@@ -1,0 +1,26 @@
+---
+source: crates/canopy-core/src/lib.rs
+assertion_line: 232
+expression: all_roles
+---
+[
+    Agent,
+    Patient,
+    Theme,
+    Experiencer,
+    Recipient,
+    Benefactive,
+    Instrument,
+    Comitative,
+    Location,
+    Source,
+    Goal,
+    Direction,
+    Temporal,
+    Frequency,
+    Measure,
+    Cause,
+    Manner,
+    ControlledSubject,
+    Stimulus,
+]

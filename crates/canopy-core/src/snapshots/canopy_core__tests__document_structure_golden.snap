@@ -1,0 +1,66 @@
+---
+source: crates/canopy-core/src/lib.rs
+assertion_line: 247
+expression: document
+---
+Document {
+    sentences: [
+        Sentence {
+            words: [
+                Word {
+                    id: 1,
+                    text: "John",
+                    lemma: "john",
+                    upos: X,
+                    head: None,
+                    deprel: "",
+                    start: 0,
+                    end: 4,
+                },
+                Word {
+                    id: 2,
+                    text: "gives",
+                    lemma: "gives",
+                    upos: X,
+                    head: None,
+                    deprel: "",
+                    start: 5,
+                    end: 10,
+                },
+                Word {
+                    id: 3,
+                    text: "Mary",
+                    lemma: "mary",
+                    upos: X,
+                    head: None,
+                    deprel: "",
+                    start: 11,
+                    end: 15,
+                },
+                Word {
+                    id: 4,
+                    text: "a",
+                    lemma: "a",
+                    upos: X,
+                    head: None,
+                    deprel: "",
+                    start: 16,
+                    end: 17,
+                },
+                Word {
+                    id: 5,
+                    text: "book",
+                    lemma: "book",
+                    upos: X,
+                    head: None,
+                    deprel: "",
+                    start: 18,
+                    end: 22,
+                },
+            ],
+            start: 0,
+            end: 22,
+        },
+    ],
+    text: "John gives Mary a book",
+}

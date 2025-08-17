@@ -1,0 +1,13 @@
+[package]
+name = "canopy-parser"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "UDPipe integration and parsing for canopy"
+
+[dependencies]
+canopy-core = { path = "../canopy-core" }
+serde = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }

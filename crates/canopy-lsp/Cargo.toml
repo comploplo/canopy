@@ -1,0 +1,19 @@
+[package]
+name = "canopy-lsp"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Language Server Protocol implementation for canopy"
+
+[dependencies]
+canopy-core = { path = "../canopy-core" }
+canopy-parser = { path = "../canopy-parser" }
+canopy-semantics = { path = "../canopy-semantics" }
+tokio = { workspace = true }
+tower-lsp = { workspace = true }
+tower = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }

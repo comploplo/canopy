@@ -1,0 +1,72 @@
+# CI/CD Pipeline for canopy.rs
+# TODO: Implement when ready to integrate with GitHub
+
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - name: Run tests
+      run: cargo test --workspace --verbose
+
+  lint:
+    name: Lint and Format
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+      with:
+        components: rustfmt, clippy
+    - name: Check formatting
+      run: cargo fmt --all -- --check
+    - name: Run clippy
+      run: cargo clippy --workspace --all-targets -- -D warnings
+
+  benchmark:
+    name: Performance Benchmarks
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - name: Run benchmarks
+      run: cargo bench --workspace
+    - name: Check for regressions
+      run: |
+        # TODO: Implement regression detection
+        echo "Performance regression check placeholder"
+
+  coverage:
+    name: Code Coverage
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - name: Install tarpaulin
+      run: cargo install cargo-tarpaulin
+    - name: Generate coverage
+      run: cargo tarpaulin --workspace --out Xml
+    - name: Upload to codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: cobertura.xml
+
+  # TODO: Add jobs for:
+  # - Security audit (cargo audit)
+  # - Dependency check (cargo outdated)
+  # - Documentation build
+  # - Release builds for multiple platforms
+  # - Performance regression analysis
+  # - Memory usage profiling

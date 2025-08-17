@@ -1,0 +1,77 @@
+---
+source: crates/canopy-core/src/lib.rs
+expression: examples
+---
+[
+    Do {
+        agent: Entity {
+            id: 1,
+            text: "John",
+            animacy: Some(
+                Human,
+            ),
+            definiteness: Some(
+                Definite,
+            ),
+        },
+        action: Action {
+            predicate: "run",
+            manner: None,
+            instrument: None,
+        },
+    },
+    Have {
+        possessor: Entity {
+            id: 1,
+            text: "John",
+            animacy: Some(
+                Human,
+            ),
+            definiteness: Some(
+                Definite,
+            ),
+        },
+        possessee: Entity {
+            id: 2,
+            text: "Mary",
+            animacy: Some(
+                Human,
+            ),
+            definiteness: Some(
+                Definite,
+            ),
+        },
+        possession_type: Kinship,
+    },
+    Go {
+        theme: Entity {
+            id: 1,
+            text: "John",
+            animacy: Some(
+                Human,
+            ),
+            definiteness: Some(
+                Definite,
+            ),
+        },
+        path: Path {
+            source: None,
+            goal: Some(
+                Entity {
+                    id: 2,
+                    text: "Mary",
+                    animacy: Some(
+                        Human,
+                    ),
+                    definiteness: Some(
+                        Definite,
+                    ),
+                },
+            ),
+            route: None,
+            direction: Some(
+                Forward,
+            ),
+        },
+    },
+]

@@ -1,0 +1,14 @@
+[package]
+name = "canopy-semantics"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Semantic analysis and event structures for canopy"
+
+[dependencies]
+canopy-core = { path = "../canopy-core" }
+canopy-parser = { path = "../canopy-parser" }
+serde = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
