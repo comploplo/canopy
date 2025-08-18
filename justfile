@@ -77,6 +77,15 @@ memprof:
 coverage:
     cargo tarpaulin --workspace --out Html --output-dir coverage
 
+# Check coverage against threshold (for CI/presubmit)
+coverage-check:
+    scripts/check-coverage.sh
+
+# Set coverage threshold for presubmit hooks
+coverage-threshold THRESHOLD:
+    sed -i.bak "s/COVERAGE_THRESHOLD=.*/COVERAGE_THRESHOLD={{THRESHOLD}}/" scripts/check-coverage.sh
+    @echo "✅ Coverage threshold updated to {{THRESHOLD}}%"
+
 # Run property-based tests with more iterations
 test-property:
     cargo test --workspace -- --ignored proptest

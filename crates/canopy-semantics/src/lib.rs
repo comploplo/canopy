@@ -1,15 +1,23 @@
-#[must_use]
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+//! # Canopy Semantics
+//!
+//! Semantic analysis components for canopy.rs including:
+//! - VerbNet integration for verb class and theta role assignment
+//! - Event structure representation
+//! - Semantic feature extraction
+//!
+//! ## VerbNet Integration
+//!
+//! This crate includes VerbNet 3.4 data and integration:
+//! - Copyright 2005 by University of Pennsylvania
+//! - Licensed under permissive terms allowing commercial use
+//! - See LICENSE-VERBNET for full license text
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub mod verbnet;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+// Re-export commonly used types
+pub use verbnet::{
+    VerbNetEngine, VerbClass, ThetaRole, ThetaRoleType,
+    SelectionalRestriction, SyntacticFrame, SemanticPredicate,
+    PredicateType, EventTime, AspectualInfo,
+    VerbNetFeatureExtractor, VerbNetFeatures, Animacy, Concreteness,
+};

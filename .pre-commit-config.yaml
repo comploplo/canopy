@@ -41,6 +41,12 @@ repos:
         language: system
         pass_filenames: false
 
+      - id: cargo-coverage
+        name: cargo coverage check
+        entry: scripts/check-coverage.sh
+        language: system
+        pass_filenames: false
+
   # General file hygiene
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0

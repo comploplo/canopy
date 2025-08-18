@@ -1,7 +1,7 @@
 [package]
 name = "canopy-parser"
 version.workspace = true
-edition.workspace = true
+edition = "2021"  # Override to 2021 for FFI compatibility
 authors.workspace = true
 license.workspace = true
 description = "UDPipe integration and parsing for canopy"
@@ -11,3 +11,22 @@ canopy-core = { path = "../canopy-core" }
 serde = { workspace = true }
 thiserror = { workspace = true }
 tracing = { workspace = true }
+conllu = "0.8.0"  # Universal Dependencies CoNLL-U format support
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[build-dependencies]
+bindgen = "0.69"
+cc = "1.0"
+reqwest = { version = "0.12", features = ["blocking"] }
+flate2 = "1.0"
+tar = "0.4"
+
+[[bench]]
+name = "parsing_pipeline"
+harness = false
+
+[[bench]]
+name = "corpus_benchmark"
+harness = false

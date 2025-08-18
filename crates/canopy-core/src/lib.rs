@@ -11,6 +11,8 @@
 //!
 //! This crate provides the foundational types for representing linguistic structures,
 //! including words, sentences, documents, and theta roles for semantic analysis.
+//! It also provides the dependency injection architecture for coordinating between
+//! different analysis layers.
 //!
 //! ## Key Components
 //!
@@ -18,6 +20,7 @@
 //! - [`Word`]: Basic word representation with morphological features
 //! - [`Sentence`]: Collections of words with positional information
 //! - [`Document`]: Complete text documents with sentence boundaries
+//! - [`layer1parser`]: Integration helpers bridging parser and semantics
 //!
 //! ## Example
 //!
@@ -40,6 +43,8 @@
 //! assert!(ThetaRole::Agent.is_core_argument());
 //! assert_eq!(ThetaRole::all().len(), 19);
 //! ```
+
+pub mod layer1parser;
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -152,15 +157,374 @@ pub enum UPos {
     X,     // other
 }
 
-/// Basic word representation (Layer 1)
+/// Person values for Universal Dependencies morphology
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDPerson {
+    First,  // 1
+    Second, // 2
+    Third,  // 3
+}
+
+/// Number values for Universal Dependencies morphology
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDNumber {
+    Singular, // Sing
+    Plural,   // Plur
+    Dual,     // Dual
+}
+
+/// Gender values for Universal Dependencies morphology
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDGender {
+    Masculine, // Masc
+    Feminine,  // Fem
+    Neuter,    // Neut
+}
+
+/// Animacy values for Universal Dependencies morphology
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDAnimacy {
+    Animate,   // Anim
+    Inanimate, // Inan
+}
+
+/// Case values for Universal Dependencies morphology
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDCase {
+    Nominative,   // Nom
+    Accusative,   // Acc
+    Genitive,     // Gen
+    Dative,       // Dat
+    Instrumental, // Ins
+    Locative,     // Loc
+    Vocative,     // Voc
+    Ablative,     // Abl
+}
+
+/// Definiteness values for Universal Dependencies morphology
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDDefiniteness {
+    Definite,     // Def
+    Indefinite,   // Ind
+    Specific,     // Spec
+    Unspecific,   // Nspec
+}
+
+/// Tense values for Universal Dependencies morphology
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDTense {
+    Past,    // Past
+    Present, // Pres
+    Future,  // Fut
+}
+
+/// Aspect values for Universal Dependencies morphology
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDAspect {
+    Perfective,   // Perf
+    Imperfective, // Imp
+}
+
+/// Mood values for Universal Dependencies morphology
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDMood {
+    Indicative,  // Ind
+    Imperative,  // Imp
+    Conditional, // Cnd
+    Subjunctive, // Sub
+}
+
+/// Voice values for Universal Dependencies morphology (distinct from semantic Voice)
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDVoice {
+    Active,  // Act
+    Passive, // Pass
+    Middle,  // Mid
+}
+
+/// Degree values for Universal Dependencies morphology
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDDegree {
+    Positive,     // Pos
+    Comparative,  // Cmp
+    Superlative,  // Sup
+}
+
+/// VerbForm values for Universal Dependencies morphology
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum UDVerbForm {
+    Finite,       // Fin
+    Infinitive,   // Inf
+    Participle,   // Part
+    Gerund,       // Ger
+    ConverbalAdverbial, // Conv
+}
+
+/// Morphological features following Universal Dependencies specification
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, Default)]
+pub struct MorphFeatures {
+    /// Person: first, second, third
+    pub person: Option<UDPerson>,
+    /// Number: singular, plural, dual
+    pub number: Option<UDNumber>,
+    /// Gender: masculine, feminine, neuter
+    pub gender: Option<UDGender>,
+    /// Animacy: animate, inanimate (morphological)
+    pub animacy: Option<UDAnimacy>,
+    /// Case: nominative, accusative, genitive, etc.
+    pub case: Option<UDCase>,
+    /// Definiteness: definite, indefinite (morphological)
+    pub definiteness: Option<UDDefiniteness>,
+    /// Tense: present, past, future
+    pub tense: Option<UDTense>,
+    /// Aspect: perfective, imperfective
+    pub aspect: Option<UDAspect>,
+    /// Mood: indicative, subjunctive, imperative
+    pub mood: Option<UDMood>,
+    /// Voice: active, passive (morphological)
+    pub voice: Option<UDVoice>,
+    /// Degree: positive, comparative, superlative
+    pub degree: Option<UDDegree>,
+    /// VerbForm: finite, infinitive, participle, gerund
+    pub verbform: Option<UDVerbForm>,
+    /// Raw features string for features not covered above
+    pub raw_features: Option<String>,
+}
+
+/// Universal Dependencies dependency relations
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum DepRel {
+    /// Clausal argument of noun, adjective, or verb
+    Acl,
+    /// Adverbial clause modifier
+    Advcl,
+    /// Adverbial modifier
+    Advmod,
+    /// Adjectival modifier
+    Amod,
+    /// Appositional modifier
+    Appos,
+    /// Auxiliary
+    Aux,
+    /// Passive auxiliary
+    AuxPass,
+    /// Case marking
+    Case,
+    /// Coordinating conjunction
+    Cc,
+    /// Clausal complement
+    Ccomp,
+    /// Classifier
+    Clf,
+    /// Compound
+    Compound,
+    /// Conjunct
+    Conj,
+    /// Copula
+    Cop,
+    /// Clausal subject
+    Csubj,
+    /// Clausal passive subject
+    CsubjPass,
+    /// Dependent
+    Dep,
+    /// Determiner
+    Det,
+    /// Discourse element
+    Discourse,
+    /// Dislocated elements
+    Dislocated,
+    /// Expletive
+    Expl,
+    /// Fixed multiword expression
+    Fixed,
+    /// Flat multiword expression
+    Flat,
+    /// Goes with
+    Goeswith,
+    /// Indirect object
+    Iobj,
+    /// List
+    List,
+    /// Marker
+    Mark,
+    /// Negation modifier
+    Neg,
+    /// Nominal modifier
+    Nmod,
+    /// Nominal subject
+    Nsubj,
+    /// Passive nominal subject
+    NsubjPass,
+    /// Numeric modifier
+    Nummod,
+    /// Direct object
+    Obj,
+    /// Oblique nominal
+    Obl,
+    /// Orphan
+    Orphan,
+    /// Parataxis
+    Parataxis,
+    /// Punctuation
+    Punct,
+    /// Reparandum
+    Reparandum,
+    /// Root
+    Root,
+    /// Vocative
+    Vocative,
+    /// Open clausal complement
+    Xcomp,
+    /// Other/unknown relation
+    Other(String),
+}
+
+impl std::str::FromStr for DepRel {
+    type Err = ();
+    
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Ok(match s {
+            "acl" => DepRel::Acl,
+            "advcl" => DepRel::Advcl,
+            "advmod" => DepRel::Advmod,
+            "amod" => DepRel::Amod,
+            "appos" => DepRel::Appos,
+            "aux" => DepRel::Aux,
+            "aux:pass" => DepRel::AuxPass,
+            "case" => DepRel::Case,
+            "cc" => DepRel::Cc,
+            "ccomp" => DepRel::Ccomp,
+            "clf" => DepRel::Clf,
+            "compound" => DepRel::Compound,
+            "conj" => DepRel::Conj,
+            "cop" => DepRel::Cop,
+            "csubj" => DepRel::Csubj,
+            "csubj:pass" => DepRel::CsubjPass,
+            "dep" => DepRel::Dep,
+            "det" => DepRel::Det,
+            "discourse" => DepRel::Discourse,
+            "dislocated" => DepRel::Dislocated,
+            "expl" => DepRel::Expl,
+            "fixed" => DepRel::Fixed,
+            "flat" => DepRel::Flat,
+            "goeswith" => DepRel::Goeswith,
+            "iobj" => DepRel::Iobj,
+            "list" => DepRel::List,
+            "mark" => DepRel::Mark,
+            "neg" => DepRel::Neg,
+            "nmod" => DepRel::Nmod,
+            "nsubj" => DepRel::Nsubj,
+            "nsubj:pass" => DepRel::NsubjPass,
+            "nummod" => DepRel::Nummod,
+            "obj" => DepRel::Obj,
+            "obl" => DepRel::Obl,
+            "orphan" => DepRel::Orphan,
+            "parataxis" => DepRel::Parataxis,
+            "punct" => DepRel::Punct,
+            "reparandum" => DepRel::Reparandum,
+            "root" => DepRel::Root,
+            "vocative" => DepRel::Vocative,
+            "xcomp" => DepRel::Xcomp,
+            _ => DepRel::Other(s.to_string()),
+        })
+    }
+}
+
+impl DepRel {
+    /// Parse a dependency relation string into a DepRel enum
+    pub fn from_str_simple(s: &str) -> Self {
+        s.parse().unwrap_or_else(|_| DepRel::Other(s.to_string()))
+    }
+}
+
+/// Enhanced word with extracted semantic features (Layer 1.5)
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct EnhancedWord {
+    /// Base word information from UDPipe
+    pub base: Word,
+    /// Semantic features extracted by feature extraction pipeline
+    pub semantic_features: SemanticFeatures,
+    /// Confidence scores for extracted features
+    pub confidence: FeatureConfidence,
+}
+
+/// Semantic features extracted from morphosyntactic analysis
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, Default)]
+pub struct SemanticFeatures {
+    /// Animacy classification (human > animal > plant > inanimate)
+    pub animacy: Option<Animacy>,
+    /// Definiteness from determiners and context
+    pub definiteness: Option<Definiteness>,
+    /// Count/mass distinction for nouns
+    pub countability: Option<Countability>,
+    /// Concrete vs abstract distinction
+    pub concreteness: Option<Concreteness>,
+}
+
+/// Countability distinction for nouns
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum Countability {
+    /// Count nouns: "book", "cat", "idea"
+    Count,
+    /// Mass nouns: "water", "sand", "information"
+    Mass,
+    /// Nouns that can be both: "paper" (count) vs "paper" (mass)
+    Dual,
+}
+
+/// Concreteness classification
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum Concreteness {
+    /// Physical entities: "book", "cat", "building"
+    Concrete,
+    /// Mental/abstract concepts: "idea", "love", "democracy"
+    Abstract,
+    /// Events and processes: "meeting", "running", "explosion"
+    Eventive,
+}
+
+/// Confidence scores for extracted features (0.0 to 1.0)
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, Default)]
+pub struct FeatureConfidence {
+    pub animacy: f32,
+    pub definiteness: f32,
+    pub countability: f32,
+    pub concreteness: f32,
+}
+
+/// Enhanced word representation with full Universal Dependencies information (Layer 1)
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Word {
     pub id: usize,
     pub text: String,
     pub lemma: String,
     pub upos: UPos,
+    /// Language-specific POS tag
+    pub xpos: Option<String>,
+    /// Morphological features
+    pub feats: MorphFeatures,
     pub head: Option<usize>,
-    pub deprel: String,
+    pub deprel: DepRel,
+    /// Enhanced dependencies (graph structure)
+    pub deps: Option<String>,
+    /// Miscellaneous information (SpaceAfter=No, etc.)
+    pub misc: Option<String>,
     pub start: usize,
     pub end: usize,
 }
@@ -173,8 +537,12 @@ impl Word {
             lemma: text.to_lowercase(), // Simple lemma for now
             text,
             upos: UPos::X, // Will be determined by parser
+            xpos: None,
+            feats: MorphFeatures::default(),
             head: None,
-            deprel: String::new(),
+            deprel: DepRel::Dep, // Default to generic dependency
+            deps: None,
+            misc: None,
             start,
             end,
         }

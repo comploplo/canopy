@@ -55,6 +55,7 @@ canopy-core = { path = "crates/canopy-core" }
 canopy-parser = { path = "crates/canopy-parser" }
 canopy-semantics = { path = "crates/canopy-semantics" }
 canopy-lsp = { path = "crates/canopy-lsp" }
+tokio = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }
@@ -62,3 +63,7 @@ criterion = { workspace = true }
 [[bench]]
 name = "baseline"
 harness = false
+
+[[example]]
+name = "basic_demo"
+path = "examples/basic_demo.rs"
