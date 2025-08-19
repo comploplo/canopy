@@ -1,14 +1,23 @@
 # THEORY — Computational Linguistic Foundations
 
-**A theoretically-grounded approach to real-time linguistic analysis through Language Server Protocol integration**
+**A theoretically-grounded approach to real-time linguistic analysis through
+Language Server Protocol integration**
 
 ---
 
 ## Executive Summary
 
-canopy.rs represents a fundamental paradigm shift from ad-hoc natural language processing to principled computational linguistics. By implementing formal semantic theory in a type-safe systems programming language, we bridge the gap between theoretical linguistics and practical software engineering. This document outlines the theoretical foundations, computational implementations, and research contributions of the canopy project.
+canopy.rs represents a fundamental paradigm shift from ad-hoc natural language
+processing to principled computational linguistics. By implementing formal
+semantic theory in a type-safe systems programming language, we bridge the gap
+between theoretical linguistics and practical software engineering. This
+document outlines the theoretical foundations, computational implementations,
+and research contributions of the canopy project.
 
-**Core Innovation**: First production-ready implementation of Discourse Representation Theory (DRT) with Optimality Theory (OT) constraint evaluation in a Language Server Protocol context, achieving both theoretical rigor and practical performance.
+**Core Innovation**: First production-ready implementation of Discourse
+Representation Theory (DRT) with Optimality Theory (OT) constraint evaluation in
+a Language Server Protocol context, achieving both theoretical rigor and
+practical performance.
 
 ## Table of Contents
 
@@ -31,26 +40,44 @@ canopy.rs represents a fundamental paradigm shift from ad-hoc natural language p
 
 canopy.rs is grounded in established formal semantic frameworks:
 
-**Universal Dependencies (UD)**: Cross-linguistically consistent syntactic representation following Nivre et al. (2016). Unlike dependency parsing as mere preprocessing, we treat UD as the foundational syntactic theory, with explicit morphological features driving semantic interpretation.
+**Universal Dependencies (UD)**: Cross-linguistically consistent syntactic
+representation following Nivre et al. (2016). Unlike dependency parsing as mere
+preprocessing, we treat UD as the foundational syntactic theory, with explicit
+morphological features driving semantic interpretation.
 
-**Neo-Davidsonian Event Semantics** (Davidson 1967, Parsons 1990): Events as first-class ontological entities with explicit participant structure. Every verb introduces an event variable `e` with thematic relations as two-place predicates: `agent(e,x)`, `patient(e,y)`.
+**Neo-Davidsonian Event Semantics** (Davidson 1967, Parsons 1990): Events as
+first-class ontological entities with explicit participant structure. Every verb
+introduces an event variable `e` with thematic relations as two-place
+predicates: `agent(e,x)`, `patient(e,y)`.
 
-**Discourse Representation Theory** (Kamp & Reyle 1993): Formal framework for multi-sentence semantic representation through Discourse Representation Structures (DRS). Unlike surface-level coreference resolution, DRT provides principled treatment of scope, presupposition, and discourse structure.
+**Discourse Representation Theory** (Kamp & Reyle 1993): Formal framework for
+multi-sentence semantic representation through Discourse Representation
+Structures (DRS). Unlike surface-level coreference resolution, DRT provides
+principled treatment of scope, presupposition, and discourse structure.
 
-**Optimality Theory** (Prince & Smolensky 1993/2004): Constraint-based approach to linguistic variation and ambiguity resolution. Constraints are violable and ranked, with optimal analyses emerging from constraint interaction rather than rule application.
+**Optimality Theory** (Prince & Smolensky 1993/2004): Constraint-based approach
+to linguistic variation and ambiguity resolution. Constraints are violable and
+ranked, with optimal analyses emerging from constraint interaction rather than
+rule application.
 
-**Type Theory**: Montague-style compositional semantics with dependent types. Base types `e` (entity), `t` (truth value), `v` (event), with complex types built via function composition `⟨α,β⟩`.
+**Type Theory**: Montague-style compositional semantics with dependent types.
+Base types `e` (entity), `t` (truth value), `v` (event), with complex types
+built via function composition `⟨α,β⟩`.
 
 ### Principled Departures from V1
 
-The Python spaCy-LSP system (V1) implemented valuable heuristics but lacked theoretical grounding:
+The Python spaCy-LSP system (V1) implemented valuable heuristics but lacked
+theoretical grounding:
 
-- **Surface mapping**: Direct spaCy→JSON transformations without linguistic motivation
+- **Surface mapping**: Direct spaCy→JSON transformations without linguistic
+  motivation
 - **Ad-hoc role assignment**: Pattern matching without systematic theta theory
-- **Compositional gaps**: No formal semantic composition beyond string concatenation
+- **Compositional gaps**: No formal semantic composition beyond string
+  concatenation
 - **Context limitations**: Sentence-level analysis without discourse modeling
 
-canopy.rs (V2) addresses these limitations through principled theoretical implementation while preserving the practical insights of V1.
+canopy.rs (V2) addresses these limitations through principled theoretical
+implementation while preserving the practical insights of V1.
 
 ---
 
@@ -60,7 +87,7 @@ canopy.rs (V2) addresses these limitations through principled theoretical implem
 
 **V1 (Python)**: Surface Processing
 
-```
+```text
 Text → spaCy (black box) → JSON dict → Proto optimization → LSP
          ↓                      ↓            ↓
     [Dependency parse]    [Pattern matching]  [String templates]
@@ -68,7 +95,7 @@ Text → spaCy (black box) → JSON dict → Proto optimization → LSP
 
 **V2 (Rust)**: Theory-Driven Analysis
 
-```
+```text
 Text → Layer 1: Morphosyntax → Layer 2: Events → Layer 3: DRT → Layer 4: Discourse/LSP
          ↓                         ↓                  ↓              ↓
     [UDPipe + Features]    [Theta assignment + OT]  [λ-calc + DRS]   [Context + Diagnostics]
@@ -76,7 +103,8 @@ Text → Layer 1: Morphosyntax → Layer 2: Events → Layer 3: DRT → Layer 4:
 
 ### Type-Safe Linguistic Representations
 
-Unlike V1's string-based representations, V2 uses Rust's type system to enforce linguistic constraints at compile time:
+Unlike V1's string-based representations, V2 uses Rust's type system to enforce
+linguistic constraints at compile time:
 
 ```rust
 // Theta roles as first-class types (from V1's 19-role inventory)
@@ -128,7 +156,8 @@ Text → UDPipe → Enhanced Dependencies → Semantic Features
 
 ### Morphological Feature System
 
-Following Kiparsky (2021) and the UniMorph schema, we implement explicit feature decomposition:
+Following Kiparsky (2021) and the UniMorph schema, we implement explicit feature
+decomposition:
 
 **Animacy** (crucial for theta role assignment):
 
@@ -183,7 +212,7 @@ Every verb introduces an event variable with explicit participant structure:
 
 **Example**: "John gives Mary a book"
 
-```
+```text
 ∃e[giving(e) ∧ agent(e,john) ∧ recipient(e,mary) ∧ patient(e,book)]
 ```
 
@@ -196,7 +225,8 @@ Every verb introduces an event variable with explicit participant structure:
 
 ### Theta Role Assignment
 
-We implement systematic theta role assignment based on syntactic position and semantic features:
+We implement systematic theta role assignment based on syntactic position and
+semantic features:
 
 **Voice-Sensitive Mapping** (adapted from V1):
 
@@ -216,7 +246,8 @@ fn assign_theta_roles(verb: &Verb, args: &[Argument]) -> Vec<(Argument, ThetaRol
 }
 ```
 
-**VerbNet Integration**: Following Kipper et al. (2008), we incorporate verb class patterns:
+**VerbNet Integration**: Following Kipper et al. (2008), we incorporate verb
+class patterns:
 
 ```rust
 // From V1's 40+ VerbNet patterns, expanded systematically
@@ -230,7 +261,8 @@ verb_patterns! {
 
 ### Aspectual Classification
 
-Following Vendler (1967) and Dowty (1979), we implement systematic aspectual analysis:
+Following Vendler (1967) and Dowty (1979), we implement systematic aspectual
+analysis:
 
 **Four-way Classification**:
 
@@ -265,11 +297,12 @@ impl AspectualClass {
 
 ### Little v Decomposition
 
-Following Hale & Keyser (1993) and Pylkkänen (2008), we decompose causative structures:
+Following Hale & Keyser (1993) and Pylkkänen (2008), we decompose causative
+structures:
 
 **Causative Decomposition**:
 
-```
+```text
 "John broke the vase" → [vP John [v CAUSE] [VP the vase BREAK]]
 ```
 
@@ -294,7 +327,8 @@ enum LittleV {
 
 ### Discourse Representation Theory
 
-Unlike surface-level coreference resolution, we implement full DRT with proper scope and presupposition handling:
+Unlike surface-level coreference resolution, we implement full DRT with proper
+scope and presupposition handling:
 
 **DRS Construction Rules**:
 
@@ -327,7 +361,8 @@ impl DRSBuilder {
 }
 ```
 
-**Quantifier Scope Resolution**: Unlike linear left-to-right processing, we implement proper scope ambiguity handling:
+**Quantifier Scope Resolution**: Unlike linear left-to-right processing, we
+implement proper scope ambiguity handling:
 
 Example: "Every student read a book"
 
@@ -358,7 +393,7 @@ enum Term {
 
 **Composition Example**: "John sleeps"
 
-```
+```text
 john: e
 sleep: ⟨v,⟨e,t⟩⟩
 ∃: ⟨⟨v,t⟩,t⟩
@@ -500,7 +535,8 @@ fn check_binding_violations(drs: &DRS) -> Vec<Diagnostic> {
 
 **Intelligent Code Actions**:
 
-- **Voice conversion**: Automatic active↔passive transformation with theta role preservation
+- **Voice conversion**: Automatic active↔passive transformation with theta role
+  preservation
 - **Pronoun resolution**: Replace ambiguous pronouns with definite descriptions
 - **Agreement repair**: Fix subject-verb number mismatches
 
@@ -557,18 +593,19 @@ fn check_binding_violations(drs: &DRS) -> Vec<Diagnostic> {
 ### Theoretical Analysis
 
 **Layer 1 (UDPipe)**: O(n³) dependency parsing (worst case), O(n) in practice
-**Layer 2 (Events)**: O(n) theta role assignment with O(1) lookup tables
-**Layer 3 (DRT)**: O(n²) quantifier scope enumeration (exponential worst case, heuristic pruning)
-**Layer 4 (Discourse)**: O(k) where k = discourse context size (bounded)
+**Layer 2 (Events)**: O(n) theta role assignment with O(1) lookup tables **Layer
+3 (DRT)**: O(n²) quantifier scope enumeration (exponential worst case, heuristic
+pruning) **Layer 4 (Discourse)**: O(k) where k = discourse context size
+(bounded)
 
 **Overall Complexity**: O(n²) for typical inputs, linear in practice
 
 ### Performance Optimizations
 
-**Zero-Copy Processing**: Rust's ownership system eliminates unnecessary allocations
-**Incremental Parsing**: Only reprocess changed text spans
-**Constraint Caching**: Memoize OT tableau evaluations
-**Bounded Discourse**: Maintain fixed-size discourse windows
+**Zero-Copy Processing**: Rust's ownership system eliminates unnecessary
+allocations **Incremental Parsing**: Only reprocess changed text spans
+**Constraint Caching**: Memoize OT tableau evaluations **Bounded Discourse**:
+Maintain fixed-size discourse windows
 
 ---
 
@@ -624,8 +661,8 @@ fn check_binding_violations(drs: &DRS) -> Vec<Diagnostic> {
 ### Short-term Extensions (6-12 months)
 
 **Information Structure**: Topic/focus articulation following Krifka (2008)
-**Temporal Semantics**: Reichenbachian tense logic with DRT integration
-**Modal Logic**: Possible worlds semantics for epistemic/deontic modals
+**Temporal Semantics**: Reichenbachian tense logic with DRT integration **Modal
+Logic**: Possible worlds semantics for epistemic/deontic modals
 
 ### Medium-term Research (1-2 years)
 
@@ -635,19 +672,27 @@ fn check_binding_violations(drs: &DRS) -> Vec<Diagnostic> {
 
 ### Long-term Vision (2-5 years)
 
-**Computational Semantics Platform**: Theory-testing framework for formal semantics
-**Embodied Semantics**: Integration with robotic/multimodal reasoning
+**Computational Semantics Platform**: Theory-testing framework for formal
+semantics **Embodied Semantics**: Integration with robotic/multimodal reasoning
 **Automated Theory Discovery**: Machine learning over linguistic constraints
 
 ---
 
 ## Conclusion
 
-canopy.rs represents a paradigm shift toward principled computational linguistics. By implementing formal semantic theory in a high-performance systems programming language, we demonstrate that theoretical rigor and practical efficiency are not only compatible but mutually reinforcing.
+canopy.rs represents a paradigm shift toward principled computational
+linguistics. By implementing formal semantic theory in a high-performance
+systems programming language, we demonstrate that theoretical rigor and
+practical efficiency are not only compatible but mutually reinforcing.
 
-The type-safe implementation of DRT, OT, and neo-Davidsonian semantics provides both immediate practical benefits (faster, more accurate language processing) and longer-term research opportunities (computational theory testing, cross-linguistic universals discovery).
+The type-safe implementation of DRT, OT, and neo-Davidsonian semantics provides
+both immediate practical benefits (faster, more accurate language processing)
+and longer-term research opportunities (computational theory testing,
+cross-linguistic universals discovery).
 
-This work establishes canopy.rs as the first production-ready, theory-driven linguistic analysis platform, bridging the gap between theoretical linguistics and practical NLP tooling.
+This work establishes canopy.rs as the first production-ready, theory-driven
+linguistic analysis platform, bridging the gap between theoretical linguistics
+and practical NLP tooling.
 
 ---
 
@@ -655,26 +700,38 @@ This work establishes canopy.rs as the first production-ready, theory-driven lin
 
 **Core Theoretical Foundations**:
 
-- Ariel, M. (1990). *Accessing Noun-Phrase Antecedents*. Routledge.
-- Chomsky, N. (1981). *Lectures on Government and Binding*. Foris.
-- Davidson, D. (1967). The logical form of action sentences. In *The Logic of Decision and Action*.
-- Dowty, D. (1979). *Word Meaning and Montague Grammar*. Reidel.
-- Grosz, B., Joshi, A., & Weinstein, S. (1995). Centering: A framework for modeling the local coherence of discourse. *Computational Linguistics*, 21(2), 203-225.
-- Hale, K., & Keyser, S. J. (1993). On argument structure and the lexical expression of syntactic relations. In *The View from Building 20*.
-- Kamp, H., & Reyle, U. (1993). *From Discourse to Logic*. Kluwer.
-- Kiparsky, P. (2021). *New Perspectives in Historical Linguistics*. MIT Press.
-- Kipper, K., Korhonen, A., Ryant, N., & Palmer, M. (2008). A large-scale classification of English verbs. *Language Resources and Evaluation*, 42(1), 21-40.
-- Krifka, M. (2008). Basic notions of information structure. *Acta Linguistica Hungarica*, 55(3-4), 243-276.
-- May, R. (1985). *Logical Form*. MIT Press.
-- Nivre, J., de Marneffe, M. C., Ginter, F., et al. (2016). Universal Dependencies v1: A multilingual treebank collection. In *LREC*.
-- Parsons, T. (1990). *Events in the Semantics of English*. MIT Press.
-- Prince, A., & Smolensky, P. (1993/2004). *Optimality Theory: Constraint Interaction in Generative Grammar*. Blackwell.
-- Pylkkänen, L. (2008). *Introducing Arguments*. MIT Press.
-- van der Sandt, R. (1992). Presupposition projection as anaphora resolution. *Journal of Semantics*, 9(4), 333-377.
-- Vendler, Z. (1967). *Linguistics in Philosophy*. Cornell University Press.
+- Ariel, M. (1990). _Accessing Noun-Phrase Antecedents_. Routledge.
+- Chomsky, N. (1981). _Lectures on Government and Binding_. Foris.
+- Davidson, D. (1967). The logical form of action sentences. In _The Logic of
+  Decision and Action_.
+- Dowty, D. (1979). _Word Meaning and Montague Grammar_. Reidel.
+- Grosz, B., Joshi, A., & Weinstein, S. (1995). Centering: A framework for
+  modeling the local coherence of discourse. _Computational Linguistics_, 21(2),
+  203-225.
+- Hale, K., & Keyser, S. J. (1993). On argument structure and the lexical
+  expression of syntactic relations. In _The View from Building 20_.
+- Kamp, H., & Reyle, U. (1993). _From Discourse to Logic_. Kluwer.
+- Kiparsky, P. (2021). _New Perspectives in Historical Linguistics_. MIT Press.
+- Kipper, K., Korhonen, A., Ryant, N., & Palmer, M. (2008). A large-scale
+  classification of English verbs. _Language Resources and Evaluation_, 42(1),
+  21-40.
+- Krifka, M. (2008). Basic notions of information structure. _Acta Linguistica
+  Hungarica_, 55(3-4), 243-276.
+- May, R. (1985). _Logical Form_. MIT Press.
+- Nivre, J., de Marneffe, M. C., Ginter, F., et al. (2016). Universal
+  Dependencies v1: A multilingual treebank collection. In _LREC_.
+- Parsons, T. (1990). _Events in the Semantics of English_. MIT Press.
+- Prince, A., & Smolensky, P. (1993/2004). _Optimality Theory: Constraint
+  Interaction in Generative Grammar_. Blackwell.
+- Pylkkänen, L. (2008). _Introducing Arguments_. MIT Press.
+- van der Sandt, R. (1992). Presupposition projection as anaphora resolution.
+  _Journal of Semantics_, 9(4), 333-377.
+- Vendler, Z. (1967). _Linguistics in Philosophy_. Cornell University Press.
 
 **Computational Implementation**:
 
-- The Rust Programming Language. (2024). *The Rust Reference: Edition Guide*. Mozilla Research.
-- UDPipe 2.0. (2021). *Universal Dependencies Parsing Pipeline*. Charles University.
-- Tower-LSP. (2023). *Language Server Protocol Implementation for Rust*. GitHub.
+- The Rust Programming Language. (2024). _The Rust Reference: Edition Guide_.
+  Mozilla Research.
+- UDPipe 2.0. (2021). _Universal Dependencies Parsing Pipeline_. Charles
+  University.
+- Tower-LSP. (2023). _Language Server Protocol Implementation for Rust_. GitHub.

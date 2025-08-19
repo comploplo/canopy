@@ -6,16 +6,22 @@
 use canopy_core::{AnalysisResult, Document};
 
 /// LSP hover handler
+#[derive(Debug)]
 pub struct HoverHandler;
 
 impl HoverHandler {
-    pub fn handle_hover(&self, _document: &Document, _position: Position) -> AnalysisResult<HoverResponse> {
+    pub fn handle_hover(
+        &self,
+        _document: &Document,
+        _position: Position,
+    ) -> AnalysisResult<HoverResponse> {
         // TODO: Implement hover functionality
         todo!("Implement hover handler")
     }
 }
 
-/// LSP diagnostic handler  
+/// LSP diagnostic handler
+#[derive(Debug)]
 pub struct DiagnosticHandler;
 
 impl DiagnosticHandler {
@@ -60,4 +66,24 @@ pub enum DiagnosticSeverity {
 pub struct Range {
     pub start: Position,
     pub end: Position,
+}
+
+/// Helper function to create a diagnostic
+pub fn create_diagnostic(
+    message: String,
+    severity: DiagnosticSeverity,
+    line: u32,
+    character: u32,
+) -> Diagnostic {
+    Diagnostic {
+        message,
+        severity,
+        range: Range {
+            start: Position { line, character },
+            end: Position {
+                line,
+                character: character.saturating_add(1),
+            },
+        },
+    }
 }

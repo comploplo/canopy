@@ -48,5 +48,5 @@ This directory contains stub CI/CD configurations for future GitHub integration.
 
 ## Current Status: STUB ONLY
 
-These files are placeholders and not yet functional.
-Focus on local development workflow first.
+These files are placeholders and not yet functional. Focus on local development
+workflow first.

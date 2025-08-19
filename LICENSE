@@ -5,9 +5,9 @@ canopy.rs - Rust Implementation of spaCy-LSP V2
 TODO: Add project license here
       Options to consider:
       - MIT License
-      - Apache 2.0 License  
+      - Apache 2.0 License
       - BSD 3-Clause License
-      
+
       Decision needed based on project requirements and intended usage.
 
 ===============================================================================
@@ -27,24 +27,24 @@ Source: https://github.com/cu-clear/verbnet
 
 VerbNet 1.5 Copyright 2005 by University of Pennsylvania. All rights reserved.
 
-Permission to use, copy, modify and distribute this software and database and 
-its documentation for any purpose and without fee or royalty is hereby granted, 
-provided that you agree to comply with the following copyright notice and 
-statements, including the disclaimer, and that the same appear on ALL copies 
-of the software, database and documentation, including modifications that you 
+Permission to use, copy, modify and distribute this software and database and
+its documentation for any purpose and without fee or royalty is hereby granted,
+provided that you agree to comply with the following copyright notice and
+statements, including the disclaimer, and that the same appear on ALL copies
+of the software, database and documentation, including modifications that you
 make for internal use or for distribution.
 
-THIS SOFTWARE AND DATABASE IS PROVIDED "AS IS" AND UNIVERSITY OF PENNSYLVANIA 
-MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED. BY WAY OF EXAMPLE, 
-BUT NOT LIMITATION, UNIVERSITY OF PENNSYLVANIA MAKES NO REPRESENTATIONS OR 
-WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE OR THAT 
-THE USE OF THE LICENSED SOFTWARE, DATABASE OR DOCUMENTATION WILL NOT INFRINGE 
+THIS SOFTWARE AND DATABASE IS PROVIDED "AS IS" AND UNIVERSITY OF PENNSYLVANIA
+MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED. BY WAY OF EXAMPLE,
+BUT NOT LIMITATION, UNIVERSITY OF PENNSYLVANIA MAKES NO REPRESENTATIONS OR
+WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE OR THAT
+THE USE OF THE LICENSED SOFTWARE, DATABASE OR DOCUMENTATION WILL NOT INFRINGE
 ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS.
 
-The name of University of Pennsylvania or Penn may not be used in advertising 
-or publicity pertaining to distribution of the software and/or database. Title 
-to copyright in this software, database and any associated documentation shall 
-at all times remain with University of Pennsylvania and LICENSEE agrees to 
+The name of University of Pennsylvania or Penn may not be used in advertising
+or publicity pertaining to distribution of the software and/or database. Title
+to copyright in this software, database and any associated documentation shall
+at all times remain with University of Pennsylvania and LICENSEE agrees to
 preserve same.
 
 This project uses VerbNet 3.4 data hosted by the University of Colorado Boulder,
@@ -67,19 +67,19 @@ Copyright 2017 by Institute of Formal and Applied Linguistics, Faculty of
 Mathematics and Physics, Charles University in Prague, Czech Republic.
 
 UDPipe Models:
-The linguistic models are free for NON-COMMERCIAL USE and distributed under the 
+The linguistic models are free for NON-COMMERCIAL USE and distributed under the
 CC BY-NC-SA 4.0 license: http://creativecommons.org/licenses/by-nc-sa/4.0/
 
-NOTE: Some models may have additional licensing conditions based on the original 
-training data. Users must comply with the respective licensing terms for any 
+NOTE: Some models may have additional licensing conditions based on the original
+training data. Users must comply with the respective licensing terms for any
 models they download and use.
 
-Test Model: 
-The test.model included in this project for development/testing purposes is 
-distributed under the same terms as the UDPipe software (MPL 2.0) for 
+Test Model:
+The test.model included in this project for development/testing purposes is
+distributed under the same terms as the UDPipe software (MPL 2.0) for
 non-commercial research and development.
 
 ===============================================================================
 
-For the complete and up-to-date license information for all third-party 
+For the complete and up-to-date license information for all third-party
 components, please refer to their original sources and documentation.

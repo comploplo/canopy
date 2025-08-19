@@ -1,9 +1,11 @@
 # Codebase Structure
 
 ## Python V1 System Structure
+
 Located at `/Users/gabe/projects/canopy/spacy-lsp/`
 
 ### Core Source Code (`src/spacy_lsp/`)
+
 ```
 src/spacy_lsp/
 ├── __init__.py
@@ -55,12 +57,14 @@ src/spacy_lsp/
 ```
 
 ### Test Structure (`tests/`)
+
 - **Unit tests**: Mirror source structure
 - **Golden tests**: Deterministic output validation in `tests/testdata/`
 - **Benchmarks**: Performance tests in `tests/benchmarks/`
 - **Integration**: End-to-end LSP testing
 
 ### Key Data Structures (Python V1)
+
 - **Word**: Core class with text, POS, features, semantic roles, dependencies
 - **ThetaRole**: 19 semantic roles (Agent, Patient, Theme, Recipient, etc.)
 - **SemanticRole**: Role assignment with confidence scores
@@ -69,9 +73,11 @@ src/spacy_lsp/
 - **Term**: Lambda calculus AST with types
 
 ## Rust V2 System Structure (Planned)
+
 Located at `/Users/gabe/projects/canopy/` (root level)
 
 ### Planned Architecture
+
 ```
 canopy/
 ├── Cargo.toml
@@ -124,12 +130,14 @@ canopy/
 ```
 
 ### Key Type Hierarchies (Rust V2)
+
 - **Layer 1**: Word → EnhancedWord → SemanticFeatures
-- **Layer 2**: Event → Participants → MovementChain → OTTableau  
+- **Layer 2**: Event → Participants → MovementChain → OTTableau
 - **Layer 3**: DRS → DRSCondition → Term → SemanticType
 - **Layer 4**: DiscourseContext → SemanticAnalysis → Diagnostic
 
 ## Migration Notes
+
 - **V1 to V2**: Port core algorithms, VerbNet patterns, test cases
 - **Architecture**: 4 clean layers vs mixed Python modules
 - **Performance**: Target 10x improvement through zero-copy, compile-time optimization

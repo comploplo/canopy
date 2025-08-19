@@ -210,10 +210,10 @@ pub enum UDCase {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[cfg_attr(test, derive(Arbitrary))]
 pub enum UDDefiniteness {
-    Definite,     // Def
-    Indefinite,   // Ind
-    Specific,     // Spec
-    Unspecific,   // Nspec
+    Definite,   // Def
+    Indefinite, // Ind
+    Specific,   // Spec
+    Unspecific, // Nspec
 }
 
 /// Tense values for Universal Dependencies morphology
@@ -256,19 +256,19 @@ pub enum UDVoice {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[cfg_attr(test, derive(Arbitrary))]
 pub enum UDDegree {
-    Positive,     // Pos
-    Comparative,  // Cmp
-    Superlative,  // Sup
+    Positive,    // Pos
+    Comparative, // Cmp
+    Superlative, // Sup
 }
 
-/// VerbForm values for Universal Dependencies morphology
+/// `VerbForm` values for Universal Dependencies morphology
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[cfg_attr(test, derive(Arbitrary))]
 pub enum UDVerbForm {
-    Finite,       // Fin
-    Infinitive,   // Inf
-    Participle,   // Part
-    Gerund,       // Ger
+    Finite,             // Fin
+    Infinitive,         // Inf
+    Participle,         // Part
+    Gerund,             // Ger
     ConverbalAdverbial, // Conv
 }
 
@@ -297,7 +297,7 @@ pub struct MorphFeatures {
     pub voice: Option<UDVoice>,
     /// Degree: positive, comparative, superlative
     pub degree: Option<UDDegree>,
-    /// VerbForm: finite, infinitive, participle, gerund
+    /// `VerbForm`: finite, infinitive, participle, gerund
     pub verbform: Option<UDVerbForm>,
     /// Raw features string for features not covered above
     pub raw_features: Option<String>,
@@ -395,7 +395,7 @@ pub enum DepRel {
 
 impl std::str::FromStr for DepRel {
     type Err = ();
-    
+
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         Ok(match s {
             "acl" => DepRel::Acl,
@@ -445,16 +445,17 @@ impl std::str::FromStr for DepRel {
 }
 
 impl DepRel {
-    /// Parse a dependency relation string into a DepRel enum
+    /// Parse a dependency relation string into a `DepRel` enum
+    #[must_use]
     pub fn from_str_simple(s: &str) -> Self {
-        s.parse().unwrap_or_else(|_| DepRel::Other(s.to_string()))
+        s.parse().unwrap_or_else(|()| DepRel::Other(s.to_string()))
     }
 }
 
 /// Enhanced word with extracted semantic features (Layer 1.5)
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct EnhancedWord {
-    /// Base word information from UDPipe
+    /// Base word information from `UDPipe`
     pub base: Word,
     /// Semantic features extracted by feature extraction pipeline
     pub semantic_features: SemanticFeatures,
@@ -862,6 +863,20 @@ impl LittleV {
     }
 }
 
+// Include coverage improvement tests for M3
+#[cfg(test)]
+mod coverage_improvement_tests;
+#[cfg(test)]
+mod utility_coverage_tests;
+
+// Include serialization round-trip tests for M3
+#[cfg(test)]
+mod serialization_tests;
+
+// Include performance edge case tests for M3
+#[cfg(test)]
+mod performance_tests;
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -869,10 +884,28 @@ mod tests {
 
     #[test]
     fn test_theta_role_core_arguments() {
+        // Test all core arguments
         assert!(ThetaRole::Agent.is_core_argument());
         assert!(ThetaRole::Patient.is_core_argument());
-        assert!(!ThetaRole::Temporal.is_core_argument());
+        assert!(ThetaRole::Theme.is_core_argument());
+        assert!(ThetaRole::Experiencer.is_core_argument());
+        assert!(ThetaRole::Recipient.is_core_argument());
+
+        // Test all non-core arguments
+        assert!(!ThetaRole::Benefactive.is_core_argument());
+        assert!(!ThetaRole::Instrument.is_core_argument());
+        assert!(!ThetaRole::Comitative.is_core_argument());
         assert!(!ThetaRole::Location.is_core_argument());
+        assert!(!ThetaRole::Source.is_core_argument());
+        assert!(!ThetaRole::Goal.is_core_argument());
+        assert!(!ThetaRole::Direction.is_core_argument());
+        assert!(!ThetaRole::Temporal.is_core_argument());
+        assert!(!ThetaRole::Frequency.is_core_argument());
+        assert!(!ThetaRole::Measure.is_core_argument());
+        assert!(!ThetaRole::Cause.is_core_argument());
+        assert!(!ThetaRole::Manner.is_core_argument());
+        assert!(!ThetaRole::ControlledSubject.is_core_argument());
+        assert!(!ThetaRole::Stimulus.is_core_argument());
     }
 
     #[test]
@@ -882,12 +915,45 @@ mod tests {
     }
 
     #[test]
+    fn test_all_theta_roles_covered() {
+        // Test that all theta roles are present and unique
+        let all_roles = ThetaRole::all();
+
+        // Check each role is present
+        assert!(all_roles.contains(&ThetaRole::Agent));
+        assert!(all_roles.contains(&ThetaRole::Patient));
+        assert!(all_roles.contains(&ThetaRole::Theme));
+        assert!(all_roles.contains(&ThetaRole::Experiencer));
+        assert!(all_roles.contains(&ThetaRole::Recipient));
+        assert!(all_roles.contains(&ThetaRole::Benefactive));
+        assert!(all_roles.contains(&ThetaRole::Instrument));
+        assert!(all_roles.contains(&ThetaRole::Comitative));
+        assert!(all_roles.contains(&ThetaRole::Location));
+        assert!(all_roles.contains(&ThetaRole::Source));
+        assert!(all_roles.contains(&ThetaRole::Goal));
+        assert!(all_roles.contains(&ThetaRole::Direction));
+        assert!(all_roles.contains(&ThetaRole::Temporal));
+        assert!(all_roles.contains(&ThetaRole::Frequency));
+        assert!(all_roles.contains(&ThetaRole::Measure));
+        assert!(all_roles.contains(&ThetaRole::Cause));
+        assert!(all_roles.contains(&ThetaRole::Manner));
+        assert!(all_roles.contains(&ThetaRole::ControlledSubject));
+        assert!(all_roles.contains(&ThetaRole::Stimulus));
+    }
+
+    #[test]
     fn test_word_creation() {
-        let word = Word::new(1, "test".to_string(), 0, 4);
-        assert_eq!(word.text, "test");
-        assert_eq!(word.lemma, "test");
+        let word = Word::new(1, "Test".to_string(), 0, 4);
+        assert_eq!(word.text, "Test");
+        assert_eq!(word.lemma, "test"); // Should be lowercase
         assert_eq!(word.start, 0);
         assert_eq!(word.end, 4);
+        assert_eq!(word.id, 1);
+        assert_eq!(word.upos, UPos::X); // Default value
+        assert_eq!(word.xpos, None);
+        assert_eq!(word.feats, MorphFeatures::default());
+        assert_eq!(word.head, None);
+        assert_eq!(word.deprel, DepRel::Dep); // Default value
     }
 
     #[test]
@@ -900,6 +966,40 @@ mod tests {
         assert_eq!(sentence.word_count(), 2);
         assert_eq!(sentence.start, 0);
         assert_eq!(sentence.end, 7);
+    }
+
+    #[test]
+    fn test_empty_sentence() {
+        // Test edge case of empty sentence
+        let sentence = Sentence::new(vec![]);
+        assert_eq!(sentence.word_count(), 0);
+        assert_eq!(sentence.start, 0); // Default value for empty
+        assert_eq!(sentence.end, 0); // Default value for empty
+    }
+
+    #[test]
+    fn test_document_methods() {
+        // Test document creation and methods
+        let words1 = vec![Word::new(1, "Hello".to_string(), 0, 5)];
+        let words2 = vec![
+            Word::new(2, "world".to_string(), 6, 11),
+            Word::new(3, "test".to_string(), 12, 16),
+        ];
+        let sentences = vec![Sentence::new(words1), Sentence::new(words2)];
+        let doc = Document::new("Hello world test".to_string(), sentences);
+
+        assert_eq!(doc.sentence_count(), 2);
+        assert_eq!(doc.total_word_count(), 3); // 1 + 2 words
+        assert_eq!(doc.text, "Hello world test");
+    }
+
+    #[test]
+    fn test_empty_document() {
+        // Test edge case of empty document
+        let doc = Document::new("".to_string(), vec![]);
+        assert_eq!(doc.sentence_count(), 0);
+        assert_eq!(doc.total_word_count(), 0);
+        assert_eq!(doc.text, "");
     }
 
     #[test]
@@ -1001,6 +1101,69 @@ mod tests {
 
         assert_eq!(fear_v.external_argument().unwrap().text, "John");
         assert_eq!(fear_v.aspectual_class(), AspectualClass::State);
+        assert!(fear_v.is_eventive()); // Experience is eventive
+    }
+
+    #[test]
+    fn test_all_little_v_variants() {
+        let john = Entity {
+            id: 1,
+            text: "John".to_string(),
+            animacy: Some(Animacy::Human),
+            definiteness: Some(Definiteness::Definite),
+        };
+
+        let book = Entity {
+            id: 2,
+            text: "book".to_string(),
+            animacy: Some(Animacy::Inanimate),
+            definiteness: Some(Definiteness::Indefinite),
+        };
+
+        // Test Cause variant
+        let cause_v = LittleV::Cause {
+            causer: john.clone(),
+            caused_predicate: "break".to_string(),
+            caused_theme: book.clone(),
+        };
+        assert_eq!(cause_v.external_argument().unwrap().text, "John");
+        assert_eq!(cause_v.aspectual_class(), AspectualClass::Accomplishment);
+        assert!(cause_v.is_eventive());
+
+        // Test Say variant
+        let say_v = LittleV::Say {
+            speaker: john.clone(),
+            addressee: Some(book.clone()),
+            content: Proposition {
+                content: "hello".to_string(),
+                modality: None,
+                polarity: true,
+            },
+        };
+        assert_eq!(say_v.external_argument().unwrap().text, "John");
+        assert_eq!(say_v.aspectual_class(), AspectualClass::Activity);
+        assert!(say_v.is_eventive());
+
+        // Test Exist variant
+        let exist_v = LittleV::Exist {
+            entity: book.clone(),
+            location: None,
+        };
+        assert!(exist_v.external_argument().is_none());
+        assert_eq!(exist_v.aspectual_class(), AspectualClass::State);
+        assert!(exist_v.is_eventive()); // Exist is eventive
+
+        // Test Be variant (non-eventive)
+        let be_v = LittleV::Be {
+            theme: john.clone(),
+            state: State {
+                predicate: "tall".to_string(),
+                polarity: true,
+            },
+        };
+        assert!(be_v.external_argument().is_none());
+        assert_eq!(be_v.aspectual_class(), AspectualClass::State);
+        assert!(!be_v.is_eventive()); // Be is not eventive
     }
 
     // Golden tests for deterministic output validation

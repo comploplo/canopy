@@ -3,34 +3,40 @@
 ## Research Summary: UDPipe Rust Integration Options
 
 ### Current State
-- **No existing Rust bindings**: No official or community UDPipe crates on crates.io
+
+- **No existing Rust bindings**: No official or community UDPipe crates on
+  crates.io
 - **Official UDPipe supports**: C++, Python, Java, C#, Perl, R - but not Rust
 - **UDPipe 1 vs 2**: UDPipe 2 is newer but UDPipe 1 has stable API
 
 ### Integration Options Analysis
 
 #### Option 1: FFI Bindings with `bindgen` ⭐ **RECOMMENDED**
+
 **Pros**:
+
 - Direct C++ API access - maximum performance
-- Type-safe Rust interface generated automatically  
+- Type-safe Rust interface generated automatically
 - Full control over memory management
 - Zero serialization overhead
 - Maintains <10ms parsing target feasibility
 
 **Cons**:
+
 - More complex initial setup
 - Need to manage C++ library linking
 - Platform-specific builds (libudpipe)
 - C++ limitations (templates, constructors)
 
 **Implementation**:
+
 ```rust
 // build.rs
 use bindgen;
 
 fn main() {
     println!("cargo:rustc-link-lib=udpipe");
-    
+
     let bindings = bindgen::Builder::default()
         .header("wrapper.h")
         .clang_arg("-x")
@@ -45,36 +51,45 @@ fn main() {
 ```
 
 #### Option 2: REST API Client
+
 **Pros**:
+
 - Simple HTTP requests with `reqwest`
 - No platform dependencies
 - Official UDPipe web service available
 
 **Cons**:
+
 - Network latency (unacceptable for <10ms target)
 - Requires internet connection
 - JSON serialization overhead
 - No offline capability
 
 #### Option 3: Command Line Process
+
 **Pros**:
+
 - Uses official UDPipe binary
 - Simple `std::process::Command`
 - Cross-platform if binary available
 
 **Cons**:
-- Process spawn overhead (~50-100ms) 
+
+- Process spawn overhead (~50-100ms)
 - File I/O for each request
 - No streaming capability
 - Fails <10ms performance target
 
 #### Option 4: Alternative Rust-Native Parser
+
 **Pros**:
+
 - Pure Rust implementation
 - No FFI complexity
 - Full control over features
 
 **Cons**:
+
 - Huge implementation effort (months)
 - Need to train/port UD models
 - Diverges from proven UDPipe accuracy
@@ -83,12 +98,14 @@ fn main() {
 ### Recommendation: FFI Bindings (Option 1)
 
 **Rationale**:
+
 1. **Performance**: Only option that can meet <10ms target
 2. **Accuracy**: Uses proven UDPipe models and algorithms
 3. **Control**: Full access to UDPipe's rich feature set
 4. **Investment**: Bindings become reusable community resource
 
 **Implementation Plan**:
+
 1. **Week 1**: Create basic FFI bindings with `bindgen`
 2. **Week 2**: Wrap unsafe FFI in safe Rust API
 3. **Week 3**: Optimize for performance and memory safety
@@ -110,7 +127,7 @@ impl UDPipeModel {
     pub fn load(path: &str) -> Result<Self, UDPipeError> {
         // Safe wrapper around FFI
     }
-    
+
     pub fn parse(&self, text: &str) -> Result<Sentence, UDPipeError> {
         // Convert to/from C++ types safely
     }
@@ -133,13 +150,14 @@ impl Drop for UDPipeModel {
 
 ### Risk Mitigation
 
-**Risk**: Complex C++ integration  
-**Mitigation**: Start with minimal API surface, expand incrementally
+**Risk**: Complex C++ integration **Mitigation**: Start with minimal API
+surface, expand incrementally
 
-**Risk**: Platform-specific builds  
-**Mitigation**: Focus on Linux/macOS first, Windows later
+**Risk**: Platform-specific builds **Mitigation**: Focus on Linux/macOS first,
+Windows later
 
-**Risk**: Memory safety issues  
-**Mitigation**: Extensive testing, careful lifetime management
+**Risk**: Memory safety issues **Mitigation**: Extensive testing, careful
+lifetime management
 
-This approach gives us the best balance of performance, accuracy, and development effort for M2.
+This approach gives us the best balance of performance, accuracy, and
+development effort for M2.

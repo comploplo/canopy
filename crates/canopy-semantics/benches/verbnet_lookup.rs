@@ -1,25 +1,25 @@
+use canopy_core::{DepRel, UPos, Word};
 use canopy_semantics::verbnet::{VerbNetEngine, VerbNetFeatureExtractor};
-use canopy_core::{Word, UPos, DepRel};
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 fn benchmark_verbnet_lookup(c: &mut Criterion) {
     let mut engine = VerbNetEngine::new();
     engine.add_test_data();
-    
+
     c.bench_function("verbnet_class_lookup", |b| {
         b.iter(|| {
             let classes = engine.get_verb_classes("give");
             criterion::black_box(classes);
         });
     });
-    
+
     c.bench_function("verbnet_theta_roles", |b| {
         b.iter(|| {
             let roles = engine.get_theta_roles("give");
             criterion::black_box(roles);
         });
     });
-    
+
     let mut extractor = VerbNetFeatureExtractor::new(engine);
     let test_word = Word {
         id: 1,
@@ -35,7 +35,7 @@ fn benchmark_verbnet_lookup(c: &mut Criterion) {
         start: 0,
         end: 4,
     };
-    
+
     c.bench_function("verbnet_feature_extraction", |b| {
         b.iter(|| {
             let features = extractor.extract_features(&test_word);

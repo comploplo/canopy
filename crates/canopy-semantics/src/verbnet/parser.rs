@@ -51,7 +51,7 @@ struct VerbClassXML {
 
 #[derive(Debug, Deserialize)]
 struct MembersXML {
-    #[serde(rename = "MEMBER")]
+    #[serde(rename = "MEMBER", default)]
     member: Vec<MemberXML>,
 }
 
@@ -69,7 +69,7 @@ struct MemberXML {
 
 #[derive(Debug, Deserialize)]
 struct ThemRolesXML {
-    #[serde(rename = "THEMROLE")]
+    #[serde(rename = "THEMROLE", default)]
     themrole: Vec<ThemRoleXML>,
 }
 
@@ -84,7 +84,7 @@ struct ThemRoleXML {
 
 #[derive(Debug, Deserialize)]
 struct SelRestrsXML {
-    #[serde(rename = "SELRESTR")]
+    #[serde(rename = "SELRESTR", default)]
     selrestr: Vec<SelRestrXML>,
 }
 
@@ -100,7 +100,7 @@ struct SelRestrXML {
 
 #[derive(Debug, Deserialize)]
 struct FramesXML {
-    #[serde(rename = "FRAME")]
+    #[serde(rename = "FRAME", default)]
     frame: Vec<FrameXML>,
 }
 
@@ -112,9 +112,9 @@ struct FrameXML {
     #[serde(rename = "EXAMPLES")]
     examples: Option<ExamplesXML>,
 
-    #[serde(rename = "SYNTAX")]
-    syntax: Option<SyntaxXML>,
-
+    // TODO: Re-enable syntax parsing after fixing duplicate NP element handling
+    // #[serde(rename = "SYNTAX")]
+    // syntax: Option<SyntaxXML>,
     #[serde(rename = "SEMANTICS")]
     semantics: Option<SemanticsXML>,
 }
@@ -144,10 +144,85 @@ struct ExamplesXML {
 
 #[derive(Debug, Deserialize)]
 struct SyntaxXML {
-    // Skip detailed parsing for now - just store the raw content
-    #[serde(rename = "$value")]
-    #[allow(dead_code)] // TODO: Use in M3 for syntactic frame parsing
-    content: Option<String>,
+    #[serde(rename = "NP", default)]
+    #[allow(dead_code)] // Preserved for future VerbNet syntactic pattern analysis
+    np: Vec<NPElementXML>,
+
+    #[serde(rename = "VERB")]
+    #[allow(dead_code)] // Preserved for future VerbNet syntactic pattern analysis
+    verb: Option<VerbElementXML>,
+
+    #[serde(rename = "PREP", default)]
+    #[allow(dead_code)] // Preserved for future VerbNet syntactic pattern analysis
+    prep: Vec<PrepElementXML>,
+
+    #[serde(rename = "ADJ", default)]
+    #[allow(dead_code)] // Preserved for future VerbNet syntactic pattern analysis
+    adj: Vec<AdjElementXML>,
+
+    #[serde(rename = "ADV", default)]
+    #[allow(dead_code)] // Preserved for future VerbNet syntactic pattern analysis
+    adv: Vec<AdvElementXML>,
+}
+
+#[derive(Debug, Deserialize)]
+struct NPElementXML {
+    #[serde(rename = "@value")]
+    #[allow(dead_code)] // Preserved for future VerbNet NP constraint validation
+    value: Option<String>,
+
+    #[serde(rename = "SYNRESTRS")]
+    #[allow(dead_code)] // Preserved for future VerbNet syntactic restriction processing
+    synrestrs: Option<SynRestrsXML>,
+}
+
+#[derive(Debug, Deserialize)]
+struct VerbElementXML {
+    // Empty element in VerbNet XML
+}
+
+#[derive(Debug, Deserialize)]
+struct PrepElementXML {
+    #[serde(rename = "@value")]
+    #[allow(dead_code)] // Preserved for future VerbNet prepositional constraint validation
+    value: Option<String>,
+
+    #[serde(rename = "SELRESTRS")]
+    #[allow(dead_code)] // Preserved for future VerbNet selectional restriction processing
+    selrestrs: Option<SelRestrsXML>,
+}
+
+#[derive(Debug, Deserialize)]
+struct AdjElementXML {
+    #[serde(rename = "@value")]
+    #[allow(dead_code)] // Preserved for future VerbNet adjectival constraint validation
+    value: Option<String>,
+}
+
+#[derive(Debug, Deserialize)]
+struct AdvElementXML {
+    #[serde(rename = "@value")]
+    #[allow(dead_code)] // Preserved for future VerbNet adverbial constraint validation
+    value: Option<String>,
+}
+
+#[derive(Debug, Deserialize)]
+struct SynRestrsXML {
+    #[serde(rename = "SYNRESTR", default)]
+    #[allow(dead_code)]
+    // Preserved for future VerbNet syntactic restriction collection processing
+    synrestr: Vec<SynRestrXML>,
+}
+
+#[derive(Debug, Deserialize)]
+struct SynRestrXML {
+    #[serde(rename = "@Value")]
+    #[allow(dead_code)] // Preserved for future VerbNet syntactic restriction value processing
+    value: String,
+
+    #[serde(rename = "@type")]
+    #[allow(dead_code)] // Preserved for future VerbNet syntactic restriction type processing
+    restriction_type: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -160,6 +235,9 @@ struct SemanticsXML {
 struct PredXML {
     #[serde(rename = "@value")]
     value: String,
+
+    #[serde(rename = "@bool")]
+    bool_attr: Option<String>, // "!" for negation
 
     #[serde(rename = "ARGS")]
     args: Option<ArgsXML>,
@@ -174,8 +252,8 @@ struct ArgsXML {
 #[derive(Debug, Deserialize)]
 struct ArgXML {
     #[serde(rename = "@type")]
-    #[allow(dead_code)] // TODO: Use in M3 for semantic predicate argument typing
-    arg_type: String,
+    #[allow(dead_code)] // Preserved for future VerbNet semantic argument type analysis
+    arg_type: String, // "Event", "ThemRole", etc.
 
     #[serde(rename = "@value")]
     value: String,
@@ -183,7 +261,7 @@ struct ArgXML {
 
 #[derive(Debug, Deserialize)]
 struct SubClassesXML {
-    #[serde(rename = "VNSUBCLASS")]
+    #[serde(rename = "VNSUBCLASS", default)]
     vnsubclass: Vec<VerbClassXML>,
 }
 
@@ -204,11 +282,12 @@ impl VerbNetParser {
         })?;
 
         // Parse the XML content using quick-xml
-        let verb_class_xml: VerbClassXML = from_str(&content).map_err(|source| ParseError::XmlParseError { source })?;
-        
+        let verb_class_xml: VerbClassXML =
+            from_str(&content).map_err(|source| ParseError::XmlParseError { source })?;
+
         // Convert XML to our internal VerbClass structure
         let verb_class = Self::convert_xml_to_verb_class(verb_class_xml, &path_str)?;
-        
+
         debug!("Successfully parsed VerbNet class: {}", verb_class.id);
         Ok(vec![verb_class])
     }
@@ -238,7 +317,10 @@ impl VerbNetParser {
             }
         }
 
-        info!("Parsed {} VerbNet classes from directory", all_classes.len());
+        info!(
+            "Parsed {} VerbNet classes from directory",
+            all_classes.len()
+        );
         Ok(all_classes)
     }
 
@@ -344,6 +426,12 @@ impl VerbNetParser {
             "utilize" => PredicateType::Utilize,
             "perceive" => PredicateType::Perceive,
             "prop" => PredicateType::Prop,
+            // VerbNet-specific predicates
+            "has_possession" => PredicateType::Other("has_possession".to_string()),
+            "apply" => PredicateType::Other("apply".to_string()),
+            "together" => PredicateType::Other("together".to_string()),
+            "against" => PredicateType::Other("against".to_string()),
+            "path_rel" => PredicateType::Other("path_rel".to_string()),
             _ => {
                 debug!("Unknown predicate type, using Other: {}", pred_str);
                 PredicateType::Other(pred_str.to_string())
@@ -352,10 +440,13 @@ impl VerbNetParser {
     }
 
     /// Convert XML VerbClass to internal VerbClass structure
-    fn convert_xml_to_verb_class(xml: VerbClassXML, file_path: &str) -> Result<VerbClass, ParseError> {
+    fn convert_xml_to_verb_class(
+        xml: VerbClassXML,
+        _file_path: &str,
+    ) -> Result<VerbClass, ParseError> {
         // Extract human-readable name from class ID
         let name = xml.id.split('-').next().unwrap_or(&xml.id).to_string();
-        
+
         let mut verb_class = VerbClass {
             id: xml.id.clone(),
             name,
@@ -391,7 +482,9 @@ impl VerbNetParser {
                     // Parse selectional restrictions
                     if let Some(selrestrs_xml) = themrole_xml.selrestrs {
                         for selrestr_xml in selrestrs_xml.selrestr {
-                            if let Some(restriction) = Self::parse_selectional_restriction(&selrestr_xml.restriction_type) {
+                            if let Some(restriction) =
+                                Self::parse_selectional_restriction(&selrestr_xml.restriction_type)
+                            {
                                 theta_role.selectional_restrictions.push(restriction);
                             }
                         }
@@ -408,47 +501,48 @@ impl VerbNetParser {
                 // Build description string from components
                 let mut description = frame_xml.description.primary.clone();
                 if let Some(secondary) = &frame_xml.description.secondary {
-                    description.push_str(" ");
+                    description.push(' ');
                     description.push_str(secondary);
                 }
 
                 // Get first example or create a placeholder
-                let example = frame_xml.examples
+                let example = frame_xml
+                    .examples
                     .as_ref()
                     .and_then(|ex| ex.example.first())
                     .cloned()
                     .unwrap_or_else(|| "No example provided".to_string());
 
-                // Parse syntax elements (simplified for now - skip complex XML)
-                let mut syntax_elements = Vec::new();
-                if let Some(_syntax_xml) = frame_xml.syntax {
-                    // For now, just create a basic syntax pattern from the description
-                    // TODO: Implement proper syntax parsing when we have real VerbNet XML files
-                    syntax_elements.push(SyntaxElement {
-                        category: "V".to_string(),
-                        theta_role: None,
-                        restrictions: Vec::new(),
-                    });
-                }
+                // TODO: Parse syntax elements - currently disabled due to duplicate NP element issue
+                let syntax_elements = Vec::new(); // Placeholder for now
 
-                // Parse semantics
+                // Parse semantics with proper boolean and event handling
                 let mut semantics = Vec::new();
                 if let Some(semantics_xml) = frame_xml.semantics {
                     for pred_xml in semantics_xml.pred {
                         let predicate_type = Self::parse_predicate_type(&pred_xml.value);
                         let mut arguments = Vec::new();
 
+                        // Parse arguments with type information
                         if let Some(args_xml) = pred_xml.args {
                             for arg_xml in args_xml.arg {
+                                // For now, just store the value; could extend to track type
                                 arguments.push(arg_xml.value);
                             }
                         }
 
+                        // Check for negation
+                        let negated = pred_xml
+                            .bool_attr
+                            .as_ref()
+                            .map(|b| b == "!")
+                            .unwrap_or(false);
+
                         semantics.push(SemanticPredicate {
                             predicate_type,
-                            event_time: EventTime::During, // Default, could be parsed from XML
+                            event_time: EventTime::During, // TODO: Could parse from Event args
                             arguments,
-                            negated: false, // Default, could be parsed from XML
+                            negated,
                         });
                     }
                 }
@@ -471,7 +565,7 @@ impl VerbNetParser {
         // Parse subclasses (recursive)
         if let Some(subclasses_xml) = xml.subclasses {
             for subclass_xml in subclasses_xml.vnsubclass {
-                let subclass = Self::convert_xml_to_verb_class(subclass_xml, file_path)?;
+                let subclass = Self::convert_xml_to_verb_class(subclass_xml, _file_path)?;
                 verb_class.subclasses.push(subclass);
             }
         }
@@ -508,7 +602,10 @@ mod tests {
             VerbNetParser::parse_selectional_restriction("CONCRETE"),
             Some(SelectionalRestriction::Concrete)
         );
-        assert_eq!(VerbNetParser::parse_selectional_restriction("unknown"), None);
+        assert_eq!(
+            VerbNetParser::parse_selectional_restriction("unknown"),
+            None
+        );
     }
 
     #[test]
@@ -521,7 +618,7 @@ mod tests {
             VerbNetParser::parse_predicate_type("motion"),
             PredicateType::Motion
         );
-        
+
         // Unknown predicates should become Other
         if let PredicateType::Other(s) = VerbNetParser::parse_predicate_type("unknown") {
             assert_eq!(s, "unknown");
@@ -536,7 +633,7 @@ mod tests {
         // TODO: Implement comprehensive VerbNet XML parsing when real XML files are needed in M3
         // Current simple XML structures in M2 are sufficient for data structure testing
         // This test is deferred until we need to parse actual VerbNet XML files
-        
+
         // For now, test the basic data structures work
         let verb_class = VerbClass {
             id: "give-13.1".to_string(),
@@ -546,7 +643,7 @@ mod tests {
             frames: vec![],
             subclasses: vec![],
         };
-        
+
         assert_eq!(verb_class.id, "give-13.1");
         assert_eq!(verb_class.name, "give");
     }

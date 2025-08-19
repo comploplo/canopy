@@ -2,6 +2,8 @@
 //!
 //! This module tests the performance of the real UDPipe integration in Layer 1.
 
+#![allow(clippy::useless_vec)] // Allow vec usage in tests for clarity
+
 #[cfg(test)]
 mod tests {
     use crate::layer1::{Layer1Config, Layer1Parser};

@@ -12,15 +12,16 @@
 //! ## Module Structure
 //!
 //! - `types`: Core VerbNet data structures
-//! - `parser`: XML parsing functionality  
+//! - `parser`: XML parsing functionality
 //! - `engine`: Fast lookup engine with indices
 
-pub mod types;
-pub mod parser;
 pub mod engine;
 pub mod feature_extraction;
+pub mod integration_tests;
+pub mod parser;
+pub mod types;
 
 // Re-export public API
-pub use types::*;
 pub use engine::VerbNetEngine;
-pub use feature_extraction::{VerbNetFeatureExtractor, VerbNetFeatures, Animacy, Concreteness};
+pub use feature_extraction::{Animacy, Concreteness, VerbNetFeatureExtractor, VerbNetFeatures};
+pub use types::*;

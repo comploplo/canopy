@@ -2,11 +2,13 @@
 
 ## Philosophy
 
-canopy.rs follows **infrastructure-first development** with rigorous performance monitoring and quality gates. We prioritize:
+canopy.rs follows **infrastructure-first development** with rigorous performance
+monitoring and quality gates. We prioritize:
 
 1. **Performance-First Mindset**: Establish baselines before building features
 2. **Type Safety**: Use Rust's type system to enforce linguistic constraints
-3. **Theory-Driven Design**: Every architectural decision grounded in linguistic theory
+3. **Theory-Driven Design**: Every architectural decision grounded in linguistic
+   theory
 4. **Comprehensive Testing**: Property-based tests, golden tests, benchmarks
 5. **Developer Experience**: Fast feedback loops and excellent tooling
 
@@ -56,7 +58,8 @@ just smoke        # Quick verification everything works
 
 ### Architecture Patterns
 
-- **Enum-Heavy Design**: Use enums for type safety (ThetaRole, PartOfSpeech, SemanticType)
+- **Enum-Heavy Design**: Use enums for type safety (ThetaRole, PartOfSpeech,
+  SemanticType)
 - **Trait-Based Interfaces**: Define traits for swappable components
 - **Builder Patterns**: For complex type construction
 - **Strategy Pattern**: Multiple implementations with shared interfaces
@@ -186,7 +189,7 @@ pub enum CanopyError {
 
 ### Documentation Style
 
-```rust
+````rust
 /// Extracts semantic features from a parsed sentence.
 ///
 /// This function implements rule-based feature extraction following
@@ -214,7 +217,7 @@ pub fn extract_semantic_features(
 ) -> Result<Vec<EnhancedWord>, CanopyError> {
     // Implementation...
 }
-```
+````
 
 ## Linguistic Theory Standards
 
@@ -280,7 +283,8 @@ test(golden): add lambda calculus β-reduction test cases
 
 ### Resources
 
-- **Documentation**: [ARCHITECTURE.md](ARCHITECTURE.md), [ROADMAP.md](ROADMAP.md)
+- **Documentation**: [ARCHITECTURE.md](ARCHITECTURE.md),
+  [ROADMAP.md](ROADMAP.md)
 - **Code Examples**: See `examples/` directory (M2+)
 - **Benchmarks**: Check `target/criterion/` for performance analysis
 
@@ -310,4 +314,6 @@ All releases must pass:
 
 ---
 
-**Remember**: Infrastructure-first development means we build the tools and processes that enable rapid, high-quality feature development. Quality gates are not obstacles—they're the foundation that enables confident iteration.
+**Remember**: Infrastructure-first development means we build the tools and
+processes that enable rapid, high-quality feature development. Quality gates are
+not obstacles—they're the foundation that enables confident iteration.

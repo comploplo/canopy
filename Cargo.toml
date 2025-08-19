@@ -3,6 +3,7 @@ members = [
     "crates/canopy-core",
     "crates/canopy-parser",
     "crates/canopy-semantics",
+    # "crates/canopy-pipeline",  # Temporarily disabled due to compilation issues
     "crates/canopy-lsp",
     "crates/canopy-cli",
 ]

@@ -8,6 +8,7 @@ description = "UDPipe integration and parsing for canopy"
 
 [dependencies]
 canopy-core = { path = "../canopy-core" }
+canopy-semantics = { path = "../canopy-semantics" }
 serde = { workspace = true }
 thiserror = { workspace = true }
 tracing = { workspace = true }

@@ -33,3 +33,13 @@ mod tests {
         // We'll add actual parsing tests once we have a model
     }
 }
+
+#[cfg(test)]
+mod morphological_features_test;
+
+#[cfg(test)]
+mod real_parsing_tests;
+
+// Coverage improvement tests for M3
+#[cfg(test)]
+mod ffi_comprehensive_tests;

@@ -1,6 +1,8 @@
 # VerbNet Patterns for canopy.rs
 
-This file documents the VerbNet-based verb patterns ported from the Python V1 system. These patterns will be implemented in Rust for M3 (Event Structure milestone).
+This file documents the VerbNet-based verb patterns ported from the Python V1
+system. These patterns will be implemented in Rust for M3 (Event Structure
+milestone).
 
 ## Pattern Structure
 
@@ -49,9 +51,12 @@ struct VerbPattern {
 
 ## Implementation Notes
 
-1. **No External XML**: Python V1 uses hardcoded patterns, not external VerbNet XML files
-2. **Pattern-Based**: Focus on syntactic patterns rather than exhaustive verb lists
-3. **Confidence Scoring**: Each pattern has a confidence score for backoff strategies
+1. **No External XML**: Python V1 uses hardcoded patterns, not external VerbNet
+   XML files
+2. **Pattern-Based**: Focus on syntactic patterns rather than exhaustive verb
+   lists
+3. **Confidence Scoring**: Each pattern has a confidence score for backoff
+   strategies
 4. **Lexicon-Free**: Emphasizes patterns over memorized verb-role mappings
 
 ## Rust Implementation Plan (M3)
@@ -83,4 +88,5 @@ pub enum ArgumentPosition {
 }
 ```
 
-This will be implemented in M3: Event Structure milestone as part of the theta role assignment system.
+This will be implemented in M3: Event Structure milestone as part of the theta
+role assignment system.

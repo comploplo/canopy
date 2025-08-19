@@ -1,1 +1,18 @@
 /target
+
+# Model files (large binaries)
+models/
+*.udpipe
+*.tar.gz
+*.zip
+
+# Cache files
+.serena/cache/
+.DS_Store
+
+# Coverage reports (we'll add specific ones we want)
+cobertura.xml
+tarpaulin-report.html
+
+# Temporary files
+delete-me.md

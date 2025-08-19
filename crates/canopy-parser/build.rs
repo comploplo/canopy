@@ -14,12 +14,16 @@ fn main() {
     // Build UDPipe static library
     build_udpipe(&udpipe_dir, &out_dir);
 
-    // Generate Rust bindings
-    generate_bindings(&udpipe_dir, &out_dir);
+    // Build wrapper
+    build_wrapper(&udpipe_dir, &out_dir, &manifest_dir);
 
-    // Link with the built library
+    // Generate Rust bindings
+    generate_bindings(&udpipe_dir, &out_dir, &manifest_dir);
+
+    // Link with the built libraries
     println!("cargo:rustc-link-search=native={}", out_dir.display());
     println!("cargo:rustc-link-lib=static=udpipe");
+    println!("cargo:rustc-link-lib=static=udpipe_wrapper");
 
     // Link with system libraries that UDPipe needs
     #[cfg(target_os = "linux")]
@@ -86,7 +90,38 @@ fn build_udpipe(udpipe_dir: &Path, out_dir: &Path) {
     println!("UDPipe build complete!");
 }
 
-fn generate_bindings(udpipe_dir: &Path, out_dir: &Path) {
+fn build_wrapper(udpipe_dir: &Path, _out_dir: &Path, manifest_dir: &Path) {
+    println!("Building UDPipe wrapper...");
+
+    let wrapper_cpp = manifest_dir.join("udpipe_wrapper.cpp");
+    let wrapper_h = manifest_dir.join("udpipe_wrapper.h");
+    let lib_dir = udpipe_dir.join("src_lib_only");
+
+    assert!(
+        wrapper_cpp.exists(),
+        "UDPipe wrapper source not found at {}",
+        wrapper_cpp.display()
+    );
+    assert!(
+        wrapper_h.exists(),
+        "UDPipe wrapper header not found at {}",
+        wrapper_h.display()
+    );
+
+    // Build the wrapper using cc crate
+    cc::Build::new()
+        .cpp(true)
+        .std("c++14")
+        .file(&wrapper_cpp)
+        .include(&lib_dir)
+        .include(manifest_dir)
+        .warnings(false) // Disable warnings for external code
+        .compile("udpipe_wrapper");
+
+    println!("UDPipe wrapper build complete!");
+}
+
+fn generate_bindings(udpipe_dir: &Path, out_dir: &Path, manifest_dir: &Path) {
     println!("Generating UDPipe bindings...");
 
     let lib_dir = udpipe_dir.join("src_lib_only");
@@ -98,12 +133,17 @@ fn generate_bindings(udpipe_dir: &Path, out_dir: &Path) {
         header_path.display()
     );
 
+    // Also include wrapper header
+    let wrapper_header = manifest_dir.join("udpipe_wrapper.h");
+
     let bindings = bindgen::Builder::default()
         .header(header_path.to_string_lossy())
+        .header(wrapper_header.to_string_lossy())
         .clang_arg("-x")
         .clang_arg("c++")
         .clang_arg("-std=c++14")
         .clang_arg(format!("-I{}", lib_dir.display()))
+        .clang_arg(format!("-I{}", manifest_dir.display()))
         // Allowlist UDPipe types and functions - be more specific about namespaces
         .allowlist_function("ufal::udpipe::.*")
         .allowlist_type("ufal::udpipe::.*")
@@ -121,6 +161,10 @@ fn generate_bindings(udpipe_dir: &Path, out_dir: &Path) {
         .allowlist_type("trainer")
         .allowlist_type("evaluator")
         .allowlist_type("string_piece")
+        // Allowlist wrapper functions
+        .allowlist_function("udpipe_.*")
+        .allowlist_type("UDPipeWord")
+        .allowlist_type("UDPipeSentence")
         // Make std types opaque to avoid binding issues
         .opaque_type("std::.*")
         .opaque_type("string")

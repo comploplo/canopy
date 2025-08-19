@@ -10,11 +10,17 @@ impl CanopyLspStub {
     pub fn new() -> Self {
         Self
     }
-    
+
     /// TODO: Implement actual LSP server
     pub async fn run() -> Result<(), Box<dyn std::error::Error>> {
         println!("LSP Server stub - not yet implemented");
         println!("TODO: Integrate tower-lsp for full LSP functionality");
+        Ok(())
+    }
+
+    /// Stub method for testing - TODO: Replace with actual LSP text analysis
+    pub fn analyze_text(&self, _text: &str) -> Result<(), Box<dyn std::error::Error>> {
+        // Stub implementation for testing
         Ok(())
     }
 }

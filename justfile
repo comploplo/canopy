@@ -86,6 +86,17 @@ coverage-threshold THRESHOLD:
     sed -i.bak "s/COVERAGE_THRESHOLD=.*/COVERAGE_THRESHOLD={{THRESHOLD}}/" scripts/check-coverage.sh
     @echo "✅ Coverage threshold updated to {{THRESHOLD}}%"
 
+# Progressive coverage improvement commands
+coverage-current:
+    @echo "📊 Current coverage status:"
+    @cargo tarpaulin --workspace --skip-clean | grep "coverage"
+
+coverage-increase-to THRESHOLD:
+    @echo "🎯 Increasing coverage threshold to {{THRESHOLD}}%"
+    @echo "   Current threshold: $(grep COVERAGE_THRESHOLD scripts/check-coverage.sh | cut -d'=' -f2)"
+    sed -i.bak "s/COVERAGE_THRESHOLD=.*/COVERAGE_THRESHOLD={{THRESHOLD}}/" scripts/check-coverage.sh
+    @echo "✅ New threshold set. Run 'just coverage-check' to validate."
+
 # Run property-based tests with more iterations
 test-property:
     cargo test --workspace -- --ignored proptest
