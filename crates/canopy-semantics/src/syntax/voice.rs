@@ -472,7 +472,7 @@ mod tests {
 
         assert_eq!(analysis.voice_type, VoiceType::Active);
         assert!(analysis.confidence > 0.0);
-        assert!(analysis.has_passive_subject == false);
+        assert!(!analysis.has_passive_subject);
     }
 
     #[test]

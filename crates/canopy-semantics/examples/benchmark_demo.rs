@@ -74,21 +74,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("Speed vs Accuracy:");
         let speed_ratio =
             accuracy_result.total_time.as_secs_f64() / speed_result.total_time.as_secs_f64();
-        println!(
-            "  Accuracy mode is {:.2}x slower than Speed mode",
-            speed_ratio
-        );
+        println!("  Accuracy mode is {speed_ratio:.2}x slower than Speed mode");
 
         println!("Balanced Performance:");
         let balanced_vs_speed =
             balanced_result.total_time.as_secs_f64() / speed_result.total_time.as_secs_f64();
         let balanced_vs_accuracy =
             accuracy_result.total_time.as_secs_f64() / balanced_result.total_time.as_secs_f64();
-        println!("  Balanced is {:.2}x slower than Speed", balanced_vs_speed);
-        println!(
-            "  Accuracy is {:.2}x slower than Balanced",
-            balanced_vs_accuracy
-        );
+        println!("  Balanced is {balanced_vs_speed:.2}x slower than Speed");
+        println!("  Accuracy is {balanced_vs_accuracy:.2}x slower than Balanced");
     }
 
     println!("\n✅ Benchmark completed successfully!");

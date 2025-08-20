@@ -1207,6 +1207,11 @@ impl VerbNetEngine {
         }
     }
 
+    /// Check if the engine has been initialized with data
+    pub fn is_initialized(&self) -> bool {
+        !self.classes.is_empty()
+    }
+
     /// Add a verb class and update all indices
     fn add_class(&mut self, class: VerbClass) {
         let class_id = class.id.clone();

@@ -8,6 +8,20 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Current Progress - Pre-Architecture Change Checkpoint
+
+- **Test Infrastructure Enhancements**: Added comprehensive UDPipe quality assessment tests
+- **Debug Tooling**: Created diagnostic scripts for UDPipe parsing validation
+- **Coverage Maintenance**: Sustained 69.46% test coverage baseline
+- **Code Quality**: All 168/168 tests passing with clean codebase
+- **Performance Stability**: Maintained 21-24μs semantic analysis performance
+
+### Experimental Work in Progress
+
+- UDPipe output quality validation test suite (integrated into test suite)
+- Layer 3 DRT design documentation (moved to docs/design/layer3-drt-design.md)
+- Debug tooling cleanup and integration
+
 ### Coming in M4
 
 - Discourse Representation Theory (DRT) and compositional semantics

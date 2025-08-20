@@ -57,7 +57,7 @@ fn test_verbnet_engine_directly() {
             }
         }
         Err(e) => {
-            println!("❌ VerbNet lookup failed: {:?}", e);
+            println!("❌ VerbNet lookup failed: {e:?}");
         }
     }
 

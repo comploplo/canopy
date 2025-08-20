@@ -791,8 +791,8 @@ mod serialization_round_trip_tests {
         for i in 1..=1000 {
             words.push(Word {
                 id: i,
-                text: format!("word{}", i),
-                lemma: format!("lemma{}", i),
+                text: format!("word{i}"),
+                lemma: format!("lemma{i}"),
                 upos: UPos::Noun,
                 xpos: None,
                 feats: MorphFeatures::default(),

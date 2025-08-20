@@ -4,7 +4,7 @@
 //! for the Layer 2 semantic analysis API.
 
 #[cfg(test)]
-mod error_handling_tests {
+mod tests {
     use crate::layer2::{Layer2Analyzer, create_word_from_parse};
     use canopy_core::UPos;
 
@@ -32,8 +32,13 @@ mod error_handling_tests {
         // Test with valid verb
         let _valid_result = engine.get_verb_classes("run");
         // This may or may not have a result depending on the VerbNet data
-        // Just test that it doesn't crash
-        assert!(true, "Should handle valid verb lookup without crashing");
+        // Just test that it doesn't crash - if we get here, the call succeeded
+
+        // Engine starts empty, so is_initialized should be false initially
+        assert!(!engine.is_initialized());
+
+        // But the method should not panic
+        let _ = engine.is_initialized();
     }
 
     /// Test edge cases in Layer 2 semantic analysis

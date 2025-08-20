@@ -198,13 +198,41 @@ impl UDPipeEngine {
                 return Err(EngineError::ParseFailed { reason: error_str });
             }
 
-            // Extract the parsed results
-            let sentence = &*sentence_ptr;
-            let mut words = Vec::with_capacity(sentence.word_count);
+            // Extract the parsed results using wrapper functions
+            let word_count =
+                ffi::udpipe_sentence_get_word_count(sentence_ptr as *mut std::os::raw::c_void);
+            println!(
+                "DEBUG: udpipe_sentence_get_word_count returned: {}",
+                word_count
+            );
 
-            // Convert UDPipe words to our format
-            for i in 0..sentence.word_count {
-                let udpipe_word = &*sentence.words.add(i);
+            if word_count > 1000 {
+                println!("WARNING: Word count {} seems unreasonably large, something is wrong with wrapper", word_count);
+                // Fallback to enhanced tokenization
+                ffi::udpipe_sentence_destroy(sentence_ptr);
+                return self.enhanced_tokenize(text).map(|words| ParsedResult {
+                    text: text.to_string(),
+                    words,
+                });
+            }
+
+            let mut words = Vec::with_capacity(word_count);
+
+            // Convert UDPipe words to our format using wrapper functions
+            for i in 0..word_count {
+                let mut udpipe_word = std::mem::MaybeUninit::<ffi::UDPipeWord>::uninit();
+                let result = ffi::udpipe_sentence_get_word(
+                    sentence_ptr as *mut std::os::raw::c_void,
+                    i,
+                    udpipe_word.as_mut_ptr(),
+                );
+
+                if result == 0 {
+                    println!("Warning: Failed to get word {} from UDPipe sentence", i);
+                    continue;
+                }
+
+                let udpipe_word = udpipe_word.assume_init();
 
                 // Convert C strings to Rust strings
                 let form = if !udpipe_word.form.is_null() {
@@ -279,6 +307,8 @@ impl UDPipeEngine {
 
                 // Parse dependency relation
                 let deprel = self.parse_deprel(&deprel_str);
+
+                println!("DEBUG: Word {}: '{}' -> {} -> {:?}", i, form, upostag, upos);
 
                 // Create parsed word with real UDPipe data
                 words.push(ParsedWord {

@@ -102,7 +102,7 @@ fn diagnostic_what_is_actually_happening() {
             );
         }
         Err(e) => {
-            println!("❌ Analysis failed: {:?}", e);
+            println!("❌ Analysis failed: {e:?}");
         }
     }
 }
@@ -134,7 +134,7 @@ fn diagnostic_verbnet_loading() {
                 analysis.theta_assignments.len()
             );
         }
-        Err(e) => println!("Simple analysis failed: {:?}", e),
+        Err(e) => println!("Simple analysis failed: {e:?}"),
     }
 
     // Test with complex VerbNet-heavy sentence
@@ -167,7 +167,7 @@ fn diagnostic_verbnet_loading() {
                 println!("Event predicate: {:?}", event.predicate.lemma);
             }
         }
-        Err(e) => println!("Complex analysis failed: {:?}", e),
+        Err(e) => println!("Complex analysis failed: {e:?}"),
     }
 }
 
@@ -193,7 +193,7 @@ fn diagnostic_baseline_overhead() {
     let mut total_simple = Duration::new(0, 0);
     for _ in 0..iterations {
         let start = Instant::now();
-        let _vec = vec![1, 2, 3, 4, 5]; // Simple allocation
+        let _array = [1, 2, 3, 4, 5]; // Simple allocation
         total_simple += start.elapsed();
     }
 

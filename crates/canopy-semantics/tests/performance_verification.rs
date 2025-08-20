@@ -79,7 +79,7 @@ fn test_analysis_performance_under_500_microseconds() {
     let benchmark_iterations = 100;
 
     for (mode_name, perf_mode) in test_configs {
-        println!("\n=== Testing {} ===", mode_name);
+        println!("\n=== Testing {mode_name} ===");
 
         let config = Layer2Config {
             performance_mode: perf_mode,
@@ -134,7 +134,7 @@ fn test_analysis_performance_under_500_microseconds() {
                     }
                 }
                 Err(e) => {
-                    panic!("Analysis failed at iteration {}: {:?}", iteration, e);
+                    panic!("Analysis failed at iteration {iteration}: {e:?}");
                 }
             }
         }
@@ -143,36 +143,30 @@ fn test_analysis_performance_under_500_microseconds() {
         let avg_time = total_time / successful_analyses as u32;
         let avg_time_micros = avg_time.as_micros();
 
-        println!("\n{} Results:", mode_name);
-        println!(
-            "  - Successful analyses: {}/{}",
-            successful_analyses, benchmark_iterations
-        );
-        println!("  - Average time: {}μs", avg_time_micros);
-        println!("  - Total time: {}ms", total_time.as_millis());
+        println!("\n{mode_name} Results:");
+        println!("  - Successful analyses: {successful_analyses}/{benchmark_iterations}");
+        println!("  - Average time: {avg_time_micros}μs");
+        let total_ms = total_time.as_millis();
+        println!("  - Total time: {total_ms}ms");
 
         // CRITICAL PERFORMANCE REQUIREMENT: Must be under 500μs
         assert!(
             avg_time_micros < 500,
-            "{} failed performance requirement: {}μs >= 500μs",
-            mode_name,
-            avg_time_micros
+            "{mode_name} failed performance requirement: {avg_time_micros}μs >= 500μs"
         );
 
         // Also check that we're not extremely slow
         assert!(
             avg_time_micros < 2000,
-            "{} is suspiciously slow: {}μs (may indicate a performance regression)",
-            mode_name,
-            avg_time_micros
+            "{mode_name} is suspiciously slow: {avg_time_micros}μs (may indicate a performance regression)"
         );
 
-        println!("  ✅ {} PASSED: {}μs < 500μs", mode_name, avg_time_micros);
+        println!("  ✅ {mode_name} PASSED: {avg_time_micros}μs < 500μs");
     }
 }
 
 #[test]
-#[ignore] // TODO: Fix performance test sensitivity in full environment
+// Enabled for M4 Phase 1 - performance comparison test with reasonable assertions
 fn test_raising_vs_control_distinction_performance() {
     // Test that our raising detection doesn't significantly impact performance
     let raising_sentence = vec![
@@ -251,5 +245,5 @@ fn test_raising_vs_control_distinction_performance() {
     // The difference shouldn't be dramatic (within 2x)
     let ratio = std::cmp::max(raising_avg, control_avg).as_micros() as f64
         / std::cmp::min(raising_avg, control_avg).as_micros() as f64;
-    assert!(ratio < 2.0, "Performance difference too large: {}x", ratio);
+    assert!(ratio < 2.0, "Performance difference too large: {ratio}x");
 }

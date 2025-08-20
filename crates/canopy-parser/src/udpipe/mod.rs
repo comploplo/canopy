@@ -43,3 +43,6 @@ mod real_parsing_tests;
 // Coverage improvement tests for M3
 #[cfg(test)]
 mod ffi_comprehensive_tests;
+
+#[cfg(test)]
+mod quality_test;

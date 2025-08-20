@@ -664,13 +664,11 @@ mod performance_edge_case_tests {
         // Complex event processing should be efficient
         assert!(
             creation_time.as_millis() < 1500,
-            "Complex event creation took too long: {:?}",
-            creation_time
+            "Complex event creation took too long: {creation_time:?}"
         );
         assert!(
             query_time.as_millis() < 100,
-            "Theta role querying took too long: {:?}",
-            query_time
+            "Theta role querying took too long: {query_time:?}"
         );
     }
 }

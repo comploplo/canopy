@@ -1152,15 +1152,15 @@ mod tests {
 
         // Test dependency injection constructor
         let verbnet_engine = crate::verbnet::VerbNetEngine::new_with_test_data();
-        let _analyzer = Layer2Analyzer::with_dependencies(
+        let analyzer = Layer2Analyzer::with_dependencies(
             config,
             movement_detector,
             event_decomposer,
             verbnet_engine,
         );
 
-        // Should be able to create analyzer with injected dependencies
-        assert!(true); // Constructor worked without panic
+        // Verify analyzer was created successfully (constructor worked without panic)
+        assert!(analyzer.config.enable_verbnet);
 
         // Test that we can disable little v decomposition
         let config_no_decomp = Layer2Config {

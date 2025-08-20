@@ -6,7 +6,7 @@
 use crate::*;
 
 #[cfg(test)]
-mod utility_coverage_tests {
+mod tests {
     use super::*;
 
     #[test]
@@ -39,7 +39,7 @@ mod utility_coverage_tests {
         ];
 
         for role in &roles {
-            let debug_str = format!("{:?}", role);
+            let debug_str = format!("{role:?}");
             assert!(!debug_str.is_empty());
             assert!(debug_str.len() > 3); // Should be meaningful
         }
@@ -73,7 +73,7 @@ mod utility_coverage_tests {
         ];
 
         for variant in &variants {
-            let debug_str = format!("{:?}", variant);
+            let debug_str = format!("{variant:?}");
             assert!(!debug_str.is_empty());
         }
     }
@@ -124,7 +124,7 @@ mod utility_coverage_tests {
         ];
 
         for variant in &variants {
-            let debug_str = format!("{:?}", variant);
+            let debug_str = format!("{variant:?}");
             assert!(!debug_str.is_empty());
         }
     }
@@ -135,7 +135,7 @@ mod utility_coverage_tests {
         let variants = vec![Animacy::Animal, Animacy::Human, Animacy::Inanimate];
 
         for variant in &variants {
-            let debug_str = format!("{:?}", variant);
+            let debug_str = format!("{variant:?}");
             assert!(!debug_str.is_empty());
         }
     }
@@ -161,9 +161,9 @@ mod utility_coverage_tests {
         let lsp_error = CanopyError::LspError("lsp problem".to_string());
 
         // Test debug formatting
-        let parser_debug = format!("{:?}", parser_error);
-        let semantic_debug = format!("{:?}", semantic_error);
-        let lsp_debug = format!("{:?}", lsp_error);
+        let parser_debug = format!("{parser_error:?}");
+        let semantic_debug = format!("{semantic_error:?}");
+        let lsp_debug = format!("{lsp_error:?}");
 
         assert!(parser_debug.contains("ParseError"));
         assert!(semantic_debug.contains("SemanticError"));
@@ -181,7 +181,7 @@ mod utility_coverage_tests {
         };
 
         // Test debug formatting
-        let features_debug = format!("{:?}", semantic_features);
+        let features_debug = format!("{semantic_features:?}");
         assert!(features_debug.contains("animacy"));
         assert!(features_debug.contains("Human"));
     }
@@ -197,7 +197,7 @@ mod utility_coverage_tests {
         // Test that all roles are unique
         let mut role_set = std::collections::HashSet::new();
         for role in all_roles {
-            assert!(role_set.insert(*role), "Duplicate role found: {:?}", role);
+            assert!(role_set.insert(*role), "Duplicate role found: {role:?}");
         }
     }
 
@@ -234,11 +234,11 @@ mod utility_coverage_tests {
             },
             LittleV::Be {
                 theme: entity.clone(),
-                state: state,
+                state,
             },
             LittleV::Do {
                 agent: entity.clone(),
-                action: action,
+                action,
             },
             LittleV::Experience {
                 experiencer: entity.clone(),
@@ -248,7 +248,7 @@ mod utility_coverage_tests {
         ];
 
         for variant in &variants {
-            let debug_str = format!("{:?}", variant);
+            let debug_str = format!("{variant:?}");
             assert!(!debug_str.is_empty());
         }
     }

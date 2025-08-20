@@ -865,6 +865,8 @@ impl LittleV {
 
 // Include coverage improvement tests for M3
 #[cfg(test)]
+mod coverage_boost_tests;
+#[cfg(test)]
 mod coverage_improvement_tests;
 #[cfg(test)]
 mod utility_coverage_tests;

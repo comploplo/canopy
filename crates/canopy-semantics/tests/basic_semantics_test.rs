@@ -155,10 +155,10 @@ fn test_aspectual_classes_exist() {
     assert_ne!(accomplishment, achievement);
 
     // Test debug formatting works
-    assert!(!format!("{:?}", state).is_empty());
-    assert!(!format!("{:?}", activity).is_empty());
-    assert!(!format!("{:?}", accomplishment).is_empty());
-    assert!(!format!("{:?}", achievement).is_empty());
+    assert!(!format!("{state:?}").is_empty());
+    assert!(!format!("{activity:?}").is_empty());
+    assert!(!format!("{accomplishment:?}").is_empty());
+    assert!(!format!("{achievement:?}").is_empty());
 }
 
 #[test]
@@ -175,10 +175,10 @@ fn test_voice_types_exist() {
     assert_ne!(middle, reflexive);
 
     // Test display formatting
-    assert_eq!(format!("{}", active), "Active");
-    assert_eq!(format!("{}", passive), "Passive");
-    assert_eq!(format!("{}", middle), "Middle");
-    assert_eq!(format!("{}", reflexive), "Reflexive");
+    assert_eq!(format!("{active}"), "Active");
+    assert_eq!(format!("{passive}"), "Passive");
+    assert_eq!(format!("{middle}"), "Middle");
+    assert_eq!(format!("{reflexive}"), "Reflexive");
 }
 
 #[test]

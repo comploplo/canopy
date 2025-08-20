@@ -2,21 +2,25 @@
 
 ## Overview
 
-canopy.rs implements a **4-layer linguistic analysis architecture** designed for
+canopy.rs implements a **3-layer linguistic analysis architecture** designed for
 high performance and theoretical correctness. The system transforms raw text
-through increasingly sophisticated semantic representations, culminating in rich
-LSP responses.
+through increasingly sophisticated semantic representations, providing a
+versatile canonical API that supports multiple interfaces (LSP, PyO3, CLI, etc.).
 
 ### Core Transformation
 
 ```text
-Text → UDPipe → Events → DRT → LSP
+Text → Layer 1: UDPipe → Layer 2: Events → Layer 3: DRT → Canonical API
+                                                                ↓
+                                          LSP Server ← Unified Interface → PyO3 Bindings
+                                                                ↓
+                                                           CLI Tools
 ```
 
 This represents a fundamental shift from the Python V1 system:
 
 - **V1**: `spaCy → JSON → Proto → LSP` (surface-level mapping)
-- **V2**: `UDPipe → Events → DRT → LSP` (theory-driven representation)
+- **V2**: `UDPipe → Events → DRT → Canonical API` (theory-driven with flexible interfaces)
 
 ## M3 Status: COMPLETE ✅
 
@@ -38,7 +42,7 @@ results:
 - ✅ **Layer 1**: UDPipe integration complete (7-76μs performance)
 - ✅ **Layer 2**: Event structures with VerbNet theta assignment complete
 - 🎯 **Layer 3**: DRT foundations planned for M4
-- 🎯 **Layer 4**: Enhanced LSP features planned for M5
+- 🎯 **Canonical API**: Unified interface for all layer results planned for M4
 
 ## Design Principles
 
@@ -81,7 +85,7 @@ No hidden features or black-box processing:
 - Easy to debug and extend
 - Clear data flow through layers
 
-## 4-Layer Architecture
+## 3-Layer Architecture with Canonical API
 
 ### Layer 1: Morphosyntactic Analysis
 
@@ -219,46 +223,62 @@ enum Term {
 - **Compositional Rules**: Function application, predicate modification
 - **Type Inference**: Semantic type system (e, t, s, functions)
 
-### Layer 4: Discourse & LSP Integration
+### Canonical API: Unified Analysis Interface
 
-**Purpose**: Document-level analysis and Language Server Protocol responses
+**Purpose**: Unified access to all linguistic analysis results with flexible output formats
 
-**Input**: DRS and lambda terms **Output**: LSP responses (hover, diagnostics,
-actions)
+**Input**: Any layer's output **Output**: Structured analysis results for any interface
 
 **Core Types**:
 
 ```rust
+/// Complete linguistic analysis results from all layers
+struct CanopyAnalysis {
+    // Layer 1 results
+    words: Vec<EnhancedWord>,
+    morphological_features: Vec<MorphFeatures>,
+
+    // Layer 2 results
+    events: Vec<Event>,
+    theta_assignments: Vec<ThetaAssignment>,
+    movement_chains: Vec<MovementChain>,
+
+    // Layer 3 results
+    drs: DRS,
+    lambda_terms: Vec<Term>,
+    semantic_composition: CompositionTree,
+
+    // Analysis metadata
+    confidence_scores: ConfidenceProfile,
+    performance_metrics: PerformanceMetrics,
+    diagnostics: Vec<Diagnostic>,
+}
+
+/// Flexible query interface for analysis results
+trait AnalysisQuery {
+    fn get_layer1(&self) -> &Layer1Results;
+    fn get_layer2(&self) -> &Layer2Results;
+    fn get_layer3(&self) -> &Layer3Results;
+    fn get_word_analysis(&self, word_id: usize) -> Option<&WordAnalysis>;
+    fn get_event_structure(&self, event_id: EventId) -> Option<&Event>;
+    fn get_semantic_representation(&self) -> &DRS;
+}
+
+/// Discourse context for cross-sentence analysis
 struct DiscourseContext {
     current_drs: DRS,
     referent_stack: Vec<Referent>,    // Accessibility hierarchy
     entity_map: HashMap<String, Referent>,
     focus: Option<Referent>,
 }
-
-struct SemanticAnalysis {
-    words: Vec<EnhancedWord>,
-    events: Vec<Event>,
-    drs: DRS,
-    lambda_term: Term,
-    diagnostics: Vec<Diagnostic>,
-}
-
-enum DiagnosticKind {
-    ThetaViolation(ThetaRole),
-    BindingViolation(BindingPrinciple),
-    ContradictionDetected(DRS, DRS),
-    AspectMismatch(AspectualClass, AspectualClass),
-    ScopeAmbiguity(Vec<ScopeReading>),
-}
 ```
 
-**Key Components**:
+**Interface Implementations**:
 
-- **Discourse Context**: Cross-sentence entity tracking
-- **LSP Server**: Tower-LSP async implementation
-- **Rich Diagnostics**: Linguistic analysis beyond basic grammar
-- **Intelligent Actions**: Theory-informed code actions
+- **LSP Server**: Tower-LSP implementation using CanopyAnalysis
+- **PyO3 Bindings**: Python interface for ML integration
+- **CLI Tools**: Command-line analysis and debugging
+- **Research API**: Theory testing and corpus analysis
 
 ## Data Flow
 
@@ -277,18 +297,24 @@ let theta_assigned = verbnet_engine.assign_theta_roles(events, &cache)?;
 let drs = drt_composer.compose(theta_assigned)?;
 let lambda_term = lambda_composer.build_term(drs)?;
 
-// Layer 4: LSP Integration
-let analysis = SemanticAnalysis::new(enhanced_words, events, drs, lambda_term);
-let response = lsp_handler.handle_request(analysis)?;
+// Canonical API: Unified Analysis Results
+let analysis = CanopyAnalysis::new(enhanced_words, events, drs, lambda_term);
+
+// Multiple interface options
+let lsp_response = lsp_handler.handle_request(&analysis)?;
+let python_result = python_bindings.to_python_dict(&analysis)?;
+let cli_output = cli_formatter.format_analysis(&analysis)?;
 ```
 
 **Key Architecture Decision**: VerbNet processing happens exclusively in Layer
-2, receiving clean syntactic structures from Layer 1. This separation ensures:
+2, receiving clean syntactic structures from Layer 1. The Canonical API provides
+unified access to all layer results:
 
 1. **Layer 1**: Fast UDPipe parsing (7-76μs) with pure syntactic features
 2. **Layer 2**: VerbNet semantic analysis with smart caching for performance
-3. **Clean Interfaces**: Each layer has well-defined inputs and outputs
-4. **Performance**: Layer 1's excellent performance is preserved
+3. **Layer 3**: DRT composition with lambda calculus
+4. **Canonical API**: Unified interface supporting LSP, PyO3, CLI, and research tools
+5. **Performance**: Each layer optimized independently, API provides zero-cost access
 
 ### Error Propagation
 
@@ -451,13 +477,19 @@ canopy/
 │   │   └── scope.rs      # Quantifier scope
 │   └── lib.rs
 │
-├── canopy-lsp/            # Layer 4: LSP integration
-│   ├── server.rs         # LSP server implementation
+├── canopy-lsp/            # LSP interface implementation
+│   ├── server.rs         # LSP server using canonical API
 │   ├── handlers/         # Request handlers
 │   │   ├── hover.rs
 │   │   ├── diagnostics.rs
 │   │   └── actions.rs
-│   └── responses.rs      # Response formatting
+│   └── responses.rs      # LSP response formatting
+│
+├── canopy-api/            # Canonical API and interfaces
+│   ├── analysis.rs       # Core CanopyAnalysis types
+│   ├── query.rs          # Analysis query interface
+│   ├── python.rs         # PyO3 bindings
+│   └── cli.rs            # CLI interface
 │
 └── canopy-cli/            # Command-line interface
     └── main.rs

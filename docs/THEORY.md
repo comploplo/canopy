@@ -26,7 +26,7 @@ practical performance.
 3. [Layer 1: Morphosyntactic Analysis](#layer-1-morphosyntactic-analysis)
 4. [Layer 2: Event Semantics](#layer-2-event-semantics)
 5. [Layer 3: Compositional Semantics](#layer-3-compositional-semantics)
-6. [Layer 4: Discourse & Pragmatics](#layer-4-discourse--pragmatics)
+6. [Canonical API & Interface Design](#canonical-api--interface-design)
 7. [Research Contributions](#research-contributions)
 8. [Computational Complexity](#computational-complexity)
 9. [Evaluation Framework](#evaluation-framework)
@@ -93,12 +93,14 @@ Text → spaCy (black box) → JSON dict → Proto optimization → LSP
     [Dependency parse]    [Pattern matching]  [String templates]
 ```
 
-**V2 (Rust)**: Theory-Driven Analysis
+**V2 (Rust)**: Theory-Driven Analysis with Canonical API
 
 ```text
-Text → Layer 1: Morphosyntax → Layer 2: Events → Layer 3: DRT → Layer 4: Discourse/LSP
+Text → Layer 1: Morphosyntax → Layer 2: Events → Layer 3: DRT → Canonical API
          ↓                         ↓                  ↓              ↓
-    [UDPipe + Features]    [Theta assignment + OT]  [λ-calc + DRS]   [Context + Diagnostics]
+    [UDPipe + Features]    [Theta assignment + OT]  [λ-calc + DRS]   [Unified Interface]
+                                                                         ↓
+                                                     LSP ← API → PyO3 ← → CLI
 ```
 
 ### Type-Safe Linguistic Representations
@@ -441,104 +443,234 @@ impl PresuppositionProjector {
 
 ---
 
-## Layer 4: Discourse & Pragmatics
+## Canonical API & Interface Design
 
-### Discourse Context Management
+### Unified Analysis Results
 
-Moving beyond sentence-level analysis to proper discourse modeling:
+The canonical API provides a single, comprehensive interface to all linguistic
+analysis results, enabling multiple client interfaces (LSP, PyO3, CLI) to build
+on the same foundation:
 
-**Accessibility Hierarchy** (following Ariel 1990):
+**Core Analysis Structure**:
+
+```rust
+/// Complete linguistic analysis from all three layers
+struct CanopyAnalysis {
+    // Layer 1: Morphosyntactic results
+    words: Vec<EnhancedWord>,
+    morphological_features: Vec<MorphFeatures>,
+    dependency_structure: DependencyGraph,
+
+    // Layer 2: Event semantic results
+    events: Vec<Event>,
+    theta_assignments: Vec<ThetaAssignment>,
+    movement_chains: Vec<MovementChain>,
+    voice_analysis: VoiceAnalysis,
+
+    // Layer 3: Compositional semantic results
+    drs: DRS,
+    lambda_terms: Vec<Term>,
+    semantic_composition: CompositionTree,
+    quantifier_scopes: Vec<ScopeReading>,
+
+    // Cross-layer discourse context
+    discourse_context: DiscourseContext,
+
+    // Analysis metadata
+    confidence_scores: ConfidenceProfile,
+    performance_metrics: PerformanceMetrics,
+    diagnostics: Vec<Diagnostic>,
+}
+
+/// Flexible query interface for accessing results
+trait AnalysisQuery {
+    // Layer-specific access
+    fn morphosyntax(&self) -> &Layer1Results;
+    fn events(&self) -> &Layer2Results;
+    fn semantics(&self) -> &Layer3Results;
+
+    // Word-level queries
+    fn word_analysis(&self, position: usize) -> Option<&WordAnalysis>;
+    fn words_in_range(&self, start: usize, end: usize) -> Vec<&WordAnalysis>;
+
+    // Event-level queries
+    fn events_for_predicate(&self, predicate: &str) -> Vec<&Event>;
+    fn theta_roles_for_entity(&self, entity: &Entity) -> Vec<ThetaRole>;
+
+    // Semantic queries
+    fn referents_in_scope(&self, position: usize) -> Vec<&Referent>;
+    fn presuppositions(&self) -> &[Presupposition];
+
+    // Discourse queries
+    fn resolve_pronoun(&self, pronoun_pos: usize) -> Option<&Entity>;
+    fn contradictions(&self) -> &[Contradiction];
+}
+```
+
+### Interface Implementations
+
+**LSP Server Interface**:
+
+```rust
+impl LspHandler {
+    fn handle_hover(&self, analysis: &CanopyAnalysis, position: usize) -> LspHover {
+        let word = analysis.word_analysis(position)?;
+        let events = analysis.events_for_word(position);
+        let semantic_type = analysis.semantic_type_at(position);
+
+        LspHover {
+            morphology: word.morphological_summary(),
+            theta_roles: events.iter().flat_map(|e| e.theta_roles()).collect(),
+            semantic_type: semantic_type.to_string(),
+            discourse_info: analysis.discourse_status_at(position),
+        }
+    }
+
+    fn generate_diagnostics(&self, analysis: &CanopyAnalysis) -> Vec<LspDiagnostic> {
+        analysis.diagnostics().iter()
+            .map(|d| self.to_lsp_diagnostic(d))
+            .collect()
+    }
+}
+```
+
+**PyO3 Python Bindings**:
+
+```rust
+#[pyclass]
+struct PythonCanopyAnalysis {
+    inner: CanopyAnalysis,
+}
+
+#[pymethods]
+impl PythonCanopyAnalysis {
+    fn get_words(&self) -> Vec<PythonWord> {
+        self.inner.words().iter()
+            .map(|w| PythonWord::from(w))
+            .collect()
+    }
+
+    fn get_events(&self) -> Vec<PythonEvent> {
+        self.inner.events().iter()
+            .map(|e| PythonEvent::from(e))
+            .collect()
+    }
+
+    fn get_drs(&self) -> PythonDRS {
+        PythonDRS::from(self.inner.semantics().drs())
+    }
+
+    fn to_dict(&self) -> PyDict {
+        // Convert entire analysis to Python dictionary
+        // for ML framework integration
+    }
+}
+```
+
+**CLI Interface**:
+
+```rust
+impl CliFormatter {
+    fn format_analysis(&self, analysis: &CanopyAnalysis, format: OutputFormat) -> String {
+        match format {
+            OutputFormat::Json => serde_json::to_string_pretty(analysis).unwrap(),
+            OutputFormat::Debug => format!("{:#?}", analysis),
+            OutputFormat::Linguistic => self.format_linguistic_analysis(analysis),
+            OutputFormat::Summary => self.format_summary(analysis),
+        }
+    }
+
+    fn format_linguistic_analysis(&self, analysis: &CanopyAnalysis) -> String {
+        let mut output = String::new();
+
+        // Layer 1: Morphosyntax
+        output.push_str("=== MORPHOSYNTACTIC ANALYSIS ===\n");
+        for word in analysis.words() {
+            output.push_str(&format!("{}: {} [{}]\n",
+                word.text, word.lemma, word.upos));
+        }
+
+        // Layer 2: Events
+        output.push_str("\n=== EVENT STRUCTURE ===\n");
+        for event in analysis.events() {
+            output.push_str(&format!("{}: {}\n",
+                event.predicate, event.participants_summary()));
+        }
+
+        // Layer 3: Semantics
+        output.push_str("\n=== SEMANTIC REPRESENTATION ===\n");
+        output.push_str(&format!("{}", analysis.semantics().drs()));
+
+        output
+    }
+}
+```
+
+### Discourse Context Integration
+
+**Cross-sentence Analysis**:
 
 ```rust
 struct DiscourseContext {
-    // Centering-style focus tracking
-    backward_centers: Vec<Entity>,    // Cb: what we're talking about
-    forward_centers: Vec<Entity>,     // Cf: what we might talk about
+    // Centering-style focus tracking (Grosz et al. 1995)
+    backward_centers: Vec<Entity>,    // Cb: current discourse focus
+    forward_centers: Vec<Entity>,     // Cf: potential future focus
 
-    // Salience-based accessibility
+    // Salience-based accessibility (Ariel 1990)
     salience_stack: Vec<Entity>,      // Recently mentioned entities
 
-    // Global discourse referents
-    discourse_referents: HashMap<String, Entity>,
+    // DRT-style discourse referents
+    discourse_referents: HashMap<String, Referent>,
+    global_drs: DRS,                  // Accumulated discourse structure
 }
 
 impl DiscourseContext {
-    fn resolve_pronoun(&self, pronoun: &Pronoun) -> Option<Entity> {
-        // Centering-based resolution (Grosz et al. 1995)
-        for entity in &self.backward_centers {
-            if self.compatible_features(entity, pronoun) {
-                return Some(entity.clone());
-            }
-        }
+    fn update_with_sentence(&mut self, analysis: &CanopyAnalysis) {
+        // Update centering information
+        self.update_centers(analysis.entities());
 
-        // Salience-based fallback
-        self.salience_stack.iter()
-            .find(|e| self.compatible_features(e, pronoun))
-            .cloned()
+        // Merge new DRS with discourse DRS
+        self.global_drs.merge(analysis.semantics().drs());
+
+        // Resolve new pronouns against discourse context
+        self.resolve_discourse_pronouns(analysis);
+    }
+
+    fn detect_contradictions(&self, new_drs: &DRS) -> Vec<Contradiction> {
+        // Check for P ∧ ¬P patterns across discourse
+        self.global_drs.find_contradictions_with(new_drs)
     }
 }
 ```
 
-### Contradiction Detection
+### Performance & Optimization
 
-Real-time detection of semantic contradictions for LSP diagnostics:
+**Zero-Cost Abstractions**:
 
-**Simple Contradictions**: P ∧ ¬P within discourse scope
+The canonical API is designed as zero-cost abstractions that compile away to
+direct field access:
 
 ```rust
-impl ContradictionDetector {
-    fn detect(&self, new_drs: &DRS, context: &DiscourseContext) -> Vec<Contradiction> {
-        let mut contradictions = Vec::new();
+// This query...
+let word_pos = analysis.word_analysis(5)?.morphology().upos;
 
-        for condition in &new_drs.conditions {
-            if let Negation(inner_drs) = condition {
-                for inner_condition in &inner_drs.conditions {
-                    if context.entails(inner_condition) {
-                        contradictions.push(Contradiction {
-                            assertion: inner_condition.clone(),
-                            negation: condition.clone(),
-                            confidence: self.calculate_confidence(inner_condition),
-                        });
-                    }
-                }
-            }
-        }
+// Compiles to direct field access:
+let word_pos = analysis.words[5].morphology.upos;
+```
 
-        contradictions
+**Lazy Evaluation**:
+
+Expensive analyses are computed only when requested:
+
+```rust
+impl CanopyAnalysis {
+    fn contradictions(&self) -> &[Contradiction] {
+        self.contradictions.get_or_init(|| {
+            self.discourse_context.detect_contradictions(&self.drs)
+        })
     }
 }
 ```
-
-### Enhanced LSP Integration
-
-Theory-driven diagnostics and intelligent code actions:
-
-**Binding Theory Violations**:
-
-```rust
-// Principle A: Anaphors must be bound in their local domain
-// *John₁ thinks that Mary₂ likes himself₁
-fn check_binding_violations(drs: &DRS) -> Vec<Diagnostic> {
-    drs.conditions.iter().filter_map(|condition| {
-        if let Binding(anaphor, antecedent) = condition {
-            if !self.c_commands(antecedent, anaphor) {
-                Some(Diagnostic::BindingViolation {
-                    principle: BindingPrinciple::A,
-                    anaphor: anaphor.clone(),
-                    suggested_antecedent: self.find_local_binder(anaphor),
-                })
-            } else { None }
-        } else { None }
-    }).collect()
-}
-```
-
-**Intelligent Code Actions**:
-
-- **Voice conversion**: Automatic active↔passive transformation with theta role
-  preservation
-- **Pronoun resolution**: Replace ambiguous pronouns with definite descriptions
-- **Agreement repair**: Fix subject-verb number mismatches
 
 ---
 

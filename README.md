@@ -260,6 +260,7 @@ See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for detailed guidelines.
 ## 📈 Current Status
 
 **Milestone**: M3 Event Structures & Semantic Analysis ✅ **COMPLETE**
+**Current**: Pre-Architecture Change Checkpoint - Experimental work in progress
 
 ### Major Achievements
 
@@ -298,7 +299,7 @@ See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for detailed guidelines.
 - **Performance**: 33-40μs semantic analysis (exceeds 50ms target by 1,250x)
 - **Documentation**: Comprehensive rustdoc with examples
 
-**Next**: M4 Compositional Semantics & DRT (targeting ~4 weeks)
+**Next**: Architecture exploration, then M4 Compositional Semantics & DRT
 
 ## 🔬 Research Foundation
 

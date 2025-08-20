@@ -290,6 +290,16 @@ semantic integration
 - [ ] **Information structure inference** (lightweight heuristics, <20μs)
 - [ ] **Batch processing optimization** for multi-sentence documents
 
+### 🔧 **Parse Quality Enhancement & Fallback System**
+
+- [ ] **Plausible parse caching** (store syntactic patterns with alternative POS analyses)
+- [ ] **Verb detection fallback** (when sentences lack verbs but match known patterns)
+- [ ] **Pattern similarity matching** (edit distance between parse trees for alternative generation)
+- [ ] **Linguistic plausibility scoring** (theta role compatibility, argument structure matching)
+- [ ] **Multi-parse hypothesis passing** (send multiple parse candidates to Layer 2 with confidence scores)
+- [ ] **Context-driven parse selection** (choose most plausible alternative based on discourse context)
+- [ ] **Graceful degradation pipeline** (UDPipe → Enhanced tokenization → Pattern-based fallback → Heuristic POS assignment)
+
 ### ✅ **Quality Gates (M4)**
 
 - **Coverage Target**: 90% minimum test coverage (vs current 69.46%)
@@ -308,22 +318,21 @@ semantic integration
 **Goal**: <1.5μs per sentence in large batches with modal logic and temporal
 reasoning
 
-### 🧠 **Modal Logic & Possible Worlds**
+### 🏗️ **Construction Grammar Integration**
 
-- [ ] **Epistemic modality** (know, believe, think with knowledge state
-      tracking)
-- [ ] **Deontic modality** (must, should, permitted with obligation tracking)
-- [ ] **Possible worlds semantics** (modal operators in DRT structures)
-- [ ] **Intensional contexts** (belief reports, counterfactuals)
-- [ ] **Modal logic operators** (□ necessity, ◊ possibility)
+- [ ] **Ditransitive constructions** [NP V NP NP] with transfer semantics
+- [ ] **Caused-motion patterns** [NP V NP PP] with motion coercion
+- [ ] **Way-construction** [NP V Det way PP] with manner-motion composition
+- [ ] **Resultative patterns** [NP V NP Adj/PP] with result state encoding
+- [ ] **Real-time pattern matching** (<50μs per construction detection)
 
-### ⏰ **Enhanced Temporal Logic**
+### 📚 **PropBank Integration**
 
-- [ ] **Reichenbachian framework** (speech time, reference time, event time)
-- [ ] **Temporal sequence tracking** across discourse
-- [ ] **Aspectual interaction** with temporal anchoring
-- [ ] **Temporal coreference** (same event references across sentences)
-- [ ] **Interval logic** for durative events and states
+- [ ] **Corpus-validated argument structure** from PropBank frame files
+- [ ] **VerbNet-PropBank mapping** for enhanced theta role confidence
+- [ ] **Numbered argument integration** (Arg0, Arg1, Arg2 → Agent, Patient, Recipient)
+- [ ] **Adjunct argument handling** (ArgM-LOC, ArgM-TMP, ArgM-MNR)
+- [ ] **Cross-validation pipeline** between VerbNet and PropBank analyses
 
 ### ⚡ **GPU Database Acceleration**
 
