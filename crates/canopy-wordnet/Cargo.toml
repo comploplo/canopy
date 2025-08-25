@@ -1,0 +1,26 @@
+[package]
+name = "canopy-wordnet"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "WordNet semantic engine for canopy.rs - lexical database integration"
+keywords = ["nlp", "wordnet", "semantics", "lexical"]
+categories = ["text-processing", "science"]
+
+[dependencies]
+canopy-engine = { path = "../canopy-engine" }
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "1.0"
+tracing = "0.1"
+rayon = { version = "1.7", optional = true }
+
+[features]
+default = []
+parallel = ["dep:rayon", "canopy-engine/parallel"]
+
+[dev-dependencies]
+tokio = { version = "1.0", features = ["full"] }
+tempfile = "3.8"
+serde_json = "1.0"

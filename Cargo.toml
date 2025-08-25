@@ -1,11 +1,15 @@
 [workspace]
 members = [
     "crates/canopy-core",
-    "crates/canopy-parser",
-    "crates/canopy-semantics",
-    # "crates/canopy-pipeline",  # Temporarily disabled due to compilation issues
+    "crates/canopy-engine",         # Base engine infrastructure
+    "crates/canopy-verbnet",        # VerbNet semantic analysis
+    "crates/canopy-framenet",       # FrameNet semantic analysis
+    "crates/canopy-semantic-layer", # Semantic-first Layer 1 with consolidated engines
+    # "crates/canopy-parser",       # DEPRECATED: Legacy UDPipe replaced by semantic-layer
+    # "crates/canopy-semantics",    # DEPRECATED: Replaced by canopy-semantic-layer
+    "crates/canopy-pipeline",     # Re-enabled with new semantic coordinator integration
     "crates/canopy-lsp",
-    "crates/canopy-cli",
+    "crates/canopy-cli", "crates/canopy-wordnet", "crates/canopy-lexicon",
 ]
 resolver = "2"
 
@@ -53,9 +57,10 @@ description.workspace = true
 
 [dependencies]
 canopy-core = { path = "crates/canopy-core" }
-canopy-parser = { path = "crates/canopy-parser" }
-canopy-semantics = { path = "crates/canopy-semantics" }
+canopy-semantic-layer = { path = "crates/canopy-semantic-layer" } # Modern semantic-first architecture
 canopy-lsp = { path = "crates/canopy-lsp" }
+canopy-verbnet = { path = "crates/canopy-verbnet" }
+canopy-framenet = { path = "crates/canopy-framenet" }
 tokio = { workspace = true }
 
 [dev-dependencies]
@@ -68,3 +73,5 @@ harness = false
 [[example]]
 name = "basic_demo"
 path = "examples/basic_demo.rs"
+
+

@@ -1,7 +1,6 @@
 //! Model management and discovery
 
-use crate::error::{AnalysisError, ModelLoadError};
-use crate::traits::{Model, ModelCapabilities, ModelMetadata, ModelType};
+use crate::traits::ModelType;
 use std::path::Path;
 
 /// Model manager for discovering and loading language models

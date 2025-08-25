@@ -1,0 +1,43 @@
+[package]
+name = "canopy-framenet"
+version = "0.1.0"
+edition = "2021"
+authors = ["canopy.rs contributors"]
+description = "FrameNet integration for semantic analysis - FrameNet frame-based semantic parsing and analysis"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/canopy-rs/canopy"
+
+[dependencies]
+# Engine infrastructure
+canopy-engine = { path = "../canopy-engine", features = ["parallel"] }
+canopy-core = { path = "../canopy-core" }
+
+# Serialization and data structures
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# XML parsing
+quick-xml = "0.31"
+
+# Error handling
+thiserror = "1.0"
+
+# Collections and utilities
+indexmap = "2.0"
+regex = "1.10"
+
+# Parallel processing
+rayon = { version = "1.7", optional = true }
+
+# Logging
+tracing = "0.1"
+
+[dev-dependencies]
+# Testing infrastructure
+tokio-test = "0.4"
+tempfile = "3.0"
+
+[features]
+default = ["std", "parallel"]
+std = []
+parallel = ["rayon", "canopy-engine/parallel"]

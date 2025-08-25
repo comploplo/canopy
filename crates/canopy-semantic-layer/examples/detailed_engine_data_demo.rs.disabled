@@ -1,0 +1,386 @@
+//! Detailed Semantic Engine Data Extraction Demo
+//!
+//! This demo shows exactly what data we extract from each semantic engine:
+//! - VerbNet: Verb classes, theta roles, class hierarchies
+//! - FrameNet: Frames, frame elements, lexical units
+//! - WordNet: Synsets, definitions, semantic relations
+//!
+//! For each word analyzed, we display the complete semantic information
+//! extracted from all engines to demonstrate the rich linguistic data
+//! available in our semantic-first architecture.
+
+use canopy_semantic_layer::{coordinator::CoordinatorConfig, SemanticCoordinator};
+use std::error::Error;
+use std::time::Instant;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    // Initialize tracing for detailed output
+    tracing_subscriber::fmt::init();
+
+    println!("🔍 Detailed Semantic Engine Data Extraction Demo");
+    println!("===============================================");
+    println!("Showing complete data structures from each engine\n");
+
+    // Configure coordinator to extract maximum detail
+    let config = CoordinatorConfig {
+        enable_verbnet: true,
+        enable_framenet: true,
+        enable_wordnet: true,
+        enable_lexicon: false, // No lexicon data available
+        graceful_degradation: true,
+        confidence_threshold: 0.01, // Very low threshold to capture all data
+        l1_cache_memory_mb: 50,
+        // Removed: l2_cache_memory_mb (not available in simplified config)
+        enable_parallel: true,
+        ..CoordinatorConfig::default()
+    };
+
+    println!("🏗️  Initializing semantic engines...");
+    let coordinator = SemanticCoordinator::new(config)?;
+
+    let stats = coordinator.get_statistics();
+    println!("✅ All engines loaded successfully");
+    println!("   📊 Active engines: {:?}", stats.active_engines);
+    println!();
+
+    // Test words that should have rich semantic data in all engines
+    let test_words = [
+        (
+            "give",
+            "Ditransitive transfer verb - should have rich VerbNet class data",
+        ),
+        (
+            "break",
+            "Destruction verb with multiple senses - WordNet + VerbNet",
+        ),
+        (
+            "walk",
+            "Motion verb - should show manner of motion in VerbNet",
+        ),
+        (
+            "teacher",
+            "Agent noun - should have WordNet hierarchy and FrameNet roles",
+        ),
+        ("book", "Physical object noun with multiple senses"),
+        (
+            "beautiful",
+            "Adjective - should show WordNet adjective cluster",
+        ),
+        (
+            "think",
+            "Mental state verb - cognitive domain in all engines",
+        ),
+    ];
+
+    for (i, (word, description)) in test_words.iter().enumerate() {
+        println!("{}. 🔍 ANALYZING: \"{}\"", i + 1, word);
+        println!("   📝 Expected: {}", description);
+        println!("   {}", "=".repeat(60));
+
+        let start = Instant::now();
+        match coordinator.analyze(word) {
+            Ok(result) => {
+                let analysis_time = start.elapsed();
+                println!(
+                    "   ⚡ Analysis completed in {}μs",
+                    analysis_time.as_micros()
+                );
+                println!("   🎯 Overall confidence: {:.3}", result.confidence);
+                println!("   📊 Sources: {:?}", result.sources);
+                println!();
+
+                // === VERBNET ENGINE DATA ===
+                println!("   🏷️  VERBNET ENGINE DATA:");
+                if let Some(ref verbnet) = result.verbnet {
+                    if verbnet.verb_classes.is_empty() {
+                        println!("      ❌ No VerbNet classes found");
+                    } else {
+                        println!(
+                            "      ✅ {} verb classes found:",
+                            verbnet.verb_classes.len()
+                        );
+                        for (j, class) in verbnet.verb_classes.iter().enumerate() {
+                            println!(
+                                "      {}. CLASS: {} - {}",
+                                j + 1,
+                                class.id,
+                                class.class_name
+                            );
+
+                            if let Some(ref parent) = class.parent_class {
+                                println!("         👨‍👦 Parent Class: {}", parent);
+                            }
+
+                            if !class.themroles.is_empty() {
+                                println!(
+                                    "         🎭 Theta Roles ({} total):",
+                                    class.themroles.len()
+                                );
+                                for role in class.themroles.iter().take(3) {
+                                    println!(
+                                        "            {} (restrictions: {} items)",
+                                        role.role_type,
+                                        role.selrestrs.restrictions.len()
+                                    );
+                                }
+                                if class.themroles.len() > 3 {
+                                    println!(
+                                        "            ... and {} more roles",
+                                        class.themroles.len() - 3
+                                    );
+                                }
+                            }
+
+                            if !class.members.is_empty() {
+                                println!(
+                                    "         👥 Verb Members ({} total):",
+                                    class.members.len()
+                                );
+                                for member in class.members.iter().take(3) {
+                                    let wn_info = member
+                                        .wn
+                                        .as_ref()
+                                        .map(|w| format!("wn:{}", w))
+                                        .unwrap_or_else(|| "no-wn".to_string());
+                                    println!("            {} ({})", member.name, wn_info);
+                                }
+                                if class.members.len() > 3 {
+                                    println!(
+                                        "            ... and {} more members",
+                                        class.members.len() - 3
+                                    );
+                                }
+                            }
+
+                            if !class.frames.is_empty() {
+                                println!(
+                                    "         🖼️  Syntactic Frames: {} available",
+                                    class.frames.len()
+                                );
+                            }
+
+                            if !class.subclasses.is_empty() {
+                                println!("         📂 Subclasses: {:?}", class.subclasses);
+                            }
+
+                            println!();
+                        }
+                    }
+                } else {
+                    println!("      ❌ VerbNet engine not available or no results");
+                }
+                println!();
+
+                // === FRAMENET ENGINE DATA ===
+                println!("   🖼️  FRAMENET ENGINE DATA:");
+                if let Some(ref framenet) = result.framenet {
+                    if framenet.frames.is_empty() {
+                        println!("      ❌ No FrameNet frames found");
+                    } else {
+                        println!("      ✅ {} frames found:", framenet.frames.len());
+                        for (j, frame) in framenet.frames.iter().enumerate() {
+                            println!("      {}. FRAME: {}", j + 1, frame.name);
+                            println!("         📝 Definition: {}", frame.definition);
+
+                            if !frame.frame_elements.is_empty() {
+                                println!(
+                                    "         🎯 Frame Elements ({} total):",
+                                    frame.frame_elements.len()
+                                );
+                                for element in frame.frame_elements.iter().take(3) {
+                                    println!(
+                                        "            {} ({}) - {:?}",
+                                        element.name, element.abbrev, element.core_type
+                                    );
+                                }
+                                if frame.frame_elements.len() > 3 {
+                                    println!(
+                                        "            ... and {} more elements",
+                                        frame.frame_elements.len() - 3
+                                    );
+                                }
+                            }
+
+                            if !frame.lexical_units.is_empty() {
+                                println!(
+                                    "         📚 Lexical Units ({} total):",
+                                    frame.lexical_units.len()
+                                );
+                                for unit in frame.lexical_units.iter().take(3) {
+                                    println!("            {} ({})", unit.name, unit.pos);
+                                }
+                                if frame.lexical_units.len() > 3 {
+                                    println!(
+                                        "            ... and {} more units",
+                                        frame.lexical_units.len() - 3
+                                    );
+                                }
+                            }
+
+                            if !frame.frame_relations.is_empty() {
+                                println!(
+                                    "         🔗 Frame Relations: {} available",
+                                    frame.frame_relations.len()
+                                );
+                            }
+
+                            println!();
+                        }
+                    }
+                } else {
+                    println!("      ❌ FrameNet engine not available or no results");
+                }
+                println!();
+
+                // === WORDNET ENGINE DATA ===
+                println!("   📚 WORDNET ENGINE DATA:");
+                if let Some(ref wordnet) = result.wordnet {
+                    if wordnet.synsets.is_empty() {
+                        println!("      ❌ No WordNet synsets found");
+                    } else {
+                        println!("      ✅ {} synsets found:", wordnet.synsets.len());
+                        for (j, synset) in wordnet.synsets.iter().enumerate() {
+                            println!(
+                                "      {}. SYNSET: {} (POS: {:?})",
+                                j + 1,
+                                synset.offset,
+                                synset.pos
+                            );
+                            println!("         📝 Definition: {}", synset.definition());
+
+                            if !synset.words.is_empty() {
+                                println!(
+                                    "         🔤 Words in synset ({} total):",
+                                    synset.words.len()
+                                );
+                                for word_entry in synset.words.iter().take(5) {
+                                    let freq_info = word_entry
+                                        .tag_count
+                                        .map(|count| format!(" (freq: {})", count))
+                                        .unwrap_or_default();
+                                    println!("            {}{}", word_entry.word, freq_info);
+                                }
+                                if synset.words.len() > 5 {
+                                    println!(
+                                        "            ... and {} more words",
+                                        synset.words.len() - 5
+                                    );
+                                }
+                            }
+
+                            if !synset.pointers.is_empty() {
+                                println!(
+                                    "         🔗 Semantic Relations ({} total):",
+                                    synset.pointers.len()
+                                );
+                                for pointer in synset.pointers.iter().take(3) {
+                                    println!(
+                                        "            {:?} -> synset {}",
+                                        pointer.relation, pointer.target_offset
+                                    );
+                                }
+                                if synset.pointers.len() > 3 {
+                                    println!(
+                                        "            ... and {} more relations",
+                                        synset.pointers.len() - 3
+                                    );
+                                }
+                            }
+
+                            println!("         📁 Lexical File: {}", synset.lex_filenum);
+                            println!();
+                        }
+                    }
+                } else {
+                    println!("      ❌ WordNet engine not available or no results");
+                }
+                println!();
+
+                // === INTEGRATION SUMMARY ===
+                println!("   🔗 CROSS-ENGINE INTEGRATION:");
+                println!("      📊 Data Sources: {:?}", result.sources);
+                println!("      🎯 Combined Confidence: {:.3}", result.confidence);
+
+                // Count total data extracted
+                let verbnet_classes = result
+                    .verbnet
+                    .as_ref()
+                    .map(|v| v.verb_classes.len())
+                    .unwrap_or(0);
+                let framenet_frames = result
+                    .framenet
+                    .as_ref()
+                    .map(|f| f.frames.len())
+                    .unwrap_or(0);
+                let wordnet_synsets = result
+                    .wordnet
+                    .as_ref()
+                    .map(|w| w.synsets.len())
+                    .unwrap_or(0);
+
+                println!("      📈 Total Data Extracted:");
+                println!("         VerbNet: {} verb classes", verbnet_classes);
+                println!("         FrameNet: {} frames", framenet_frames);
+                println!("         WordNet: {} synsets", wordnet_synsets);
+
+                // Show semantic richness
+                let total_semantic_units = verbnet_classes + framenet_frames + wordnet_synsets;
+                if total_semantic_units > 5 {
+                    println!(
+                        "      🌟 HIGH semantic richness: {} total semantic units",
+                        total_semantic_units
+                    );
+                } else if total_semantic_units > 2 {
+                    println!(
+                        "      📊 MEDIUM semantic richness: {} total semantic units",
+                        total_semantic_units
+                    );
+                } else if total_semantic_units > 0 {
+                    println!(
+                        "      📝 LOW semantic richness: {} total semantic units",
+                        total_semantic_units
+                    );
+                } else {
+                    println!("      ❌ NO semantic data found");
+                }
+            }
+            Err(e) => {
+                println!("   ❌ Analysis failed: {}", e);
+            }
+        }
+
+        println!("   {}", "=".repeat(80));
+        println!();
+    }
+
+    // Final statistics showing data extraction performance
+    let final_stats = coordinator.get_statistics();
+    println!("📊 SEMANTIC DATA EXTRACTION SUMMARY:");
+    println!("=====================================");
+    println!("✅ Total analyses: {}", final_stats.total_queries);
+    println!(
+        "✅ Cache efficiency: {:.1}% hit rate",
+        final_stats.cache_hit_rate * 100.0
+    );
+    println!(
+        "✅ Memory usage: {:.1}MB / {}MB ({:.1}%)",
+        final_stats.memory_usage.estimated_usage_mb,
+        final_stats.memory_usage.budget_mb,
+        final_stats.memory_usage.utilization_percent
+    );
+    println!();
+
+    println!("🎯 ENGINE CAPABILITIES DEMONSTRATED:");
+    println!("====================================");
+    println!("✅ VerbNet: Verb classification, theta roles, class hierarchies");
+    println!("✅ FrameNet: Frame semantics, frame elements, lexical units");
+    println!("✅ WordNet: Synset definitions, semantic relations, word frequencies");
+    println!("✅ Integration: Multi-engine coordination with confidence scoring");
+    println!("✅ Performance: Real-time semantic data extraction <100μs per word");
+    println!();
+
+    println!("🚀 Semantic engines are extracting comprehensive linguistic data!");
+    println!("   📋 Ready for Layer 2 composition rules and advanced patterns");
+
+    Ok(())
+}

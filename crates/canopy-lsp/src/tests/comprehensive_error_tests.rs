@@ -3,9 +3,9 @@
 //! Tests for error handling, recovery, and graceful degradation across all
 //! LSP components and edge cases.
 
+use crate::CanopyLspServerFactory;
 use crate::handlers::{DiagnosticSeverity, create_diagnostic};
 use crate::server::{CanopyServer, DefaultCanopyServer};
-use crate::{CanopyLspServerFactory, integration::RealServerFactory};
 use canopy_core::CanopyError;
 use canopy_core::layer1parser::{
     Layer1HelperConfig, Layer1ParserHandler, SemanticAnalysisHandler, SemanticConfig,
@@ -443,7 +443,7 @@ mod comprehensive_error_tests {
     #[test]
     fn test_real_server_error_handling() {
         // Test error handling in real server factory
-        let result = RealServerFactory::create();
+        let result = CanopyLspServerFactory::create_server();
 
         match result {
             Ok(server) => {

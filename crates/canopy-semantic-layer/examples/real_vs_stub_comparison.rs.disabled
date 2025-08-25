@@ -1,0 +1,218 @@
+//! Real vs Stub Parser Comparison
+//!
+//! This test demonstrates the difference between:
+//! 1. Current stub implementations (fast but fake)
+//! 2. Real semantic parser implementations (slower but accurate)
+
+use canopy_framenet::FrameNetEngine as RealFrameNetEngine;
+use canopy_semantic_layer::{coordinator::CoordinatorConfig, SemanticCoordinator};
+use canopy_verbnet::VerbNetEngine as RealVerbNetEngine;
+use canopy_wordnet::WordNetEngine as RealWordNetEngine;
+use std::error::Error;
+use std::time::Instant;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    println!("🕵️ Real vs Stub Parser Comparison");
+    println!("==================================");
+
+    // Test words
+    let test_words = vec![
+        "run", "walk", "love", "give", "take", "break", "eat", "sleep",
+    ];
+
+    println!(
+        "\n📊 Testing {} words with both implementations...",
+        test_words.len()
+    );
+
+    // === Test 1: Current Stub Implementation ===
+    println!("\n1️⃣ Current SemanticCoordinator (Stub Implementation):");
+    println!("---------------------------------------------------");
+
+    let config = CoordinatorConfig {
+        confidence_threshold: 0.01,
+        enable_verbnet: true,
+        enable_framenet: true,
+        enable_wordnet: true,
+        enable_lexicon: true,
+        ..CoordinatorConfig::default()
+    };
+
+    let coordinator = SemanticCoordinator::new(config)?;
+
+    let start = Instant::now();
+    let mut stub_results = Vec::new();
+
+    for word in &test_words {
+        match coordinator.analyze(word) {
+            Ok(result) => {
+                stub_results.push((word, result));
+                println!(
+                    "   {} → {} sources: {:?}",
+                    word,
+                    result.sources.len(),
+                    result.sources
+                );
+            }
+            Err(e) => println!("   {} → ERROR: {}", word, e),
+        }
+    }
+
+    let stub_duration = start.elapsed();
+    let stub_stats = coordinator.get_statistics();
+
+    println!(
+        "   ⚡ Stub Performance: {:.0} words/sec",
+        test_words.len() as f64 / stub_duration.as_secs_f64()
+    );
+    println!(
+        "   📊 Cache hit rate: {:.1}%",
+        stub_stats.cache_hit_rate * 100.0
+    );
+
+    // === Test 2: Real Parser Implementation ===
+    println!("\n2️⃣ Real Semantic Parsers (Full Implementation):");
+    println!("----------------------------------------------");
+
+    // Try to initialize real parsers
+    println!("   🏗️  Attempting to load real parsers...");
+
+    // VerbNet
+    let verbnet_result = match RealVerbNetEngine::new() {
+        Ok(engine) => {
+            println!("   ✅ VerbNet: Real engine loaded successfully");
+            Some(engine)
+        }
+        Err(e) => {
+            println!("   ❌ VerbNet: Failed to load real data - {}", e);
+            None
+        }
+    };
+
+    // FrameNet
+    let framenet_result = match RealFrameNetEngine::new() {
+        Ok(engine) => {
+            println!("   ✅ FrameNet: Real engine loaded successfully");
+            Some(engine)
+        }
+        Err(e) => {
+            println!("   ❌ FrameNet: Failed to load real data - {}", e);
+            None
+        }
+    };
+
+    // WordNet
+    let wordnet_config = canopy_wordnet::WordNetConfig::default();
+    let wordnet_result = match RealWordNetEngine::new(wordnet_config) {
+        Ok(engine) => {
+            println!("   ✅ WordNet: Real engine loaded successfully");
+            Some(engine)
+        }
+        Err(e) => {
+            println!("   ❌ WordNet: Failed to load real data - {}", e);
+            None
+        }
+    };
+
+    if verbnet_result.is_none() && framenet_result.is_none() && wordnet_result.is_none() {
+        println!("\n   🚨 CRITICAL: No real parsers available!");
+        println!("   📁 Expected data locations:");
+        println!("      - VerbNet: data/verbnet/verbnet3.4/*.xml");
+        println!("      - FrameNet: data/framenet/*.xml");
+        println!("      - WordNet: system WordNet installation");
+        println!("\n   ℹ️  This explains why performance is so high - we're only using stubs!");
+    } else {
+        // Test real parsers if available
+        println!("\n   🔍 Testing available real parsers:");
+
+        let start = Instant::now();
+        let mut real_results = Vec::new();
+
+        for word in &test_words {
+            let mut sources = Vec::new();
+
+            if let Some(ref engine) = verbnet_result {
+                match engine.analyze(word) {
+                    Ok(_) => sources.push("VerbNet-Real"),
+                    Err(_) => {}
+                }
+            }
+
+            if let Some(ref engine) = framenet_result {
+                match engine.analyze(word) {
+                    Ok(_) => sources.push("FrameNet-Real"),
+                    Err(_) => {}
+                }
+            }
+
+            if let Some(ref engine) = wordnet_result {
+                match engine.analyze(word) {
+                    Ok(_) => sources.push("WordNet-Real"),
+                    Err(_) => {}
+                }
+            }
+
+            real_results.push((word, sources.clone()));
+            println!("   {} → {} sources: {:?}", word, sources.len(), sources);
+        }
+
+        let real_duration = start.elapsed();
+        println!(
+            "   ⚡ Real Performance: {:.0} words/sec",
+            test_words.len() as f64 / real_duration.as_secs_f64()
+        );
+
+        // Compare results
+        println!("\n🔍 Result Quality Comparison:");
+        println!("============================");
+
+        for (i, word) in test_words.iter().enumerate() {
+            let stub_sources = &stub_results[i].1.sources;
+            let real_sources = &real_results[i].1;
+
+            println!("   {}:", word);
+            println!(
+                "      Stub: {} sources → {:?}",
+                stub_sources.len(),
+                stub_sources
+            );
+            println!(
+                "      Real: {} sources → {:?}",
+                real_sources.len(),
+                real_sources
+            );
+
+            if real_sources.is_empty() && !stub_sources.is_empty() {
+                println!("      ⚠️  Stub claims results but real parsers find none!");
+            } else if real_sources.len() > stub_sources.len() {
+                println!("      ✅ Real parsers provide richer analysis");
+            }
+        }
+    }
+
+    // === Analysis and Recommendations ===
+    println!("\n💡 Analysis & Recommendations:");
+    println!("==============================");
+
+    println!("   📊 Current Status:");
+    println!(
+        "      • Stub Performance: {:.0} words/sec",
+        test_words.len() as f64 / stub_duration.as_secs_f64()
+    );
+    println!("      • Using hardcoded test data (not real semantic analysis)");
+    println!("      • Cache effectiveness is on trivial lookups");
+
+    println!("\n   🎯 To Get Real Performance Numbers:");
+    println!("      1. Populate VerbNet XML data in data/verbnet/verbnet3.4/");
+    println!("      2. Populate FrameNet XML data in data/framenet/");
+    println!("      3. Install/configure WordNet database");
+    println!("      4. Update SemanticCoordinator to use real engines");
+
+    println!("\n   ⚠️  Expected Impact of Real Parsers:");
+    println!("      • Performance will drop significantly (XML parsing overhead)");
+    println!("      • Memory usage will increase (real data structures)");
+    println!("      • Results will be semantically meaningful");
+    println!("      • Cache effectiveness will improve analysis quality");
+
+    Ok(())
+}

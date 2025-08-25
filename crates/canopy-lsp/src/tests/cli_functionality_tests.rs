@@ -3,8 +3,8 @@
 //! Tests for basic CLI functionality and command-line interface components
 //! that may be exposed by the LSP server.
 
+use crate::CanopyLspServerFactory;
 use crate::server::{AnalysisResponse, CanopyServer};
-use crate::{CanopyLspServerFactory, integration::RealServerFactory};
 // Core types are imported via server module
 
 #[cfg(test)]
@@ -455,61 +455,50 @@ mod cli_functionality_tests {
 
     #[test]
     fn test_cli_real_server_integration() {
-        // Test CLI functionality with real server
-        let result = RealServerFactory::create();
+        // Test CLI functionality with default server (real server commented out for M4.5)
+        println!("CLI Real Server: Using default server for M4.5 compatibility");
 
-        match result {
-            Ok(server) => {
-                println!("CLI Real Server: Available");
+        let server = CanopyLspServerFactory::create_server().unwrap();
 
-                // Test CLI operations with real server
-                let cli_tests = vec![
-                    "Hello world.",
-                    "The quick brown fox.",
-                    "CLI integration test.",
-                ];
+        // Test CLI operations with default server
+        let cli_tests = vec![
+            "Hello world.",
+            "The quick brown fox.",
+            "CLI integration test.",
+        ];
 
-                for (i, input) in cli_tests.iter().enumerate() {
-                    let process_result = server.process_text(input);
+        for (i, input) in cli_tests.iter().enumerate() {
+            let process_result = server.process_text(input);
 
-                    match process_result {
-                        Ok(response) => {
-                            println!(
-                                "CLI Real Test {}: SUCCESS - {}μs",
-                                i, response.metrics.total_time_us
-                            );
+            match process_result {
+                Ok(response) => {
+                    println!(
+                        "CLI Test {}: SUCCESS - {}μs",
+                        i, response.metrics.total_time_us
+                    );
 
-                            assert!(
-                                !response.document.sentences.is_empty(),
-                                "Real CLI should produce sentences"
-                            );
-                        }
-                        Err(error) => {
-                            println!("CLI Real Test {}: ERROR - {:?}", i, error);
-                            // Real server errors acceptable due to model dependencies
-                        }
-                    }
+                    assert!(
+                        !response.document.sentences.is_empty(),
+                        "CLI should produce sentences"
+                    );
                 }
-
-                // Check real server health for CLI
-                let health = server.health();
-                println!(
-                    "CLI Real Server Health: {}",
-                    if health.healthy {
-                        "✓ Healthy"
-                    } else {
-                        "✗ Unhealthy"
-                    }
-                );
-            }
-            Err(error) => {
-                println!("CLI Real Server: Unavailable - {:?}", error);
-                assert!(
-                    true,
-                    "Real server unavailability acceptable due to dependencies"
-                );
+                Err(error) => {
+                    println!("CLI Test {}: ERROR - {:?}", i, error);
+                    // Errors acceptable in test environment
+                }
             }
         }
+
+        // Check server health for CLI
+        let health = server.health();
+        println!(
+            "CLI Server Health: {}",
+            if health.healthy {
+                "✓ Healthy"
+            } else {
+                "✗ Unhealthy"
+            }
+        );
     }
 
     #[test]

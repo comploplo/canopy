@@ -1,0 +1,133 @@
+use canopy_pipeline::create_l1_analyzer;
+use std::error::Error;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    // Initialize logging (info level for clean output)
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::INFO)
+        .with_target(false)
+        .init();
+
+    println!("🔍 Debug: Layer 1 Raw Engine Analysis");
+    println!("====================================");
+
+    // Create analyzer
+    let analyzer = create_l1_analyzer()?;
+
+    // Test with "give" - a verb that should have rich semantic data
+    let word = "give";
+    let result = analyzer.analyze(word)?;
+
+    println!("📊 LAYER 1 ANALYSIS FOR \"{}\":", word);
+    println!("   Original word: {}", result.original_word);
+    println!("   Lemma: {}", result.lemma);
+    println!("   Sources: {:?}", result.sources);
+    println!("   Confidence: {:.3}", result.confidence);
+    println!("   Processing time: {}μs", result.processing_time_us);
+    if !result.errors.is_empty() {
+        println!("   Errors: {:?}", result.errors);
+    }
+    println!();
+
+    // Check VerbNet data in detail
+    if let Some(ref verbnet) = result.verbnet {
+        println!("🏷️  VerbNet Raw Data:");
+        println!("   Verb classes: {}", verbnet.verb_classes.len());
+        println!(
+            "   Theta role assignments: {}",
+            verbnet.theta_role_assignments.len()
+        );
+        println!("   Confidence: {:.3}", verbnet.confidence);
+
+        for (i, assignment) in verbnet.theta_role_assignments.iter().enumerate() {
+            println!(
+                "      Assignment {}: {:?} at position {} (confidence: {:.3})",
+                i + 1,
+                assignment.theta_role,
+                assignment.argument_position,
+                assignment.confidence
+            );
+        }
+
+        for (i, verb_class) in verbnet.verb_classes.iter().enumerate() {
+            println!(
+                "      Class {}: {} ({})",
+                i + 1,
+                verb_class.class_name,
+                verb_class.id
+            );
+        }
+    } else {
+        println!("🏷️  VerbNet Raw Data: None");
+    }
+    println!();
+
+    // Check FrameNet data in detail
+    if let Some(ref framenet) = result.framenet {
+        println!("🖼️  FrameNet Raw Data:");
+        println!("   Frames: {}", framenet.frames.len());
+        println!("   Lexical units: {}", framenet.lexical_units.len());
+        println!("   Confidence: {:.3}", framenet.confidence);
+
+        for (i, frame) in framenet.frames.iter().enumerate() {
+            println!("      Frame {}: {} ({})", i + 1, frame.name, frame.id);
+            println!("         Frame elements: {}", frame.frame_elements.len());
+            for (j, fe) in frame.frame_elements.iter().enumerate() {
+                println!("            FE {}: {} ({:?})", j + 1, fe.name, fe.core_type);
+            }
+        }
+    } else {
+        println!("🖼️  FrameNet Raw Data: None");
+    }
+    println!();
+
+    // Check WordNet data in detail
+    if let Some(ref wordnet) = result.wordnet {
+        println!("📚 WordNet Raw Data:");
+        println!("   Synsets: {}", wordnet.synsets.len());
+        println!("   Confidence: {:.3}", wordnet.confidence);
+
+        for (i, synset) in wordnet.synsets.iter().enumerate().take(3) {
+            println!("      Synset {}: {} words", i + 1, synset.words.len());
+            let def = synset.definition();
+            println!(
+                "         Definition: {}",
+                if def.is_empty() { "N/A" } else { &def }
+            );
+            for word in &synset.words {
+                println!("           - {}", word.word);
+            }
+        }
+    } else {
+        println!("📚 WordNet Raw Data: None");
+    }
+    println!();
+
+    // Check Lexicon data in detail
+    if let Some(ref lexicon) = result.lexicon {
+        println!("📖 Lexicon Raw Data:");
+        println!("   Pattern matches: {}", lexicon.pattern_matches.len());
+        println!("   Confidence: {:.3}", lexicon.confidence);
+
+        for (i, pattern) in lexicon.pattern_matches.iter().enumerate().take(3) {
+            println!("      Pattern {}: {:?}", i + 1, pattern.pattern_type);
+        }
+    } else {
+        println!("📖 Lexicon Raw Data: None");
+    }
+    println!();
+
+    println!("🤔 LAYER 1 ANALYSIS:");
+    println!("   - VerbNet has data: {}", result.verbnet.is_some());
+    println!("   - FrameNet has data: {}", result.framenet.is_some());
+    println!("   - WordNet has data: {}", result.wordnet.is_some());
+    println!("   - Lexicon has data: {}", result.lexicon.is_some());
+    println!();
+
+    println!("💡 NOTE:");
+    println!("   Layer 1 provides RAW engine outputs only.");
+    println!("   Unified roles and cross-engine enrichment belong in Layer 2.");
+    println!("   This is the foundation data that Layer 2 will process.");
+
+    Ok(())
+}

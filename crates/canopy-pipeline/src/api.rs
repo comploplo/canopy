@@ -1,7 +1,7 @@
 //! Public API interface for the pipeline
 
 use crate::error::PipelineError;
-use canopy_semantics::SemanticAnalysis;
+use canopy_semantic_layer::SemanticLayer1Output as SemanticAnalysis;
 use serde::{Deserialize, Serialize};
 
 /// Main analyzer interface
@@ -11,7 +11,7 @@ pub struct CanopyAnalyzer {
 
 impl CanopyAnalyzer {
     /// Create new analyzer
-    pub fn new(model_path: Option<&str>) -> Result<Self, PipelineError> {
+    pub fn new(_model_path: Option<&str>) -> Result<Self, PipelineError> {
         todo!("Implementation pending")
     }
 
@@ -22,7 +22,7 @@ impl CanopyAnalyzer {
     }
 
     /// Analyze text synchronously
-    pub fn analyze_sync(&self, text: &str) -> Result<AnalysisResponse, PipelineError> {
+    pub fn analyze_sync(&self, _text: &str) -> Result<AnalysisResponse, PipelineError> {
         todo!("Implementation pending")
     }
 

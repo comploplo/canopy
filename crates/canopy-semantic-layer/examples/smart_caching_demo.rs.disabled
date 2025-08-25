@@ -1,0 +1,245 @@
+//! Smart Caching Strategy Demo
+//!
+//! This example demonstrates the enhanced caching features of the SemanticCoordinator:
+//! - Multi-layer caching (L1 coordinator cache + L2 engine caches)
+//! - TTL (Time-To-Live) support for data freshness
+//! - Cache warming for improved performance
+//! - Cache analytics and optimization recommendations
+
+use canopy_semantic_layer::{coordinator::CoordinatorConfig, SemanticCoordinator};
+use std::error::Error;
+use std::time::{Duration, Instant};
+
+fn main() -> Result<(), Box<dyn Error>> {
+    // Initialize tracing for debug output
+    tracing_subscriber::fmt::init();
+
+    println!("🧠 Smart Caching Strategy Demo");
+    println!("==============================");
+
+    // Configure coordinator with enhanced caching
+    let config = CoordinatorConfig {
+        // L1 cache at coordinator level (100MB)
+        l1_cache_memory_mb: 100,
+        // Enable lemmatization for better cache keys
+        enable_lemmatization: true,
+        use_advanced_lemmatization: false,
+        // Enable all engines for comprehensive caching test
+        enable_verbnet: true,
+        enable_framenet: true,
+        enable_wordnet: true,
+        enable_lexicon: true,
+        graceful_degradation: true,
+        confidence_threshold: 0.01, // Lower threshold so results get cached
+        ..CoordinatorConfig::default()
+    };
+
+    println!("🏗️  Initializing SemanticCoordinator with smart caching...");
+    let coordinator = SemanticCoordinator::new(config)?;
+
+    // Check initial state
+    let initial_stats = coordinator.get_statistics();
+    println!("\n📊 Initial Cache State:");
+    println!(
+        "   L1 cache budget: {}MB",
+        initial_stats.memory_usage.budget_mb
+    );
+    println!("   TTL: 3600 seconds (1 hour)");
+    println!("   Active engines: {:?}", initial_stats.active_engines);
+
+    // === Phase 1: Demonstrate cold cache performance ===
+    println!("\n❄️  Phase 1: Cold Cache Performance");
+    println!("====================================");
+
+    let cold_words = vec!["run", "walk", "eat", "sleep"];
+    let mut cold_times = Vec::new();
+
+    for word in &cold_words {
+        let start = Instant::now();
+        match coordinator.analyze(word) {
+            Ok(result) => {
+                let time = start.elapsed();
+                cold_times.push(time.as_micros() as u64);
+                println!(
+                    "   {} - {}μs (sources: {:?})",
+                    word,
+                    time.as_micros(),
+                    result.sources
+                );
+            }
+            Err(e) => println!("   {} - ERROR: {}", word, e),
+        }
+    }
+
+    let cold_stats = coordinator.get_statistics();
+    println!(
+        "   Cache hits: {} / Cache misses: {}",
+        cold_stats.cache_hits, cold_stats.cache_misses
+    );
+
+    // === Phase 2: Demonstrate warm cache performance ===
+    println!("\n🔥 Phase 2: Warm Cache Performance");
+    println!("===================================");
+
+    let mut warm_times = Vec::new();
+
+    // Query the same words again (should hit cache)
+    for word in &cold_words {
+        let start = Instant::now();
+        let stats_before = coordinator.get_statistics();
+        match coordinator.analyze(word) {
+            Ok(result) => {
+                let time = start.elapsed();
+                let stats_after = coordinator.get_statistics();
+                warm_times.push(time.as_micros() as u64);
+                let hit_diff = stats_after.cache_hits - stats_before.cache_hits;
+                let cache_status = if hit_diff > 0 { "HIT" } else { "MISS" };
+                println!(
+                    "   {} - {}μs ({}) sources: {:?}",
+                    word,
+                    time.as_micros(),
+                    cache_status,
+                    result.sources
+                );
+            }
+            Err(e) => println!("   {} - ERROR: {}", word, e),
+        }
+    }
+
+    let warm_stats = coordinator.get_statistics();
+    println!(
+        "   Cache hits: {} / Cache misses: {}",
+        warm_stats.cache_hits, warm_stats.cache_misses
+    );
+
+    // === Phase 3: Cache warming demonstration ===
+    println!("\n🔥 Phase 3: Cache Warming");
+    println!("=========================");
+
+    let common_verbs = vec![
+        "give", "take", "make", "come", "go", "see", "know", "get", "use", "find", "tell", "ask",
+        "work", "seem", "feel", "try", "leave", "call", "show", "turn",
+    ];
+
+    println!("Warming cache with {} common verbs...", common_verbs.len());
+    let warming_start = Instant::now();
+
+    match coordinator.warm_cache(&common_verbs) {
+        Ok(results) => {
+            let warming_time = warming_start.elapsed();
+            println!(
+                "✅ Cache warming completed in {:.2}s",
+                warming_time.as_secs_f64()
+            );
+
+            let successful = results.iter().filter(|r| !r.errors.is_empty()).count();
+            let attempted = results.len();
+            let failed = attempted - successful;
+
+            println!("   Success: {} / {} verbs", successful, attempted);
+            println!("   Failed: {} verbs", failed);
+
+            let all_errors: Vec<_> = results.iter().flat_map(|r| &r.errors).collect();
+            if !all_errors.is_empty() {
+                println!("   Errors:");
+                for error in &all_errors[..all_errors.len().min(3)] {
+                    println!("     {}", error);
+                }
+                if all_errors.len() > 3 {
+                    println!("     ... and {} more", all_errors.len() - 3);
+                }
+            }
+        }
+        Err(e) => println!("❌ Cache warming failed: {}", e),
+    }
+
+    // === Phase 4: Cache analytics and optimization ===
+    println!("\n📈 Phase 4: Cache Analytics");
+    println!("===========================");
+
+    let analytics = coordinator.get_cache_analytics();
+    println!("   Hit Rate: {:.1}%", analytics.hit_rate * 100.0);
+    println!("   Miss Rate: {:.1}%", analytics.miss_rate * 100.0);
+    println!(
+        "   Expiration Rate: {:.1}%",
+        analytics.expiration_rate * 100.0
+    );
+    println!(
+        "   Memory Efficiency: {:.1}%",
+        analytics.memory_efficiency * 100.0
+    );
+    println!("   Total Entries: {}", analytics.total_entries);
+    println!("   Warmed Entries: {}", analytics.warmed_entries);
+
+    if !analytics.recommendations.is_empty() {
+        println!("\n💡 Optimization Recommendations:");
+        for (i, rec) in analytics.recommendations.iter().enumerate() {
+            println!("   {}. {}", i + 1, rec);
+        }
+    }
+
+    // === Phase 5: Memory pressure monitoring ===
+    println!("\n🔍 Phase 5: Memory Pressure Monitoring");
+    println!("======================================");
+
+    if let Some(alert) = coordinator.check_memory_pressure() {
+        println!("⚠️  Memory Pressure Alert:");
+        println!("   Severity: {:?}", alert.severity);
+        println!(
+            "   Current Usage: {:.1}MB / {}MB ({:.1}%)",
+            alert.current_usage_mb, alert.budget_mb, alert.current_utilization
+        );
+        println!("   Recommendation: {}", alert.recommendation);
+    } else {
+        println!("✅ Memory pressure: Normal");
+    }
+
+    // === Phase 6: Performance comparison ===
+    println!("\n⚡ Phase 6: Performance Analysis");
+    println!("================================");
+
+    if !cold_times.is_empty() && !warm_times.is_empty() {
+        let avg_cold = cold_times.iter().sum::<u64>() / cold_times.len() as u64;
+        let avg_warm = warm_times.iter().sum::<u64>() / warm_times.len() as u64;
+        let speedup = if avg_warm > 0 {
+            avg_cold as f64 / avg_warm as f64
+        } else {
+            0.0
+        };
+
+        println!("   Cold cache avg: {}μs", avg_cold);
+        println!("   Warm cache avg: {}μs", avg_warm);
+        println!("   Cache speedup: {:.1}x faster", speedup);
+    }
+
+    // Final statistics
+    let final_stats = coordinator.get_statistics();
+    println!("\n📊 Final Statistics:");
+    println!("   Total queries: {}", final_stats.total_queries);
+    println!(
+        "   Cache hit rate: {:.1}%",
+        final_stats.cache_hit_rate * 100.0
+    );
+    println!(
+        "   Parallel queries: {} ({:.1}%)",
+        final_stats.parallel_queries,
+        final_stats.parallel_query_rate * 100.0
+    );
+    println!("   Warmed queries: {}", final_stats.warmed_queries);
+    println!(
+        "   Memory usage: {:.1}MB / {}MB ({:.1}%)",
+        final_stats.memory_usage.estimated_usage_mb,
+        final_stats.memory_usage.budget_mb,
+        final_stats.memory_usage.utilization_percent
+    );
+
+    println!("\n🎯 Smart Caching Summary:");
+    println!("   ✅ Multi-layer caching (L1 + L2) implemented");
+    println!("   ✅ TTL support for data freshness");
+    println!("   ✅ Cache warming for improved cold start performance");
+    println!("   ✅ Cache analytics for optimization insights");
+    println!("   ✅ Memory pressure monitoring");
+    println!("   ✅ Performance metrics and recommendations");
+
+    Ok(())
+}

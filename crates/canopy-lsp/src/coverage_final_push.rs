@@ -282,15 +282,15 @@ mod tests {
 
     #[test]
     fn test_real_server_factory() {
-        // Test that RealServerFactory can be created (may fail without models, that's OK)
-        match crate::integration::RealServerFactory::create() {
+        // Test that  can be created (may fail without models, that's OK)
+        match crate::CanopyLspServerFactory::create_server() {
             Ok(server) => {
                 let health = server.health();
                 assert!(health.components.len() >= 2); // Should have parser and semantics
             }
             Err(_) => {
                 // Expected if UDPipe models not available - this is fine for testing
-                println!("RealServerFactory creation failed (expected without models)");
+                println!(" creation failed (expected without models)");
             }
         }
     }

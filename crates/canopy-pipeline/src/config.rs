@@ -4,25 +4,13 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 /// Main pipeline configuration
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct PipelineConfig {
     pub model: ModelConfig,
     pub performance: PerformanceConfig,
     pub cache: CacheConfig,
     pub memory: MemoryConfig,
     pub logging: LoggingConfig,
-}
-
-impl Default for PipelineConfig {
-    fn default() -> Self {
-        Self {
-            model: ModelConfig::default(),
-            performance: PerformanceConfig::default(),
-            cache: CacheConfig::default(),
-            memory: MemoryConfig::default(),
-            logging: LoggingConfig::default(),
-        }
-    }
 }
 
 /// Model configuration

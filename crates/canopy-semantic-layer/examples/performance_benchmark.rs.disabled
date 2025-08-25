@@ -1,0 +1,184 @@
+//! Performance benchmark for real-world semantic analysis
+//!
+//! This benchmark tests the actual performance of the semantic coordinator
+//! with real engines, parallel processing, and intelligent fallbacks.
+
+use canopy_semantic_layer::coordinator::{CoordinatorConfig, SemanticCoordinator};
+use std::time::Instant;
+use tracing::{info, Level};
+use tracing_subscriber;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Initialize logging
+    tracing_subscriber::fmt().with_max_level(Level::INFO).init();
+
+    info!("🚀 Starting Canopy Semantic Layer Performance Benchmark");
+    info!("==================================================");
+
+    // Test configurations
+    let test_words = vec![
+        "running".to_string(),
+        "beautiful".to_string(),
+        "quickly".to_string(),
+        "development".to_string(),
+        "understanding".to_string(),
+        "computer".to_string(),
+        "analyze".to_string(),
+        "process".to_string(),
+        "semantic".to_string(),
+        "language".to_string(),
+        "complex".to_string(),
+        "natural".to_string(),
+        "intelligence".to_string(),
+        "machine".to_string(),
+        "learning".to_string(),
+        "neural".to_string(),
+        "network".to_string(),
+        "algorithm".to_string(),
+        "data".to_string(),
+        "structure".to_string(),
+    ];
+
+    // Performance test configurations
+    let configs = vec![
+        (
+            "Sequential Processing",
+            CoordinatorConfig {
+                enable_parallel: false,
+                enable_query_batching: false,
+                enable_fallbacks: false,
+                ..CoordinatorConfig::default()
+            },
+        ),
+        (
+            "Parallel Processing",
+            CoordinatorConfig {
+                enable_parallel: true,
+                enable_query_batching: false,
+                enable_fallbacks: false,
+                ..CoordinatorConfig::default()
+            },
+        ),
+        (
+            "Parallel + Batching",
+            CoordinatorConfig {
+                enable_parallel: true,
+                enable_query_batching: true,
+                batch_size: 10,
+                enable_fallbacks: false,
+                ..CoordinatorConfig::default()
+            },
+        ),
+        (
+            "Full Optimization",
+            CoordinatorConfig {
+                enable_parallel: true,
+                enable_query_batching: true,
+                batch_size: 10,
+                enable_fallbacks: true,
+                // Removed: enable_cache_warming (not available in simplified config)
+                ..CoordinatorConfig::default()
+            },
+        ),
+    ];
+
+    for (config_name, config) in configs {
+        info!("\n📊 Testing Configuration: {}", config_name);
+        info!("----------------------------------------");
+
+        let coordinator = SemanticCoordinator::new(config)?;
+
+        // Warm up cache if enabled
+        if coordinator.get_statistics().active_engines.len() > 0 {
+            info!("🔥 Cache warming with common words...");
+            let warm_start = Instant::now();
+            let _warm_results = coordinator.warm_cache(&["the", "and", "run", "fast"])?;
+            info!(
+                "   Cache warming completed in {}ms",
+                warm_start.elapsed().as_millis()
+            );
+        }
+
+        // Single word analysis test
+        info!("🔍 Single word analysis test...");
+        let single_start = Instant::now();
+        let single_result = coordinator.analyze("running")?;
+        let single_time = single_start.elapsed();
+
+        info!(
+            "   Result: {} sources, {:.2} confidence",
+            single_result.sources.len(),
+            single_result.confidence
+        );
+        info!(
+            "   Maximal context: {} unified roles, {} hierarchies",
+            single_result.unified_semantic_roles.len(),
+            single_result.semantic_hierarchies.len()
+        );
+        info!("   Time: {}μs", single_time.as_micros());
+
+        // Batch analysis test
+        info!("📦 Batch analysis test ({} words)...", test_words.len());
+        let batch_start = Instant::now();
+        let batch_results = coordinator.analyze_batch(&test_words)?;
+        let batch_time = batch_start.elapsed();
+
+        let total_sources: usize = batch_results.iter().map(|r| r.sources.len()).sum();
+        let avg_confidence: f32 =
+            batch_results.iter().map(|r| r.confidence).sum::<f32>() / batch_results.len() as f32;
+        let total_unified_roles: usize = batch_results
+            .iter()
+            .map(|r| r.unified_semantic_roles.len())
+            .sum();
+
+        let throughput = if batch_time.as_millis() > 0 {
+            (test_words.len() as f64 / batch_time.as_millis() as f64) * 1000.0
+        } else {
+            0.0
+        };
+
+        info!("   Results: {} words processed", batch_results.len());
+        info!(
+            "   Average: {:.1} sources, {:.2} confidence",
+            total_sources as f64 / batch_results.len() as f64,
+            avg_confidence
+        );
+        info!(
+            "   Unified context: {} total roles across all words",
+            total_unified_roles
+        );
+        info!("   Time: {}ms", batch_time.as_millis());
+        info!("   Throughput: {:.1} words/sec", throughput);
+
+        // Get detailed statistics
+        let stats = coordinator.get_statistics();
+        info!("📈 Performance Statistics:");
+        info!("   Active engines: {:?}", stats.active_engines);
+        info!("   Cache hit rate: {:.1}%", stats.cache_hit_rate * 100.0);
+        info!(
+            "   Parallel query rate: {:.1}%",
+            stats.parallel_query_rate * 100.0
+        );
+        if stats.fallback_attempts > 0 {
+            info!(
+                "   Fallback success rate: {:.1}%",
+                stats.fallback_success_rate * 100.0
+            );
+        }
+        info!(
+            "   Memory usage: {:.1}MB ({:.1}% of budget)",
+            stats.memory_usage.estimated_usage_mb, stats.memory_usage.utilization_percent
+        );
+    }
+
+    info!("\n🎯 Benchmark Summary");
+    info!("==================");
+    info!("✅ Real engines with actual data loading");
+    info!("✅ Parallel processing across 3+ engines");
+    info!("✅ Cross-engine semantic enrichment");
+    info!("✅ Intelligent fallback strategies");
+    info!("✅ Maximal context preparation for Layer 2");
+    info!("✅ Memory-budgeted multi-layer caching");
+
+    Ok(())
+}

@@ -1,0 +1,222 @@
+//! Lemmatization Performance Benchmark
+//!
+//! This benchmark tests the performance impact of lemmatization on semantic analysis.
+
+use canopy_semantic_layer::coordinator::{CoordinatorConfig, SemanticCoordinator};
+use std::time::Instant;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Initialize tracing for debugging
+    tracing_subscriber::fmt::init();
+
+    println!("🔬 Lemmatization Performance Benchmark");
+    println!("=====================================\n");
+
+    // Test dataset with various word forms
+    let test_words = vec![
+        // Regular verbs
+        "running",
+        "jumped",
+        "walking",
+        "talking",
+        "playing",
+        // Irregular verbs
+        "gave",
+        "went",
+        "ran",
+        "was",
+        "had",
+        "did",
+        "said",
+        "took",
+        // Nouns (plural)
+        "books",
+        "cats",
+        "houses",
+        "children",
+        "mice",
+        "geese",
+        // Adjectives/adverbs
+        "quickly",
+        "beautiful",
+        "carefully",
+        "amazing",
+        "wonderful",
+        // Unchanged words
+        "book",
+        "run",
+        "think",
+        "work",
+        "play",
+    ];
+
+    // Benchmark 1: Without lemmatization
+    println!("📊 Benchmark 1: Semantic analysis WITHOUT lemmatization");
+    let mut config_no_lem = CoordinatorConfig::default();
+    config_no_lem.enable_lemmatization = false;
+    config_no_lem.graceful_degradation = true;
+
+    let coordinator_no_lem = SemanticCoordinator::new(config_no_lem)?;
+
+    let start = Instant::now();
+    for word in &test_words {
+        let _result = coordinator_no_lem.analyze(word)?;
+    }
+    let elapsed_no_lem = start.elapsed();
+    let avg_no_lem = elapsed_no_lem.as_micros() as f64 / test_words.len() as f64;
+
+    println!(
+        "   Total time: {:.2}ms",
+        elapsed_no_lem.as_micros() as f64 / 1000.0
+    );
+    println!("   Average per word: {:.1}μs", avg_no_lem);
+    println!("   Throughput: {:.0} words/sec\n", 1_000_000.0 / avg_no_lem);
+
+    // Benchmark 2: With simple lemmatization
+    println!("📊 Benchmark 2: Semantic analysis WITH lemmatization (simple)");
+    let mut config_simple_lem = CoordinatorConfig::default();
+    config_simple_lem.enable_lemmatization = true;
+    config_simple_lem.use_advanced_lemmatization = false;
+    config_simple_lem.graceful_degradation = true;
+
+    let coordinator_simple_lem = SemanticCoordinator::new(config_simple_lem)?;
+
+    let start = Instant::now();
+    for word in &test_words {
+        let _result = coordinator_simple_lem.analyze(word)?;
+    }
+    let elapsed_simple_lem = start.elapsed();
+    let avg_simple_lem = elapsed_simple_lem.as_micros() as f64 / test_words.len() as f64;
+
+    println!(
+        "   Total time: {:.2}ms",
+        elapsed_simple_lem.as_micros() as f64 / 1000.0
+    );
+    println!("   Average per word: {:.1}μs", avg_simple_lem);
+    println!(
+        "   Throughput: {:.0} words/sec",
+        1_000_000.0 / avg_simple_lem
+    );
+
+    let overhead_simple = ((avg_simple_lem - avg_no_lem) / avg_no_lem) * 100.0;
+    println!("   Lemmatization overhead: {:.1}%\n", overhead_simple);
+
+    // Benchmark 3: Batch processing comparison
+    println!("📊 Benchmark 3: Batch processing comparison");
+
+    // Without lemmatization - batch
+    let start = Instant::now();
+    let batch_words: Vec<String> = test_words.iter().map(|&s| s.to_string()).collect();
+    let _results_no_lem = coordinator_no_lem.analyze_batch(&batch_words)?;
+    let elapsed_batch_no_lem = start.elapsed();
+
+    // With lemmatization - batch
+    let start = Instant::now();
+    let _results_lem = coordinator_simple_lem.analyze_batch(&batch_words)?;
+    let elapsed_batch_lem = start.elapsed();
+
+    println!(
+        "   Batch without lemmatization: {:.2}ms",
+        elapsed_batch_no_lem.as_micros() as f64 / 1000.0
+    );
+    println!(
+        "   Batch with lemmatization: {:.2}ms",
+        elapsed_batch_lem.as_micros() as f64 / 1000.0
+    );
+
+    let batch_overhead = ((elapsed_batch_lem.as_micros() as f64
+        - elapsed_batch_no_lem.as_micros() as f64)
+        / elapsed_batch_no_lem.as_micros() as f64)
+        * 100.0;
+    println!("   Batch lemmatization overhead: {:.1}%\n", batch_overhead);
+
+    // Benchmark 4: Cache effectiveness
+    println!("📊 Benchmark 4: Cache effectiveness with lemmatization");
+
+    // Test with repeated words that lemmatize to same form
+    let repeated_words = vec![
+        "run", "running", "runs", "ran", // All -> "run"
+        "give", "giving", "gives", "gave", // All -> "give"
+        "book", "books", // "book"
+    ];
+
+    for word in &repeated_words {
+        let _result = coordinator_simple_lem.analyze(word)?;
+    }
+
+    let stats = coordinator_simple_lem.get_statistics();
+    println!("   Total queries: {}", stats.total_queries);
+    println!("   Cache hits: {}", stats.cache_hits);
+    println!("   Cache hit rate: {:.1}%", stats.cache_hit_rate * 100.0);
+    println!(
+        "   Memory usage: {:.1}MB ({:.1}% of budget)",
+        stats.memory_usage.estimated_usage_mb, stats.memory_usage.utilization_percent
+    );
+
+    // Benchmark 5: Lemmatization accuracy
+    println!("\n📊 Benchmark 5: Lemmatization accuracy verification");
+
+    let accuracy_tests = vec![
+        ("running", "run"),
+        ("gave", "give"),
+        ("books", "book"),
+        ("children", "child"),
+        ("quickly", "quick"),
+        ("beautiful", "beautiful"), // Unchanged
+    ];
+
+    let mut correct = 0;
+    let total = accuracy_tests.len();
+
+    for (input, expected) in &accuracy_tests {
+        let result = coordinator_simple_lem.analyze(input)?;
+        let actual = &result.lemma;
+        let confidence = result.lemmatization_confidence.unwrap_or(0.0);
+
+        if actual == expected {
+            correct += 1;
+            println!(
+                "   ✅ '{}' -> '{}' (confidence: {:.2})",
+                input, actual, confidence
+            );
+        } else {
+            println!(
+                "   ❌ '{}' -> '{}' (expected: '{}', confidence: {:.2})",
+                input, actual, expected, confidence
+            );
+        }
+    }
+
+    let accuracy = (correct as f64 / total as f64) * 100.0;
+    println!("\n   Accuracy: {}/{} ({:.1}%)", correct, total, accuracy);
+
+    // Performance summary
+    println!("\n🎯 Performance Summary");
+    println!("=====================");
+    println!(
+        "• Lemmatization adds ~{:.1}% overhead per word",
+        overhead_simple
+    );
+    println!("• Batch processing overhead: ~{:.1}%", batch_overhead);
+    println!(
+        "• Cache hit rate: {:.1}% (improves with usage)",
+        stats.cache_hit_rate * 100.0
+    );
+    println!("• Lemmatization accuracy: {:.1}%", accuracy);
+
+    if overhead_simple < 20.0 {
+        println!("• ✅ Performance impact is acceptable (<20% overhead)");
+    } else {
+        println!("• ⚠️  Performance impact is significant (>20% overhead)");
+    }
+
+    if accuracy > 85.0 {
+        println!("• ✅ Lemmatization accuracy is good (>85%)");
+    } else {
+        println!("• ⚠️  Lemmatization accuracy needs improvement (<85%)");
+    }
+
+    println!("\n✨ Lemmatization benchmark completed successfully!");
+
+    Ok(())
+}

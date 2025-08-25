@@ -1,0 +1,67 @@
+//! L1 Analyzer Demo
+//!
+//! Shows how to use the pipeline crate's simple API to get a fully-loaded
+//! semantic analyzer with all engines ready to use.
+
+use canopy_pipeline::create_l1_analyzer;
+use std::error::Error;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    tracing_subscriber::fmt::init();
+
+    println!("🚀 Creating L1 Semantic Analyzer");
+    println!("=================================");
+
+    // Create fully-loaded analyzer with all engines
+    let analyzer = create_l1_analyzer()?;
+
+    let stats = analyzer.get_statistics();
+    println!(
+        "✅ L1 Analyzer ready with engines: {:?}",
+        stats.active_engines
+    );
+    println!("📊 Cache hit rate: {:.1}%", stats.cache_hit_rate * 100.0);
+    println!(
+        "🧠 Memory usage: {:.1}MB ({:.1}% of budget)",
+        stats.memory_usage.estimated_usage_mb, stats.memory_usage.utilization_percent
+    );
+    println!();
+
+    let test_words = ["give", "running", "beautiful", "teacher", "computer"];
+
+    for word in test_words {
+        let result = analyzer.analyze(word)?;
+        let source_count = result.sources.len();
+        let engine_count = [
+            result.verbnet.is_some(),
+            result.framenet.is_some(),
+            result.wordnet.is_some(),
+            result.lexicon.is_some(),
+        ]
+        .iter()
+        .filter(|&&x| x)
+        .count();
+
+        if source_count > 0 {
+            println!(
+                "📝 \"{}\" → {} sources, {} engines, {:.2} confidence",
+                word, source_count, engine_count, result.confidence
+            );
+        } else {
+            println!("📝 \"{}\" → No semantic data found", word);
+        }
+    }
+
+    println!();
+    let final_stats = analyzer.get_statistics();
+    println!(
+        "📈 Final cache hit rate: {:.1}%",
+        final_stats.cache_hit_rate * 100.0
+    );
+    println!(
+        "🏃 Parallel queries: {:.1}%",
+        final_stats.parallel_query_rate * 100.0
+    );
+
+    Ok(())
+}

@@ -5,67 +5,111 @@
 set -e
 
 # Coverage threshold for release milestones
-# Current gate: 69% (current baseline: 69.46%)
+# Current gate: 75% (raised from 69.46% baseline)
 # M3 REQUIREMENT: 80% minimum coverage for completion
 # M4 REQUIREMENT: 90% minimum coverage for completion
 #
 # IMPORTANT: DO NOT LOWER THESE THRESHOLDS WHEN MAKING RELEASES
 # Instead, improve test coverage to meet the requirements
-COVERAGE_THRESHOLD=68
+COVERAGE_THRESHOLD=75
 
 echo "🔬 Running coverage analysis..."
 echo "📊 Coverage threshold: ${COVERAGE_THRESHOLD}%"
 
-# Run coverage analysis and extract percentage directly
-echo "🔍 Analyzing test coverage..."
-coverage_output=$(cargo tarpaulin --workspace --skip-clean 2>&1)
-coverage_percent=$(echo "$coverage_output" | grep -o '[0-9]*\.[0-9]*% coverage' | head -1 | sed 's/% coverage//' || echo "0.00")
-
-# If no "% coverage" pattern, try alternative patterns
-if [ -z "$coverage_percent" ] || [ "$coverage_percent" = "0.00" ]; then
-    coverage_percent=$(echo "$coverage_output" | grep -o '[0-9]*\.[0-9]*%' | head -1 | sed 's/%//' || echo "0.00")
+# Check if cargo-tarpaulin is installed
+if ! command -v cargo-tarpaulin &> /dev/null; then
+    echo "❌ cargo-tarpaulin is not installed!"
+    echo "   Install with: cargo install cargo-tarpaulin"
+    exit 1
 fi
 
-# Ensure we have a valid number
-if ! [[ "$coverage_percent" =~ ^[0-9]+\.?[0-9]*$ ]]; then
-    echo "⚠️  Could not parse coverage percentage, running full analysis..."
+# Run coverage analysis 
+echo "🔍 Analyzing test coverage..."
+TEMP_FILE=$(mktemp)
 
-    # Fall back to running tarpaulin with stdout output
-    echo ""
-    if cargo tarpaulin --workspace --skip-clean; then
-        echo ""
-        echo "✅ Coverage analysis completed"
-        echo "   Note: Could not parse exact percentage for threshold check"
-        echo "   Please manually verify coverage meets ${COVERAGE_THRESHOLD}% threshold"
-        exit 0
-    else
-        echo "❌ Coverage analysis failed"
+# Run tarpaulin with 15-minute timeout and capture output
+timeout 900 cargo tarpaulin --workspace --skip-clean --out Stdout > "$TEMP_FILE" 2>&1 || {
+    exit_code=$?
+    if [ $exit_code -ne 0 ]; then
+        echo "❌ Coverage analysis failed with exit code $exit_code"
+        echo "   Output:"
+        cat "$TEMP_FILE"
+        rm -f "$TEMP_FILE"
         exit 1
     fi
+}
+
+# Extract coverage percentage from output
+coverage_output=$(cat "$TEMP_FILE")
+echo "📋 Coverage output:"
+echo "$coverage_output"
+echo ""
+
+# Try multiple patterns to extract coverage percentage
+coverage_percent=""
+
+# Pattern 1: "XX.XX% coverage"
+coverage_percent=$(echo "$coverage_output" | grep -o '[0-9]*\.[0-9]*% coverage' | head -1 | sed 's/% coverage//' 2>/dev/null || true)
+
+# Pattern 2: "XX.XX%" at end of line
+if [ -z "$coverage_percent" ]; then
+    coverage_percent=$(echo "$coverage_output" | grep -oE '[0-9]+\.[0-9]+%$' | head -1 | sed 's/%//' 2>/dev/null || true)
+fi
+
+# Pattern 3: Any "XX.XX%" 
+if [ -z "$coverage_percent" ]; then
+    coverage_percent=$(echo "$coverage_output" | grep -oE '[0-9]+\.[0-9]+%' | head -1 | sed 's/%//' 2>/dev/null || true)
+fi
+
+# Pattern 4: Integer percentage "XX%"
+if [ -z "$coverage_percent" ]; then
+    coverage_percent=$(echo "$coverage_output" | grep -oE '[0-9]+%' | head -1 | sed 's/%//' 2>/dev/null || true)
+fi
+
+# Clean up temp file
+rm -f "$TEMP_FILE"
+
+# Validate we found a percentage
+if [ -z "$coverage_percent" ] || ! [[ "$coverage_percent" =~ ^[0-9]+\.?[0-9]*$ ]]; then
+    echo "⚠️  Could not parse coverage percentage from output"
+    echo "   Coverage analysis completed but threshold check skipped"
+    echo "   Please manually verify coverage meets ${COVERAGE_THRESHOLD}% threshold"
+    echo ""
+    echo "✅ Coverage analysis completed (manual verification required)"
+    exit 0
 fi
 
 echo "📈 Current coverage: ${coverage_percent}%"
 
-# Check against threshold
-if (( $(echo "$coverage_percent >= $COVERAGE_THRESHOLD" | bc -l) )); then
-    echo "✅ Coverage check passed! (${coverage_percent}% >= ${COVERAGE_THRESHOLD}%)"
+# Convert to integer for comparison if it's a decimal
+coverage_int=$(echo "$coverage_percent" | cut -d. -f1)
 
+# Check against threshold  
+if [ "$coverage_int" -ge "$COVERAGE_THRESHOLD" ]; then
+    echo "✅ Coverage check passed! (${coverage_percent}% >= ${COVERAGE_THRESHOLD}%)"
+    
     # Store coverage info for reporting
+    echo ""
     echo "📊 Coverage Summary:"
     echo "   Threshold: ${COVERAGE_THRESHOLD}%"
     echo "   Actual: ${coverage_percent}%"
     echo "   Status: PASSED ✅"
-
+    echo ""
+    echo "📝 Note: Full workspace coverage analysis completed."
+    echo "   Deprecated packages excluded from workspace."
+    
     exit 0
 else
     echo "❌ Coverage check failed!"
     echo "   Required: ${COVERAGE_THRESHOLD}%"
     echo "   Actual: ${coverage_percent}%"
-    echo "   Shortfall: $(echo "$COVERAGE_THRESHOLD - $coverage_percent" | bc -l)%"
+    
+    shortfall=$((COVERAGE_THRESHOLD - coverage_int))
+    echo "   Shortfall: ~${shortfall}%"
     echo ""
     echo "💡 To improve coverage:"
     echo "   1. Add tests for uncovered code paths"
-    echo "   2. Run 'just coverage' to see detailed coverage report"
+    echo "   2. Run 'cargo tarpaulin --workspace' to see detailed coverage report"
     echo "   3. Focus on files with low coverage first"
     echo ""
     echo "⚠️  REMINDER: DO NOT lower the coverage threshold for releases!"

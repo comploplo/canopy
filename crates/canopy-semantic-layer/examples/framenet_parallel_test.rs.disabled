@@ -1,0 +1,40 @@
+//! FrameNet Parallel Processing Test
+//!
+//! Tests the parallel FrameNet loading to verify it's working correctly.
+
+use canopy_engine::DataLoader;
+use canopy_framenet::FrameNetEngine;
+use std::time::Instant;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::INFO)
+        .init();
+
+    println!("🧪 FrameNet Parallel Loading Test");
+    println!("=================================\n");
+
+    // Show available parallelism
+    let num_cpus = num_cpus::get();
+    println!("💻 Available CPU cores: {}", num_cpus);
+
+    // Test loading FrameNet with detailed timing
+    println!("\n🖼️ Loading FrameNet frames...");
+    let start = Instant::now();
+
+    let mut engine = FrameNetEngine::new();
+    engine.load_from_directory("data/framenet/archive/framenet_v17/framenet_v17")?;
+
+    let elapsed = start.elapsed();
+    println!("⏱️ Total loading time: {:.2}s", elapsed.as_secs_f64());
+    println!(
+        "📊 Frames per second: {:.0}",
+        1221.0 / elapsed.as_secs_f64()
+    );
+
+    // Test a sample analysis
+    println!("\n🔍 Testing frame analysis...");
+    // Note: We'd need to implement a test analysis method here
+
+    Ok(())
+}

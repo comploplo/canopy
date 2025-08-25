@@ -1,0 +1,27 @@
+[package]
+name = "canopy-lexicon"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Lexicon engine for canopy.rs - closed-class words and functional lexical items"
+keywords = ["nlp", "lexicon", "function-words", "discourse", "negation"]
+categories = ["text-processing", "science"]
+
+[dependencies]
+canopy-engine = { path = "../canopy-engine" }
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "1.0"
+tracing = "0.1"
+regex = "1.10"
+quick-xml = "0.31"
+rayon = { version = "1.7", optional = true }
+
+[features]
+default = []
+parallel = ["dep:rayon", "canopy-engine/parallel"]
+
+[dev-dependencies]
+tokio = { version = "1.0", features = ["full"] }
+tempfile = "3.8"

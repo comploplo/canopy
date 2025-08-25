@@ -1,0 +1,133 @@
+use canopy_pipeline::create_l1_analyzer;
+use std::error::Error;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    // Initialize logging (info level for clean output)
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::INFO)
+        .with_target(false)
+        .init();
+    
+    println!("🐋 Moby Dick Unified Roles Analysis");
+    println!("===================================");
+    
+    // Create analyzer
+    let analyzer = create_l1_analyzer()?;
+    
+    // Sample words from Moby Dick (first ~100 interesting words)
+    let moby_dick_words = vec![
+        "call", "Ishmael", "years", "ago", "never", "mind", "precisely", "long", 
+        "thought", "sail", "about", "little", "see", "watery", "part", "world", 
+        "way", "driving", "off", "spleen", "regulating", "circulation", "account",
+        "whenever", "find", "myself", "growing", "grim", "mouth", "damp", "drizzly",
+        "November", "soul", "find", "myself", "involuntarily", "pausing", "coffin",
+        "warehouses", "bringing", "rear", "every", "funeral", "meet", "especially",
+        "whenever", "hypos", "get", "upper", "hand", "me", "requires", "strong",
+        "moral", "principle", "prevent", "deliberately", "stepping", "street",
+        "methodically", "knocking", "people", "hats", "off", "then", "account",
+        "time", "get", "sea", "soon", "can", "substitute", "pistol", "ball",
+        "philosophical", "flourish", "Cato", "throws", "himself", "upon", "sword",
+        "quietly", "take", "ship", "nothing", "surprising", "this", "they",
+        "may", "not", "know", "almost", "all", "men", "their", "degree",
+        "some", "time", "other", "cherish", "very", "nearly", "same", "feelings",
+        "towards", "ocean", "with", "me", "there", "now", "your", "insular",
+        "city", "Manhattoes", "belted", "round", "wharves", "commerce", "surrounds",
+        "with", "her", "surf", "right", "left", "streets", "take", "you", 
+        "waterward"
+    ];
+    
+    println!("📊 Testing {} words from Moby Dick opening...", moby_dick_words.len());
+    println!();
+    
+    let mut total_words = 0;
+    let mut words_with_unified_roles = 0;
+    let mut total_unified_roles = 0;
+    let mut words_with_verbnet = 0;
+    let mut words_with_framenet = 0;
+    let mut words_with_both_engines = 0;
+    
+    for (i, word) in moby_dick_words.iter().enumerate() {
+        if i % 10 == 0 {
+            println!("🔍 Processing batch {}...", (i / 10) + 1);
+        }
+        
+        match analyzer.analyze(word) {
+            Ok(result) => {
+                total_words += 1;
+                let unified_count = result.unified_semantic_roles.len();
+                if unified_count > 0 {
+                    words_with_unified_roles += 1;
+                    total_unified_roles += unified_count;
+                }
+                
+                if result.verbnet.is_some() {
+                    words_with_verbnet += 1;
+                }
+                if result.framenet.is_some() {
+                    words_with_framenet += 1;
+                }
+                if result.verbnet.is_some() && result.framenet.is_some() {
+                    words_with_both_engines += 1;
+                }
+            }
+            Err(e) => {
+                println!("❌ Error analyzing '{}': {}", word, e);
+            }
+        }
+    }
+    
+    println!();
+    println!("📈 UNIFIED ROLES ANALYSIS RESULTS:");
+    println!("==================================");
+    println!("   📝 Total words analyzed: {}", total_words);
+    println!("   🎯 Words with VerbNet data: {} ({:.1}%)", 
+        words_with_verbnet, 
+        (words_with_verbnet as f64 / total_words as f64) * 100.0
+    );
+    println!("   🖼️  Words with FrameNet data: {} ({:.1}%)", 
+        words_with_framenet,
+        (words_with_framenet as f64 / total_words as f64) * 100.0
+    );
+    println!("   🤝 Words with BOTH engines: {} ({:.1}%)", 
+        words_with_both_engines,
+        (words_with_both_engines as f64 / total_words as f64) * 100.0
+    );
+    println!("   🔗 Words with unified roles: {} ({:.1}%)", 
+        words_with_unified_roles,
+        (words_with_unified_roles as f64 / total_words as f64) * 100.0
+    );
+    println!("   📊 Total unified roles generated: {}", total_unified_roles);
+    println!("   📈 Average unified roles per word: {:.2}", 
+        if total_words > 0 { total_unified_roles as f64 / total_words as f64 } else { 0.0 }
+    );
+    
+    println!();
+    println!("💡 FINDINGS:");
+    if words_with_unified_roles == 0 {
+        println!("   ❌ NO unified roles generated for any word");
+        if words_with_both_engines == 0 {
+            println!("   🔍 Root cause: No words have data from both VerbNet AND FrameNet");
+        } else {
+            println!("   🔍 Root cause: Engines have data but lack required semantic structures");
+            println!("      - VerbNet may lack theta role assignments");
+            println!("      - FrameNet may lack frame structures");
+        }
+    } else {
+        println!("   ✅ Unified roles working for {:.1}% of words", 
+            (words_with_unified_roles as f64 / total_words as f64) * 100.0
+        );
+    }
+    
+    if words_with_verbnet < total_words / 2 {
+        println!("   ⚠️  Low VerbNet coverage ({:.1}%)", 
+            (words_with_verbnet as f64 / total_words as f64) * 100.0
+        );
+    }
+    if words_with_framenet < total_words / 2 {
+        println!("   ⚠️  Low FrameNet coverage ({:.1}%)", 
+            (words_with_framenet as f64 / total_words as f64) * 100.0
+        );
+    }
+    
+    Ok(())
+}

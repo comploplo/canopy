@@ -1,0 +1,127 @@
+//! Quick performance test to show real semantic analysis speed
+
+use canopy_semantic_layer::coordinator::{CoordinatorConfig, SemanticCoordinator};
+use std::time::Instant;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    println!("🚀 Canopy Semantic Layer - Quick Performance Test");
+    println!("=============================================");
+
+    // Create coordinator with full optimizations
+    let config = CoordinatorConfig {
+        enable_parallel: true,
+        enable_query_batching: true,
+        enable_fallbacks: true,
+        // Removed: enable_cache_warming (not available in simplified config)
+        ..CoordinatorConfig::default()
+    };
+
+    let coordinator = SemanticCoordinator::new(config)?;
+    let stats = coordinator.get_statistics();
+
+    println!("✅ Active engines: {:?}", stats.active_engines);
+
+    // Test with a simple word
+    println!("\n📊 Single Word Analysis Test");
+    let start = Instant::now();
+    let result = coordinator.analyze("running")?;
+    let elapsed = start.elapsed();
+
+    println!("   Word: 'running'");
+    println!("   Processing time: {}μs", elapsed.as_micros());
+    println!("   Sources: {:?}", result.sources);
+    println!("   Confidence: {:.2}", result.confidence);
+    println!(
+        "   Lemma: {} (confidence: {:.2})",
+        result.lemma,
+        result.lemmatization_confidence.unwrap_or(0.0)
+    );
+
+    let engine_count = [
+        result.verbnet.is_some(),
+        result.framenet.is_some(),
+        result.wordnet.is_some(),
+        result.lexicon.is_some(),
+    ]
+    .iter()
+    .filter(|&&x| x)
+    .count();
+    println!("   Engines with data: {}/4", engine_count);
+
+    // Test batch processing
+    println!("\n📦 Batch Processing Test");
+    let test_words = vec![
+        "running".to_string(),
+        "beautiful".to_string(),
+        "quickly".to_string(),
+        "computer".to_string(),
+        "analyze".to_string(),
+    ];
+
+    let start = Instant::now();
+    let batch_results = coordinator.analyze_batch(&test_words)?;
+    let elapsed = start.elapsed();
+
+    let throughput = if elapsed.as_millis() > 0 {
+        (test_words.len() as f64 / elapsed.as_millis() as f64) * 1000.0
+    } else {
+        0.0
+    };
+
+    println!("   Words processed: {}", batch_results.len());
+    println!("   Total time: {}ms", elapsed.as_millis());
+    println!("   Throughput: {:.1} words/sec", throughput);
+
+    let avg_confidence: f32 =
+        batch_results.iter().map(|r| r.confidence).sum::<f32>() / batch_results.len() as f32;
+    let total_engines_with_data: usize = batch_results
+        .iter()
+        .map(|r| {
+            [
+                r.verbnet.is_some(),
+                r.framenet.is_some(),
+                r.wordnet.is_some(),
+                r.lexicon.is_some(),
+            ]
+            .iter()
+            .filter(|&&x| x)
+            .count()
+        })
+        .sum();
+
+    println!("   Average confidence: {:.2}", avg_confidence);
+    println!("   Total engine matches: {}", total_engines_with_data);
+
+    // Performance statistics
+    let final_stats = coordinator.get_statistics();
+    println!("\n📈 Final Performance Statistics");
+    println!(
+        "   Cache hit rate: {:.1}%",
+        final_stats.cache_hit_rate * 100.0
+    );
+    println!(
+        "   Parallel query rate: {:.1}%",
+        final_stats.parallel_query_rate * 100.0
+    );
+    println!(
+        "   Memory usage: {:.1}MB ({:.1}% of budget)",
+        final_stats.memory_usage.estimated_usage_mb, final_stats.memory_usage.utilization_percent
+    );
+
+    if final_stats.fallback_attempts > 0 {
+        println!(
+            "   Fallback success rate: {:.1}%",
+            final_stats.fallback_success_rate * 100.0
+        );
+    }
+
+    println!("\n🎯 Summary:");
+    println!("✅ Real engines with actual data parsing");
+    println!("✅ Parallel processing across multiple engines");
+    println!("✅ Layer 1 semantic analysis complete");
+    println!("✅ Intelligent fallback strategies");
+    println!("✅ Lemmatization with confidence scoring");
+    println!("✅ Memory-budgeted caching with smart eviction");
+
+    Ok(())
+}

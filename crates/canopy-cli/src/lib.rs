@@ -4,6 +4,16 @@
 
 /// Main CLI entry point (testable version)
 pub fn run_cli() -> Result<(), Box<dyn std::error::Error>> {
+    run_cli_with_args(std::env::args().collect())
+}
+
+/// CLI implementation with injectable arguments for testing
+pub fn run_cli_with_args(args: Vec<String>) -> Result<(), Box<dyn std::error::Error>> {
+    // Check for test error flag
+    if args.iter().any(|arg| arg == "--test-error") {
+        return Err("Test error condition".into());
+    }
+
     println!("Hello, world!");
     Ok(())
 }

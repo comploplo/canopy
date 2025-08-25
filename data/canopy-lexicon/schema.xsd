@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://canopy.rs/lexicon"
+           xmlns:cl="http://canopy.rs/lexicon"
+           elementFormDefault="qualified">
+
+  <!-- Root element for lexicon data -->
+  <xs:element name="lexicon" type="cl:LexiconType"/>
+
+  <!-- Main lexicon structure -->
+  <xs:complexType name="LexiconType">
+    <xs:sequence>
+      <xs:element name="metadata" type="cl:MetadataType"/>
+      <xs:element name="word-classes" type="cl:WordClassesType"/>
+    </xs:sequence>
+    <xs:attribute name="version" type="xs:string" use="required"/>
+    <xs:attribute name="language" type="xs:string" default="en"/>
+  </xs:complexType>
+
+  <!-- Metadata about the lexicon -->
+  <xs:complexType name="MetadataType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="created" type="xs:date"/>
+      <xs:element name="author" type="xs:string"/>
+      <xs:element name="license" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Container for all word classes -->
+  <xs:complexType name="WordClassesType">
+    <xs:sequence>
+      <xs:element name="word-class" type="cl:WordClassType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Individual word class definition -->
+  <xs:complexType name="WordClassType">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="properties" type="cl:PropertiesType" minOccurs="0"/>
+      <xs:element name="words" type="cl:WordsType"/>
+      <xs:element name="patterns" type="cl:PatternsType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="cl:WordClassTypeEnum" use="required"/>
+    <xs:attribute name="priority" type="xs:int" default="1"/>
+  </xs:complexType>
+
+  <!-- Word class types enumeration -->
+  <xs:simpleType name="WordClassTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="stop-words"/>
+      <xs:enumeration value="negation"/>
+      <xs:enumeration value="discourse-markers"/>
+      <xs:enumeration value="quantifiers"/>
+      <xs:enumeration value="temporal"/>
+      <xs:enumeration value="modal"/>
+      <xs:enumeration value="pronouns"/>
+      <xs:enumeration value="prepositions"/>
+      <xs:enumeration value="conjunctions"/>
+      <xs:enumeration value="intensifiers"/>
+      <xs:enumeration value="hedge-words"/>
+      <xs:enumeration value="sentiment"/>
+      <xs:enumeration value="functional"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Properties for word classes -->
+  <xs:complexType name="PropertiesType">
+    <xs:sequence>
+      <xs:element name="property" type="cl:PropertyType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PropertyType">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="cl:PropertyTypeEnum" default="string"/>
+  </xs:complexType>
+
+  <xs:simpleType name="PropertyTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="string"/>
+      <xs:enumeration value="boolean"/>
+      <xs:enumeration value="integer"/>
+      <xs:enumeration value="float"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Container for words -->
+  <xs:complexType name="WordsType">
+    <xs:sequence>
+      <xs:element name="word" type="cl:WordType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Individual word entry -->
+  <xs:complexType name="WordType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="variants" type="xs:string"/>
+        <xs:attribute name="pos" type="xs:string"/>
+        <xs:attribute name="confidence" type="xs:float" default="1.0"/>
+        <xs:attribute name="frequency" type="xs:int"/>
+        <xs:attribute name="context" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <!-- Container for patterns -->
+  <xs:complexType name="PatternsType">
+    <xs:sequence>
+      <xs:element name="pattern" type="cl:PatternType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Pattern for matching morphological variations -->
+  <xs:complexType name="PatternType">
+    <xs:sequence>
+      <xs:element name="regex" type="xs:string"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="examples" type="cl:ExamplesType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="cl:PatternTypeEnum" use="required"/>
+    <xs:attribute name="confidence" type="xs:float" default="0.8"/>
+  </xs:complexType>
+
+  <xs:simpleType name="PatternTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="prefix"/>
+      <xs:enumeration value="suffix"/>
+      <xs:enumeration value="infix"/>
+      <xs:enumeration value="whole-word"/>
+      <xs:enumeration value="phrase"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Examples for patterns -->
+  <xs:complexType name="ExamplesType">
+    <xs:sequence>
+      <xs:element name="example" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

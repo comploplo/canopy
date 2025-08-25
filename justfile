@@ -81,6 +81,14 @@ coverage:
 coverage-check:
     scripts/check-coverage.sh
 
+# Check coverage with extended timeout (for slow tests)
+coverage-check-long:
+    timeout 900 scripts/check-coverage.sh
+
+# Run coverage without timeout (for troubleshooting)
+coverage-raw:
+    cargo tarpaulin --workspace --skip-clean
+
 # Set coverage threshold for presubmit hooks
 coverage-threshold THRESHOLD:
     sed -i.bak "s/COVERAGE_THRESHOLD=.*/COVERAGE_THRESHOLD={{THRESHOLD}}/" scripts/check-coverage.sh

@@ -1,0 +1,85 @@
+use canopy_pipeline::create_l1_analyzer;
+use std::error::Error;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    // Initialize logging (info level for clean output)
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::INFO)
+        .with_target(false)
+        .init();
+    
+    println!("🔍 Debug: Why unified roles aren't generated");
+    println!("============================================");
+    
+    // Create analyzer
+    let analyzer = create_l1_analyzer()?;
+    
+    // Test with "give" - a verb that should have rich theta roles
+    let word = "give";
+    let result = analyzer.analyze(word)?;
+    
+    println!("📊 ANALYSIS FOR \"{}\":", word);
+    println!("   Sources: {:?}", result.sources);
+    println!("   Unified roles: {}", result.unified_semantic_roles.len());
+    println!();
+    
+    // Check VerbNet data in detail
+    if let Some(ref verbnet) = result.verbnet {
+        println!("🏷️  VerbNet Data:");
+        println!("   Verb classes: {}", verbnet.verb_classes.len());
+        println!("   Theta role assignments: {}", verbnet.theta_role_assignments.len());
+        
+        for (i, assignment) in verbnet.theta_role_assignments.iter().enumerate() {
+            println!("      Assignment {}: {:?} at position {} (confidence: {:.3})", 
+                i+1, assignment.theta_role, assignment.argument_position, assignment.confidence);
+        }
+    } else {
+        println!("🏷️  VerbNet Data: None");
+    }
+    
+    // Check FrameNet data in detail
+    if let Some(ref framenet) = result.framenet {
+        println!("🖼️  FrameNet Data:");
+        println!("   Frames: {}", framenet.frames.len());
+        println!("   Lexical units: {}", framenet.lexical_units.len());
+        
+        for (i, frame) in framenet.frames.iter().enumerate() {
+            println!("      Frame {}: {} ({})", i+1, frame.name, frame.id);
+            println!("         Frame elements: {}", frame.frame_elements.len());
+            for (j, fe) in frame.frame_elements.iter().enumerate() {
+                println!("            FE {}: {} ({:?})", j+1, fe.name, fe.core_type);
+            }
+        }
+    } else {
+        println!("🖼️  FrameNet Data: None");
+    }
+    
+    println!();
+    println!("🤔 ANALYSIS:");
+    println!("   - VerbNet has data: {}", result.verbnet.is_some());
+    println!("   - FrameNet has data: {}", result.framenet.is_some());
+    
+    if let (Some(vn), Some(fn_)) = (&result.verbnet, &result.framenet) {
+        println!("   - VerbNet theta assignments: {}", vn.theta_role_assignments.len());
+        println!("   - FrameNet frames: {}", fn_.frames.len());
+        
+        if vn.theta_role_assignments.is_empty() {
+            println!("   ❌ VerbNet has NO theta role assignments!");
+        }
+        if fn_.frames.is_empty() {
+            println!("   ❌ FrameNet has NO frames!");
+        }
+        
+        if !vn.theta_role_assignments.is_empty() && !fn_.frames.is_empty() {
+            println!("   ✅ Both engines have required data - should generate unified roles");
+        }
+    } else if result.verbnet.is_some() && result.framenet.is_none() {
+        println!("   ❌ Missing FrameNet data");
+    } else if result.verbnet.is_none() && result.framenet.is_some() {
+        println!("   ❌ Missing VerbNet data");
+    } else {
+        println!("   ❌ Missing both VerbNet and FrameNet data");
+    }
+    
+    Ok(())
+}

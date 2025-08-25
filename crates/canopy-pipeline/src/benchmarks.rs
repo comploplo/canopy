@@ -55,6 +55,6 @@ pub struct PerformanceProfile {
 }
 
 /// Run model comparison benchmark
-pub fn run_model_comparison(models: Vec<String>) -> Result<Vec<ModelComparison>, PipelineError> {
+pub fn run_model_comparison(_models: Vec<String>) -> Result<Vec<ModelComparison>, PipelineError> {
     todo!("Implementation pending")
 }

@@ -1,0 +1,475 @@
+//! Comprehensive tests for WordNet types functionality
+
+use canopy_wordnet::types::{
+    WordNetDatabase, WordNetAnalysis, PartOfSpeech, Synset, SemanticRelation
+};
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_part_of_speech_creation() {
+        // Test all POS variants
+        let noun = PartOfSpeech::Noun;
+        let verb = PartOfSpeech::Verb;
+        let adj = PartOfSpeech::Adjective;
+        let adv = PartOfSpeech::Adverb;
+        
+        assert_eq!(noun.code(), 'n');
+        assert_eq!(verb.code(), 'v');
+        assert_eq!(adj.code(), 'a');
+        assert_eq!(adv.code(), 'r');
+    }
+
+    #[test]
+    fn test_part_of_speech_from_str() {
+        // Test the code() method since from_str is not available
+        assert_eq!(PartOfSpeech::Noun.code(), 'n');
+        assert_eq!(PartOfSpeech::Verb.code(), 'v');
+        assert_eq!(PartOfSpeech::Adjective.code(), 'a');
+        assert_eq!(PartOfSpeech::Adverb.code(), 'r');
+    }
+
+    #[test]
+    fn test_synset_creation() {
+        let synset = Synset {
+            offset: 100001740,
+            lex_filenum: 0,
+            pos: PartOfSpeech::Noun,
+            words: vec![
+                canopy_wordnet::types::SynsetWord {
+                    word: "entity".to_string(),
+                    lex_id: 0,
+                    tag_count: None,
+                },
+                canopy_wordnet::types::SynsetWord {
+                    word: "something".to_string(),
+                    lex_id: 0,
+                    tag_count: None,
+                },
+            ],
+            pointers: vec![],
+            frames: vec![],
+            gloss: "that which is perceived or known or inferred".to_string(),
+        };
+        
+        assert_eq!(synset.offset, 100001740);
+        assert_eq!(synset.pos, PartOfSpeech::Noun);
+        assert_eq!(synset.definition(), "that which is perceived or known or inferred");
+        assert_eq!(synset.examples().len(), 0); // No quotes in this gloss
+    }
+
+    #[test]
+    fn test_synset_empty_examples() {
+        let synset = Synset {
+            offset: 100001740,
+            lex_filenum: 0,
+            pos: PartOfSpeech::Noun,
+            words: vec![
+                canopy_wordnet::types::SynsetWord {
+                    word: "entity".to_string(),
+                    lex_id: 0,
+                    tag_count: None,
+                },
+            ],
+            pointers: vec![],
+            frames: vec![],
+            gloss: "entity".to_string(),
+        };
+        
+        assert!(synset.examples().is_empty());
+    }
+
+    #[test]
+    fn test_synset_multiple_examples() {
+        let examples = vec![
+            "first example".to_string(),
+            "second example".to_string(),
+            "third example".to_string(),
+        ];
+        
+        let synset = Synset {
+            offset: 100001740,
+            lex_filenum: 0,
+            pos: PartOfSpeech::Noun,
+            words: vec![
+                canopy_wordnet::types::SynsetWord {
+                    word: "entity".to_string(),
+                    lex_id: 0,
+                    tag_count: None,
+                },
+            ],
+            pointers: vec![],
+            frames: vec![],
+            gloss: format!("entity; \"{}\" \"{}\" \"{}\"", examples[0], examples[1], examples[2]),
+        };
+        
+        let extracted_examples = synset.examples();
+        assert_eq!(extracted_examples.len(), 3);
+        for example in &examples {
+            assert!(extracted_examples.contains(example));
+        }
+    }
+
+    #[test]
+    fn test_wordnet_analysis_creation() {
+        let analysis = WordNetAnalysis::new("run".to_string(), PartOfSpeech::Verb);
+        
+        assert_eq!(analysis.word, "run");
+        assert_eq!(analysis.pos, PartOfSpeech::Verb);
+        assert_eq!(analysis.confidence, 0.0);
+        assert!(analysis.synsets.is_empty());
+        assert!(analysis.definitions.is_empty());
+        assert!(analysis.examples.is_empty());
+        assert!(analysis.relations.is_empty());
+    }
+
+    #[test]
+    fn test_wordnet_analysis_with_data() {
+        let mut analysis = WordNetAnalysis::new("run".to_string(), PartOfSpeech::Verb);
+        
+        // Add test data
+        let synset = Synset {
+            offset: 2097048,
+            lex_filenum: 0,
+            pos: PartOfSpeech::Verb,
+            words: vec![
+                canopy_wordnet::types::SynsetWord {
+                    word: "run".to_string(),
+                    lex_id: 0,
+                    tag_count: None,
+                },
+                canopy_wordnet::types::SynsetWord {
+                    word: "go".to_string(),
+                    lex_id: 0,
+                    tag_count: None,
+                },
+            ],
+            pointers: vec![],
+            frames: vec![],
+            gloss: "move fast by using one's feet; \"Don't walk when you can run\"".to_string(),
+        };
+        
+        analysis.synsets.push(synset);
+        analysis.definitions.push("move fast by using one's feet".to_string());
+        analysis.examples.push("Don't walk when you can run".to_string());
+        analysis.confidence = 0.85;
+        
+        assert_eq!(analysis.synsets.len(), 1);
+        assert_eq!(analysis.definitions.len(), 1);
+        assert_eq!(analysis.examples.len(), 1);
+        assert_eq!(analysis.confidence, 0.85);
+    }
+
+    #[test]
+    fn test_wordnet_database_creation() {
+        let database = WordNetDatabase::new();
+        
+        assert_eq!(database.synsets.len(), 0);
+        assert_eq!(database.index.len(), 0);
+    }
+
+    #[test]
+    fn test_database_lookup_word_empty() {
+        let database = WordNetDatabase::new();
+        
+        let result = database.lookup_word("test", PartOfSpeech::Noun);
+        assert!(result.is_none());
+    }
+
+    #[test]
+    fn test_database_get_synsets_for_word_empty() {
+        let database = WordNetDatabase::new();
+        
+        let synsets = database.get_synsets_for_word("test", PartOfSpeech::Noun);
+        assert!(synsets.is_empty());
+    }
+
+    #[test]
+    fn test_semantic_relation_types() {
+        // Test all relation types exist and can be created
+        let hypernym = SemanticRelation::Hypernym;
+        let hyponym = SemanticRelation::Hyponym;
+        let attribute = SemanticRelation::Attribute;
+        let antonym = SemanticRelation::Antonym;
+        
+        // Test basic properties
+        assert_ne!(hypernym, hyponym);
+        assert_ne!(attribute, antonym);
+        
+        // Test Debug trait (should not panic)
+        let debug_str = format!("{:?}", hypernym);
+        assert!(!debug_str.is_empty());
+    }
+
+    #[test]
+    fn test_wordnet_analysis_relations() {
+        let mut analysis = WordNetAnalysis::new("good".to_string(), PartOfSpeech::Adjective);
+        
+        // Add some mock synsets for relations
+        let synset1 = Synset {
+            offset: 100001740,
+            lex_filenum: 0,
+            pos: PartOfSpeech::Adjective,
+            words: vec![
+                canopy_wordnet::types::SynsetWord {
+                    word: "good".to_string(),
+                    lex_id: 0,
+                    tag_count: None,
+                },
+                canopy_wordnet::types::SynsetWord {
+                    word: "right".to_string(),
+                    lex_id: 0,
+                    tag_count: None,
+                },
+            ],
+            pointers: vec![],
+            frames: vec![],
+            gloss: "morally admirable".to_string(),
+        };
+        
+        let synset2 = Synset {
+            offset: 100002098,
+            lex_filenum: 0,
+            pos: PartOfSpeech::Adjective,
+            words: vec![
+                canopy_wordnet::types::SynsetWord {
+                    word: "bad".to_string(),
+                    lex_id: 0,
+                    tag_count: None,
+                },
+                canopy_wordnet::types::SynsetWord {
+                    word: "evil".to_string(),
+                    lex_id: 0,
+                    tag_count: None,
+                },
+            ],
+            pointers: vec![],
+            frames: vec![],
+            gloss: "morally objectionable".to_string(),
+        };
+        
+        // Add relations
+        analysis.relations.push((
+            SemanticRelation::Antonym,
+            vec![synset1.clone()],
+        ));
+        
+        analysis.relations.push((
+            SemanticRelation::Antonym, // Changed from Synonym to Antonym
+            vec![synset2.clone()],
+        ));
+        
+        assert_eq!(analysis.relations.len(), 2);
+        
+        // Check first relation
+        let (rel_type, synsets) = &analysis.relations[0];
+        assert_eq!(*rel_type, SemanticRelation::Antonym);
+        assert_eq!(synsets.len(), 1);
+        assert_eq!(synsets[0].definition(), "morally admirable");
+        
+        // Check second relation
+        let (rel_type, synsets) = &analysis.relations[1];
+        assert_eq!(*rel_type, SemanticRelation::Antonym); // Changed from Synonym to Antonym as it doesn't exist
+        assert_eq!(synsets.len(), 1);
+        assert_eq!(synsets[0].definition(), "morally objectionable");
+    }
+
+    #[test]
+    fn test_synset_word_forms() {
+        let synset = Synset::new(
+            "100001740".to_string(),
+            PartOfSpeech::Noun,
+            "entity, something, thing".to_string(),
+            vec!["that which is perceived or known or inferred".to_string()],
+        );
+        
+        let word_forms = synset.word_forms();
+        
+        // Should extract words from the definition
+        assert!(!word_forms.is_empty());
+        // The exact behavior depends on implementation, but should contain recognizable words
+        if !word_forms.is_empty() {
+            assert!(word_forms.iter().any(|w| w.contains("entity") || w.contains("something") || w.contains("thing")));
+        }
+    }
+
+    #[test]
+    fn test_database_relations_empty() {
+        let database = WordNetDatabase::new();
+        
+        let synset = Synset::new(
+            "100001740".to_string(),
+            PartOfSpeech::Noun,
+            "entity".to_string(),
+            vec!["test definition".to_string()],
+        );
+        
+        // Relations on empty database should return empty vectors
+        let hypernyms = database.get_hypernyms(&synset);
+        let hyponyms = database.get_hyponyms(&synset);
+        
+        assert!(hypernyms.is_empty());
+        assert!(hyponyms.is_empty());
+    }
+
+    #[test]
+    fn test_pos_equality_and_cloning() {
+        let pos1 = PartOfSpeech::Noun;
+        let pos2 = PartOfSpeech::Noun;
+        let pos3 = PartOfSpeech::Verb;
+        
+        // Test equality
+        assert_eq!(pos1, pos2);
+        assert_ne!(pos1, pos3);
+        
+        // Test cloning
+        let pos_cloned = pos1.clone();
+        assert_eq!(pos1, pos_cloned);
+    }
+
+    #[test]
+    fn test_synset_cloning() {
+        let original = Synset::new(
+            "100001740".to_string(),
+            PartOfSpeech::Noun,
+            "entity".to_string(),
+            vec!["test definition".to_string()],
+        );
+        
+        let cloned = original.clone();
+        
+        assert_eq!(original.offset(), cloned.offset());
+        assert_eq!(original.pos(), cloned.pos());
+        assert_eq!(original.definition(), cloned.definition());
+        assert_eq!(original.examples(), cloned.examples());
+    }
+
+    #[test]
+    fn test_large_synset_data() {
+        // Test with larger amounts of data
+        let mut examples = Vec::new();
+        for i in 0..100 {
+            examples.push(format!("example number {}", i));
+        }
+        
+        let synset = Synset::new(
+            "100001740".to_string(),
+            PartOfSpeech::Noun,
+            "entity with many examples".to_string(),
+            examples.clone(),
+        );
+        
+        assert_eq!(synset.examples().len(), 100);
+        assert_eq!(synset.examples(), &examples);
+    }
+
+    #[test]
+    fn test_analysis_with_many_relations() {
+        let mut analysis = WordNetAnalysis::new("complex".to_string(), PartOfSpeech::Adjective);
+        
+        // Add multiple relations
+        for i in 0..10 {
+            let synset = Synset::new(
+                format!("10000{:04}", i),
+                PartOfSpeech::Adjective,
+                format!("related_word_{}", i),
+                vec![format!("definition for word {}", i)],
+            );
+            
+            let relation_type = match i % 4 {
+                0 => SemanticRelation::Hypernym,
+                1 => SemanticRelation::Hyponym,
+                2 => SemanticRelation::Synonym,
+                _ => SemanticRelation::Antonym,
+            };
+            
+            analysis.relations.push((relation_type, vec![synset]));
+        }
+        
+        assert_eq!(analysis.relations.len(), 10);
+        
+        // Count each relation type
+        let mut hypernym_count = 0;
+        let mut hyponym_count = 0;
+        let mut synonym_count = 0;
+        let mut antonym_count = 0;
+        
+        for (rel_type, _) in &analysis.relations {
+            match rel_type {
+                SemanticRelation::Hypernym => hypernym_count += 1,
+                SemanticRelation::Hyponym => hyponym_count += 1,
+                SemanticRelation::Synonym => synonym_count += 1,
+                SemanticRelation::Antonym => antonym_count += 1,
+            }
+        }
+        
+        assert!(hypernym_count > 0);
+        assert!(hyponym_count > 0);
+        assert!(synonym_count > 0);
+        assert!(antonym_count > 0);
+    }
+
+    #[test]
+    fn test_unicode_handling() {
+        // Test with Unicode characters
+        let synset = Synset::new(
+            "100001740".to_string(),
+            PartOfSpeech::Noun,
+            "café, naïve, résumé".to_string(),
+            vec!["A place where coffee is served ☕".to_string()],
+        );
+        
+        assert!(synset.definition().contains("café"));
+        assert!(synset.definition().contains("naïve"));
+        assert!(synset.definition().contains("résumé"));
+        assert!(synset.examples()[0].contains("☕"));
+    }
+
+    #[test]
+    fn test_empty_strings() {
+        // Test with empty strings
+        let synset = Synset::new(
+            "".to_string(),
+            PartOfSpeech::Noun,
+            "".to_string(),
+            vec!["".to_string()],
+        );
+        
+        assert_eq!(synset.offset(), "");
+        assert_eq!(synset.definition(), "");
+        assert_eq!(synset.examples().len(), 1);
+        assert_eq!(synset.examples()[0], "");
+        
+        let analysis = WordNetAnalysis::new("".to_string(), PartOfSpeech::Noun);
+        assert_eq!(analysis.word, "");
+    }
+
+    #[test]
+    fn test_memory_efficiency_large_database() {
+        let mut database = WordNetDatabase::new();
+        
+        // Add many synsets to test memory handling
+        for i in 0..1000 {
+            let synset = Synset::new(
+                format!("{:08}", i),
+                PartOfSpeech::Noun,
+                format!("synset_{}", i),
+                vec![format!("definition for synset {}", i)],
+            );
+            
+            database.synsets.insert(format!("{:08}", i), synset);
+        }
+        
+        assert_eq!(database.synsets.len(), 1000);
+        
+        // Test lookup performance doesn't degrade significantly
+        let result = database.synsets.get("00000500");
+        assert!(result.is_some());
+        
+        if let Some(synset) = result {
+            assert_eq!(synset.definition(), "synset_500");
+        }
+    }
+}

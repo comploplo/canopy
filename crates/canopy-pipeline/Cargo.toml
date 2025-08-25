@@ -8,8 +8,7 @@ description = "Central pipeline orchestration for Canopy linguistic analysis"
 
 [dependencies]
 canopy-core = { path = "../canopy-core" }
-canopy-parser = { path = "../canopy-parser" }
-canopy-semantics = { path = "../canopy-semantics" }
+canopy-semantic-layer = { path = "../canopy-semantic-layer" }
 serde = { workspace = true, features = ["derive"] }
 thiserror = { workspace = true }
 tracing = { workspace = true }
@@ -27,3 +26,8 @@ lsp-integration = []
 [dev-dependencies]
 criterion = { version = "0.5", features = ["html_reports"] }
 tokio-test = "0.4"
+tokio = { workspace = true, features = ["full"] }
+
+# Binary targets removed - deprecated benchmarks replaced by examples
+
+# Examples temporarily disabled during architectural transformation

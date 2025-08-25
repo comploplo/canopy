@@ -8,8 +8,9 @@ description = "Language Server Protocol implementation for canopy"
 
 [dependencies]
 canopy-core = { path = "../canopy-core" }
-canopy-parser = { path = "../canopy-parser" }
-canopy-semantics = { path = "../canopy-semantics" }
+canopy-semantic-layer = { path = "../canopy-semantic-layer" }
+canopy-verbnet = { path = "../canopy-verbnet" }
+canopy-engine = { path = "../canopy-engine" }
 tokio = { workspace = true }
 tower-lsp = { workspace = true }
 tower = { workspace = true }

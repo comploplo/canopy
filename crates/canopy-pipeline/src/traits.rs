@@ -6,8 +6,9 @@
 
 use crate::error::{AnalysisError, PipelineError};
 use async_trait::async_trait;
-use canopy_core::{UPos, Word};
-use canopy_semantics::{Event, SemanticAnalysis, ThetaRoleType};
+use canopy_core::ThetaRole as ThetaRoleType;
+use canopy_core::Word;
+use canopy_semantic_layer::SemanticLayer1Output as SemanticAnalysis;
 use std::collections::HashMap;
 
 /// Core trait for morphosyntactic parsing (Layer 1)
@@ -200,7 +201,7 @@ pub struct AnalyzerConfig {
 }
 
 /// Performance mode configuration
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, PartialEq)]
 pub enum PerformanceMode {
     #[default]
     Balanced,

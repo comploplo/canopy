@@ -3,8 +3,8 @@
 //! Tests for the complete analysis pipeline integration, including error propagation
 //! through pipeline layers and end-to-end processing validation.
 
+use crate::CanopyLspServerFactory;
 use crate::server::{CanopyServer, DefaultCanopyServer};
-use crate::{CanopyLspServerFactory, integration::RealServerFactory};
 use canopy_core::CanopyError;
 use canopy_core::layer1parser::{Layer1ParserHandler, SemanticAnalysisHandler};
 
@@ -270,7 +270,7 @@ mod pipeline_integration_tests {
     #[test]
     fn test_real_server_factory_pipeline() {
         // Test the real server factory pipeline integration
-        let result = RealServerFactory::create();
+        let result = CanopyLspServerFactory::create_server();
 
         match result {
             Ok(server) => {

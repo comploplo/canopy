@@ -4,12 +4,9 @@
 
 #[cfg(test)]
 mod quick_coverage_tests {
+    use crate::CanopyLspServerFactory;
     use crate::handlers::*;
     use crate::server::CanopyServer;
-    use crate::{
-        CanopyLspServerFactory,
-        integration::{RealLayer1Handler, RealServerFactory},
-    };
 
     #[test]
     fn test_lsp_server_factory_edge_cases() {
@@ -191,9 +188,9 @@ mod quick_coverage_tests {
 
     #[test]
     fn test_integration_factory_patterns() {
-        // Test that RealServerFactory can be used (even if creation might fail)
+        // Test that  can be used (even if creation might fail)
         // This tests the factory pattern implementation
-        let result = RealServerFactory::create();
+        let result = CanopyLspServerFactory::create_server();
 
         // The result might fail due to missing UDPipe models, but the code path should execute
         match result {
@@ -211,22 +208,22 @@ mod quick_coverage_tests {
     }
 
     #[test]
-    fn test_real_layer1_handler_creation() {
-        // Test RealLayer1Handler creation (might fail without UDPipe)
-        let result = RealLayer1Handler::new();
+    fn test_server_factory_creation() {
+        // Test server factory creation (M4.5 compatibility)
+        let result = CanopyLspServerFactory::create_server();
 
         match result {
-            Ok(handler) => {
+            Ok(server) => {
                 // If successful, test basic operations
-                let test_result = handler.process_real("test sentence");
+                let test_result = server.process_text("test sentence");
                 // Processing might fail, but creation succeeded
                 match test_result {
-                    Ok(words) => assert!(words.len() >= 0),
+                    Ok(response) => assert!(response.document.sentences.len() >= 0),
                     Err(_) => assert!(true), // Expected in test environment
                 }
             }
             Err(_) => {
-                // Expected to fail without UDPipe models
+                // Expected to fail without models
                 assert!(true);
             }
         }
