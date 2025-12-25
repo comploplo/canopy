@@ -3,23 +3,23 @@
 <frame cBy="ChW" cDate="02/07/2001 04:12:18 PST Wed" name="Operate_vehicle" ID="65" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;The words in this frame describe motion involving a &lt;fen&gt;Vehicle&lt;/fen&gt; and someone who controls it, the &lt;fen&gt;Driver&lt;/fen&gt;. Some words normally allow the &lt;fen&gt;Vehicle&lt;/fen&gt; to be expressed as a separate constituent.
 &lt;ex&gt;&lt;fex name="Driver"&gt;Tim&lt;/fex&gt; &lt;t&gt;drove&lt;/t&gt; &lt;fex name="Vehicle"&gt;his car&lt;/fex&gt; &lt;fex name="Path"&gt;all the way across North America&lt;/fex&gt;.&lt;/ex&gt;
-&lt;ex&gt;&lt;fex name="Driver"&gt;Tom&lt;/fex&gt; &lt;t&gt;paddled&lt;/t&gt; &lt;fex name="Vehicle"&gt;my canoe&lt;/fex&gt; &lt;fex name="Path"&gt;across the Canadian border&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Driver"&gt;Tom&lt;/fex&gt; &lt;t&gt;paddled&lt;/t&gt; &lt;fex name="Vehicle"&gt;my canoe&lt;/fex&gt; &lt;fex name="Path"&gt;across the Canadian border&lt;/fex&gt;.&lt;/ex&gt;
 Other words in this domain are based on the names of vehicles, and do not normally allow the &lt;fen&gt;Vehicle&lt;/fen&gt; to be expressed as a separate constituent.
-&lt;ex&gt;&lt;fex name="Driver"&gt;The group&lt;/fex&gt; &lt;t&gt;biked&lt;/t&gt; all the way across the country.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Driver"&gt;The group&lt;/fex&gt; &lt;t&gt;biked&lt;/t&gt; all the way across the country.&lt;/ex&gt;
 However, a separate &lt;fen&gt;Vehicle&lt;/fen&gt; constituent can occur if it adds information not included in the verb.
 &lt;ex&gt;&lt;fex name="Driver"&gt;Tim&lt;/fex&gt; &lt;t&gt;biked&lt;/t&gt; across the country &lt;fex name="Vehicle"&gt;on an old 10-speed&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:18 PST Wed" abbrev="Driv" name="Driver" ID="292">
-        <definition>&lt;def-root&gt;This is the being, typically human, that controls the &lt;fen&gt;Vehicle&lt;/fen&gt; as it moves. 
+        <definition>&lt;def-root&gt;This is the being, typically human, that controls the &lt;fen&gt;Vehicle&lt;/fen&gt; as it moves.
 &lt;ex&gt;&lt;fex name="Driver"&gt;Kim&lt;/fex&gt; &lt;t&gt;drove&lt;/t&gt; my old car cross-country.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:18 PST Wed" abbrev="Veh" name="Vehicle" ID="294">
-        <definition>&lt;def-root&gt;This is the means of conveyance controlled by the &lt;fen&gt;Driver&lt;/fen&gt;.  It may move in any way or medium.  With verbs, &lt;fen&gt;Vehicle&lt;/fen&gt; is usually expressed as Object: 
+        <definition>&lt;def-root&gt;This is the means of conveyance controlled by the &lt;fen&gt;Driver&lt;/fen&gt;.  It may move in any way or medium.  With verbs, &lt;fen&gt;Vehicle&lt;/fen&gt; is usually expressed as Object:
 &lt;ex&gt;I &lt;t&gt;drove&lt;/t&gt; &lt;fex name="Vehicle"&gt;my car&lt;/fex&gt; to Canada.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:18 PST Wed" abbrev="Src" name="Source" ID="295">
-        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of motion expresses the frame element &lt;fen&gt;Source&lt;/fen&gt;. In prepositional phrases, the prepositional object expresses the starting point of motion.  With particles, the starting point of motion is understood from context. 
-&lt;ex&gt;Kim &lt;t&gt;drove&lt;/t&gt; &lt;fex name="Source"&gt;out of town&lt;/fex&gt;.&lt;/ex&gt; 
+        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of motion expresses the frame element &lt;fen&gt;Source&lt;/fen&gt;. In prepositional phrases, the prepositional object expresses the starting point of motion.  With particles, the starting point of motion is understood from context.
+&lt;ex&gt;Kim &lt;t&gt;drove&lt;/t&gt; &lt;fex name="Source"&gt;out of town&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;Kim &lt;t&gt;drove&lt;/t&gt; &lt;fex name="Source"&gt;away&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="Source" ID="151"/>
         <excludesFE name="Area" ID="300"/>
@@ -30,14 +30,14 @@ However, a separate &lt;fen&gt;Vehicle&lt;/fen&gt; constituent can occur if it a
         <excludesFE name="Area" ID="300"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:18 PST Wed" abbrev="Goal" name="Goal" ID="297">
-        <definition>&lt;def-root&gt;Any expression which tells where the moving object(s) ends up as a result of the motion expresses the frame element &lt;fen&gt;Goal&lt;/fen&gt;. Some particles imply the existence of a &lt;fen&gt;Goal&lt;/fen&gt; which is understood in the context of utterance. 
+        <definition>&lt;def-root&gt;Any expression which tells where the moving object(s) ends up as a result of the motion expresses the frame element &lt;fen&gt;Goal&lt;/fen&gt;. Some particles imply the existence of a &lt;fen&gt;Goal&lt;/fen&gt; which is understood in the context of utterance.
 &lt;ex&gt;Kim &lt;t&gt;drove&lt;/t&gt; &lt;fex name="Goal"&gt;into the parking lot&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;Kim &lt;t&gt;drove&lt;/t&gt; &lt;fex name="Goal"&gt;in&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>
         <excludesFE name="Area" ID="300"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="ChW" cDate="02/07/2001 04:12:18 PST Wed" abbrev="Manr" name="Manner" ID="298">
-        <definition>&lt;def-root&gt;Any expression which describes a property of motion which is not directly related to the trajectory of motion expresses the frame element &lt;fen&gt;Manner&lt;/fen&gt;. Descriptions of steadiness, grace, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.  
+        <definition>&lt;def-root&gt;Any expression which describes a property of motion which is not directly related to the trajectory of motion expresses the frame element &lt;fen&gt;Manner&lt;/fen&gt;. Descriptions of steadiness, grace, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.
 &lt;ex&gt;The bikers &lt;t&gt;rode&lt;/t&gt; &lt;fex name="Manner"&gt;recklessly&lt;/fex&gt; through the desert.&lt;/ex&gt; &lt;ex&gt;The bikers &lt;t&gt;rode&lt;/t&gt; &lt;fex name="Manner"&gt;haltingly&lt;/fex&gt; over the rough terrain.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

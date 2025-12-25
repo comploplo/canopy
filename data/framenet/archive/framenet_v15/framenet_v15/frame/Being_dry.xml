@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="296" cDate="05/31/2002 12:03:53 PDT Fri" name="Being_dry" ID="338" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;An &lt;fen&gt;Item&lt;/fen&gt; is in a state of dryness.
-&lt;ex&gt;&lt;fex name="Item"&gt;The shingles &lt;/fex&gt; are &lt;t&gt;dry&lt;/t&gt;.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Item"&gt;The shingles &lt;/fex&gt; are &lt;t&gt;dry&lt;/t&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Item"&gt;The apple&lt;/fex&gt; is &lt;fex name="Degree"&gt;completely&lt;/fex&gt; &lt;t&gt;dehydrated&lt;/t&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name = "Item" &gt;The mop&lt;/fex&gt; is &lt;t&gt;dry&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="06/04/2002 08:53:22 PDT Tue" abbrev="Item" name="Item" ID="2938">

@@ -9,8 +9,8 @@
 Many targets incorporate the &lt;fen&gt;Clothing&lt;/fen&gt; item, and some targets describe the state of &lt;ment&gt;not&lt;/ment&gt; wearing something (when it might be expected).
 
 &lt;ex&gt;Do you think anyone would notice if &lt;fex name="Wearer"&gt;I&lt;/fex&gt; &lt;ment&gt;went&lt;/ment&gt; &lt;t&gt;topless&lt;/t&gt;?&lt;/ex&gt;
-  
-NB: There is a very common metonymy in which characteristics of the clothing stand for the clothing itself, such as 
+
+NB: There is a very common metonymy in which characteristics of the clothing stand for the clothing itself, such as
 
 &lt;ex&gt;the &lt;fex name="Wearer"&gt;man&lt;/fex&gt; &lt;t&gt;clad&lt;/t&gt; &lt;fex name="Clothing"&gt;in leather&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Wearer"&gt;She&lt;/fex&gt; was &lt;t&gt;dressed&lt;/t&gt; &lt;fex name="Clothing"&gt;all in red&lt;/fex&gt;.&lt;/ex&gt;
@@ -28,7 +28,7 @@ Such sentences should be tagged METAPHOR on the sentence level.&lt;/def-root&gt;
         <semType name="Artifact" ID="61"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="599" cDate="08/15/2001 01:55:05 PDT Wed" abbrev="BP" name="Body_part" ID="1623">
-        <definition>&lt;def-root&gt;The body part of the &lt;fen&gt;Wearer&lt;/fen&gt; which is covered by the &lt;fen&gt;Clothing&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The body part of the &lt;fen&gt;Wearer&lt;/fen&gt; which is covered by the &lt;fen&gt;Clothing&lt;/fen&gt;.
 
 &lt;ex&gt;She was &lt;t&gt;wearing&lt;/t&gt; a glove &lt;fex name="BP"&gt;on one hand&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Body_part" ID="10"/>
@@ -42,7 +42,7 @@ Such sentences should be tagged METAPHOR on the sentence level.&lt;/def-root&gt;
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="296" cDate="09/14/2001 01:43:30 PDT Fri" abbrev="man" name="Manner" ID="1870">
         <definition>&lt;def-root&gt;A characterization of the impression given by the &lt;fen&gt;Wearer&lt;/fen&gt;'s clothing status.
 
-&lt;ex&gt; She was aware that she was being closely observed by the &lt;fex name="man"&gt;formally&lt;/fex&gt; &lt;t&gt;dressed&lt;/t&gt; staff .&lt;/ex&gt; 
+&lt;ex&gt; She was aware that she was being closely observed by the &lt;fex name="man"&gt;formally&lt;/fex&gt; &lt;t&gt;dressed&lt;/t&gt; staff .&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

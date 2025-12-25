@@ -247,15 +247,15 @@ The British National Corpus uses a number of SGML entities that have
 no standardized UTF-8 counterpart.  Those entities have been
 translated as follows:
 
-    &bquo;    ->      &ldquo; 
+    &bquo;    ->      &ldquo;
     &equo;    ->      &rdquo;
     &scedil;  ->      LATIN SMALL LETTER S WITH CEDILLA
     &tcedil;  ->      LATIN SMALL LETTER T WITH CEDILLA
-    &lsqb;    ->      [ 
+    &lsqb;    ->      [
     &rsqb;    ->      ]
     &Bgr;     ->      &Beta;
     &bgr;     ->      &beta;
-    &rehy;    ->      - 
+    &rehy;    ->      -
     &dollar;  ->      $
     &agr;     ->      &alpha;
     &egr;     ->      &epsilon;
@@ -284,8 +284,8 @@ translated as follows:
     &nacute;  ->      LATIN SMALL LETTER N WITH ACUTE
     &Sacute;  ->      LATIN CAPITAL LETTER S WITH ACUTE
     &verbar;  ->      |
-    &sol;     ->      /      
-    &shilling;  ->    /      
+    &sol;     ->      /
+    &shilling;  ->    /
     &frac18;  ->      VULGAR FRACTION ONE EIGHTH
     &frac38;  ->      VULGAR FRACTION THREE EIGHTHS
     &dstrok;  ->      LATIN SMALL LETTER D WITH STROKE
@@ -431,4 +431,3 @@ release.  We are currently investigating 3rd party XML diff solutions.
 As of yet we are undecided as to if or how we will support this
 functionality.  Users affected by the absence of diffs in the release
 are encouraged to contact us.
-

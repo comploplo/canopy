@@ -36,7 +36,7 @@
 &lt;ex&gt;The Greenwich armchair from Barnsley House's &lt;fex name="Name"&gt;Winterthur&lt;/fex&gt; &lt;t&gt;collection&lt;/t&gt; is a must for those looking for sturdy yet stylish garden furniture.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="CVa" cDate="01/08/2013 04:29:57 PST Tue" abbrev="D" name="Designer" ID="15850">
-        <definition>&lt;def-root&gt;The person who designs the &lt;fen&gt;Collection&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The person who designs the &lt;fen&gt;Collection&lt;/fen&gt;.
 
 &lt;ex&gt;Did you see &lt;fex name="D"&gt;Louis'&lt;/fex&gt; new &lt;t&gt;line&lt;/t&gt;?&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

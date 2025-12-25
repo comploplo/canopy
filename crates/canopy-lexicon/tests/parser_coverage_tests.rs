@@ -2,7 +2,7 @@
 
 use canopy_engine::XmlResource;
 use canopy_lexicon::parser::LexiconXmlResource;
-use canopy_lexicon::types::{PatternType, PropertyValue, WordClassType};
+use canopy_lexicon::types::{PatternType, WordClassType};
 use quick_xml::Reader;
 use std::io::Cursor;
 

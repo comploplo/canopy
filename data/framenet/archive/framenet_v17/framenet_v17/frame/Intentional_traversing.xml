@@ -17,14 +17,14 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="11/10/2005 07:01:08 PST Thu" abbrev="Src" name="Source" ID="9203">
-        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of motion expresses the frame element &lt;fen&gt;Source&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of motion expresses the frame element &lt;fen&gt;Source&lt;/fen&gt;.
 
 &lt;ex&gt;We &lt;t&gt;forded&lt;/t&gt; &lt;fex name="Src"&gt;from the island&lt;/fex&gt; to the mainland.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Source" ID="151"/>
         <excludesFE name="Place" ID="9214"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="11/10/2005 07:01:08 PST Thu" abbrev="Path" name="Path" ID="9204">
-        <definition>&lt;def-root&gt;Any description of a trajectory of motion which is neither a &lt;fen&gt;Source&lt;/fen&gt; nor a &lt;fen&gt;Goal&lt;/fen&gt; expresses the frame element &lt;fen&gt;Path&lt;/fen&gt;, excluding directional expressions: 
+        <definition>&lt;def-root&gt;Any description of a trajectory of motion which is neither a &lt;fen&gt;Source&lt;/fen&gt; nor a &lt;fen&gt;Goal&lt;/fen&gt; expresses the frame element &lt;fen&gt;Path&lt;/fen&gt;, excluding directional expressions:
 
 
 &lt;ex&gt;We decided to &lt;t&gt;cut&lt;/t&gt; &lt;fex name="Path"&gt;through the forest&lt;/fex&gt;. &lt;/ex&gt;
@@ -33,20 +33,20 @@
         <excludesFE name="Place" ID="9214"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="11/10/2005 07:01:08 PST Thu" abbrev="Goal" name="Goal" ID="9205">
-        <definition>&lt;def-root&gt;Any expression which indicates where the &lt;fen&gt;Self_mover&lt;/fen&gt; ends up as a result of the motion expresses the frame element &lt;fen&gt;Goal&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;Any expression which indicates where the &lt;fen&gt;Self_mover&lt;/fen&gt; ends up as a result of the motion expresses the frame element &lt;fen&gt;Goal&lt;/fen&gt;.
 
 &lt;ex&gt;I'll &lt;t&gt;cut&lt;/t&gt; across the Sahara desert &lt;fex name="Goal"&gt;up to Algeria and Morocco&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>
         <excludesFE name="Place" ID="9214"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="11/10/2005 07:01:08 PST Thu" abbrev="Manr" name="Manner" ID="9206">
-        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including force (&lt;ment&gt;hard&lt;/ment&gt;, &lt;ment&gt;softly&lt;/ment&gt;), secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may indicate salient characteristics of a &lt;fen&gt;Self_mover&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously&lt;/ment&gt;, &lt;ment&gt;coldly&lt;/ment&gt;, &lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including force (&lt;ment&gt;hard&lt;/ment&gt;, &lt;ment&gt;softly&lt;/ment&gt;), secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may indicate salient characteristics of a &lt;fen&gt;Self_mover&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously&lt;/ment&gt;, &lt;ment&gt;coldly&lt;/ment&gt;, &lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;).
 
 &lt;ex&gt;Immediately, the monk invited her to sit on his shoulders and he &lt;fex name="Manner"&gt;carefully&lt;/fex&gt; &lt;t&gt;forded&lt;/t&gt; the river, depositing her on the opposite bank.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="FFFF00" fgColor="000000" coreType="Peripheral" cBy="JKR" cDate="11/10/2005 07:01:08 PST Thu" abbrev="Dist" name="Distance" ID="9207">
-        <definition>&lt;def-root&gt;Any expression which characterizes the extent of motion expresses the frame element &lt;fen&gt;Distance&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;Any expression which characterizes the extent of motion expresses the frame element &lt;fen&gt;Distance&lt;/fen&gt;.
 
 &lt;ex&gt;He followed the coast as far as Fronteras, then &lt;t&gt;cut&lt;/t&gt; &lt;fex name="Dist"&gt;160 miles&lt;/fex&gt; across the Gulf of Mexico to the Yucatán Peninsula.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Quantity" ID="59"/>
@@ -139,7 +139,7 @@
 of the footbridge.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="000000" coreType="Extra-Thematic" cBy="JKR" cDate="11/10/2005 07:01:09 PST Thu" abbrev="re-e" name="Re-encoding" ID="9226">
-        <definition>&lt;def-root&gt;A larger conceptualization that includes the Intentional_traversing as an integral part. The Intentional_traversing expressed by the target typically corresponds to a Means action in this larger conceptualization. 
+        <definition>&lt;def-root&gt;A larger conceptualization that includes the Intentional_traversing as an integral part. The Intentional_traversing expressed by the target typically corresponds to a Means action in this larger conceptualization.
 
 &lt;ex&gt;The 133rd Infantry hurriedly &lt;t&gt;forded&lt;/t&gt; the river &lt;fex name="Re-encoding"&gt;in an attempt to capture a bridge intact&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

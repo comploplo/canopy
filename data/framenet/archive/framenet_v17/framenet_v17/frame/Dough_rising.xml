@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="JKR" cDate="04/29/2005 06:13:57 PDT Fri" name="Dough_rising" ID="1421" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;The LUs of this frame describe a lump of &lt;fen&gt;Dough&lt;/fen&gt; expanding as gas develops inside it.  This is part of a process where, in order to produce a lighter, more easily chewed bread, &lt;fen&gt;Dough&lt;/fen&gt; is leavened with yeast, baking soda or in another fashion to add gas to it before baking.  
+    <definition>&lt;def-root&gt;The LUs of this frame describe a lump of &lt;fen&gt;Dough&lt;/fen&gt; expanding as gas develops inside it.  This is part of a process where, in order to produce a lighter, more easily chewed bread, &lt;fen&gt;Dough&lt;/fen&gt; is leavened with yeast, baking soda or in another fashion to add gas to it before baking.
 
 &lt;ex&gt;I've got no frozen boxed meals, and no other real options to make something to keep me going while &lt;fex name="dou"&gt;my pizza dough&lt;/fex&gt; &lt;t&gt;rises&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="04/29/2005 06:18:27 PDT Fri" abbrev="dou" name="Dough" ID="7901">
-        <definition>&lt;def-root&gt;The paste made out of any cereals (grains) or leguminous crops by grinding, with some water added, which expands in volume as a result of leavening before baking. 
+        <definition>&lt;def-root&gt;The paste made out of any cereals (grains) or leguminous crops by grinding, with some water added, which expands in volume as a result of leavening before baking.
 
 &lt;ex&gt;While &lt;fex name="dou"&gt;the dough&lt;/fex&gt; was &lt;t&gt;rising&lt;/t&gt;, they heated the oven.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -29,7 +29,7 @@
         <semType name="Speed" ID="234"/>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="04/29/2005 06:36:43 PDT Fri" abbrev="man" name="Manner" ID="7905">
-        <definition>&lt;def-root&gt;Any description of the rising of the &lt;fen&gt;Dough&lt;/fen&gt;  which is not covered by more specific FEs, including epistemic modification (&lt;ment&gt;probably&lt;/ment&gt;, &lt;ment&gt;presumably&lt;/ment&gt;, &lt;ment&gt;mysteriously&lt;/ment&gt;) and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the rising of the &lt;fen&gt;Dough&lt;/fen&gt;  which is not covered by more specific FEs, including epistemic modification (&lt;ment&gt;probably&lt;/ment&gt;, &lt;ment&gt;presumably&lt;/ment&gt;, &lt;ment&gt;mysteriously&lt;/ment&gt;) and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;).
 
 &lt;ex&gt;My dough &lt;t&gt;rose&lt;/t&gt; &lt;fex name="man"&gt;nicely&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

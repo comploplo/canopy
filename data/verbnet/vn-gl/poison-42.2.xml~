@@ -244,7 +244,7 @@
                         <ARG type="ThemRole" value="Agent"/>
                         <ARG type="ThemRole" value="Instrument"/>
                     </ARGS>
-                </PRED>                
+                </PRED>
                 <PRED value="harmed">
                     <ARGS>
                         <ARG type="Event" value="e3"/>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:12:28 PST Wed" name="Commerce_scenario" ID="82" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;Commerce is a situation in which a &lt;fen&gt;Buyer&lt;/fen&gt; and a &lt;fen&gt;Seller&lt;/fen&gt; have agreed upon an exchange of &lt;fen&gt;Money&lt;/fen&gt; and &lt;fen&gt;Goods&lt;/fen&gt; (possibly after a negotiation), and then perform the exchange, optionally carrying it out with various kinds of direct payment or financing or the giving of change.  
+    <definition>&lt;def-root&gt;Commerce is a situation in which a &lt;fen&gt;Buyer&lt;/fen&gt; and a &lt;fen&gt;Seller&lt;/fen&gt; have agreed upon an exchange of &lt;fen&gt;Money&lt;/fen&gt; and &lt;fen&gt;Goods&lt;/fen&gt; (possibly after a negotiation), and then perform the exchange, optionally carrying it out with various kinds of direct payment or financing or the giving of change.
 
-The &lt;fen&gt;Seller&lt;/fen&gt; indicates their willingness to give the &lt;fen&gt;Goods&lt;/fen&gt; in their possession to a &lt;fen&gt;Buyer&lt;/fen&gt; who would give them some amount of &lt;fen&gt;Money&lt;/fen&gt;.  The &lt;fen&gt;Seller&lt;/fen&gt; may have already decided on the amount of money that they would require, in which case it is called the Asking price.  
+The &lt;fen&gt;Seller&lt;/fen&gt; indicates their willingness to give the &lt;fen&gt;Goods&lt;/fen&gt; in their possession to a &lt;fen&gt;Buyer&lt;/fen&gt; who would give them some amount of &lt;fen&gt;Money&lt;/fen&gt;.  The &lt;fen&gt;Seller&lt;/fen&gt; may have already decided on the amount of money that they would require, in which case it is called the Asking price.
 
-The &lt;fen&gt;Buyer&lt;/fen&gt; also indicates their willingness to give an amount of money called an Offer to a &lt;fen&gt;Seller&lt;/fen&gt; who would give them the &lt;fen&gt;Goods&lt;/fen&gt;.  
+The &lt;fen&gt;Buyer&lt;/fen&gt; also indicates their willingness to give an amount of money called an Offer to a &lt;fen&gt;Seller&lt;/fen&gt; who would give them the &lt;fen&gt;Goods&lt;/fen&gt;.
 
 Normally the process is begun by the &lt;fen&gt;Seller&lt;/fen&gt;.  The means by which the &lt;fen&gt;Seller&lt;/fen&gt; indicates their wish to engage in an exchange are various, ranging from putting a price tag on an item on a store shelf, to advertizing, to communicating directly and specifically with a possible &lt;fen&gt;Buyer&lt;/fen&gt;.  In some cases, however, the process may be initiated by the &lt;fen&gt;Buyer&lt;/fen&gt; indicating to a possible &lt;fen&gt;Seller&lt;/fen&gt; that they would like to make an exchange.
 
@@ -20,12 +20,12 @@ Normally the process is begun by the &lt;fen&gt;Seller&lt;/fen&gt;.  The means b
 &lt;ex&gt;&lt;fex name="Slr"&gt;My local grocery store&lt;/fex&gt; raised &lt;t&gt;prices&lt;/t&gt; on meat&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:29 PST Wed" abbrev="Mny" name="Money" ID="378">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Money&lt;/fen&gt; is given in exchange for &lt;fen&gt;Goods&lt;/fen&gt; in a transaction. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Money&lt;/fen&gt; is given in exchange for &lt;fen&gt;Goods&lt;/fen&gt; in a transaction.
 &lt;ex&gt;The &lt;t&gt;price&lt;/t&gt; of the sweater &lt;m&gt;was&lt;/m&gt; &lt;fex name="Mny"&gt; $50&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:29 PST Wed" abbrev="Gds" name="Goods" ID="379">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Goods&lt;/fen&gt; is anything including labor or time, for example, which is exchanged for &lt;fen&gt;Money&lt;/fen&gt; in a transaction. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Goods&lt;/fen&gt; is anything including labor or time, for example, which is exchanged for &lt;fen&gt;Money&lt;/fen&gt; in a transaction.
 &lt;ex&gt;She was considered a &lt;t&gt;purchaser&lt;/t&gt; &lt;fex name="Gds"&gt;of the finest things&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="ChW" cDate="02/07/2001 04:12:29 PST Wed" abbrev="Rate" name="Rate" ID="380">
@@ -33,7 +33,7 @@ Normally the process is begun by the &lt;fen&gt;Seller&lt;/fen&gt;.  The means b
 &lt;ex&gt; The authorities cut tomato &lt;t&gt;prices&lt;/t&gt; &lt;fex name="Rate"&gt; to a dollar per pound&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="ChW" cDate="02/07/2001 04:12:29 PST Wed" abbrev="Unit" name="Unit" ID="381">
-        <definition>&lt;def-root&gt;This FE is any unit in which goods or services can be measured. Generally, it occurs in a 	&lt;ment&gt;by&lt;/ment&gt;-PP. 
+        <definition>&lt;def-root&gt;This FE is any unit in which goods or services can be measured. Generally, it occurs in a 	&lt;ment&gt;by&lt;/ment&gt;-PP.
 &lt;ex&gt;The &lt;t&gt;price&lt;/t&gt; of Bob's peppers is determined &lt;fex name="Unit"&gt;by the pound&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>

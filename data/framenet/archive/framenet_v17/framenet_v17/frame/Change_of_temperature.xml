@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MJE" cDate="08/15/2003 07:49:17 PDT Fri" name="Change_of_temperature" ID="797" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame, the temperature of an &lt;fen&gt;Item&lt;/fen&gt; changes.  An &lt;fen&gt;Initial_temperature&lt;/fen&gt;, &lt;fen&gt;Final_temperature&lt;/fen&gt;, or &lt;fen&gt;Temperature_change&lt;/fen&gt; can also be indicated.  
+    <definition>&lt;def-root&gt;In this frame, the temperature of an &lt;fen&gt;Item&lt;/fen&gt; changes.  An &lt;fen&gt;Initial_temperature&lt;/fen&gt;, &lt;fen&gt;Final_temperature&lt;/fen&gt;, or &lt;fen&gt;Temperature_change&lt;/fen&gt; can also be indicated.
 
 &lt;ex&gt;&lt;fex name="Item"&gt;The house&lt;/fex&gt; had &lt;t&gt;cooled&lt;/t&gt; &lt;t&gt;off&lt;/t&gt; &lt;fex name="Temperature_change"&gt;by a few more degrees&lt;/fex&gt; &lt;fex name="Time"&gt;by midnight&lt;/fex&gt;, and we finally managed to eat a bite.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="664" cDate="08/24/2001 01:04:23 PDT Fri" name="Direction" ID="215" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Path&lt;/fen&gt; made up of a set of positions in some N-space &lt;fen&gt;Domain&lt;/fen&gt; (often spatial) is determined as a function of a &lt;fen&gt;Base_position&lt;/fen&gt; and some one-dimensional &lt;fen&gt;Independent_variable&lt;/fen&gt; (often time).  For many of the words of this frame, the &lt;fen&gt;Domain&lt;/fen&gt; and/or the &lt;fen&gt;Independent_variable&lt;/fen&gt; are incorporated in the basic definition of the target.  
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Path&lt;/fen&gt; made up of a set of positions in some N-space &lt;fen&gt;Domain&lt;/fen&gt; (often spatial) is determined as a function of a &lt;fen&gt;Base_position&lt;/fen&gt; and some one-dimensional &lt;fen&gt;Independent_variable&lt;/fen&gt; (often time).  For many of the words of this frame, the &lt;fen&gt;Domain&lt;/fen&gt; and/or the &lt;fen&gt;Independent_variable&lt;/fen&gt; are incorporated in the basic definition of the target.
 
 &lt;ex&gt;&lt;/ex&gt;
-&lt;ex&gt;&lt;fex name="Path"&gt;&lt;t&gt;East&lt;/t&gt;&lt;/fex&gt; &lt;fex name="Base_position"&gt;of Mt. Diablo&lt;/fex&gt; the Sierras rise majestically above the Central Valley.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Path"&gt;&lt;t&gt;East&lt;/t&gt;&lt;/fex&gt; &lt;fex name="Base_position"&gt;of Mt. Diablo&lt;/fex&gt; the Sierras rise majestically above the Central Valley.&lt;/ex&gt;
 &lt;ex&gt;&lt;/ex&gt;
 
 In this case, the &lt;fen&gt;Domain&lt;/fen&gt; and the &lt;fen&gt;Independent_variable&lt;/fen&gt; are both spatial.&lt;/def-root&gt;</definition>

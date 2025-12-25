@@ -3,23 +3,23 @@
 <frame cBy="ACW" cDate="07/09/2002 01:52:13 PDT Tue" name="Social_interaction_evaluation" ID="372" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;In this frame an &lt;fen&gt;Evaluee&lt;/fen&gt; is judged by a (usually implicit) &lt;fen&gt;Judge&lt;/fen&gt; to be of a certain character based on her or his &lt;fen&gt;Behavior&lt;/fen&gt; towards other human beings; a specific &lt;fen&gt;Affected_party&lt;/fen&gt; may be overtly mentioned along with the &lt;fen&gt;Degree&lt;/fen&gt; to which the &lt;fen&gt;Evaluee&lt;/fen&gt; behaves appropriately towards others. The&lt;fen&gt;Behavior&lt;/fen&gt; alone may be mentioned with the understanding that these behaviors characterize a property of the unmentioned &lt;fen&gt;Evaluee&lt;/fen&gt;. The &lt;fen&gt;Evaluee&lt;/fen&gt;'s &lt;fen&gt;Behavior&lt;/fen&gt; may be in the context of a &lt;fen&gt;Topic&lt;/fen&gt;.
 
-&lt;ex&gt; It was &lt;t&gt;nice&lt;/t&gt; &lt;fex name="Evaluee"&gt;of you&lt;/fex&gt; &lt;fex name="Behavior"&gt;to send a card&lt;/fex&gt;. &lt;/ex&gt; 
+&lt;ex&gt; It was &lt;t&gt;nice&lt;/t&gt; &lt;fex name="Evaluee"&gt;of you&lt;/fex&gt; &lt;fex name="Behavior"&gt;to send a card&lt;/fex&gt;. &lt;/ex&gt;
 
-&lt;ex&gt; &lt;fex name="Evaluee"&gt;Jim&lt;/fex&gt; was &lt;t&gt;thoughtful&lt;/t&gt; &lt;fex name="Behavior"&gt;to email the directions&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt; &lt;fex name="Evaluee"&gt;Jim&lt;/fex&gt; was &lt;t&gt;thoughtful&lt;/t&gt; &lt;fex name="Behavior"&gt;to email the directions&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt; &lt;fex name="Behavior"&gt;For Martha to smoke in the car&lt;/fex&gt; was &lt;fex name="Degree"&gt;extremely&lt;/fex&gt; &lt;t&gt;inconsiderate&lt;/t&gt;.&lt;/ex&gt; 
+&lt;ex&gt; &lt;fex name="Behavior"&gt;For Martha to smoke in the car&lt;/fex&gt; was &lt;fex name="Degree"&gt;extremely&lt;/fex&gt; &lt;t&gt;inconsiderate&lt;/t&gt;.&lt;/ex&gt;
 
-&lt;ex&gt; It was &lt;t&gt;cruel&lt;/t&gt; &lt;fex name="Behavior"&gt;that he continued to call her&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt; It was &lt;t&gt;cruel&lt;/t&gt; &lt;fex name="Behavior"&gt;that he continued to call her&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt; &lt;fex name="Evaluee"&gt;Mary&lt;/fex&gt; was &lt;t&gt;cruel&lt;/t&gt; &lt;fex name="Affected_party"&gt;to her friends&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt; &lt;fex name="Evaluee"&gt;Mary&lt;/fex&gt; was &lt;t&gt;cruel&lt;/t&gt; &lt;fex name="Affected_party"&gt;to her friends&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt; Samson was a &lt;t&gt;thoughtless&lt;/t&gt; &lt;fex name="Evaluee"&gt;person&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt; Samson was a &lt;t&gt;thoughtless&lt;/t&gt; &lt;fex name="Evaluee"&gt;person&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt;&lt;fex name="Evaluee"&gt;Mrs. Robinson&lt;/fex&gt; was always &lt;t&gt;considerate&lt;/t&gt; &lt;fex name="Affected_party"&gt;of her students&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Evaluee"&gt;Mrs. Robinson&lt;/fex&gt; was always &lt;t&gt;considerate&lt;/t&gt; &lt;fex name="Affected_party"&gt;of her students&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt; &lt;fex name="Evaluee"&gt;The press&lt;/fex&gt; was always &lt;t&gt;kind&lt;/t&gt; &lt;fex name="Topic"&gt;about Madonna&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt; &lt;fex name="Evaluee"&gt;The press&lt;/fex&gt; was always &lt;t&gt;kind&lt;/t&gt; &lt;fex name="Topic"&gt;about Madonna&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt; &lt;fex name="Evaluee"&gt;Lee&lt;/fex&gt; was &lt;t&gt;nice&lt;/t&gt; &lt;fex name="Topic"&gt;about my car accident&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt; &lt;fex name="Evaluee"&gt;Lee&lt;/fex&gt; was &lt;t&gt;nice&lt;/t&gt; &lt;fex name="Topic"&gt;about my car accident&lt;/fex&gt;.&lt;/ex&gt;
 
 &lt;ex&gt; I appreciated his &lt;t&gt;kind&lt;/t&gt; &lt;fex name="Behavior"&gt;offer of the car&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="ACW" cDate="07/09/2002 02:06:19 PDT Tue" abbrev="Eval" name="Evaluee" ID="3336">

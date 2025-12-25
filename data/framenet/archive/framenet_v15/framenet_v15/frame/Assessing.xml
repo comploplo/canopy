@@ -71,7 +71,7 @@
 &lt;ex&gt;In order to find the best suited, targeted form of activity, the prisoner?s work and functioning capability is &lt;t&gt;assessed&lt;/t&gt; together &lt;fex name="cop"&gt;with him/her&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFFF00" fgColor="000000" coreType="Extra-Thematic" cBy="303" cDate="11/10/2005 02:54:21 PST Thu" abbrev="Fre" name="Frequency" ID="9197">
-        <definition>&lt;def-root&gt;This frame element is defined as the number of times assessing occurs per some unit of time. 
+        <definition>&lt;def-root&gt;This frame element is defined as the number of times assessing occurs per some unit of time.
 
 &lt;ex&gt;Brown 's chapter on geodemographics discusses an application field where primary data collected for operational purposes are &lt;fex name="Fre"&gt;typically&lt;/fex&gt; &lt;t&gt;evaluated&lt;/t&gt; in relation to secondary data derived from sources such as the Census of Population .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

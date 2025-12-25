@@ -40,7 +40,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="03/23/2005 03:08:10 PST Wed" abbrev="man" name="Manner" ID="7661">
-        <definition>&lt;def-root&gt;Any description of the allowing which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of the &lt;fen&gt;Ratifier&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the allowing which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of the &lt;fen&gt;Ratifier&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 
 &lt;ex&gt;It is no coincidence that the EU, on behalf of its 25 member states, has &lt;fex name="man"&gt;eagerly&lt;/fex&gt;
 &lt;t&gt;ratified&lt;/t&gt; Rotterdam and other treaties, no doubt seeing it as the perfect opportunity.&lt;/ex&gt;&lt;/def-root&gt;</definition>

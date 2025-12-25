@@ -27,7 +27,7 @@
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="07/25/2002 06:35:37 PDT Thu" abbrev="Descriptor" name="Descriptor" ID="3413">
         <definition>&lt;def-root&gt;This FE marks expressions that indicate attributes, traits, or evaluations of the entrenched &lt;fen&gt;Behavior&lt;/fen&gt;.
 
-&lt;ex&gt;In the year 2100, a historian will undertake a study of that 
+&lt;ex&gt;In the year 2100, a historian will undertake a study of that
 &lt;fex name="Descriptor"&gt;quaint&lt;/fex&gt; &lt;t&gt;custom&lt;/t&gt; of preserving public footpaths across private land .&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
@@ -39,7 +39,7 @@
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="07/25/2002 06:55:59 PDT Thu" abbrev="Society" name="Society" ID="3415">
         <definition>&lt;def-root&gt;
-&lt;ex&gt;We can help , you to meet Egyptian people and learn about 
+&lt;ex&gt;We can help , you to meet Egyptian people and learn about
 &lt;fex name="Society"&gt;Egyptian&lt;/fex&gt; &lt;t&gt;customs&lt;/t&gt;.  &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <frameRelation type="Inherits from"/>

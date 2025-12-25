@@ -19,7 +19,7 @@
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="12/13/2001 11:59:49 PST Thu" abbrev="Purp" name="Purpose" ID="2155">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Purpose&lt;/fen&gt; for which the manipulation of the &lt;fen&gt;Rope&lt;/fen&gt; takes place. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Purpose&lt;/fen&gt; for which the manipulation of the &lt;fen&gt;Rope&lt;/fen&gt; takes place.
 
 &lt;ex&gt;Prof. Frink &lt;t&gt;braided&lt;/t&gt; my hair &lt;fex name="Purpose"&gt;to make me look beautiful&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

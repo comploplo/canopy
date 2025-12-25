@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="JKR" cDate="06/28/2004 06:05:09 PDT Mon" name="People_by_residence" ID="1143" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame contains  words for individuals, i.e. humans, with respect to their  proximity of residence. This relationship may be defined either symmetrically (as &lt;fen&gt;Residents&lt;/fen&gt;) or asymmetrically (in terms of a &lt;fen&gt;Known_resident&lt;/fen&gt; and a &lt;fen&gt;Indicated_resident&lt;/fen&gt;).  The &lt;fen&gt;Residents&lt;/fen&gt; or the &lt;fen&gt;Indicated_resident&lt;/fen&gt; may have an &lt;fen&gt;Age&lt;/fen&gt;, &lt;fen&gt;Descriptor&lt;/fen&gt;, &lt;fen&gt;Persistent_characteristic&lt;/fen&gt;, or &lt;fen&gt;Ethnicity&lt;/fen&gt; specified. 
+    <definition>&lt;def-root&gt;This frame contains  words for individuals, i.e. humans, with respect to their  proximity of residence. This relationship may be defined either symmetrically (as &lt;fen&gt;Residents&lt;/fen&gt;) or asymmetrically (in terms of a &lt;fen&gt;Known_resident&lt;/fen&gt; and a &lt;fen&gt;Indicated_resident&lt;/fen&gt;).  The &lt;fen&gt;Residents&lt;/fen&gt; or the &lt;fen&gt;Indicated_resident&lt;/fen&gt; may have an &lt;fen&gt;Age&lt;/fen&gt;, &lt;fen&gt;Descriptor&lt;/fen&gt;, &lt;fen&gt;Persistent_characteristic&lt;/fen&gt;, or &lt;fen&gt;Ethnicity&lt;/fen&gt; specified.
 
 
 &lt;ex&gt;The dead included homeowner Todd Underfoot, 33, his wife Spring Back Underfoot, 32, &lt;fex name="kno"&gt;their&lt;/fex&gt; &lt;t&gt;housemate&lt;/t&gt;, &lt;fex name="ind"&gt;Luisa Life&lt;/fex&gt;, 46, and two of the Underfoot's three children. &lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="kno"&gt;I&lt;/fex&gt; &lt;m&gt;have&lt;/m&gt; a &lt;fex name="eth"&gt;Swedish&lt;/fex&gt; &lt;t&gt;&lt;fex name="ind"&gt;roommate&lt;/fex&gt;&lt;/t&gt; that translated for me! &lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="06/28/2004 06:05:09 PDT Mon" abbrev="kno" name="Known_resident" ID="6584">
-        <definition>&lt;def-root&gt;The individual(s) that serve(s) as a reference point for the definition of the &lt;fen&gt;Indicated_resident&lt;/fen&gt; due to the proximity of residences. 
+        <definition>&lt;def-root&gt;The individual(s) that serve(s) as a reference point for the definition of the &lt;fen&gt;Indicated_resident&lt;/fen&gt; due to the proximity of residences.
 
 
 &lt;ex&gt;I have no problem with him becoming &lt;fex name="kno"&gt;Madonna's&lt;/fex&gt; &lt;t&gt;neighbour&lt;/t&gt; at all!&lt;/ex&gt;
@@ -21,7 +21,7 @@
         <semType name="Location" ID="54"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="06/28/2004 06:05:10 PDT Mon" abbrev="ind" name="Indicated_resident" ID="6586">
-        <definition>&lt;def-root&gt;A person or group of people defined in terms of the fact that they reside in the proximity of the &lt;fen&gt;Known_resident&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;A person or group of people defined in terms of the fact that they reside in the proximity of the &lt;fen&gt;Known_resident&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="ind"&gt;Bill Jankelow&lt;/fex&gt; is my &lt;t&gt;house-mate&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

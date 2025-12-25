@@ -21,7 +21,7 @@
         <semType name="Physical_object" ID="68"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="11/17/2005 09:34:09 PST Thu" abbrev="Src" name="Source" ID="9350">
-        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of motion expresses the frame element &lt;fen&gt;Source&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of motion expresses the frame element &lt;fen&gt;Source&lt;/fen&gt;.
 
 &lt;ex&gt;One of those ugly landcuisers &lt;t&gt;cut&lt;/t&gt; left &lt;fex name="Src"&gt;from the opposite lane&lt;/fex&gt; in moving traffic.&lt;/ex&gt;
 
@@ -34,9 +34,9 @@
 &lt;ex&gt;They &lt;t&gt;turned&lt;/t&gt; right &lt;fex name="Path"&gt;through another gate&lt;/fex&gt; into a courtyard opening.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="11/17/2005 09:34:10 PST Thu" abbrev="Goal" name="Goal" ID="9352">
-        <definition>&lt;def-root&gt;Any expression which indicates where the &lt;fen&gt;Theme&lt;/fen&gt; ends up as a result of the change of direction. 
+        <definition>&lt;def-root&gt;Any expression which indicates where the &lt;fen&gt;Theme&lt;/fen&gt; ends up as a result of the change of direction.
 
-&lt;ex&gt;Finally, where the road begins to climb steeply, &lt;t&gt;cut&lt;/t&gt; right &lt;fex name="Goal"&gt;onto a small trail near a sign in a tree&lt;/fex&gt;, and go downhill to the stream.&lt;/ex&gt;. 
+&lt;ex&gt;Finally, where the road begins to climb steeply, &lt;t&gt;cut&lt;/t&gt; right &lt;fex name="Goal"&gt;onto a small trail near a sign in a tree&lt;/fex&gt;, and go downhill to the stream.&lt;/ex&gt;.
 &lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>
     </FE>
@@ -61,7 +61,7 @@
         <semType name="Speed" ID="234"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="000000" coreType="Extra-Thematic" cBy="605" cDate="11/17/2005 09:34:10 PST Thu" abbrev="Thm_c" name="Cotheme" ID="9359">
-        <definition>&lt;def-root&gt;This is the second moving object, expressed as a direct object or an oblique: 
+        <definition>&lt;def-root&gt;This is the second moving object, expressed as a direct object or an oblique:
 
 
 &lt;ex&gt;I &lt;t&gt;turned&lt;/t&gt; right &lt;fex name="Thm_c"&gt;after them&lt;/fex&gt;, closed in on the rear plane but then discovered another plane from the formation nearing me from the right side.&lt;/ex&gt;&lt;/def-root&gt;</definition>
@@ -126,7 +126,7 @@
 &lt;ex&gt;They &lt;t&gt;turned&lt;/t&gt; right &lt;fex name="Frequency"&gt;three times&lt;/fex&gt; and approached the sea lions from behind.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="000000" coreType="Extra-Thematic" cBy="605" cDate="11/17/2005 09:34:11 PST Thu" abbrev="ree" name="Re_encoding" ID="9373">
-        <definition>&lt;def-root&gt;A larger conceptualization that includes the change of direction as an integral part. The change of direction expressed by the target typically corresponds to a Means action in this larger conceptualization. 
+        <definition>&lt;def-root&gt;A larger conceptualization that includes the change of direction as an integral part. The change of direction expressed by the target typically corresponds to a Means action in this larger conceptualization.
 
 &lt;ex&gt;The pilot of N3602D &lt;t&gt;turned&lt;/t&gt; left &lt;fex name="ree"&gt;in an attempt to avoid a collision&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

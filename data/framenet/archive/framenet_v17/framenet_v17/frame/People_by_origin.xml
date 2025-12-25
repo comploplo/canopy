@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="JKR" cDate="02/20/2004 06:07:14 PST Fri" name="People_by_origin" ID="974" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame contains  words for individuals, i.e. humans, with respect to their &lt;fen&gt;Origin&lt;/fen&gt;. The &lt;fen&gt;Origin&lt;/fen&gt; is generally incorporated, but may occasionally be specified separately.  The &lt;fen&gt;Person&lt;/fen&gt; is conceived of as independent of other specific individuals with whom they have relationships and independent of their participation in any particular activity. They may have an &lt;fen&gt;Age&lt;/fen&gt;, &lt;fen&gt;Descriptor&lt;/fen&gt;, &lt;fen&gt;Persistent_characteristic&lt;/fen&gt;, or &lt;fen&gt;Ethnicity&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;This frame contains  words for individuals, i.e. humans, with respect to their &lt;fen&gt;Origin&lt;/fen&gt;. The &lt;fen&gt;Origin&lt;/fen&gt; is generally incorporated, but may occasionally be specified separately.  The &lt;fen&gt;Person&lt;/fen&gt; is conceived of as independent of other specific individuals with whom they have relationships and independent of their participation in any particular activity. They may have an &lt;fen&gt;Age&lt;/fen&gt;, &lt;fen&gt;Descriptor&lt;/fen&gt;, &lt;fen&gt;Persistent_characteristic&lt;/fen&gt;, or &lt;fen&gt;Ethnicity&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Person"&gt;I&lt;/fex&gt;'m a &lt;fex name="Descriptor"&gt;proud&lt;/fex&gt; &lt;t&gt;Brit&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="02/20/2004 06:07:14 PST Fri" abbrev="Ori" name="Origin" ID="5943">
@@ -127,7 +127,7 @@
         <lexeme order="1" headword="false" breakBefore="false" POS="N" name="iranian"/>
     </lexUnit>
     <lexUnit status="Created" POS="N" name="Irish.n" ID="13886" lemmaID="20614" cBy="KmG" cDate="02/27/2007 05:25:28 PST Tue">
-        <definition>FN: a native or citizen of Ireland. 
+        <definition>FN: a native or citizen of Ireland.
 
 
 </definition>

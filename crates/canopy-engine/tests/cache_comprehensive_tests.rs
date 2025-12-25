@@ -108,7 +108,7 @@ mod tests {
 
         // Insert multiple values
         for i in 0..5 {
-            let key = format!("key{}", i);
+            let key = format!("key{i}");
             cache.insert(key, i * 10);
         }
 
@@ -116,7 +116,7 @@ mod tests {
 
         // Verify all values
         for i in 0..5 {
-            let key = format!("key{}", i);
+            let key = format!("key{i}");
             assert_eq!(cache.get(&key), Some(i * 10));
         }
 
@@ -508,7 +508,7 @@ mod tests {
             let cache_clone = Arc::clone(&cache);
             let handle = thread::spawn(move || {
                 for j in 0..10 {
-                    let key = format!("key_{}_{}", i, j);
+                    let key = format!("key_{i}_{j}");
                     let value = i * 10 + j;
                     cache_clone.insert(key.clone(), value);
                     assert_eq!(cache_clone.get(&key), Some(value));
@@ -538,7 +538,7 @@ mod tests {
             let cache_clone = Arc::clone(&cache);
             let handle = thread::spawn(move || {
                 for j in 0..10 {
-                    let key = format!("thread_{}_{}", i, j);
+                    let key = format!("thread_{i}_{j}");
                     let value = i * 100 + j;
                     cache_clone.insert(key.clone(), value);
                     assert_eq!(cache_clone.get(&key), Some(value));
@@ -578,7 +578,7 @@ mod tests {
 
         // Insert many items - this should test capacity limiting
         for i in 0..2000 {
-            cache.insert(format!("key{}", i), i);
+            cache.insert(format!("key{i}"), i);
         }
 
         // Cache should be at capacity (1000 items max)
@@ -590,7 +590,7 @@ mod tests {
         // Verify some recent items are present (cache should contain most recent insertions)
         let mut recent_found = 0;
         for i in 1900..2000 {
-            if cache.get(&format!("key{}", i)).is_some() {
+            if cache.get(&format!("key{i}")).is_some() {
                 recent_found += 1;
             }
         }
@@ -622,14 +622,14 @@ mod tests {
         // Measure insertion performance
         let start = std::time::Instant::now();
         for i in 0..1000 {
-            cache.insert(format!("key{}", i), format!("value{}", i));
+            cache.insert(format!("key{i}"), format!("value{i}"));
         }
         let insert_duration = start.elapsed();
 
         // Measure retrieval performance
         let start = std::time::Instant::now();
         for i in 0..1000 {
-            cache.get(&format!("key{}", i));
+            cache.get(&format!("key{i}"));
         }
         let get_duration = start.elapsed();
 
@@ -649,7 +649,7 @@ mod tests {
         // Insert reasonably large values
         for i in 0..100 {
             let data = vec![i as u8; 1000]; // 1KB per entry
-            cache.insert(format!("key{}", i), data);
+            cache.insert(format!("key{i}"), data);
         }
 
         assert_eq!(cache.len(), 100);
@@ -657,7 +657,7 @@ mod tests {
         // Verify data integrity
         for i in 0..100 {
             let expected = vec![i as u8; 1000];
-            assert_eq!(cache.get(&format!("key{}", i)), Some(expected));
+            assert_eq!(cache.get(&format!("key{i}")), Some(expected));
         }
     }
 
@@ -711,7 +711,7 @@ mod tests {
 
         // Fill both levels with different access patterns
         for i in 0..15 {
-            cache.insert(i, format!("value{}", i));
+            cache.insert(i, format!("value{i}"));
         }
 
         // Access some items to create L1/L2 promotion scenarios

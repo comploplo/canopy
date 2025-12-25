@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="296" cDate="08/05/2002 03:15:59 PDT Mon" name="Intoxicants" ID="390" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Intoxicant&lt;/fen&gt; is ingested in order to achieve an altered state of consciousness. A &lt;fen&gt;Type&lt;/fen&gt; or &lt;fen&gt;Descriptor&lt;/fen&gt; may be indicated as well. 
-&lt;ex&gt; We &lt;gov&gt;smoked&lt;/gov&gt; &lt;x&gt;some &lt;fex name="Descriptor"&gt;high-grade&lt;/fex&gt; &lt;fex name="Intoxicant"&gt;&lt;t&gt;marijuana&lt;/t&gt;&lt;/fex&gt;&lt;/x&gt;.&lt;/ex&gt; 
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Intoxicant&lt;/fen&gt; is ingested in order to achieve an altered state of consciousness. A &lt;fen&gt;Type&lt;/fen&gt; or &lt;fen&gt;Descriptor&lt;/fen&gt; may be indicated as well.
+&lt;ex&gt; We &lt;gov&gt;smoked&lt;/gov&gt; &lt;x&gt;some &lt;fex name="Descriptor"&gt;high-grade&lt;/fex&gt; &lt;fex name="Intoxicant"&gt;&lt;t&gt;marijuana&lt;/t&gt;&lt;/fex&gt;&lt;/x&gt;.&lt;/ex&gt;
 &lt;ex&gt;They &lt;gov&gt;smoked&lt;/gov&gt; &lt;x&gt;&lt;fex name="Type"&gt;freebase&lt;/fex&gt; &lt;fex name="Intoxicant"&gt;&lt;t&gt;cocaine&lt;/t&gt;&lt;/fex&gt;&lt;/x&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="08/05/2002 03:18:19 PDT Mon" abbrev="Int" name="Intoxicant" ID="3495">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Intoxicant&lt;/fen&gt; is ingested.

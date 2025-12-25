@@ -22,7 +22,7 @@
 &lt;ex&gt;Late Prehistoric peoples &lt;t&gt;hunted&lt;/t&gt; &lt;fex name="Instrument"&gt;with the bow and arrow&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="361" cDate="02/04/2008 04:00:25 PST Mon" abbrev="Dur" name="Duration" ID="12100">
-        <definition>&lt;def-root&gt;For what length of time the &lt;fen&gt;Hunter&lt;/fen&gt; attempted to obtain &lt;fen&gt;Food&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;For what length of time the &lt;fen&gt;Hunter&lt;/fen&gt; attempted to obtain &lt;fen&gt;Food&lt;/fen&gt;.
 
 &lt;ex&gt;We all &lt;t&gt;fished&lt;/t&gt; &lt;fex name="Duration"&gt;for several hours&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

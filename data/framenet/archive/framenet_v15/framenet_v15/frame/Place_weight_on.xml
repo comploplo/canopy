@@ -60,7 +60,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="07/06/2005 02:04:43 PDT Wed" abbrev="pla" name="Place" ID="8416">
-        <definition>&lt;def-root&gt;The location in which the &lt;fen&gt;Agent&lt;/fen&gt; attaches the specified level of importance  to the &lt;fen&gt;Consideration&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The location in which the &lt;fen&gt;Agent&lt;/fen&gt; attaches the specified level of importance  to the &lt;fen&gt;Consideration&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="pla"&gt;In Arizona&lt;/fex&gt; we &lt;t&gt;emphasize&lt;/t&gt; western bats with a special focus on species identification.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Locative_relation" ID="182"/>

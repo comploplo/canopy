@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="CVa" cDate="04/18/2013 02:56:58 PDT Thu" name="Sharing" ID="2810" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame &lt;fen&gt;Protagonist_1&lt;/fen&gt; and &lt;fen&gt;Protagonist_2&lt;/fen&gt;, collectively &lt;fen&gt;Protagonists&lt;/fen&gt;, allow one another to partake jointly the use of an &lt;fen&gt;Entity&lt;/fen&gt; .   
+    <definition>&lt;def-root&gt;In this frame &lt;fen&gt;Protagonist_1&lt;/fen&gt; and &lt;fen&gt;Protagonist_2&lt;/fen&gt;, collectively &lt;fen&gt;Protagonists&lt;/fen&gt;, allow one another to partake jointly the use of an &lt;fen&gt;Entity&lt;/fen&gt; .
 
 &lt;ex&gt;&lt;fex name="Pros"&gt;More than half of the group&lt;/fex&gt; &lt;t&gt;shared&lt;/t&gt; &lt;fex name="Ent"&gt;needles&lt;/fex&gt;.&lt;/ex&gt;
 

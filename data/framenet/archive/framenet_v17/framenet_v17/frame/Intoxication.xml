@@ -25,7 +25,7 @@
         <semType name="Duration" ID="142"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="ACW" cDate="08/09/2002 10:29:44 PDT Fri" abbrev="Manner" name="Manner" ID="3524">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Manner&lt;/fen&gt; in which the &lt;fen&gt;Cognizer&lt;/fen&gt; is intoxicated. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Manner&lt;/fen&gt; in which the &lt;fen&gt;Cognizer&lt;/fen&gt; is intoxicated.
 &lt;ex&gt; &lt;fex name="Cognizer"&gt;Michael&lt;/fex&gt; was &lt;fex name = "Manner"&gt;aggressively&lt;/fex&gt; &lt;t&gt;drunk&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

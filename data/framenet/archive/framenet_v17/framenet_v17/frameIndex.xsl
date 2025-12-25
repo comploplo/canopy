@@ -60,7 +60,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                                      "<a href='#M'>M </a><a href='#N'>N </a><a href='#O'>O </a><a href='#P'>P </a><a href='#Q'>Q </a><a href='#R'>R </a>" +
                                      "<a href='#S'>S </a><a href='#T'>T </a><a href='#U'>U </a><a href='#V'>V </a><a href='#W'>W </a><a href='#X'>X </a>" +
                                      "<a href='#Y'>Y </a><a href='#Z'>Z </a>";
-                
+
                 // get the list of Frames and store in a 'p' block
                 docBody.innerHTML += "<p id='frames'>";
                 var framesHTML = '';
@@ -104,7 +104,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                     banFrame.setAttribute("src",  domain + unescape(banner));
                     banFrame.style.width = '100%';
                     banFrame.scrolling = 'no';
-                    banFrame.style.border = 0;     
+                    banFrame.style.border = 0;
                     docBody.appendChild(banFrame);
                 }
             }
@@ -113,7 +113,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
 			function openFrame(frName) {
 				parent.frames[1].location.href = 'frame/' + frName + '.xml?banner=' + banner;
 			}
-        
+
             // extract XML file name from URL
             function getURLFileName() {
                var wholeurl = window.location.href;
@@ -139,4 +139,3 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
 </html>
 </xsl:template>
 </xsl:stylesheet>
-	

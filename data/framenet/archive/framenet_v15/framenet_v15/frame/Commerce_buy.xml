@@ -10,7 +10,7 @@ Abby bought a car from Robin for $5,000.&lt;/def-root&gt;</definition>
 &lt;ex&gt;Lee &lt;t&gt;bought&lt;/t&gt; a textbook &lt;fex name="Buyer"&gt;from Abby&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="07/16/2001 01:49:09 PDT Mon" abbrev="Gds" name="Goods" ID="1390">
-        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Goods&lt;/fen&gt; is anything (including labor or time, for example) which is exchanged for &lt;fen&gt;Money&lt;/fen&gt; in a transaction. 
+        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Goods&lt;/fen&gt; is anything (including labor or time, for example) which is exchanged for &lt;fen&gt;Money&lt;/fen&gt; in a transaction.
 &lt;ex&gt; Only one winner &lt;t&gt;purchased&lt;/t&gt; &lt;fex name="Gds"&gt;the paintings&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="296" cDate="07/16/2001 01:49:09 PDT Mon" abbrev="Mns" name="Means" ID="1391">
@@ -33,7 +33,7 @@ Abby bought a car from Robin for $5,000.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="296" cDate="07/16/2001 01:49:09 PDT Mon" abbrev="Unit" name="Unit" ID="1395">
         <definition>&lt;def-root&gt;This FE is any unit in which goods or services can be measured.
-Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP. 
+Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP.
 &lt;ex&gt;Lee &lt;t&gt;buys&lt;/t&gt; potatoes &lt;fex name="Unit"&gt;by the pound&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="7CCD73" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/21/2001 08:41:05 PDT Tue" abbrev="Place" name="Place" ID="1734">

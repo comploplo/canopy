@@ -29,7 +29,7 @@ Note that this frame is undergoing some degree of reconsideration.  Many of the 
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:11:52 PST Wed" abbrev="Top" name="Topic" ID="86">
         <definition>&lt;def-root&gt;Some verbs in this frame allow a &lt;fen&gt;Topic&lt;/fen&gt; to be expressed in about-PPs.
-&lt;ex&gt;Kim &lt;t&gt;knows&lt;/t&gt; &lt;fex name="Topic"&gt;about first aid&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;Kim &lt;t&gt;knows&lt;/t&gt; &lt;fex name="Topic"&gt;about first aid&lt;/fex&gt;.&lt;/ex&gt;
 However, a number of nouns and adjectives in this frame which cannot take about-phrases allow &lt;fen&gt;Topic&lt;/fen&gt; to be expressed as an adjectival or adverbial modifier.
 &lt;ex&gt;Kim is &lt;fex name="Topic"&gt;politically&lt;/fex&gt; &lt;t&gt;aware&lt;/t&gt;. &lt;/ex&gt;
 &lt;ex&gt; &lt;fex name="Topic"&gt;Environmental&lt;/fex&gt; &lt;t&gt;consciousness&lt;/t&gt; is increasing.&lt;/ex&gt; &lt;/def-root&gt;</definition>

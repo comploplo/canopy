@@ -7,7 +7,7 @@
 
 &lt;ex&gt;&lt;fex name="veh"&gt;The UFO&lt;/fex&gt; &lt;t&gt;touched down&lt;/t&gt; &lt;fex name="goa"&gt;here&lt;/fex&gt;, you say?&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="RLG" cDate="09/01/2011 11:34:07 PDT Thu" abbrev="veh" name="Vehicle" ID="14926">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Vehicle&lt;/fen&gt; comes to the ground, usually (but not necessarily) under the control of an operator. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Vehicle&lt;/fen&gt; comes to the ground, usually (but not necessarily) under the control of an operator.
 
 &lt;ex&gt;&lt;fex name="veh"&gt;The plane&lt;/fex&gt; &lt;t&gt;landed&lt;/t&gt; on the airstrip.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Physical_object" ID="68"/>
@@ -24,7 +24,7 @@
 &lt;ex&gt;The airplane &lt;t&gt;landed&lt;/t&gt; &lt;fex name="Path"&gt;through lightning and rain&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="RLG" cDate="09/01/2011 11:34:07 PDT Thu" abbrev="goa" name="Goal" ID="14929">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Goal&lt;/fen&gt; is any expression that tells where the &lt;fen&gt;Vehicle&lt;/fen&gt; ends up, or would end up, as a result of the motion. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Goal&lt;/fen&gt; is any expression that tells where the &lt;fen&gt;Vehicle&lt;/fen&gt; ends up, or would end up, as a result of the motion.
 
 &lt;ex&gt;Most of the planes &lt;t&gt;set down&lt;/t&gt; &lt;fex name="Goal"&gt;on the strip&lt;/fex&gt; before midnight.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="Location" ID="54"/>
@@ -43,7 +43,7 @@
         <definition>&lt;def-root&gt;The &lt;fen&gt;Mode_of_transportation&lt;/fen&gt; expresses how the motion of the &lt;fen&gt;Vehicle&lt;/fen&gt; is effected, by its body or by a vehicle which holds and conveys the &lt;fen&gt;Vehicle&lt;/fen&gt;.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="7CCD7C" fgColor="000000" coreType="Extra-Thematic" cBy="RLG" cDate="09/01/2011 11:34:07 PDT Thu" abbrev="Thm_c" name="Cotheme" ID="14933">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Cotheme&lt;/fen&gt; is the second moving object, expressed as a direct object or an oblique. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Cotheme&lt;/fen&gt; is the second moving object, expressed as a direct object or an oblique.
 
 &lt;ex&gt;Our airplane &lt;t&gt;landed&lt;/t&gt; &lt;fex name="Cotheme"&gt;with the others&lt;/fex&gt; in formation.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -52,12 +52,12 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="RLG" cDate="09/01/2011 11:34:07 PDT Thu" abbrev="New" name="New_situation" ID="14935">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;New_situation&lt;/fen&gt; are the state of the &lt;fen&gt;Goal&lt;/fen&gt; when the &lt;fen&gt;Vehicle&lt;/fen&gt; arrives. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;New_situation&lt;/fen&gt; are the state of the &lt;fen&gt;Goal&lt;/fen&gt; when the &lt;fen&gt;Vehicle&lt;/fen&gt; arrives.
 
 &lt;ex&gt;&lt;fex name="veh"&gt;The troop carrier&lt;/fex&gt; &lt;t&gt;landed&lt;/t&gt; &lt;fex name="New_situation"&gt;to a standing ovation&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="RLG" cDate="09/01/2011 11:34:07 PDT Thu" abbrev="Dep" name="Depictive" ID="14936">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Depictive&lt;/fen&gt; is a phrase which describes the state of the &lt;fen&gt;Vehicle&lt;/fen&gt; upon arrival. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Depictive&lt;/fen&gt; is a phrase which describes the state of the &lt;fen&gt;Vehicle&lt;/fen&gt; upon arrival.
 
 &lt;ex&gt;&lt;fex name="Vehicle"&gt;It&lt;/fex&gt; &lt;t&gt;landed&lt;/t&gt;, &lt;fex name="Depictive"&gt;on fire and about to explode&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

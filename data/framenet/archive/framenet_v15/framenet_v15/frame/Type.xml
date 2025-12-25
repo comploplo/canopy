@@ -12,15 +12,15 @@
 &lt;ex&gt;I don't like this &lt;t&gt;&lt;fex name="Subtype"&gt;kind&lt;/fex&gt;&lt;/t&gt; of fish.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="06/12/2001 05:42:13 PDT Tue" abbrev="Cat" name="Category" ID="849">
-        <definition>&lt;def-root&gt;The more general type that the target denotes a subtype of. This FE is obligatory and should be labeled DNI when not present. 
+        <definition>&lt;def-root&gt;The more general type that the target denotes a subtype of. This FE is obligatory and should be labeled DNI when not present.
 
 &lt;ex&gt;They created a new &lt;t&gt;breed&lt;/t&gt; &lt;fex name="Category"&gt;of dog&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="06/12/2001 06:20:55 PDT Tue" abbrev="Type-Prop" name="Type_Property" ID="850">
-        <definition>&lt;def-root&gt;A property of the &lt;fen&gt;Subtype&lt;/fen&gt; itself rather than the members of the &lt;fen&gt;Category&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;A property of the &lt;fen&gt;Subtype&lt;/fen&gt; itself rather than the members of the &lt;fen&gt;Category&lt;/fen&gt;.
 
-&lt;ex&gt;I tried a &lt;fex name="Type_Property"&gt;new&lt;/fex&gt; &lt;t&gt;type&lt;/t&gt; of hair gel yesterday.&lt;/ex&gt; 
+&lt;ex&gt;I tried a &lt;fex name="Type_Property"&gt;new&lt;/fex&gt; &lt;t&gt;type&lt;/t&gt; of hair gel yesterday.&lt;/ex&gt;
 
 Many &lt;fen&gt;Type_Property&lt;/fen&gt; adjectives (e.g. new, rare, traditional, modern, strange) make explicit that the type under discussion is just one of the types in the more general &lt;fen&gt;Category&lt;/fen&gt;. Adjectives that denote properties of items in the category should be tagged &lt;fen&gt;Item_Property&lt;/fen&gt;.&lt;/def-root&gt;</definition>
     </FE>

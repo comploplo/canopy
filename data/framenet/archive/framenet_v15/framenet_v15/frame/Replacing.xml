@@ -52,7 +52,7 @@
         <definition>&lt;def-root&gt;The extent to which the &lt;fen&gt;New&lt;/fen&gt; entity is affected by the &lt;fen&gt;Agent&lt;/fen&gt;.  &lt;fen&gt;Degree&lt;/fen&gt;s of replacement are generally only possible when there are multiple &lt;fen&gt;New&lt;/fen&gt; and &lt;fen&gt;Old&lt;/fen&gt; entities.
 
 &lt;ex&gt;He &lt;t&gt;replaced&lt;/t&gt; the 6761 models &lt;fex name="deg"&gt;entirely&lt;/fex&gt; with about half as many 6800s.&lt;/ex&gt;
- 
+
 &lt;/def-root&gt;</definition>
         <semType name="Degree" ID="172"/>
     </FE>

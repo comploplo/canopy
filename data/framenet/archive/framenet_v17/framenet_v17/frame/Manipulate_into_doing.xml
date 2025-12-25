@@ -27,7 +27,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="07/18/2001 07:19:16 PDT Wed" abbrev="Goods" name="Goods" ID="1541">
-        <definition>&lt;def-root&gt;The FE goods is anything (including labor, time, or legal rights) that can be taken away. 
+        <definition>&lt;def-root&gt;The FE goods is anything (including labor, time, or legal rights) that can be taken away.
 &lt;ex&gt;Leslie &lt;t&gt;blackmailed&lt;/t&gt; &lt;fex name="Goods"&gt;the watch&lt;/fex&gt; out of John.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="12/09/2005 12:52:04 PST Fri" abbrev="ins" name="Instrument" ID="9757">

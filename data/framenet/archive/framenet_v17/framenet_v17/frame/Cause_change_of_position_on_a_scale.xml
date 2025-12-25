@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="JKR" cDate="04/06/2001 01:57:51 PDT Fri" name="Cause_change_of_position_on_a_scale" ID="96" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;This frame consists of words that indicate that an &lt;fen&gt;Agent&lt;/fen&gt; or a &lt;fen&gt;Cause&lt;/fen&gt; affects the position of an &lt;fen&gt;Item&lt;/fen&gt; on some scale (the &lt;fen&gt;Attribute&lt;/fen&gt;) to change it from an initial value (&lt;fen&gt;Value_1&lt;/fen&gt;) to an end value (&lt;fen&gt;Value_2&lt;/fen&gt;). The direction of the change (&lt;fen&gt;Path&lt;/fen&gt;) can be encoded as well as the magnitude of the change (&lt;fen&gt;Difference&lt;/fen&gt;).
-The rate of change of the value (&lt;fen&gt;Speed&lt;/fen&gt;) can optionally be indicated as well as a second scale (&lt;fen&gt;Co_Variable&lt;/fen&gt;), which the values are correlated with. 
+The rate of change of the value (&lt;fen&gt;Speed&lt;/fen&gt;) can optionally be indicated as well as a second scale (&lt;fen&gt;Co_Variable&lt;/fen&gt;), which the values are correlated with.
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Agent"&gt;The company&lt;/fex&gt; is &lt;t&gt;raising&lt;/t&gt; &lt;fex name="Attribute"&gt;the final dividend&lt;/fex&gt; &lt;fex name="Value_1"&gt;from 4.34p&lt;/fex&gt; &lt;fex name="Value_2"&gt;to 4.57p&lt;/fex&gt;, to boost the total by 5.3 percent to 6.36p.&lt;/ex&gt;
 

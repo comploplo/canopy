@@ -284,11 +284,11 @@ fn test_error_debug_and_display() {
     let error = EngineError::analysis("test".to_string(), "failed".to_string());
 
     // Test Debug formatting
-    let debug_str = format!("{:?}", error);
+    let debug_str = format!("{error:?}");
     assert!(debug_str.contains("AnalysisError"));
 
     // Test Display formatting
-    let display_str = format!("{}", error);
+    let display_str = format!("{error}");
     assert!(display_str.contains("Analysis failed"));
     assert!(display_str.contains("test"));
     assert!(display_str.contains("failed"));

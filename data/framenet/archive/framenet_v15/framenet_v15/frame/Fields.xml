@@ -27,7 +27,7 @@
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="03/02/2005 06:55:09 PST Wed" abbrev="wor" name="Work" ID="7608">
         <definition>&lt;def-root&gt;A phase of a &lt;fen&gt;Practitioner&lt;/fen&gt;'s career that is spent engaged in an &lt;fen&gt;Activity&lt;/fen&gt;.
 
- 
+
 &lt;ex&gt;&lt;fex name="wor"&gt;My most recent job&lt;/fex&gt; was in the construction &lt;t&gt;industry&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Peripheral" cBy="361" cDate="05/29/2008 04:17:38 PDT Thu" abbrev="Typ" name="Type" ID="12681">

@@ -11,7 +11,7 @@
 
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="06/16/2005 05:14:07 PDT Thu" abbrev="cogs" name="Cognizers" ID="8177">
-        <definition>&lt;def-root&gt;This FE marks constituents that express the set of &lt;fen&gt;Cognizers&lt;/fen&gt; whose similarity of opinion is at issue. 
+        <definition>&lt;def-root&gt;This FE marks constituents that express the set of &lt;fen&gt;Cognizers&lt;/fen&gt; whose similarity of opinion is at issue.
 
 &lt;/def-root&gt;</definition>
         <excludesFE name="Cognizer_1" ID="8178"/>

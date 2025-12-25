@@ -5,7 +5,7 @@
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Experimenter"&gt;Johann's&lt;/fex&gt; &lt;t&gt;&lt;fex name="Experiment"&gt;experiment&lt;/fex&gt;&lt;/t&gt; &lt;fex name="Result"&gt;proved the new drug was effective in treating the disease&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt;Jacob placed the &lt;t&gt;&lt;fex name="Control_group"&gt;control group&lt;/fex&gt;&lt;/t&gt; under a strong light for 20 hours each day.&lt;/ex&gt; 
+&lt;ex&gt;Jacob placed the &lt;t&gt;&lt;fex name="Control_group"&gt;control group&lt;/fex&gt;&lt;/t&gt; under a strong light for 20 hours each day.&lt;/ex&gt;
 
 &lt;ex&gt;&lt;fex name="Experimenter"&gt;Rolf&lt;/fex&gt; &lt;t&gt;tested&lt;/t&gt; &lt;fex name="Hyp"&gt;his hypothesis&lt;/fex&gt; &lt;fex name="Place"&gt;in Vienna&lt;/fex&gt; &lt;fex name="Time"&gt;in 1973&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <semType name="Non-perspectivalized_frame" ID="52"/>
@@ -70,7 +70,7 @@
 &lt;ex&gt;Jeff's &lt;t&gt;&lt;fex name="Experiment"&gt;experiment&lt;/fex&gt;&lt;/t&gt;showed the drug to be harmful to human health.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="000000" coreType="Core" cBy="CVa" cDate="11/15/2011 03:51:19 PST Tue" abbrev="Hyp" name="Hypothesis" ID="15302">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Hypothesis&lt;/fen&gt; is a conjecture as to the result of an &lt;fen&gt;Experiment&lt;/fen&gt;.  The &lt;fen&gt;Experiment&lt;/fen&gt; takes place in order to prove the &lt;fen&gt;Hypothesis&lt;/fen&gt; as correct or incorrect.  
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Hypothesis&lt;/fen&gt; is a conjecture as to the result of an &lt;fen&gt;Experiment&lt;/fen&gt;.  The &lt;fen&gt;Experiment&lt;/fen&gt; takes place in order to prove the &lt;fen&gt;Hypothesis&lt;/fen&gt; as correct or incorrect.
 &lt;ex&gt;Katrina &lt;t&gt;tested&lt;/t&gt; &lt;fex name="Hyp"&gt;her hypothesis&lt;/fex&gt; yesterday afternoon. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="EEE8AA" fgColor="000000" coreType="Core" cBy="CVa" cDate="11/16/2011 06:48:19 PST Wed" abbrev="Sub" name="Subjects" ID="15304">

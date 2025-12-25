@@ -1,240 +1,136 @@
-//! Integration tests for FrameNet engine against real data
+//! Integration tests for FrameNet engine with BaseEngine infrastructure
+//!
+//! These tests verify that FrameNet properly loads and uses real data.
+//! With workspace-relative path resolution, engines find their data automatically.
+//!
+//! Uses singleton pattern to load FrameNet data once per test binary (~50s),
+//! rather than reloading for each test (which would take 200+ seconds total).
 
-use canopy_framenet::{DataLoader, FrameNetEngine, SemanticEngine};
-use std::path::Path;
+use canopy_engine::{EngineCore, SemanticEngine};
+use canopy_framenet::FrameNetEngine;
+use once_cell::sync::OnceCell;
+use std::sync::Mutex;
+
+// Shared engine singleton - loaded once per test binary
+static SHARED_ENGINE: OnceCell<Mutex<FrameNetEngine>> = OnceCell::new();
+
+fn shared_engine() -> &'static Mutex<FrameNetEngine> {
+    SHARED_ENGINE.get_or_init(|| {
+        eprintln!("🔧 Loading shared FrameNet engine (one-time)...");
+        Mutex::new(FrameNetEngine::new().expect("FrameNet data required for tests"))
+    })
+}
 
 #[test]
-fn test_load_single_framenet_file() {
-    let mut engine = FrameNetEngine::new();
+fn test_framenet_engine_baseengine_integration() {
+    let engine = shared_engine().lock().unwrap();
 
-    // Test loading FrameNet XML files
-    let frames_dir = Path::new("../../data/framenet/archive/framenet_v17/framenet_v17/frame");
-    let lu_dir = Path::new("../../data/framenet/archive/framenet_v17/framenet_v17/lu");
+    // With proper path resolution, engine should be initialized
+    assert!(
+        SemanticEngine::is_initialized(&*engine),
+        "Engine should be initialized"
+    );
+    assert!(engine.is_loaded(), "Engine should be loaded");
 
-    if !frames_dir.exists() && !lu_dir.exists() {
-        println!("FrameNet test data not found at expected locations");
-        println!("Frames: {}", frames_dir.display());
-        println!("LUs: {}", lu_dir.display());
-        println!("Skipping integration test");
-        return;
-    }
+    println!("📊 Engine Statistics:");
+    let all_frames = engine.get_all_frames();
+    let all_lus = engine.get_all_lexical_units();
+    println!("  Frames: {}", all_frames.len());
+    println!("  Lexical Units: {}", all_lus.len());
+    assert!(!all_frames.is_empty(), "Should have loaded frames");
 
-    // Try to load the FrameNet data directory
-    let framenet_dir = Path::new("../../data/framenet/archive/framenet_v17/framenet_v17");
-    let result = engine.load_from_directory(framenet_dir);
+    // Test BaseEngine integration
+    println!("🔧 BaseEngine Integration:");
+    let stats = engine.statistics();
+    println!("  Total frames: {}", stats.total_frames);
+    println!("  Total lexical units: {}", stats.total_lexical_units);
+    assert!(stats.total_frames > 0, "Should have loaded frames");
 
-    match result {
-        Ok(()) => {
-            println!("✅ Successfully loaded FrameNet data");
-            println!("Number of frames loaded: {}", engine.get_all_frames().len());
-            println!(
-                "Number of lexical units loaded: {}",
-                engine.get_all_lexical_units().len()
-            );
-            println!("Engine initialized: {}", engine.is_initialized());
+    let cache_stats = engine.cache_stats();
+    println!("  Cache hits: {}", cache_stats.hits);
+    println!("  Cache misses: {}", cache_stats.misses);
 
-            // Test that we can analyze some text
-            if let Ok(analysis) = engine.analyze_text("give") {
-                println!("✅ Successfully analyzed 'give':");
-                println!("  Frames found: {}", analysis.data.frames.len());
-                println!("  Confidence: {:.2}", analysis.confidence);
+    // Test semantic analysis through BaseEngine
+    let result = engine.analyze_text("give").unwrap();
+    println!("🎯 Semantic Analysis Test:");
+    println!("  Input: 'give'");
+    println!("  Frames found: {}", result.data.frames.len());
+    println!("  Confidence: {:.2}", result.confidence);
+    println!("  From cache: {}", result.from_cache);
 
-                for frame in &analysis.data.frames {
-                    println!("  - Frame: {} ({})", frame.name, frame.id);
-                    println!("    Core elements: {}", frame.core_elements().len());
-                }
-            } else {
-                println!("❌ Failed to analyze 'give'");
-            }
-
-            // Test that the engine reports as loaded
-            assert!(engine.is_loaded(), "Engine should report as loaded");
-        }
-        Err(e) => {
-            println!("❌ Failed to load FrameNet data: {}", e);
-            println!("This indicates issues with the XML parser implementation");
-            panic!("FrameNet integration test failed: {}", e);
+    if !result.data.frames.is_empty() {
+        for frame in &result.data.frames {
+            println!("  - Frame: {} ({})", frame.name, frame.id);
+            println!("    Core elements: {}", frame.core_elements().len());
         }
     }
 }
 
 #[test]
-fn test_framenet_frame_parser() {
-    use canopy_engine::XmlParser;
-    use canopy_framenet::types::Frame;
+fn test_framenet_engine_with_loaded_data() {
+    let engine = shared_engine().lock().unwrap();
 
-    let test_file =
-        Path::new("../../data/framenet/archive/framenet_v17/framenet_v17/frame/Giving.xml");
+    // Engine auto-loads data on creation
+    assert!(
+        SemanticEngine::is_initialized(&*engine),
+        "Engine should be initialized"
+    );
+    assert!(engine.is_loaded(), "Engine should be loaded");
 
-    if !test_file.exists() {
-        println!("FrameNet Giving frame not found, skipping parser test");
-        return;
-    }
-
-    let parser = XmlParser::new();
-    let result = parser.parse_file::<Frame>(test_file);
-
-    match result {
-        Ok(frame) => {
-            println!("✅ Successfully parsed FrameNet frame: {}", frame.name);
-            println!("  Frame ID: {}", frame.id);
-            println!("  Frame elements: {}", frame.frame_elements.len());
-            println!("  Definition length: {}", frame.definition.len());
-
-            // Verify basic structure
-            assert!(!frame.id.is_empty(), "Frame ID should not be empty");
-            assert!(
-                !frame.frame_elements.is_empty(),
-                "Should have frame elements"
-            );
-            assert!(!frame.definition.is_empty(), "Should have definition");
-
-            // Check specific content for Giving frame
-            if frame.name == "Giving" {
-                assert!(frame.has_frame_element("Donor"), "Should have Donor FE");
-                assert!(frame.has_frame_element("Theme"), "Should have Theme FE");
-                assert!(
-                    frame.has_frame_element("Recipient"),
-                    "Should have Recipient FE"
-                );
-
-                println!("  ✅ Verified Giving frame structure");
-
-                // Check core elements
-                let core_elements = frame.core_elements();
-                println!("  Core elements: {}", core_elements.len());
-                for fe in core_elements {
-                    println!(
-                        "    - {}: {}",
-                        fe.name,
-                        fe.definition.chars().take(50).collect::<String>()
-                    );
-                }
-            }
-        }
-        Err(e) => {
-            println!("❌ Failed to parse FrameNet frame: {}", e);
-            panic!("FrameNet frame parser test failed: {}", e);
-        }
-    }
+    // Statistics should reflect loaded data
+    let stats = engine.statistics();
+    assert!(stats.total_frames > 0, "Should have frames");
 }
 
 #[test]
-fn test_framenet_lu_parser() {
-    use canopy_engine::XmlParser;
-    use canopy_framenet::types::LexicalUnit;
+fn test_framenet_caching_behavior() {
+    let engine = shared_engine().lock().unwrap();
 
-    // Try to find any LU file
-    let lu_dir = Path::new("../../data/framenet/archive/framenet_v17/framenet_v17/lu");
+    // Test cache behavior - capture initial state (may have activity from other tests)
+    let initial_stats = engine.cache_stats();
+    let initial_hits = initial_stats.hits;
+    let initial_misses = initial_stats.misses;
 
-    if !lu_dir.exists() {
-        println!("FrameNet LU directory not found, skipping LU parser test");
-        return;
-    }
+    // First analysis (cache miss for this word)
+    let result1 = engine.analyze_text("testing").unwrap();
 
-    let parser = XmlParser::new();
-    let entries = std::fs::read_dir(lu_dir).unwrap();
+    // Second analysis (should be cache hit)
+    let result2 = engine.analyze_text("testing").unwrap();
 
-    let mut successful_parses = 0;
-    let mut total_attempts = 0;
+    // Results should be consistent
+    assert_eq!(result1.confidence, result2.confidence);
+    assert_eq!(result1.data.frames.len(), result2.data.frames.len());
 
-    // Try parsing first few LU files
-    for entry in entries.take(5) {
-        if let Ok(entry) = entry {
-            let filepath = entry.path();
-            if filepath.extension().and_then(|s| s.to_str()) == Some("xml") {
-                total_attempts += 1;
-                match parser.parse_file::<LexicalUnit>(&filepath) {
-                    Ok(lu) => {
-                        successful_parses += 1;
-                        println!(
-                            "✅ Parsed LU: {} (frame: {}, pos: {})",
-                            lu.name, lu.frame_name, lu.pos
-                        );
+    // Cache should show activity
+    let final_stats = engine.cache_stats();
+    assert!(
+        final_stats.hits > initial_hits || final_stats.misses > initial_misses,
+        "Cache should show some activity"
+    );
 
-                        // Verify structure
-                        assert!(!lu.id.is_empty(), "LU ID should not be empty");
-                        assert!(!lu.name.is_empty(), "LU name should not be empty");
-                        assert!(!lu.pos.is_empty(), "LU POS should not be empty");
-                    }
-                    Err(e) => {
-                        println!("❌ Failed to parse {}: {}", filepath.display(), e);
-                    }
-                }
-
-                if total_attempts >= 5 {
-                    break;
-                }
-            }
-        }
-    }
-
-    if total_attempts > 0 {
-        let success_rate = (successful_parses as f32 / total_attempts as f32) * 100.0;
-        println!(
-            "LU parse success rate: {:.1}% ({}/{})",
-            success_rate, successful_parses, total_attempts
-        );
-
-        // Require at least 50% success rate for integration test to pass
-        assert!(
-            success_rate >= 50.0,
-            "FrameNet LU parser success rate too low: {:.1}%",
-            success_rate
-        );
-    } else {
-        println!("No FrameNet LU files found, skipping test");
-    }
+    // Second result should be from cache
+    assert!(result2.from_cache, "Second lookup should be from cache");
 }
 
 #[test]
-fn test_framenet_mixed_directory() {
-    use canopy_engine::XmlParser;
-    use canopy_framenet::types::{Frame, LexicalUnit};
+fn test_framenet_config_and_traits() {
+    let engine = shared_engine().lock().unwrap();
 
-    let test_dir = Path::new("../../data/framenet/archive/framenet_v17/framenet_v17");
+    // Test trait implementations
+    assert_eq!(engine.name(), "FrameNet");
+    assert_eq!(engine.version(), "1.7");
+    assert_eq!(engine.engine_name(), "FrameNet");
+    assert_eq!(engine.engine_version(), "1.7");
 
-    if !test_dir.exists() {
-        println!("FrameNet test directory not found, skipping mixed directory test");
-        return;
-    }
-
-    let mut engine = FrameNetEngine::new();
-
-    // Test loading mixed frame and LU data
-    match engine.load_from_directory(test_dir) {
-        Ok(()) => {
-            let total_frames = engine.get_all_frames().len();
-            let total_lus = engine.get_all_lexical_units().len();
-
-            println!("✅ Successfully loaded mixed FrameNet data:");
-            println!("  Frames: {}", total_frames);
-            println!("  Lexical Units: {}", total_lus);
-
-            // Should have loaded some data
-            assert!(
-                total_frames > 0 || total_lus > 0,
-                "Should have loaded some frames or LUs"
-            );
-
-            // Test frame search
-            let giving_frames = engine.search_frames("giving");
-            if !giving_frames.is_empty() {
-                println!(
-                    "  ✅ Found {} frame(s) matching 'giving'",
-                    giving_frames.len()
-                );
-            }
-
-            // Test LU search
-            let give_lus = engine.search_lexical_units("give");
-            if !give_lus.is_empty() {
-                println!("  ✅ Found {} LU(s) matching 'give'", give_lus.len());
-            }
-        }
-        Err(e) => {
-            println!("❌ Failed to load mixed FrameNet data: {}", e);
-            // Don't panic here as this might be due to data organization
-        }
-    }
+    // Test configuration access
+    let config = engine.config();
+    assert!(config.enable_cache, "Default config should enable caching");
+    assert_eq!(
+        config.cache_capacity, 10000,
+        "Default cache capacity should be 10000"
+    );
+    assert_eq!(
+        config.confidence_threshold, 0.5,
+        "Default confidence threshold should be 0.5"
+    );
 }

@@ -58,22 +58,23 @@ repos:
     rev: v4.6.0
     hooks:
       - id: trailing-whitespace
-        exclude: '\.snap$|^data/verbnet/.*\.xml$'  # Don't modify insta snapshots or VerbNet XML files
+        exclude: '\.snap$|^data/'  # Don't modify insta snapshots or data files
       - id: end-of-file-fixer
-        exclude: '\.snap$|^data/verbnet/.*\.xml$'  # Don't modify insta snapshots or VerbNet XML files
+        exclude: '\.snap$|^data/'  # Don't modify insta snapshots or data files
       - id: check-yaml
       - id: check-toml
       - id: check-merge-conflict
       - id: check-added-large-files
         args: [--maxkb=1000]
 
-  # Markdown formatting (dprint temporarily disabled - config issue)
-  # - repo: https://github.com/dprint/dprint
-  #   rev: 0.47.2
-  #   hooks:
-  #     - id: dprint
-  #       types: [markdown]
-  #       exclude: '^(CHANGELOG\.md|\.serena/.*\.md|data/verbnet/.*\.md)$'
+  # Markdown formatting with mdformat
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.21
+    hooks:
+      - id: mdformat
+        additional_dependencies:
+          - mdformat-gfm  # GitHub Flavored Markdown support
+        exclude: '^(CHANGELOG\.md|\.serena/.*\.md|data/.*\.md)$'
 
 
 # Performance and Quality Standards

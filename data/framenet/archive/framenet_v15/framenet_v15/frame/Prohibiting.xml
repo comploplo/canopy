@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="296" cDate="01/23/2003 02:22:41 PST Thu" name="Prohibiting" ID="521" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;State_of_affairs&lt;/fen&gt; is prohibited by a &lt;fen&gt;Principle&lt;/fen&gt;. Raising constructions are common in this frame. In this frame the &lt;fen&gt;Principle&lt;/fen&gt; which prohibits the &lt;fen&gt;State_of_affairs&lt;/fen&gt; is not an agent who denies permission to a specific individual or group of individuals, and thus differs from the Authority in the Deny_permission frame. 
+    <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;State_of_affairs&lt;/fen&gt; is prohibited by a &lt;fen&gt;Principle&lt;/fen&gt;. Raising constructions are common in this frame. In this frame the &lt;fen&gt;Principle&lt;/fen&gt; which prohibits the &lt;fen&gt;State_of_affairs&lt;/fen&gt; is not an agent who denies permission to a specific individual or group of individuals, and thus differs from the Authority in the Deny_permission frame.
 
-&lt;ex&gt; &lt;fex name="State_of_affairs"&gt;Guns&lt;/fex&gt; were &lt;t&gt;prohibited&lt;/t&gt; &lt;fex name="State_of_affairs"&gt;in the airport&lt;/fex&gt; .&lt;/ex&gt; 
+&lt;ex&gt; &lt;fex name="State_of_affairs"&gt;Guns&lt;/fex&gt; were &lt;t&gt;prohibited&lt;/t&gt; &lt;fex name="State_of_affairs"&gt;in the airport&lt;/fex&gt; .&lt;/ex&gt;
 &lt;ex&gt; &lt;fex name="Principle"&gt;Code 1425&lt;/fex&gt; &lt;t&gt;bans&lt;/t&gt; &lt;fex name="State_of_affairs"&gt;large trucks&lt;/fex&gt; &lt;fex name="State_of_affairs"&gt;in the tunnel&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="01/23/2003 02:27:34 PST Thu" abbrev="" name="State_of_affairs" ID="4124">
         <definition>&lt;def-root&gt;&lt;/def-root&gt;</definition>

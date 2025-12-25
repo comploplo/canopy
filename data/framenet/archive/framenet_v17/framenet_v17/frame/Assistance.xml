@@ -37,7 +37,7 @@ This Frame has unique Frame-to-Frame Relations: it inherits from and uses the In
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="Pam" cDate="01/21/2005 03:10:24 PST Fri" abbrev="Mnr" name="Manner" ID="7445">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Manner&lt;/fen&gt; in which a &lt;fen&gt;Helper&lt;/fen&gt; assists a &lt;fen&gt;Benefited_party&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Manner&lt;/fen&gt; in which a &lt;fen&gt;Helper&lt;/fen&gt; assists a &lt;fen&gt;Benefited_party&lt;/fen&gt;.
 
 &lt;ex&gt;The doorman &lt;t&gt;assisted&lt;/t&gt; Harry into the car &lt;fex name="Manner"&gt;with enthusiasm&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

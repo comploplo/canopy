@@ -7,7 +7,7 @@
 
 &lt;ex&gt;&lt;fex name="Potential_hindrance"&gt;Our lonely city&lt;/fex&gt; &lt;t&gt;starves&lt;/t&gt; &lt;fex name="Protagonist"&gt;us&lt;/fex&gt; &lt;fex name="State_of_affairs"&gt;of original live music&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt;&lt;fex name="Protagonist"&gt;Employees&lt;/fex&gt; were &lt;t&gt;denied&lt;/t&gt; &lt;fex name="State_of_affairs"&gt;overtime pay and meal breaks&lt;/fex&gt;. &lt;fex name="Agent"&gt;CNI&lt;/fex&gt; &lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Protagonist"&gt;Employees&lt;/fex&gt; were &lt;t&gt;denied&lt;/t&gt; &lt;fex name="State_of_affairs"&gt;overtime pay and meal breaks&lt;/fex&gt;. &lt;fex name="Agent"&gt;CNI&lt;/fex&gt; &lt;/ex&gt;
 &lt;ex&gt;&lt;t&gt;Allow&lt;/t&gt; &lt;fex name="Protagonist"&gt;me&lt;/fex&gt; &lt;fex name="State_of_affairs"&gt;just one more cupcake&lt;/fex&gt; ! &lt;fex name="Agent"&gt;CNI&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Core" cBy="KmG" cDate="04/25/2008 04:46:16 PDT Fri" abbrev="Pre" name="Potential_hindrance" ID="12602">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Potential_hindrance&lt;/fen&gt; is the force which keeps the &lt;fen&gt;Event&lt;/fen&gt; from happening, or does not prevent it.

@@ -113,7 +113,7 @@
         <lexeme order="1" headword="false" breakBefore="false" POS="PREP" name="by"/>
     </lexUnit>
     <lexUnit status="Created" POS="N" name="tactic.n" ID="13570" lemmaID="39372" cBy="MJE" cDate="09/18/2006 06:55:19 PDT Mon">
-        <definition>COD: an action or strategy carefully planned to achieve a specific end. 
+        <definition>COD: an action or strategy carefully planned to achieve a specific end.
 
 
 </definition>

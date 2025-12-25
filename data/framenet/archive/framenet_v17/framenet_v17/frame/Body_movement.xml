@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:11:49 PST Wed" name="Body_movement" ID="16" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame contains words for motions or actions an &lt;fen&gt;Agent&lt;/fen&gt; performs using some part of his/her body. 
+    <definition>&lt;def-root&gt;This frame contains words for motions or actions an &lt;fen&gt;Agent&lt;/fen&gt; performs using some part of his/her body.
 
-A number of words in this frame occur as blends with Communication, in which the action has an &lt;fen&gt;Addressee&lt;/fen&gt;.  For example, 
+A number of words in this frame occur as blends with Communication, in which the action has an &lt;fen&gt;Addressee&lt;/fen&gt;.  For example,
 
 &lt;ex&gt;Pat &lt;t&gt;nodded&lt;/t&gt; &lt;fex name="Addressee"&gt;at Kim&lt;/fex&gt;.&lt;/ex&gt;
 
-These examples differ from Communication.Gesture in that no specific message need be expressed, as in 
+These examples differ from Communication.Gesture in that no specific message need be expressed, as in
 &lt;ex&gt;She &lt;t&gt;nodded&lt;/t&gt; to him to sit down.&lt;/ex&gt;
 
-Since this frame involves a particular type of motion, it contains the frame elements &lt;fen&gt;Source&lt;/fen&gt;, &lt;fen&gt;Path&lt;/fen&gt;, &lt;fen&gt;Goal&lt;/fen&gt; and &lt;fen&gt;Area&lt;/fen&gt;, which originate in the motion frame.  All of these frame elements are generally expressed in PP Complements. 
+Since this frame involves a particular type of motion, it contains the frame elements &lt;fen&gt;Source&lt;/fen&gt;, &lt;fen&gt;Path&lt;/fen&gt;, &lt;fen&gt;Goal&lt;/fen&gt; and &lt;fen&gt;Area&lt;/fen&gt;, which originate in the motion frame.  All of these frame elements are generally expressed in PP Complements.
 &lt;ex&gt;The boy &lt;t&gt;swung&lt;/t&gt; his legs &lt;fex name="Source"&gt;from under the table&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:49 PST Wed" abbrev="Agt" name="Agent" ID="68">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Agent&lt;/fen&gt; uses some part of his/her body to perform the action. &lt;fen&gt;Agent&lt;/fen&gt; occurs as the External Argument.
@@ -18,13 +18,13 @@ Since this frame involves a particular type of motion, it contains the frame ele
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="7CCD73" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:49 PST Wed" abbrev="BodP" name="Body_part" ID="69">
-        <definition>&lt;def-root&gt;With some verbs in this frame, the &lt;fen&gt;Body_part&lt;/fen&gt; involved in the action is specified by the meaning of the verb and cannot be expressed separately.  For example, 
-&lt;ex&gt;Pat &lt;t&gt;yawned&lt;/t&gt; (*his mouth).&lt;/ex&gt; 
+        <definition>&lt;def-root&gt;With some verbs in this frame, the &lt;fen&gt;Body_part&lt;/fen&gt; involved in the action is specified by the meaning of the verb and cannot be expressed separately.  For example,
+&lt;ex&gt;Pat &lt;t&gt;yawned&lt;/t&gt; (*his mouth).&lt;/ex&gt;
 With others, the &lt;fen&gt;Body_part&lt;/fen&gt; is specified by the verb but can optionally be expressed separately, although its presence is generally redundant, as in
 &lt;ex&gt;Pat &lt;t&gt;nodded&lt;/t&gt; &lt;fex name="BodP"&gt;(his head)&lt;/fex&gt;.&lt;/ex&gt;
  A few verbs have a default &lt;fen&gt;Body_part&lt;/fen&gt; which need not be expressed, but can be overridden by the expression of some other &lt;fen&gt;Body_part&lt;/fen&gt;.
 &lt;ex&gt;Pat &lt;t&gt;waved&lt;/t&gt; &lt;fex name="BodP"&gt;(his arms)&lt;/fex&gt;.&lt;/ex&gt;
-(The objectless version of the sentence, &lt;ment&gt;Pat waved&lt;/ment&gt;, is a blend with communication.) The remainder of the verbs require a &lt;fen&gt;Body_part&lt;/fen&gt; to be expressed in a separate constituent: 
+(The objectless version of the sentence, &lt;ment&gt;Pat waved&lt;/ment&gt;, is a blend with communication.) The remainder of the verbs require a &lt;fen&gt;Body_part&lt;/fen&gt; to be expressed in a separate constituent:
 &lt;ex&gt;Pat &lt;t&gt;rolled&lt;/t&gt; &lt;fex name="BodP"&gt;his eyes&lt;/fex&gt;.&lt;/ex&gt;
 &lt;fen&gt;Body_part&lt;/fen&gt; generally occurs as the direct object. &lt;/def-root&gt;</definition>
         <semType name="Body_part" ID="10"/>
@@ -42,7 +42,7 @@ With others, the &lt;fen&gt;Body_part&lt;/fen&gt; is specified by the verb but c
 &lt;fen&gt;Cause&lt;/fen&gt; does not include any physical force moving the &lt;fen&gt;Agent&lt;/fen&gt;'s &lt;fen&gt;Body_part&lt;/fen&gt;.  This type of situation is described by the frame Motion.Cause-to-move. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="ChW" cDate="02/07/2001 04:11:50 PST Wed" abbrev="Add" name="Addressee" ID="72">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Addressee&lt;/fen&gt; only occurs in the Body-movement frame in sentences which are blends with Communication.  Where it occurs, it is typically a PP Complement: 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Addressee&lt;/fen&gt; only occurs in the Body-movement frame in sentences which are blends with Communication.  Where it occurs, it is typically a PP Complement:
 &lt;ex&gt;Pat &lt;t&gt;fluttered&lt;/t&gt; his eyelashes &lt;fex name="Add"&gt;at me&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
@@ -57,7 +57,7 @@ With others, the &lt;fen&gt;Body_part&lt;/fen&gt; is specified by the verb but c
 &lt;ex&gt;Pat &lt;t&gt;flung&lt;/t&gt; his arms &lt;fex name="Path"&gt;up&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="ChW" cDate="02/07/2001 04:11:50 PST Wed" abbrev="Goal" name="Goal" ID="75">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Goal&lt;/fen&gt; is any expression that identifies the endpoint of movement. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Goal&lt;/fen&gt; is any expression that identifies the endpoint of movement.
 
 &lt;ex&gt;Pat &lt;t&gt;dropped&lt;/t&gt; her hands &lt;fex name="Goal"&gt;to her lap&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>

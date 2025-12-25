@@ -18,7 +18,7 @@
         <semType name="Physical_object" ID="68"/>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="RLG" cDate="09/30/2011 01:32:47 PDT Fri" abbrev="Mnr" name="Manner" ID="15116">
-        <definition>&lt;def-root&gt;Any description of the release which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the release which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 
 &lt;ex&gt;The police &lt;t&gt;freed&lt;/t&gt; the suspect &lt;fex name="Manner"&gt;carefully&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

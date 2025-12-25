@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:11:43 PST Wed" name="Duplication" ID="11" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame involves a &lt;fen&gt;Creator&lt;/fen&gt; making a duplicate, the &lt;fen&gt;Copy&lt;/fen&gt;, of some &lt;fen&gt;Original&lt;/fen&gt; entity.  A &lt;fen&gt;Source&lt;/fen&gt;, the location of the &lt;fen&gt;Original&lt;/fen&gt;, and &lt;fen&gt;Goal&lt;/fen&gt;, the location of the &lt;fen&gt;Copy&lt;/fen&gt;, may be expressed. 
+    <definition>&lt;def-root&gt;This frame involves a &lt;fen&gt;Creator&lt;/fen&gt; making a duplicate, the &lt;fen&gt;Copy&lt;/fen&gt;, of some &lt;fen&gt;Original&lt;/fen&gt; entity.  A &lt;fen&gt;Source&lt;/fen&gt;, the location of the &lt;fen&gt;Original&lt;/fen&gt;, and &lt;fen&gt;Goal&lt;/fen&gt;, the location of the &lt;fen&gt;Copy&lt;/fen&gt;, may be expressed.
 
 &lt;ex&gt;&lt;fex name="Creator"&gt;The teacher&lt;/fex&gt; &lt;t&gt;copied&lt;/t&gt; &lt;fex name="Original"&gt;the problem&lt;/fex&gt; &lt;fex name="Goal"&gt;onto the blackboard&lt;/fex&gt;.&lt;/ex&gt;
 
@@ -29,8 +29,8 @@
     </FE>
     <FE bgColor="7FFF00" fgColor="000000" coreType="Extra-Thematic" cBy="MJE" cDate="03/09/2001 02:22:40 PST Fri" abbrev="Char" name="Characterization" ID="430">
         <definition>&lt;def-root&gt;This FE designates the character of the medium in which a &lt;fen&gt;Copy&lt;/fen&gt; is made. Usually, it is expressed as PP-in or AP.
-&lt;ex&gt;They sold a million &lt;t&gt;copies&lt;/t&gt; &lt;fex name="Char"&gt;in hardback&lt;/fex&gt;.&lt;/ex&gt; 
-&lt;ex&gt;Opposite is Pilinsky's &lt;fex name="Char"&gt;wood-engraved&lt;/fex&gt; &lt;t&gt;copy&lt;/t&gt;.&lt;/ex&gt; 
+&lt;ex&gt;They sold a million &lt;t&gt;copies&lt;/t&gt; &lt;fex name="Char"&gt;in hardback&lt;/fex&gt;.&lt;/ex&gt;
+&lt;ex&gt;Opposite is Pilinsky's &lt;fex name="Char"&gt;wood-engraved&lt;/fex&gt; &lt;t&gt;copy&lt;/t&gt;.&lt;/ex&gt;
 &lt;ex&gt;The margins are covered in &lt;t&gt;copies&lt;/t&gt; of the works of Shelley &lt;fex name="Char"&gt;in Joan's handwriting&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Peripheral" cBy="BoC" cDate="07/02/2001 09:32:26 PDT Mon" abbrev="Mns" name="Means" ID="1205">

@@ -6,7 +6,7 @@
 &lt;ex&gt;&lt;fex name="Speaker"&gt;The customer&lt;/fex&gt; &lt;t&gt;demanded&lt;/t&gt; &lt;fex name="Msg"&gt;a refund&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Speaker"&gt;I&lt;/fex&gt; &lt;t&gt;begged&lt;/t&gt; &lt;fex name="Addressee"&gt;my parents&lt;/fex&gt; &lt;fex name="Message"&gt;to let me stay up late.&lt;/fex&gt;&lt;/ex&gt; &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:03 PST Wed" abbrev="Spkr" name="Speaker" ID="172">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Speaker&lt;/fen&gt;, as in other communication frames, is generally an External Argument. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Speaker&lt;/fen&gt;, as in other communication frames, is generally an External Argument.
 
 &lt;ex&gt;&lt;fex name="Speaker"&gt;The judge&lt;/fex&gt; &lt;t&gt;ordered&lt;/t&gt; the plaintiff to return the money.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
@@ -34,7 +34,7 @@
 &lt;ex&gt;Max offered a &lt;t&gt;suggestion&lt;/t&gt; &lt;fex name="Topic"&gt;about completing the work&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:04 PST Wed" abbrev="Medium" name="Medium" ID="176">
-        <definition>&lt;def-root&gt;The &lt;fex name="Medium"&gt;&lt;/fex&gt; is the physical entity or channel used to transmit the &lt;fen&gt;Message&lt;/fen&gt;. The &lt;fen&gt;Medium&lt;/fen&gt; is frequently expressed as a PP Complement headed by &lt;ment&gt;on&lt;/ment&gt; or &lt;ment&gt;in&lt;/ment&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fex name="Medium"&gt;&lt;/fex&gt; is the physical entity or channel used to transmit the &lt;fen&gt;Message&lt;/fen&gt;. The &lt;fen&gt;Medium&lt;/fen&gt; is frequently expressed as a PP Complement headed by &lt;ment&gt;on&lt;/ment&gt; or &lt;ment&gt;in&lt;/ment&gt;.
 &lt;ex&gt;The parents of the missing child made an &lt;t&gt;appeal&lt;/t&gt; &lt;fex name="Medium"&gt;on television&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;The parents of the missing child made an &lt;t&gt;appeal&lt;/t&gt; &lt;fex name="Medium"&gt;in the papers&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

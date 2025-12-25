@@ -22,5 +22,3 @@ VERBNET_PATH_3.3 = path/to/verbnet_version3.3
 
 FRAMENET_MAPPING_PATH = path/to/framenet_mapping_file
 ```
-
-

@@ -7,7 +7,7 @@
 &lt;/def-root&gt;</definition>
     <semType name="Non-perspectivalized_frame" ID="52"/>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="11/08/2002 02:56:28 PST Fri" abbrev="Agt" name="Agent" ID="3880">
-        <definition>&lt;def-root&gt;The conscious entity, generally a person, that moves the &lt;fen&gt;Goods&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;The conscious entity, generally a person, that moves the &lt;fen&gt;Goods&lt;/fen&gt;.
 &lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>

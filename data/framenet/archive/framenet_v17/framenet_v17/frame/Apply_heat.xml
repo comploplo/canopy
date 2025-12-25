@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="KCo" cDate="10/03/2001 05:32:57 PDT Wed" name="Apply_heat" ID="236" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Cook&lt;/fen&gt; applies heat to &lt;fen&gt;Food&lt;/fen&gt;, where the &lt;fen&gt;Temperature_setting&lt;/fen&gt; of the heat and &lt;fen&gt;Duration&lt;/fen&gt; of application may be specified.  A &lt;fen&gt;Heating_instrument&lt;/fen&gt;, generally indicated by a locative phrase, may also be expressed. Some cooking methods involve the use of a &lt;fen&gt;Medium&lt;/fen&gt; (e.g. milk or water) by which heat is transferred to the &lt;fen&gt;Food&lt;/fen&gt;.  A less semantically prominent &lt;fen&gt;Food&lt;/fen&gt; or &lt;fen&gt;Cook&lt;/fen&gt; is marked &lt;fen&gt;Co-participant&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Cook&lt;/fen&gt; applies heat to &lt;fen&gt;Food&lt;/fen&gt;, where the &lt;fen&gt;Temperature_setting&lt;/fen&gt; of the heat and &lt;fen&gt;Duration&lt;/fen&gt; of application may be specified.  A &lt;fen&gt;Heating_instrument&lt;/fen&gt;, generally indicated by a locative phrase, may also be expressed. Some cooking methods involve the use of a &lt;fen&gt;Medium&lt;/fen&gt; (e.g. milk or water) by which heat is transferred to the &lt;fen&gt;Food&lt;/fen&gt;.  A less semantically prominent &lt;fen&gt;Food&lt;/fen&gt; or &lt;fen&gt;Cook&lt;/fen&gt; is marked &lt;fen&gt;Co-participant&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Cook"&gt;Sally&lt;/fex&gt; &lt;t&gt;fried&lt;/t&gt; &lt;fex name="Food"&gt;an egg&lt;/fex&gt; &lt;fex name="Medium"&gt;in butter&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Cook"&gt;Sally&lt;/fex&gt; &lt;t&gt;fried&lt;/t&gt; &lt;fex name="Food"&gt;an egg&lt;/fex&gt; &lt;fex name="Heating_instrument"&gt;in a teflon pan&lt;/fex&gt;.&lt;/ex&gt;
@@ -13,7 +13,7 @@ This frame differs from Cooking_creation in focusing on the process of handling 
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Core" cBy="KCo" cDate="10/03/2001 05:37:28 PDT Wed" abbrev="Heat_instr" name="Heating_instrument" ID="2028">
-        <definition>&lt;def-root&gt;This FE identifes the entity that  directly supplies heat to the &lt;fen&gt;Food&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;This FE identifes the entity that  directly supplies heat to the &lt;fen&gt;Food&lt;/fen&gt;.
 &lt;ex&gt;Jim &lt;t&gt;browned&lt;/t&gt; the roast &lt;fex name="Heat_instr"&gt;in the oven&lt;/fex&gt;.&lt;/ex&gt;
 
 This FE will take precedence over &lt;fen&gt;Container&lt;/fen&gt; when both are expressed in the same constituent.  For example:
@@ -68,7 +68,7 @@ This FE will take precedence over &lt;fen&gt;Container&lt;/fen&gt; when both are
         <semType name="Degree" ID="172"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="KCo" cDate="10/04/2001 01:47:38 PDT Thu" abbrev="Manr" name="Manner" ID="2042">
-        <definition>&lt;def-root&gt;Any description of the cooking event which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Cook&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the cooking event which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Cook&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 &lt;ex&gt;&lt;t&gt;Saute&lt;/t&gt; the onions &lt;fex name="Manner"&gt;gently&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

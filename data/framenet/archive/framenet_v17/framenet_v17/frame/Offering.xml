@@ -39,7 +39,7 @@
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="RLG" cDate="03/08/2010 11:31:54 PST Mon" abbrev="cir" name="Circumstances" ID="13666">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; are the conditions under which the &lt;fen&gt;Theme&lt;/fen&gt; is offered. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; are the conditions under which the &lt;fen&gt;Theme&lt;/fen&gt; is offered.
 
 &lt;ex&gt;&lt;fex name="Offerer"&gt;I&lt;/fex&gt; &lt;t&gt;offer&lt;/t&gt; &lt;fex name="Theme"&gt;my services&lt;/fex&gt; &lt;fex name="Circumstances"&gt;free of charge&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

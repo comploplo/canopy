@@ -10,13 +10,13 @@
 
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="08/25/2005 04:52:00 PDT Thu" abbrev="com" name="Communicator" ID="8989">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Communicator&lt;/fen&gt; is the person who expresses the &lt;fen&gt;Content&lt;/fen&gt; (whether spoken or written).  
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Communicator&lt;/fen&gt; is the person who expresses the &lt;fen&gt;Content&lt;/fen&gt; (whether spoken or written).
 
 &lt;ex&gt;&lt;fex name="com"&gt;Reagan&lt;/fex&gt; &lt;t&gt;gave voice&lt;/t&gt; to the innate patriotism of the American people.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="08/25/2005 04:52:00 PDT Thu" abbrev="Add" name="Addressee" ID="8990">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; is the person to whom the &lt;fen&gt;Content&lt;/fen&gt; is communicated. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; is the person to whom the &lt;fen&gt;Content&lt;/fen&gt; is communicated.
 
 &lt;ex&gt;After waiting 2-hours for his appointment, Kiyosaki &lt;t&gt;vented&lt;/t&gt; his frustration &lt;fex name="Add"&gt;to
 his rich dad&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
@@ -29,7 +29,7 @@ his rich dad&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Content" ID="55"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="08/25/2005 04:52:00 PDT Thu" abbrev="Manr" name="Manner" ID="8993">
-        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including force (&lt;ment&gt;hard&lt;/ment&gt;, &lt;ment&gt;softly&lt;/ment&gt;), secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may also indicate salient characteristics of the &lt;fen&gt;Communicator&lt;/fen&gt; that also affect the action (&lt;ment&gt;eagerly&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including force (&lt;ment&gt;hard&lt;/ment&gt;, &lt;ment&gt;softly&lt;/ment&gt;), secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may also indicate salient characteristics of the &lt;fen&gt;Communicator&lt;/fen&gt; that also affect the action (&lt;ment&gt;eagerly&lt;/ment&gt;).
 
 &lt;ex&gt;The girl's grandfather's body was frail but his ideas were strong and his voice
 rose as he &lt;fex name="Manr"&gt;furiously&lt;/fex&gt; &lt;t&gt;expressed&lt;/t&gt; his ideas.&lt;/ex&gt;&lt;/def-root&gt;</definition>
@@ -83,7 +83,7 @@ ire &lt;fex name="Dep"&gt;with full passion&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="7FFF00" fgColor="000000" coreType="Extra-Thematic" cBy="303" cDate="09/09/2005 03:30:23 PDT Fri" abbrev="" name="Frequency" ID="9081">
-        <definition>&lt;def-root&gt;This frame element is defined as the number of times an event occurs per some unit of time. 
+        <definition>&lt;def-root&gt;This frame element is defined as the number of times an event occurs per some unit of time.
 
 &lt;ex&gt;An important policy matter which has been &lt;t&gt;aired&lt;/t&gt; &lt;fex name="Frequency"&gt;occasionally&lt;/fex&gt; in recent years is the size of academic library collections , compared with the amount of use they receive .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -93,7 +93,7 @@ ire &lt;fex name="Dep"&gt;with full passion&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root
 &lt;ex&gt;&lt;fex name="cir"&gt;With half the opposition in exile&lt;/fex&gt;, hardly anyone dared &lt;t&gt;give&lt;/t&gt; &lt;t&gt;voice&lt;/t&gt; to their deep misgivings .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="664" cDate="10/20/2005 12:07:39 PDT Thu" abbrev="exp" name="Explanation" ID="9151">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the particular public expression logically follows. This often means that the &lt;fen&gt;Explanation&lt;/fen&gt; causes the expression, but not in all cases. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the particular public expression logically follows. This often means that the &lt;fen&gt;Explanation&lt;/fen&gt; causes the expression, but not in all cases.
 
 &lt;ex&gt;The mute had to &lt;t&gt;voice&lt;/t&gt; the concerns of her community &lt;fex name="exp"&gt;because there was no-one else to do so&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

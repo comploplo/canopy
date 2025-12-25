@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="731" cDate="02/07/2001 04:12:06 PST Wed" name="Emotion_active" ID="45" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame has similarities to Experiencer_subject, but here the verbs are more 'active' in meaning. (For example, they often occur in negative imperatives, e.g. "Don't worry!'').  They also differ from Experiencer_subject verbs in that they occur with &lt;fen&gt;Topic&lt;/fen&gt; expressions and  can be used in the present progressive: 
-&lt;ex&gt;Pat is still &lt;t&gt;worrying&lt;/t&gt; &lt;fex name="Topic"&gt;about the exam&lt;/fex&gt;.&lt;/ex&gt; 
+    <definition>&lt;def-root&gt;This frame has similarities to Experiencer_subject, but here the verbs are more 'active' in meaning. (For example, they often occur in negative imperatives, e.g. "Don't worry!'').  They also differ from Experiencer_subject verbs in that they occur with &lt;fen&gt;Topic&lt;/fen&gt; expressions and  can be used in the present progressive:
+&lt;ex&gt;Pat is still &lt;t&gt;worrying&lt;/t&gt; &lt;fex name="Topic"&gt;about the exam&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ment&gt;*Pat is fearing the exam.&lt;/ment&gt;
 This frame can be thought of as a blend of a basic emotion frame with Cogitation. &lt;/def-root&gt;</definition>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:06 PST Wed" abbrev="Exp" name="Experiencer" ID="192">

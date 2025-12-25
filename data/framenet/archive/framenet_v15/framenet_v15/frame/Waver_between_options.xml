@@ -31,7 +31,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="07/19/2005 09:03:50 PDT Tue" abbrev="Place" name="Place" ID="8657">
-        <definition>&lt;def-root&gt;This FE identifies the&lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Cognizer&lt;/fen&gt; keeps changing their mind between the &lt;fen&gt;Options&lt;/fen&gt; that present themselves. 
+        <definition>&lt;def-root&gt;This FE identifies the&lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Cognizer&lt;/fen&gt; keeps changing their mind between the &lt;fen&gt;Options&lt;/fen&gt; that present themselves.
 
 &lt;ex&gt;Do they know better than us that our &lt;t&gt;dithering&lt;/t&gt; &lt;fex name="Place"&gt;at the UN&lt;/fex&gt; gave Saddam time to hide, destroy, and shuffle his weapons programs?&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Locative_relation" ID="182"/>

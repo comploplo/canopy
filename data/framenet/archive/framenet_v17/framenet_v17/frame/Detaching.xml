@@ -36,7 +36,7 @@
 Notice that when the FE &lt;fen&gt;Items&lt;/fen&gt; occurs, neither &lt;fen&gt;Item&lt;/fen&gt; nor &lt;fen&gt;Source&lt;/fen&gt; can occur.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="04/15/2005 04:19:50 PDT Fri" abbrev="Mns" name="Means" ID="7810">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Means&lt;/fen&gt; by which an &lt;fen&gt;Agent&lt;/fen&gt; detaches an &lt;fen&gt;Item&lt;/fen&gt; or &lt;fen&gt;Items&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Means&lt;/fen&gt; by which an &lt;fen&gt;Agent&lt;/fen&gt; detaches an &lt;fen&gt;Item&lt;/fen&gt; or &lt;fen&gt;Items&lt;/fen&gt;.
 
 &lt;ex&gt;I must have &lt;t&gt;detached&lt;/t&gt; the macro lens &lt;fex name="Mns"&gt;by dragging my octopus hose over the camera as I was preparing to submerge&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
@@ -48,13 +48,13 @@ Notice that when the FE &lt;fen&gt;Items&lt;/fen&gt; occurs, neither &lt;fen&gt;
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="04/15/2005 04:19:50 PDT Fri" abbrev="Place" name="Place" ID="7812">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Agent&lt;/fen&gt; detaches an &lt;fen&gt;Item&lt;/fen&gt; or &lt;fen&gt;Items&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Agent&lt;/fen&gt; detaches an &lt;fen&gt;Item&lt;/fen&gt; or &lt;fen&gt;Items&lt;/fen&gt;.
 
 &lt;/def-root&gt;</definition>
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="04/15/2005 04:19:50 PDT Fri" abbrev="Purp" name="Purpose" ID="7813">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Purpose&lt;/fen&gt; for which an &lt;fen&gt;Agent&lt;/fen&gt; intentionally detaches an &lt;fen&gt;Item&lt;/fen&gt; or &lt;fen&gt;Items&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Purpose&lt;/fen&gt; for which an &lt;fen&gt;Agent&lt;/fen&gt; intentionally detaches an &lt;fen&gt;Item&lt;/fen&gt; or &lt;fen&gt;Items&lt;/fen&gt;.
 
 &lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

@@ -48,7 +48,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="05/07/2004 03:46:17 PDT Fri" abbrev="man" name="Manner" ID="6414">
-        <definition>&lt;def-root&gt;Any description of the &lt;fen&gt;Misdeed&lt;/fen&gt; which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of a &lt;fen&gt;Wrongdoer&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously&lt;/ment&gt;, &lt;ment&gt;coldly&lt;/ment&gt;, &lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;).        
+        <definition>&lt;def-root&gt;Any description of the &lt;fen&gt;Misdeed&lt;/fen&gt; which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of a &lt;fen&gt;Wrongdoer&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously&lt;/ment&gt;, &lt;ment&gt;coldly&lt;/ment&gt;, &lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;).
 
 &lt;ex&gt;Many years of &lt;fex name="man"&gt;quiet&lt;/fex&gt; &lt;t&gt;transgressions&lt;/t&gt; later, he found he no longer knew if it was truly wrong.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

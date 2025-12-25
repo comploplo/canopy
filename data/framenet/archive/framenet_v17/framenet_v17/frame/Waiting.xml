@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="JKR" cDate="07/14/2005 04:13:37 PDT Thu" name="Waiting" ID="1561" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Protagonist&lt;/fen&gt; delays a planned action because they cannot or do not want to proceed until an &lt;fen&gt;Expected_event&lt;/fen&gt; occurs. The &lt;fen&gt;Expected_event&lt;/fen&gt; may be evoked by reference to a &lt;fen&gt;Salient_entity&lt;/fen&gt; that participates in it.  If a &lt;fen&gt;Salient_entity&lt;/fen&gt; is expressed, the &lt;fen&gt;Expected_event&lt;/fen&gt; is typically the arrival of the &lt;fen&gt;Salient_entity&lt;/fen&gt; at the &lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Protagonist&lt;/fen&gt; is located. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Protagonist&lt;/fen&gt; delays a planned action because they cannot or do not want to proceed until an &lt;fen&gt;Expected_event&lt;/fen&gt; occurs. The &lt;fen&gt;Expected_event&lt;/fen&gt; may be evoked by reference to a &lt;fen&gt;Salient_entity&lt;/fen&gt; that participates in it.  If a &lt;fen&gt;Salient_entity&lt;/fen&gt; is expressed, the &lt;fen&gt;Expected_event&lt;/fen&gt; is typically the arrival of the &lt;fen&gt;Salient_entity&lt;/fen&gt; at the &lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Protagonist&lt;/fen&gt; is located.
 
 &lt;ex&gt;&lt;fex name="pro"&gt;The cat&lt;/fex&gt; &lt;t&gt;waited&lt;/t&gt; &lt;fex name="pla"&gt;on top of the washer&lt;/fex&gt; &lt;fex name="Time"&gt;as Elmer popped the lid off the can of cat food&lt;/fex&gt; and then pounded the can's contents onto the plate&lt;/ex&gt;
 
@@ -72,7 +72,7 @@ Although in both frames a Protagonist/Agent is not performing some desired actio
 &lt;ex&gt;We &lt;t&gt;waited&lt;/t&gt; &lt;fex name="dep"&gt;with a smile on our faces and a chortle in our hearts&lt;/fex&gt; when the race organizers handed out the first weather charts.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="07/14/2005 05:17:49 PDT Thu" abbrev="pur" name="Purpose" ID="8498">
-        <definition>&lt;def-root&gt;An action that the &lt;fen&gt;Protagonist&lt;/fen&gt; intends to accomplish by waiting. 
+        <definition>&lt;def-root&gt;An action that the &lt;fen&gt;Protagonist&lt;/fen&gt; intends to accomplish by waiting.
 
 &lt;ex&gt;Cussing under his breath, he said he went back outside and &lt;t&gt;waited&lt;/t&gt; quietly &lt;fex name="pur"&gt;in order to avoid further argument&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

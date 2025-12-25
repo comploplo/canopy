@@ -519,7 +519,7 @@
 { [ Armenian1, adj.pert:armenian,+ ] Armenian_alphabet, alphabet,@ (a writing system having an alphabet of 38 letters in which the Armenian language is written) }
 { [ Avestan1, adj.pert:avestan,+ ] script1,@ (the script in which the ancient Persian language of the Avesta is written) }
 { Babylonian1, cuneiform,@ noun.location:Babylon,;r (the ideographic and syllabic writing system in which the ancient Babylonian language was written) }
-{ Brahmi, script1,@ (a script (probably adapted from the Aramaic about the 7th century BC) from which later Indian scripts developed) } 
+{ Brahmi, script1,@ (a script (probably adapted from the Aramaic about the 7th century BC) from which later Indian scripts developed) }
 { Devanagari, Devanagari_script, Nagari, Nagari_script, syllabary,@ script1,@ (a syllabic script used in writing Sanskrit and Hindi) }
 { Pahlavi1, script1,@ (the script (derived from the Aramaic alphabet) used to write the Pahlavi language) }
 { Uighur1, Uigur1, Uygur1, script1,@ (the script (derived from Aramaic) used to write the Uighur language) }
@@ -1010,7 +1010,7 @@
 { Second_Epistle_of_Paul_the_Apostle_to_the_Corinthians, Second_Epistle_to_the_Corinthians, II_Corinthians, Epistle,@i New_Testament,#p (a New Testament book containing the second epistle from Saint Paul to the church at Corinth) }
 { Epistle_of_Paul_the_Apostle_to_the_Galatians, Epistle_to_the_Galatians, Galatians, Epistle,@i New_Testament,#p (a New Testament book containing the epistle from Saint Paul to the Galatians) }
 { Epistle_of_Paul_the_Apostle_to_the_Ephesians, Epistle_to_the_Ephesians, Ephesians, Epistle,@i New_Testament,#p (a New Testament book containing the epistle from Saint Paul to the Ephesians which explains the divine plan for the world and the consummation of this in Christ) }
-{ Epistle_of_Paul_the_Apostle_to_the_Philippians, Epistle_to_the_Philippians, Philippians, Epistle,@i New_Testament,#p (a New Testament book containing an epistle from Saint Paul to the church at Philippi in Macedonia) } 
+{ Epistle_of_Paul_the_Apostle_to_the_Philippians, Epistle_to_the_Philippians, Philippians, Epistle,@i New_Testament,#p (a New Testament book containing an epistle from Saint Paul to the church at Philippi in Macedonia) }
 { Epistle_of_Paul_the_Apostle_to_the_Colossians, Epistle_to_the_Colossians, Colossians, Epistle,@i New_Testament,#p (a New Testament book containing an epistle from Saint Paul to the Colossians in ancient Phrygia) }
 { First_Epistle_of_Paul_the_Apostle_to_the_Thessalonians, First_Epistle_to_the_Thessalonians, I_Thessalonians, Epistle,@i New_Testament,#p (a New Testament book containing Saint Paul's first epistle to the Thessalonians) }
 { Second_Epistle_of_Paul_the_Apostle_to_the_Thessalonians, Second_Epistle_to_the_Thessalonians, II_Thessalonians, Epistle,@i New_Testament,#p (a New Testament book containing Saint Paul's second epistle to the Thessalonians) }
@@ -1022,7 +1022,7 @@
 { Epistle_of_James, James, Epistle,@i New_Testament,#p (a New Testament book attributed to Saint James the Apostle) }
 { First_Epistle_of_Peter, I_Peter, Epistle,@i New_Testament,#p (the first New Testament book traditionally attributed to Saint Peter the Apostle) }
 { Second_Epistle_of_Peter, II_Peter, Epistle,@i New_Testament,#p (the second New Testament book traditionally attributed to Saint Peter the Apostle) }
-{ First_Epistle_of_John, I_John, Epistle,@i New_Testament,#p (the first New Testament epistle traditionally attributed to Saint John the Apostle) } 
+{ First_Epistle_of_John, I_John, Epistle,@i New_Testament,#p (the first New Testament epistle traditionally attributed to Saint John the Apostle) }
 { Second_Epistel_of_John, II_John, Epistle,@i New_Testament,#p (the second New Testament epistle traditionally attributed to Saint John the Apostle) }
 { Third_Epistel_of_John, III_John, Epistle,@i New_Testament,#p (the third New Testament epistle traditionally attributed to Saint John the Apostle) }
 { Epistle_of_Jude, Jude, Epistle,@i New_Testament,#p (a New Testament book attributed to Saint Jude) }
@@ -1253,7 +1253,7 @@
 { menu, bill_of_fare, card5, carte_du_jour, carte, bill6,@ (a list of dishes available at a restaurant; "the menu was in French") }
 { masthead1, flag1, list,@ (a listing printed in all issues of a newspaper or magazine (usually on the editorial page) that gives the name of the publication and the names of the editorial staff, etc.) }
 { menu1, computer_menu, list,@ noun.cognition:computer_science,;c ((computer science) a list of options available to a computer user) }
-{ drop-down_menu, menu1,@ (a menu of options that appears below the item when the computer user clicks on it) } 
+{ drop-down_menu, menu1,@ (a menu of options that appears below the item when the computer user clicks on it) }
 { hierarchical_menu, cascading_menu, submenu, menu1,@ noun.cognition:computer_science,;c (a secondary menu that appears while you are holding the cursor over an item on the primary menu) }
 { necrology1, list,@ (a list of people who died recently) }
 { playlist, play_list, list,@ (a list of musical selections for performance or for broadcast by radio) }
@@ -1992,7 +1992,7 @@
 { airmail_letter, air_letter, aerogram, aerogramme, letter,@ (a letter sent by air mail) }
 { [ epistle1, adj.all:informal2^epistolary,+ ] letter,@ (a specially long, formal letter) }
 { note3, short_letter, line4, billet, personal_letter,@ (a short personal letter; "drop me a line when you get there") }
-{ [ excuse1, verb.communication:excuse5,+ verb.communication:excuse4,+ ] note3,@ (a note explaining an absence; "he had to get his mother to write an excuse for him") } 
+{ [ excuse1, verb.communication:excuse5,+ verb.communication:excuse4,+ ] note3,@ (a note explaining an absence; "he had to get his mother to write an excuse for him") }
 { love_letter, billet_doux, personal_letter,@ (a personal letter to a loved one expressing affection) }
 { dead_letter, dead_mail, letter,@ (mail that can neither be delivered nor returned) }
 { letter_of_intent, letter,@ (any letter expressing an intention to take (or forgo) some action) }
@@ -3977,7 +3977,7 @@
 { [ Nepali, adj.pert:nepali,+ ] Indic,@ (the official state language of Nepal) }
 { [ Prakrit, adj.pert:prakritic,+ ] Indic,@ (any of the vernacular Indic languages of north and central India (as distinguished from Sanskrit) recorded from the 3rd century BC to the 4th century AD) }
 { Pali, Prakrit,@ (an ancient Prakrit language (derived from Sanskrit) that is the scriptural and liturgical language of Theravada Buddhism) }
-{ [ Prakrit1, adj.pert:prakritic,+ ] Indic,@ (any of the modern Indic languages) } 
+{ [ Prakrit1, adj.pert:prakritic,+ ] Indic,@ (any of the modern Indic languages) }
 { [ Iranian, adj.pert:iranian,+ ] Iranian_language, Indo-Iranian,@ (the modern Persian language spoken in Iran) }
 { [ Avestan, adj.pert:avestan,+ ] Zend, Iranian,@ (an ancient Iranian language) }
 { Gathic, Iranian,@ (an ancient Iranian language) }
@@ -4282,7 +4282,7 @@
 { minstrel_show, variety_show,@ (a variety show in which the performers are made up in blackface) }
 { revue, review2, variety_show,@ (a variety show with topical sketches and songs and dancing and comedians) }
 { follies, revue,@ (a revue with elaborate costuming) }
-{ Ziegfeld_Follies, follies,@ (a series of extravagant revues produced by Flo Ziegfeld) } 
+{ Ziegfeld_Follies, follies,@ (a series of extravagant revues produced by Flo Ziegfeld) }
 { variety_show, variety, show,@ (a show consisting of a series of short unrelated performances) }
 { vaudeville, music_hall, variety_show,@ (a variety show with songs and comic acts etc.) }
 
@@ -5723,8 +5723,8 @@
 { program_music, programme_music, musical_composition,@ (musical compositions intended to evoke images or remind the listener of events) }
 { incidental_music, musical_composition,@ (music composed to accompany the action of a drama or to fill intervals between scenes) }
 { slanguage, language,@ (language characterized by excessive use of slang or cant) }
-{ Ta'ziyeh, music,@ noun.cognition:Islam,;c ((Islam) a form of Iranian musical pageant that is the theatrical expression of religious passion; based on the Battle of Kerbala and performed annually (in Farsi)) } 
-{ sprechgesang, sprechstimme, voice,@ (a style of dramatic vocalization between singing and speaking) } 
+{ Ta'ziyeh, music,@ noun.cognition:Islam,;c ((Islam) a form of Iranian musical pageant that is the theatrical expression of religious passion; based on the Battle of Kerbala and performed annually (in Farsi)) }
+{ sprechgesang, sprechstimme, voice,@ (a style of dramatic vocalization between singing and speaking) }
 { vocal_music, vocal, music,@ (music intended to be performed by one or more singers, usually with instrumental accompaniment) }
 { voice_over, voice,@ (the voice on an unseen commentator in a film of television program) }
 { walk-through, explanation,@ (a thorough explanation (usually accompanied by a demonstration) of each step in a procedure or process; "she gave me a walk-through of my new duties") }

@@ -553,7 +553,7 @@
 { [ insurability, uninsurability,! ] eligibility,@ (the quality of being insurable; the conditions under which an insurance company will issue insurance to an applicant (based on standards set by the insurance company)) }
 { [ marriageability, adj.all:mature1^marriageable,+ ] eligibility,@ (eligibility for marriage) }
 { [ ineligibility, adj.all:illegal^ineligible,+ adj.all:ineligible,+ eligibility,! ] qualification,@ (the quality or state of being ineligible) }
-{ [ uninsurability, insurability,! ] ineligibility,@ (the quality of being uninsurable; the conditions under which an insurance company will refuse to issue insurance to an applicant (based on standards set by the insurance company)) } 
+{ [ uninsurability, insurability,! ] ineligibility,@ (the quality of being uninsurable; the conditions under which an insurance company will refuse to issue insurance to an applicant (based on standards set by the insurance company)) }
 { [ convenience, adj.all:convenient,+ inconvenience,!] suitability,@ (the quality of being useful and convenient; "they offered the convenience of an installment plan") }
 { [ opportuneness, adj.all:opportune,+ inopportuneness,!] [ patness, adj.all:appropriate^pat,+ ] [ timeliness, adj.all:opportune^timely,+ ] convenience,@ (timely convenience) }
 { [ handiness, adj.all:accessible^handy,+ ] [ accessibility, adj.all:available^accessible,+ inaccessibility,!] [ availability, adj.all:available,+ unavailability,!] [ availableness, adj.all:disposable2^available,+ adj.all:available,+ ] convenience,@ (the quality of being at hand when needed) }
@@ -1230,7 +1230,7 @@
 { [ saintliness, adj.all:good2^saintly,+ ] goodness1,@ (the quality of resembling a saint) }
 { [ conscience, adj.all:conscientious,+ ] morality,@ (conformity to one's own sense of right conduct; "a person of unflagging conscience") }
 { [ conscientiousness, adj.all:conscientious,+ unconscientiousness,!] conscience,@ (the quality of being in accord with the dictates of conscience) }
-{ [ religiousness1, adj.all:scrupulous^religious,+ ] conscientiousness,@ (the quality of being extremely conscientious; "his care in observing the rules of good health amounted to a kind of religiousness") } 
+{ [ religiousness1, adj.all:scrupulous^religious,+ ] conscientiousness,@ (the quality of being extremely conscientious; "his care in observing the rules of good health amounted to a kind of religiousness") }
 { [ unconscientiousness, adj.all:unconscientious,+ conscientiousness,!] conscience,@ (the quality of being willing to ignore the dictates of conscience) }
 { [ good1, evil,!] [ goodness1, adj.all:righteous^good,+ adj.all:reputable^good,+ adj.all:good2,+ evilness,!] morality,@ (moral excellence or admirableness; "there is much good to be found in people") }
 { summum_bonum, good1,@ (the supreme good in which all moral values are included or from which they are derived) }
@@ -1995,7 +1995,7 @@
 { value1, color_property,@ (relative darkness or lightness of a color; "I establish the colors and principal values by organizing the painting into three values--dark, medium...and light"-Joe Hing Lowe) }
 { [ lightness3, adj.all:light5,+ darkness3,!] value1,@ (having a light color) }
 { [ darkness3, adj.all:brunet^dark,+ adj.all:dark2,+ lightness3,!] value1,@ (having a dark or somber color) }
-	
+
 { olfactory_property, [ smell, adj.all:malodorous^smelly,+ verb.perception:smell,+ verb.perception:smell1,+ ] [ aroma, adj.pert:aromatic,+ verb.perception:aromatize,+ verb.perception:aromatise,+ ] [ odor, adj.all:odorous,+ verb.perception:odorize,+ ] [ odour, verb.perception:odourise,+ ] [ scent, verb.perception:scent1,+ verb.perception:scent2,+ ] property,@ (any property detected by the olfactory system) }
 { bouquet, [ fragrance, adj.all:fragrant,+ ] fragrancy, [ redolence, adj.all:fragrant^redolent,+ ] [ sweetness1, adj.all:fragrant^sweet,+ ] olfactory_property,@ (a pleasingly sweet olfactory property) }
 { [ malodorousness, adj.all:malodorous,+ ] [ stinkiness, adj.all:stinky,+ ] [ foulness, adj.all:malodorous^foul,+ ] [ rankness, adj.all:offensive1^rank,+ ] [ fetidness, adj.all:malodorous^fetid,+ ] olfactory_property,@ (the attribute of having a strong offensive smell) }
@@ -2674,7 +2674,7 @@
 { [ highness1, adj.all:superior1^high,+ adj.all:high2,+ ] degree,@ (a high degree (of amount or force etc.); "responsible for the highness of the rates") }
 { [ high, adj.all:high1,+ low,!] degree,@ (a lofty level or position or degree; "summer temperatures reached an all-time high") }
 { [ low, high,!] degree,@ (a low level or position or degree; "the stock market fell to a new low") }
-{ [ lowness1, adj.all:soft4^low,+ adj.all:insufficient^low,+ adj.all:low3,+ adj.all:low2,+ ] degree,@ (a low or small degree of any quality (amount or force or temperature etc.); "he took advantage of the lowness of interest rates") } 
+{ [ lowness1, adj.all:soft4^low,+ adj.all:insufficient^low,+ adj.all:low3,+ adj.all:low2,+ ] degree,@ (a low or small degree of any quality (amount or force or temperature etc.); "he took advantage of the lowness of interest rates") }
 { extreme, degree,@ (the furthest or highest degree of something; "he carried it to extremes") }
 { extremeness, quality,@ (the quality of being extreme) }
 { amplitude1, magnitude,@ (greatness of magnitude) }

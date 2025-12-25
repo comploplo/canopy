@@ -7,11 +7,13 @@ use crate::container::PipelineContainer;
 use crate::error::PipelineError;
 use crate::traits::*;
 use canopy_core::Word;
-use canopy_semantic_layer::SemanticLayer1Output as SemanticAnalysis;
-use canopy_semantic_layer::{SemanticCoordinator, coordinator::CoordinatorConfig};
+use canopy_events::{ComposedEvents, DependencyArc, EventComposer, SentenceAnalysis};
+use canopy_tokenizer::SemanticLayer1Output as SemanticL1Output;
+use canopy_tokenizer::{SemanticCoordinator, coordinator::CoordinatorConfig};
+use canopy_treebank::types::DependencyRelation;
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
-use tracing::{debug, error, info, instrument};
+use tracing::{debug, error, info, instrument, warn};
 
 /// Main linguistic analysis pipeline with dependency injection
 pub struct LinguisticPipeline {
@@ -23,6 +25,35 @@ pub struct LinguisticPipeline {
 
     /// Pipeline metrics
     metrics: PipelineMetrics,
+}
+
+/// Result of full pipeline analysis including event composition
+#[derive(Debug, Clone)]
+pub struct FullAnalysisResult {
+    /// Layer 1/2 semantic analysis (tokens, frames, predicates)
+    pub analysis: SemanticL1Output,
+
+    /// Layer 2 event composition (Neo-Davidsonian events with theta roles)
+    pub events: Option<ComposedEvents>,
+
+    /// Timing breakdown for each stage
+    pub timing: AnalysisTiming,
+}
+
+/// Timing breakdown for pipeline stages
+#[derive(Debug, Clone)]
+pub struct AnalysisTiming {
+    /// Total end-to-end processing time
+    pub total: Duration,
+
+    /// Layer 1 morphosyntactic parsing + semantic enhancement
+    pub layer1: Duration,
+
+    /// Layer 2 semantic token extraction
+    pub layer2: Duration,
+
+    /// Event composition time
+    pub event_composition: Duration,
 }
 
 /// Pipeline configuration
@@ -48,6 +79,10 @@ pub struct PipelineConfig {
 
     /// Batch size for parallel processing
     pub batch_size: usize,
+
+    /// Enable semantic analysis (VerbNet/FrameNet/WordNet)
+    /// Disable for faster tests that don't need semantic data
+    pub enable_semantic_analysis: bool,
 }
 
 impl Default for PipelineConfig {
@@ -60,6 +95,17 @@ impl Default for PipelineConfig {
             performance_mode: PerformanceMode::Balanced,
             enable_parallel: false,
             batch_size: 10,
+            enable_semantic_analysis: true,
+        }
+    }
+}
+
+impl PipelineConfig {
+    /// Create a config suitable for fast tests (no semantic analysis)
+    pub fn for_testing() -> Self {
+        Self {
+            enable_semantic_analysis: false,
+            ..Default::default()
         }
     }
 }
@@ -204,9 +250,130 @@ impl LinguisticPipeline {
 
     /// Process text through the complete pipeline
     #[instrument(skip(self, text), fields(text_len = text.len()))]
-    pub async fn analyze(&mut self, text: &str) -> Result<SemanticAnalysis, PipelineError> {
+    pub async fn analyze(&mut self, text: &str) -> Result<SemanticL1Output, PipelineError> {
         let context = PipelineContext::new(text.to_string(), self.config.clone());
         self.analyze_with_context(context).await
+    }
+
+    /// Process text through the complete pipeline including event composition
+    ///
+    /// This method runs the full analysis pipeline including:
+    /// - Layer 1: Morphosyntactic parsing with semantic enhancement
+    /// - Layer 2: Semantic token extraction
+    /// - Event Composition: Neo-Davidsonian event structures
+    ///
+    /// Returns both the semantic analysis and composed events.
+    #[instrument(skip(self, text), fields(text_len = text.len()))]
+    pub async fn analyze_with_events(
+        &mut self,
+        text: &str,
+    ) -> Result<FullAnalysisResult, PipelineError> {
+        let context = PipelineContext::new(text.to_string(), self.config.clone());
+        self.analyze_full_with_context(context).await
+    }
+
+    /// Process text with full context including event composition
+    #[instrument(skip(self, context), fields(request_id = %context.request_id))]
+    pub async fn analyze_full_with_context(
+        &mut self,
+        context: PipelineContext,
+    ) -> Result<FullAnalysisResult, PipelineError> {
+        let start = Instant::now();
+
+        info!(
+            "Starting full pipeline analysis for request {}",
+            context.request_id
+        );
+
+        // Validate input
+        self.validate_input(&context)?;
+
+        // Stage 1: Layer 1 Parsing (Morphosyntactic)
+        let layer1_result = self.run_layer1(&context).await.map_err(|e| {
+            error!("Layer 1 failed for request {}: {:?}", context.request_id, e);
+            self.metrics.errors += 1;
+            e
+        })?;
+
+        let layer1_time = layer1_result.duration;
+        debug!(
+            "Layer 1 completed in {:?} with {} words",
+            layer1_time,
+            layer1_result.result.len()
+        );
+
+        // Check timeout
+        if context.is_timed_out() {
+            return Err(PipelineError::Timeout(context.elapsed()));
+        }
+
+        // Keep reference to words for event composition
+        let words = layer1_result.result.clone();
+
+        // Stage 2: Layer 2 Analysis (Semantic tokens)
+        let layer2_result = self
+            .run_layer2(&context, words.clone())
+            .await
+            .map_err(|e| {
+                error!("Layer 2 failed for request {}: {:?}", context.request_id, e);
+                self.metrics.errors += 1;
+                e
+            })?;
+
+        let layer2_time = layer2_result.duration;
+        debug!(
+            "Layer 2 completed in {:?} with {} predicates",
+            layer2_time,
+            layer2_result.result.predicates.len()
+        );
+
+        // Stage 3: Event Composition (using EventComposer)
+        let event_result = if self.config.enable_semantic_analysis {
+            match self.run_event_composition(&context, &words).await {
+                Ok(result) => {
+                    debug!(
+                        "Event composition completed in {:?} with {} events",
+                        result.duration,
+                        result.result.events.len()
+                    );
+                    Some(result)
+                }
+                Err(e) => {
+                    warn!("Event composition failed: {:?}", e);
+                    None
+                }
+            }
+        } else {
+            None
+        };
+
+        let event_time = event_result
+            .as_ref()
+            .map(|r| r.duration)
+            .unwrap_or(Duration::ZERO);
+        let total_time = start.elapsed();
+
+        // Update metrics
+        self.metrics.texts_processed += 1;
+        self.metrics.total_time += total_time;
+        self.metrics.layer1_time += layer1_time;
+        self.metrics.layer2_time += layer2_time;
+
+        info!(
+            "Full pipeline completed for request {} in {:?} (L1: {:?}, L2: {:?}, Events: {:?})",
+            context.request_id, total_time, layer1_time, layer2_time, event_time
+        );
+
+        Ok(FullAnalysisResult {
+            analysis: layer2_result.result,
+            events: event_result.map(|r| r.result),
+            timing: AnalysisTiming {
+                total: total_time,
+                layer1: layer1_time,
+                layer2: layer2_time,
+                event_composition: event_time,
+            },
+        })
     }
 
     /// Process text with full context and tracing
@@ -214,7 +381,7 @@ impl LinguisticPipeline {
     pub async fn analyze_with_context(
         &mut self,
         context: PipelineContext,
-    ) -> Result<SemanticAnalysis, PipelineError> {
+    ) -> Result<SemanticL1Output, PipelineError> {
         info!(
             "Starting pipeline analysis for request {}",
             context.request_id
@@ -310,7 +477,7 @@ impl LinguisticPipeline {
     async fn check_cache(
         &self,
         context: &PipelineContext,
-    ) -> Result<Option<SemanticAnalysis>, PipelineError> {
+    ) -> Result<Option<SemanticL1Output>, PipelineError> {
         if !self.config.enable_caching {
             return Ok(None);
         }
@@ -336,21 +503,6 @@ impl LinguisticPipeline {
     ) -> Result<StageResult<Vec<Word>>, PipelineError> {
         let start = Instant::now();
 
-        // Enhanced Layer 1: Use semantic coordinator for token-level analysis
-        let coordinator_config = CoordinatorConfig {
-            enable_verbnet: true,
-            enable_framenet: true,
-            enable_wordnet: true,
-            enable_lexicon: true,
-            graceful_degradation: true,
-            confidence_threshold: 0.1,
-            l1_cache_memory_mb: 100, // Allocate 100MB for L1 cache
-            ..CoordinatorConfig::default()
-        };
-
-        let coordinator = SemanticCoordinator::new(coordinator_config)
-            .map_err(|e| PipelineError::InvalidInput(e.to_string()))?;
-
         // First tokenize using traditional parser
         let base_words = self
             .container
@@ -358,6 +510,31 @@ impl LinguisticPipeline {
             .parse(&context.input_text)
             .await
             .map_err(PipelineError::AnalysisError)?;
+
+        // If semantic analysis is disabled, return base words without enhancement
+        if !self.config.enable_semantic_analysis {
+            let duration = start.elapsed();
+            return Ok(StageResult {
+                result: base_words,
+                duration,
+                metrics: HashMap::new(),
+                warnings: Vec::new(),
+            });
+        }
+
+        // Enhanced Layer 1: Use semantic coordinator for token-level analysis
+        let coordinator_config = CoordinatorConfig {
+            enable_verbnet: true,
+            enable_framenet: true,
+            enable_wordnet: true,
+            enable_lexicon: true,
+            confidence_threshold: 0.1,
+            l1_cache_memory_mb: 100, // Allocate 100MB for L1 cache
+            ..CoordinatorConfig::default()
+        };
+
+        let coordinator = SemanticCoordinator::new(coordinator_config)
+            .map_err(|e| PipelineError::InvalidInput(e.to_string()))?;
 
         // Enhance each word with semantic analysis
         let mut enhanced_words = Vec::new();
@@ -369,7 +546,7 @@ impl LinguisticPipeline {
             // Get unified semantic analysis for the lemma
             let semantic_result = coordinator.analyze(&word.lemma).unwrap_or_else(|_| {
                 // Graceful degradation: return empty result
-                canopy_semantic_layer::coordinator::Layer1SemanticResult::new(
+                canopy_tokenizer::coordinator::Layer1SemanticResult::new(
                     word.lemma.clone(),
                     word.lemma.clone(),
                 )
@@ -472,7 +649,7 @@ impl LinguisticPipeline {
         &self,
         _context: &PipelineContext,
         words: Vec<Word>,
-    ) -> Result<StageResult<SemanticAnalysis>, PipelineError> {
+    ) -> Result<StageResult<SemanticL1Output>, PipelineError> {
         let start = Instant::now();
 
         // Enhanced Layer 2: Convert enhanced words to semantic tokens and create full analysis
@@ -513,17 +690,17 @@ impl LinguisticPipeline {
             }
 
             // Create semantic token
-            let semantic_token = canopy_semantic_layer::SemanticToken {
+            let semantic_token = canopy_tokenizer::SemanticToken {
                 text: word.text.clone(),
                 lemma: word.lemma.clone(),
-                semantic_class: canopy_semantic_layer::SemanticClass::Predicate, // Default classification
+                semantic_class: canopy_tokenizer::SemanticClass::Predicate, // Default classification
                 frames: Vec::new(), // Would be populated from FrameNet analysis
                 verbnet_classes: Vec::new(), // Would be populated from VerbNet analysis
                 wordnet_senses: Vec::new(), // Would be populated from WordNet analysis
-                morphology: canopy_semantic_layer::MorphologicalAnalysis {
+                morphology: canopy_tokenizer::MorphologicalAnalysis {
                     lemma: word.lemma.clone(),
                     features: HashMap::new(), // Convert from MorphFeatures if needed
-                    inflection_type: canopy_semantic_layer::InflectionType::None,
+                    inflection_type: canopy_tokenizer::InflectionType::None,
                     is_recognized: true,
                 },
                 confidence: semantic_confidence,
@@ -533,12 +710,12 @@ impl LinguisticPipeline {
 
             // Extract predicates from VerbNet analysis
             if verbnet_class_count > 0 && word.upos == canopy_core::UPos::Verb {
-                let predicate = canopy_semantic_layer::SemanticPredicate {
+                let predicate = canopy_tokenizer::SemanticPredicate {
                     lemma: word.lemma.clone(),
                     verbnet_class: Some(format!("class_{verbnet_class_count}")),
                     theta_grid: vec![canopy_core::ThetaRole::Agent], // Simplified
                     selectional_restrictions: HashMap::new(),
-                    aspectual_class: canopy_semantic_layer::AspectualClass::Unknown,
+                    aspectual_class: canopy_tokenizer::AspectualClass::Unknown,
                     confidence: semantic_confidence,
                 };
                 predicates.push(predicate);
@@ -553,14 +730,14 @@ impl LinguisticPipeline {
         };
 
         // Create logical form (simplified)
-        let logical_form = canopy_semantic_layer::LogicalForm {
+        let logical_form = canopy_tokenizer::LogicalForm {
             predicates: Vec::new(), // Would be populated by deeper semantic analysis
             variables: HashMap::new(),
             quantifiers: Vec::new(),
         };
 
         // Create analysis metrics
-        let analysis_metrics = canopy_semantic_layer::AnalysisMetrics {
+        let analysis_metrics = canopy_tokenizer::AnalysisMetrics {
             total_time_us: start.elapsed().as_micros() as u64,
             tokenization_time_us: 0, // Already done in Layer 1
             framenet_time_us: 0,
@@ -572,7 +749,7 @@ impl LinguisticPipeline {
         };
 
         // Create comprehensive semantic analysis
-        let analysis = SemanticAnalysis {
+        let analysis = SemanticL1Output {
             tokens: semantic_tokens,
             frames,
             predicates,
@@ -600,12 +777,144 @@ impl LinguisticPipeline {
         })
     }
 
+    /// Run Layer 2 event composition using EventComposer
+    ///
+    /// This integrates the Neo-Davidsonian event composition system to create
+    /// structured events from the Layer 1 semantic analysis and dependency structure.
+    #[instrument(skip(self, _context, words))]
+    async fn run_event_composition(
+        &self,
+        _context: &PipelineContext,
+        words: &[Word],
+    ) -> Result<StageResult<ComposedEvents>, PipelineError> {
+        let start = Instant::now();
+
+        // Create semantic coordinator for L1 analysis
+        let coordinator_config = CoordinatorConfig {
+            enable_verbnet: true,
+            enable_framenet: true,
+            enable_wordnet: true,
+            enable_lexicon: true,
+            confidence_threshold: 0.1,
+            l1_cache_memory_mb: 100,
+            ..CoordinatorConfig::default()
+        };
+
+        let coordinator = SemanticCoordinator::new(coordinator_config).map_err(|e| {
+            PipelineError::InvalidInput(format!("Failed to create coordinator: {}", e))
+        })?;
+
+        // Create event composer
+        let composer = EventComposer::new().map_err(|e| {
+            PipelineError::InvalidInput(format!("Failed to create event composer: {}", e))
+        })?;
+
+        // Analyze each word through Layer 1 to get rich semantic results
+        let mut l1_tokens = Vec::with_capacity(words.len());
+        for word in words {
+            let mut l1_result = coordinator.analyze(&word.lemma).unwrap_or_else(|_| {
+                canopy_tokenizer::coordinator::Layer1SemanticResult::new(
+                    word.text.clone(),
+                    word.lemma.clone(),
+                )
+            });
+            // Set POS from the parsed word
+            l1_result.pos = Some(word.upos);
+            l1_tokens.push(l1_result);
+        }
+
+        // Extract dependency arcs from parsed words
+        let deps = Self::extract_dependency_arcs(words);
+
+        // Build sentence analysis using the builder
+        let sentence_text = words
+            .iter()
+            .map(|w| w.text.as_str())
+            .collect::<Vec<_>>()
+            .join(" ");
+        let sentence_analysis =
+            SentenceAnalysis::new(sentence_text, l1_tokens).with_dependencies(deps);
+
+        // Compose events using the EventComposer
+        let composed_events = composer.compose_sentence(&sentence_analysis).map_err(|e| {
+            PipelineError::AnalysisError(crate::error::AnalysisError::ParseFailed(format!(
+                "Event composition failed: {}",
+                e
+            )))
+        })?;
+
+        let duration = start.elapsed();
+        let event_count = composed_events.events.len();
+        let unbound_count = composed_events.unbound_entities.len();
+
+        debug!(
+            "Event composition completed: {} events in {:?}",
+            event_count, duration
+        );
+
+        Ok(StageResult {
+            result: composed_events,
+            duration,
+            metrics: HashMap::from([
+                ("events_composed".to_string(), event_count as f64),
+                ("unbound_entities".to_string(), unbound_count as f64),
+            ]),
+            warnings: Vec::new(),
+        })
+    }
+
+    /// Extract DependencyArc structures from Words with head/deprel information
+    fn extract_dependency_arcs(words: &[Word]) -> Vec<DependencyArc> {
+        let mut arcs = Vec::new();
+
+        for word in words {
+            if let Some(head) = word.head {
+                // Skip root (head = 0)
+                if head > 0 {
+                    let relation = Self::deprel_to_dependency_relation(&word.deprel);
+                    arcs.push(DependencyArc::new(
+                        head.saturating_sub(1),    // Convert 1-indexed to 0-indexed
+                        word.id.saturating_sub(1), // Convert 1-indexed to 0-indexed
+                        relation,
+                    ));
+                }
+            }
+        }
+
+        arcs
+    }
+
+    /// Convert canopy_core::DepRel to canopy_treebank::DependencyRelation
+    fn deprel_to_dependency_relation(deprel: &canopy_core::DepRel) -> DependencyRelation {
+        use canopy_core::DepRel;
+
+        match deprel {
+            DepRel::Nsubj => DependencyRelation::NominalSubject,
+            DepRel::Obj => DependencyRelation::Object,
+            DepRel::Iobj => DependencyRelation::IndirectObject,
+            DepRel::Obl => DependencyRelation::Oblique,
+            DepRel::Advmod => DependencyRelation::AdverbialModifier,
+            DepRel::Amod => DependencyRelation::AdjectivalModifier,
+            DepRel::Det => DependencyRelation::Determiner,
+            DepRel::Case => DependencyRelation::Case,
+            DepRel::Nmod => DependencyRelation::NominalModifier,
+            DepRel::Conj => DependencyRelation::Conjunction,
+            DepRel::Cc => DependencyRelation::CoordinatingConjunction,
+            DepRel::Compound => DependencyRelation::Compound,
+            DepRel::Aux => DependencyRelation::Auxiliary,
+            DepRel::Cop => DependencyRelation::Copula,
+            DepRel::Mark => DependencyRelation::Mark,
+            DepRel::Punct => DependencyRelation::Punctuation,
+            _ => DependencyRelation::Other(format!("{:?}", deprel)), // Fallback for unmapped relations
+        }
+    }
+
     /// Update pipeline metrics
     fn update_metrics(
         &mut self,
         context: &PipelineContext,
         layer1: &StageResult<Vec<Word>>,
-        layer2: &StageResult<SemanticAnalysis>,
+        layer2: &StageResult<SemanticL1Output>,
     ) {
         self.metrics.texts_processed += 1;
         self.metrics.total_time += context.elapsed();
@@ -631,7 +940,7 @@ impl LinguisticPipeline {
     async fn cache_result(
         &self,
         context: &PipelineContext,
-        analysis: &SemanticAnalysis,
+        analysis: &SemanticL1Output,
     ) -> Result<(), PipelineError> {
         if !self.config.enable_caching {
             return Ok(());
@@ -679,7 +988,7 @@ impl LinguisticPipeline {
     pub async fn analyze_batch(
         &mut self,
         texts: Vec<String>,
-    ) -> Result<Vec<SemanticAnalysis>, PipelineError> {
+    ) -> Result<Vec<SemanticL1Output>, PipelineError> {
         let mut results = Vec::new();
 
         if self.config.enable_parallel && texts.len() > 1 {

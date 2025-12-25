@@ -4,7 +4,7 @@
     <definition>&lt;def-root&gt;An &lt;fen&gt;Experiencer&lt;/fen&gt; is in a &lt;fen&gt;State&lt;/fen&gt; where a biological urge is signaling the need to perform a certain action such as eating, drinking, stopping exertion, sleeping, regurgitating, or having sex.
 The &lt;fen&gt;Duration&lt;/fen&gt;, &lt;fen&gt;Time&lt;/fen&gt;, &lt;fen&gt;Place&lt;/fen&gt;, or &lt;fen&gt;Degree&lt;/fen&gt; of intensity associated with the occurrence of the urge may also be indicated.  In this frame, the &lt;fen&gt;Experiencer&lt;/fen&gt; does not necessarily want to perform the action that would fulfill the urge, and there is no specific focus associated with the urge.
 
-&lt;ex&gt;&lt;fex name="Experiencer"&gt;Mike&lt;/fex&gt; &lt;m&gt;feels&lt;/m&gt; &lt;t&gt;hungry&lt;/t&gt;.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Experiencer"&gt;Mike&lt;/fex&gt; &lt;m&gt;feels&lt;/m&gt; &lt;t&gt;hungry&lt;/t&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Experiencer"&gt;Sam&lt;/fex&gt; &lt;m&gt;was&lt;/m&gt; &lt;t&gt;thirsty&lt;/t&gt; &lt;fex name="Time"&gt;after dinner&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="296" cDate="08/08/2002 04:49:12 PDT Thu" abbrev="Deg" name="Degree" ID="3519">
         <definition>&lt;def-root&gt;&lt;fen&gt;Degree&lt;/fen&gt; identifies the extent to which the &lt;fen&gt;Experiencer&lt;/fen&gt; receives the biological signal.&lt;/def-root&gt;</definition>
@@ -17,7 +17,7 @@ The &lt;fen&gt;Duration&lt;/fen&gt;, &lt;fen&gt;Time&lt;/fen&gt;, &lt;fen&gt;Pla
         <excludesFE name="Expressor" ID="3526"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="296" cDate="08/08/2002 04:50:43 PDT Thu" abbrev="Time" name="Time" ID="3521">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Time&lt;/fen&gt; when the &lt;fen&gt;Experiencer&lt;/fen&gt; feels the biological signal. &lt;fen&gt;Time&lt;/fen&gt; may also allow inference about the &lt;fen&gt;Reason&lt;/fen&gt; for the biological urge. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Time&lt;/fen&gt; when the &lt;fen&gt;Experiencer&lt;/fen&gt; feels the biological signal. &lt;fen&gt;Time&lt;/fen&gt; may also allow inference about the &lt;fen&gt;Reason&lt;/fen&gt; for the biological urge.
 &lt;ex&gt;&lt;fex name="Experiencer"&gt;I&lt;/fex&gt; &lt;m&gt;am&lt;/m&gt; &lt;t&gt;exhausted&lt;/t&gt; &lt;fex name="Time"&gt;when I babysit&lt;/fex&gt;.&lt;/ex&gt;
 In such cases, we tag &lt;fen&gt;Reason&lt;/fen&gt; on the second layer.&lt;/def-root&gt;</definition>
         <semType name="Time" ID="141"/>
@@ -37,12 +37,12 @@ In such cases, we tag &lt;fen&gt;Reason&lt;/fen&gt; on the second layer.&lt;/def
         <semType name="Duration" ID="142"/>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="296" cDate="08/12/2002 09:53:06 PDT Mon" abbrev="Rea" name="Reason" ID="3530">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Reason&lt;/fen&gt; for which the &lt;fen&gt;Experiencer&lt;/fen&gt; has the biological urge. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Reason&lt;/fen&gt; for which the &lt;fen&gt;Experiencer&lt;/fen&gt; has the biological urge.
 &lt;ex&gt;&lt;fex name="Experiencer"&gt;Jen&lt;/fex&gt; &lt;m&gt;is&lt;/m&gt; &lt;t&gt;tired&lt;/t&gt; &lt;fex name = "Reason"&gt;because she gave birth last night.&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="08/12/2002 10:13:27 PDT Mon" abbrev="Stat" name="State" ID="3531">
-        <definition>&lt;def-root&gt;&lt;fen&gt;State&lt;/fen&gt; identifies the &lt;fen&gt;Experiencer&lt;/fen&gt;'s state of being. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;State&lt;/fen&gt; identifies the &lt;fen&gt;Experiencer&lt;/fen&gt;'s state of being.
 &lt;ex&gt;She was alarmed by John's &lt;t&gt;hungry&lt;/t&gt; &lt;fex  name = "State"&gt;state&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Experiencer" ID="3520"/>
     </FE>

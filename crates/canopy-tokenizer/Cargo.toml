@@ -1,0 +1,46 @@
+[package]
+name = "canopy-tokenizer"
+version = "0.1.0"
+edition = "2021"
+authors = ["canopy.rs contributors"]
+description = "Semantic tokenization for canopy.rs - FrameNet, VerbNet, WordNet integration"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/canopy-rs/canopy"
+
+[dependencies]
+canopy-core = { path = "../canopy-core" }
+canopy-engine = { path = "../canopy-engine" } # Use base engine infrastructure
+canopy-verbnet = { path = "../canopy-verbnet" }
+canopy-framenet = { path = "../canopy-framenet" }
+canopy-wordnet = { path = "../canopy-wordnet" }
+canopy-lexicon = { path = "../canopy-lexicon" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+tracing = "0.1"
+indexmap = "2.0"
+lru = "0.12"
+num_cpus = "1.16"
+tokio = { version = "1.0", features = ["rt", "macros"], optional = true }
+rayon = { version = "1.7", optional = true }
+nlprule = { version = "0.6", optional = true }
+indicatif = "0.17"
+
+[features]
+default = ["std"]
+std = []
+parallel = ["rayon"]
+async = ["tokio"]
+lemmatization = ["nlprule"]
+dev = []
+
+[dev-dependencies]
+tokio-test = "0.4"
+proptest = "1.0"
+criterion = { version = "0.5", features = ["html_reports"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+canopy-pipeline = { path = "../canopy-pipeline" }
+tempfile = "3.8"
+once_cell = "1.19"
+
+# Most examples disabled due to API changes during architectural transformation

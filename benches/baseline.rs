@@ -1,144 +1,130 @@
-use criterion::{BenchmarkId, Criterion, black_box, criterion_group, criterion_main};
+use criterion::{Criterion, black_box, criterion_group, criterion_main};
 use std::time::Duration;
 
-/// Baseline benchmarks for canopy performance monitoring
+/// Baseline benchmarks for canopy semantic analysis performance
 ///
-/// These benchmarks establish performance baselines and detect regressions.
-/// Run with: `just bench` or `cargo bench`
-fn dummy_parsing_benchmark(c: &mut Criterion) {
-    let mut group = c.benchmark_group("parsing");
+/// These benchmarks measure real semantic analysis operations.
+/// Run with: `cargo bench` or `cargo bench --release`
+fn semantic_coordinator_benchmark(c: &mut Criterion) {
+    use canopy_tokenizer::{SemanticCoordinator, coordinator::CoordinatorConfig};
 
-    // Set reasonable sample sizes and measurement time for development
+    let mut group = c.benchmark_group("semantic_analysis");
+    group.sample_size(20);
+    group.measurement_time(Duration::from_secs(10));
+
+    // Skip if semantic data not available
+    let coordinator = match SemanticCoordinator::new(CoordinatorConfig::default()) {
+        Ok(c) => c,
+        Err(e) => {
+            eprintln!("Skipping benchmark: semantic data not available: {}", e);
+            return;
+        }
+    };
+
+    let test_words = ["run", "give", "think", "eat", "walk"];
+
+    // Warm up the cache
+    for word in test_words.iter() {
+        let _ = coordinator.analyze(*word);
+    }
+
+    group.bench_function("analyze_word_cached", |b| {
+        b.iter(|| {
+            for word in test_words.iter() {
+                let _ = coordinator.analyze(black_box(*word));
+            }
+        });
+    });
+
+    group.finish();
+}
+
+fn engine_lookup_benchmark(c: &mut Criterion) {
+    use canopy_verbnet::VerbNetEngine;
+    use canopy_wordnet::WordNetEngine;
+
+    let mut group = c.benchmark_group("engine_lookups");
     group.sample_size(50);
     group.measurement_time(Duration::from_secs(5));
 
-    let sentences = [
-        "The quick brown fox jumps over the lazy dog.",
-        "John gives Mary a book in the library.",
-        "Complex sentences with multiple clauses are harder to parse.",
-        "She said that she would come to the party if she had time.",
-    ];
+    // VerbNet lookup benchmark
+    if let Ok(verbnet) = VerbNetEngine::new() {
+        group.bench_function("verbnet_analyze", |b| {
+            b.iter(|| verbnet.analyze_verb(black_box("give")).ok());
+        });
+    }
 
-    for (i, sentence) in sentences.iter().enumerate() {
-        group.bench_with_input(
-            BenchmarkId::new("dummy_parse", i),
-            sentence,
-            |b, sentence| {
-                b.iter(|| {
-                    // Dummy parsing operation - will be replaced with real UDPipe parsing
-                    dummy_parse_sentence(black_box(sentence))
-                });
-            },
-        );
+    // WordNet lookup benchmark
+    if let Ok(wordnet) = WordNetEngine::new() {
+        use canopy_wordnet::types::PartOfSpeech;
+        group.bench_function("wordnet_analyze", |b| {
+            b.iter(|| {
+                wordnet
+                    .analyze_word(black_box("run"), PartOfSpeech::Verb)
+                    .ok()
+            });
+        });
     }
 
     group.finish();
 }
 
-fn memory_allocation_benchmark(c: &mut Criterion) {
-    let mut group = c.benchmark_group("memory");
+fn lemmatization_benchmark(c: &mut Criterion) {
+    use canopy_tokenizer::lemmatizer::{Lemmatizer, SimpleLemmatizer};
 
-    group.bench_function("word_creation", |b| {
+    let mut group = c.benchmark_group("lemmatization");
+    group.sample_size(100);
+
+    let lemmatizer = SimpleLemmatizer::default();
+
+    let test_words = ["running", "gave", "walked", "thinking", "eaten"];
+
+    group.bench_function("simple_lemmatize", |b| {
         b.iter(|| {
-            // Dummy word creation - will be replaced with real Word struct
-            create_dummy_words(black_box(50))
+            for word in test_words.iter() {
+                black_box(lemmatizer.lemmatize(word));
+            }
         });
     });
 
-    group.bench_function("sentence_processing", |b| {
-        let words = create_dummy_words(20);
+    group.bench_function("lemmatize_with_confidence", |b| {
         b.iter(|| {
-            // Dummy sentence processing - will be replaced with real semantic analysis
-            process_dummy_sentence(black_box(&words))
+            for word in test_words.iter() {
+                black_box(lemmatizer.lemmatize_with_confidence(word));
+            }
         });
     });
 
     group.finish();
 }
 
-fn semantic_analysis_benchmark(c: &mut Criterion) {
-    let mut group = c.benchmark_group("semantics");
+fn treebank_loading_benchmark(c: &mut Criterion) {
+    use canopy_core::treebank_loader::TreebankSentenceLoader;
 
-    // Benchmark theta role assignment (dummy implementation for now)
-    group.bench_function("theta_roles", |b| {
-        let sentence = "John gives Mary a book";
-        b.iter(|| dummy_theta_assignment(black_box(sentence)));
-    });
+    let mut group = c.benchmark_group("treebank");
+    group.sample_size(10);
+    group.measurement_time(Duration::from_secs(15));
 
-    // Benchmark lambda calculus operations (dummy implementation for now)
-    group.bench_function("lambda_composition", |b| {
-        b.iter(|| dummy_lambda_composition(black_box("give(john, mary, book)")));
-    });
+    // Only run if treebank data exists
+    let treebank_path = std::path::Path::new("data/ud_english-ewt");
+    if !treebank_path.exists() {
+        eprintln!("Skipping treebank benchmark: data not available");
+        return;
+    }
 
-    group.finish();
-}
-
-fn lsp_response_benchmark(c: &mut Criterion) {
-    let mut group = c.benchmark_group("lsp");
-
-    // Target: sub-50ms response times
-    group.bench_function("hover_request", |b| {
-        let text = "The cat sat on the mat.";
-        let position = 4; // position of "cat"
-
-        b.iter(|| dummy_hover_response(black_box(text), black_box(position)));
-    });
-
-    group.bench_function("diagnostics", |b| {
-        let text = "John give Mary a books."; // intentional errors
-
-        b.iter(|| dummy_diagnostics(black_box(text)));
+    group.bench_function("load_treebank", |b| {
+        b.iter(|| TreebankSentenceLoader::new().ok());
     });
 
     group.finish();
-}
-
-// === Dummy implementations (will be replaced with real code) ===
-
-fn dummy_parse_sentence(sentence: &str) -> Vec<String> {
-    // Dummy implementation: just split by whitespace
-    sentence.split_whitespace().map(String::from).collect()
-}
-
-fn create_dummy_words(count: usize) -> Vec<String> {
-    (0..count).map(|i| format!("word_{i}")).collect()
-}
-
-fn process_dummy_sentence(words: &[String]) -> String {
-    // Dummy implementation: just join words
-    words.join(" ")
-}
-
-fn dummy_theta_assignment(_sentence: &str) -> Vec<(&'static str, &'static str)> {
-    // Dummy implementation: hardcoded roles
-    vec![
-        ("John", "agent"),
-        ("Mary", "recipient"),
-        ("book", "patient"),
-    ]
-}
-
-fn dummy_lambda_composition(term: &str) -> String {
-    // Dummy implementation: just return the input
-    format!("λx.{term}")
-}
-
-fn dummy_hover_response(_text: &str, _position: usize) -> String {
-    // Dummy implementation: return simple info
-    "Hover: noun, animate, singular".to_string()
-}
-
-fn dummy_diagnostics(_text: &str) -> Vec<String> {
-    // Dummy implementation: return sample diagnostics
-    vec!["Subject-verb disagreement".to_string()]
 }
 
 criterion_group!(
     benches,
-    dummy_parsing_benchmark,
-    memory_allocation_benchmark,
-    semantic_analysis_benchmark,
-    lsp_response_benchmark
+    semantic_coordinator_benchmark,
+    engine_lookup_benchmark,
+    lemmatization_benchmark,
+    treebank_loading_benchmark,
 );
 
 criterion_main!(benches);

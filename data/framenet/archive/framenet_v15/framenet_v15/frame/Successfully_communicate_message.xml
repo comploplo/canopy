@@ -16,13 +16,13 @@
 
 &lt;ex&gt;But , alas , &lt;fex name="Medium"&gt;the printed word&lt;/fex&gt; can not &lt;fex name="Adequacy"&gt;adequately&lt;/fex&gt; &lt;t&gt;convey&lt;/t&gt; &lt;fex name="Message"&gt;the panting , gasping misery of this particular torment&lt;/fex&gt;. &lt;fex name="Add"&gt;INI&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="11/16/2005 05:39:55 PST Wed" abbrev="Com" name="Communicator" ID="9336">
-        <definition>&lt;def-root&gt;The person who uses language in the written or spoken modality to convey a &lt;fen&gt;Message&lt;/fen&gt; to another person. 
+        <definition>&lt;def-root&gt;The person who uses language in the written or spoken modality to convey a &lt;fen&gt;Message&lt;/fen&gt; to another person.
 
 &lt;ex&gt;&lt;fex name="Communicator"&gt;Nobody&lt;/fex&gt; seems to be able to &lt;t&gt;get&lt;/t&gt; the idea &lt;t&gt;through&lt;/t&gt; to her that she needs a job!!!!&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="11/16/2005 05:39:57 PST Wed" abbrev="Add" name="Addressee" ID="9337">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; receives a &lt;fen&gt;Message&lt;/fen&gt; from the &lt;fen&gt;Communicator&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; receives a &lt;fen&gt;Message&lt;/fen&gt; from the &lt;fen&gt;Communicator&lt;/fen&gt;.
 
 
 
@@ -31,14 +31,14 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="11/16/2005 05:39:57 PST Wed" abbrev="Msg" name="Message" ID="9338">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Message&lt;/fen&gt; A proposition or set of propositions that the &lt;fen&gt;Communicator&lt;/fen&gt; wants the &lt;fen&gt;Addressee&lt;/fen&gt; to believe or take for granted. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Message&lt;/fen&gt; A proposition or set of propositions that the &lt;fen&gt;Communicator&lt;/fen&gt; wants the &lt;fen&gt;Addressee&lt;/fen&gt; to believe or take for granted.
 
 
 &lt;ex&gt;He tried to &lt;t&gt;get&lt;/t&gt; &lt;t&gt;through&lt;/t&gt; to his wife &lt;fex name="Msg"&gt;that the debt he's taken on buying stocks poses no risk&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Message" ID="56"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="11/16/2005 05:39:58 PST Wed" abbrev="Medium" name="Medium" ID="9340">
-        <definition>&lt;def-root&gt;The physical or abstract setting in which the &lt;fen&gt;Message&lt;/fen&gt; is conveyed. 
+        <definition>&lt;def-root&gt;The physical or abstract setting in which the &lt;fen&gt;Message&lt;/fen&gt; is conveyed.
 
 &lt;ex&gt;&lt;fex name="Medium"&gt;The article&lt;/fex&gt; &lt;t&gt;conveys&lt;/t&gt; Mr. Handley's disrespect for those who disagree with him.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

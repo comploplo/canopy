@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="JKR" cDate="02/18/2004 02:34:22 PST Wed" name="Speed_description" ID="966" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; is in motion  at a particular &lt;fen&gt;Speed&lt;/fen&gt;, a momentaneous description of distance traveled per time.  
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; is in motion  at a particular &lt;fen&gt;Speed&lt;/fen&gt;, a momentaneous description of distance traveled per time.
 
 
 &lt;ex&gt;&lt;fex name="Entity"&gt;The car&lt;/fex&gt; went by &lt;fex name="Degree"&gt;real&lt;/fex&gt;  &lt;t&gt;fast&lt;/t&gt;.&lt;/ex&gt;
@@ -12,7 +12,7 @@
 
 &lt;ex&gt;The &lt;t&gt;speed&lt;/t&gt; &lt;fex name="Entity"&gt;of the car&lt;/fex&gt; was &lt;fex name="Speed"&gt;25 mph&lt;/fex&gt; &lt;fex name="Time"&gt;when it ran into the obstacle&lt;/fex&gt;.&lt;/ex&gt;
 
-LUs of this frame are commonly involved in a semantic construction in which, instead of describing the current &lt;fen&gt;Speed&lt;/fen&gt;, they rather describe some other &lt;fen&gt;Speed&lt;/fen&gt; saliently associated with the &lt;fen&gt;Entity&lt;/fen&gt;, such as maximum possible &lt;fen&gt;Speed&lt;/fen&gt; of the &lt;fen&gt;Entity&lt;/fen&gt; or (for an &lt;fen&gt;Entity&lt;/fen&gt; used as an implement) &lt;fen&gt;Speed&lt;/fen&gt; when in operation.  
+LUs of this frame are commonly involved in a semantic construction in which, instead of describing the current &lt;fen&gt;Speed&lt;/fen&gt;, they rather describe some other &lt;fen&gt;Speed&lt;/fen&gt; saliently associated with the &lt;fen&gt;Entity&lt;/fen&gt;, such as maximum possible &lt;fen&gt;Speed&lt;/fen&gt; of the &lt;fen&gt;Entity&lt;/fen&gt; or (for an &lt;fen&gt;Entity&lt;/fen&gt; used as an implement) &lt;fen&gt;Speed&lt;/fen&gt; when in operation.
 
 This construction can be defined as follows:
 

@@ -10,7 +10,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="05/12/2015 03:07:05 PDT Tue" abbrev="Fig" name="Figure" ID="16451">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Figure&lt;/fen&gt; is perceived as in motion relative to a certain &lt;fen&gt;Ground&lt;/fen&gt; location. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Figure&lt;/fen&gt; is perceived as in motion relative to a certain &lt;fen&gt;Ground&lt;/fen&gt; location.
 
 &lt;/def-root&gt;</definition>
     </FE>
@@ -43,7 +43,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MJE" cDate="05/12/2015 03:07:05 PDT Tue" abbrev="" name="Accessibility" ID="16457">
-        <definition>&lt;def-root&gt;An indication of how accessible the &lt;fen&gt;Figure&lt;/fen&gt; is to some participant in the speech context (either the speaker or the addressee, or some other highly salient viewpoint in a narrative).  This FE normally describes availability for manipulation and use, but may simply describe how easily seen or difficult to see the &lt;fen&gt;Figure&lt;/fen&gt; is. There is a closed class of items that can fill this slot, including only 'just' and 'right' indicating ease of access, and 'way', 'all the way', or (dialectally) 'clear' indicating distance and difficulty of access.  
+        <definition>&lt;def-root&gt;An indication of how accessible the &lt;fen&gt;Figure&lt;/fen&gt; is to some participant in the speech context (either the speaker or the addressee, or some other highly salient viewpoint in a narrative).  This FE normally describes availability for manipulation and use, but may simply describe how easily seen or difficult to see the &lt;fen&gt;Figure&lt;/fen&gt; is. There is a closed class of items that can fill this slot, including only 'just' and 'right' indicating ease of access, and 'way', 'all the way', or (dialectally) 'clear' indicating distance and difficulty of access.
 
 &lt;ex&gt;Oh yeah , the flashlight 's &lt;fex name="Accessibility"&gt;right&lt;/fex&gt; &lt;t&gt;in&lt;/t&gt; my handbag.&lt;/ex&gt;
 &lt;ex&gt; I had an uncle that lived &lt;fex name="Accessibility"&gt;clear&lt;/fex&gt; over &lt;t&gt;in&lt;/t&gt; Kenmore , and I tried to ride my bike there.&lt;/ex&gt;

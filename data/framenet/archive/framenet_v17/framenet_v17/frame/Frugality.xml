@@ -7,7 +7,7 @@
 &lt;ex&gt;&lt;fex name="Resource_controller"&gt;Bill&lt;/fex&gt; &lt;t&gt;squanders&lt;/t&gt; &lt;fex name="Resource"&gt;his money&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Behavior"&gt;To spend the surplus now&lt;/fex&gt; would &lt;m&gt;be&lt;/m&gt; needlessly &lt;t&gt;profligate&lt;/t&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:30 PST Wed" abbrev="Pers" name="Resource_controller" ID="386">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Resource_controller&lt;/fen&gt; is the individual whose frugality or generosity is being described. Person typically occurs as the External Argument or, in some cases when &lt;fen&gt;Behavior&lt;/fen&gt; is also expressed, in an &lt;ment&gt;of&lt;/ment&gt;-PP: 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Resource_controller&lt;/fen&gt; is the individual whose frugality or generosity is being described. Person typically occurs as the External Argument or, in some cases when &lt;fen&gt;Behavior&lt;/fen&gt; is also expressed, in an &lt;ment&gt;of&lt;/ment&gt;-PP:
 &lt;ex&gt;&lt;fex name="Resource_controller"&gt;Jo&lt;/fex&gt; is very &lt;t&gt;frugal&lt;/t&gt;.&lt;/ex&gt;
 &lt;ex&gt;It was &lt;t&gt;frugal&lt;/t&gt; &lt;fex name="Resource_controller"&gt;of Jo&lt;/fex&gt; not to pay for dinner.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

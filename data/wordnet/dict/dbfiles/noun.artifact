@@ -3813,7 +3813,7 @@
 { face_mask, mask1,@ (mask that provides a protective covering for the face in such sports as baseball or football or hockey) }
 { faceplate, protective_covering,@ noun.artifact:computer,;c (a protective covering for the front of a machine or device (as a door lock or computer component)) }
 { face_powder, powder1,@ makeup,@ (cosmetic powder for the face) }
-{ face_veil, head_covering,@ (a piece of more-or-less transparent material that covers the face) } 
+{ face_veil, head_covering,@ (a piece of more-or-less transparent material that covers the face) }
 { facility, [ installation, verb.contact:install1,+ ] noun.Tops:artifact,@ (a building or place that provides a particular service or is used for a particular industry; "the assembly plant is an enormous facility") }
 { [ facing, verb.contact:face1,+ ] cladding, protective_covering,@ (a protective covering that protects the outside of a building) }
 { [ facing1, verb.contact:face,+ ] lining,@ collar,#p cuff,#p (a lining applied to the edge of a garment for ornamentation or strengthening) }
@@ -4800,7 +4800,7 @@
 { hacksaw, hack_saw, metal_saw, saw,@ (saw used with one hand for cutting metal) }
 { haft, helve, handle,@ axe,#p knife,#p sword,#p dagger,#p sickle,#p awl,#p file,#p (the handle of a weapon or tool) }
 { Hagia_Sophia, Hagia_Sofia, Santa_Sophia, Santa_Sofia, museum,@i noun.location:Istanbul,#p (a 6th century masterpiece of Byzantine architecture in Istanbul; built as a Christian church, converted to a mosque in 1453, and made into a museum in the middle of the 20th century) }
-{ haik, haick, garment,@ (an outer garment consisting of a large piece of white cloth; worn by men and women in northern Africa) } 
+{ haik, haick, garment,@ (an outer garment consisting of a large piece of white cloth; worn by men and women in northern Africa) }
 { hairbrush, brush,@ (a brush used to groom a person's hair) }
 { haircloth, hair, fabric,@ (cloth woven from horsehair or camelhair; used for upholstery or stiffening in garments) }
 { hairdressing, hair_tonic, hair_oil, hair_grease, toiletry,@ (a toiletry for the hair) }
@@ -5397,7 +5397,7 @@
 { intake_valve, valve,@ cylinder2,#p (a valve that controls the flow of fluid through an intake) }
 { integrated_circuit, microcircuit, computer_circuit,@ chip,#p (a microelectronic computer circuit incorporated into a chip or semiconductor; a whole system rather than a single component) }
 { [ integrator, verb.cognition:integrate,+ ] planimeter, measuring_instrument,@ (a measuring instrument for measuring the area of an irregular plane figure) }
-{ Intelnet, computer_network,@ (a computer network similar to but separate from the internet; devoted to the dissemination of information to and for the Intelligence Community) } 
+{ Intelnet, computer_network,@ (a computer network similar to but separate from the internet; devoted to the dissemination of information to and for the Intelligence Community) }
 { [ interceptor, verb.contact:intercept,+ ] fighter,@ (a fast maneuverable fighter plane designed to intercept enemy aircraft) }
 { interchange, junction,@ highway,#p (a junction of highways on different levels that permits traffic to move from one to another without crossing traffic streams) }
 { intercommunication_system, intercom, communication_system1,@ (a communication system linking different rooms within a building or ship etc) }
@@ -6529,7 +6529,7 @@
 { [ miniature2, noun.person:miniaturist,+ ] [ illumination, verb.creation:illuminate,+ ] painting,@ noun.time:middle_ages,;c (painting or drawing included in a book (especially in illuminated medieval manuscripts)) }
 { minibar, cellaret, buffet,@ (sideboard with compartments for holding bottles) }
 { minibike, motorbike, motorcycle,@ (small motorcycle with a low frame and small wheels and elevated handlebars) }
-{ minibus, bus,@ (a light bus (4 to 10 passengers)) } 
+{ minibus, bus,@ (a light bus (4 to 10 passengers)) }
 { minicab, cab,@ minicar,@ noun.location:Britain,;r (a minicar used as a taxicab) }
 { minicar, car,@ noun.location:Britain,;r (a car that is even smaller than a subcompact car) }
 { minicomputer, digital_computer,@ (a digital computer of medium size) }
@@ -6696,7 +6696,7 @@
 { mufti, civilian_clothing,@ (civilian dress worn by a person who is entitled to wear a military uniform) }
 { mug, drinking_vessel,@ (with handle and usually cylindrical) }
 { mug_shot, mugshot, photograph,@ noun.communication:mug_file,#m (a photograph of someone's face (especially one made for police records)) }
-{ mukataa, headquarters1,@ noun.communication:Arabic,;c (an Arabic word for headquarters or administrative center; "Arafat was holed up in the mukataa of his West Bank compound") } 
+{ mukataa, headquarters1,@ noun.communication:Arabic,;c (an Arabic word for headquarters or administrative center; "Arafat was holed up in the mukataa of his West Bank compound") }
 { [ mulch, verb.contact:mulch,+ ] protective_covering,@ (a protective covering of rotting vegetable matter spread to reduce evaporation and soil erosion) }
 { mule, scuff, slipper,@ (a slipper that has no fitting around the heel) }
 { [ muller1, verb.perception:mull,+ ] vessel1,@ (a vessel in which wine is mulled) }
@@ -6832,9 +6832,9 @@
 { net4, goal,@ noun.act:soccer,;c noun.act:hockey,;c (a goal lined with netting (as in soccer or hockey)) }
 { network1, communication_system,@ noun.communication:broadcasting,;c ((broadcasting) a communication system consisting of a group of broadcasting stations that all transmit the same programs; "the networks compete to broadcast important sports events") }
 { network2, electronic_network, system,@ noun.cognition:electronics,;c ((electronics) a system of interconnected electronic components or circuits) }
-{ network3, system,@ (a system of intersecting lines or channels; "a railroad network"; "a network of canals") } 
+{ network3, system,@ (a system of intersecting lines or channels; "a railroad network"; "a network of canals") }
 { neutron_bomb, atom_bomb,@ (atom bomb that produces lethal neutrons with less blast) }
-{ nevirapine, Viramune, non-nucleoside_reverse_transcriptase_inhibitor,@ (a non-nucleoside reverse transcriptase inhibitor (trade name Viramune) used to treat AIDS and HIV) } 
+{ nevirapine, Viramune, non-nucleoside_reverse_transcriptase_inhibitor,@ (a non-nucleoside reverse transcriptase inhibitor (trade name Viramune) used to treat AIDS and HIV) }
 { newel, column,@ (the central pillar of a circular staircase) }
 { newel_post, newel2, post,@ (the post at the top or bottom of a flight of stairs; it supports the handrail) }
 { Newgate, prison,@i noun.location:London,#p (a former prison in London notorious for its unsanitary conditions and burnt down in riots in 1780; a new prison was built on the same spot but was torn down in 1902) }
@@ -7366,7 +7366,7 @@
 { pelvimeter, measuring_instrument,@ (measuring instrument for performing pelvimetry) }
 { [ pen, verb.creation:pen,+ ] writing_implement,@ (a writing implement with a point from which ink flows) }
 { pen1, enclosure,@ (an enclosure for confining livestock) }
-{ penal_colony, penal_institution,@ (a penal institution where prisoners are exiled (often located on an island from which escape is difficult or impossible)) } 
+{ penal_colony, penal_institution,@ (a penal institution where prisoners are exiled (often located on an island from which escape is difficult or impossible)) }
 { penal_institution, penal_facility, institution,@ infrastructure,#p (an institution where persons are confined for punishment and to protect the public) }
 { penalty_box, bench,@ ice_hockey_rink,#p noun.act:ice_hockey,;c ((ice hockey) an enclosed bench to the side of an ice-hockey rink for players who are serving time penalties) }
 { pen-and-ink, drawing,@ (a drawing executed with pen and ink) }
@@ -8626,7 +8626,7 @@
 { russet, homespun,@ (a reddish brown homespun fabric) }
 { rya, rya_rug, shag_rug,@ (a shag rug made in Sweden) }
 { [ saber1, verb.contact:saber,+ verb.contact:saber1,+ ] [ sabre1, verb.contact:sabre1,+ verb.contact:sabre,+ ] fencing_sword,@ noun.act:fencing,;c (a fencing sword with a v-shaped blade and a slightly curved handle) }
-{ saber_saw, jigsaw1, reciprocating_saw, power_saw,@ (a portable power saw with a reciprocating blade; can be used with a variety of blades depending on the application and kind of cut; generally have a plate that rides on the surface that is being cut) } 
+{ saber_saw, jigsaw1, reciprocating_saw, power_saw,@ (a portable power saw with a reciprocating blade; can be used with a variety of blades depending on the application and kind of cut; generally have a plate that rides on the surface that is being cut) }
 { Sabin_vaccine, oral_poliovirus_vaccine, OPV, trivalent_live_oral_poliomyelitis_vaccine, TOPV, poliovirus_vaccine,@ (an oral vaccine (containing live but weakened poliovirus) that is given to provide immunity to poliomyelitis) }
 { sable, scarf,@ (a scarf (or trimming) made of sable) }
 { sable1, sable_brush, sable's_hair_pencil, brush,@ (an artist's brush made of sable hairs) }
@@ -9377,7 +9377,7 @@
 { small_ship, ship,@ (a ship that is small) }
 { small_stores, commissary,@ noun.communication:plural,;u (personal items conforming to regulations that are sold aboard ship or at a naval base and charged to the person's pay) }
 { small_stuff, rope,@ (any light rope used on shipboard) }
-{ [ smart_bomb, dumb_bomb,! ] bomb,@ (a bomb that can be guided (by a laser beam or radio) to its target; "smart bombs have revolutionized aerial bombardment") } 
+{ [ smart_bomb, dumb_bomb,! ] bomb,@ (a bomb that can be guided (by a laser beam or radio) to its target; "smart bombs have revolutionized aerial bombardment") }
 { smelling_bottle, bottle,@ (a bottle containing smelling salts) }
 { [ smelter, verb.creation:smelt,+ ] smeltery, plant1,@ (an industrial plant for smelting) }
 { [ smocking, verb.creation:smock,+ ] embroidery,@ (embroidery consisting of ornamental needlework on a garment that is made by gathering the cloth tightly in stitches) }
@@ -11032,7 +11032,7 @@
 { Valenciennes, Valenciennes_lace, pillow_lace,@ (a type of bobbin lace with floral patterns) }
 { valise, overnight_bag,@ (a small overnight bag for short trips) }
 { valproic_acid, [ Depokene, noun.communication:trade_name,;u ] anticonvulsant,@ (anticonvulsant (trade name Depokene) used to prevent some kinds of seizures) }
-{ valsartan, Diovan, angiotensin_II_inhibitor,@ (an angiotensin II inhibitor that is used to treat high blood pressure) } 
+{ valsartan, Diovan, angiotensin_II_inhibitor,@ (an angiotensin II inhibitor that is used to treat high blood pressure) }
 { [ valve, adj.pert:valvular,+ noun.body:valvelet,+ ] control,@ (control consisting of a mechanical device for controlling the flow of a fluid) }
 { [ valve1, noun.body:valvelet,+ ] device,@ brass,#p (device in a brass wind instrument for varying the length of the air column to alter the pitch of a tone) }
 { valve-in-head_engine, internal-combustion_engine,@ (internal-combustion engine having both inlet and exhaust valves located in the cylinder head) }

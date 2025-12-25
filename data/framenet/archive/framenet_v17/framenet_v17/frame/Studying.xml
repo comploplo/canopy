@@ -3,7 +3,7 @@
 <frame cBy="MJE" cDate="06/22/2004 02:39:27 PDT Tue" name="Studying" ID="1130" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;A &lt;fen&gt;Student&lt;/fen&gt; enrolls and then remains at an &lt;fen&gt;Institution&lt;/fen&gt; for the purposes of education within a &lt;fen&gt;Subject&lt;/fen&gt;.  They may receive instruction from a particular &lt;fen&gt;Teacher&lt;/fen&gt; at the &lt;fen&gt;Institution&lt;/fen&gt;.  The &lt;fen&gt;Place&lt;/fen&gt;, &lt;fen&gt;Time&lt;/fen&gt;, and &lt;fen&gt;Duration&lt;/fen&gt; of the study may also be specified.
 
-&lt;ex&gt;&lt;fex name="Student"&gt;He&lt;/fex&gt; spent ten years &lt;t&gt;studying&lt;/t&gt; &lt;fex name="Subject"&gt;physics&lt;/fex&gt; &lt;fex name="Institution"&gt;at the lycee&lt;/fex&gt; before he flunked out.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Student"&gt;He&lt;/fex&gt; spent ten years &lt;t&gt;studying&lt;/t&gt; &lt;fex name="Subject"&gt;physics&lt;/fex&gt; &lt;fex name="Institution"&gt;at the lycee&lt;/fex&gt; before he flunked out.&lt;/ex&gt;
 
  &lt;/def-root&gt;</definition>
     <semType name="Non-perspectivalized_frame" ID="52"/>
@@ -26,7 +26,7 @@
 &lt;ex&gt;She &lt;t&gt;studies&lt;/t&gt; &lt;fex name="Subject"&gt;astrophysics&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="06/22/2004 02:39:27 PDT Tue" abbrev="Lvl" name="Level" ID="6530">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Level&lt;/fen&gt; of a &lt;fen name="Student"&gt;student&lt;/fen&gt; in his/her education. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Level&lt;/fen&gt; of a &lt;fen name="Student"&gt;student&lt;/fen&gt; in his/her education.
 &lt;ex&gt;a &lt;fex name="Level"&gt;graduate&lt;/fex&gt; &lt;fen&gt;student&lt;/fen&gt;&lt;/ex&gt;
 &lt;ex&gt;a &lt;fex name="Level"&gt;fourth grade&lt;/fex&gt; &lt;fen&gt;student&lt;/fen&gt;&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
@@ -59,7 +59,7 @@ NOTE: Consider whether a possible &lt;fen&gt;Place&lt;/fen&gt; phrase is really 
         <definition>&lt;def-root&gt;Co_participant is an entity that participates in a coordinated way in the Studying event. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="EEE8AA" fgColor="000000" coreType="Peripheral" cBy="KmG" cDate="01/10/2007 01:06:32 PST Wed" abbrev="" name="Intended_academic_credit" ID="10965">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Student&lt;/fen&gt;'s motivation for studying.  
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Student&lt;/fen&gt;'s motivation for studying.
 
 &lt;ex&gt;He is &lt;t&gt;studying&lt;/t&gt; &lt;fex name="Intended_academic_credit"&gt;for his Master's&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

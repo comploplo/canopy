@@ -3,7 +3,7 @@
 <frame cBy="Tess" cDate="05/23/2001 03:07:57 PDT Wed" name="Education_teaching" ID="111" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;This frame contains words referring to teaching and the participants in teaching.  A &lt;fen&gt;Student&lt;/fen&gt; comes to learn either about a &lt;fen&gt;Subject&lt;/fen&gt;; a &lt;fen&gt;Skill&lt;/fen&gt;; a &lt;fen&gt;Precept&lt;/fen&gt;; or a &lt;fen&gt;Fact&lt;/fen&gt; as a result of instruction by a &lt;fen&gt;Teacher&lt;/fen&gt;.
 
-Some of the nouns (schoolmaster, -mistress) in this frame refer to administrative positions and do not take relevant frame elements; these will be moved.  
+Some of the nouns (schoolmaster, -mistress) in this frame refer to administrative positions and do not take relevant frame elements; these will be moved.
 
 &lt;ex&gt;&lt;fex name="tea"&gt;Dad&lt;/fex&gt; &lt;t&gt;taught&lt;/t&gt; &lt;fex name=""&gt;me&lt;/fex&gt; &lt;fex name="fac"&gt;that if you work hard, you will be OK - no matter what happens&lt;/fex&gt;. &lt;/ex&gt;
 
@@ -23,7 +23,7 @@ came back to bite me in the ass, without fail. &lt;/ex&gt;
 Frame-Element relations:
 
 Several Frame element relations hold in this frame. There is a core-set {&lt;fen&gt;Material&lt;/fen&gt;, &lt;fen&gt;Teacher&lt;/fen&gt;} (possibly also including &lt;fen&gt;Institution&lt;/fen&gt;); these FE's can fill the subject slot of the teach-type verbs.
-There is another core-set  {&lt;fen&gt;Precept&lt;/fen&gt;, &lt;fen&gt;Subject&lt;/fen&gt;, &lt;fen&gt;Skill&lt;/fen&gt;, &lt;fen&gt;Fact&lt;/fen&gt;, &lt;fen&gt;Role&lt;/fen&gt;} to do with what is learnt. In addition, the FE &lt;fen&gt;Qualification&lt;/fen&gt; may occur with &lt;fen&gt;Subject&lt;/fen&gt; and &lt;fen&gt;Role&lt;/fen&gt; 
+There is another core-set  {&lt;fen&gt;Precept&lt;/fen&gt;, &lt;fen&gt;Subject&lt;/fen&gt;, &lt;fen&gt;Skill&lt;/fen&gt;, &lt;fen&gt;Fact&lt;/fen&gt;, &lt;fen&gt;Role&lt;/fen&gt;} to do with what is learnt. In addition, the FE &lt;fen&gt;Qualification&lt;/fen&gt; may occur with &lt;fen&gt;Subject&lt;/fen&gt; and &lt;fen&gt;Role&lt;/fen&gt;
 &lt;ex&gt;My sister is &lt;t&gt;studying&lt;/t&gt; &lt;fex name="Qualification"&gt;for a maths degree &lt;/fex&gt;  &lt;fex name="Role"&gt; to be a teacher &lt;/fex&gt;&lt;/ex&gt;
 &lt;ex&gt;She's &lt;t&gt;studying&lt;/t&gt; &lt;fex name="Subject"&gt;maths&lt;/fex&gt; &lt;fex name="Role"&gt;to be a teacher &lt;/fex&gt;.&lt;/ex&gt;
 
@@ -55,7 +55,7 @@ Phrases expressing &lt;fen&gt;Qualification&lt;/fen&gt; also very often include 
         <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Level&lt;/fen&gt; of a student in his/her education. This is  distinct from the goal or qualification towards which a student is working (&lt;fen&gt;Qualification&lt;/fen&gt; ). &lt;ex&gt;a &lt;fex name="Level"&gt;graduate&lt;/fex&gt; &lt;fen&gt;student&lt;/fen&gt; &lt;/ex&gt; &lt;ex&gt;a &lt;fex name="Level"&gt;fourth grade&lt;/fex&gt; &lt;fen&gt;student&lt;/fen&gt; &lt;/ex&gt; The above are both &lt;fen&gt;Level&lt;/fen&gt;s, in contrast to: &lt;ex&gt;a &lt;fex name="Qualification"&gt;doctoral&lt;/fex&gt; &lt;fen&gt;Student&lt;/fen&gt; &lt;/ex&gt; &lt;ex&gt;an &lt;fex name="Qualification"&gt;MA&lt;/fex&gt; &lt;fen&gt;Student&lt;/fen&gt; &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="Tess" cDate="05/24/2001 11:48:40 PDT Thu" abbrev="Qual" name="Qualification" ID="568">
-        <definition>&lt;def-root&gt;A formal Qualification such as an academic degree or a certificate for which a student is aiming. 
+        <definition>&lt;def-root&gt;A formal Qualification such as an academic degree or a certificate for which a student is aiming.
 
 &lt;ex&gt;She's &lt;t&gt;Studying&lt;/t&gt; &lt;fex name="Qualification"&gt;for a Master's degree&lt;/fex&gt;&lt;/ex&gt;
 &lt;ex&gt;She's an &lt;fex name="Qualification"&gt;MA&lt;/fex&gt; &lt;t&gt;Student&lt;/t&gt;&lt;/ex&gt;

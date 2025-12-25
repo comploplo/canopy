@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MJE" cDate="01/13/2003 05:24:37 PST Mon" name="Bearing_arms" ID="470" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Protagonist&lt;/fen&gt; has (or does not have) a &lt;fen&gt;Weapon&lt;/fen&gt;.  The &lt;fen&gt;Degree&lt;/fen&gt; to which the &lt;fen&gt;Protagonist&lt;/fen&gt; is armed may also be described.  The &lt;fen&gt;Protagonist&lt;/fen&gt; is normally a human but may be a device that has subsidiary weapons. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Protagonist&lt;/fen&gt; has (or does not have) a &lt;fen&gt;Weapon&lt;/fen&gt;.  The &lt;fen&gt;Degree&lt;/fen&gt; to which the &lt;fen&gt;Protagonist&lt;/fen&gt; is armed may also be described.  The &lt;fen&gt;Protagonist&lt;/fen&gt; is normally a human but may be a device that has subsidiary weapons.
 &lt;ex&gt;Apparently, &lt;fex name="Protagonist"&gt;the suspect&lt;/fex&gt; &lt;m&gt;is&lt;/m&gt; &lt;t&gt;armed&lt;/t&gt; &lt;fex name="Weapon"&gt;with a shotgun&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;After she pulled the .45 from her sock drawer, &lt;fex name="Protagonist"&gt;she&lt;/fex&gt; &lt;m&gt;felt&lt;/m&gt; &lt;fex name="Degree"&gt;well enough&lt;/fex&gt; &lt;t&gt;armed&lt;/t&gt; &lt;fex name="Degree"&gt;to face anyone coming in&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Protagonist"&gt;The Tomahawk missile&lt;/fex&gt; &lt;t&gt;packs&lt;/t&gt; a lot of heat .&lt;/ex&gt;

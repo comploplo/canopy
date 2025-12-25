@@ -8,7 +8,7 @@ use crate::error::{AnalysisError, PipelineError};
 use async_trait::async_trait;
 use canopy_core::ThetaRole as ThetaRoleType;
 use canopy_core::Word;
-use canopy_semantic_layer::SemanticLayer1Output as SemanticAnalysis;
+use canopy_tokenizer::SemanticLayer1Output as SemanticAnalysis;
 use std::collections::HashMap;
 
 /// Core trait for morphosyntactic parsing (Layer 1)

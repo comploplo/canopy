@@ -33,7 +33,7 @@
         <semType name="Source" ID="151"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="06/03/2003 12:26:48 PDT Tue" abbrev="" name="Beam" ID="4525">
-        <definition>&lt;def-root&gt;The light that travels from a &lt;fen&gt;Source&lt;/fen&gt; along a &lt;fen&gt;Path&lt;/fen&gt; to a &lt;fen&gt;Goal&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The light that travels from a &lt;fen&gt;Source&lt;/fen&gt; along a &lt;fen&gt;Path&lt;/fen&gt; to a &lt;fen&gt;Goal&lt;/fen&gt;.
 &lt;ex&gt;&lt;fex name="Beam"&gt;Sunlight&lt;/fex&gt; &lt;t&gt;gleamed&lt;/t&gt; from the water of the bay.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Beam"&gt;Lamplight&lt;/fex&gt; &lt;t&gt;flickered&lt;/t&gt; through the foggy air.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

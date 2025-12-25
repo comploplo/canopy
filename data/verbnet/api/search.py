@@ -369,4 +369,3 @@ def find_frames(frames):
 
 def get_verbnet_parser(version="3.4"):
     return VerbNetParser(version=version)
-

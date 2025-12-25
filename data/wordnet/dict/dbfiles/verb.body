@@ -134,7 +134,7 @@
 { [ grin, noun.person:grinner,+ noun.communication:grinning,+ noun.communication:grin,+ ] smile,@ frames: 2 (to draw back the lips and reveal the teeth, in a smile, grimace, or snarl) }
 { beam, smile,@ frames: 2 (smile radiantly; express joy through one's facial expression) }
 { [ smirk, noun.person:smirker,+ noun.communication:smirk,+ ] [ simper, noun.person:simperer,+ ] smile,@ frames: 2,22 (smile affectedly or derisively) }
-{ [ fleer, noun.communication:fleer,+ ] smirk,@ frames: 2,22 (to smirk contemptuously) } 
+{ [ fleer, noun.communication:fleer,+ ] smirk,@ frames: 2,22 (to smirk contemptuously) }
 { [ bray, noun.event:bray,+ ] laugh,@ frames: 2,22 (laugh loudly and harshly) }
 { bellylaugh, laugh,@ frames: 2 (laugh a deep, hearty laugh) }
 { [ roar, noun.communication:roar,+ ] [ howl, noun.communication:howl,+ noun.communication:howler,+ noun.communication:howling,+ ] laugh,@ frames: 2 (laugh unrestrainedly and heartily) }

@@ -12,7 +12,7 @@
 &lt;ex&gt;&lt;fex name="tra"&gt;We&lt;/fex&gt; &lt;t&gt;got&lt;/t&gt; off at the wrong bus stop.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="10/14/2005 03:07:42 PDT Fri" abbrev="veh" name="Vehicle" ID="9127">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Vehicle&lt;/fen&gt; is the means of conveyance that the &lt;fen&gt;Traveller&lt;/fen&gt; disembarks from. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Vehicle&lt;/fen&gt; is the means of conveyance that the &lt;fen&gt;Traveller&lt;/fen&gt; disembarks from.
 
 
 &lt;ex&gt;The victim stopped the tractor and &lt;t&gt;dismounted&lt;/t&gt; &lt;fex name="Vehicle"&gt;from it&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>

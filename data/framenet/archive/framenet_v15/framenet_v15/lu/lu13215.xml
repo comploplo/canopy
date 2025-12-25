@@ -22,7 +22,7 @@
             <FE fgColor="FFFFFF" bgColor="0000FF" type="Core" abbrev="top" name="Topic"/>
         </frame>
     </header>
-    <definition>COD: a person who brags. 
+    <definition>COD: a person who brags.
 
 </definition>
     <lexeme POS="N" name="braggart"/>

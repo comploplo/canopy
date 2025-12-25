@@ -74,7 +74,7 @@
         <definition>&lt;def-root&gt;This frame element selects some gradable attribute and modifies the expected value for it.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="d0d0d0" fgColor="000000" coreType="Extra-Thematic" cBy="361" cDate="08/15/2006 03:26:12 PDT Tue" abbrev="Gro" name="Group" ID="10504">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Group&lt;/fen&gt; of &lt;fen&gt;Speaker&lt;/fen&gt;s or &lt;fen&gt;Medium&lt;/fen&gt;s within which the statement is made. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Group&lt;/fen&gt; of &lt;fen&gt;Speaker&lt;/fen&gt;s or &lt;fen&gt;Medium&lt;/fen&gt;s within which the statement is made.
 
 &lt;ex&gt;Much would be achieved if these were more &lt;fex name="Group"&gt;widely&lt;/fex&gt; &lt;t&gt;acknowledged&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

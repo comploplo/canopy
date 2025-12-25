@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:11:56 PST Wed" name="Judgment" ID="28" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Cognizer&lt;/fen&gt; makes a judgment about an &lt;fen&gt;Evaluee&lt;/fen&gt;. The judgment may be positive (e.g. &lt;ment&gt;respect&lt;/ment&gt;) or negative (e.g. &lt;ment&gt;condemn&lt;/ment&gt;), and this information is recorded in the semantic types Positive and Negative on the Lexical Units of this frame. There may be a specific &lt;fen&gt;Reason&lt;/fen&gt; for the &lt;fen&gt;Cognizer&lt;/fen&gt;'s judgment, or there may be a capacity or &lt;fen&gt;Role&lt;/fen&gt; in which the &lt;fen&gt;Evaluee&lt;/fen&gt; is judged. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Cognizer&lt;/fen&gt; makes a judgment about an &lt;fen&gt;Evaluee&lt;/fen&gt;. The judgment may be positive (e.g. &lt;ment&gt;respect&lt;/ment&gt;) or negative (e.g. &lt;ment&gt;condemn&lt;/ment&gt;), and this information is recorded in the semantic types Positive and Negative on the Lexical Units of this frame. There may be a specific &lt;fen&gt;Reason&lt;/fen&gt; for the &lt;fen&gt;Cognizer&lt;/fen&gt;'s judgment, or there may be a capacity or &lt;fen&gt;Role&lt;/fen&gt; in which the &lt;fen&gt;Evaluee&lt;/fen&gt; is judged.
 &lt;ex&gt;&lt;/ex&gt;
-This frame is distinct from the Judgment_communication frame in that this frame does not involve the Cognizer communicating his or her judgment to an Addressee.  
+This frame is distinct from the Judgment_communication frame in that this frame does not involve the Cognizer communicating his or her judgment to an Addressee.
 &lt;ex&gt;JUDGMENT:  She &lt;t&gt;admired&lt;/t&gt; Einstein for his character.&lt;/ex&gt;
 &lt;ex&gt;JUDGMENT_COMMUNICATION:  She &lt;t&gt;accused&lt;/t&gt; Einstein of collusion.&lt;/ex&gt;
 &lt;ex&gt;&lt;/ex&gt;
@@ -15,7 +15,7 @@ Currently, however, some lexical units and annotation for both remain in this fr
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:57 PST Wed" abbrev="Eval" name="Evaluee" ID="116">
-        <definition>&lt;def-root&gt;Evaluee is the person or thing about whom/which a judgment is made. With verbs this FE is typically expressed as Object: 
+        <definition>&lt;def-root&gt;Evaluee is the person or thing about whom/which a judgment is made. With verbs this FE is typically expressed as Object:
 &lt;ex&gt;The boss &lt;t&gt;appreciates&lt;/t&gt; &lt;fex name="Eval"&gt;you&lt;/fex&gt; for your diligence. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:57 PST Wed" abbrev="Reas" name="Reason" ID="117">
@@ -28,7 +28,7 @@ Currently, however, some lexical units and annotation for both remain in this fr
         <definition>&lt;def-root&gt; &lt;fen&gt;Role&lt;/fen&gt; is used for the capacity in which the &lt;fen&gt;Evaluee&lt;/fen&gt; is judged, and is expressed in &lt;ment&gt;as&lt;/ment&gt;-PPs. &lt;ex&gt;I &lt;t&gt;admire&lt;/t&gt; you &lt;fex name="Role"&gt;as a composer&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root &gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:57 PST Wed" abbrev="Exr" name="Expressor" ID="119">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Expressor&lt;/fen&gt; is the body part or action by a body part that conveys the judgment made by the &lt;fen&gt;Cognizer&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Expressor&lt;/fen&gt; is the body part or action by a body part that conveys the judgment made by the &lt;fen&gt;Cognizer&lt;/fen&gt;.
 &lt;ex&gt;She viewed him with an &lt;t&gt;appreciative&lt;/t&gt; &lt;fex name="Expressor"&gt;gaze&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="06/25/2001 12:34:27 PDT Mon" abbrev="Degr" name="Degree" ID="1064">
@@ -48,7 +48,7 @@ Currently, however, some lexical units and annotation for both remain in this fr
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="MRLP" cDate="09/18/2002 04:35:25 PDT Wed" abbrev="Top" name="Topic" ID="3720">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Topic&lt;/fen&gt; identifies the entity to which the proposition or propositions conveyed relate. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Topic&lt;/fen&gt; identifies the entity to which the proposition or propositions conveyed relate.
 &lt;ex&gt;Jon was &lt;t&gt;disapproving&lt;/t&gt;  &lt;fex name="Topic"&gt;about Madie's managerial style&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Peripheral" cBy="ACW" cDate="06/06/2003 02:10:20 PDT Fri" abbrev="" name="Extent_of_acclaim" ID="4546">

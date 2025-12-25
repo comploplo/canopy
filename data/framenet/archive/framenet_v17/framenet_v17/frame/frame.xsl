@@ -31,7 +31,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
             sorttable.init();
             // get the FEs color info and store it in 'fes'
             getFEs();
-            
+
             // the FE definitions have ids 'fe#'
             // get the first FE definition
 			var fe = document.getElementById('fe1');
@@ -48,7 +48,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
 			var defEl = document.getElementById('def');
 			var def = defEl.innerHTML;
 			defEl.innerHTML = convertDefinition(def);
-            
+
             // if the banner was specified, display it
             if (banner) {
                 // create an iframe and load the banner in it
@@ -94,7 +94,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                     // if its the start of a tag ('<')
                     if (defWords[j].substr(0,4) == '&lt;') {
                         // find the actual tag by skipping empty words
-                        do { j++ } while (!defWords[j] || defWords[j] == ''); 
+                        do { j++ } while (!defWords[j] || defWords[j] == '');
                         // store the tag
                         tag = defWords[j];
                         // if the tag is a start tag (doesn't start with '/')
@@ -148,7 +148,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                         }
                         else { // tag is a closing tag (starts with '/')
                             // remove the '/'
-                            tag = tag.substr(1);                            
+                            tag = tag.substr(1);
                             // skip to close of tag
                             while (!defWords[j] || defWords[j].substr(0,4) != '&gt;') j++;
                             // grab a possible trailing space from the endtag
@@ -367,7 +367,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
           Licenced as X11: http://www.kryogenix.org/code/browser/licence.html
           This basically means: do what you want with it.
         */
-        
+
         var stIsIE = /*@cc_on!@*/false;
 
         sorttable = {
@@ -812,7 +812,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
 		</script>
    	</head>
    	<body>
-        <!-- body stored in a div to be displayed after 
+        <!-- body stored in a div to be displayed after
              the definitions are done being colored -->
         <div id='bodyDelay' style='display:none;'>
             <iframe id='banner' style='display:none;'></iframe>
@@ -892,7 +892,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                 <xsl:for-each select='fn:FE'>
                     <xsl:sort select='@name' order='ascending' />
                     <xsl:variable name='feNum' select='position()' />
-                    <xsl:if test='@coreType="Core-Unexpressed"'>                        
+                    <xsl:if test='@coreType="Core-Unexpressed"'>
                         <tr>
                             <td valign='top' width='210' cellpadding='4'>
                                 <xsl:variable name='fgColor' select='@fgColor' />
@@ -1035,7 +1035,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                     <xsl:for-each select='fn:lexUnit'>
                         <xsl:sort select='@name' order='ascending' />
                         <tr><td><xsl:value-of select='@name' /></td>
-                        <td><b><xsl:value-of select='@status' /></b></td>                        
+                        <td><b><xsl:value-of select='@status' /></b></td>
                         <td><xsl:value-of select='@cBy' /></td>
                         <td><xsl:value-of select='@cDate' /></td>
                     </tr></xsl:for-each>

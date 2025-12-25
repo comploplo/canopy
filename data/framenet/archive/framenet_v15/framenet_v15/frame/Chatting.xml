@@ -18,7 +18,7 @@
         <excludesFE name="Interlocutors" ID="5781"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="11/26/2003 03:54:48 PST Wed" abbrev="" name="Interlocutor_2" ID="5783">
-        <definition>&lt;def-root&gt;The semantically (and grammatically) less prominent group of participants in a conversation.  It is generally encoded within a prepositional phrase (e.g. headed by &lt;ment&gt;with&lt;/ment&gt;).  
+        <definition>&lt;def-root&gt;The semantically (and grammatically) less prominent group of participants in a conversation.  It is generally encoded within a prepositional phrase (e.g. headed by &lt;ment&gt;with&lt;/ment&gt;).
 
 &lt;ex&gt;I gossiped &lt;fex name="Interlocutor_2"&gt;with the rest of the choir&lt;/fex&gt; for a little while.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>

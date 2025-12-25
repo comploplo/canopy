@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:11:54 PST Wed" name="Differentiation" ID="24" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;Words in this frame have to do with a &lt;fen&gt;Cognizer&lt;/fen&gt; being aware (or not being aware) of the difference between two &lt;fen&gt;Phenomena&lt;/fen&gt;, which may be expressed jointly or disjointly.    
+    <definition>&lt;def-root&gt;Words in this frame have to do with a &lt;fen&gt;Cognizer&lt;/fen&gt; being aware (or not being aware) of the difference between two &lt;fen&gt;Phenomena&lt;/fen&gt;, which may be expressed jointly or disjointly.
 
 &lt;ex&gt;It is very difficult for &lt;fex name="Cognizer"&gt;people&lt;/fex&gt; to &lt;fex name="Means"&gt;visually&lt;/fex&gt; &lt;t&gt;distinguish&lt;/t&gt; &lt;fex name="Phenomena"&gt;between living and non-living things&lt;/fex&gt; &lt;fex name="Circumstances"&gt;from such a great distance&lt;/fex&gt; .&lt;/ex&gt;
 
@@ -14,7 +14,7 @@
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:55 PST Wed" abbrev="Phen-1" name="Phenomenon_1" ID="103">
         <definition>&lt;def-root&gt;The phenomena that are potentially judged to be different from one another can be expressed as separate constituents. When they are, one is typically expressed as an NP Object, and the other as a PP Complement headed by &lt;ment&gt;from&lt;/ment&gt;:
 &lt;ex&gt; The teacher couldn't &lt;t&gt;distinguish&lt;/t&gt; Pat from Kim.&lt;/ex&gt;
- In this case, the phenomenon expressed more prominently as an NP Object is called &lt;fen&gt;Phenomenon_1&lt;/fen&gt;: 
+ In this case, the phenomenon expressed more prominently as an NP Object is called &lt;fen&gt;Phenomenon_1&lt;/fen&gt;:
 &lt;ex&gt;The teacher couldn't &lt;t&gt;distinguish&lt;/t&gt; &lt;fex name="Phenomenon_1"&gt;Pat&lt;/fex&gt; from Kim. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <requiresFE name="Phenomenon_2" ID="104"/>
         <excludesFE name="Phenomena" ID="105"/>
@@ -26,13 +26,13 @@
         <excludesFE name="Phenomena" ID="105"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:55 PST Wed" abbrev="Phen-pl" name="Phenomena" ID="105">
-        <definition>&lt;def-root&gt;Both phenomena that are potentially judged to be different from one another can be expressed jointly by the same constituent: 
+        <definition>&lt;def-root&gt;Both phenomena that are potentially judged to be different from one another can be expressed jointly by the same constituent:
 &lt;ex&gt;The teacher couldn't &lt;t&gt;distinguish&lt;/t&gt; &lt;fex name="Phenomena"&gt;the twins&lt;/fex&gt;.&lt;/ex&gt;
- Such constituents are assigned the FE &lt;fen&gt;Phenomena&lt;/fen&gt;. They are always plural, as in the above example, or involve conjunction: 
+ Such constituents are assigned the FE &lt;fen&gt;Phenomena&lt;/fen&gt;. They are always plural, as in the above example, or involve conjunction:
 &lt;ex&gt;The teacher couldn't &lt;t&gt;distinguish&lt;/t&gt; &lt;fex name="Phenomena"&gt;Pat and Kim&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:55 PST Wed" abbrev="Qual" name="Quality" ID="106">
-        <definition>&lt;def-root&gt;This is a property that is potentially used by the Cognizer to distinguish one phenomenon from another. It is normally expressed as a PP headed by a preposition such as &lt;ment&gt;from&lt;/ment&gt;, &lt;ment&gt;by&lt;/ment&gt;, or &lt;ment&gt;on the basis of&lt;/ment&gt;: 
+        <definition>&lt;def-root&gt;This is a property that is potentially used by the Cognizer to distinguish one phenomenon from another. It is normally expressed as a PP headed by a preposition such as &lt;ment&gt;from&lt;/ment&gt;, &lt;ment&gt;by&lt;/ment&gt;, or &lt;ment&gt;on the basis of&lt;/ment&gt;:
 &lt;ex&gt;The coach could &lt;t&gt;distinguish&lt;/t&gt; the twins &lt;fex name="Quality"&gt;by their hair&lt;/fex&gt;.&lt;/ex&gt; General Grammatical Observations: Verbs in this domain often occur with the modal auxiliary &lt;ment&gt;can&lt;/ment&gt;. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="06/23/2001 06:51:35 PDT Sat" abbrev="Degr" name="Degree" ID="1000">

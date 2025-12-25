@@ -449,11 +449,11 @@
 { balance_of_power, equilibrium,@ (an equilibrium of power between nations) }
 { dynamic_balance, equilibrium,@ noun.cognition:aeronautics,;c ((aeronautics) the state of equilibrium in which centrifugal forces due to a rotating mass (e.g., a propeller) do not produce force in the shaft and so vibration is reduced) }
 { [ homeostasis, adj.pert:homeostatic,+ ] equilibrium,@ noun.cognition:physiology,;c ((physiology) metabolic equilibrium actively maintained by several complex biological mechanisms that operate via the autonomic nervous system to offset disrupting changes) }
-{ isostasy, equilibrium,@ noun.cognition:geology,;c ((geology) a general equilibrium of the forces tending to elevate or depress the earth's crust) } 
+{ isostasy, equilibrium,@ noun.cognition:geology,;c ((geology) a general equilibrium of the forces tending to elevate or depress the earth's crust) }
 { Nash_equilibrium, equilibrium,@ noun.cognition:game_theory,;c ((game theory) a stable state of a system that involves several interacting participants in which no participant can gain by a change of strategy as long as all the other participants remain unchanged) }
 { [ poise, verb.contact:poise1,+ verb.contact:poise2,+ ] equilibrium,@ (a state of being balanced in a stable equilibrium) }
 { thermal_equilibrium, equilibrium,@ (a state in which all parts of a system are at the same temperature) }
-{ [ imbalance, balance,!] instability1, unbalance, disequilibrium,@ (a lack of balance or state of disequilibrium; "a hormonal imbalance") } 
+{ [ imbalance, balance,!] instability1, unbalance, disequilibrium,@ (a lack of balance or state of disequilibrium; "a hormonal imbalance") }
 
 { [ motion, verb.body:move6,+ motionlessness,! ] noun.Tops:state,@ (a state of change; "they were in a state of steady motion") }
 { [ shaking, verb.body:shake,+ ] [ shakiness, adj.all:unsteady^shaky,+ adj.all:unstable^shaky,+ ] [ trembling, verb.motion:tremble,+ ] [ quiver, verb.motion:quiver,+ ] [ quivering, verb.motion:quiver,+ ] [ vibration1, adj.pert:vibrational,+ verb.motion:vibrate,+ ] [ palpitation1, verb.motion:palpitate1,+ ] motion,@ (a shaky motion; "the shaking of his fingers as he lit his pipe") }
@@ -1516,7 +1516,7 @@
 { [ myopathy, adj.pert:myopathic,+ ] pathology,@ (any pathology of the muscles that is not attributable to nerve dysfunction) }
 { dermatomyositis, myositis,@ (myositis characterized by weakness of limb and neck muscles and much muscle pain and swelling accompanied by skin rash affecting cheeks and eyelids and neck and chest and limbs; progression and severity vary among individuals) }
 { polymyositis, myositis,@ (myositis characterized by weakness of limb and neck muscles and much muscle pain and swelling; progression and severity vary among individuals) }
-{ inclusion_body_myositis, myositis,@ (myositis characterized by weakness of limb muscles (especially the thighs and wrists and fingers); sometimes involves swallowing muscles; onset after 50 and slowly progressive; seen more often in men than in women) } 
+{ inclusion_body_myositis, myositis,@ (myositis characterized by weakness of limb muscles (especially the thighs and wrists and fingers); sometimes involves swallowing muscles; onset after 50 and slowly progressive; seen more often in men than in women) }
 { osteopetrosis, Albers-Schonberg_disease, marble_bones_disease, genetic_disease,@ (an inherited disorder characterized by an increase in bone density; in severe forms the bone marrow cavity may be obliterated) }
 { osteoporosis, pathology,@ (abnormal loss of bony tissue resulting in fragile porous bones attributable to a lack of calcium; most common in postmenopausal women) }
 { priapism, pathology,@ (condition in which the penis is continually erect; usually painful and seldom with sexual arousal) }

@@ -6,13 +6,13 @@
 &lt;/def-root&gt;</definition>
     <semType name="Non-Lexical Frame" ID="16"/>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="12/07/2005 10:02:43 PST Wed" abbrev="Cog" name="Cognizer" ID="9634">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Cognizer&lt;/fen&gt; pays attention to an entity in order to discover something about it. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Cognizer&lt;/fen&gt; pays attention to an entity in order to discover something about it.
 
 &lt;ex&gt;&lt;fex name="Cognizer"&gt;Leslie&lt;/fex&gt; &lt;t&gt;examined&lt;/t&gt; the glass for cracks.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="7CCD7C" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="12/07/2005 10:02:43 PST Wed" abbrev="Ground" name="Ground" ID="9635">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Cognizer&lt;/fen&gt; pays attention to the &lt;fen&gt;Ground&lt;/fen&gt;, so named because it serves as the background or context for the &lt;fen&gt;Phenomenon&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Cognizer&lt;/fen&gt; pays attention to the &lt;fen&gt;Ground&lt;/fen&gt;, so named because it serves as the background or context for the &lt;fen&gt;Phenomenon&lt;/fen&gt;.
 
 &lt;ex&gt;Leslie &lt;t&gt;examined&lt;/t&gt; &lt;fex name="Ground"&gt;the glass&lt;/fex&gt; for cracks.&lt;/ex&gt;
 &lt;ex&gt;Kim &lt;t&gt;searched&lt;/t&gt; &lt;fex name="Ground"&gt;the woods&lt;/fex&gt; for mushrooms.&lt;/ex&gt;&lt;/def-root&gt;</definition>

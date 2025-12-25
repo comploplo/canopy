@@ -207,6 +207,20 @@ pre-release: check-all test coverage
 release: build-release
     @echo "📦 Release binaries built in target/release/"
 
+# === Demos ===
+
+# Run the basic demo (release mode for speed)
+demo:
+    cargo run --release --example basic_demo
+
+# Run the comprehensive semantic demo
+demo-full:
+    cargo run --release --example comprehensive_semantic_demo
+
+# Run demo in debug mode (slower but with debug info)
+demo-debug:
+    cargo run --example basic_demo
+
 # === Utility ===
 
 # Show workspace information

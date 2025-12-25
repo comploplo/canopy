@@ -172,7 +172,7 @@
 { homonymy, linguistic_relation,@ (the relation between two words that are spelled the same way but differ in meaning or the relation between two words that are pronounced the same way but differ in meaning) }
 
 { [ part, adj.all:incomplete^partial,+ ] portion, component_part, component, constituent, noun.Tops:relation,@ meronymy,#p (something determined in relation to something that includes it; "he wanted to feel a part of something bigger than himself"; "I read a portion of the manuscript"; "the smaller component is hard to reach"; "the animal constituent of plankton") }
-{ basis1, base, part,@ (the most important or necessary part of something; "the basis of this drink is orange juice") } 
+{ basis1, base, part,@ (the most important or necessary part of something; "the basis of this drink is orange juice") }
 { [ detail, verb.communication:detail,+ ] particular, [ item, verb.communication:itemize,+ ] part,@ (a small part that can be considered separately from the whole; "it was perfect in all details") }
 { [ highlight, verb.change:highlight,+ ] high_spot, detail,@ (the most interesting or memorable part; "the highlight of the tour was our visit to the Vatican") }
 { [ unit, verb.social:unitize,+ verb.change:unitize,+ ] part,@ (an individual or group or structure or other entity regarded as a structural or functional constituent of a whole; "the reduced the number of units and installations"; "the word is a basic linguistic unit") }

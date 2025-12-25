@@ -5,7 +5,7 @@
 
 &lt;ex&gt;I drove a &lt;t&gt;limo&lt;/t&gt; to the school dance.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="GlY" cDate="12/05/2002 05:13:03 PST Thu" abbrev="Desc" name="Descriptor" ID="3957">
-        <definition>&lt;def-root&gt;This FE identifies a characteristic or description of the Vehicle. 
+        <definition>&lt;def-root&gt;This FE identifies a characteristic or description of the Vehicle.
 &lt;ex&gt;Kim drove a &lt;fex name="Desc"&gt; used&lt;/fex&gt; &lt;t&gt;car&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Core" cBy="GlY" cDate="12/05/2002 05:21:36 PST Thu" abbrev="Veh" name="Vehicle" ID="3958">

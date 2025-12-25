@@ -24,7 +24,7 @@
         <excludesFE name="Dependent_variable" ID="10669"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Core-Unexpressed" cBy="RLG" cDate="10/06/2006 09:03:34 PDT Fri" abbrev="depv" name="Dependent_variable" ID="10669">
-        <definition>&lt;def-root&gt;A scalar variable, whose value depends on the behavior of a &lt;fen&gt;Controlling_entity&lt;/fen&gt;, a &lt;fen&gt;Controlling_situation&lt;/fen&gt;, or a &lt;fen&gt;Controlling_variable&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;A scalar variable, whose value depends on the behavior of a &lt;fen&gt;Controlling_entity&lt;/fen&gt;, a &lt;fen&gt;Controlling_situation&lt;/fen&gt;, or a &lt;fen&gt;Controlling_variable&lt;/fen&gt;.
 
 &lt;ex&gt;Move the slider on the SpeedBar while playing audio or video material to &lt;t&gt;control&lt;/t&gt; &lt;fex name="depv"&gt;playback speed&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Dependent_entity" ID="10666"/>

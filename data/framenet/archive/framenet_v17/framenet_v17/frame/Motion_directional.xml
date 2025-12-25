@@ -3,7 +3,7 @@
 <frame cBy="ACW" cDate="06/24/2002 03:57:57 PDT Mon" name="Motion_directional" ID="362" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;Theme&lt;/fen&gt; moves in a certain &lt;fen&gt;Direction&lt;/fen&gt; which is often determined by gravity or other natural, physical forces. The &lt;fen&gt;Theme&lt;/fen&gt; is not necessarily a self-mover.
 
-&lt;ex&gt; &lt;fex name="Theme"&gt;The paper&lt;/fex&gt; &lt;t&gt;fell&lt;/t&gt; &lt;fex name="Path"&gt;to the floor&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt; &lt;fex name="Theme"&gt;The paper&lt;/fex&gt; &lt;t&gt;fell&lt;/t&gt; &lt;fex name="Path"&gt;to the floor&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt; &lt;fex name="Theme"&gt;The girl&lt;/fex&gt; &lt;t&gt;dropped&lt;/t&gt; &lt;fex name="Distance"&gt;13 stories&lt;/fex&gt; &lt;fex name="Result"&gt;to her death&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Core" cBy="ACW" cDate="06/24/2002 03:58:41 PDT Mon" abbrev="Area" name="Area" ID="3220">
         <definition>&lt;def-root&gt;This FE identifies the general &lt;fen&gt;Area&lt;/fen&gt; in which motion takes place when the motion is understood to be irregular or not to consist of a single, linear path.
@@ -73,7 +73,7 @@
         <excludesFE name="Area" ID="3220"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="ACW" cDate="06/27/2002 02:09:33 PDT Thu" abbrev="Result" name="Result" ID="3280">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Result&lt;/fen&gt; of the motion. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Result&lt;/fen&gt; of the motion.
 
 &lt;ex&gt;Marie shoved Simon, and he &lt;t&gt;toppled&lt;/t&gt; &lt;fex name="Result"&gt;over&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -89,7 +89,7 @@
         <semType name="Degree" ID="172"/>
     </FE>
     <FE bgColor="EEE8AA" fgColor="000000" coreType="Extra-Thematic" cBy="JKR" cDate="03/19/2005 02:08:41 PST Sat" abbrev="poi" name="Point_of_contact" ID="7643">
-        <definition>&lt;def-root&gt;This FE is used for expressing some part of the &lt;fen&gt;Theme&lt;/fen&gt; participant that makes contact with a horizontal surface. 
+        <definition>&lt;def-root&gt;This FE is used for expressing some part of the &lt;fen&gt;Theme&lt;/fen&gt; participant that makes contact with a horizontal surface.
 
 &lt;ex&gt;With a loud thump, the monster &lt;t&gt;fell&lt;/t&gt; &lt;fex name="poi"&gt;on its back&lt;/fex&gt;, the earth trembling as he hit the ground.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

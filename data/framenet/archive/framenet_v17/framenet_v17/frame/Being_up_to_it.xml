@@ -27,7 +27,7 @@
 &lt;ex&gt;Bill was not equal to the task &lt;fex name="cir"&gt;with the distraction of the alien landing&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="90876C" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="05/06/2005 12:28:39 PDT Fri" abbrev="Exp" name="Explanation" ID="7953">
-        <definition>&lt;def-root&gt;An entity, event, or state that causes the &lt;fen&gt;Entity&lt;/fen&gt; to  meet or fail to meet the pre-conditions for participating in an &lt;fen&gt;Activity&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;An entity, event, or state that causes the &lt;fen&gt;Entity&lt;/fen&gt; to  meet or fail to meet the pre-conditions for participating in an &lt;fen&gt;Activity&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Explanation"&gt;Because of his mother's death&lt;/fex&gt;, Smithers was not &lt;t&gt;up&lt;/t&gt; &lt;t&gt;to&lt;/t&gt; taking the final exam.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

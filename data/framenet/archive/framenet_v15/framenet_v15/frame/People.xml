@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="664" cDate="04/12/2002 05:32:52 PDT Fri" name="People" ID="304" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame contains general words for Individuals, i.e. humans. The &lt;fen&gt;Person&lt;/fen&gt; is conceived of as independent of other specific individuals with whom they have relationships and independent of their participation in any particular activity. They may have an &lt;fen&gt;Age&lt;/fen&gt;, &lt;fen&gt;Descriptor&lt;/fen&gt;, &lt;fen&gt;Origin&lt;/fen&gt;, &lt;fen&gt;Persistent_characteristic&lt;/fen&gt;, or &lt;fen&gt;Ethnicity&lt;/fen&gt;. 
-&lt;ex&gt; A &lt;fex name="Person"&gt;man&lt;/fex&gt; &lt;fex name="Origin"&gt;from Phoenix&lt;/fex&gt; was shot yesterday.&lt;/ex&gt; 
-&lt;ex&gt; She gave birth to a &lt;fex name="Descriptor"&gt;screaming&lt;/fex&gt; &lt;fex name="Person"&gt;baby&lt;/fex&gt;yesterday.&lt;/ex&gt; 
-&lt;ex&gt; I study &lt;fex name="Age"&gt;16-year-old&lt;/fex&gt; &lt;fex name="Persistent_characteristic"&gt;female&lt;/fex&gt; &lt;fex name="Person"&gt;adolescents&lt;/fex&gt;.&lt;/ex&gt; 
-&lt;ex&gt; I am dating an &lt;fex name="Ethnicity"&gt;African-American&lt;/fex&gt; &lt;fex name="Person"&gt;man&lt;/fex&gt;.&lt;/ex&gt; 
-&lt;ex&gt; She comforted the &lt;fex name="Descriptor"&gt;terrified&lt;/fex&gt; &lt;fex name="Person"&gt;child&lt;/fex&gt;.&lt;/ex&gt; 
+    <definition>&lt;def-root&gt;This frame contains general words for Individuals, i.e. humans. The &lt;fen&gt;Person&lt;/fen&gt; is conceived of as independent of other specific individuals with whom they have relationships and independent of their participation in any particular activity. They may have an &lt;fen&gt;Age&lt;/fen&gt;, &lt;fen&gt;Descriptor&lt;/fen&gt;, &lt;fen&gt;Origin&lt;/fen&gt;, &lt;fen&gt;Persistent_characteristic&lt;/fen&gt;, or &lt;fen&gt;Ethnicity&lt;/fen&gt;.
+&lt;ex&gt; A &lt;fex name="Person"&gt;man&lt;/fex&gt; &lt;fex name="Origin"&gt;from Phoenix&lt;/fex&gt; was shot yesterday.&lt;/ex&gt;
+&lt;ex&gt; She gave birth to a &lt;fex name="Descriptor"&gt;screaming&lt;/fex&gt; &lt;fex name="Person"&gt;baby&lt;/fex&gt;yesterday.&lt;/ex&gt;
+&lt;ex&gt; I study &lt;fex name="Age"&gt;16-year-old&lt;/fex&gt; &lt;fex name="Persistent_characteristic"&gt;female&lt;/fex&gt; &lt;fex name="Person"&gt;adolescents&lt;/fex&gt;.&lt;/ex&gt;
+&lt;ex&gt; I am dating an &lt;fex name="Ethnicity"&gt;African-American&lt;/fex&gt; &lt;fex name="Person"&gt;man&lt;/fex&gt;.&lt;/ex&gt;
+&lt;ex&gt; She comforted the &lt;fex name="Descriptor"&gt;terrified&lt;/fex&gt; &lt;fex name="Person"&gt;child&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt; I always thought of him as a &lt;fex name="Persistent_characteristic"&gt;stupid&lt;/fex&gt; &lt;fex name="Person"&gt;man&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="669" cDate="04/15/2002 02:45:20 PDT Mon" abbrev="Ori" name="Origin" ID="2617">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Origin&lt;/fen&gt; is the place where the &lt;fen&gt;Person&lt;/fen&gt; was born or lived a salient part of her or his life.&lt;/def-root&gt;</definition>

@@ -151,7 +151,7 @@
 { slip10, sneak10, pass,@ frames: 14,15 (pass on stealthily; "He slipped me the key when nobody was looking") }
 { [ pass1, noun.person:passer,+ noun.act:pass2,+ noun.act:passing3,+ ] verb.contact:throw,@ frames: 2,14,15,8 (throw (a ball) to another player; "Smith passed")}
 { convey10, [ transmit10, adj.all:inheritable^transmissible1,+ adj.all:infectious^transmissible,+ noun.event:transmission,+ noun.object:transmitter,+ ] [ communicate10, noun.Tops:communication,+ ] transfer1,@ frames: 8,15 (transfer to another; "communicate a disease") }
-{ load12, transfer1,@ noun.cognition:computer_science,;c frames: 8 (transfer from a storage device to a computer's memory)} 
+{ load12, transfer1,@ noun.cognition:computer_science,;c frames: 8 (transfer from a storage device to a computer's memory)}
 { [ offset1, noun.communication:offset,+ ] transfer1,@ frames: 8 (cause (printed matter) to transfer or smear onto another surface)}
 { [ transfer1, noun.act:transfer,+ noun.act:transfer3,+ noun.person:transferrer,+ noun.act:transferral,+ ] verb.motion:move1,@ frames: 8,9 (move from one place to another; "transfer the data"; "transmit the news"; "transfer the patient to another hospital") }
 { [import1, export1,!] transfer1,@ noun.cognition:computing,;c frames: 8 (transfer (electronic data) into a database or document)}
@@ -208,7 +208,7 @@
 { resell, sell,@ noun.act:commerce,;c frames: 8 (sell (something) again after having bought it) }
 { [ syndicate, noun.group:syndicate2,+ noun.act:syndication1,+ ] sell,@ frames: 8 (sell articles, television programs, or photos to several publications or independent broadcasting stations) }
 { deaccession, sell,@ noun.act:art,;c noun.act:commerce,;c frames: 8 (sell (art works) from a collection, especially in order to raise money for the purchase of other art works; "The museum deaccessioned several important works of this painter") }
-{ [sell_off, noun.act:selloff,+] sell,@ frames: 8 (get rid of by selling, usually at reduced prices; "The store sold off the surplus merchandise")} 
+{ [sell_off, noun.act:selloff,+] sell,@ frames: 8 (get rid of by selling, usually at reduced prices; "The store sold off the surplus merchandise")}
 { foist_off, palm_off, fob_off, sell,@ noun.act:crime,;c noun.act:commerce,;c frames: 19 (sell as genuine, sell with the intention to deceive) }
 { [ realize, noun.act:realization1,+ ] [ realise, noun.act:realisation1,+ ] sell,@ noun.act:commerce,;c frames: 8 (convert into cash; of goods and property) }
 { [ auction, noun.act:auction,+ noun.person:auctioneer,+ ] auction_off, [ auctioneer, noun.person:auctioneer,+ ] sell,@ noun.act:commerce,;c frames: 8 (sell at an auction) }
@@ -821,7 +821,7 @@
 { [ stave, noun.artifact:stave2,+ ] equip,@ frames: 8 (furnish with staves; "stave a ladder")}
 { vest2, give,@ frames: 8 (place (authority, property, or rights) in the control of a person or group of persons; "She vested her vast fortune in her two sons")}
 { [ hat, noun.artifact:hat,+ ] provide,@ frames: 8,9 (furnish with a hat )}
-{ fee-tail, entail, bequeath,@ frames: 8 (limit the inheritance of property to a specific class of heirs)} 
+{ fee-tail, entail, bequeath,@ frames: 8 (limit the inheritance of property to a specific class of heirs)}
 { [enfeoff, noun.communication:enfeoffment,+ ] give,@ frames: 17 (put in possession of land in exchange for a pledge of service, in feudal society; "He enfeoffed his son-in-law with a large estate in Scotland")}
 { theme, provide,@ frames: 8 (provide with a particular theme or motive; "the restaurant often themes its menus")}
 { [check_out, noun.artifact:checkout,+ ] buy,* frames: 2,8 (record, add up, and receive payment for items purchased; "She was checking out the apples that the customer had put on the conveyer belt")}

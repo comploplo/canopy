@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="Shw" cDate="07/03/2001 04:18:32 PDT Tue" name="Body_description_holistic" ID="157" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame covers descriptions of an entire human body, viewed as a gestalt (as opposed to descriptions based on salient body parts).  The Frame Elements are &lt;fen&gt;Individual&lt;/fen&gt; and &lt;fen&gt;Figure&lt;/fen&gt;.  
+    <definition>&lt;def-root&gt;This frame covers descriptions of an entire human body, viewed as a gestalt (as opposed to descriptions based on salient body parts).  The Frame Elements are &lt;fen&gt;Individual&lt;/fen&gt; and &lt;fen&gt;Figure&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Ind"&gt;Chuck&lt;/fex&gt; &lt;m&gt;is&lt;/m&gt; &lt;t&gt;muscular&lt;/t&gt;.&lt;/ex&gt;
 

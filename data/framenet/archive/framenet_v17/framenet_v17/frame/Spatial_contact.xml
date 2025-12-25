@@ -36,7 +36,7 @@ The use of on.prep and upon.prep for Topics is considered a non-productive metap
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MJE" cDate="01/22/2015 12:46:02 PST Thu" abbrev="Acc" name="Accessibility" ID="16252">
-        <definition>&lt;def-root&gt;An indication of how accessible the &lt;fen&gt;Figure&lt;/fen&gt; is to some participant in the speech context (either the speaker or the addressee, or some other highly salient viewpoint in a narrative).  This FE normally describes availability for manipulation and use, but may simply describe how easily seen or difficult to see the &lt;fen&gt;Figure&lt;/fen&gt; is. There is a closed class of items that can fill this slot, including only 'right' indicating ease of access, and 'way', 'all the way', or (dialectally) 'clear' indicating distance and difficulty of access.  
+        <definition>&lt;def-root&gt;An indication of how accessible the &lt;fen&gt;Figure&lt;/fen&gt; is to some participant in the speech context (either the speaker or the addressee, or some other highly salient viewpoint in a narrative).  This FE normally describes availability for manipulation and use, but may simply describe how easily seen or difficult to see the &lt;fen&gt;Figure&lt;/fen&gt; is. There is a closed class of items that can fill this slot, including only 'right' indicating ease of access, and 'way', 'all the way', or (dialectally) 'clear' indicating distance and difficulty of access.
 &lt;ex&gt;My bag sat &lt;fex name="Accessibility"&gt;right&lt;/fex&gt; &lt;t&gt;on&lt;/t&gt; the table.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
@@ -66,7 +66,7 @@ The use of on.prep and upon.prep for Topics is considered a non-productive metap
 &lt;ex&gt;I stood &lt;fex name="Directness"&gt;right&lt;/fex&gt; &lt;t&gt;on&lt;/t&gt; the edge .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="7FFF00" fgColor="000000" coreType="Extra-Thematic" cBy="HPh" cDate="03/24/2015 03:31:29 PDT Tue" abbrev="" name="Temporal_profile" ID="16330">
-        <definition>&lt;def-root&gt;A description of how the access path to the &lt;fen&gt;Ground&lt;/fen&gt; interacts with time.  This FE is filled only by the closed class adverbial back.adv (which indicates that the position was occupied by the &lt;fen&gt;Figure&lt;/fen&gt; before). While this FE in its most basic use refers to cases of actual motion, it can be used with descriptions of static position, where motion is backgrounded. 
+        <definition>&lt;def-root&gt;A description of how the access path to the &lt;fen&gt;Ground&lt;/fen&gt; interacts with time.  This FE is filled only by the closed class adverbial back.adv (which indicates that the position was occupied by the &lt;fen&gt;Figure&lt;/fen&gt; before). While this FE in its most basic use refers to cases of actual motion, it can be used with descriptions of static position, where motion is backgrounded.
 
 &lt;ex&gt;Put the book &lt;fex name="Temporal_profile"&gt;back&lt;/fex&gt; &lt;t&gt;upon&lt;/t&gt; the shelf.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

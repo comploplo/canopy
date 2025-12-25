@@ -37,7 +37,7 @@ we took it.&lt;/ex&gt;&lt;/def-root&gt;</definition>
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="11/21/2005 03:47:02 PST Mon" abbrev="dep" name="Depictive" ID="9443">
-        <definition>&lt;def-root&gt;This FE describes the &lt;fen&gt;Creator&lt;/fen&gt; as being in some state during the creation of the &lt;fen&gt;Representation&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;This FE describes the &lt;fen&gt;Creator&lt;/fen&gt; as being in some state during the creation of the &lt;fen&gt;Representation&lt;/fen&gt;.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="11/21/2005 03:47:03 PST Mon" abbrev="locr" name="Location_of_representation" ID="9444">
@@ -62,7 +62,7 @@ we took it.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="1E90FF" fgColor="000000" coreType="Extra-Thematic" cBy="JKR" cDate="11/21/2005 05:24:18 PST Mon" abbrev="exp" name="Explanation" ID="9448">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the creation of the &lt;fen&gt;Representation&lt;/fen&gt; ogically follows. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the creation of the &lt;fen&gt;Representation&lt;/fen&gt; ogically follows.
 
 &lt;ex&gt;Well, I &lt;t&gt;painted&lt;/t&gt; the picture &lt;fex name="Explanation"&gt;because the quarry was visually exciting&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="664" cDate="07/07/2003 01:10:35 PDT Mon" name="Forming_relationships" ID="723" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;&lt;fen&gt;Partner_1&lt;/fen&gt; interacts with Partner_2 (also collectively expressible as &lt;fen&gt;Partners&lt;/fen&gt;) to change their social relationship.  
+    <definition>&lt;def-root&gt;&lt;fen&gt;Partner_1&lt;/fen&gt; interacts with Partner_2 (also collectively expressible as &lt;fen&gt;Partners&lt;/fen&gt;) to change their social relationship.
 
 &lt;ex&gt;&lt;fex name="Partner_1"&gt;I&lt;/fex&gt; &lt;t&gt;befriended&lt;/t&gt; &lt;fex name="Partner_2"&gt;the little pony&lt;/fex&gt; by giving him a piece of apple.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="07/07/2003 02:25:39 PDT Mon" abbrev="" name="Partner_1" ID="4732">

@@ -23,7 +23,7 @@ mod parser_tests {
     <author>Test</author>
     <license>MIT</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="test-stop-words" name="Test Stop Words" type="stop-words" priority="10">
       <description>Test stop words</description>
@@ -35,7 +35,7 @@ mod parser_tests {
         <word pos="DT">a</word>
       </words>
     </word-class>
-    
+
     <word-class id="test-negation" name="Test Negation" type="negation" priority="9">
       <description>Test negation words</description>
       <words>
@@ -58,7 +58,7 @@ mod parser_tests {
     <author>Test</author>
     <license>MIT</license>
   </metadata>
-  
+
   <word-classes>
   </word-classes>
 </lexicon>"#
@@ -190,7 +190,7 @@ mod parser_tests {
         let stats = resource.database.stats();
         // Should have parsed some data
         assert!(stats.total_word_classes >= 2); // stop-words and negation classes
-        assert!(stats.total_words >= 4); // "the", "a", "not", "no" 
+        assert!(stats.total_words >= 4); // "the", "a", "not", "no"
     }
 
     #[test]
@@ -205,7 +205,7 @@ mod parser_tests {
     <author>Test</author>
     <license>MIT</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="unicode-words" name="Unicode Words" type="stop-words" priority="10">
       <description>Unicode words for testing</description>
@@ -273,7 +273,7 @@ mod parser_tests {
     <author>Test</author>
     <license>MIT</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="large-words" name="Large Words" type="stop-words" priority="10">
       <description>Many words for performance testing</description>

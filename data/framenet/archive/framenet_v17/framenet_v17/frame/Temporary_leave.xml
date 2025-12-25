@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="CVa" cDate="03/09/2012 11:06:25 PST Fri" name="Temporary_leave" ID="2709" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Person&lt;/fen&gt; takes leave from his or her routine &lt;fen&gt;Activity&lt;/fen&gt; (such as work or school) for a &lt;fen&gt;Duration&lt;/fen&gt; of time.  The &lt;fen&gt;Duration&lt;/fen&gt; can be any length of time, as long as the absence is temporary.   
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Person&lt;/fen&gt; takes leave from his or her routine &lt;fen&gt;Activity&lt;/fen&gt; (such as work or school) for a &lt;fen&gt;Duration&lt;/fen&gt; of time.  The &lt;fen&gt;Duration&lt;/fen&gt; can be any length of time, as long as the absence is temporary.
 
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;The claimant should then submit medical certificates for the duration of &lt;fex name="Person"&gt;their&lt;/fex&gt; &lt;t&gt;absence&lt;/t&gt; &lt;fex name="Act"&gt;from work&lt;/fex&gt;.&lt;fex name="Dur"&gt;INI&lt;/fex&gt;&lt;/ex&gt;

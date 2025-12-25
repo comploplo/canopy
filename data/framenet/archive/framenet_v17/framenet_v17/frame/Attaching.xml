@@ -10,7 +10,7 @@ manipulating a &lt;fen&gt;Connector&lt;/fen&gt;, creating an asymmetric relation
 between the &lt;fen&gt;Item&lt;/fen&gt; and the &lt;fen&gt;Goal&lt;/fen&gt;.  In the second, the
 &lt;fen&gt;Agent&lt;/fen&gt; attaches two &lt;fen&gt;Items&lt;/fen&gt; to each other, where each
 serves as a &lt;fen&gt;Goal&lt;/fen&gt; for the other, creating a symmetric
-relationship between the two &lt;fen&gt;Items&lt;/fen&gt;. In both cases, the 
+relationship between the two &lt;fen&gt;Items&lt;/fen&gt;. In both cases, the
 &lt;fen&gt;Connector&lt;/fen&gt; remains to bind the two entities (either
 &lt;fen&gt;Item&lt;/fen&gt; and &lt;fen&gt;Goal&lt;/fen&gt;, or two &lt;fen&gt;Items&lt;/fen&gt;), without
 creating a new entity.

@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MJE" cDate="03/11/2002 02:43:02 PST Mon" name="Mass_motion" ID="284" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;A &lt;fen&gt;Mass_theme&lt;/fen&gt;, generally made up of many individuals, moves from a &lt;fen&gt;Source&lt;/fen&gt; to a &lt;fen&gt;Goal&lt;/fen&gt; with some &lt;fen&gt;Path&lt;/fen&gt;.
- 
+
 &lt;ex&gt;&lt;fex name="Mass_theme"&gt;Emails from so-called Nigerian princes&lt;/fex&gt; &lt;t&gt;flooded&lt;/t&gt; &lt;fex name="Goal"&gt;inboxes&lt;/fex&gt; &lt;fex name="Area"&gt;all over the US&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="03/11/2002 02:54:42 PST Mon" abbrev="Thm" name="Mass_theme" ID="2458">
         <definition>&lt;def-root&gt;The mass of entities which moves.&lt;/def-root&gt;</definition>
@@ -27,20 +27,20 @@
         <semType name="Speed" ID="234"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="03/11/2002 02:55:38 PST Mon" abbrev="Src" name="Source" ID="2463">
-        <definition>&lt;def-root&gt;The Source is the location the Theme occupies initially before its change of location. 
+        <definition>&lt;def-root&gt;The Source is the location the Theme occupies initially before its change of location.
 
 &lt;ex&gt;Afterwards, the crowd &lt;t&gt;flooded&lt;/t&gt; &lt;fex name="Source"&gt;away from the ceremony&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Source" ID="151"/>
         <excludesFE name="Area" ID="2460"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="03/11/2002 02:55:40 PST Mon" abbrev="Path" name="Path" ID="2464">
-        <definition>&lt;def-root&gt;Path refers to (a part of the) ground the &lt;fen&gt;Mass_theme&lt;/fen&gt; travels over or to a landmark the &lt;fen&gt;Mass_theme&lt;/fen&gt; travels by. 
+        <definition>&lt;def-root&gt;Path refers to (a part of the) ground the &lt;fen&gt;Mass_theme&lt;/fen&gt; travels over or to a landmark the &lt;fen&gt;Mass_theme&lt;/fen&gt; travels by.
 
 &lt;ex&gt;The door opened , and a crowd of people &lt;t&gt;flooded&lt;/t&gt; &lt;fex name="Path"&gt;past me&lt;/fex&gt;, into the hall.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Area" ID="2460"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="03/11/2002 02:55:54 PST Mon" abbrev="Goal" name="Goal" ID="2465">
-        <definition>&lt;def-root&gt;Goal is the location the &lt;fen&gt;Mass_theme&lt;/fen&gt; ends up in. 
+        <definition>&lt;def-root&gt;Goal is the location the &lt;fen&gt;Mass_theme&lt;/fen&gt; ends up in.
 
 
 &lt;ex&gt;Eager spectators &lt;t&gt;crowded&lt;/t&gt; &lt;fex name="Goal"&gt;into the auditorium&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>

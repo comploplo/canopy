@@ -35,7 +35,7 @@
 &lt;ex&gt;The new car has a cruising &lt;t&gt;capacity&lt;/t&gt; &lt;fex name="Circumstances"&gt;in excess of 150 kph&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="605" cDate="08/12/2004 04:35:56 PDT Thu" abbrev="cau" name="Cause" ID="7004">
-        <definition>&lt;def-root&gt;An entity, event, or state that causes the &lt;fen&gt;Entity&lt;/fen&gt; to be meet or fail to meet the pre-conditions for participating in an &lt;fen&gt;Event&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;An entity, event, or state that causes the &lt;fen&gt;Entity&lt;/fen&gt; to be meet or fail to meet the pre-conditions for participating in an &lt;fen&gt;Event&lt;/fen&gt;.
 
 &lt;ex&gt;They were not &lt;t&gt;able&lt;/t&gt; to go outside &lt;fex name="cau"&gt;because of the rain&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

@@ -5,7 +5,7 @@
     <semType name="Non-Lexical Frame" ID="16"/>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MJE" cDate="04/12/2002 04:20:32 PDT Fri" abbrev="Cnst" name="Constituents" ID="2610">
         <definition>&lt;def-root&gt;Salient parts or substances that make up an &lt;fen&gt;Entity&lt;/fen&gt;.  At this level of abstraction, not every &lt;fen&gt;Entity&lt;/fen&gt; is conceived of as having parts, though any normal entity has them.
- 
+
 &lt;ex&gt;A &lt;fex name="Constituents"&gt;bronze&lt;/fex&gt; &lt;t&gt;sword&lt;/t&gt; is nearly as strong as the steel ones .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="04/12/2002 04:20:33 PDT Fri" abbrev="Ent" name="Entity" ID="2611">

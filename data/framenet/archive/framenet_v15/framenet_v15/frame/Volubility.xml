@@ -3,12 +3,12 @@
 <frame cBy="731" cDate="02/07/2001 04:12:05 PST Wed" name="Volubility" ID="44" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;These words describe the size of message that a &lt;fen&gt;Speaker&lt;/fen&gt; is judged by a (usually unexpressed) &lt;fen&gt;Judge&lt;/fen&gt; to give, either in a specific occasion or &lt;fen&gt;Topic&lt;/fen&gt; or in general. As in other communication frames, &lt;fen&gt;Medium&lt;/fen&gt; may also be expressed.&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:05 PST Wed" abbrev="Spkr" name="Speaker" ID="187">
-        <definition>&lt;def-root&gt;This is the person who is characterized as talkative, reticent etc.  It is usually the External Argument: 
+        <definition>&lt;def-root&gt;This is the person who is characterized as talkative, reticent etc.  It is usually the External Argument:
 &lt;ex&gt;&lt;fex name="Spkr"&gt;Pat&lt;/fex&gt; has been &lt;t&gt;silent&lt;/t&gt; on this issue.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="731" cDate="02/07/2001 04:12:05 PST Wed" abbrev="Comp" name="Company" ID="188">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Company&lt;/fen&gt; in which the &lt;fen&gt;Speaker&lt;/fen&gt; exhibits a certain communicative behavior.  In this frame, &lt;fen&gt;Company&lt;/fen&gt; occurs in PP Complements headed by &lt;ment&gt;with&lt;/ment&gt;: 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Company&lt;/fen&gt; in which the &lt;fen&gt;Speaker&lt;/fen&gt; exhibits a certain communicative behavior.  In this frame, &lt;fen&gt;Company&lt;/fen&gt; occurs in PP Complements headed by &lt;ment&gt;with&lt;/ment&gt;:
 &lt;ex&gt;Kim was &lt;t&gt;reticent&lt;/t&gt; &lt;fex name="Company"&gt;with me&lt;/fex&gt; about her family.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:05 PST Wed" abbrev="Text" name="Text" ID="189">
@@ -17,7 +17,7 @@
 &lt;ex&gt;Kim gave a hesitant, &lt;t&gt;reticent&lt;/t&gt; &lt;fex name="Text"&gt;account&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:05 PST Wed" abbrev="Top" name="Topic" ID="190">
-        <definition>&lt;def-root&gt;This FE is the &lt;fen&gt;Topic&lt;/fen&gt; on which much or little information is communicated. &lt;fen&gt;Topic&lt;/fen&gt; is far more frequent than Message in this frame. 
+        <definition>&lt;def-root&gt;This FE is the &lt;fen&gt;Topic&lt;/fen&gt; on which much or little information is communicated. &lt;fen&gt;Topic&lt;/fen&gt; is far more frequent than Message in this frame.
 &lt;ex&gt;Kim is very &lt;t&gt;talkative&lt;/t&gt; &lt;fex name="Top"&gt;about her family and childhood&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="731" cDate="02/07/2001 04:12:06 PST Wed" abbrev="Medium" name="Medium" ID="191">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MJE" cDate="08/14/2002 11:51:50 PDT Wed" name="Cause_impact" ID="395" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Agent&lt;/fen&gt; causes an &lt;fen&gt;Impactor&lt;/fen&gt; to make sudden, forcible contact with an &lt;fen&gt;Impactee&lt;/fen&gt;, or manipulates two (or more) &lt;fen&gt;Impactors&lt;/fen&gt; so that they make mutual forcible contact.  
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Agent&lt;/fen&gt; causes an &lt;fen&gt;Impactor&lt;/fen&gt; to make sudden, forcible contact with an &lt;fen&gt;Impactee&lt;/fen&gt;, or manipulates two (or more) &lt;fen&gt;Impactors&lt;/fen&gt; so that they make mutual forcible contact.
 
 &lt;ex&gt;&lt;fex name="Agent"&gt;He&lt;/fex&gt; &lt;t&gt;slammed&lt;/t&gt; &lt;fex name="Impactor"&gt;his fist&lt;/fex&gt; &lt;fex name="Result"&gt;down&lt;/fex&gt; &lt;fex name="Impactee"&gt;on the table&lt;/fex&gt; and bellowed something unintelligible.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/14/2002 11:53:33 PDT Wed" abbrev="Frc" name="Force" ID="3542">
@@ -87,8 +87,8 @@
         <definition>&lt;def-root&gt;This FE identifies the  &lt;fen&gt;Period_of_iterations&lt;/fen&gt; during which the &lt;fen&gt;Agent&lt;/fen&gt; repeatedly causes impacts.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="7CCD73" fgColor="FFFFFF" coreType="Core" cBy="TRn" cDate="05/26/2004 01:43:20 PDT Wed" abbrev="Cau" name="Cause" ID="6473">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Cause&lt;/fen&gt; marks expressions that indicate some non-intentional, 
-typically non-human, force that causes an &lt;fen&gt;Impactor&lt;/fen&gt; to make sudden, 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Cause&lt;/fen&gt; marks expressions that indicate some non-intentional,
+typically non-human, force that causes an &lt;fen&gt;Impactor&lt;/fen&gt; to make sudden,
 forcible contact with an Impactee.
 
 &lt;ex&gt;&lt;fex name="Cause"&gt;A violent explosion&lt;/fex&gt;&lt;t&gt;rattled&lt;/t&gt; the windows.&lt;/ex&gt;

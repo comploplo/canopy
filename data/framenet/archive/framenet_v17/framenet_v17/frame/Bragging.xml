@@ -20,7 +20,7 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="08/30/2005 02:33:37 PDT Tue" abbrev="Add" name="Addressee" ID="9024">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; is the person to whom the &lt;fen&gt;Speaker&lt;/fen&gt; communicated a message. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; is the person to whom the &lt;fen&gt;Speaker&lt;/fen&gt; communicated a message.
 
 &lt;ex&gt;Sheppard said Turner apparently was backing up his &lt;t&gt;boast&lt;/t&gt; &lt;fex name="Add"&gt;to a bystander&lt;/fex&gt; when a patrol officer saw him writing on the sign and arrested him.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
@@ -32,7 +32,7 @@
 &lt;ex&gt;Mike Wallace was told that Canseco had &lt;t&gt;bragged&lt;/t&gt; &lt;fex name="top"&gt;about steroids&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="08/30/2005 02:33:38 PDT Tue" abbrev="Manr" name="Manner" ID="9027">
-        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may indicate salient characteristics of the Speaker that also affect the action (deliberately, eagerly). 
+        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may indicate salient characteristics of the Speaker that also affect the action (deliberately, eagerly).
 
 &lt;ex&gt;She insulted everyone she spoke to, and &lt;t&gt;boasted&lt;/t&gt;
 &lt;fex name="Manner"&gt;loudly&lt;/fex&gt; about a salary that no one else in the office could ever hope to make.&lt;/ex&gt;&lt;/def-root&gt;</definition>
@@ -172,7 +172,7 @@
         <lexeme order="1" headword="false" breakBefore="false" POS="V" name="gripe"/>
     </lexUnit>
     <lexUnit status="Created" incorporatedFE="Speaker" POS="N" name="braggart.n" ID="13215" lemmaID="4404" cBy="MJE" cDate="06/08/2006 01:27:33 PDT Thu">
-        <definition>COD: a person who brags. 
+        <definition>COD: a person who brags.
 
 </definition>
         <sentenceCount annotated="0" total="0"/>

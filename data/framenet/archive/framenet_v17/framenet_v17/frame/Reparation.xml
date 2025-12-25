@@ -11,7 +11,7 @@
 &lt;ex&gt;You can never make &lt;t&gt;amends&lt;/t&gt; &lt;fex name="Injrd_prty"&gt;to Susan&lt;/fex&gt; for standing her up.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="08/27/2002 12:58:23 PDT Tue" abbrev="Injry" name="Injury" ID="3634">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Injury&lt;/fen&gt; is the injurious action that  the &lt;fen&gt;Wrongdoer&lt;/fen&gt; committed against the &lt;fen&gt;Injured_party&lt;/fen&gt;.  Although conceptually present, this FE need not always be realized. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Injury&lt;/fen&gt; is the injurious action that  the &lt;fen&gt;Wrongdoer&lt;/fen&gt; committed against the &lt;fen&gt;Injured_party&lt;/fen&gt;.  Although conceptually present, this FE need not always be realized.
 &lt;ex&gt;Wyelander sought &lt;t&gt;reparations&lt;/t&gt; &lt;fex name="Injury"&gt;for the brutal murder of his nephew&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="08/27/2002 01:01:36 PDT Tue" abbrev="Wr" name="Wrongdoer" ID="3635">
@@ -31,7 +31,7 @@
         <semType name="Physical_entity" ID="70"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/27/2002 01:17:51 PDT Tue" abbrev="Mnr" name="Manner" ID="3638">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Manner&lt;/fen&gt; marks any description of the &lt;fen&gt;Wrongdoer&lt;/fen&gt;'s making of reparations not covered by more specific FEs, including epistemic modification, (e.g. &lt;ment&gt;probably&lt;/ment&gt;), and general descriptions comparing events (e.g. &lt;ment&gt;the same way&lt;/ment&gt;). It may indicate salient characteristics of a &lt;fen&gt;Wrongdoer&lt;/fen&gt; that also affect the action ( e.g. &lt;ment&gt;presumptuously&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Manner&lt;/fen&gt; marks any description of the &lt;fen&gt;Wrongdoer&lt;/fen&gt;'s making of reparations not covered by more specific FEs, including epistemic modification, (e.g. &lt;ment&gt;probably&lt;/ment&gt;), and general descriptions comparing events (e.g. &lt;ment&gt;the same way&lt;/ment&gt;). It may indicate salient characteristics of a &lt;fen&gt;Wrongdoer&lt;/fen&gt; that also affect the action ( e.g. &lt;ment&gt;presumptuously&lt;/ment&gt;).
 &lt;ex&gt;Smeagol &lt;fex name="Mnr"&gt;humbly&lt;/fex&gt; made &lt;t&gt;amends&lt;/t&gt; for his earlier bad behavior.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

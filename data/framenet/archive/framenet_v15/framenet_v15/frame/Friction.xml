@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="09/19/2003 07:04:39 PDT Fri" name="Friction" ID="820" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt; A &lt;fen&gt;Theme&lt;/fen&gt; moves on or against the surface of a &lt;fen&gt;Static_object&lt;/fen&gt;. (Alternatively, &lt;fen&gt;Themes&lt;/fen&gt;  moves against each other simultaneously). The &lt;fen&gt;Theme&lt;/fen&gt; exerts pressure on the surface and experiences resistance to its movement. 
+    <definition>&lt;def-root&gt; A &lt;fen&gt;Theme&lt;/fen&gt; moves on or against the surface of a &lt;fen&gt;Static_object&lt;/fen&gt;. (Alternatively, &lt;fen&gt;Themes&lt;/fen&gt;  moves against each other simultaneously). The &lt;fen&gt;Theme&lt;/fen&gt; exerts pressure on the surface and experiences resistance to its movement.
 
 
 &lt;ex&gt;&lt;fex name="Theme"&gt;Smithers' boots&lt;/fex&gt; &lt;t&gt;scraped&lt;/t&gt; &lt;fex name="Static_object"&gt;on the floor&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>

@@ -3,6 +3,7 @@
 //! These types mirror the FrameNet XML schema structure, providing
 //! Rust representations of frames, frame elements, lexical units, and semantic relations.
 
+use canopy_core::paths::data_path_string;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
@@ -222,7 +223,7 @@ pub struct FrameElementAssignment {
 }
 
 /// FrameNet engine statistics
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct FrameNetStats {
     /// Total number of frames loaded
     pub total_frames: usize,
@@ -260,8 +261,10 @@ pub struct FrameNetConfig {
 impl Default for FrameNetConfig {
     fn default() -> Self {
         Self {
-            frames_path: "data/framenet/archive/framenet_v17/framenet_v17/frame".to_string(),
-            lexical_units_path: "data/framenet/archive/framenet_v17/framenet_v17/lu".to_string(),
+            frames_path: data_path_string("data/framenet/archive/framenet_v17/framenet_v17/frame"),
+            lexical_units_path: data_path_string(
+                "data/framenet/archive/framenet_v17/framenet_v17/lu",
+            ),
             enable_cache: true,
             cache_capacity: 10000,
             confidence_threshold: 0.5,

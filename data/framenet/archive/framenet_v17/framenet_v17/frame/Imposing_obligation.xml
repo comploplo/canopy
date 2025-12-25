@@ -40,7 +40,7 @@ streets leveled off without any additional cost to the Sisters.&lt;/ex&gt;&lt;/d
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="06/13/2005 05:37:00 PDT Mon" abbrev="obl" name="Obligator" ID="8154">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Obligator&lt;/fen&gt; is the person who imposes the &lt;fen&gt;Duty&lt;/fen&gt; on the &lt;fen&gt;Responsible_party&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Obligator&lt;/fen&gt; is the person who imposes the &lt;fen&gt;Duty&lt;/fen&gt; on the &lt;fen&gt;Responsible_party&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Obligator"&gt;She&lt;/fex&gt; &lt;t&gt;pledged&lt;/t&gt; him to pay her the money back.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Situation" ID="8155"/>

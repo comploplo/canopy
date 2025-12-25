@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="07/26/2001 03:35:57 PDT Thu" name="Quantity" ID="189" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame contains transparent nouns (and some adjectives) denoting quantities of a &lt;fen&gt;Mass&lt;/fen&gt; or of &lt;fen&gt;Individuals&lt;/fen&gt;. As opposed to aggregate words such as group, set, these &lt;fen&gt;Quantity&lt;/fen&gt; do not have a status as Wholes on their own. Initially, at least, we annotate both &lt;fen&gt;Quantity&lt;/fen&gt; of &lt;fen&gt;Mass&lt;/fen&gt;es and of &lt;fen&gt;Individuals&lt;/fen&gt; in this frame, though we may split the frame along these lines later on. 
+    <definition>&lt;def-root&gt;This frame contains transparent nouns (and some adjectives) denoting quantities of a &lt;fen&gt;Mass&lt;/fen&gt; or of &lt;fen&gt;Individuals&lt;/fen&gt;. As opposed to aggregate words such as group, set, these &lt;fen&gt;Quantity&lt;/fen&gt; do not have a status as Wholes on their own. Initially, at least, we annotate both &lt;fen&gt;Quantity&lt;/fen&gt; of &lt;fen&gt;Mass&lt;/fen&gt;es and of &lt;fen&gt;Individuals&lt;/fen&gt; in this frame, though we may split the frame along these lines later on.
 
 &lt;ex&gt;He found them in the &lt;fex name="Quantity"&gt;&lt;t&gt;deluge&lt;/t&gt;&lt;/fex&gt; &lt;fex name="Individuals"&gt;of papers&lt;/fex&gt; on his desk.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="07/27/2001 10:39:53 PDT Fri" abbrev="Qua" name="Quantity" ID="1550">

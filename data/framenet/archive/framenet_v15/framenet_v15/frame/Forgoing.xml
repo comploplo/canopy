@@ -5,7 +5,7 @@
 
 &lt;ex&gt;&lt;fex name="For"&gt;Chuck&lt;/fex&gt; often &lt;t&gt;skips&lt;/t&gt; &lt;fex name="Des"&gt;lunch&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="243" cDate="12/24/2004 03:54:17 PST Fri" abbrev="For" name="Forgoer" ID="7385">
-        <definition>&lt;def-root&gt;The&lt;fen&gt;Forgoer&lt;/fen&gt; decides not to partake in the desirable activity or event. 
+        <definition>&lt;def-root&gt;The&lt;fen&gt;Forgoer&lt;/fen&gt; decides not to partake in the desirable activity or event.
 
 &lt;ex&gt;&lt;fex name="For"&gt;Chuck&lt;/fex&gt; often &lt;t&gt;skips&lt;/t&gt; lunch.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

@@ -5,7 +5,7 @@
     <semType name="Non-Lexical Frame" ID="16"/>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="04/12/2002 04:20:32 PDT Fri" abbrev="Cnst" name="Constituents" ID="2610">
         <definition>&lt;def-root&gt;Salient parts that make up a locale.
- 
+
 &lt;ex&gt;This is the oldest &lt;fex name="Constituents"&gt;oak&lt;/fex&gt; &lt;t&gt;forest&lt;/t&gt; in Dorsetshire.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="04/12/2002 04:20:33 PDT Fri" abbrev="Ent" name="Entity" ID="2611">

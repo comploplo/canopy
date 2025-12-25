@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="07/08/2004 05:27:51 PDT Thu" name="Being_obligatory" ID="1164" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;Under some &lt;fen&gt;Condition&lt;/fen&gt;, usually left implicit, a &lt;fen&gt;Duty&lt;/fen&gt; needs to be fulfilled by a 
+    <definition>&lt;def-root&gt;Under some &lt;fen&gt;Condition&lt;/fen&gt;, usually left implicit, a &lt;fen&gt;Duty&lt;/fen&gt; needs to be fulfilled by a
 &lt;fen&gt;Responsible_party&lt;/fen&gt;. If the &lt;fen&gt;Duty&lt;/fen&gt; is not performed, there may be some undesirable &lt;fen&gt;Consequence&lt;/fen&gt; for the &lt;fen&gt;Responsible_party&lt;/fen&gt;, which may or may not be stated overtly.
 Compare this frame to the Being_obligated frame.
 
@@ -54,7 +54,7 @@ Compare this frame to the Being_obligated frame.
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="664" cDate="06/10/2005 03:07:02 PDT Fri" abbrev="exp" name="Explanation" ID="8147">
-        <definition>&lt;def-root&gt;The reason why the &lt;fen&gt;Duty&lt;/fen&gt; is necessary for the &lt;fen&gt;Responsible_party&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The reason why the &lt;fen&gt;Duty&lt;/fen&gt; is necessary for the &lt;fen&gt;Responsible_party&lt;/fen&gt;.
 
 &lt;ex&gt;Rigorous posttreatment follow-up is &lt;t&gt;mandatory&lt;/t&gt;, &lt;fex name="exp"&gt;because long-term recurrence rates after treatment of melanoma in situ with imiquimod are yet unknown&lt;/fex&gt;. &lt;/ex&gt;
 &lt;/def-root&gt;</definition>

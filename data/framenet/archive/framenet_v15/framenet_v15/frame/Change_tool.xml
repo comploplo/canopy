@@ -28,7 +28,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="07/13/2004 04:12:38 PDT Tue" abbrev="man" name="Manner" ID="6811">
-        <definition>&lt;def-root&gt;Any description of the &lt;fen&gt;Agent&lt;/fen&gt;'s change which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the &lt;fen&gt;Agent&lt;/fen&gt;'s change which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

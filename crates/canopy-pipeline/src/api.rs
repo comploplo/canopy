@@ -1,7 +1,8 @@
 //! Public API interface for the pipeline
 
 use crate::error::PipelineError;
-use canopy_semantic_layer::SemanticLayer1Output as SemanticAnalysis;
+use canopy_events::ComposedEvents;
+use canopy_tokenizer::SemanticLayer1Output as SemanticAnalysis;
 use serde::{Deserialize, Serialize};
 
 /// Main analyzer interface
@@ -43,7 +44,14 @@ pub struct AnalysisRequest {
 /// Analysis response
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AnalysisResponse {
+    /// Layer 1 semantic analysis (tokenization, lemmatization, VerbNet/FrameNet/WordNet)
     pub analysis: SemanticAnalysis,
+
+    /// Layer 2 event composition (Neo-Davidsonian events with theta roles)
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub events: Option<ComposedEvents>,
+
+    /// Response metadata
     pub metadata: ResponseMetadata,
 }
 

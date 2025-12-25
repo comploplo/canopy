@@ -14,7 +14,7 @@
 uncontactable when I was &lt;t&gt;out&lt;/t&gt; &lt;fex name="loc"&gt;of the office&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="08/22/2005 06:37:23 PDT Mon" abbrev="per" name="Person" ID="8947">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Person&lt;/fen&gt; is located in or at a place that they customarily occupy. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Person&lt;/fen&gt; is located in or at a place that they customarily occupy.
 
 &lt;ex&gt;&lt;fex name="per"&gt;The doctor&lt;/fex&gt; is not &lt;t&gt;in&lt;/t&gt; right now.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

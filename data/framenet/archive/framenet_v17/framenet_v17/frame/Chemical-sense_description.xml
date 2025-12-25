@@ -17,7 +17,7 @@
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="KCo" cDate="02/19/2002 12:25:40 PST Tue" abbrev="Percept" name="Sensory_attribute" ID="2336">
         <definition>&lt;def-root&gt;&lt;fen&gt;Sensory_attribute&lt;/fen&gt; is used for words that describe the perception itself.
-	
+
 &lt;ex&gt;The almonds had a &lt;t&gt;bitter&lt;/t&gt; &lt;fex name="Sensory_attribute"&gt; taste&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;The coffee had a &lt;t&gt;pungent&lt;/t&gt; &lt;fex name="Sensory_attribute"&gt;smell&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

@@ -12,13 +12,13 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="07/12/2011 11:25:58 PDT Tue" abbrev="Add" name="Victim" ID="14485">
-        <definition>&lt;def-root&gt;The person who receives an incorrect idea because of the &lt;fen&gt;Deceiver&lt;/fen&gt;'s actions. 
+        <definition>&lt;def-root&gt;The person who receives an incorrect idea because of the &lt;fen&gt;Deceiver&lt;/fen&gt;'s actions.
 &lt;ex&gt;Practicing deception upon them , &lt;/ex&gt;
 &lt;ex&gt;Sometimes it may be the case that the press itself stands as a monolith &lt;m&gt;practicing&lt;/m&gt; &lt;t&gt;deception&lt;/t&gt; &lt;fex name="Victim"&gt;upon the people&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="07/12/2011 11:25:58 PDT Tue" abbrev="Top" name="Topic" ID="14486">
-        <definition>&lt;def-root&gt;The entity to which the misleading idea relates, what it is about. 
+        <definition>&lt;def-root&gt;The entity to which the misleading idea relates, what it is about.
 &lt;ex&gt;You &lt;t&gt;deceived&lt;/t&gt; me &lt;fex name="Topic"&gt;about the location of the diamonds&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="07/12/2011 11:38:27 PDT Tue" abbrev="mea" name="Means" ID="14488">

@@ -540,20 +540,20 @@ impl LexiconDatabase {
 
         if let Some(indices) = self.word_index.get(&word_lower) {
             for &(class_idx, word_idx) in indices {
-                if let Some(word_class) = self.word_classes.get(class_idx) {
-                    if let Some(lexicon_word) = word_class.words.get(word_idx) {
-                        classifications.push(WordClassification {
-                            word_class_type: word_class.word_class_type.clone(),
-                            word_class_id: word_class.id.clone(),
-                            word_class_name: word_class.name.clone(),
-                            matched_word: lexicon_word.word.clone(),
-                            input_word: word.to_string(),
-                            confidence: lexicon_word.confidence,
-                            classification_type: ClassificationType::ExactMatch,
-                            context: lexicon_word.context.clone(),
-                            properties: word_class.properties.clone(),
-                        });
-                    }
+                if let Some(word_class) = self.word_classes.get(class_idx)
+                    && let Some(lexicon_word) = word_class.words.get(word_idx)
+                {
+                    classifications.push(WordClassification {
+                        word_class_type: word_class.word_class_type.clone(),
+                        word_class_id: word_class.id.clone(),
+                        word_class_name: word_class.name.clone(),
+                        matched_word: lexicon_word.word.clone(),
+                        input_word: word.to_string(),
+                        confidence: lexicon_word.confidence,
+                        classification_type: ClassificationType::ExactMatch,
+                        context: lexicon_word.context.clone(),
+                        properties: word_class.properties.clone(),
+                    });
                 }
             }
         }
@@ -574,19 +574,19 @@ impl LexiconDatabase {
 
         for word_class in &self.word_classes {
             for pattern in &word_class.patterns {
-                if pattern.matches(word) {
-                    if let Some(matched_text) = pattern.extract_match(word) {
-                        matches.push(PatternMatch {
-                            word_class_type: word_class.word_class_type.clone(),
-                            word_class_id: word_class.id.clone(),
-                            pattern_id: pattern.id.clone(),
-                            pattern_type: pattern.pattern_type.clone(),
-                            input_word: word.to_string(),
-                            matched_text,
-                            confidence: pattern.confidence,
-                            description: pattern.description.clone(),
-                        });
-                    }
+                if pattern.matches(word)
+                    && let Some(matched_text) = pattern.extract_match(word)
+                {
+                    matches.push(PatternMatch {
+                        word_class_type: word_class.word_class_type.clone(),
+                        word_class_id: word_class.id.clone(),
+                        pattern_id: pattern.id.clone(),
+                        pattern_type: pattern.pattern_type.clone(),
+                        input_word: word.to_string(),
+                        matched_text,
+                        confidence: pattern.confidence,
+                        description: pattern.description.clone(),
+                    });
                 }
             }
         }

@@ -14,7 +14,7 @@ In the second example, the event FE is labeled with two labels, because the two 
         <semType name="Location" ID="54"/>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="CFB" cDate="03/30/2007 12:00:30 PDT Fri" abbrev="Cnst" name="Constituent_parts" ID="11556">
-        <definition>&lt;def-root&gt;Salient parts that make up a &lt;fen&gt;Locale&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;Salient parts that make up a &lt;fen&gt;Locale&lt;/fen&gt;.
 
 &lt;ex&gt;We need a meeting &lt;t&gt;site&lt;/t&gt; &lt;fex name="Constituent_parts"&gt;with more computers&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

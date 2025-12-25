@@ -5,7 +5,7 @@
 
 &lt;ex&gt;&lt;t&gt;&lt;fex name="cur"&gt;Foreign&lt;/fex&gt;&lt;/t&gt; sales account for only 20% of IBM's income .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="06/03/2005 11:07:07 PDT Fri" abbrev="Constp" name="Constituent_parts" ID="8090">
-        <definition>&lt;def-root&gt;The materials or &lt;fen&gt;Constituent_parts&lt;/fen&gt; that make up the &lt;fen&gt;Current_country&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;The materials or &lt;fen&gt;Constituent_parts&lt;/fen&gt; that make up the &lt;fen&gt;Current_country&lt;/fen&gt;.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="06/03/2005 11:07:07 PDT Fri" abbrev="ContP" name="Container_possessor" ID="8091">

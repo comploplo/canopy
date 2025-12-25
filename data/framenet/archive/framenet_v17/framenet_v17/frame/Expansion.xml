@@ -13,7 +13,7 @@ This frame does not specify whether the &lt;fen&gt;Item&lt;/fen&gt; gains mass o
 &lt;ex&gt;&lt;fex name="Item"&gt;Joan's new sweater&lt;/fex&gt; &lt;t&gt;shrank&lt;/t&gt; to a size that might fit a doll.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="07/11/2003 01:20:41 PDT Fri" abbrev="Dim" name="Dimension" ID="4757">
-        <definition>&lt;def-root&gt;Change of size may be limited to or described in terms of a single &lt;fen&gt;Dimension&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;Change of size may be limited to or described in terms of a single &lt;fen&gt;Dimension&lt;/fen&gt;.
 
 &lt;ex&gt;The wall &lt;t&gt;grew&lt;/t&gt; &lt;fex name="Dim"&gt;in height&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;The piglet had &lt;t&gt;grown&lt;/t&gt; 6 inches &lt;fex name="Dim"&gt;in length&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
@@ -60,7 +60,7 @@ This frame does not specify whether the &lt;fen&gt;Item&lt;/fen&gt; gains mass o
 &lt;ex&gt;The snake's belly &lt;t&gt;expanded&lt;/t&gt; &lt;fex name="Co_variable"&gt;with each mouse it ate&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="07/11/2003 04:15:09 PDT Fri" abbrev="Mnr" name="Manner" ID="4774">
-        <definition>&lt;def-root&gt;This FE is used for any description of the &lt;fen&gt;Manner&lt;/fen&gt; of the expansion including force (&lt;ment&gt;hard, softly&lt;/ment&gt;), secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;This FE is used for any description of the &lt;fen&gt;Manner&lt;/fen&gt; of the expansion including force (&lt;ment&gt;hard, softly&lt;/ment&gt;), secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;).
 
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

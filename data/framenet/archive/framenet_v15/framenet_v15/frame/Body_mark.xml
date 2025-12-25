@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="296" cDate="08/06/2002 01:51:59 PDT Tue" name="Body_mark" ID="393" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;Body_mark&lt;/fen&gt; is present on a &lt;fen&gt;Possessor&lt;/fen&gt;'s body.  It may be located at an &lt;fen&gt;Attachment&lt;/fen&gt; and have a &lt;fen&gt;Descriptor&lt;/fen&gt;.  A &lt;fen&gt;Cause&lt;/fen&gt; may also be indicated. It may be a temporary condition or a permanent one. 
+    <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;Body_mark&lt;/fen&gt; is present on a &lt;fen&gt;Possessor&lt;/fen&gt;'s body.  It may be located at an &lt;fen&gt;Attachment&lt;/fen&gt; and have a &lt;fen&gt;Descriptor&lt;/fen&gt;.  A &lt;fen&gt;Cause&lt;/fen&gt; may also be indicated. It may be a temporary condition or a permanent one.
 
 &lt;ex&gt; &lt;fex name="Possessor"&gt;Mark&lt;/fex&gt; has a &lt;fex name="Descriptor"&gt;cancerous&lt;/fex&gt; &lt;fex name="Body_mark"&gt;&lt;t&gt;mole&lt;/t&gt;&lt;/fex&gt; &lt;fex name="Attachment"&gt;on his back&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="296" cDate="08/06/2002 01:54:24 PDT Tue" abbrev="Attachment" name="Attachment" ID="3506">
@@ -17,7 +17,7 @@
         <semType name="Artifact" ID="61"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Peripheral" cBy="296" cDate="08/06/2002 01:54:24 PDT Tue" abbrev="Desc" name="Descriptor" ID="3508">
-        <definition>&lt;def-root&gt;This Frame Element is used for a characteristic or description of the &lt;fen&gt;Body_mark&lt;/fen&gt;. it identifies a modifier of its head noun. 
+        <definition>&lt;def-root&gt;This Frame Element is used for a characteristic or description of the &lt;fen&gt;Body_mark&lt;/fen&gt;. it identifies a modifier of its head noun.
 
 &lt;ex&gt;Mark has a &lt;fex name="Desc"&gt;cancerous&lt;/fex&gt; &lt;t&gt;mole&lt;/t&gt; on his back.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

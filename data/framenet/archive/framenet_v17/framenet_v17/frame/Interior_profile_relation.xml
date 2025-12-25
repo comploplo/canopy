@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="KlB" cDate="07/14/2004 11:24:31 PDT Wed" name="Interior_profile_relation" ID="1178" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Figure&lt;/fen&gt; is located in the interior (the Profiled_region--see Locative_relation frame) of the &lt;fen&gt;Ground&lt;/fen&gt;. Some members of this frame indicate the plexity of the &lt;fen&gt;Ground&lt;/fen&gt;, as either single-entity gestalt (inside), two-entity or bi-partite gestalt (between.prep), and multiple-entity or multipart gestalt (among.prep, amid.prep), while others are maximally general (in.prep).  
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Figure&lt;/fen&gt; is located in the interior (the Profiled_region--see Locative_relation frame) of the &lt;fen&gt;Ground&lt;/fen&gt;. Some members of this frame indicate the plexity of the &lt;fen&gt;Ground&lt;/fen&gt;, as either single-entity gestalt (inside), two-entity or bi-partite gestalt (between.prep), and multiple-entity or multipart gestalt (among.prep, amid.prep), while others are maximally general (in.prep).
 &lt;ex&gt;&lt;/ex&gt;
 
 This frame makes use of the Bounded_region image schema, a way of partitioning a scene into an Interior, an Exterior, and a Boundary.  In some cases, the Boundary may be a physical entity that inhibits motion ("in a box"), while in other cases it may be based on a category boundary where properties change ("in the garden").  The LUs that specifically pick out two-entity or multi-entity &lt;fen&gt;Ground&lt;/fen&gt;s imply the lack or irrelevancy of a physical barrier.
@@ -31,7 +31,7 @@ As in other locative frames, the LUs interact productively with other lexical an
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;/ex&gt;
 
-This frame is used in several productive metaphor cases. One of the most frequent is the use of this frame to express an Entity (construed as a &lt;fen&gt;Figure&lt;/fen&gt;) as a member of a category or state (construed as a &lt;fen&gt;Ground&lt;/fen&gt;). 
+This frame is used in several productive metaphor cases. One of the most frequent is the use of this frame to express an Entity (construed as a &lt;fen&gt;Figure&lt;/fen&gt;) as a member of a category or state (construed as a &lt;fen&gt;Ground&lt;/fen&gt;).
 &lt;ex&gt;&lt;m&gt;Is&lt;/m&gt; &lt;fex name="Figure"&gt;the economy&lt;/fex&gt; &lt;t&gt;in&lt;/t&gt; &lt;fex name="Ground"&gt;recession&lt;/fex&gt; ?&lt;/ex&gt;
 &lt;ex&gt;There are good or bad weather days here , and &lt;fex name="Figure"&gt;nothing&lt;/fex&gt; &lt;t&gt;in between&lt;/t&gt; . &lt;fex name="Ground"&gt;DNI&lt;/fex&gt; &lt;/ex&gt;
 &lt;ex&gt;&lt;/ex&gt;

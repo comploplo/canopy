@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MJE" cDate="06/28/2005 06:03:16 PDT Tue" name="Ranked_expectation" ID="1533" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; is rated as unexpected for its context in terms of its magnitude.  Either some different type of &lt;fen&gt;Entity&lt;/fen&gt; with a different scope would be expected, or a different amount of the &lt;fen&gt;Entity&lt;/fen&gt;.  
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; is rated as unexpected for its context in terms of its magnitude.  Either some different type of &lt;fen&gt;Entity&lt;/fen&gt; with a different scope would be expected, or a different amount of the &lt;fen&gt;Entity&lt;/fen&gt;.
 
 &lt;ex&gt;The &lt;t&gt;entire&lt;/t&gt; &lt;fex name="ent"&gt;apple&lt;/fex&gt; was riddled with worms .&lt;/ex&gt;
 &lt;ex&gt;The inevitable fate of the Warsaw Resistance fighters was not finally sealed until nine &lt;t&gt;whole&lt;/t&gt; &lt;fex name="ent"&gt;weeks&lt;/fex&gt; of vicious fighting had taken a terrible toll on the people .&lt;/ex&gt;

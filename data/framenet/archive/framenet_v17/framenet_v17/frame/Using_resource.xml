@@ -22,7 +22,7 @@
         <definition>&lt;def-root&gt;A more specific description of how the &lt;fen&gt;Purpose&lt;/fen&gt; is achieved by spending the &lt;fen&gt;Resource&lt;/fen&gt;.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="AlK" cDate="02/18/2011 04:28:05 PST Fri" abbrev="" name="Manner" ID="14315">
-        <definition>&lt;def-root&gt;Any description of the intentional act which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that also affect the action (&lt;ment&gt; deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the intentional act which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that also affect the action (&lt;ment&gt; deliberately, eagerly, carefully&lt;/ment&gt;).
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Peripheral" cBy="AlK" cDate="02/18/2011 04:35:55 PST Fri" abbrev="" name="Place" ID="14316">

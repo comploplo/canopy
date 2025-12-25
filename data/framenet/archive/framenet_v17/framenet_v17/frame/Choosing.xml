@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MJE" cDate="06/13/2002 02:16:37 PDT Thu" name="Choosing" ID="352" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Cognizer&lt;/fen&gt; decides upon the &lt;fen&gt;Chosen&lt;/fen&gt; (either an item or a course of action) out of a set of  &lt;fen&gt;Possibilities&lt;/fen&gt; .  The &lt;fen&gt;Cognizer&lt;/fen&gt; may have an &lt;fen&gt;Inherent_purpose&lt;/fen&gt; or a &lt;fen&gt;Larger_purpose&lt;/fen&gt; for the &lt;fen&gt;Chosen&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Cognizer&lt;/fen&gt; decides upon the &lt;fen&gt;Chosen&lt;/fen&gt; (either an item or a course of action) out of a set of  &lt;fen&gt;Possibilities&lt;/fen&gt; .  The &lt;fen&gt;Cognizer&lt;/fen&gt; may have an &lt;fen&gt;Inherent_purpose&lt;/fen&gt; or a &lt;fen&gt;Larger_purpose&lt;/fen&gt; for the &lt;fen&gt;Chosen&lt;/fen&gt;.
 Often an &lt;fen&gt;Explanation&lt;/fen&gt;, which serves as the basis of the choice, is given.
 
 &lt;ex&gt;&lt;fex name="Cognizer"&gt;The council&lt;/fex&gt; &lt;t&gt;picked&lt;/t&gt; &lt;fex name="Chosen"&gt;you&lt;/fex&gt; &lt;fex name="Possibilities"&gt;out of all the pilots available&lt;/fex&gt; &lt;fex name="Inherent_purpose"&gt;to head this mission&lt;/fex&gt;.&lt;/ex&gt;
@@ -53,7 +53,7 @@ Often an &lt;fen&gt;Explanation&lt;/fen&gt;, which serves as the basis of the ch
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="06/27/2002 04:44:48 PDT Thu" abbrev="Mnr" name="Manner" ID="3289">
-        <definition>&lt;def-root&gt;Any description of the selecting event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may indicate salient characteristics of a &lt;fen&gt;Cognizer&lt;/fen&gt; that also affect the action (presumptuously, coldly, deliberately, eagerly, carefully). 
+        <definition>&lt;def-root&gt;Any description of the selecting event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may indicate salient characteristics of a &lt;fen&gt;Cognizer&lt;/fen&gt; that also affect the action (presumptuously, coldly, deliberately, eagerly, carefully).
 &lt;ex&gt;She &lt;fex name="Manner"&gt;wisely&lt;/fex&gt; &lt;t&gt;chose&lt;/t&gt; the plain-looking cup.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

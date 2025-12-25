@@ -33,7 +33,7 @@
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="09/18/2001 12:37:39 PDT Tue" abbrev="MoT" name="Mode_of_transportation" ID="1938">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Mode_of_transportation&lt;/fen&gt; expresses how the motion of the &lt;fen&gt;Theme&lt;/fen&gt; is effected, by its body or by a vehicle which holds and conveys the &lt;fen&gt;Theme&lt;/fen&gt;.   Vehicles can move in any way and in any medium. They are usually expressed obliquely with 'in' or 'by'.
 
-&lt;ex&gt;I &lt;t&gt;reached&lt;/t&gt; Canada &lt;fex name="Mode_of_transportation"&gt;by car&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;I &lt;t&gt;reached&lt;/t&gt; Canada &lt;fex name="Mode_of_transportation"&gt;by car&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;I &lt;t&gt;reached&lt;/t&gt; Mexico &lt;fex name="Mode_of_transportation"&gt;on foot&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="7CCD7C" fgColor="000000" coreType="Extra-Thematic" cBy="MJE" cDate="09/18/2001 12:38:24 PDT Tue" abbrev="Thm_c" name="Cotheme" ID="1939">
@@ -45,7 +45,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="ACW" cDate="08/19/2002 03:31:49 PDT Mon" abbrev="New" name="New_situation" ID="3580">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;New_situation&lt;/fen&gt; are the state of the &lt;fen&gt;Goal&lt;/fen&gt; when the &lt;fen&gt;Theme&lt;/fen&gt; arrives. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;New_situation&lt;/fen&gt; are the state of the &lt;fen&gt;Goal&lt;/fen&gt; when the &lt;fen&gt;Theme&lt;/fen&gt; arrives.
 &lt;ex&gt;The senator &lt;t&gt;arrived&lt;/t&gt; &lt;fex name="New_situation"&gt;to a standing ovation&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="ACW" cDate="08/19/2002 03:33:04 PDT Mon" abbrev="Dep" name="Depictive" ID="3581">

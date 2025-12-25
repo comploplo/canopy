@@ -20,7 +20,7 @@ mod error_and_complex_xml_tests {
         let error = result.unwrap_err();
         assert!(matches!(error, EngineError::DataLoadError { .. }));
         // Accept any data load error - the specific message may vary
-        assert!(error.to_string().len() > 0);
+        assert!(!error.to_string().is_empty());
     }
 
     #[test]
@@ -293,7 +293,7 @@ mod error_and_complex_xml_tests {
             let error = result.unwrap_err();
             assert!(matches!(error, EngineError::DataLoadError { .. }));
             // Accept any data load error message
-            assert!(error.to_string().len() > 0);
+            assert!(!error.to_string().is_empty());
         } else {
             // Or extract what it can
             let frame = result.unwrap();

@@ -29,7 +29,7 @@
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="03/28/2007 05:05:53 PDT Wed" abbrev="MoT" name="Mode_of_transportation" ID="11451">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Mode_of_transportation&lt;/fen&gt; expresses how the motion of the &lt;fen&gt;Agent&lt;/fen&gt; is effected, by its body or by a vehicle which holds and conveys the &lt;fen&gt;Agent&lt;/fen&gt;.   Vehicles can move in any way and in any medium. They are usually expressed obliquely with 'in' or 'by'.
 
-&lt;ex&gt;I &lt;t&gt;reached&lt;/t&gt; Canada &lt;fex name="Mode_of_transportation"&gt;by car&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;I &lt;t&gt;reached&lt;/t&gt; Canada &lt;fex name="Mode_of_transportation"&gt;by car&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;I &lt;t&gt;reached&lt;/t&gt; Mexico &lt;fex name="Mode_of_transportation"&gt;on foot&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="03/28/2007 05:05:53 PDT Wed" abbrev="Time" name="Time" ID="11453">

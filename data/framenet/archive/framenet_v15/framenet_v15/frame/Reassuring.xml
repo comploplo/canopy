@@ -3,17 +3,17 @@
 <frame cBy="395" cDate="04/10/2005 04:09:05 PDT Sun" name="Reassuring" ID="1378" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;A &lt;fen&gt;Speaker&lt;/fen&gt; conveys &lt;fen&gt;Content&lt;/fen&gt; to an &lt;fen&gt;Experiencer&lt;/fen&gt; in order to reassure them about a &lt;fen&gt;Situation&lt;/fen&gt;; &lt;fen&gt;Medium&lt;/fen&gt; and the &lt;fen&gt;Means&lt;/fen&gt; of the communication also may be expressed. &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="395" cDate="04/10/2005 04:09:05 PDT Sun" abbrev="Spkr" name="Speaker" ID="7717">
-        <definition>&lt;def-root&gt;The sentient entity that uses language in the written or spoken modality to reassure another person. 
+        <definition>&lt;def-root&gt;The sentient entity that uses language in the written or spoken modality to reassure another person.
 &lt;ex&gt;&lt;fex name="Speaker"&gt;He&lt;/fex&gt; &lt;t&gt;reassured&lt;/t&gt; her that she was his favorite ice-skating star. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Core" cBy="395" cDate="04/10/2005 04:09:05 PDT Sun" abbrev="Exp" name="Experiencer" ID="7718">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Experiencer&lt;/fen&gt; receives reassurance from the &lt;fen&gt;Speaker&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Experiencer&lt;/fen&gt; receives reassurance from the &lt;fen&gt;Speaker&lt;/fen&gt;.
 &lt;ex&gt;He tried to &lt;t&gt;reassure&lt;/t&gt; &lt;fex name="Exp"&gt;his potential customers&lt;/fex&gt; that his company not only offered the best service, but also the most competitive prices. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="395" cDate="04/10/2005 04:09:05 PDT Sun" abbrev="Cont" name="Content" ID="7719">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Content&lt;/fen&gt; A proposition or set of propositions that the &lt;fen&gt;Speaker&lt;/fen&gt; wants the &lt;fen&gt;Experiencer&lt;/fen&gt;to believe in order to feel reassured. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Content&lt;/fen&gt; A proposition or set of propositions that the &lt;fen&gt;Speaker&lt;/fen&gt; wants the &lt;fen&gt;Experiencer&lt;/fen&gt;to believe in order to feel reassured.
 
 &lt;ex&gt;How do you &lt;t&gt;reassure&lt;/t&gt; them &lt;fex name="Content"&gt;that you really like them&lt;/fex&gt; ?  &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Content" ID="55"/>
@@ -24,7 +24,7 @@
 &lt;ex&gt;The policeman &lt;t&gt;reassured&lt;/t&gt; him &lt;fex name="Situation"&gt;about the safety of the neighborhood&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Peripheral" cBy="395" cDate="04/10/2005 04:09:05 PDT Sun" abbrev="Medium" name="Medium" ID="7721">
-        <definition>&lt;def-root&gt;The physical or abstract setting in which the Message is conveyed. 
+        <definition>&lt;def-root&gt;The physical or abstract setting in which the Message is conveyed.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="395" cDate="04/10/2005 04:09:05 PDT Sun" abbrev="Amo" name="Amount_of_reassurance" ID="7722">

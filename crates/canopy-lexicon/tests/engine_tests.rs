@@ -12,7 +12,7 @@ mod engine_tests {
     #[test]
     fn test_lexicon_engine_creation() {
         let config = LexiconConfig::default();
-        let engine = LexiconEngine::new(config);
+        let engine = LexiconEngine::with_config(config);
 
         // Engine should be created successfully
         assert_eq!(engine.name(), "Lexicon");
@@ -51,7 +51,7 @@ mod engine_tests {
     #[test]
     fn test_engine_basic_methods() {
         let config = LexiconConfig::default();
-        let engine = LexiconEngine::new(config);
+        let engine = LexiconEngine::with_config(config);
 
         // Test basic engine interface
         assert_eq!(engine.name(), "Lexicon");
@@ -68,7 +68,7 @@ mod engine_tests {
             data_path: "/nonexistent/path".to_string(),
             ..LexiconConfig::default()
         };
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
 
         // Loading should fail for nonexistent path
         let result = engine.load_data();
@@ -79,7 +79,7 @@ mod engine_tests {
     #[test]
     fn test_analysis_methods_without_data() {
         let config = LexiconConfig::default();
-        let engine = LexiconEngine::new(config);
+        let engine = LexiconEngine::with_config(config);
 
         // Analysis methods should work even without loaded data
         // (they might return empty results or errors)
@@ -102,7 +102,7 @@ mod engine_tests {
     #[test]
     fn test_cache_operations() {
         let config = LexiconConfig::default();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
 
         // Cache operations should work
         let cache_stats = engine.cache_stats();
@@ -118,7 +118,7 @@ mod engine_tests {
     #[test]
     fn test_data_info_without_data() {
         let config = LexiconConfig::default();
-        let engine = LexiconEngine::new(config);
+        let engine = LexiconEngine::with_config(config);
 
         let data_info = engine.data_info();
         assert!(!data_info.source.is_empty());
@@ -137,7 +137,7 @@ mod engine_tests {
             ..LexiconConfig::default()
         };
 
-        let engine = LexiconEngine::new(edge_config);
+        let engine = LexiconEngine::with_config(edge_config);
         assert_eq!(engine.name(), "Lexicon");
     }
 
@@ -153,14 +153,14 @@ mod engine_tests {
             ..LexiconConfig::default()
         };
 
-        let engine = LexiconEngine::new(boundary_config);
+        let engine = LexiconEngine::with_config(boundary_config);
         assert_eq!(engine.name(), "Lexicon");
     }
 
     #[test]
     fn test_statistics_consistency() {
         let config = LexiconConfig::default();
-        let engine = LexiconEngine::new(config);
+        let engine = LexiconEngine::with_config(config);
 
         let stats1 = engine.statistics();
         let stats2 = engine.statistics();
@@ -177,8 +177,8 @@ mod engine_tests {
             ..LexiconConfig::default()
         };
 
-        let engine1 = LexiconEngine::new(config1);
-        let engine2 = LexiconEngine::new(config2);
+        let engine1 = LexiconEngine::with_config(config1);
+        let engine2 = LexiconEngine::with_config(config2);
 
         // Engine name should be consistent regardless of configuration
         assert_eq!(engine1.name(), engine2.name());
@@ -190,8 +190,8 @@ mod engine_tests {
         let config = LexiconConfig::default();
 
         // Should be able to create multiple engines
-        let engine1 = LexiconEngine::new(config.clone());
-        let engine2 = LexiconEngine::new(config);
+        let engine1 = LexiconEngine::with_config(config.clone());
+        let engine2 = LexiconEngine::with_config(config);
 
         assert_eq!(engine1.name(), "Lexicon");
         assert_eq!(engine2.name(), "Lexicon");
@@ -206,7 +206,7 @@ mod engine_tests {
             ..LexiconConfig::default()
         };
 
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
 
         // Should handle errors gracefully
         let load_result = engine.load_data();
@@ -220,12 +220,12 @@ mod engine_tests {
     #[test]
     fn test_analysis_result_structure() {
         let config = LexiconConfig::default();
-        let engine = LexiconEngine::new(config);
+        let engine = LexiconEngine::with_config(config);
 
         // Test that analysis returns proper structure
         match engine.analyze_word("test") {
             Ok(analysis) => {
-                assert_eq!(analysis.input, "test");
+                assert_eq!(analysis.data.input, "test");
                 assert!(analysis.confidence >= 0.0);
                 assert!(analysis.confidence <= 1.0);
                 // Classifications and pattern matches might be empty without data
@@ -239,7 +239,7 @@ mod engine_tests {
     #[test]
     fn test_word_classification_methods() {
         let config = LexiconConfig::default();
-        let engine = LexiconEngine::new(config);
+        let engine = LexiconEngine::with_config(config);
 
         // Test word classification methods
         let test_words = vec!["the", "not", "however", "all"];
@@ -258,7 +258,7 @@ mod engine_tests {
     #[test]
     fn test_empty_and_special_inputs() {
         let config = LexiconConfig::default();
-        let engine = LexiconEngine::new(config);
+        let engine = LexiconEngine::with_config(config);
 
         let special_inputs = vec!["", "  ", "123", "@#$", "very_long_word"];
 
@@ -273,7 +273,7 @@ mod engine_tests {
     #[test]
     fn test_unicode_input_handling() {
         let config = LexiconConfig::default();
-        let engine = LexiconEngine::new(config);
+        let engine = LexiconEngine::with_config(config);
 
         let unicode_inputs = vec!["café", "naïve", "résumé", "你好"];
 

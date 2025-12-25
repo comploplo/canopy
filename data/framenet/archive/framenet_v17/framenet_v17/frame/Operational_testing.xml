@@ -31,7 +31,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="12/15/2004 07:26:41 PST Wed" abbrev="pur" name="Purpose" ID="7365">
-        <definition>&lt;def-root&gt;An action that the &lt;fen&gt;Tester&lt;/fen&gt; intends to accomplish subjecting the &lt;fen&gt;Product&lt;/fen&gt; to a test of its functioning. 
+        <definition>&lt;def-root&gt;An action that the &lt;fen&gt;Tester&lt;/fen&gt; intends to accomplish subjecting the &lt;fen&gt;Product&lt;/fen&gt; to a test of its functioning.
 
 &lt;ex&gt;Once you have copied your site and have &lt;t&gt;tested&lt;/t&gt; it &lt;fex name="pur"&gt;to make sure it works normally&lt;/fex&gt;, you're ready to pull out the scalpel and start hacking away.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

@@ -36,7 +36,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="04/29/2005 05:39:20 PDT Fri" abbrev="man" name="Manner" ID="7895">
-        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including epistemic modification (&lt;ment&gt;probably&lt;/ment&gt;, &lt;ment&gt;presumably&lt;/ment&gt;, &lt;ment&gt;mysteriously&lt;/ment&gt;),  secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may also indicate salient characteristics of the Protagonist that affect the action (&lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including epistemic modification (&lt;ment&gt;probably&lt;/ment&gt;, &lt;ment&gt;presumably&lt;/ment&gt;, &lt;ment&gt;mysteriously&lt;/ment&gt;),  secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may also indicate salient characteristics of the Protagonist that affect the action (&lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;).
 
 &lt;ex&gt; I &lt;t&gt;rose&lt;/t&gt; from bed &lt;fex name="Manner"&gt;with urgency&lt;/fex&gt; early one morning because a light clicked on.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

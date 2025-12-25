@@ -14,7 +14,7 @@
         <definition>&lt;def-root&gt;The &lt;fen&gt;Protagonist&lt;/fen&gt;'s state throughout the time they are changing posture.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/29/2003 06:09:59 PDT Fri" abbrev="" name="Location" ID="5004">
-        <definition>&lt;def-root&gt;The place or  setting in which the &lt;fen&gt;Protagonist&lt;/fen&gt;'s change of posture takes place. 
+        <definition>&lt;def-root&gt;The place or  setting in which the &lt;fen&gt;Protagonist&lt;/fen&gt;'s change of posture takes place.
 
 &lt;ex&gt;The supplicant &lt;t&gt;sat&lt;/t&gt; down &lt;fex name="Location"&gt;outside the office&lt;/fex&gt; and waited for the mayor.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Location" ID="54"/>

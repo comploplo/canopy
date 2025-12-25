@@ -42,7 +42,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MJE" cDate="01/17/2006 09:16:18 PST Tue" abbrev="cir" name="Circumstances" ID="9858">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; is the condition(s) under which the &lt;fen&gt;Stimulus&lt;/fen&gt; evokes its response.  In some cases it may appear without an explicit &lt;fen&gt;Stimulus&lt;/fen&gt;.  Quite often in such cases, the &lt;fen&gt;Stimulus&lt;/fen&gt; can be inferred from the &lt;fen&gt;Circumstances&lt;/fen&gt; 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; is the condition(s) under which the &lt;fen&gt;Stimulus&lt;/fen&gt; evokes its response.  In some cases it may appear without an explicit &lt;fen&gt;Stimulus&lt;/fen&gt;.  Quite often in such cases, the &lt;fen&gt;Stimulus&lt;/fen&gt; can be inferred from the &lt;fen&gt;Circumstances&lt;/fen&gt;
 
 &lt;/def-root&gt;</definition>
     </FE>

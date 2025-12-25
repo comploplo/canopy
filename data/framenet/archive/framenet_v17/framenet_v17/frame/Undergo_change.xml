@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="JKR" cDate="07/13/2004 03:38:58 PDT Tue" name="Undergo_change" ID="1172" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; changes, either in its category membership, its situation, or in terms of the quality of an &lt;fen&gt;Attribute&lt;/fen&gt;. In the first case, where category membership is changing, an &lt;fen&gt;Initial_category&lt;/fen&gt; and a  &lt;fen&gt;Final_category&lt;/fen&gt; may be expressed. In the second case, where a situation as a whole is changing, an &lt;fen&gt;Initial_situation&lt;/fen&gt; and a &lt;fen&gt;Final_situation&lt;/fen&gt; can be present. And in the last case, where some characterization of the &lt;fen&gt;Entity&lt;/fen&gt; is changing, an &lt;fen&gt;Initial_quality&lt;/fen&gt; and a &lt;fen&gt;Final_quality&lt;/fen&gt; can be specified. 
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; changes, either in its category membership, its situation, or in terms of the quality of an &lt;fen&gt;Attribute&lt;/fen&gt;. In the first case, where category membership is changing, an &lt;fen&gt;Initial_category&lt;/fen&gt; and a  &lt;fen&gt;Final_category&lt;/fen&gt; may be expressed. In the second case, where a situation as a whole is changing, an &lt;fen&gt;Initial_situation&lt;/fen&gt; and a &lt;fen&gt;Final_situation&lt;/fen&gt; can be present. And in the last case, where some characterization of the &lt;fen&gt;Entity&lt;/fen&gt; is changing, an &lt;fen&gt;Initial_quality&lt;/fen&gt; and a &lt;fen&gt;Final_quality&lt;/fen&gt; can be specified.
 
 
 &lt;ex&gt;As soon as Tiffany kissed the frog, &lt;fex name="ent"&gt;Tiffany&lt;/fex&gt; &lt;t&gt;turned&lt;/t&gt; &lt;fex name="finc"&gt;into a frog&lt;/fex&gt;. &lt;/ex&gt;
@@ -67,14 +67,14 @@ This frame is often the target domain of motion metaphors, in which the moving T
         <excludesFE name="Initial_category" ID="6836"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core-Unexpressed" cBy="JKR" cDate="07/14/2004 04:03:48 PDT Wed" abbrev="att" name="Attribute" ID="6840">
-        <definition>&lt;def-root&gt;A characteristic of the &lt;fen&gt;Entity&lt;/fen&gt; for which a quality can be assigned or determined by calculation, measurement, or observation. 
+        <definition>&lt;def-root&gt;A characteristic of the &lt;fen&gt;Entity&lt;/fen&gt; for which a quality can be assigned or determined by calculation, measurement, or observation.
 
 
 &lt;ex&gt;Test to check if &lt;fex name="att"&gt;the color&lt;/fex&gt; &lt;t&gt;changes&lt;/t&gt; when you place your mouse over the JavaScript image&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Initial_category" ID="6836"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="000000" coreType="Peripheral" cBy="JKR" cDate="07/14/2004 04:43:50 PDT Wed" abbrev="man" name="Manner" ID="6842">
-        <definition>&lt;def-root&gt;Any description of the Change event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). 
+        <definition>&lt;def-root&gt;Any description of the Change event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way).
 
 &lt;ex&gt;He also identified all of the places where cancer rates or pollution levels &lt;t&gt;changed&lt;/t&gt; &lt;fex name="man"&gt;quickly&lt;/fex&gt; over short periods of time.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
@@ -116,7 +116,7 @@ The main faith of the church has &lt;t&gt;changed&lt;/t&gt; &lt;fex name="val"&g
         <definition>&lt;def-root&gt;The location that the change takes place.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Core-Unexpressed" cBy="HPh" cDate="08/11/2015 04:59:17 PDT Tue" abbrev="fins" name="Final_situation" ID="16590">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Entity&lt;/fen&gt;'s situation that results from the change. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Entity&lt;/fen&gt;'s situation that results from the change.
 
 &lt;ex&gt;Tests &lt;t&gt;went&lt;/t&gt; from taking three hours &lt;fex name="Final_situation"&gt;to needing less than one&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

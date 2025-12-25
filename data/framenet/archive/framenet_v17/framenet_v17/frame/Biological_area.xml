@@ -5,7 +5,7 @@
 
 &lt;ex&gt;I've spent a long time in the &lt;fex name="Descriptor"&gt;rugged&lt;/fex&gt; &lt;fex name="Locale"&gt;&lt;t&gt;prairies&lt;/t&gt;&lt;/fex&gt; &lt;fex name="Container_possessor"&gt;of northern Llorwyn&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/10/2001 05:00:30 PDT Fri" abbrev="Cnst" name="Constituent_parts" ID="1575">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Constituent_parts&lt;/fen&gt; make up a &lt;fen&gt;Locale&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Constituent_parts&lt;/fen&gt; make up a &lt;fen&gt;Locale&lt;/fen&gt;.
 &lt;ex&gt;This is the  oldest  &lt;fex name="Cnst"&gt;oak&lt;/fex&gt; &lt;t&gt;forest&lt;/t&gt; in California.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/10/2001 05:00:30 PDT Fri" abbrev="ContP" name="Container_possessor" ID="1576">

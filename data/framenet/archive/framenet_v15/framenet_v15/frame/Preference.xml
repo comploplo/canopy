@@ -29,7 +29,7 @@
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="664" cDate="09/06/2005 05:46:49 PDT Tue" abbrev="exp" name="Explanation" ID="9067">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; shows why the &lt;fen&gt;Experiencer&lt;/fen&gt; wants the &lt;fen&gt;Event&lt;/fen&gt; to occur.  This FE occurs frequently as a PP complement headed by &lt;ment&gt;for&lt;/ment&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; shows why the &lt;fen&gt;Experiencer&lt;/fen&gt; wants the &lt;fen&gt;Event&lt;/fen&gt; to occur.  This FE occurs frequently as a PP complement headed by &lt;ment&gt;for&lt;/ment&gt;.
 &lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
     </FE>

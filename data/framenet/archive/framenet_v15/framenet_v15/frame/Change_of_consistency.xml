@@ -16,7 +16,7 @@
 &lt;ex&gt;The cheesecake finally &lt;t&gt;hardened&lt;/t&gt; &lt;fex name="Initial_state"&gt;from its runny state&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="06/03/2002 02:01:53 PDT Mon" abbrev="Und" name="Undergoer" ID="2919">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Undergoer&lt;/fen&gt; is the entity that undergoes a change. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Undergoer&lt;/fen&gt; is the entity that undergoes a change.
 
 &lt;ex&gt;&lt;fex name="Undergoer"&gt;The blood&lt;/fex&gt; &lt;t&gt;congealed&lt;/t&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Undergoer"&gt;The liquid&lt;/fex&gt; &lt;t&gt;gelled&lt;/t&gt; into a semi-solid mass.&lt;/ex&gt;

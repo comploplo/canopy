@@ -31,7 +31,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="07/21/2003 11:18:32 PDT Mon" abbrev="Man" name="Manner" ID="4801">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Manner&lt;/fen&gt; is used for any description of the abuse event which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Abuser&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Manner&lt;/fen&gt; is used for any description of the abuse event which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Abuser&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 &lt;ex&gt;It is fair to say that it was &lt;fex name="Man"&gt;malicious&lt;/fex&gt; &lt;t&gt;abuse&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>
@@ -48,7 +48,7 @@
         <semType name="Physical_entity" ID="70"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="07/21/2003 11:38:45 PDT Mon" abbrev="Purp" name="Purpose" ID="4804">
-        <definition>&lt;def-root&gt;An action that the &lt;fen&gt;Abuser&lt;/fen&gt; intends to accomplish by performing the abuse. 
+        <definition>&lt;def-root&gt;An action that the &lt;fen&gt;Abuser&lt;/fen&gt; intends to accomplish by performing the abuse.
 
 &lt;ex&gt;They are &lt;t&gt;abusive&lt;/t&gt; &lt;fex name="Purp"&gt;in order to get back at those who abused them&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

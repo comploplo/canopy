@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="KmG" cDate="07/16/2008 02:12:43 PDT Wed" name="History" ID="2113" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A recordable sequence of events is associated with a given &lt;fen&gt;Topic&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;A recordable sequence of events is associated with a given &lt;fen&gt;Topic&lt;/fen&gt;.
 
 &lt;ex&gt;And that is where the &lt;t&gt;history&lt;/t&gt; &lt;fex name="Topic"&gt;of art&lt;/fex&gt; begins.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

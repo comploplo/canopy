@@ -7,15 +7,15 @@
 &lt;ex&gt;&lt;t&gt;If&lt;/t&gt; &lt;fex name="Profiled_possibility"&gt;you read caerfully&lt;/fex&gt;, &lt;fex name="Consequence"&gt;you 'll see the letters are swapped&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;t&gt;Unless&lt;/t&gt; &lt;fex name="Profiled_possibility"&gt;you read carefully&lt;/fex&gt; , &lt;fex name="Anti_consequence"&gt;you wo n't understand what I said&lt;/fex&gt; .&lt;/ex&gt;
 
-The most common use of lexical units connected to the Conditional_scenario is for prediction; in this case the conditionals pair up possibilities with predicted consequences. Subtypes of this use include, but are not limited to: 
+The most common use of lexical units connected to the Conditional_scenario is for prediction; in this case the conditionals pair up possibilities with predicted consequences. Subtypes of this use include, but are not limited to:
 &lt;ex&gt;&lt;/ex&gt;
-(1) contingencies:  
+(1) contingencies:
 &lt;ex&gt;&lt;t&gt;If&lt;/t&gt; &lt;fex name="Profiled_possibility"&gt;it rains&lt;/fex&gt;, &lt;fex name="Consequence"&gt;the ceremony will be under the tent&lt;/fex&gt;.&lt;/ex&gt;
 
 (2) conditional promises (usually when making a deal):
 &lt;ex&gt;&lt;t&gt;If&lt;/t&gt; &lt;fex name="Profiled_possibility"&gt;you will wait with reasonable patience&lt;/fex&gt; , &lt;fex name="Consequence"&gt;I will explain&lt;/fex&gt;&lt;/ex&gt;
 
-(3) threats (which are inherently conditional): 
+(3) threats (which are inherently conditional):
 &lt;ex&gt;&lt;t&gt;If&lt;/t&gt; &lt;fex name="Profiled_possibility"&gt;any boy says anything to Weeks about it&lt;/fex&gt;, &lt;fex name="Consequence"&gt;I will cane him.&lt;/fex&gt;&lt;/ex&gt;
 
 (4) hypotheticals, especially when a different choice was made in the past and one imagines it would lead to a different outcome:
@@ -30,7 +30,7 @@ The most common use of lexical units connected to the Conditional_scenario is fo
 &lt;ex&gt;&lt;/ex&gt;
 &lt;m&gt;Speech act conditionals:&lt;/m&gt;
 &lt;ex&gt;&lt;/ex&gt;
-Lexical units of these frames can also be used in a pattern called a "Speech Act conditional".  In this case, the conditional presents a statement that is relevant to the conversation if the &lt;fen&gt;Profiled_possibility&lt;/fen&gt; holds. 
+Lexical units of these frames can also be used in a pattern called a "Speech Act conditional".  In this case, the conditional presents a statement that is relevant to the conversation if the &lt;fen&gt;Profiled_possibility&lt;/fen&gt; holds.
 
 &lt;ex&gt;&lt;fex name="Consequence"&gt;Just ask for Bob&lt;/fex&gt; &lt;t&gt;if&lt;/t&gt; &lt;fex name="Profiled_possibility"&gt;you need anything&lt;/fex&gt;.&lt;/ex&gt;
 

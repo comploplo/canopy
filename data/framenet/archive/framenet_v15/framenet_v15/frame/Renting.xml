@@ -10,7 +10,7 @@
 &lt;ex&gt;&lt;fex name="Lessee"&gt;We&lt;/fex&gt; 've been &lt;t&gt;renting&lt;/t&gt; from him for years .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="03/29/2006 04:15:06 PST Wed" abbrev="Gds" name="Goods" ID="9987">
-        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Goods&lt;/fen&gt; is an item which is temporarily exchanged for &lt;fen&gt;Money&lt;/fen&gt; in a transaction. 
+        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Goods&lt;/fen&gt; is an item which is temporarily exchanged for &lt;fen&gt;Money&lt;/fen&gt; in a transaction.
 &lt;ex&gt;I tried to &lt;t&gt;hire&lt;/t&gt; &lt;fex name="Goods"&gt;a bicycle&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="03/29/2006 04:15:06 PST Wed" abbrev="Mns" name="Means" ID="9988">
@@ -34,7 +34,7 @@
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="03/29/2006 04:15:07 PST Wed" abbrev="Unit" name="Unit" ID="9992">
         <definition>&lt;def-root&gt;This FE is any unit in which goods or services can be measured.
-Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP. 
+Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP.
 &lt;ex&gt;Lee &lt;t&gt;rents&lt;/t&gt; rooms &lt;fex name="Unit"&gt;by the hour&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="7CCD73" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="03/29/2006 04:15:07 PST Wed" abbrev="Place" name="Place" ID="9993">
@@ -69,7 +69,7 @@ Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP.
 &lt;ex&gt;She &lt;t&gt;rented&lt;/t&gt; &lt;fex name="Recipient"&gt;him&lt;/fex&gt; a cadillac from the lot next door and they hit the road .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="03/29/2006 04:15:07 PST Wed" abbrev="Dur" name="Duration" ID="9999">
-        <definition>&lt;def-root&gt;The length of time that the &lt;fen&gt;Goods&lt;/fen&gt; are (or have been) in the &lt;fen&gt;Lessee&lt;/fen&gt;'s possession.  
+        <definition>&lt;def-root&gt;The length of time that the &lt;fen&gt;Goods&lt;/fen&gt; are (or have been) in the &lt;fen&gt;Lessee&lt;/fen&gt;'s possession.
 
 &lt;ex&gt;Our neighbors have been &lt;t&gt;renting&lt;/t&gt; their house &lt;fex name="Duration"&gt;for the last ten years&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Duration" ID="142"/>

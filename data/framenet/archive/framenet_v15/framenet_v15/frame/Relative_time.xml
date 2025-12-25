@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="731" cDate="02/07/2001 04:12:28 PST Wed" name="Relative_time" ID="81" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;These words relate to the relative ordering of two events or times.  There are two major types of relations evoked by the words of this frame.  
+    <definition>&lt;def-root&gt;These words relate to the relative ordering of two events or times.  There are two major types of relations evoked by the words of this frame.
 &lt;ex&gt;&lt;/ex&gt;
 Some of the words (e.g. &lt;ment&gt;follow.v, antecedent.a, previous.a&lt;/ment&gt;) describe the (definitively) stative relationship between two events (the &lt;fen&gt;Landmark_occasion&lt;/fen&gt; and the &lt;fen&gt;Focal_occasion&lt;/fen&gt;).  This first type will be moved to the Time_vector frame.
 
@@ -19,7 +19,7 @@ Others (e.g. &lt;ment&gt;belated.a, early.a&lt;/ment&gt;) refer to the change or
 &lt;ex&gt;During the &lt;t&gt;previous&lt;/t&gt; &lt;fex name="Focal_occasion"&gt;week&lt;/fex&gt;, he had eaten 5 mangoes.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:28 PST Wed" abbrev="REv" name="Landmark_occasion" ID="374">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Landmark_occasion&lt;/fen&gt; is the event  with respect to which the &lt;fen&gt;Focal_occasion&lt;/fen&gt; is located. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Landmark_occasion&lt;/fen&gt; is the event  with respect to which the &lt;fen&gt;Focal_occasion&lt;/fen&gt; is located.
 &lt;ex&gt;Hours of eating and drinking &lt;t&gt;followed&lt;/t&gt; &lt;fex name="Landmark_occasion"&gt;the wedding ceremony&lt;/fex&gt;.&lt;/ex&gt;
 
 &lt;/def-root&gt;</definition>

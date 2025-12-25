@@ -7,7 +7,7 @@
 
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="09/24/2002 05:56:22 PDT Tue" abbrev="Cog" name="Cognizer" ID="3725">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Cognizer&lt;/fen&gt; comes up with or conceptualizes the &lt;fen&gt;New_idea&lt;/fen&gt;. It is normally expressed as an External Argument: 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Cognizer&lt;/fen&gt; comes up with or conceptualizes the &lt;fen&gt;New_idea&lt;/fen&gt;. It is normally expressed as an External Argument:
 &lt;ex&gt;&lt;fex name="Cognizer"&gt;Kim Sung&lt;/fex&gt; &lt;t&gt;invented&lt;/t&gt; cinnamon cheez fries in 1988.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
@@ -50,7 +50,7 @@
         <semType name="Physical_entity" ID="70"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/04/2003 02:44:43 PDT Mon" abbrev="Mnr" name="Manner" ID="4897">
-        <definition>&lt;def-root&gt;Any description of the creative event which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of a &lt;fen&gt;Cognizer&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the creative event which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of a &lt;fen&gt;Cognizer&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

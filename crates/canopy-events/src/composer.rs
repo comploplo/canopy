@@ -3,12 +3,12 @@
 //! Orchestrates decomposition and binding to compose events from Layer 1 analysis.
 
 use crate::binding::ParticipantBinder;
+use crate::confidence::{ConfidenceCalculator, update_confidence};
 use crate::config::EventComposerConfig;
-use crate::confidence::{update_confidence, ConfidenceCalculator};
 use crate::decomposition::EventDecomposer;
 use crate::error::EventResult;
 use crate::types::{
-    ComposedEvents, PredicateInfo, SentenceAnalysis, UnboundEntity, UnbindingReason,
+    ComposedEvents, PredicateInfo, SentenceAnalysis, UnbindingReason, UnboundEntity,
 };
 use canopy_core::UPos;
 use std::time::Instant;
@@ -74,7 +74,8 @@ impl EventComposer {
 
             // Bind participants
             let (mut composed, unbound) =
-                self.binder.bind_participants(decomposed.clone(), analysis, predicate)?;
+                self.binder
+                    .bind_participants(decomposed.clone(), analysis, predicate)?;
 
             // Set event ID
             composed.id = idx;
@@ -119,10 +120,7 @@ impl EventComposer {
     }
 
     /// Compose events for multiple sentences
-    pub fn compose_batch(
-        &self,
-        analyses: &[SentenceAnalysis],
-    ) -> EventResult<Vec<ComposedEvents>> {
+    pub fn compose_batch(&self, analyses: &[SentenceAnalysis]) -> EventResult<Vec<ComposedEvents>> {
         analyses.iter().map(|a| self.compose_sentence(a)).collect()
     }
 
@@ -199,7 +197,11 @@ mod tests {
     use crate::types::DependencyArc;
     use canopy_treebank::types::DependencyRelation;
 
-    fn make_token(word: &str, lemma: &str, pos: Option<UPos>) -> canopy_tokenizer::coordinator::Layer1SemanticResult {
+    fn make_token(
+        word: &str,
+        lemma: &str,
+        pos: Option<UPos>,
+    ) -> canopy_tokenizer::coordinator::Layer1SemanticResult {
         canopy_tokenizer::coordinator::Layer1SemanticResult {
             original_word: word.to_string(),
             lemma: lemma.to_string(),
@@ -241,7 +243,8 @@ mod tests {
 
         let deps = vec![DependencyArc::new(1, 0, DependencyRelation::NominalSubject)];
 
-        let analysis = SentenceAnalysis::new("John runs".to_string(), tokens).with_dependencies(deps);
+        let analysis =
+            SentenceAnalysis::new("John runs".to_string(), tokens).with_dependencies(deps);
 
         let result = composer.compose_sentence(&analysis).unwrap();
 

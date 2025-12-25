@@ -3,7 +3,7 @@
 <frame cBy="MJE" cDate="08/24/2001 01:04:23 PDT Fri" name="Direction" ID="215" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;This frame covers the basic uses of direction words like the adverbs east, up, and forward.  These are used either to talk about a direction of facing (e.g., facing outward, pointing left, looking downward, turn east) or to talk about actual or metaphorical motion (went up, traveling due north).  Lexical units of this frame typically have a semantic type that refers to the means of determining the direction (e.g. forward.adv has the semantic type Landmark_front, meaning that "forward" is defined with respect to the direction from the center of some entity to its front, however defined).  Nevertheless, some words like way.n are used exactly when normal means of specifying direction are not available.
 
-This frame is most frequently used to describe the motion of something along the &lt;fen&gt;Path&lt;/fen&gt; from the &lt;fen&gt;Landmark&lt;/fen&gt;, which is normally implicitly identified as the location of the viewpoint:  
+This frame is most frequently used to describe the motion of something along the &lt;fen&gt;Path&lt;/fen&gt; from the &lt;fen&gt;Landmark&lt;/fen&gt;, which is normally implicitly identified as the location of the viewpoint:
 
 &lt;ex&gt;We went &lt;t&gt;&lt;fex name="Path"&gt;north&lt;/fex&gt;&lt;/t&gt; . &lt;fex name="Landmark"&gt;DNI&lt;/fex&gt;&lt;/ex&gt;
 
@@ -18,7 +18,7 @@ It can often be used for direction of facing, which is not compatible with the &
 Although rare for certain lexical units (e.g., upward.adv), most words in this frame are commonly used in a fictive motion pattern to identify locations that can be reached by moving in the indicated way from the &lt;fen&gt;Landmark&lt;/fen&gt;:
 
 &lt;ex&gt;The book was unreachable, &lt;fex name="Distance"&gt;10 feet&lt;/fex&gt; &lt;t&gt;&lt;fex name="Path"&gt;up&lt;/fex&gt;&lt;/t&gt; on the shelf. &lt;fex name="Landmark"&gt;DNI&lt;/fex&gt;&lt;/ex&gt;
-&lt;ex&gt;&lt;fex name="Path"&gt;&lt;t&gt;East&lt;/t&gt;&lt;/fex&gt; &lt;fex name="Landmark"&gt;of Mt. Diablo&lt;/fex&gt; the Sierras rise majestically above the Central Valley.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Path"&gt;&lt;t&gt;East&lt;/t&gt;&lt;/fex&gt; &lt;fex name="Landmark"&gt;of Mt. Diablo&lt;/fex&gt; the Sierras rise majestically above the Central Valley.&lt;/ex&gt;
 &lt;ex&gt;&lt;/ex&gt;
 
 In this fictive motion case, the &lt;fen&gt;Domain&lt;/fen&gt; and the &lt;fen&gt;Independent_variable&lt;/fen&gt; are both spatial, and should be marked as metaphorical.

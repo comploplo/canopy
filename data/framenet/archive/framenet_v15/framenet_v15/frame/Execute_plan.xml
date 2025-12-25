@@ -60,7 +60,7 @@ Note: the phrase &lt;em&gt;(put) in effect&lt;/em&gt; is in the Being_in_effect 
 &lt;ex&gt;The policy will be &lt;t&gt;implemented&lt;/t&gt; &lt;fex name="Medium"&gt;by a new computer system&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="90876C" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="303" cDate="08/01/2006 05:07:14 PDT Tue" abbrev="Out" name="Outcome" ID="10432">
-        <definition>&lt;def-root&gt;The Outcome is the failure or success of executing the plan. 
+        <definition>&lt;def-root&gt;The Outcome is the failure or success of executing the plan.
 &lt;ex&gt;We &lt;t&gt;implemented&lt;/t&gt; the new approach &lt;fex name="Outcome"&gt;with astounding results&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FEcoreSet>

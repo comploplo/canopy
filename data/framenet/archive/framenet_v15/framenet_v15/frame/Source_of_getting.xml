@@ -2,14 +2,14 @@
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="03/02/2005 07:51:37 PST Wed" name="Source_of_getting" ID="1347" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;A &lt;fen&gt;Goal&lt;/fen&gt; has a &lt;fen&gt;Source&lt;/fen&gt; from which it has gotten a &lt;fen&gt;Theme&lt;/fen&gt;.
-The &lt;fen&gt;Goal&lt;/fen&gt; may be a sentient recipient who has actively obtained the &lt;fen&gt;Theme&lt;/fen&gt; but it may also  be a non-sentient entity that gets the &lt;fen&gt;Theme&lt;/fen&gt; as a result of natural or other processes that it does not control. 
+The &lt;fen&gt;Goal&lt;/fen&gt; may be a sentient recipient who has actively obtained the &lt;fen&gt;Theme&lt;/fen&gt; but it may also  be a non-sentient entity that gets the &lt;fen&gt;Theme&lt;/fen&gt; as a result of natural or other processes that it does not control.
 
 
 &lt;ex&gt;&lt;fex name="sou"&gt;she&lt;/fex&gt; &lt;m&gt;is&lt;/m&gt; my friend...not to mention &lt;fex name="goa"&gt;my&lt;/fex&gt; &lt;t&gt;source&lt;/t&gt; &lt;fex name="thm"&gt;for French madeleines&lt;/fex&gt;!&lt;/ex&gt;
 
 &lt;ex&gt;Pakistan informed IAEA and US officials investigating the network that &lt;fex name="sou"&gt;North Korea&lt;/fex&gt; &lt;m&gt;was&lt;/m&gt; the &lt;t&gt;source&lt;/t&gt; &lt;fex name="thm"&gt;of the uranium shipment&lt;/fex&gt; &lt;fex name="goa"&gt;DNI&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt;&lt;fex name="sou"&gt;The state&lt;/fex&gt; remains the dominant &lt;t&gt;source&lt;/t&gt; &lt;fex name="thm"&gt;of research funding&lt;/fex&gt;. &lt;fex name="goa"&gt;INI&lt;/fex&gt; &lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="sou"&gt;The state&lt;/fex&gt; remains the dominant &lt;t&gt;source&lt;/t&gt; &lt;fex name="thm"&gt;of research funding&lt;/fex&gt;. &lt;fex name="goa"&gt;INI&lt;/fex&gt; &lt;/ex&gt;
 
 &lt;ex&gt;This is not true according to &lt;fex name="goa"&gt;our&lt;/fex&gt; &lt;fex name="sou"&gt;&lt;t&gt;source&lt;/t&gt;&lt;/fex&gt;. &lt;fex name="thm"&gt;DNI&lt;/fex&gt;&lt;/ex&gt;
 

@@ -1,68 +1,75 @@
 # Canopy
 
-**High-performance semantic analysis Language Server Protocol (LSP) in Rust**
+**High-performance semantic linguistic analysis library in Rust**
 
-Canopy is a semantic-first linguistic analysis platform built for production use. It delivers sub-50ms LSP responses through pure semantic analysis without syntactic parsing dependencies.
+Canopy is a semantic-first linguistic analysis library built for production use. It provides word-level semantic analysis through VerbNet, FrameNet, WordNet, and custom lexicon engines.
+
+> ⚠️ **Current Limitation**: Canopy currently supports UD treebank sentences only. Arbitrary sentence analysis is planned for future releases.
 
 ## 🚀 Quick Start
 
 ```bash
 git clone https://github.com/username/canopy
 cd canopy
-cargo run --package canopy-semantic-layer --example moby_dick_demo
+cargo build --workspace
+cargo run --example basic_demo
 ```
 
-## 🎯 Current Status: M5 Complete - Layer 1 Production-Ready
+## 🎯 Current Status: M7 Complete - Layer 2 Event Composition
 
-✅ **Full Semantic Engines**: VerbNet, FrameNet, WordNet, Lexicon  
-✅ **Lemmatization System**: 54.4% cache hit improvement  
-✅ **Production Performance**: 930 words/sec on Moby Dick (71,577 words)  
-✅ **Layer 1 Architecture**: Clean separation from Layer 2 events  
-✅ **Real-World Testing**: Full corpus analysis with professional UX  
+✅ **Layer 1 Semantic Analysis**: VerbNet, FrameNet, WordNet, Lexicon engines
+✅ **Layer 2 Event Composition**: Neo-Davidsonian events with theta roles
+✅ **Full Pipeline**: L1→L2 integration with honest end-to-end timing
+✅ **Lemmatization**: 54.4% cache hit improvement
+✅ **Production Performance**: ~19ms per sentence (L1 + L2)
 
 ## 🏗️ Architecture
 
 ```text
-Text → Layer 1: Semantic Analysis → Layer 2: Events → Layer 3: DRT → Layer 4: LSP
-       [VerbNet + FrameNet + WordNet]   [Event Structure]  [Discourse]  [Diagnostics]
+Text → Tokenization → Lemmatization → Layer 1: Semantic Analysis → Layer 2: Event Composition
+                                      [VerbNet + FrameNet + WordNet]  [Neo-Davidsonian Events]
 ```
 
-**Current Implementation**: M5 Layer 1 production-ready with lemmatization
+**Current Implementation**: Full L1→L2 pipeline with semantic analysis and event composition.
 
 ## 📊 Performance
 
-- **Single word**: 85.4μs with lemmatization (11,703 words/sec)  
-- **Full corpus**: 930 words/sec on Moby Dick (71,577 words)  
-- **Memory usage**: <0.5MB cache (0.5% of budget)  
-- **Cache hit rate**: 54.4% with lemmatization optimization  
+**Layer 1 (Semantic Analysis)**:
+
+- **Single word**: 85.4μs with lemmatization (11,703 words/sec)
+- **Cache hit rate**: 54.4% with lemmatization optimization
+
+**Layer 2 (Event Composition)**:
+
+- **Event composition**: 78-148μs per sentence
+- **End-to-end**: ~19ms per sentence (L1 dominates)
+- **Engine loading**: ~900ms one-time startup
 
 ## 🔧 Key Features
 
-- **Pure Semantic**: No dependency on syntactic parsers
-- **Real Linguistic Data**: VerbNet/FrameNet/WordNet/Lexicon engines
-- **Lemmatization System**: Intelligent morphological analysis with confidence  
+- **Two-Layer Pipeline**: L1 semantic analysis → L2 event composition
+- **Real Linguistic Data**: VerbNet/FrameNet/WordNet engines
+- **Neo-Davidsonian Events**: Theta roles, LittleV primitives, voice detection
+- **Lemmatization System**: Intelligent morphological analysis with confidence
 - **Parallel Processing**: Concurrent multi-engine analysis
-- **Smart Caching**: L1/L2 cache with 54.4% hit rate improvement
-- **Production Ready**: 69.46% test coverage with real-world benchmarks
+- **Smart Caching**: 54.4% hit rate improvement with lemmatization
+- **Production Ready**: ~67% test coverage with real-world benchmarks
 
 ## 📖 Documentation
 
+- [**Roadmap**](docs/ROADMAP.md) - Current milestone progress and status
 - [**Architecture**](docs/ARCHITECTURE.md) - Current semantic-first design
-- [**Implementation**](docs/implementation/) - Layer-by-layer implementation details  
 - [**Performance**](docs/reference/performance.md) - Benchmarks and optimization
-- [**Roadmap**](docs/ROADMAP.md) - Current milestone progress
+- [**Contributing**](docs/CONTRIBUTING.md) - Development guidelines
 
 ## 🧪 Examples
 
 ```bash
-# Performance demonstration
-cargo run --package canopy-semantic-layer --example fast_performance_demo
+# Basic semantic analysis demo
+cargo run --example basic_demo
 
-# Real-world text analysis
-cargo run --package canopy-semantic-layer --example moby_dick_demo
-
-# Engine benchmarking
-cargo run --package canopy-semantic-layer --example performance_benchmark
+# Comprehensive semantic analysis
+cargo run --example comprehensive_semantic_demo
 ```
 
 ## 🔬 Technology Stack
@@ -87,8 +94,10 @@ See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for development guidelines.
 
 MIT License - see [LICENSE](LICENSE) for details.
 
----
+______________________________________________________________________
 
-**Current Milestone**: M5 Layer 1 Production-Ready ✅  
-**Next Milestone**: M6 Layer 2 Event Structure  
-**Performance Achieved**: 85.4μs per word with lemmatization ✅  
+**Current Milestone**: M7 Complete - Layer 2 Event Composition ✅
+**Next Milestone**: M8 Discourse Representation Theory (DRT)
+**Performance Achieved**: ~19ms per sentence (L1 + L2 end-to-end) ✅
+
+> Note: Canopy currently supports UD treebank sentences. Arbitrary sentence parsing is planned for future releases.

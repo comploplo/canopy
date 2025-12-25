@@ -10,7 +10,7 @@
 &lt;ex&gt; FOAP provides &lt;fex name="par"&gt;participants&lt;/fex&gt; with comprehensive clerical skills. &lt;/ex&gt;
 
 
-&lt;ex&gt;&lt;fex name="par1"&gt;Our eight-year-old son&lt;/fex&gt; &lt;m&gt;was&lt;/m&gt; &lt;fex name="tim"&gt;recently&lt;/fex&gt; 
+&lt;ex&gt;&lt;fex name="par1"&gt;Our eight-year-old son&lt;/fex&gt; &lt;m&gt;was&lt;/m&gt; &lt;fex name="tim"&gt;recently&lt;/fex&gt;
 &lt;fex name="deg"&gt;peripherally&lt;/fex&gt; &lt;t&gt;involved&lt;/t&gt; &lt;fex name="eve"&gt;in an incident which resulted in him being threatened with the strap&lt;/fex&gt;.&lt;/ex&gt;
 
 &lt;ex&gt;A New York press agent must scramble when &lt;fex name="par1"&gt;his major client&lt;/fex&gt; &lt;m&gt;becomes&lt;/m&gt; &lt;t&gt;embroiled&lt;/t&gt; &lt;fex name="eve"&gt;in a huge scandal&lt;/fex&gt;.&lt;/ex&gt;
@@ -57,7 +57,7 @@ first in their family to attend college.&lt;/ex&gt;&lt;/def-root&gt;</definition
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="06/28/2004 07:51:00 PDT Mon" abbrev="man" name="Manner" ID="6602">
-        <definition>&lt;def-root&gt;Any description of the Event (or state) which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). When the &lt;fen&gt;Participants&lt;/fen&gt; are understood agentively frames, it may indicate salient characteristics of them that also affect the action (deliberately, eagerly). 
+        <definition>&lt;def-root&gt;Any description of the Event (or state) which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). When the &lt;fen&gt;Participants&lt;/fen&gt; are understood agentively frames, it may indicate salient characteristics of them that also affect the action (deliberately, eagerly).
 
 &lt;ex&gt;He had performed well on the varsity wrestling team and &lt;t&gt;participated&lt;/t&gt; &lt;fex name="man"&gt;eagerly&lt;/fex&gt; in student government&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
@@ -69,7 +69,7 @@ first in their family to attend college.&lt;/ex&gt;&lt;/def-root&gt;</definition
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="06/28/2004 07:57:20 PDT Mon" abbrev="mea" name="Means" ID="6604">
-        <definition>&lt;def-root&gt;An intentional action performed by &lt;fen&gt;Participant_1&lt;/fen&gt; or the &lt;fen&gt;Participants&lt;/fen&gt; that contributes to bringing off the &lt;fen&gt;Event&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;An intentional action performed by &lt;fen&gt;Participant_1&lt;/fen&gt; or the &lt;fen&gt;Participants&lt;/fen&gt; that contributes to bringing off the &lt;fen&gt;Event&lt;/fen&gt;.
 
 &lt;ex&gt;WICS-TV &lt;t&gt;participated&lt;/t&gt; &lt;fex name="mea"&gt;by handing out pamphlets, corporate job opening lists and other information regarding employment opportunities within the broadcasting field&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

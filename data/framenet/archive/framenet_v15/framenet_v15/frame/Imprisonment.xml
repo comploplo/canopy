@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="05/13/2004 02:41:45 PDT Thu" name="Imprisonment" ID="1111" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;The &lt;fen&gt;Authorities&lt;/fen&gt; put a &lt;fen&gt;Prisoner&lt;/fen&gt; in &lt;fen&gt;Prison&lt;/fen&gt; as punishment for an &lt;fen&gt;Offense&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;The &lt;fen&gt;Authorities&lt;/fen&gt; put a &lt;fen&gt;Prisoner&lt;/fen&gt; in &lt;fen&gt;Prison&lt;/fen&gt; as punishment for an &lt;fen&gt;Offense&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="pri"&gt;US Drug Researcher&lt;/fex&gt; &lt;t&gt;Imprisoned&lt;/t&gt; &lt;fex name="off"&gt;for FDA Fraud&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;Men will be more likely to be &lt;t&gt;put&lt;/t&gt; &lt;t&gt;away&lt;/t&gt; &lt;fex name="con"&gt;for murder rather than manslaughter&lt;/fex&gt; &lt;fex name="off"&gt;for killing their wives&lt;/fex&gt;.&lt;/ex&gt;

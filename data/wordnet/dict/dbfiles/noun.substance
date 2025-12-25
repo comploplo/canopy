@@ -2446,7 +2446,7 @@
 { silver_chloride, chloride,@ (a chloride used chiefly in the manufacture of photographic emulsions) }
 { stannic_chloride, chloride,@ (a colorless caustic liquid made by treating tin with chlorine) }
 { stannous_fluoride, fluoride,@ (a white powder that is used to fluoridate toothpaste) }
-{ staple1, staple_fiber, staple_fibre, natural_fiber,@ (a natural fiber (raw cotton, wool, hemp, flax) that can be twisted to form yarn; "staple fibers vary widely in length") } 
+{ staple1, staple_fiber, staple_fibre, natural_fiber,@ (a natural fiber (raw cotton, wool, hemp, flax) that can be twisted to form yarn; "staple fibers vary widely in length") }
 { starch1, formulation,@ (a commercial preparation of starch that is used to stiffen textile fabrics in laundering) }
 { [ sand, adj.all:sandy2,+ ] soil1,@ concrete,#s noun.object:beach,#s noun.object:sandbar,#s noun.object:spit,#s noun.object:quicksand,#s (a loose material consisting of grains of rock or coral) }
 { sangapenum, gum_sangapenum, gum,@ (a variety of gum) }
@@ -2854,7 +2854,7 @@
 { vanadium_pentoxide, vanadic_acid, oxyacid,@ (any of various oxyacids of vanadium; known mostly in the form of its salts) }
 { vanadium_steel, alloy_steel,@ (steel alloyed with vanadium for greater strength and high-temperature stability) }
 { vellum1, writing_paper,@ (a heavy creamy-colored paper resembling parchment) }
-{ vermiculite, mineral,@ (any of a group of yellow or brown hydrous silicate minerals having a micaceous structure) } 
+{ vermiculite, mineral,@ (any of a group of yellow or brown hydrous silicate minerals having a micaceous structure) }
 { very_low_density_lipoprotein, VLDL, lipoprotein,@ (large lipoproteins rich in triglycerides; VLDLs circulate through the blood giving up their triglycerides to fat and muscle tissue until the VLDL remnants are modified and converted into LDL) }
 { vesuvianite, vesuvian, idocrase, mineral,@ (a green or yellow or brown mineral consisting of a hydrated silicate; it occurs as crystals in limestone and is used a gemstone) }
 { vinegar, acetic_acid,@ (dilute acetic acid) }

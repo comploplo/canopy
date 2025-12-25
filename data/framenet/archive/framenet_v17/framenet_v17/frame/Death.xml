@@ -29,7 +29,7 @@
         <definition>&lt;def-root&gt;The FE &lt;fen&gt;Depictive&lt;/fen&gt; denotes the state of the &lt;fen&gt;Protagonist&lt;/fen&gt; as the death occurred.  &lt;ex&gt;I think he &lt;t&gt;died&lt;/t&gt; &lt;fex name="Dep"&gt;happy&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="06/01/2001 09:41:42 PDT Fri" abbrev="Manr" name="Manner" ID="688">
-        <definition>&lt;def-root&gt;Any description of the event which is not covered by more specific FEs, including force (hard, softly), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). 
+        <definition>&lt;def-root&gt;Any description of the event which is not covered by more specific FEs, including force (hard, softly), secondary effects (quietly, loudly), and general descriptions comparing events (the same way).
 
 &lt;ex&gt;He &lt;t&gt;died&lt;/t&gt; &lt;fex name="Manr"&gt;horribly&lt;/fex&gt;; I won't describe it.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

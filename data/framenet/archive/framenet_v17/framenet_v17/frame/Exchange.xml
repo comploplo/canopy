@@ -50,7 +50,7 @@ of &lt;fen&gt;Exchangers&lt;/fen&gt; as a whole.
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="07/09/2004 10:48:10 PDT Fri" abbrev="man" name="Manner" ID="6787">
-        <definition>&lt;def-root&gt;Any description of the exchange act which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of &lt;fen&gt;Exchanger_1&lt;/fen&gt; or &lt;fen&gt;Exchangers&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the exchange act which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of &lt;fen&gt;Exchanger_1&lt;/fen&gt; or &lt;fen&gt;Exchangers&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 
 &lt;ex&gt;Theodosia and Felix &lt;fex name="man"&gt;carefully&lt;/fex&gt; &lt;t&gt;exchanged&lt;/t&gt; their bunches of flowers.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

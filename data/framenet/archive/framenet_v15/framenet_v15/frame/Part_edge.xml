@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="296" cDate="05/29/2002 11:14:30 PDT Wed" name="Part_edge" ID="330" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This describes a part_whole relationship where the &lt;fen&gt;Part&lt;/fen&gt; provides the boundary between the &lt;fen&gt;Whole&lt;/fen&gt; and what is not that object.  The &lt;fen&gt;Part&lt;/fen&gt; can exist along a continuum of width.  It can be modified by an &lt;fen&gt;Orientation&lt;/fen&gt; that specifies the particular portion of the edge of a &lt;fen&gt;Part_prop&lt;/fen&gt; which describes a property of the &lt;fen&gt;Part&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;This describes a part_whole relationship where the &lt;fen&gt;Part&lt;/fen&gt; provides the boundary between the &lt;fen&gt;Whole&lt;/fen&gt; and what is not that object.  The &lt;fen&gt;Part&lt;/fen&gt; can exist along a continuum of width.  It can be modified by an &lt;fen&gt;Orientation&lt;/fen&gt; that specifies the particular portion of the edge of a &lt;fen&gt;Part_prop&lt;/fen&gt; which describes a property of the &lt;fen&gt;Part&lt;/fen&gt;.
 
 &lt;ex&gt;We came to the &lt;fex name="Orientation"&gt;southern&lt;/fex&gt; &lt;t&gt;&lt;fex name="Part"&gt;edge&lt;/fex&gt;&lt;/t&gt; &lt;fex name="Whole"&gt; of the town &lt;/fex&gt; . &lt;/ex&gt;&lt;/def-root&gt;</definition>
     <semType name="Transparent Noun" ID="9"/>

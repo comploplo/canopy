@@ -7,7 +7,7 @@
 
 &lt;ex&gt;&lt;fex name="Side_1"&gt;Dennis Andries's&lt;/fex&gt; &lt;fex name="Purpose"&gt;European cruiserweight title&lt;/fex&gt; &lt;t&gt;clash&lt;/t&gt; &lt;fex name="Side_2"&gt;against Akim Tafer of France&lt;/fex&gt; &lt;fex name="Place"&gt;in Beausoleil&lt;/fex&gt; &lt;fex name="Time"&gt;last February&lt;/fex&gt; has been voted as the EBU's fight of the year.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="HCB" cDate="03/15/2001 02:31:38 PST Thu" abbrev="Side-1" name="Side_1" ID="439">
-        <definition>&lt;def-root&gt;One of two participants in a hostile encounter. 
+        <definition>&lt;def-root&gt;One of two participants in a hostile encounter.
 &lt;ex&gt;While &lt;fex name="Side_1"&gt;the U.S.'s&lt;/fex&gt; &lt;t&gt;battle&lt;/t&gt; with terrorist-harboring nations is far off ...&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
         <requiresFE name="Side_2" ID="440"/>
@@ -21,18 +21,18 @@
         <excludesFE name="Sides" ID="441"/>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="HCB" cDate="03/15/2001 02:44:52 PST Thu" abbrev="Sides" name="Sides" ID="441">
-        <definition>&lt;def-root&gt;The jointly expressed sides in a hostile encounter. 
+        <definition>&lt;def-root&gt;The jointly expressed sides in a hostile encounter.
 &lt;ex&gt;&lt;fex name="Sides"&gt;They&lt;/fex&gt; &lt;t&gt;fought&lt;/t&gt; over the right to own land.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Core" cBy="HCB" cDate="03/15/2001 02:51:26 PST Thu" abbrev="Iss" name="Issue" ID="442">
-        <definition>&lt;def-root&gt;An unresolved question over which the two sides of a hostile encounter are in disagreement. 
+        <definition>&lt;def-root&gt;An unresolved question over which the two sides of a hostile encounter are in disagreement.
 
 &lt;ex&gt;They had a &lt;t&gt;dust-up&lt;/t&gt; &lt;fex name="Issue"&gt;over who was prettier&lt;/fex&gt; .&lt;/ex&gt;
 
 Quite often it takes the form of a covert question of various sorts. So in an example like:
 
-&lt;ex&gt;They &lt;t&gt;fought&lt;/t&gt; &lt;fex name="Issue"&gt;over the right to own land&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;They &lt;t&gt;fought&lt;/t&gt; &lt;fex name="Issue"&gt;over the right to own land&lt;/fex&gt;.&lt;/ex&gt;
 
 among many other possibilities, the covert question might be more explicitly phrased as follows:
 
@@ -42,7 +42,7 @@ among many other possibilities, the covert question might be more explicitly phr
         <definition>&lt;def-root&gt;The desired result of the outcome of the hostile encounter for the &lt;fen&gt;Side_1&lt;/fen&gt; or for all the &lt;fen&gt;Sides&lt;/fen&gt; collectively.  It may either directly refer to the state of affairs that is desired, e.g.
 
 &lt;ex&gt;He &lt;t&gt;dueled&lt;/t&gt; with his former second &lt;fex name="Purpose"&gt;to defend the honour of the man he had killed&lt;/fex&gt; .&lt;/ex&gt;
- 
+
 or it the state of affairs may be implicit in an (abstract or concrete) entity that they desire, e.g.
 
 &lt;ex&gt;Rival Democratic presidential candidates Mr Bill Clinton and Mr Jerry Brown taunted each other at the weekend as mudslinging in the &lt;t&gt;battle&lt;/t&gt; &lt;fex name="Purpose"&gt;for votes&lt;/fex&gt; in tomorrow's crucial New York primary reached a new low.&lt;/ex&gt;&lt;/def-root&gt;</definition>
@@ -57,13 +57,13 @@ or it the state of affairs may be implicit in an (abstract or concrete) entity t
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Peripheral" cBy="HCB" cDate="03/15/2001 03:05:57 PST Thu" abbrev="pla" name="Place" ID="446">
-        <definition>&lt;def-root&gt;The location at which the hostile encounter takes place. 
+        <definition>&lt;def-root&gt;The location at which the hostile encounter takes place.
 
 &lt;ex&gt;Following the &lt;t&gt;battle&lt;/t&gt; &lt;fex name="Place"&gt;of Naseby&lt;/fex&gt; in 1645 ...&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="HCB" cDate="03/15/2001 03:08:49 PST Thu" abbrev="Time" name="Time" ID="447">
-        <definition>&lt;def-root&gt;The &lt;fex name="Time"&gt;Time&lt;/fex&gt; at which the hostile encounter occurs. 
+        <definition>&lt;def-root&gt;The &lt;fex name="Time"&gt;Time&lt;/fex&gt; at which the hostile encounter occurs.
 
 &lt;ex&gt;Following the &lt;t&gt;battle&lt;/t&gt; of Naseby &lt;fex name="Time"&gt;in 1645&lt;/fex&gt; he died.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Time" ID="141"/>

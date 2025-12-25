@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="361" cDate="03/05/2008 03:50:35 PST Wed" name="Abandonment" ID="2031" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fex name="Agent"&gt;Agent&lt;/fex&gt; leaves behind a &lt;fex name="Theme"&gt;Theme&lt;/fex&gt; effectively rendering it no longer within their control or of the normal security as one's property. 
+    <definition>&lt;def-root&gt;An &lt;fex name="Agent"&gt;Agent&lt;/fex&gt; leaves behind a &lt;fex name="Theme"&gt;Theme&lt;/fex&gt; effectively rendering it no longer within their control or of the normal security as one's property.
 
 &lt;ex&gt;&lt;fex name="Agent"&gt;Carolyn&lt;/fex&gt; &lt;t&gt;abandoned&lt;/t&gt; &lt;fex name="Theme"&gt;her car&lt;/fex&gt; and jumped on a red double decker bus.&lt;/ex&gt;
 

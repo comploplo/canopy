@@ -30,7 +30,7 @@ reasons. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="90876C" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="04/27/2004 03:22:54 PDT Tue" abbrev="exp" name="Explanation" ID="6339">
-        <definition>&lt;def-root&gt;A state of affairs that the &lt;fen&gt;Executive_authority&lt;/fen&gt;  is responding to in granting clemency. 
+        <definition>&lt;def-root&gt;A state of affairs that the &lt;fen&gt;Executive_authority&lt;/fen&gt;  is responding to in granting clemency.
 
 &lt;ex&gt;Since 1976, 224 death row inmates have been granted &lt;t&gt;clemency&lt;/t&gt; &lt;fex name="exp"&gt;for humanitarian reasons&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

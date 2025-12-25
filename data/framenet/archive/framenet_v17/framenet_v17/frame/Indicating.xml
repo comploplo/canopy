@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="KmG" cDate="06/25/2008 02:45:24 PDT Wed" name="Indicating" ID="2090" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Communicator&lt;/fen&gt; or &lt;fen&gt;Medium&lt;/fen&gt; assigns linguistic meaning to an &lt;fen&gt;Unresolved_referent&lt;/fen&gt; thereby identifying the specific actor or entity which fulfills the answer to this question. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Communicator&lt;/fen&gt; or &lt;fen&gt;Medium&lt;/fen&gt; assigns linguistic meaning to an &lt;fen&gt;Unresolved_referent&lt;/fen&gt; thereby identifying the specific actor or entity which fulfills the answer to this question.
 
 &lt;ex&gt;Can &lt;fex name="Communicator"&gt;you&lt;/fex&gt; &lt;t&gt;name&lt;/t&gt; &lt;fex name="Unresolved_referent"&gt;all the U.S. Presidents&lt;/fex&gt;?&lt;/ex&gt;
 
@@ -11,17 +11,17 @@
 
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="KmG" cDate="06/25/2008 02:45:24 PDT Wed" abbrev="Com" name="Communicator" ID="12917">
-        <definition>&lt;def-root&gt;The person who uses language in the written or spoken modality to convey the &lt;fen&gt;Unresolved_referent&lt;/fen&gt; to another person. 
+        <definition>&lt;def-root&gt;The person who uses language in the written or spoken modality to convey the &lt;fen&gt;Unresolved_referent&lt;/fen&gt; to another person.
 &lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="KmG" cDate="06/25/2008 02:45:24 PDT Wed" abbrev="Unr" name="Unresolved_referent" ID="12919">
-        <definition>&lt;def-root&gt;The thing to which the &lt;fen&gt;Communicator&lt;/fen&gt; or &lt;fen&gt;Medium&lt;/fen&gt; refers for identification purposes. 
+        <definition>&lt;def-root&gt;The thing to which the &lt;fen&gt;Communicator&lt;/fen&gt; or &lt;fen&gt;Medium&lt;/fen&gt; refers for identification purposes.
 &lt;/def-root&gt;</definition>
         <semType name="Message" ID="56"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="KmG" cDate="06/25/2008 02:45:24 PDT Wed" abbrev="Medium" name="Medium" ID="12920">
-        <definition>&lt;def-root&gt;The physical or abstract setting in which the &lt;fen&gt;Unresolved_referent&lt;/fen&gt; is conveyed. 
+        <definition>&lt;def-root&gt;The physical or abstract setting in which the &lt;fen&gt;Unresolved_referent&lt;/fen&gt; is conveyed.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="KmG" cDate="06/25/2008 02:45:24 PDT Wed" abbrev="Amo" name="Amount_of_information" ID="12921">

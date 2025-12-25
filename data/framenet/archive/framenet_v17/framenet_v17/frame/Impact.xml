@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MJE" cDate="04/24/2002 01:40:04 PDT Wed" name="Impact" ID="311" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;While in motion, an &lt;fen&gt;Impactor&lt;/fen&gt; makes sudden, forcible contact with the &lt;fen&gt;Impactee&lt;/fen&gt;, or two &lt;fen&gt;Impactors&lt;/fen&gt; both move, mutually making forcible contact.  
+    <definition>&lt;def-root&gt;While in motion, an &lt;fen&gt;Impactor&lt;/fen&gt; makes sudden, forcible contact with the &lt;fen&gt;Impactee&lt;/fen&gt;, or two &lt;fen&gt;Impactors&lt;/fen&gt; both move, mutually making forcible contact.
 &lt;ex&gt;&lt;fex name="Impactor"&gt;The massive metal foot&lt;/fex&gt; &lt;t&gt;hit&lt;/t&gt; &lt;fex name="Impactee"&gt;the ground&lt;/fex&gt; &lt;fex name="Result"&gt;with a huge thud&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="04/24/2002 07:05:39 PDT Wed" abbrev="Place" name="Place" ID="2665">

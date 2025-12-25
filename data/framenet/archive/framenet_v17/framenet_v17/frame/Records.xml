@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="CVa" cDate="10/28/2011 05:29:05 PDT Fri" name="Records" ID="2680" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Record&lt;/fen&gt; that contains a permanent account of &lt;fen&gt;Data&lt;/fen&gt;.  This &lt;fen&gt;Record&lt;/fen&gt; may be maintained by a &lt;fen&gt;Recorder&lt;/fen&gt; for a certain &lt;fen&gt;Entity&lt;/fen&gt;.  
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Record&lt;/fen&gt; that contains a permanent account of &lt;fen&gt;Data&lt;/fen&gt;.  This &lt;fen&gt;Record&lt;/fen&gt; may be maintained by a &lt;fen&gt;Recorder&lt;/fen&gt; for a certain &lt;fen&gt;Entity&lt;/fen&gt;.
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Entity"&gt;The bank's&lt;/fex&gt; &lt;t&gt;&lt;fex name="Record"&gt;books&lt;/fex&gt;&lt;/t&gt; were not accurate.&lt;/ex&gt;
 
@@ -36,11 +36,11 @@
 &lt;ex&gt;Moria's bank kept &lt;fex name="Descriptor"&gt;detailed&lt;/fex&gt; &lt;t&gt;books&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 03:21:49 PDT Thu" abbrev="" name="Material" ID="16532">
-        <definition>&lt;def-root&gt;What a &lt;fen&gt;Record&lt;/fen&gt; is made of (if applicable). 
+        <definition>&lt;def-root&gt;What a &lt;fen&gt;Record&lt;/fen&gt; is made of (if applicable).
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 03:23:24 PDT Thu" abbrev="" name="Medium" ID="16533">
-        <definition>&lt;def-root&gt;The Medium is the language in which a Record is composed, or the physical medium (radio, ink) in which it is distributed. 
+        <definition>&lt;def-root&gt;The Medium is the language in which a Record is composed, or the physical medium (radio, ink) in which it is distributed.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 03:23:51 PDT Thu" abbrev="" name="Place" ID="16534">
@@ -50,7 +50,7 @@
         <definition>&lt;def-root&gt;The Time at which the &lt;fen&gt;Record&lt;/fen&gt; was created. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 03:25:20 PDT Thu" abbrev="" name="Title" ID="16536">
-        <definition>&lt;def-root&gt;The Title of a &lt;fen&gt;Record&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The Title of a &lt;fen&gt;Record&lt;/fen&gt;.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 03:26:21 PDT Thu" abbrev="" name="Topic" ID="16537">
@@ -58,7 +58,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 03:26:45 PDT Thu" abbrev="" name="Use" ID="16538">
-        <definition>&lt;def-root&gt;The use for which the &lt;fen&gt;Record&lt;/fen&gt; was produced; its purpose. 
+        <definition>&lt;def-root&gt;The use for which the &lt;fen&gt;Record&lt;/fen&gt; was produced; its purpose.
 &lt;/def-root&gt;</definition>
     </FE>
     <frameRelation type="Inherits from">

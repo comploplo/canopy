@@ -69,7 +69,7 @@
         <definition>&lt;def-root&gt;This FE describes the &lt;fen&gt;Entity&lt;/fen&gt; as being in some state during the action. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="000000" coreType="Extra-Thematic" cBy="361" cDate="04/25/2006 11:55:39 PDT Tue" abbrev="Res" name="Result" ID="10053">
-        <definition>&lt;def-root&gt;The final state of affairs after the absorbing heat event has finished. 
+        <definition>&lt;def-root&gt;The final state of affairs after the absorbing heat event has finished.
 
 &lt;ex&gt;The lobster &lt;t&gt;boiled&lt;/t&gt; &lt;fex name="Result"&gt;to death&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

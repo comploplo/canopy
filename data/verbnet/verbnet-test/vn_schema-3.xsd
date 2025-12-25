@@ -2,11 +2,11 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
 
-<!-- SECTION I.  
-	  
+<!-- SECTION I.
+
 	  This part of the Schema defines the structure of a VerbNet file.
-	  Alterations should be made with great care. -->   
-  
+	  Alterations should be made with great care. -->
+
 
 <xsd:element name="VNCLASS">
   <xsd:complexType>
@@ -47,10 +47,10 @@
       <xsd:attribute name="Value" use="required" type="boolValue"/>
       <xsd:attribute name="type" use="required" type="selrestrType"/>
     </xsd:complexType></xsd:element>
-    <xsd:element ref="SELRESTRS"/> 
-  </xsd:choice>  
+    <xsd:element ref="SELRESTRS"/>
+  </xsd:choice>
   <xsd:attribute name="logic" use="optional" type="xsd:string"/>
-</xsd:complexType></xsd:element>          
+</xsd:complexType></xsd:element>
 
 <xsd:element name="SYNRESTRS"><xsd:complexType>
   <xsd:choice minOccurs="0" maxOccurs="unbounded">
@@ -58,10 +58,10 @@
       <xsd:attribute name="Value" use="required" type="boolValue"/>
       <xsd:attribute name="type" use="required" type="synrestrType"/>
     </xsd:complexType></xsd:element>
-    <xsd:element ref="SYNRESTRS"/> 
-  </xsd:choice>  
+    <xsd:element ref="SYNRESTRS"/>
+  </xsd:choice>
   <xsd:attribute name="logic" use="optional" type="xsd:string"/>
-</xsd:complexType></xsd:element>          
+</xsd:complexType></xsd:element>
 
 <xsd:element name="FRAMES"><xsd:complexType><xsd:sequence>
   <xsd:element name="FRAME" minOccurs="0" maxOccurs="unbounded"><xsd:complexType>
@@ -71,19 +71,19 @@
         <xsd:attribute name="primary" use="required" type="primaryDescriptionType"/>
         <xsd:attribute name="secondary" use="optional" type="xsd:string"/>
 	<xsd:attribute name="xtag" use="required" type="xsd:string"/>
-      </xsd:complexType></xsd:element>  
+      </xsd:complexType></xsd:element>
       <xsd:element name="EXAMPLES"><xsd:complexType><xsd:sequence>
         <xsd:element name="EXAMPLE" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence></xsd:complexType></xsd:element>
       <xsd:element ref="SYNTAX"/>
-      <xsd:element ref="SEMANTICS"/>       
+      <xsd:element ref="SEMANTICS"/>
     </xsd:sequence>
   </xsd:complexType></xsd:element>
 </xsd:sequence></xsd:complexType></xsd:element>
 
 x<xsd:element name="NP">
   <xsd:complexType>
-  <xsd:choice> 
+  <xsd:choice>
     <xsd:element ref="SELRESTRS"/>
     <xsd:element ref="SYNRESTRS"/>
   </xsd:choice>
@@ -105,7 +105,7 @@ x<xsd:element name="NP">
   </xsd:sequence>
   <xsd:attribute name="value" use="optional" type="xsd:string"/>
 </xsd:complexType></xsd:element>
-  
+
 <xsd:element name="LEX"><xsd:complexType>
   <xsd:attribute name="value" use="required" type="xsd:string"/>
 </xsd:complexType></xsd:element>
@@ -127,12 +127,12 @@ x<xsd:element name="NP">
       <xsd:element ref="PREP"/>
       <xsd:element ref="LEX"/>
     </xsd:choice>
-  </xsd:sequence>  
+  </xsd:sequence>
 </xsd:complexType></xsd:element>
 
 <xsd:element name="SEMANTICS"><xsd:complexType>
   <xsd:sequence minOccurs="1" maxOccurs="unbounded">
-    <xsd:element name="PRED"><xsd:complexType>    
+    <xsd:element name="PRED"><xsd:complexType>
       <xsd:sequence>
         <xsd:element name="ARGS"><xsd:complexType>
           <xsd:sequence minOccurs="1" maxOccurs="unbounded">
@@ -142,20 +142,20 @@ x<xsd:element name="NP">
       </xsd:sequence>
       <xsd:attribute name="bool" use="optional" type="xsd:string"/>
       <xsd:attribute name="value" use="required" type="predType"/>
-    </xsd:complexType></xsd:element>    
+    </xsd:complexType></xsd:element>
   </xsd:sequence>
 </xsd:complexType></xsd:element>
 
 <xsd:element name="ARG"><xsd:complexType>
   <xsd:attribute name="type" use="required" type="argType"/>
   <xsd:attribute name="value" use="required" type="xsd:string"/>
-</xsd:complexType></xsd:element>  
+</xsd:complexType></xsd:element>
 
 <xsd:element name="SUBCLASSES"><xsd:complexType><xsd:sequence>
   <xsd:element ref="VNSUBCLASS" minOccurs="0" maxOccurs="unbounded"/>
 </xsd:sequence></xsd:complexType></xsd:element>
 
-<xsd:element name="VNSUBCLASS"> 
+<xsd:element name="VNSUBCLASS">
   <xsd:complexType>
     <xsd:sequence>
       <xsd:element ref="MEMBERS"/>
@@ -165,7 +165,7 @@ x<xsd:element name="NP">
     </xsd:sequence>
     <xsd:attribute name="ID" use="required" type="xsd:ID"/>
   </xsd:complexType>
-</xsd:element>       
+</xsd:element>
 
 
 
@@ -173,7 +173,7 @@ x<xsd:element name="NP">
 <!-- SECTION II.
 
 	  This section defines the VerbNet data types.  This part of the
-	  document should be updated when the data types are expanded --> 
+	  document should be updated when the data types are expanded -->
 
 
 <!-- Each Wordnet SenseKey must conform to this RE -->
@@ -191,8 +191,8 @@ x<xsd:element name="NP">
 <xsd:simpleType name="vnKeyType">
   <xsd:restriction base="xsd:string">
     <xsd:pattern value="[a-z]*#[0-9]+"/>
-  </xsd:restriction>   
-</xsd:simpleType> 
+  </xsd:restriction>
+</xsd:simpleType>
 
 <!-- These are NP's (appearing in syntax and semantics) which are not thematic
      roles -->
@@ -210,11 +210,11 @@ x<xsd:element name="NP">
 </xsd:simpleType>
 
 <xsd:simpleType name="themRoleType">
-  <xsd:restriction base="xsd:string">	
+  <xsd:restriction base="xsd:string">
     <xsd:enumeration value="Affector"/>
     <xsd:enumeration value="?Affector"/>
     <xsd:enumeration value="Agent"/>
-    <xsd:enumeration value="?Agent"/>	
+    <xsd:enumeration value="?Agent"/>
     <xsd:enumeration value="Agent_i"/>
     <xsd:enumeration value="Agent_j"/>
     <xsd:enumeration value="Asset"/>
@@ -233,7 +233,7 @@ x<xsd:element name="NP">
     <xsd:enumeration value="Co-Patient"/>
     <xsd:enumeration value="?Co-Patient"/>
     <xsd:enumeration value="Context"/>
-    <xsd:enumeration value="?Context"/>   
+    <xsd:enumeration value="?Context"/>
     <xsd:enumeration value="Destination"/>
     <xsd:enumeration value="?Destination"/>
     <xsd:enumeration value="Direction"/>
@@ -313,7 +313,7 @@ x<xsd:element name="NP">
     <xsd:enumeration value="?Trajectory"/>
     <xsd:enumeration value="Value"/>
     <xsd:enumeration value="?Value"/>
-  </xsd:restriction>  
+  </xsd:restriction>
 </xsd:simpleType>
 
 <xsd:simpleType name="boolValue">
@@ -350,7 +350,7 @@ x<xsd:element name="NP">
       </xsd:list>
     </xsd:simpleType>
   <xsd:minLength value="1"/>
-  </xsd:restriction>  
+  </xsd:restriction>
 </xsd:simpleType>
 
 <!--
@@ -404,13 +404,13 @@ x<xsd:element name="NP">
     <xsd:enumeration value="substance"/>
     <xsd:enumeration value="time"/>
     <xsd:enumeration value="vehicle"/>
-  </xsd:restriction>    
+  </xsd:restriction>
 </xsd:simpleType>
- 
+
 <xsd:simpleType name="preprestrType">
   <xsd:restriction base="xsd:string">
     <xsd:enumeration value="dest"/>
-    <xsd:enumeration value="dest_dir"/>	
+    <xsd:enumeration value="dest_dir"/>
     <xsd:enumeration value="dest_conf"/>
     <xsd:enumeration value="dir"/>
     <xsd:enumeration value="loc"/>
@@ -439,7 +439,7 @@ x<xsd:element name="NP">
     <xsd:enumeration value="np_to_inf"/>
     <xsd:enumeration value="oc_bare_inf"/>
     <xsd:enumeration value="oc_ing"/>
-    <xsd:enumeration value="oc_to_inf"/>	
+    <xsd:enumeration value="oc_to_inf"/>
     <xsd:enumeration value="plural"/>
     <xsd:enumeration value="poss_ing"/>
     <xsd:enumeration value="quotation"/>
@@ -461,13 +461,13 @@ x<xsd:element name="NP">
     <xsd:enumeration value="what_extract"/>
     <xsd:enumeration value="wheth_inf"/>
   </xsd:restriction>
-</xsd:simpleType>    
+</xsd:simpleType>
 
 <xsd:simpleType name="predType">
   <xsd:restriction base="xsd:string">
     <xsd:enumeration value="about"/>
     <xsd:enumeration value="abstain"/>
-    <xsd:enumeration value="act"/> 
+    <xsd:enumeration value="act"/>
     <xsd:enumeration value="adjust"/>
     <xsd:enumeration value="admit"/>
     <xsd:enumeration value="adopt"/>
@@ -538,7 +538,7 @@ x<xsd:element name="NP">
     <xsd:enumeration value="earn"/>
     <xsd:enumeration value="emit"/>
     <xsd:enumeration value="emotional_state"/>
-    <xsd:enumeration value="end"/> 
+    <xsd:enumeration value="end"/>
     <xsd:enumeration value="enforce"/>
     <xsd:enumeration value="ensure"/>
     <xsd:enumeration value="equals"/>
@@ -642,7 +642,7 @@ x<xsd:element name="NP">
 
 <xsd:simpleType name="primaryDescriptionType">
   <xsd:restriction base="xsd:string">
-    <xsd:enumeration value="NP V NP PP.trajectory"/> 
+    <xsd:enumeration value="NP V NP PP.trajectory"/>
     <xsd:enumeration value="NP V NP PP.theme whether S_INF"/>
     <xsd:enumeration value="NP V NP PP.theme what S"/>
     <xsd:enumeration value="NP V NP PP.theme what S_INF"/>
@@ -665,7 +665,7 @@ x<xsd:element name="NP">
     <xsd:enumeration value="NP V PP that S"/>
     <xsd:enumeration value="NP V PP.source PP.theme what S"/>
     <xsd:enumeration value="NP V NP ADJ"/>
-    <xsd:enumeration value="NP V PP.cause"/> 
+    <xsd:enumeration value="NP V PP.cause"/>
     <xsd:enumeration value="NP.location V NP"/>
     <xsd:enumeration value="NP V whether S"/>
     <xsd:enumeration value="NP V PP.location PP.theme"/>
@@ -682,7 +682,7 @@ x<xsd:element name="NP">
     <xsd:enumeration value="NP V together ADV-Middle"/>
     <xsd:enumeration value="NP V PP.recipient S_INF"/>
     <xsd:enumeration value="NP V NP down"/>
-    <xsd:enumeration value="NP V NP PP.product PP.beneficiary"/>   
+    <xsd:enumeration value="NP V NP PP.product PP.beneficiary"/>
     <xsd:enumeration value="NP V PP.theme NP S_ING"/>
     <xsd:enumeration value="NP V what S"/>
     <xsd:enumeration value="NP V ADVP-Middle PP"/>
@@ -1057,9 +1057,3 @@ x<xsd:element name="NP">
 
 
 </xsd:schema>
-
-
-
-
-
-

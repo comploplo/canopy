@@ -51,7 +51,7 @@
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="d0d0d0" fgColor="000000" coreType="Extra-Thematic" cBy="MiL" cDate="07/11/2005 02:48:36 PDT Mon" abbrev="resu" name="Resultant_situation" ID="8441">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Resultant_situation&lt;/fen&gt; is any situation which arises as a result of resolving a &lt;fen&gt;Problem&lt;/fen&gt; .  
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Resultant_situation&lt;/fen&gt; is any situation which arises as a result of resolving a &lt;fen&gt;Problem&lt;/fen&gt; .
 
 &lt;ex&gt;The question was : could the situation be &lt;t&gt;resolved&lt;/t&gt; by improving the integration of the thought and design processes , &lt;fex name="Resultant_situation"&gt;so that what was built better achieved what was intended&lt;/fex&gt; ?&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -61,7 +61,7 @@
 &lt;ex&gt;This issue must have been raised before and BSM would presumably be gratified to see the situation &lt;fex name="Outcome"&gt;successfully&lt;/fex&gt; &lt;t&gt;resolved&lt;/t&gt; , once and for all .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MiL" cDate="07/11/2005 04:36:34 PDT Mon" abbrev="conta" name="Containing_event" ID="8464">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Containing_event&lt;/fen&gt; denotes an event or state of affairs that occurs or holds at a time that includes the time during which the resolution of the &lt;fen&gt;Problem&lt;/fen&gt; occurs. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Containing_event&lt;/fen&gt; denotes an event or state of affairs that occurs or holds at a time that includes the time during which the resolution of the &lt;fen&gt;Problem&lt;/fen&gt; occurs.
 
 &lt;ex&gt;There are tricky design and methodological issues which would need to be worked out , as foreshadowed earlier in this paper and by no means fully &lt;t&gt;resolved&lt;/t&gt; &lt;fex name="Containing_event"&gt;in the preliminary study&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -71,13 +71,13 @@
 &lt;ex&gt;Such issues can only be &lt;t&gt;resolved&lt;/t&gt; &lt;fex name="Cir"&gt;at local level&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="000000" coreType="Peripheral" cBy="MiL" cDate="07/12/2005 06:16:31 PDT Tue" abbrev="Inst" name="Instrument" ID="8472">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Instrument&lt;/fen&gt; is an entity used for resolving the &lt;fen&gt;Problem&lt;/fen&gt; . 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Instrument&lt;/fen&gt; is an entity used for resolving the &lt;fen&gt;Problem&lt;/fen&gt; .
 
 
 &lt;ex&gt;&lt;fex name="Inst"&gt;Using modern computers&lt;/fex&gt; , many practical elastic and other problems may be &lt;t&gt;solved&lt;/t&gt; by manipulation of this matrix .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="000000" coreType="Extra-Thematic" cBy="MiL" cDate="07/13/2005 01:31:08 PDT Wed" abbrev="Ben" name="Beneficiary" ID="8475">
-        <definition>&lt;def-root&gt;This FE applies to participants that derive a benefit from the resolution of a &lt;fen&gt;Problem&lt;/fen&gt; .  
+        <definition>&lt;def-root&gt;This FE applies to participants that derive a benefit from the resolution of a &lt;fen&gt;Problem&lt;/fen&gt; .
 
 &lt;ex&gt;I wanted you to believe that I was as grateful as you that the baby had died and &lt;t&gt;solved&lt;/t&gt; the problem &lt;fex name="Ben"&gt;for us&lt;/fex&gt; of concealing the birth .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -93,7 +93,7 @@ The government &lt;t&gt;resolved&lt;/t&gt; the beach ball crisis &lt;fex name="D
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="1E90FF" fgColor="000000" coreType="Extra-Thematic" cBy="MiL" cDate="07/22/2005 03:22:45 PDT Fri" abbrev="Freq" name="Frequency" ID="8682">
-        <definition>&lt;def-root&gt; &lt;fen&gt;Frequency&lt;/fen&gt; describes how often the &lt;fen&gt;Agent&lt;/fen&gt; or &lt;fen&gt;Cause&lt;/fen&gt; resolves this problem. 
+        <definition>&lt;def-root&gt; &lt;fen&gt;Frequency&lt;/fen&gt; describes how often the &lt;fen&gt;Agent&lt;/fen&gt; or &lt;fen&gt;Cause&lt;/fen&gt; resolves this problem.
 
 &lt;ex&gt;Unfortunately , when such influences are considered as explanations of the results of free-running experiments , the following problems have &lt;fex name="Freq"&gt;never&lt;/fex&gt; been satisfactorily &lt;t&gt;dealt&lt;/t&gt; with.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

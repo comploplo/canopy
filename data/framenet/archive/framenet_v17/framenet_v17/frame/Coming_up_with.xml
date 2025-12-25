@@ -9,27 +9,27 @@ Compare this frame with Achieving_first.  In that frame, the fact that the idea 
 
 &lt;/def-root&gt;</definition>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:56 PST Wed" abbrev="Cog" name="Cognizer" ID="111">
-        <definition>&lt;def-root&gt;Cognizer is the person who comes up with or conceptualizes the Invention. It is normally expressed as an External Argument: 
+        <definition>&lt;def-root&gt;Cognizer is the person who comes up with or conceptualizes the Invention. It is normally expressed as an External Argument:
 
 &lt;fex name="Cognizer"&gt;Kim&lt;/fex&gt; &lt;t&gt;devised&lt;/t&gt; a new recipe. &lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:56 PST Wed" abbrev="Inv" name="Idea" ID="112">
-        <definition>&lt;def-root&gt;Invention is the intellectual creation of the Cognizer. It is normally expressed as an NP Object, but sometimes as a PP Complement: 
+        <definition>&lt;def-root&gt;Invention is the intellectual creation of the Cognizer. It is normally expressed as an NP Object, but sometimes as a PP Complement:
 
 &lt;ex&gt;Kim &lt;t&gt;devised&lt;/t&gt; &lt;fex name="Idea"&gt;a new recipe&lt;/fex&gt;. &lt;/ex&gt;
 
 &lt;ex&gt;Kim &lt;t&gt;came up&lt;/t&gt; &lt;fex name="Idea"&gt;with a new recipe&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="ChW" cDate="02/07/2001 04:11:56 PST Wed" abbrev="Purp" name="Purpose" ID="113">
-        <definition>&lt;def-root&gt;Some of the words in this frame frequently occur with a constituent expressing the &lt;fen&gt;Purpose&lt;/fen&gt; for which the &lt;fen&gt;Idea&lt;/fen&gt; is intended. Normally this constituent is a PP Complement headed by &lt;ment&gt;for&lt;/ment&gt; or a &lt;ment&gt;to&lt;/ment&gt;-marked VP Complement: 
+        <definition>&lt;def-root&gt;Some of the words in this frame frequently occur with a constituent expressing the &lt;fen&gt;Purpose&lt;/fen&gt; for which the &lt;fen&gt;Idea&lt;/fen&gt; is intended. Normally this constituent is a PP Complement headed by &lt;ment&gt;for&lt;/ment&gt; or a &lt;ment&gt;to&lt;/ment&gt;-marked VP Complement:
 
 &lt;ex&gt;This car has been &lt;t&gt;designed&lt;/t&gt; &lt;fex name="Purpose"&gt;for quicker performance&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;Kim &lt;t&gt;created&lt;/t&gt; this plan &lt;fex name="Purp"&gt;to prevent a hostile takeover&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="ChW" cDate="02/07/2001 04:11:56 PST Wed" abbrev="Mat" name="Material" ID="114">
-        <definition>&lt;def-root&gt;Words in this frame sometimes occur with a constituent that expresses the intellectual material from which the &lt;fen&gt;Idea&lt;/fen&gt; is created. This frame element is characteristic of physical creation verbs like &lt;ment&gt;make&lt;/ment&gt;; its presence gives sentences in this frame an especially strong metaphorical quality. The &lt;fen&gt;Material&lt;/fen&gt; FE is normally expressed by a PP Complement headed by &lt;ment&gt;from&lt;/ment&gt; or &lt;ment&gt;out of&lt;/ment&gt;: 
+        <definition>&lt;def-root&gt;Words in this frame sometimes occur with a constituent that expresses the intellectual material from which the &lt;fen&gt;Idea&lt;/fen&gt; is created. This frame element is characteristic of physical creation verbs like &lt;ment&gt;make&lt;/ment&gt;; its presence gives sentences in this frame an especially strong metaphorical quality. The &lt;fen&gt;Material&lt;/fen&gt; FE is normally expressed by a PP Complement headed by &lt;ment&gt;from&lt;/ment&gt; or &lt;ment&gt;out of&lt;/ment&gt;:
 
 &lt;ex&gt;The composer &lt;t&gt;created&lt;/t&gt; the symphony &lt;fex name="Material"&gt;out of snippets of popular melodies&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

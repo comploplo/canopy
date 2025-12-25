@@ -30,7 +30,7 @@
     </FE>
     <FE bgColor="7CCD7C" fgColor="FFFFFF" coreType="Peripheral" cBy="RLG" cDate="10/12/2011 04:50:32 PDT Wed" abbrev="rnk" name="Rank" ID="15161">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Fighter&lt;/fen&gt; may have a &lt;fen&gt;Rank&lt;/fen&gt; in the formal or informal military organization to which s/he belongs.
- 	
+
 &lt;ex&gt;Robin was the &lt;fex name="rnk"&gt;highest-ranking&lt;/fex&gt; &lt;t&gt;gunner&lt;/t&gt; at the scene.&lt;/ex&gt;
  &lt;/def-root&gt;</definition>
     </FE>

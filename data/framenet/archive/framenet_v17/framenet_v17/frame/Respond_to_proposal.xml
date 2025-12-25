@@ -9,7 +9,7 @@
 
 &lt;ex&gt;&lt;fex name="Speaker"&gt;He&lt;/fex&gt; &lt;t&gt;rebuffed&lt;/t&gt; &lt;fex name="Proposal"&gt;Singh's every overture&lt;/fex&gt;,  &lt;fex name="Depict"&gt;relentlessly pursuing a cap on India's nuclear capability&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="08/29/2005 04:24:45 PDT Mon" abbrev="spr" name="Speaker" ID="9008">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Speaker&lt;/fen&gt; is the person who communicates the reply or response. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Speaker&lt;/fen&gt; is the person who communicates the reply or response.
 
 &lt;ex&gt;&lt;fex name="Speaker"&gt;Iran&lt;/fex&gt; on Saturday &lt;t&gt;rejected&lt;/t&gt; Europe's proposal for ending the standoff over Tehran's nuclear program.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
@@ -46,7 +46,7 @@ the guerrillas&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="08/29/2005 04:24:46 PDT Mon" abbrev="ica" name="Internal_cause" ID="9017">
-        <definition>&lt;def-root&gt;The response may be prompted by either some outside phenomenon or occurrence, or by an &lt;fen&gt;Internal_cause&lt;/fen&gt;, the &lt;fen&gt;Speaker&lt;/fen&gt; mental or emotional state.  
+        <definition>&lt;def-root&gt;The response may be prompted by either some outside phenomenon or occurrence, or by an &lt;fen&gt;Internal_cause&lt;/fen&gt;, the &lt;fen&gt;Speaker&lt;/fen&gt; mental or emotional state.
 
 &lt;/def-root&gt;</definition>
     </FE>

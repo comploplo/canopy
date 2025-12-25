@@ -3,9 +3,9 @@
 <frame cBy="JKR" cDate="10/04/2002 07:49:01 PDT Fri" name="Omen" ID="412" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;One phenomenon, the &lt;fen&gt;Predictive_phenomenon&lt;/fen&gt; is an indication of the future or current (but still uncertain) existence of another phenomenon, the &lt;fen&gt;Future_phenomenon&lt;/fen&gt;. There is no Cognizer present on the scene, in distinction to the Expectation frame where a Cognizer takes (the equivalent of) &lt;fen&gt;Predictive_phenomenon&lt;/fen&gt; as evidence for (the equivalent of) &lt;fen&gt;Future_phenomenon&lt;/fen&gt;. Many words in this frame also allow a slightly different understanding, whereby &lt;fen&gt;Predictive_phenomenon&lt;/fen&gt; provides clues as to the good or bad &lt;fen&gt;Outcome&lt;/fen&gt; of an expected &lt;fen&gt;Future_phenomenon&lt;/fen&gt;. Instead of &lt;fen&gt;Future_phenomenon&lt;/fen&gt; an &lt;fen&gt;Interested_party&lt;/fen&gt; that will be involved in the &lt;fen&gt;Future_phenomenon&lt;/fen&gt; may be mentioned. In both construals, the two phenomena are asymmetrical and consequently they have no joint syntactic realization.
 
-&lt;ex&gt;  &lt;fex name="Predictive_phenomenon"&gt;Such potential&lt;/fex&gt; &lt;t&gt;augurs&lt;/t&gt; 
+&lt;ex&gt;  &lt;fex name="Predictive_phenomenon"&gt;Such potential&lt;/fex&gt; &lt;t&gt;augurs&lt;/t&gt;
 &lt;fex name="Outcome"&gt;well&lt;/fex&gt;  &lt;fex name="Future_phenomenon"&gt;for the 1990s&lt;/fex&gt; &lt;/ex&gt;
-&lt;ex&gt;&lt;fex name="Predictive_phenomenon"&gt;Its appearance&lt;/fex&gt; &lt;m&gt;was&lt;/m&gt; an 
+&lt;ex&gt;&lt;fex name="Predictive_phenomenon"&gt;Its appearance&lt;/fex&gt; &lt;m&gt;was&lt;/m&gt; an
 &lt;fex name="Outcome"&gt;ill&lt;/fex&gt; &lt;t&gt;omen&lt;/t&gt;. &lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Predictive_phenomenon"&gt;Cold-blooded words&lt;/fex&gt; do not necessarily &lt;t&gt;betoken&lt;/t&gt; &lt;fex name="Future_phenomenon"&gt;a callous nature&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;I wish I could say &lt;fex name="Predictive_phenomenon"&gt;my success&lt;/fex&gt;  &lt;t&gt;bodes&lt;/t&gt; &lt;fex name="Outcome"&gt;well&lt;/fex&gt; &lt;fex name="Interested_party"&gt;for him&lt;/fex&gt;.&lt;/ex&gt;
@@ -33,7 +33,7 @@
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="10/04/2002 08:26:38 PDT Fri" abbrev="Interested_party" name="Interested_party" ID="3782">
         <definition>&lt;def-root&gt;&lt;fen&gt;Interested_party&lt;/fen&gt; marks expressions that indicate people who are interested in the &lt;fen&gt;Outcome&lt;/fen&gt; of the &lt;fen&gt;Future_phenomenon&lt;/fen&gt;.
 
-&lt;ex&gt;That Meisel speaks so highly of Kate &lt;t&gt;bodes&lt;/t&gt; well 
+&lt;ex&gt;That Meisel speaks so highly of Kate &lt;t&gt;bodes&lt;/t&gt; well
 &lt;fex name="Interested_party"&gt;for her&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="12/08/2005 11:48:26 PST Thu" abbrev="str" name="Strength" ID="9748">

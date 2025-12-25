@@ -28,7 +28,7 @@
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="KCo" cDate="04/04/2002 03:26:56 PST Thu" abbrev="Cont_text" name="Containing_text" ID="2549">
         <definition>&lt;def-root&gt;This is a text in which the &lt;fen&gt;Text&lt;/fen&gt; is located.
-&lt;ex&gt;The last &lt;fex name="Text"&gt;&lt;t&gt;poem&lt;/t&gt;&lt;/fex&gt; &lt;fex name="Cont_text"&gt;in the anthology&lt;/fex&gt; was horrid.&lt;/ex&gt; 
+&lt;ex&gt;The last &lt;fex name="Text"&gt;&lt;t&gt;poem&lt;/t&gt;&lt;/fex&gt; &lt;fex name="Cont_text"&gt;in the anthology&lt;/fex&gt; was horrid.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="KCo" cDate="04/04/2002 03:27:21 PST Thu" abbrev="Genre" name="Genre" ID="2550">
@@ -39,7 +39,7 @@
 &lt;ex&gt;I've got three &lt;fex name="Genre"&gt;comedic&lt;/fex&gt; &lt;fex name="Text"&gt;&lt;t&gt;screenplays&lt;/t&gt;&lt;/fex&gt; on my desk right now!&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Peripheral" cBy="KCo" cDate="04/04/2002 03:27:51 PST Thu" abbrev="Use" name="Use" ID="2551">
-        <definition>&lt;def-root&gt;The use for which the text was produced; its purpose. 
+        <definition>&lt;def-root&gt;The use for which the text was produced; its purpose.
 
 &lt;ex&gt;She read through the bicycle's &lt;fex name="Use"&gt;construction&lt;/fex&gt; &lt;fex name="Text"&gt;&lt;t&gt;manual&lt;/t&gt;&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

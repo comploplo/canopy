@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="731" cDate="02/07/2001 04:11:52 PST Wed" name="Becoming_aware" ID="20" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;Words in this frame have to do with a &lt;fen&gt;Cognizer&lt;/fen&gt; adding some &lt;fen&gt;Phenomenon&lt;/fen&gt; to their model of the world. They are similar to Coming-to-believe words, except the latter generally involve reasoning from Evidence. 
+    <definition>&lt;def-root&gt;Words in this frame have to do with a &lt;fen&gt;Cognizer&lt;/fen&gt; adding some &lt;fen&gt;Phenomenon&lt;/fen&gt; to their model of the world. They are similar to Coming-to-believe words, except the latter generally involve reasoning from Evidence.
 &lt;ex&gt;&lt;/ex&gt;
 The words in this frame take direct objects that denote entities in the world, and indicate awareness of those entities, without necessarily giving any information about the content of the &lt;fen&gt;Cognizer&lt;/fen&gt;'s belief or knowledge. These words also resemble perception words, since creatures often become aware of things by perceiving them.
 
@@ -97,7 +97,7 @@ General Grammatical Observations: Passive forms of the verbs in this frame can o
         <definition>&lt;def-root&gt;Expressions marked with this extra-thematic FE modify a non-iterative use of the target, and indicate that it is conceived as embedded within an iterated series of similar events or states. In addition, most expressions of Particular_iteration indicate which instance of the series is being referred to.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="361" cDate="08/23/2006 03:10:46 PDT Wed" abbrev="per" name="Period_of_iterations" ID="10573">
-        <definition>&lt;def-root&gt;This FE is minimally distinct from Duration and Duration_of final_state in that the clause described is conveyed to be iterative. 
+        <definition>&lt;def-root&gt;This FE is minimally distinct from Duration and Duration_of final_state in that the clause described is conveyed to be iterative.
 
 &lt;/def-root&gt;</definition>
     </FE>

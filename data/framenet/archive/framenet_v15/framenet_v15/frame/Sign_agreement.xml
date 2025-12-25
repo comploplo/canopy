@@ -32,7 +32,7 @@
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="06/29/2004 09:57:47 PDT Tue" abbrev="man" name="Manner" ID="6657">
-        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including epistemic modification (&lt;ment&gt;probably&lt;/ment&gt;, &lt;ment&gt;presumably&lt;/ment&gt;), and general descriptions comparing events (the same way). It may indicate salient characteristics of the &lt;fen&gt;Signatory&lt;/fen&gt; that also affect the action (&lt;ment&gt;happily&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including epistemic modification (&lt;ment&gt;probably&lt;/ment&gt;, &lt;ment&gt;presumably&lt;/ment&gt;), and general descriptions comparing events (the same way). It may indicate salient characteristics of the &lt;fen&gt;Signatory&lt;/fen&gt; that also affect the action (&lt;ment&gt;happily&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;).
 
 &lt;ex&gt;Bob &lt;fex name="man"&gt;eagerly&lt;/fex&gt; &lt;t&gt;signed&lt;/t&gt; the contract.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

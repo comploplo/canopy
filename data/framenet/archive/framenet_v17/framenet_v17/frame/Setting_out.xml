@@ -7,11 +7,11 @@
 &lt;ex&gt;&lt;fex name="Self_mover"&gt;The expedition&lt;/fex&gt; &lt;t&gt;set out&lt;/t&gt; &lt;fex name="Source"&gt;from Granada&lt;/fex&gt; &lt;fex name="Time"&gt;early in March&lt;/fex&gt;, leaving only one hundred men to garrison the fort which overlooks the city.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Time"&gt;After that&lt;/fex&gt; &lt;fex name="Self_mover"&gt;the earl&lt;/fex&gt; &lt;t&gt;set out&lt;/t&gt; &lt;fex name="Direction"&gt;south&lt;/fex&gt; &lt;fex name="Cotheme"&gt;with his host&lt;/fex&gt;, and Kari went with him, and Njal's sons too.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="11/16/2005 04:35:59 PST Wed" abbrev="Thm" name="Self_mover" ID="9310">
-        <definition>&lt;def-root&gt;This is the entity which moves under its own power. 
+        <definition>&lt;def-root&gt;This is the entity which moves under its own power.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="11/16/2005 04:36:00 PST Wed" abbrev="Src" name="Source" ID="9311">
-        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of motion expresses the frame element &lt;fen&gt;Source&lt;/fen&gt;. In prepositional phrases, the prepositional object expresses the starting point of motion. In particles, the starting point of motion is understood from context. 
+        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of motion expresses the frame element &lt;fen&gt;Source&lt;/fen&gt;. In prepositional phrases, the prepositional object expresses the starting point of motion. In particles, the starting point of motion is understood from context.
 
 
 
@@ -27,7 +27,7 @@
         <semType name="Goal" ID="153"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="11/16/2005 04:36:00 PST Wed" abbrev="Manr" name="Manner" ID="9314">
-        <definition>&lt;def-root&gt;Any expression which describes a property of motion which is not directly related to the trajectory of motion expresses the frame element &lt;fen&gt;Manner&lt;/fen&gt;. Descriptions of steadiness, grace, means of motion, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.  
+        <definition>&lt;def-root&gt;Any expression which describes a property of motion which is not directly related to the trajectory of motion expresses the frame element &lt;fen&gt;Manner&lt;/fen&gt;. Descriptions of steadiness, grace, means of motion, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

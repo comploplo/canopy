@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="203" cDate="07/08/2004 03:04:11 PDT Thu" name="Trajector-Landmark" ID="1160" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;Basic Image Schema: contains a (more) profiled element, the &lt;fen&gt;Trajector&lt;/fen&gt;, and an un- or less profiled element, the &lt;fen&gt;Landmark&lt;/fen&gt;.  In combination with a schematically-defined &lt;fen&gt;Profiled_region&lt;/fen&gt; (with a pre-defined relationship to the &lt;fen&gt;Landmark&lt;/fen&gt;), the &lt;fen&gt;Landmark&lt;/fen&gt; serves as the basis for understanding the status or location of the &lt;fen&gt;Trajector&lt;/fen&gt;.  
+    <definition>&lt;def-root&gt;Basic Image Schema: contains a (more) profiled element, the &lt;fen&gt;Trajector&lt;/fen&gt;, and an un- or less profiled element, the &lt;fen&gt;Landmark&lt;/fen&gt;.  In combination with a schematically-defined &lt;fen&gt;Profiled_region&lt;/fen&gt; (with a pre-defined relationship to the &lt;fen&gt;Landmark&lt;/fen&gt;), the &lt;fen&gt;Landmark&lt;/fen&gt; serves as the basis for understanding the status or location of the &lt;fen&gt;Trajector&lt;/fen&gt;.
 
 This schema essentially establishes a point-of-view or focus.  &lt;ment&gt;above.prep&lt;/ment&gt; and &lt;ment&gt;below.prep&lt;/ment&gt; both make use of the verticality schema, but are differentiated by whether the &lt;fen&gt;Landmark&lt;/fen&gt; is associated with the upper region and the &lt;fen&gt;Profiled_region&lt;/fen&gt; with the lower or vice-versa.
 

@@ -12,26 +12,26 @@ NB:  For many words in this domain (those which do not inherently ascribe cognit
 &lt;ex&gt;&lt;fex name="Means"&gt;Putting his arm around her protectively&lt;/fex&gt; achieved nothing but &lt;t&gt;announcing&lt;/t&gt; &lt;fex name="Addressee"&gt;to their captors&lt;/fex&gt; &lt;fex name="Message"&gt;their vulnerability&lt;/fex&gt; . MET&lt;/ex&gt;
 &lt;ex&gt;&lt;ment&gt;It&lt;/ment&gt; &lt;t&gt;says&lt;/t&gt; &lt;fex name="Message"&gt;a lot&lt;/fex&gt; &lt;fex name="Means"&gt;that he did n't come back&lt;/fex&gt; . &lt;fex name="Addressee"&gt;INI&lt;/fex&gt; MET  &lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:11:41 PST Wed" abbrev="Com" name="Communicator" ID="21">
-        <definition>&lt;def-root&gt;The sentient entity that uses language in the written or spoken modality to convey a Message to another person. 
+        <definition>&lt;def-root&gt;The sentient entity that uses language in the written or spoken modality to convey a Message to another person.
 &lt;ex&gt;&lt;fex name="Communicator"&gt;He&lt;/fex&gt; finds it hard to &lt;t&gt;communicate&lt;/t&gt; with people, not least his separated parents . &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="731" cDate="02/07/2001 04:11:41 PST Wed" abbrev="Add" name="Addressee" ID="22">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; receives a &lt;fen&gt;Message&lt;/fen&gt; from the &lt;fen&gt;Communicator&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; receives a &lt;fen&gt;Message&lt;/fen&gt; from the &lt;fen&gt;Communicator&lt;/fen&gt;.
 &lt;ex&gt;The company must be able to &lt;t&gt;communicate&lt;/t&gt; &lt;fex name="Addressee"&gt;to potential customers&lt;/fex&gt; the way in which its product would satisfy their needs, and provide competitive value. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:11:41 PST Wed" abbrev="Msg" name="Message" ID="23">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Message&lt;/fen&gt; A proposition or set of propositions that the &lt;fen&gt;Communicator&lt;/fen&gt; wants the Addressee to believe or take for granted. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Message&lt;/fen&gt; A proposition or set of propositions that the &lt;fen&gt;Communicator&lt;/fen&gt; wants the Addressee to believe or take for granted.
 &lt;ex&gt;How do you &lt;t&gt;communicate&lt;/t&gt; to them &lt;fex name="Message"&gt;that you really like them&lt;/fex&gt; ?  &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Message" ID="56"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:11:41 PST Wed" abbrev="Top" name="Topic" ID="24">
-        <definition>&lt;def-root&gt;Topic is the entity that the proposition or propositions conveyed relate to, that they are about. 
+        <definition>&lt;def-root&gt;Topic is the entity that the proposition or propositions conveyed relate to, that they are about.
 &lt;ex&gt;Had someone &lt;t&gt;communicated&lt;/t&gt; to the capital &lt;fex name="Topic"&gt;about the flagrant disregard of the religious law&lt;/fex&gt; ? &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:11:41 PST Wed" abbrev="Medium" name="Medium" ID="25">
-        <definition>&lt;def-root&gt;The physical or abstract setting in which the Message is conveyed. 
+        <definition>&lt;def-root&gt;The physical or abstract setting in which the Message is conveyed.
 &lt;ex&gt;Opinions are usually &lt;t&gt;communicated&lt;/t&gt; &lt;fex name="Medium"&gt;over the telephone&lt;/fex&gt; and are often given within 24 hours. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="296" cDate="08/13/2002 11:59:28 PDT Tue" abbrev="Amo" name="Amount_of_information" ID="3535">

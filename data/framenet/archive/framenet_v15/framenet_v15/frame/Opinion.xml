@@ -10,7 +10,7 @@
 
 &lt;ex&gt;&lt;fex name="cog"&gt;Your&lt;/fex&gt; &lt;t&gt;view&lt;/t&gt; &lt;fex name="top"&gt;of Smithers&lt;/fex&gt; &lt;fex name="opi"&gt;as an excellent secretary&lt;/fex&gt; is not shared by the rest of the UN.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="04/26/2005 10:54:54 PDT Tue" abbrev="cog" name="Cognizer" ID="7869">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Cognizer&lt;/fen&gt; is the person whose &lt;fen&gt;Opinion&lt;/fen&gt; is in question. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Cognizer&lt;/fen&gt; is the person whose &lt;fen&gt;Opinion&lt;/fen&gt; is in question.
 
 &lt;ex&gt;&lt;fex name="cog"&gt;My&lt;/fex&gt; &lt;t&gt;take&lt;/t&gt; is that Johnson will not actually make it to the last round .&lt;/ex&gt;
 &lt;ex&gt;Everyone is entitled to &lt;fex name="cog"&gt;their&lt;/fex&gt; &lt;t&gt;opinion&lt;/t&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
@@ -43,7 +43,7 @@ become violent but cannot quite handle it&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;I &lt;fex name="con"&gt;really&lt;/fex&gt; &lt;t&gt;think&lt;/t&gt; that you should reconsider.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="04/26/2005 10:54:55 PDT Tue" abbrev="man" name="Manner" ID="7874">
-        <definition>&lt;def-root&gt;Any description of how the &lt;fen&gt;Cognizer&lt;/fen&gt; holds an opinion which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quiet(ly)&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of a &lt;fen&gt;Cognizer&lt;/fen&gt; that also affect their thinking (&lt;ment&gt;presumptuous(ly), cold(ly)&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of how the &lt;fen&gt;Cognizer&lt;/fen&gt; holds an opinion which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quiet(ly)&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of a &lt;fen&gt;Cognizer&lt;/fen&gt; that also affect their thinking (&lt;ment&gt;presumptuous(ly), cold(ly)&lt;/ment&gt;).
 
 &lt;ex&gt;She &lt;fex name="man"&gt;quietly&lt;/fex&gt; held the &lt;t&gt;belief&lt;/t&gt; that it was he that had betrayed the rebellion.&lt;/ex&gt;
 

@@ -25,14 +25,14 @@
         <excludesFE name="Parts" ID="10908"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="618" cDate="12/04/2006 02:31:09 PST Mon" abbrev="Part-2" name="Part_2" ID="10910">
-        <definition>&lt;def-root&gt;Part_2 is the second of two Parts mentioned. This is usually a PP Complement. 
+        <definition>&lt;def-root&gt;Part_2 is the second of two Parts mentioned. This is usually a PP Complement.
 
 &lt;ex&gt;Initially the front &lt;t&gt;split&lt;/t&gt; &lt;fex name="Part_2"&gt;from the rest of the body&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <requiresFE name="Part_1" ID="10909"/>
         <excludesFE name="Parts" ID="10908"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Peripheral" cBy="618" cDate="12/04/2006 02:31:09 PST Mon" abbrev="Crit" name="Criterion" ID="10912">
-        <definition>&lt;def-root&gt;This frame element expresses a property of the Parts or components of the Whole which correlates with the separation. Criterion is typically expressed as a PP headed by &lt;ment&gt;by&lt;/ment&gt;, or as a complex PP of the form &lt;ment&gt;on the basis of&lt;/ment&gt;.... 
+        <definition>&lt;def-root&gt;This frame element expresses a property of the Parts or components of the Whole which correlates with the separation. Criterion is typically expressed as a PP headed by &lt;ment&gt;by&lt;/ment&gt;, or as a complex PP of the form &lt;ment&gt;on the basis of&lt;/ment&gt;....
 &lt;ex&gt;Particles will therefore only &lt;t&gt;separate&lt;/t&gt; &lt;fex name="Crit"&gt;on the basis of contact angle&lt;/fex&gt; as long as their mass is between an upper and lower critical value.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="618" cDate="12/04/2006 02:31:09 PST Mon" abbrev="Dep" name="Depictive" ID="10913">

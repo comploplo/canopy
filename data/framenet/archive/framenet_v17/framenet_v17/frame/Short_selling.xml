@@ -29,7 +29,7 @@ Because this strategy only makes sense when the &lt;fen&gt;Intermediary&lt;/fen&
         <definition>&lt;def-root&gt;This FE identifies the place at which the short selling occurs.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="06/30/2015 05:27:51 PDT Tue" abbrev="" name="Manner" ID="16494">
-        <definition>&lt;def-root&gt;Any description of the intentional act which is not covered by more specific FEs, including secondary effects (quietly, loudly), and general descriptions comparing events (the same way). In addition, it may indicate salient characteristics of an &lt;fen&gt;Intermediary&lt;/fen&gt; that also affect the action (presumptuously, coldly, deliberately, eagerly, carefully). 
+        <definition>&lt;def-root&gt;Any description of the intentional act which is not covered by more specific FEs, including secondary effects (quietly, loudly), and general descriptions comparing events (the same way). In addition, it may indicate salient characteristics of an &lt;fen&gt;Intermediary&lt;/fen&gt; that also affect the action (presumptuously, coldly, deliberately, eagerly, carefully).
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="06/30/2015 05:29:35 PDT Tue" abbrev="" name="Means" ID="16496">

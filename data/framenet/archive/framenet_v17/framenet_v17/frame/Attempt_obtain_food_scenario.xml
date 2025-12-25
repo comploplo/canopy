@@ -15,7 +15,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="KmG" cDate="02/04/2008 05:43:25 PST Mon" abbrev="Dur" name="Duration" ID="12116">
-        <definition>&lt;def-root&gt;For what length of time the &lt;fen&gt;Seeker&lt;/fen&gt; attempted to obtain &lt;fen&gt;Food&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;For what length of time the &lt;fen&gt;Seeker&lt;/fen&gt; attempted to obtain &lt;fen&gt;Food&lt;/fen&gt;.
 
 &lt;/def-root&gt;</definition>
     </FE>

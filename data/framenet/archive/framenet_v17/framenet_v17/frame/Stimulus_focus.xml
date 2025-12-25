@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ACW" cDate="06/28/2002 12:16:43 PDT Fri" name="Stimulus_focus" ID="364" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame either a &lt;fen&gt;Stimulus&lt;/fen&gt; brings about a particular emotion or experience in the &lt;fen&gt;Experiencer&lt;/fen&gt; or  saliently fails to bring about a particular experience. Some words indicate that the &lt;fen&gt;Stimulus&lt;/fen&gt; is characterized by the experience it is likely to evoke in an &lt;fen&gt;Experiencer&lt;/fen&gt; and for these, the &lt;fen&gt;Experiencer&lt;/fen&gt; may rarely be present. There may also be a &lt;fen&gt;Degree&lt;/fen&gt; to which the &lt;fen&gt;Stimulus&lt;/fen&gt; affects the &lt;fen&gt;Experiencer&lt;/fen&gt; and &lt;fen&gt;Circumstances&lt;/fen&gt; under which the experience occurs. There may also be a &lt;fen&gt;Comparison_set&lt;/fen&gt; to which the &lt;fen&gt;Stimulus&lt;/fen&gt; is compared and a &lt;fen&gt;Parameter&lt;/fen&gt; that indicates the area in which the &lt;fen&gt;Stimulus&lt;/fen&gt; has its effect. 
-&lt;ex&gt; &lt;fex name="Stimulus"&gt;The view&lt;/fex&gt; is &lt;t&gt;breathtaking&lt;/t&gt; &lt;fex name="Circumstances"&gt;in January&lt;/fex&gt;. &lt;/ex&gt; 
-&lt;ex&gt; &lt;fex name="Stimulus"&gt;That movie&lt;/fex&gt; was &lt;fex name="Degree"&gt;quite&lt;/fex&gt; &lt;t&gt;fascinating&lt;/t&gt;. &lt;/ex&gt; 
+    <definition>&lt;def-root&gt;In this frame either a &lt;fen&gt;Stimulus&lt;/fen&gt; brings about a particular emotion or experience in the &lt;fen&gt;Experiencer&lt;/fen&gt; or  saliently fails to bring about a particular experience. Some words indicate that the &lt;fen&gt;Stimulus&lt;/fen&gt; is characterized by the experience it is likely to evoke in an &lt;fen&gt;Experiencer&lt;/fen&gt; and for these, the &lt;fen&gt;Experiencer&lt;/fen&gt; may rarely be present. There may also be a &lt;fen&gt;Degree&lt;/fen&gt; to which the &lt;fen&gt;Stimulus&lt;/fen&gt; affects the &lt;fen&gt;Experiencer&lt;/fen&gt; and &lt;fen&gt;Circumstances&lt;/fen&gt; under which the experience occurs. There may also be a &lt;fen&gt;Comparison_set&lt;/fen&gt; to which the &lt;fen&gt;Stimulus&lt;/fen&gt; is compared and a &lt;fen&gt;Parameter&lt;/fen&gt; that indicates the area in which the &lt;fen&gt;Stimulus&lt;/fen&gt; has its effect.
+&lt;ex&gt; &lt;fex name="Stimulus"&gt;The view&lt;/fex&gt; is &lt;t&gt;breathtaking&lt;/t&gt; &lt;fex name="Circumstances"&gt;in January&lt;/fex&gt;. &lt;/ex&gt;
+&lt;ex&gt; &lt;fex name="Stimulus"&gt;That movie&lt;/fex&gt; was &lt;fex name="Degree"&gt;quite&lt;/fex&gt; &lt;t&gt;fascinating&lt;/t&gt;. &lt;/ex&gt;
 &lt;ex&gt; That was certainly a &lt;t&gt;gratifying&lt;/t&gt; &lt;fex name="Stimulus"&gt;experience&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt; &lt;fex name="Stimulus"&gt;The report&lt;/fex&gt; was &lt;fex name="Degree"&gt;very&lt;/fex&gt; &lt;t&gt;alarming&lt;/t&gt; &lt;fex name="Experiencer"&gt;to me&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ACW" cDate="06/28/2002 01:18:32 PDT Fri" abbrev="Stim" name="Stimulus" ID="3291">
@@ -26,7 +26,7 @@
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="ACW" cDate="07/03/2002 10:41:34 PDT Wed" abbrev="Par" name="Parameter" ID="3325">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Parameter&lt;/fen&gt; is the area in which the &lt;fen&gt;Stimulus&lt;/fen&gt; brings about an effect on the Experiencer.
 
-&lt;ex&gt; This art work is &lt;fex name="Parameter"&gt;aesthetically&lt;/fex&gt; &lt;t&gt;pleasing&lt;/t&gt;.&lt;/ex&gt; 
+&lt;ex&gt; This art work is &lt;fex name="Parameter"&gt;aesthetically&lt;/fex&gt; &lt;t&gt;pleasing&lt;/t&gt;.&lt;/ex&gt;
 &lt;ex&gt;The book is &lt;fex name="Parameter"&gt;emotionally&lt;/fex&gt; &lt;t&gt;disturbing&lt;/t&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="ACW" cDate="07/03/2002 03:04:19 PDT Wed" abbrev="C_set" name="Comparison_set" ID="3328">

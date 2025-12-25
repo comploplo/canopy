@@ -11,7 +11,7 @@ use std::collections::HashMap;
 pub enum PartOfSpeech {
     /// Noun
     Noun,
-    /// Verb  
+    /// Verb
     Verb,
     /// Adjective
     Adjective,
@@ -443,18 +443,47 @@ impl WordNetDatabase {
     }
 
     /// Calculate semantic similarity between two synsets using path distance
+    /// Uses the formula: similarity = 1 / (path_length + 1)
+    /// where path_length is the shortest path through the hypernym hierarchy
     pub fn path_similarity(&self, synset1: &Synset, synset2: &Synset) -> f32 {
         if synset1.offset == synset2.offset {
             return 1.0;
         }
 
-        if let Some(_lch) = self.lowest_common_hypernym(synset1, synset2) {
-            // Simplified path similarity calculation
-            // In a full implementation, this would calculate the actual path distance
-            0.5 // Placeholder value
+        if let Some(lch) = self.lowest_common_hypernym(synset1, synset2) {
+            // Calculate depth from synset1 to LCH
+            let depth1 = self.depth_to_ancestor(synset1, lch);
+            // Calculate depth from synset2 to LCH
+            let depth2 = self.depth_to_ancestor(synset2, lch);
+
+            let path_length = depth1 + depth2;
+            // Use inverse path distance: similarity = 1 / (path_length + 1)
+            1.0 / (path_length as f32 + 1.0)
         } else {
             0.0
         }
+    }
+
+    /// Calculate depth from a synset to an ancestor in the hypernym hierarchy
+    fn depth_to_ancestor(&self, synset: &Synset, ancestor: &Synset) -> usize {
+        if synset.offset == ancestor.offset {
+            return 0;
+        }
+
+        let mut depth = 0;
+        let mut current = synset;
+
+        while current.offset != ancestor.offset {
+            depth += 1;
+            if let Some(hypernym) = self.get_hypernyms(current).first() {
+                current = hypernym;
+            } else {
+                // Should not happen if ancestor is valid, but return max depth as fallback
+                return depth;
+            }
+        }
+
+        depth
     }
 
     /// Get database statistics

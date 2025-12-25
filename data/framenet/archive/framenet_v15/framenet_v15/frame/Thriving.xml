@@ -12,7 +12,7 @@
 &lt;ex&gt;In the 1920s &lt;fex name="ent"&gt;the peach industry&lt;/fex&gt; &lt;t&gt;thrived&lt;/t&gt; in Upson County.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Peripheral" cBy="618" cDate="08/21/2006 04:12:55 PDT Mon" abbrev="cir" name="Circumstances" ID="10528">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Circumstances&lt;/fen&gt; describe the state of the world (at a particular time and place) which is specifically independent of the event itself and any of its participants. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Circumstances&lt;/fen&gt; describe the state of the world (at a particular time and place) which is specifically independent of the event itself and any of its participants.
 
 &lt;ex&gt;In those nations, the economy &lt;t&gt;languishes&lt;/t&gt; &lt;fex name="cir"&gt;under repressive regimes which do not govern for their people but rather against them&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

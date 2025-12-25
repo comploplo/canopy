@@ -318,7 +318,7 @@
 { [boogie, noun.communication:boogie,+] verb.creation:dance,@ frames: 2 (dance to boogie music)}
 { [cha-cha, noun.act:cha-cha,+] verb.creation:dance,@ frames: 2 (dance the cha-cha)}
 { disco, verb.creation:dance,@ frames: 2 (dance to disco music)}
-{ [mambo, noun.act:mambo,+] verb.creation:dance,@ frames: 2 (dance a mambo)} 
+{ [mambo, noun.act:mambo,+] verb.creation:dance,@ frames: 2 (dance a mambo)}
 { [polka, noun.act:polka,+] verb.creation:dance,@ frames: 2 (dance a polka)}
 { [one-step, noun.act:one-step,+] verb.creation:dance,@ frames: 2 (dance the one-step)}
 { [ rhumba, noun.communication:rhumba,+ ] rumba, verb.creation:dance,@ frames: 2 (dance the rhumba) }
@@ -362,7 +362,7 @@
 { swim2, move3,@ frames: 4 (move as if gliding through water; "this snake swims through the soil where it lives")}
 { [ buoy, adj.all:light1^buoyant,+ noun.communication:buoy,+ ] float1,@ frames: 1,2 (float on the surface of water) }
 { [ walk, noun.attribute:walk,+ noun.artifact:walk,+ noun.act:walk3,+ noun.act:walk,+ noun.person:walker,+ noun.act:walking,+ ride,! walk_around,^ walk_about,^ ] step,* walk3,$ walk1,$ walk4,$ walk5,$ walk2,$ travel,@ frames: 2,1,22 (use one's feet to advance; advance by steps; "Walk, don't run!"; "We walked instead of driving"; "She walks with a slight limp"; "The patient cannot walk yet"; "Walk over to the cabinet") }
-{ [spacewalk, noun.act:space_walk,+] walk,@ frames: 2 (move in space outside a space craft)} 
+{ [spacewalk, noun.act:space_walk,+] walk,@ frames: 2 (move in space outside a space craft)}
 { [ foot, noun.act:foot,+ noun.body:foot1,+ noun.person:footer,+ ] leg_it, hoof, hoof_it, walk,@ noun.communication:colloquialism,;u frames: 2,22 (walk; "let's hoof it to the disco")}
 { [ toe, noun.body:toe1,+ ] walk,@ frames: 2 (walk so that the toes assume an indicated position or direction; "She toes inwards") }
 { [ chariot, noun.artifact:chariot1,+ noun.artifact:chariot,+ noun.person:charioteer,+ ] ride,@ frames: 2 (ride in a chariot) }
@@ -590,7 +590,7 @@
 { [ taxi, noun.artifact:taxi,+ ] cab3, ride,@ frames: 2 (ride in a taxicab) }
 { [ bus, noun.artifact:bus,+ ] ride,@ frames: 2,21,9 (ride in a bus) }
 { [ ferry, noun.artifact:ferry,+ ] travel,@ noun.act:navigation,;c frames: 22 (travel by ferry) }
-{ [caravan, noun.group:caravan,+] travel,@ frames: 2 (travel in a caravan)} 
+{ [caravan, noun.group:caravan,+] travel,@ frames: 2 (travel in a caravan)}
 { [ ferry1, noun.artifact:ferry,+ noun.act:ferrying,+ ] transport,@ noun.act:navigation,;c frames: 20,21 (transport by ferry) }
 { wheelbarrow, transport,@ frames: 8 (transport in a wheelbarrow)}
 { [ ferry2, noun.act:ferry,+ ] convey,@ noun.act:navigation,;c frames: 20,21 (transport from one place to another) }
@@ -601,7 +601,7 @@
 { [ barge1, noun.person:bargee,+ noun.artifact:barge,+ ] transport1,@ noun.act:navigation,;c frames: 8 (transport by barge on a body of water) }
 { [ railroad, noun.artifact:railroad1,+ noun.artifact:railroad,+ noun.act:railroading,+ ] transport1,@ frames: 8 (transport by railroad)}
 { [ transport1, noun.act:transport,+ noun.act:transportation1,+ ] [send, send_on,^ send_off,^ ] [ ship, noun.artifact:shipment,+ noun.act:shipment,+ noun.person:shipper,+ noun.group:shipper,+ noun.act:shipping,+ ] move1,@ frames: 8,9,20,21 (transport commercially) }
-{ air-ship, airfreight, air-freight, freight,@ frames: 8 (transport (cargo) by air)} 
+{ air-ship, airfreight, air-freight, freight,@ frames: 8 (transport (cargo) by air)}
 { [ freight, noun.possession:freight,+ noun.act:freight,+ noun.artifact:freighter,+ noun.possession:freightage,+ noun.act:freightage,+ ] transport,@ frames: 8 (transport commercially as cargo) }
 { [ send1, noun.act:sending,+ verb.social:send_away,^ verb.social:send_away1,^ ] direct1, move1,@ frames: 9,20,8,21,11 (cause to go somewhere; "The explosion sent the car flying in the air"; "She sent her children to camp"; "He directed all his energies into his dissertation") }
 { turn14, direct1,@ frames: 22 (channel one's attention, interest, thought, or attention toward or away from something; "The pedophile turned to boys for satisfaction"; "people turn to mysticism at the turn of a millennium")}
@@ -961,7 +961,7 @@
 { [ maraud, noun.act:maraud,+ noun.person:marauder,+ ] raid,@ frames: 2 (raid and rove in search of booty; "marauding rebels overran the countryside")}
 { [ infest, noun.state:infestation,+ noun.group:infestation,+ ] overrun1, verb.competition:invade,@ frames: 10,11 (invade in great numbers; "the roaches infested our kitchen") }
 { reach1, make, [ attain1, noun.act:attainment1,+ ] hit, arrive_at, gain, travel,* frames: 8 (reach a destination, either real or abstract; "We hit Detroit by noon"; "The water reached the doorstep"; "We barely made it to the finish line"; "I have to hit the MAC machine before the weekend starts") }
-{ [summit, noun.location:summit,+] breast1, reach1,@ frames: 2,8,11 (reach the summit (of a mountain); "They breasted the mountain"; "Many mountaineers go up Mt. Everest but not all summit")} 
+{ [summit, noun.location:summit,+] breast1, reach1,@ frames: 2,8,11 (reach the summit (of a mountain); "They breasted the mountain"; "Many mountaineers go up Mt. Everest but not all summit")}
 { [ top4, noun.location:top2,+ ] reach1,@ frames: 8 (reach or ascend the top of; "The hikers topped the mountain just before noon")}
 { make15, make,$ reach1,@ frames: 8 (reach in time; "We barely made the plane") }
 { find10, reach1,@ frames: 11 (succeed in reaching; arrive at; "The arrow found its mark") }
@@ -1406,7 +1406,7 @@
 { hit2, strike2, move1,@ frames: 20,21 (drive something violently into a location; "he hit his fist on the table"; "she struck her head on the low ceiling" )}
 { smash2, hit2,@ frames: 20,21 (hit violently; "She smashed her car against the guard rail")}
 { close8, move,@ noun.act:ball_game,;c frames: 2 (change one's body stance so that the forward shoulder and foot are closer to the intended point of impact)}
-{ [teleport, noun.act:teleportation,+ ] transport,@ noun.communication:science_fiction,;c frames: 8 (transport by dematerializing at one point and assembling at another)} 
+{ [teleport, noun.act:teleportation,+ ] transport,@ noun.communication:science_fiction,;c frames: 8 (transport by dematerializing at one point and assembling at another)}
 { [snowboard, noun.artifact:snowboard,+ noun.person:snowboarder,+ noun.act:snowboarding,+] glide,@ frames: 2 (glide down a snow-covered slope while standing on a board; "The children love to snowboard in winter")}
 { jump11, leap11, jump_off2, move,@ frames: 2 (jump down from an elevated point; "the parachutist didn't want to jump"; "every year, hundreds of people jump off the Golden Gate bridge"; "the widow leapt into the funeral pyre")}
 { sling1, move1,@ frames: 8 (move with a sling; "sling the cargo onto the ship")}

@@ -69,7 +69,11 @@ impl ParticipantBinder {
 
         self.dep_to_theta.insert(
             IndirectObject,
-            vec![ThetaRole::Recipient, ThetaRole::Benefactive, ThetaRole::Goal],
+            vec![
+                ThetaRole::Recipient,
+                ThetaRole::Benefactive,
+                ThetaRole::Goal,
+            ],
         );
 
         // Oblique arguments are more ambiguous
@@ -86,10 +90,8 @@ impl ParticipantBinder {
         );
 
         // Clausal subject
-        self.dep_to_theta.insert(
-            ClausalSubject,
-            vec![ThetaRole::Theme, ThetaRole::Stimulus],
-        );
+        self.dep_to_theta
+            .insert(ClausalSubject, vec![ThetaRole::Theme, ThetaRole::Stimulus]);
     }
 
     /// Bind participants to theta roles
@@ -124,12 +126,8 @@ impl ParticipantBinder {
                 .unwrap_or_default();
 
             // Find best matching role
-            let bound_role = self.select_best_role(
-                &candidate_roles,
-                expected_roles,
-                &participants,
-                token,
-            );
+            let bound_role =
+                self.select_best_role(&candidate_roles, expected_roles, &participants, token);
 
             if let Some(role) = bound_role {
                 let entity = self.create_entity(token, arc.dependent_idx);
@@ -373,7 +371,11 @@ impl ParticipantBinder {
     }
 
     /// Determine aspectual class from decomposition
-    fn determine_aspect(&self, decomposed: &DecomposedEvent, _predicate: &PredicateInfo) -> AspectualClass {
+    fn determine_aspect(
+        &self,
+        decomposed: &DecomposedEvent,
+        _predicate: &PredicateInfo,
+    ) -> AspectualClass {
         use crate::types::LittleVType;
 
         match decomposed.primary_type {

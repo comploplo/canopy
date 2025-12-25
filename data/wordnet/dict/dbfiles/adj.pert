@@ -203,7 +203,7 @@
 { [ hermeneutic, noun.cognition:hermeneutics,\ ] (interpretive or explanatory)}
 { [ Middle_Eastern, noun.location:Middle_East,\ ] (of or relating to or located in the Middle East) }
 { [ annunciatory, verb.communication:announce2,+ verb.communication:announce,+ noun.communication:annunciation1,\ ] (relating to the act of announcing or being announced) }
-{ [ alliaceous, noun.plant:allium,+ noun.plant:Allium,\ ] noun.cognition:botany,;c (of or pertaining to the botanical genus Allium; "onions, leeks, garlic, chives are alliaceous plants") } 
+{ [ alliaceous, noun.plant:allium,+ noun.plant:Allium,\ ] noun.cognition:botany,;c (of or pertaining to the botanical genus Allium; "onions, leeks, garlic, chives are alliaceous plants") }
 { [ anodic, cathodic,! noun.artifact:anode,\ ] [ anodal, noun.artifact:anode1,+ noun.artifact:anode,+ noun.artifact:anode,\ ] (of or at or relating to an anode) }
 { [ cathodic, anodic,! noun.artifact:cathode,\ ] (of or at or pertaining to a cathode; "cathodic deposition of metals") }
 { [ anoperineal, noun.body:anus,\ noun.body:perineum,\ ] (relating to the anus and surrounding perineum) }
@@ -389,7 +389,7 @@
 { [ avitaminotic, noun.state:avitaminosis,+ noun.state:avitaminosis,\ ] (of or relating to or characteristic of avitaminosis) }
 { [ avocational, noun.act:avocation,+ noun.act:avocation,\ ] (of or involved in an avocation) }
 { [ avuncular, noun.person:uncle,+ noun.person:uncle,\ ] (being or relating to an uncle ) }
-{ [ avuncular1, noun.person:uncle1,\] (resembling a uncle in kindness or indulgence) } 
+{ [ avuncular1, noun.person:uncle1,\] (resembling a uncle in kindness or indulgence) }
 { [ award-winning, noun.event:win,\ ] (having received awards; "this award-winning bridge spans a distance of five miles") }
 { [ axial, noun.artifact:axis,+ noun.artifact:axis,\ ] (of or relating to or resembling an axis of rotation) }
 { [ axile, noun.plant:axis,\ ] [ axial2, noun.cognition:axis,+ noun.plant:axis,\ ] noun.cognition:botany,;c (relating to or attached to the axis; "axial angle")}
@@ -675,9 +675,9 @@
 { [ Chippendale, noun.person:Chippendale,\ ] (of or relating to an 18th-century style of furniture made by Thomas Chippendale; graceful outlines and Greek motifs and massive rococo carvings) }
 { [ chirpy, noun.event:chirp,+ noun.event:chirp,\ noun.animal:bird,;c noun.animal:insect,;c ] ((birds or insects) characterized by or tending to chirp) }
 { [ chitinous, noun.substance:chitin,+ noun.substance:chitin,\ ] (of or resembling chitin) }
-{ [ chlamydial, noun.state:chlamydia,+ noun.animal:chlamydia,+ noun.state:chlamydia,\ noun.animal:chlamydia,\] (of or pertaining to the sexually transmitted infection or to the parasite)} 
+{ [ chlamydial, noun.state:chlamydia,+ noun.animal:chlamydia,+ noun.state:chlamydia,\ noun.animal:chlamydia,\] (of or pertaining to the sexually transmitted infection or to the parasite)}
 { [ chlorophyllose, noun.animal:chlorophyll,\ ] [ chlorophyllous, noun.animal:chlorophyll,+ noun.animal:chlorophyll,\ ] (relating to or being or containing chlorophyll) }
-{ [ chlorotic, noun.state:chlorosis,\ ] [greensick, noun.state:greensickness,\ ] (of or pertaining to or suffering from chlorosis) } 
+{ [ chlorotic, noun.state:chlorosis,\ ] [greensick, noun.state:greensickness,\ ] (of or pertaining to or suffering from chlorosis) }
 { [ choleraic, noun.state:cholera,+ noun.state:cholera,\ ] (relating to or resulting from or resembling cholera) }
 { [ choragic, noun.person:choragus,+ noun.person:choragus,\ ] (pertaining to or characteristic of a choragus) }
 { [ chordal, noun.communication:chord,+ noun.communication:chord,\ ] (relating to or consisting of or emphasizing chords; "chordal assonance in modern music"; "chordal rather than contrapuntal music") }
@@ -696,13 +696,13 @@
 { [ cleistogamous, noun.event:cleistogamy,\ ] [ cleistogamic, noun.event:cleistogamy,\ ] (exhibiting or relating to cleistogamy) }
 { [ clerical, noun.group:clergy,+ noun.group:clergy,\ ] (of or relating to the clergy; "clerical collar") }
 { [ clerical1, noun.person:clerk,+ noun.person:clerk,\ ] (of or relating to clerks; "clerical work") }
-{ [ classical, noun.cognition:classics,\ ] (of or relating to the study of the literary works of ancient Greece and Rome; "a classical scholar")} 
+{ [ classical, noun.cognition:classics,\ ] (of or relating to the study of the literary works of ancient Greece and Rome; "a classical scholar")}
 { [ clonal, noun.group:clone,\ ] (of or relating to a clone) }
 { [ closed-circuit, noun.artifact:closed_circuit,\ ] (relating to or consisting of a closed circuit; "closed-circuit television") }
 { [ cloven-hoofed, noun.animal:cloven_hoof,\ ] [ cloven-footed, noun.animal:cloven_foot,\ ] (of or relating to the cloven feet of ruminants or swine) }
 { [ cloze, noun.cognition:cloze_procedure,\ ] (based on or being a test of reading skill using the cloze procedure) }
 { [ coastal, noun.object:coast,+ noun.object:coast,\ ] (of or relating to a coast; "coastal erosion") }
-{ [ coccal, noun.animal:coccus,+ noun.animal:coccus,\ ] (of or pertaining to or resembling a coccus) } 
+{ [ coccal, noun.animal:coccus,+ noun.animal:coccus,\ ] (of or pertaining to or resembling a coccus) }
 { [ coccygeal, noun.body:coccyx,+ noun.body:coccyx,\ ] (of or relating to or near the coccyx) }
 { [ coin-operated, noun.artifact:coin_machine,\ ] (of devices that do not operate without the prior insertion of one or more coins; "a coin-operated telephone") }
 { [ collagenous, noun.body:collagen,+ noun.body:collagen,\ ] [ collagenic, noun.body:collagen,+ noun.body:collagen,\ ] (relating to or consisting of collagen) }
@@ -817,7 +817,7 @@
 { [ dynastic, noun.group:dynasty,+ noun.group:dynasty,\ ] (of or relating to or characteristic of a dynasty) }
 { [ dysgenic, noun.cognition:dysgenics,+ eugenic,! noun.cognition:dysgenics,\ ] [ cacogenic, noun.cognition:cacogenics,+ noun.cognition:cacogenics,\ ] (pertaining to or causing degeneration in the offspring produced) }
 { [ dysplastic, noun.state:dysplasia,+ noun.state:dysplasia,\ ] (relating to or evidencing dysplasia) }
-{ [ Ephesian, noun.location:Ephesus,\ ] (of or relating to ancient Ephesus or its people or language or culture) } 
+{ [ Ephesian, noun.location:Ephesus,\ ] (of or relating to ancient Ephesus or its people or language or culture) }
 { [ Eucharistic, noun.act:eucharist,+ noun.act:Eucharist,\ ] (of or relating to the sacrament of the Eucharist; "the Eucharistic cup") }
 { [ eugenic, noun.cognition:eugenics,+ dysgenic,! noun.cognition:eugenics,\ ] (pertaining to or causing improvement in the offspring produced) }
 { [ Eurocentric, noun.cognition:eurocentrism,+ noun.cognition:Eurocentrism,\ ] [ Europocentric, noun.cognition:Eurocentrism,\ ] (focussed on Europe and the Europeans) }
@@ -954,7 +954,7 @@
 { [ generational, noun.time:generation1,+ noun.group:generation1,+ noun.group:generation,+ noun.group:generation1,\ ] (of or relating to a generation) }
 { [ generic, noun.group:genus,+ noun.group:genus,\ ] noun.cognition:biology,;c (relating to or common to or descriptive of all members of a genus; "the generic name") }
 { [ genetic, noun.cognition:genetics,+ noun.body:gene,+ noun.cognition:genetics,\ ] [ genetical, noun.body:gene,+ noun.cognition:genetics,+ ] (of or relating to the science of genetics; "genetic research") }
-{ [ genetic1, noun.event:origin,\] (pertaining to or referring to origin; "genetic history reconstructs the origins of a literary work") } 
+{ [ genetic1, noun.event:origin,\] (pertaining to or referring to origin; "genetic history reconstructs the origins of a literary work") }
 { [ genic, noun.body:gene,+ noun.body:gene,\ ] [ genetic2, noun.body:gene,\ ] [ genetical2, noun.body:gene,+ noun.body:gene,\ ] (of or relating to or produced by or being a gene; "genic combinations"; "genetic code") }
 { [ genial, noun.body:chin,\ ] [ mental4, noun.body:mentum,\ ] (of or relating to the chin or median part of the lower jaw) }
 { [ mental3, noun.body:mentum,\ ] noun.cognition:biology,;c (of or relating to the chin- or liplike structure in insects and certain mollusks) }
@@ -1114,7 +1114,7 @@
 { [ locker-room, noun.artifact:locker_room,\ ] (relating to or appropriate for a locker room; "locker-room humor") }
 { [ logogrammatic, noun.communication:logogram,+ noun.communication:logogram,\ ] [ logographic,noun.communication:logograph,\ ] (of or relating to logograms or logographs) }
 { [ long-distance, noun.communication:long_distance,\ ] (of or relating to or being a long-distance telephone call; "a long-distance call"; "a long-distance transmission line"; "a long-distance operator") }
-{ [ loopy, noun.shape:loop,+ noun.shape:loop,\ ] (consisting of or covered with or having loops) } 
+{ [ loopy, noun.shape:loop,+ noun.shape:loop,\ ] (consisting of or covered with or having loops) }
 { [ lucifugous, noun.act:phototropism,\ ] [ lucifugal, noun.act:phototropism,\ ] (light-avoiding) }
 { [ lunar, noun.object:Moon1,\ ] (of or relating to or associated with the moon; "lunar surface"; "lunar module") }
 { [ sublunar, noun.object:Moon1,\ ] [ sublunary, noun.object:Moon1,\ ] [ cislunar, noun.object:Moon1,\ ] (situated between the earth and the moon) }
@@ -1149,7 +1149,7 @@
 { [ menopausal, noun.time:menopause,+ noun.time:menopause,\ ] (of or relating to the menopause) }
 { [ Merovingian, noun.group:Merovingian,\ ] (of or relating to the Merovingian dynasty or its members) }
 { [ Prakritic, noun.communication:prakrit1,+ noun.communication:prakrit,+ noun.communication:Prakrit,\ ] (of or relating to Prakrit) }
-{ [ Procrustean, noun.person: Procrustes,\ ] (of or relating to the mythical giant Procrustes or the mode of torture practiced by him) } 
+{ [ Procrustean, noun.person: Procrustes,\ ] (of or relating to the mythical giant Procrustes or the mode of torture practiced by him) }
 { [ provencal, noun.location:Provence,\ ] (of or relating to Provence or its people or their culture) }
 { [ pre-Christian, noun.time:Christian_era,\ ] (of or relating to or being the time before the beginning of the Christian era) }
 { [ prejudicial, noun.cognition:prejudice1,+ noun.cognition:prejudice1,\ ] [ prejudicious, noun.cognition:prejudice1,+ noun.cognition:prejudice1,\ ] (tending to favor preconceived ideas; "the presence of discriminatory or prejudicial attitudes in the white population") }
@@ -1175,7 +1175,7 @@
 { [ minimalist, noun.group:minimalism,\ ] (of or relating to artistic minimalism) }
 { [ ministerial1, noun.person:minister2,+ noun.person:minister1,+ noun.act:minister,+ noun.person:minister1,\ ] (of or relating to a government minister or ministry; "ministerial decree") }
 { [ ministerial2, noun.person:minister,+ noun.person:minister,\ ] (of or relating to a minister of religion or the minister's office; "ministerial duties") }
-{ [ minty, noun.food:mint,\ ] (relating to or suggestive of mint) } 
+{ [ minty, noun.food:mint,\ ] (relating to or suggestive of mint) }
 { [ Mishnaic, noun.communication:Mishna,\ ] (of or relating to the Mishna (the first part of the Talmud)) }
 { [ omissive, verb.cognition:omit,+ noun.cognition:omission,\ ] (characterized by omissions; "omissive crimes") }
 { [ miotic, noun.act:miosis,+ noun.artifact:miotic_drug,\ ] [ myotic, noun.act:myosis,+ noun.artifact:myotic_drug,\ ] (of or relating to or causing constriction of the pupil of the eye; "a miotic drug") }
@@ -1251,7 +1251,7 @@
 { [ nonpasserine, passerine,! noun.animal:passerine,\ ] (relating to or characteristic of birds that are not perching birds) }
 { [ Pauline, noun.person:Paul,\ ] (relating to Paul the Apostle or his doctrines) }
 { [ peacekeeping, noun.act:peacekeeping,\ ] (of or relating to the preservation of peace between hostile groups by international military forces; "a peacekeeping force") }
-{ [ peaty, noun.substance:peat,+ noun.substance:peat,\ ] (of or pertaining to or of the nature of peat) } 
+{ [ peaty, noun.substance:peat,+ noun.substance:peat,\ ] (of or pertaining to or of the nature of peat) }
 { [ perigonal, noun.plant:perigone,\ ] (of or relating to a perigone)}
 { [ perithelial, noun.body:perithelium,+ noun.body:perithelium,\ ] (of or relating to the tissue layer around small blood vessels) }
 { [ monetary, noun.possession:money1,+ noun.possession:money,+ noun.possession:money,\ ] [ pecuniary, noun.possession:money,\ ] (relating to or involving money; "monetary rewards"; "he received thanks but no pecuniary compensation for his services") }
@@ -1381,7 +1381,7 @@
 { [ sclerotic1, noun.state:sclerosis,+ noun.state:sclerosis,\ ] [ sclerosed, noun.state:sclerosis,\ ] (relating to or having sclerosis; hardened; "a sclerotic patient") }
 { [ scurfy, noun.object:scurf,+ noun.object:scurf,\ ] (having or producing or covered with scurf) }
 { [ Scythian, noun.person:scythian,+ noun.communication:scythian,+ noun.location:scythia,+ noun.person:Scythian,\ noun.communication:Scythian,\ ] (of or relating to the ancient Scythians or their culture or language) }
-{ [ secular, noun.cognition:secularism,\] (of or relating to the doctrine that rejects religion and religious considerations) } 
+{ [ secular, noun.cognition:secularism,\] (of or relating to the doctrine that rejects religion and religious considerations) }
 { [ secretarial, noun.person:secretary,+ noun.person:secretary,\ ] (of or relating to a secretary or to a secretary's work) }
 { [ secretory, noun.body:secretion,\ ] (of or relating to or producing a secretion; "a secretory cell") }
 { [ sectarian1, noun.person:sectarian,+ noun.group:sect1,+ noun.group:sect,\ ] (of or relating to or characteristic of a sect or sects; "sectarian differences") }
@@ -1448,7 +1448,7 @@
 { [ statutory, noun.communication:statute,\ ] (relating to or created by statutes; "statutory matters"; "statutory law") }
 { [ stellar, noun.object:star,\ ] [ astral, noun.object:star,\ ] (being or relating to or resembling or emanating from stars; "an astral body"; "stellar light") }
 { [ interstellar, noun.object:star,\ ] (between or among stars; "the density of hydrogen in interplanetary and interstellar space") }
-{ [ stemmatic, noun.shape:stemma,\ ] (of or relating to a textual stemma) } 
+{ [ stemmatic, noun.shape:stemma,\ ] (of or relating to a textual stemma) }
 { [ stenographic, noun.act:stenography,+ noun.communication:stenography,\ ] [ stenographical, noun.communication:stenography,+ noun.act:stenography,+ noun.communication:stenography,\ ] (of or relating to or employing stenography) }
 { [ steroidal, noun.substance:steroid2,+ noun.substance:steroid,+ nonsteroidal,! noun.substance:steroid_hormone,\ ] (of or relating to steroid hormones or their effects) }
 { [ nonsteroidal, steroidal,! noun.substance:nonsteroid,\ ] (not steroidal or not having the effects of steroid hormones) }
@@ -1641,7 +1641,7 @@
 { [ fungal, noun.plant:fungus,+ noun.plant:fungus,\ ] [ fungous, noun.plant:fungus,+ noun.plant:fungus,\ ] (of or relating to fungi) }
 { [ fungicidal, noun.artifact:fungicide,+ noun.artifact:fungicide,\ ] [ antifungal, noun.artifact:antifungal,+ noun.artifact:antifungal,\ ] (capable of destroying fungi) }
 { [ fungoid, noun.plant:fungus,\ ] [ funguslike, noun.plant:fungus,\ ] (resembling fungi) }
-{ [ infectious, noun.state:infection,+ noun.process:infection,+ noun.state:infection,\ ] (of or relating to infection; "infectious hospital"; "infectious disease") } 
+{ [ infectious, noun.state:infection,+ noun.process:infection,+ noun.state:infection,\ ] (of or relating to infection; "infectious hospital"; "infectious disease") }
 { [ plantal, noun.Tops:plant,+ noun.Tops:plant,\ ] (of or relating to plants) }
 { [ vegetative1, verb.stative:vegetate,+ verb.body:vegetate,+ noun.act:vegetation,\ ] [ vegetive1, noun.act:vegetation,\ ] (of or relating to an activity that is passive and monotonous; "a dull vegetative lifestyle") }
 { [ bacterial, noun.animal:bacteria,+ noun.animal:bacterium,+ noun.animal:bacteria,\ ] (relating to or caused by bacteria; "bacterial infection") }
@@ -1678,7 +1678,7 @@
 { [ bistroic, noun.artifact:bistro,\ ] (of or relating to or resembling a bistro) }
 { [ polar, noun.location:pole,+ noun.location:pole,\ ] (located at or near or coming from the earth's poles; "polar diameter"; "polar zone"; "a polar air mass"; "Antarctica is the only polar continent") }
 { [ bipolar, polar,\ ] (of, pertaining to, or occurring in both polar regions; "the bipolar distribution of certain species") }
-{ [ bipolar1, noun.state:manic_depressive_illness,\ ] (of or relating to manic depressive illness) } 
+{ [ bipolar1, noun.state:manic_depressive_illness,\ ] (of or relating to manic depressive illness) }
 { [ transpolar, noun.location:pole,\ ] (extending across or crossing either pole; "transpolar air routes") }
 { [ photographic, noun.process:photography,+ noun.act:photography1,+ noun.act:photography,+ noun.artifact:photograph,+ noun.act:photography,\ ] (relating to photography or obtained by using photography; "photographic equipment") }
 { [ photic, noun.phenomenon:light,\ ] (of or relating to or caused by light) }
@@ -1974,7 +1974,7 @@
 { [ nephritic, noun.body:kidney,\ ] [ renal, noun.body:kidney,\ ] (of or relating to the kidneys) }
 { [ nephritic1, noun.state:nephritis,+ noun.state:nephritis,\ ] (affected by nephritis) }
 { [ neurotoxic, noun.substance:neurotoxin,+ noun.substance:neurotoxin,\ ] (poisonous to nerves or nerve cells) }
-{ [ neurotropic, noun.act:neurotropism,\] noun.cognition:medicine,;c ((of a virus, toxin, or chemical) tending to attack or affect the nervous system preferentially) } 
+{ [ neurotropic, noun.act:neurotropism,\] noun.cognition:medicine,;c ((of a virus, toxin, or chemical) tending to attack or affect the nervous system preferentially) }
 { [ parental, noun.person:parent,+ filial,! noun.person:parent,\ ] noun.cognition:genetics,;c (designating the generation of organisms from which hybrid offspring are produced) }
 { [ filial, parental,! noun.person:offspring,\ ] noun.cognition:genetics,;c (designating the generation or the sequence of generations following the parental generation) }
 { [ spinal, noun.body:spine,+ noun.animal:spine,+ noun.body:spine,\ ] (of or relating to the spine or spinal cord; "spinal cord"; "spinal injury") }
@@ -2072,7 +2072,7 @@
 { [ ecclesiastical, noun.group:church,\ ] [ ecclesiastic, noun.group:church,\ ] (of or associated with a church (especially a Christian Church); "ecclesiastic history")}
 { [ priestly, noun.group:priesthood,\ ] [ hieratic1, noun.group:priesthood,\ ] [ hieratical1, noun.group:priesthood,\ ] [ sacerdotal, noun.group:priesthood,\ ] (associated with the priesthood or priests; "priestly (or sacerdotal) vestments"; "hieratic gestures") }
 { [ sacerdotal2, noun.cognition:sacerdotalism,+ noun.cognition:sacerdotalism,\ ] (of or relating to a belief in sacerdotalism; "sacerdotal emphasis on the authority of priests") }
-{ [ molar, noun.quantity:mole,+ noun.attribute:molarity,+ noun.quantity:mole,\ ] (containing one mole of a substance; "molar weight")} 
+{ [ molar, noun.quantity:mole,+ noun.attribute:molarity,+ noun.quantity:mole,\ ] (containing one mole of a substance; "molar weight")}
 { [ molar2, noun.quantity:mole,+ noun.attribute:molarity,+ noun.quantity:mole,\ ] (designating a solution containing one mole of solute per liter of solution) }
 { [ molal, noun.quantity:mole,+ noun.attribute:molality,+ noun.quantity:mole,\ ] (designating a solution containing one mole of solute per kilogram of solvent) }
 { [ molar3, noun.body:molar,+ noun.body:molar,\ ] (of or pertaining to the grinding teeth in the back of a mammal's mouth; "molar teeth") }
@@ -2088,7 +2088,7 @@
 { [ machine_readable, noun.communication:machine_code,\ ] computer_readable, noun.cognition:computer_science,;c (suitable for feeding directly into a computer) }
 { [ macromolecular, noun.substance:macromolecule,+ noun.substance:macromolecule,\ ] (relating to or consisting of or characterized by macromolecules; "macromolecular compounds") }
 { [ isotopic, noun.substance:isotope,+ noun.substance:isotope,\ ] (of or relating to or having the relation of an isotope) }
-{ [ isothermic, noun.location:isotherm,\ ] (of or relating to an isotherm) } 
+{ [ isothermic, noun.location:isotherm,\ ] (of or relating to an isotherm) }
 { [ microcosmic, noun.cognition:microcosm,\ ] (relating to or characteristic of a microcosm; "the microcosmic world of business") }
 { [ micrometeoric, noun.object:micrometeorite,\ ] [ micrometeoritic, noun.object:micrometeorite,+ noun.object:micrometeorite,\ ] (of or relating to micrometeorites) }
 { [ micropylar, noun.plant:micropyle,\] (of or relating to a micropyle) }
@@ -2220,7 +2220,7 @@
 { [ evangelistic, noun.person:evangelist,+ noun.communication:evangelism,\ ] (relating to or promoting the preaching and dissemination of the Christian gospel; "evangelistic fervor"; "the evangelistic concerns of the early church") }
 { [ Muslim, noun.person:muslim,+ noun.cognition:Islamism,\ ] [ Moslem, noun.person:moslem,+ noun.cognition:Islamism,\ ] [ Islamic, noun.group:islam,+ noun.cognition:islam,+ noun.cognition:Islamism,\ ] (of or relating to or supporting Islamism; "Islamic art") }
 { [ Hindu, noun.person:hindu1,+ noun.cognition:Hinduism,\ ] [ Hindi, noun.communication:hindi,+ noun.cognition:Hinduism,\ ] [ Hindoo, noun.person:hindoo1,+ noun.person:hindoo,+ noun.cognition:Hinduism,\ ] (of or relating to or supporting Hinduism; "the Hindu faith") }
-{ [ Hmong, noun.person:Hmong,\ ] ( of or related to the Hmong people or their language or their culture) } 
+{ [ Hmong, noun.person:Hmong,\ ] ( of or related to the Hmong people or their language or their culture) }
 { [ Buddhist, noun.cognition:Buddhism,\ ] [ Buddhistic, noun.group:buddhism,+ noun.cognition:buddhism,+ noun.cognition:Buddhism,\ ] (of or relating to or supporting Buddhism; "Buddhist sculpture") }
 { [ sculptural, noun.artifact:sculpture,+ noun.artifact:sculpture,\ ] (relating to or consisting of sculpture; "sculptural embellishments") }
 { [ evaporative, verb.change:evaporate2,+ verb.change:evaporate1,+ noun.process:evaporation,\ ] (relating to or causing or being caused by evaporation; "an evaporative cooler") }
@@ -2253,7 +2253,7 @@
 { [ South_African, noun.location:south_africa,+ noun.location:South_Africa,\ ] (of or pertaining to or characteristic of South Africa or its people) }
 { [ asymptotic, noun.shape:asymptote,+ noun.shape:asymptote,\ ] (relating to or of the nature of an asymptote; "an asymptotic function") }
 { [ subtropical, noun.location:subtropics,\ ] [ subtropic, noun.location:subtropics,+ noun.location:subtropics,\ ] semitropical, semitropic, (of or relating to or characteristic of conditions in the subtropics; "even near the equator vegetation at 5000 ft is subtropical rather than tropical") }
-{ [ tropical, noun.location:tropic,+ noun.location:tropic,\ ] (of or relating to the tropics, or either tropic; "tropical year") } 
+{ [ tropical, noun.location:tropic,+ noun.location:tropic,\ ] (of or relating to the tropics, or either tropic; "tropical year") }
 { [ equatorial, noun.location:equator,\ ] (of or relating to conditions at the geographical equator; "equatorial heat") }
 { [ equatorial2, noun.shape:equator,+ noun.shape:equator,\ ] (of or relating to or at an equator; "equatorial diameter") }
 { [ rational, noun.attribute:rationalness,+ irrational,! noun.relation:ratio1,\ ] noun.cognition:math,;c (capable of being expressed as a quotient of integers; "rational numbers") }
@@ -2538,7 +2538,7 @@
 { [ tragicomic, noun.communication:tragicomedy,+ noun.communication:tragicomedy,\ ] noun.communication:drama,;c (of or relating to or characteristic of tragicomedy; "a playwright specializing in tragicomic drama") }
 { [ abyssal, noun.object:abyssal_zone,\ ] (relating to ocean depths from 2000 to 5000 meters) }
 { [ neritic, noun.object:neritic_zone,\ ] (of or relating to the region of the sea over the continental shelf which is less than 200 meters deep; "neritic fauna"; "neritic oil") }
-{ [ baroque, noun.time:Baroque,\] [Baroque, noun.time:Baroque,\] (of or relating to or characteristic of the elaborately ornamented style of architecture, art, and music popular in Europe between 1600 and 1750) } 
+{ [ baroque, noun.time:Baroque,\] [Baroque, noun.time:Baroque,\] (of or relating to or characteristic of the elaborately ornamented style of architecture, art, and music popular in Europe between 1600 and 1750) }
 { [ bathyal, noun.object:bathyal_zone,\ ] (relating to ocean depths between 200 and 2000 meters (corresponds to the continental slope)) }
 { [ hadal, noun.object:seabed,\ ] (relating to the deepest parts of the ocean (below 6000 meters)) }
 { [ operculate, noun.animal:operculum,\ ] [ operculated, noun.animal:operculum,\ ] (having an operculum) }
@@ -2678,7 +2678,7 @@
 { [ locomotive, noun.attribute:locomotion,+ noun.act:locomotion,+ verb.motion:locomote,+ noun.act:locomotion,\ ] [ locomotor, noun.act:locomotion,\ ] (of or relating to locomotion) }
 { [ logarithmic, noun.communication:logarithm,+ noun.communication:logarithm,\ ] (of or relating to or using logarithms; "logarithmic function") }
 { [ Markovian, noun.person:markov,+ noun.process:Markov_process,\ ] (relating to or generated by a Markov process) }
-{ [ marmorean, noun.substance:marble,+ noun.substance:marble,\ ] [ marmoreal, noun.substance:marble,+ noun.substance:marble,\ ] (of or relating to or characteristic of marble) } 
+{ [ marmorean, noun.substance:marble,+ noun.substance:marble,\ ] [ marmoreal, noun.substance:marble,+ noun.substance:marble,\ ] (of or relating to or characteristic of marble) }
 { [ marly, noun.substance:marl,+ noun.substance:marl,\ ] (of or relating to or resembling or abounding in marl) }
 { [ mesonic, noun.object:meson,+ noun.object:meson,\ ] [ mesic, noun.object:meson,+ noun.object:meson,\ ] noun.cognition:physics,;c (of or pertaining to a meson; "the radii of the mesic orbits"- Lawrence Wilets) }
 { [ marsupial, noun.body:marsupium,\ ] (of or relating to the marsupials; "marsupial animals") }
@@ -2991,7 +2991,7 @@
 { [ ambassadorial, noun.person:ambassador,+ noun.person:ambassador,\ ] (of or relating to or characteristic of ambassadors) }
 { [ amoebic, noun.animal:amoeba,+ noun.animal:amoeba,\ ] [ amebic, noun.animal:ameba,+ noun.animal:amoeba,\ ] [ amoeban, noun.animal:amoeba,+ noun.animal:amoeba,\ ] [ ameban, noun.animal:ameba,+ noun.animal:amoeba,\ ] [ amoebous, noun.animal:amoeba,+ noun.animal:amoeba,\ ] [ amebous, noun.animal:ameba,+ noun.animal:amoeba,\ ] (pertaining to or resembling amoebae; "amoebic dysentery") }
 { [ anemic, noun.state:anemia,+ noun.state:anemia,\ ] [ anaemic, noun.state:anaemia,+ noun.state:anemia,\ ] (relating to anemia or suffering from anemia)}
-{ [ anaesthetic, verb.body:anaesthetize,+ noun.state:anaesthesia,\ ] [anesthetic, noun.state:anesthesia,\ ] (relating to or producing insensibility) } 
+{ [ anaesthetic, verb.body:anaesthetize,+ noun.state:anaesthesia,\ ] [anesthetic, noun.state:anesthesia,\ ] (relating to or producing insensibility) }
 { [ ablative, noun.communication:ablative,\ ] noun.cognition:linguistics,;c (relating to the ablative case) }
 { [ accusatorial, noun.communication:accusation1,+ noun.communication:accusation,+ inquisitorial,! noun.person:accuser,\ ] (specifically indicating a form of prosecution in which one is publicly accused of and tried for a crime and in which the judge is not also the prosecutor) }
 { [ inquisitorial, noun.person:inquisitor,+ accusatorial,! noun.person:inquisitor,\ ] (especially indicating a form of prosecution in which proceedings are secret and the accused is questioned by a prosecutor who acts also as the judge) }
@@ -3527,7 +3527,7 @@
 { [ trophotropic, noun.act:trophotropism,+ noun.act:trophotropism,\ ] (of or relating to trophotropism) }
 { [ Tunisian1, noun.person:tunisian,+ noun.location:tunisia,+ noun.location:Tunisia,\ ] (of or relating to Tunisia or its inhabitants; "Tunisian archeological sites") }
 { [ Tunisian2, noun.location:Tunis,\ ] (of or relating to the city of Tunis or its residents; "Tunisian markets") }
-{ [ Turkic, noun.communication:Turki,\ ] (of or relating to the people who speak the Turkic language) } 
+{ [ Turkic, noun.communication:Turki,\ ] (of or relating to the people who speak the Turkic language) }
 { [ tutorial, noun.communication:tutorial,+ noun.person:tutor,+ noun.person:tutor,\ ] (of or relating to tutors or tutoring; "tutorial sessions") }
 { [ Ugandan, noun.location:Uganda,\ ] (of or relating to or characteristic of Uganda or its people; "Ugandan game parks") }
 { [ uric, noun.substance:urine,\ ] (in or relating to or obtained from urine; "uric acid") }
@@ -3575,7 +3575,7 @@
 { [ rupestral, noun.substance:rock,\ ] [ rupicolous, noun.substance:rock,\ ] (composed of or inscribed on rock; "rupestral drawings in the caves of Northern Spain") }
 { [ Kafkaesque, noun.person:Kafka,\ ] (relating to or in the manner of Franz Kafka or his writings) }
 { [ Faustian, noun.person:faust,+ noun.person:Faust,\ ] (pertaining to or resembling or befitting Faust or Faustus especially in insatiably striving for worldly knowledge and power even at the price of spiritual values; "a Faustian pact with the Devil") }
-{ [ invitational, noun.communication:invitation,+ noun.communication:invitation,\ ] (pertaining to or characteristic of an invitation) } 
+{ [ invitational, noun.communication:invitation,+ noun.communication:invitation,\ ] (pertaining to or characteristic of an invitation) }
 { [ involucrate, noun.plant:involucre,\ ] noun.cognition:botany,;c (having an involucre) }
 { [ scalar, noun.cognition:scalar,+ noun.relation:scale,\ ] (of or relating to a directionless magnitude (such as mass or speed etc.) that is completely specified by its magnitude; "scalar quantity") }
 { [ scalar1, noun.communication:scale,+ noun.communication:scale,\ ] (of or relating to a musical scale; "he played some basic scalar patterns on his guitar") }
@@ -3595,7 +3595,7 @@
 { [ striate, noun.shape:stria,\ ] (marked with stria or striations) }
 { [ sulcate, noun.body:sulcus,\ ] (having deep narrow furrows or grooves) }
 { [ hymenal, noun.body:hymen,+ noun.body:hymen,\ ] (of or relating to the hymen) }
-{ [ hymeneal,noun.act:wedding,\ noun.act:marriage,\ ] (of or relating to a wedding or marriage; "hymeneal rites") } 
+{ [ hymeneal,noun.act:wedding,\ noun.act:marriage,\ ] (of or relating to a wedding or marriage; "hymeneal rites") }
 { [ servomechanical, noun.artifact:servomechanism,\ ] [ servo, noun.artifact:servo,+ noun.artifact:servomechanism,\ ] (of or involving servomechanisms) }
 { [ onomatopoeic, noun.communication:onomatopoeia,\ ] [ onomatopoetic, noun.communication:onomatopoeia,+ noun.communication:onomatopoeia,\ ] (of or relating to or characterized by onomatopoeia) }
 { [ commercial, noun.act:commerce,+ noun.act:commerce,\ ] (of or relating to commercialism; "a commercial attache"; "commercial paper"; "commercial law") }
@@ -3638,7 +3638,7 @@
 { [ thallophytic, noun.plant:thallophyte,+ noun.plant:thallophyte,\ ] (pertaining to or characteristic of thallophytes) }
 { [ ulcerative, verb.change:ulcerate,+ verb.body:ulcerate,+ noun.state:ulceration,\ ] (of or relating to or characterized by ulceration; "ulcerative colitis") }
 { [ ultramicroscopic, noun.artifact:ultramicroscope,+ noun.artifact:ultramicroscope,\ ] (too small to be seen without an ultramicroscope) }
-{ [ ultramontane, noun.cognition:ultramontanism,\ ] (of or relating to ultramontanism) } 
+{ [ ultramontane, noun.cognition:ultramontanism,\ ] (of or relating to ultramontanism) }
 { [ undescended, noun.body:undescended_testicle,\ ] ((of the testis) remaining in the abdomen instead of descending into the scrotum) }
 { [ undulatory, noun.event:undulation1,\ ] [ undulant, noun.event:undulation1,\ ] (resembling waves in form or outline or motion) }
 { [ universalistic1, noun.cognition:whole,\ ] (of or relating to the whole) }

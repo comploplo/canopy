@@ -13,10 +13,10 @@
             targetNamespace="http://framenet.icsi.berkeley.edu"
             xmlns="http://framenet.icsi.berkeley.edu"
             elementFormDefault="qualified">
-    
-    <!-- 
+
+    <!--
        A sketch of the XML under the root is as follows:
-       
+
        <lexUnit ...>
          <header> ... </header>
          <definition> ... </definition>
@@ -53,9 +53,9 @@
             <xsd:attribute name="totalAnnotated" type="fn:countType"/>
         </xsd:complexType>
     </xsd:element>
-    
+
     <!-- ************* Types Contained in the Root Node **************  -->
-    
+
     <!-- valences type -->
     <xsd:complexType name="valencesType">
         <xsd:sequence>
@@ -67,7 +67,7 @@
                 minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <!-- subCorpus element type -->
     <xsd:complexType name="subCorpusType">
         <xsd:sequence>
@@ -76,9 +76,9 @@
         </xsd:sequence>
         <xsd:attribute name="name" type="xsd:string"/>
     </xsd:complexType>
-    
+
     <!-- ************* Types contains in the valences type ************** -->
-    
+
     <!-- governor type -->
     <xsd:complexType name="governorType">
         <xsd:sequence>
@@ -87,7 +87,7 @@
         <xsd:attribute name="lemma" type="xsd:string" use="required"/>
         <xsd:attribute name="type" type="xsd:string" use="required"/> <!-- more strict type? -->
     </xsd:complexType>
-    
+
     <!-- FERealization Type -->
     <xsd:complexType name="FERealizationType">
         <xsd:sequence>
@@ -104,7 +104,7 @@
         </xsd:sequence>
         <xsd:attribute name="total" type="fn:countType" use="required"/>
     </xsd:complexType>
-  
+
     <!-- FEGRoupRealization type -->
     <xsd:complexType name="FEGroupRealizationType">
         <xsd:sequence>
@@ -121,7 +121,7 @@
         </xsd:sequence>
         <xsd:attribute name="total" type="fn:countType" use="required"/>
     </xsd:complexType>
-    
+
 
     <!-- Attributes-only Complex Types used in valences -->
     <xsd:complexType name="annoSetType">

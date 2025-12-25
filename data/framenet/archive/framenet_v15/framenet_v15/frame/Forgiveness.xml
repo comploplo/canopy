@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="08/23/2002 02:47:50 PDT Fri" name="Forgiveness" ID="401" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Judge&lt;/fen&gt; refrains from imposing, or demanding a punishment for an &lt;fen&gt;Evaluee&lt;/fen&gt; who has committed an &lt;fen&gt;Offense&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Judge&lt;/fen&gt; refrains from imposing, or demanding a punishment for an &lt;fen&gt;Evaluee&lt;/fen&gt; who has committed an &lt;fen&gt;Offense&lt;/fen&gt;.
 &lt;ex&gt;&lt;fex name="Judge"&gt;God&lt;/fex&gt; &lt;t&gt;forgives&lt;/t&gt; &lt;fex name="Evaluee"&gt;repentant sinners&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;Won't &lt;fex name="Judge"&gt;you&lt;/fex&gt; &lt;t&gt;forgive&lt;/t&gt; &lt;fex name="Evaluee"&gt;me&lt;/fex&gt; &lt;fex name="Offense"&gt;for keeping it a secret&lt;/fex&gt;?&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="08/23/2002 06:16:41 PDT Fri" abbrev="Judge" name="Judge" ID="3610">

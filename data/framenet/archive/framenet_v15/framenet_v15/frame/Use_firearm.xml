@@ -47,7 +47,7 @@
         <semType name="Source" ID="151"/>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="04/26/2002 02:29:30 PDT Fri" abbrev="Area" name="Area" ID="2691">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Area&lt;/fen&gt; is the setting in which the projectile's movement takes place. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Area&lt;/fen&gt; is the setting in which the projectile's movement takes place.
 &lt;ex&gt;Sometimes they got together and &lt;t&gt;fired&lt;/t&gt; off M-16 &lt;fex name="Area"&gt;in the park&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="664" cDate="04/26/2002 02:41:03 PDT Fri" abbrev="Iter" name="Iteration" ID="2692">

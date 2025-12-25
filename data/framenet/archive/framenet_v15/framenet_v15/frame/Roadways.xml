@@ -4,7 +4,7 @@
     <definition>&lt;def-root&gt;This frame involves stable &lt;fen&gt;Roadway&lt;/fen&gt;s which connect two stable &lt;fen&gt;Endpoints&lt;/fen&gt;, the &lt;fen&gt;Source&lt;/fen&gt; and the &lt;fen&gt;Goal&lt;/fen&gt;.  Being physical objects, these &lt;fen&gt;Roadway&lt;/fen&gt;s may have &lt;fen&gt;Name&lt;/fen&gt;s and &lt;fen&gt;Characteristic&lt;/fen&gt;s; they are also made of a &lt;fen&gt;Material&lt;/fen&gt;.  They also cover ground, so they may have a &lt;fen&gt;Path&lt;/fen&gt; or a &lt;fen&gt;Relative_location&lt;/fen&gt; that the travel occurs in.
 
 &lt;ex&gt; We crossed the &lt;fex name="Material"&gt;brick&lt;/fex&gt; &lt;fex name="Roadway"&gt;road&lt;/fex&gt;.&lt;/ex&gt;
-&lt;ex&gt; I prefer to travel on &lt;fex name="Roadway"&gt;highway&lt;/fex&gt; &lt;fex name="Name"&gt;I-80&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt; I prefer to travel on &lt;fex name="Roadway"&gt;highway&lt;/fex&gt; &lt;fex name="Name"&gt;I-80&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;This is the only &lt;fex name="Roadway"&gt;highway&lt;/fex&gt; &lt;fex name="Endpoints"&gt;between Lodi and Sonoma&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt; She dreaded turning onto the &lt;fex name="Frequency_of_use"&gt;busy&lt;/fex&gt; &lt;fex name="Roadway"&gt;street&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="599" cDate="08/17/2001 04:44:26 PDT Fri" abbrev="Road" name="Roadway" ID="1657">

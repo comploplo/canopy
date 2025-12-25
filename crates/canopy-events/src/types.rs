@@ -180,10 +180,7 @@ impl ComposedEvents {
 
     /// Get total participant count across all events
     pub fn total_participants(&self) -> usize {
-        self.events
-            .iter()
-            .map(|e| e.event.participants.len())
-            .sum()
+        self.events.iter().map(|e| e.event.participants.len()).sum()
     }
 }
 

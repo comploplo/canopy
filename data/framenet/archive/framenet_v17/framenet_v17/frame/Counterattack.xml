@@ -29,7 +29,7 @@ A &lt;fen&gt;Weapon&lt;/fen&gt; used by the &lt;fen&gt;Assailant&lt;/fen&gt; may
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="RLG" cDate="10/14/2011 12:27:05 PDT Fri" abbrev="Mns" name="Means" ID="15231">
-        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Assailant&lt;/fen&gt; that accomplishes the assault. 
+        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Assailant&lt;/fen&gt; that accomplishes the assault.
 
 &lt;ex&gt;&lt;fex name="Assailant"&gt;Japanese&lt;/fex&gt; &lt;t&gt;counterattacked&lt;/t&gt; &lt;fex name="Means"&gt;by invading coastal fortifications&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

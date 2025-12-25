@@ -4,12 +4,12 @@
 //! Moby Dick, demonstrating the system's ability to process arbitrary text.
 
 use canopy_events::{DependencyArc, EventComposer, SentenceAnalysis};
+use canopy_tokenizer::SemanticCoordinator;
 use canopy_tokenizer::coordinator::CoordinatorConfig;
 use canopy_tokenizer::tokenization::Tokenizer;
-use canopy_tokenizer::SemanticCoordinator;
 use canopy_treebank::types::DependencyRelation;
-use rand::seq::SliceRandom;
 use rand::SeedableRng;
+use rand::seq::SliceRandom;
 use std::fs;
 use std::sync::Arc;
 use std::time::Instant;
@@ -81,7 +81,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut coordinator = SemanticCoordinator::new(config)?;
 
     // Wire up treebank dependency analysis
-    match canopy_treebank::TreebankEngine::with_config(canopy_treebank::engine::TreebankConfig::default()) {
+    match canopy_treebank::TreebankEngine::with_config(
+        canopy_treebank::engine::TreebankConfig::default(),
+    ) {
         Ok(treebank_engine) => {
             coordinator.set_treebank_provider(Arc::new(treebank_engine));
             println!("   ✅ Treebank dependency analysis enabled");
@@ -194,8 +196,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("   • Sentences analyzed: 100");
     println!(
         "   • Sentences with semantic data: {} ({:.1}%)",
-        sentences_with_semantic_data,
-        sentences_with_semantic_data as f64
+        sentences_with_semantic_data, sentences_with_semantic_data as f64
     );
     println!("   • Total content words: {}", total_words);
     println!("   • Total semantic features: {}", total_features);
@@ -228,36 +229,48 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Show event composition for a few carefully selected sentences
     let demo_sentences = [
-        ("John gives Mary a book", vec![
-            ("John", "john", Some(canopy_core::UPos::Propn)),
-            ("gives", "give", Some(canopy_core::UPos::Verb)),
-            ("Mary", "mary", Some(canopy_core::UPos::Propn)),
-            ("a", "a", Some(canopy_core::UPos::Det)),
-            ("book", "book", Some(canopy_core::UPos::Noun)),
-        ], vec![
-            (1, 0, DependencyRelation::NominalSubject),  // John <- gives
-            (1, 2, DependencyRelation::IndirectObject),  // Mary <- gives
-            (1, 4, DependencyRelation::Object),          // book <- gives
-        ]),
-        ("The whale broke the boat", vec![
-            ("The", "the", Some(canopy_core::UPos::Det)),
-            ("whale", "whale", Some(canopy_core::UPos::Noun)),
-            ("broke", "break", Some(canopy_core::UPos::Verb)),
-            ("the", "the", Some(canopy_core::UPos::Det)),
-            ("boat", "boat", Some(canopy_core::UPos::Noun)),
-        ], vec![
-            (2, 1, DependencyRelation::NominalSubject),  // whale <- broke
-            (2, 4, DependencyRelation::Object),          // boat <- broke
-        ]),
-        ("Ahab fears the whale", vec![
-            ("Ahab", "ahab", Some(canopy_core::UPos::Propn)),
-            ("fears", "fear", Some(canopy_core::UPos::Verb)),
-            ("the", "the", Some(canopy_core::UPos::Det)),
-            ("whale", "whale", Some(canopy_core::UPos::Noun)),
-        ], vec![
-            (1, 0, DependencyRelation::NominalSubject),  // Ahab <- fears
-            (1, 3, DependencyRelation::Object),          // whale <- fears
-        ]),
+        (
+            "John gives Mary a book",
+            vec![
+                ("John", "john", Some(canopy_core::UPos::Propn)),
+                ("gives", "give", Some(canopy_core::UPos::Verb)),
+                ("Mary", "mary", Some(canopy_core::UPos::Propn)),
+                ("a", "a", Some(canopy_core::UPos::Det)),
+                ("book", "book", Some(canopy_core::UPos::Noun)),
+            ],
+            vec![
+                (1, 0, DependencyRelation::NominalSubject), // John <- gives
+                (1, 2, DependencyRelation::IndirectObject), // Mary <- gives
+                (1, 4, DependencyRelation::Object),         // book <- gives
+            ],
+        ),
+        (
+            "The whale broke the boat",
+            vec![
+                ("The", "the", Some(canopy_core::UPos::Det)),
+                ("whale", "whale", Some(canopy_core::UPos::Noun)),
+                ("broke", "break", Some(canopy_core::UPos::Verb)),
+                ("the", "the", Some(canopy_core::UPos::Det)),
+                ("boat", "boat", Some(canopy_core::UPos::Noun)),
+            ],
+            vec![
+                (2, 1, DependencyRelation::NominalSubject), // whale <- broke
+                (2, 4, DependencyRelation::Object),         // boat <- broke
+            ],
+        ),
+        (
+            "Ahab fears the whale",
+            vec![
+                ("Ahab", "ahab", Some(canopy_core::UPos::Propn)),
+                ("fears", "fear", Some(canopy_core::UPos::Verb)),
+                ("the", "the", Some(canopy_core::UPos::Det)),
+                ("whale", "whale", Some(canopy_core::UPos::Noun)),
+            ],
+            vec![
+                (1, 0, DependencyRelation::NominalSubject), // Ahab <- fears
+                (1, 3, DependencyRelation::Object),         // whale <- fears
+            ],
+        ),
     ];
 
     for (sentence_text, token_data, deps) in &demo_sentences {
@@ -308,7 +321,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                         println!("   🎯 Event: {}", event.event.predicate);
                         println!("      LittleV: {:?}", event.event.little_v);
                         println!("      Voice: {:?}", event.event.voice);
-                        println!("      Participants: {} bound", event.event.participants.len());
+                        println!(
+                            "      Participants: {} bound",
+                            event.event.participants.len()
+                        );
                         for (role, entity) in &event.event.participants {
                             println!("         • {:?} → \"{}\"", role, entity.text);
                         }

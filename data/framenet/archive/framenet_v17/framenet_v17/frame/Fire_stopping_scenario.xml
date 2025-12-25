@@ -23,7 +23,7 @@
         <definition>&lt;def-root&gt;The combustion process that the &lt;fen&gt;Agent&lt;/fen&gt; causes to end.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFFF00" fgColor="000000" coreType="Peripheral" cBy="MJE" cDate="03/03/2014 03:02:34 PST Mon" abbrev="" name="Degree" ID="15994">
-        <definition>&lt;def-root&gt;This FE describes the how near the &lt;fen&gt;Agent&lt;/fen&gt; is to putting out the &lt;fen&gt;Fire&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;This FE describes the how near the &lt;fen&gt;Agent&lt;/fen&gt; is to putting out the &lt;fen&gt;Fire&lt;/fen&gt;.
 &lt;/def-root&gt;</definition>
         <semType name="Degree" ID="172"/>
     </FE>

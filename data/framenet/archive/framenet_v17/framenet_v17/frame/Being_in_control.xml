@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="RLG" cDate="10/11/2006 03:04:26 PDT Wed" name="Being_in_control" ID="1800" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Controlling_entity&lt;/fen&gt; has control of a &lt;fen&gt;Dependent_entity&lt;/fen&gt;, &lt;fen&gt;Dependent_situation&lt;/fen&gt;, or &lt;fen&gt;Dependent_variable&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Controlling_entity&lt;/fen&gt; has control of a &lt;fen&gt;Dependent_entity&lt;/fen&gt;, &lt;fen&gt;Dependent_situation&lt;/fen&gt;, or &lt;fen&gt;Dependent_variable&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Controlling_entity"&gt;She&lt;/fex&gt; was &lt;m&gt;in&lt;/m&gt; &lt;t&gt;control&lt;/t&gt; &lt;fex name="Dependent_entity"&gt;of the empire&lt;/fex&gt; &lt;fex name="Time"&gt;within two days&lt;/fex&gt;.&lt;/ex&gt;
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:12:22 PST Wed" name="Make_noise" ID="69" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A physical entity, construed as a point-&lt;fen&gt;Sound_source&lt;/fen&gt;, emits a &lt;fen&gt;Sound&lt;/fen&gt;.  This includes animals and people making noise with their vocal tracts. Sometimes the sound itself is referred to with a nominal expression, in which case it is called the &lt;fen&gt;Sound&lt;/fen&gt;. &lt;fen&gt;Manner&lt;/fen&gt; expressions may also be relevant in this frame, if they describe properties of the sound as such.  A path-schema can be overlaid on the simple noise-making scene, adding a &lt;fen&gt;Location_of_source&lt;/fen&gt; and/or a &lt;fen&gt;Path&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;A physical entity, construed as a point-&lt;fen&gt;Sound_source&lt;/fen&gt;, emits a &lt;fen&gt;Sound&lt;/fen&gt;.  This includes animals and people making noise with their vocal tracts. Sometimes the sound itself is referred to with a nominal expression, in which case it is called the &lt;fen&gt;Sound&lt;/fen&gt;. &lt;fen&gt;Manner&lt;/fen&gt; expressions may also be relevant in this frame, if they describe properties of the sound as such.  A path-schema can be overlaid on the simple noise-making scene, adding a &lt;fen&gt;Location_of_source&lt;/fen&gt; and/or a &lt;fen&gt;Path&lt;/fen&gt;.
 
 This frame does not cover scenarios where objects create sound by coming into forceful contact with one another or rubbing against each other. Such scenarios are covered by the Impact and Friction frames. The current frame also does not cover cases where an animate Agent or a natural Force or Cause causes a single Source or several Sources (moving or rubbing against each other) to make noise. Such scenarios are  covered by the Cause_to_make_noise, Cause_impact and Cause_friction frames (the latter of which is not yet existent). Cases where the major emphasis of the portrayed scene is on the motion of a Theme, with sound emission only an accompaniment, are covered by the Motion_noise frame. Likewise, cases where the Sound itself is portrayed as moving through space are not covered in this frame but rather in Sound_movement. Finally, all nouns used to evoke Sounds have been placed in the Sounds frame. We have done this because these nouns do  not denote sound emission/production events but only the Sound itself (*The siren's blare occurred right on time).&lt;/def-root&gt;</definition>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:22 PST Wed" abbrev="Src-p" name="Sound_source" ID="323">
-        <definition>&lt;def-root&gt;The frame element &lt;fen&gt;Sound_source&lt;/fen&gt; is assigned to a constituent referring to a physical entity which emits a sound. Such an entity must have an appropriately complex internal structure such that it can create a sound. For example, a machine or some other thing with moving parts can create sound by itself.  
+        <definition>&lt;def-root&gt;The frame element &lt;fen&gt;Sound_source&lt;/fen&gt; is assigned to a constituent referring to a physical entity which emits a sound. Such an entity must have an appropriately complex internal structure such that it can create a sound. For example, a machine or some other thing with moving parts can create sound by itself.
 
 &lt;ex&gt;&lt;fex name="Sound_source"&gt;The wind&lt;/fex&gt; &lt;t&gt;howled&lt;/t&gt;.&lt;/ex&gt;
 
@@ -19,16 +19,16 @@ This frame does not cover scenarios where objects create sound by coming into fo
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:22 PST Wed" abbrev="Sound" name="Sound" ID="328">
-        <definition>&lt;def-root&gt;The frame element &lt;fen&gt;Sound&lt;/fen&gt; is incorporated in the meaning of the verbs of this frame. Otherwise, this FE is assigned to NPs which actually refer to a sound in the presence of the target. This typically occurs when the target is a verb used as a modifier in its &lt;ment&gt;-ing&lt;/ment&gt; form, e.g.: 
+        <definition>&lt;def-root&gt;The frame element &lt;fen&gt;Sound&lt;/fen&gt; is incorporated in the meaning of the verbs of this frame. Otherwise, this FE is assigned to NPs which actually refer to a sound in the presence of the target. This typically occurs when the target is a verb used as a modifier in its &lt;ment&gt;-ing&lt;/ment&gt; form, e.g.:
 
 &lt;ex&gt;The branches made a &lt;t&gt;rattling&lt;/t&gt; &lt;fex name="Sound"&gt;sound&lt;/fex&gt;.&lt;/ex&gt;
 
-In this example, the frame element &lt;fen&gt;Sound&lt;/fen&gt; is actually expressed by the word &lt;ment&gt;sound&lt;/ment&gt;.  
+In this example, the frame element &lt;fen&gt;Sound&lt;/fen&gt; is actually expressed by the word &lt;ment&gt;sound&lt;/ment&gt;.
 Sometimes, &lt;fen&gt;Sound&lt;/fen&gt; just occurs as an NP argument of a tensed verb form.
 &lt;ex&gt;&lt;fex name="Sound"&gt;Heavy music&lt;/fex&gt; &lt;t&gt;thundered&lt;/t&gt; from leather-curtained basements&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="ChW" cDate="02/07/2001 04:12:22 PST Wed" abbrev="Manr" name="Manner" ID="329">
-        <definition>&lt;def-root&gt;Manner expressions may be of lexicographic interest if they describe properties of a sounds as such: &lt;ment&gt;loudly&lt;/ment&gt;, &lt;ment&gt;shrilly&lt;/ment&gt;, etc. 
+        <definition>&lt;def-root&gt;Manner expressions may be of lexicographic interest if they describe properties of a sounds as such: &lt;ment&gt;loudly&lt;/ment&gt;, &lt;ment&gt;shrilly&lt;/ment&gt;, etc.
 
 &lt;ex&gt;Jocelyn &lt;t&gt;sobbed&lt;/t&gt; &lt;fex name="Manner"&gt;loudly&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
@@ -47,7 +47,7 @@ Sometimes, &lt;fen&gt;Sound&lt;/fen&gt; just occurs as an NP argument of a tense
 &lt;ex&gt;Cicadas &lt;t&gt;screech&lt;/t&gt; &lt;fex name="Depictive"&gt;unseen from within&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MJE" cDate="07/17/2001 02:51:46 PDT Tue" abbrev="ICause" name="Internal_cause" ID="1505">
-        <definition>&lt;def-root&gt;The noise-making may be prompted by either some outside phenomenon or occurrence, or by an &lt;fen&gt;Internal_cause&lt;/fen&gt;, the mental or emotional state of an animate &lt;fen&gt;Sound_source&lt;/fen&gt;.  &lt;fen&gt;Internal_cause&lt;/fen&gt; is expressed in a PP Complement: 
+        <definition>&lt;def-root&gt;The noise-making may be prompted by either some outside phenomenon or occurrence, or by an &lt;fen&gt;Internal_cause&lt;/fen&gt;, the mental or emotional state of an animate &lt;fen&gt;Sound_source&lt;/fen&gt;.  &lt;fen&gt;Internal_cause&lt;/fen&gt; is expressed in a PP Complement:
 
 &lt;ex&gt;Kim &lt;t&gt;hmmmed&lt;/t&gt; &lt;t&gt;and&lt;/t&gt; &lt;t&gt;haaed&lt;/t&gt; &lt;fex name="Internal_cause"&gt;in concentration&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;Kim &lt;t&gt;wailed&lt;/t&gt; &lt;fex name="Internal_cause"&gt;in despair&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
@@ -59,7 +59,7 @@ Sometimes, &lt;fen&gt;Sound&lt;/fen&gt; just occurs as an NP argument of a tense
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="09/10/2003 02:55:44 PDT Wed" abbrev="" name="Addressee" ID="5051">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Addressee&lt;/fen&gt; identifies the intended audience of an event of making a noise as a communicative signal. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Addressee&lt;/fen&gt; identifies the intended audience of an event of making a noise as a communicative signal.
 
 &lt;ex&gt; Our new puppy has taken to &lt;t&gt;growling&lt;/t&gt; &lt;fex name="Addressee"&gt;at other dogs&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
@@ -73,7 +73,7 @@ Sometimes, &lt;fen&gt;Sound&lt;/fen&gt; just occurs as an NP argument of a tense
 &lt;ex&gt;The radio &lt;t&gt;blared&lt;/t&gt; &lt;fex name="Path"&gt;across the room&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="000000" coreType="Peripheral" cBy="JKR" cDate="09/16/2003 03:14:42 PDT Tue" abbrev="" name="Place" ID="5080">
-        <definition>&lt;def-root&gt;The location of the &lt;fen&gt;Sound_source&lt;/fen&gt;. This FE differs from &lt;fen&gt;Location_of_source&lt;/fen&gt; only in terms of point of view; the latter FE implies a point of view that is not on the &lt;fen&gt;Sound_source&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The location of the &lt;fen&gt;Sound_source&lt;/fen&gt;. This FE differs from &lt;fen&gt;Location_of_source&lt;/fen&gt; only in terms of point of view; the latter FE implies a point of view that is not on the &lt;fen&gt;Sound_source&lt;/fen&gt;.
 
 &lt;ex&gt;A bat &lt;t&gt;squeaked&lt;/t&gt; &lt;fex name="Place"&gt;over our heads&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Locative_relation" ID="182"/>

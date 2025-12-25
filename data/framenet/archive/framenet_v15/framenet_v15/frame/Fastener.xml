@@ -20,7 +20,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="07/29/2005 11:26:25 PDT Fri" abbrev="cop" name="Container_portal" ID="8748">
-        <definition>&lt;def-root&gt;This FE identifies the active zone of the container where the &lt;fen&gt;Fastener&lt;/fen&gt; is located.  
+        <definition>&lt;def-root&gt;This FE identifies the active zone of the container where the &lt;fen&gt;Fastener&lt;/fen&gt; is located.
 
 
 &lt;ex&gt;We couldn't close the &lt;fex name="Container_portal"&gt;tent flap&lt;/fex&gt; &lt;t&gt;zipper&lt;/t&gt; and a lot of flies came in .&lt;/ex&gt;&lt;/def-root&gt;</definition>

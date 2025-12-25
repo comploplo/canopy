@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="CFB" cDate="04/24/2009 11:34:00 PDT Fri" name="Tolerating" ID="2131" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;The words in this frame describe an &lt;fen&gt;Experiencer&lt;/fen&gt;'s feelings of tolerating with respect to some &lt;fen&gt;Content&lt;/fen&gt;. A &lt;fen&gt;Reason&lt;/fen&gt; for the toleration may also be expressed.  Although the &lt;fen&gt;Content&lt;/fen&gt; may refer to an actual, current state of affairs, quite often it refers to a general situation which causes the emotion. 
- 
+    <definition>&lt;def-root&gt;The words in this frame describe an &lt;fen&gt;Experiencer&lt;/fen&gt;'s feelings of tolerating with respect to some &lt;fen&gt;Content&lt;/fen&gt;. A &lt;fen&gt;Reason&lt;/fen&gt; for the toleration may also be expressed.  Although the &lt;fen&gt;Content&lt;/fen&gt; may refer to an actual, current state of affairs, quite often it refers to a general situation which causes the emotion.
+
 &lt;ex&gt; &lt;fex name="Experiencer"&gt;He&lt;/fex&gt; could not &lt;t&gt;tolerate&lt;/t&gt; &lt;fex name="Content"&gt;the smell of coconut&lt;/fex&gt; . &lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="CFB" cDate="04/24/2009 11:34:00 PDT Fri" abbrev="Exp" name="Experiencer" ID="13142">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Experiencer&lt;/fen&gt; experiences tolerance with respect to the &lt;fen&gt;Content&lt;/fen&gt;.&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="CFB" cDate="04/24/2009 11:34:01 PDT Fri" abbrev="Cont" name="Content" ID="13143">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Content&lt;/fen&gt; is what the &lt;fen&gt;Experiencer&lt;/fen&gt;'s feeling of tolerance is directed towards..  The &lt;fen&gt;Content&lt;/fen&gt; differs from a stimulus because the &lt;fen&gt;Content&lt;/fen&gt; is not construed as being direcly responsible for causing the emotion. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Content&lt;/fen&gt; is what the &lt;fen&gt;Experiencer&lt;/fen&gt;'s feeling of tolerance is directed towards..  The &lt;fen&gt;Content&lt;/fen&gt; differs from a stimulus because the &lt;fen&gt;Content&lt;/fen&gt; is not construed as being direcly responsible for causing the emotion.
 &lt;ex&gt; &lt;fex name="Experiencer"&gt;Everyone&lt;/fex&gt; must &lt;t&gt;endure&lt;/t&gt; &lt;fex name="Content"&gt;some disappointments in life&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="Content" ID="55"/>
     </FE>
     <FE bgColor="90876C" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="CFB" cDate="04/24/2009 11:34:01 PDT Fri" abbrev="Exp" name="Explanation" ID="13144">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; is the explanation for why an &lt;fen&gt;Experiencer&lt;/fen&gt; tolerates the &lt;fen&gt;Content&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; is the explanation for why an &lt;fen&gt;Experiencer&lt;/fen&gt; tolerates the &lt;fen&gt;Content&lt;/fen&gt;.
 &lt;ex&gt; Spouses often &lt;t&gt;tolerate&lt;/t&gt; their partner's vices &lt;fex name="Explanation"&gt;because they love the overall person&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
     </FE>
@@ -35,7 +35,7 @@
         <definition>&lt;def-root&gt;The &lt;fen&gt;Topic&lt;/fen&gt; is the area about which the &lt;fen&gt;Experiencer&lt;/fen&gt; has the  tolerated experience(s). &lt;ex&gt; &lt;fex name="Experiencer"&gt;They&lt;/fex&gt; 're very &lt;t&gt;tolerant&lt;/t&gt; &lt;fex name="Topic"&gt;about boys' mess in the home and untidiness generally&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Core" cBy="CFB" cDate="04/24/2009 11:34:01 PDT Fri" abbrev="State" name="State" ID="13150">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;State&lt;/fen&gt; is the abstract noun that describes a more lasting experience by the &lt;fen&gt;Experiencer&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;State&lt;/fen&gt; is the abstract noun that describes a more lasting experience by the &lt;fen&gt;Experiencer&lt;/fen&gt;.
 &lt;ex&gt;Tracy was in a surprisngly &lt;t&gt;tolerant&lt;/t&gt; &lt;fex name="State"&gt;mood&lt;/fex&gt; today.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="CFB" cDate="04/24/2009 11:34:01 PDT Fri" abbrev="Event" name="Event" ID="13151">

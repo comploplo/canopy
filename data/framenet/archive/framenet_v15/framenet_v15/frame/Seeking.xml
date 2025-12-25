@@ -12,9 +12,9 @@ NB:  This frame should be compared to the Scrutiny frame, in which the primary f
         <definition>&lt;def-root&gt;This is the entity to which the Cognizer pays attention. It is referred to as &lt;t&gt;Ground&lt;/t&gt; because it serves as the background or context for the Phenomenon. This FE can be expressed as an NP Object or as a PP Complement: Leslie &lt;t&gt;examined&lt;/t&gt; &lt;fex name="Ground"&gt;the glass&lt;/fex&gt; for cracks. Kim &lt;t&gt;searched&lt;/t&gt; &lt;fex name="Ground"&gt;in the woods&lt;/fex&gt; for mushrooms. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="02/14/2002 11:19:04 PST Thu" abbrev="Phen" name="Sought_entity" ID="2329">
-        <definition>&lt;def-root&gt;This is the entity that the Ground may contain. Typically, it is expressed as a&lt;ment&gt;for&lt;/ment&gt;-PP. 
-Leslie &lt;t&gt;examined&lt;/t&gt; the glass &lt;fex name="Sought_entity"&gt;for cracks&lt;/fex&gt;. 
-Kim &lt;t&gt;searched&lt;/t&gt; in the woods &lt;fex name="Sought_entity"&gt;for mushrooms&lt;/fex&gt;. 
+        <definition>&lt;def-root&gt;This is the entity that the Ground may contain. Typically, it is expressed as a&lt;ment&gt;for&lt;/ment&gt;-PP.
+Leslie &lt;t&gt;examined&lt;/t&gt; the glass &lt;fex name="Sought_entity"&gt;for cracks&lt;/fex&gt;.
+Kim &lt;t&gt;searched&lt;/t&gt; in the woods &lt;fex name="Sought_entity"&gt;for mushrooms&lt;/fex&gt;.
 Some words in this frame allow alternate expressions of the Ground and the Sought_entity:  We searched the yard for my contact lens. We searched for my contact lends in the yard. &lt;/def-root&gt;</definition>
         <semType name="Physical_entity" ID="70"/>
     </FE>

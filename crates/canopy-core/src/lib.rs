@@ -45,6 +45,8 @@
 //! ```
 
 pub mod layer1parser;
+pub mod paths;
+pub mod treebank_loader;
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;

@@ -7,13 +7,13 @@
 &lt;ex&gt;&lt;fex name="Means"&gt;With your index finger&lt;/fex&gt; &lt;t&gt;prise&lt;/t&gt; &lt;fex name="Theme"&gt;the meat&lt;/fex&gt; &lt;fex name="Source"&gt;out of the shell&lt;/fex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Cause"&gt;The torrential winds&lt;/fex&gt; &lt;t&gt;dislodged&lt;/t&gt; &lt;fex name="Theme"&gt;most of the roof tiles&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:16 PST Wed" abbrev="Agt" name="Agent" ID="279">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Agent&lt;/fen&gt; is the person (or other force) that causes the &lt;fen&gt;Theme&lt;/fen&gt; to move. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Agent&lt;/fen&gt; is the person (or other force) that causes the &lt;fen&gt;Theme&lt;/fen&gt; to move.
 
 &lt;ex&gt;&lt;fex name="Agent"&gt;The waiter&lt;/fex&gt; &lt;t&gt;removed&lt;/t&gt; the dishes from the table.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:17 PST Wed" abbrev="Thm" name="Theme" ID="280">
-        <definition>&lt;def-root&gt;Theme is the object that changes location. 
+        <definition>&lt;def-root&gt;Theme is the object that changes location.
 
 &lt;ex&gt;The waiter &lt;t&gt;removed&lt;/t&gt; &lt;fex name="Theme"&gt;the dishes&lt;/fex&gt; from the table. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Physical_object" ID="68"/>
@@ -38,7 +38,7 @@ Sentences with a &lt;fen&gt;Source&lt;/fen&gt; object belong in the frame Motion
         <semType name="Source" ID="151"/>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="731" cDate="02/07/2001 04:12:17 PST Wed" abbrev="Path" name="Path" ID="282">
-        <definition>&lt;def-root&gt;Any description of a trajectory of motion which is neither a &lt;fen&gt;Source&lt;/fen&gt; nor a &lt;fen&gt;Goal&lt;/fen&gt; expresses the frame element &lt;fen&gt;Path&lt;/fen&gt;. In this frame, &lt;fen&gt;Path&lt;/fen&gt; expressions almost always have a &lt;ment&gt;via&lt;/ment&gt;-sense. 
+        <definition>&lt;def-root&gt;Any description of a trajectory of motion which is neither a &lt;fen&gt;Source&lt;/fen&gt; nor a &lt;fen&gt;Goal&lt;/fen&gt; expresses the frame element &lt;fen&gt;Path&lt;/fen&gt;. In this frame, &lt;fen&gt;Path&lt;/fen&gt; expressions almost always have a &lt;ment&gt;via&lt;/ment&gt;-sense.
 
 &lt;ex&gt;The army &lt;t&gt;evacuated&lt;/t&gt; the townspeople &lt;fex name="Path"&gt;through the tunnel&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -75,7 +75,7 @@ Sentences with a &lt;fen&gt;Source&lt;/fen&gt; object belong in the frame Motion
         <excludesFE name="Agent" ID="279"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="09/17/2001 06:06:54 PDT Mon" abbrev="Dist" name="Distance" ID="1927">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Distance&lt;/fen&gt; is any expression which characterizes the extent of motion.  This frame element occurs throughout the motion domain but is very infrequent in Motion_Noise. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Distance&lt;/fen&gt; is any expression which characterizes the extent of motion.  This frame element occurs throughout the motion domain but is very infrequent in Motion_Noise.
 
 &lt;ex&gt;John &lt;t&gt;withdrew&lt;/t&gt; the gun &lt;fex name="Distance"&gt;a few feet&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

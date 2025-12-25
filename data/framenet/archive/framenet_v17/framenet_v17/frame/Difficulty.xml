@@ -3,7 +3,7 @@
 <frame cBy="JKR" cDate="07/10/2002 06:29:00 PDT Wed" name="Difficulty" ID="375" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;An &lt;fen&gt;Experiencer&lt;/fen&gt; has an easy or difficult time carrying out an &lt;fen&gt;Activity&lt;/fen&gt;. The ease or difficulty associated with the &lt;fen&gt;Activity&lt;/fen&gt; seems to often be associated with a prominent participant. However, we consider this impression to be due to the syntax and pragmatics of the relevant sentence constructions and employ no special FE for such participants. The &lt;fen&gt;Degree&lt;/fen&gt; of ease or difficulty is often specified as well as a set of &lt;fen&gt;Circumstances&lt;/fen&gt;. A &lt;fen&gt;Parameter&lt;/fen&gt; may be mentioned that indicates in which respect the &lt;fen&gt;Activity&lt;/fen&gt; is judged to be easy or difficult.
 &lt;ex&gt;&lt;/ex&gt;
-Unmarked LUs of this frame indicate that something is easy, while LUs of this frame that mean the opposite of easy are marked with the semantic type "Negative", as in difficult.a, arduous.a, and a bitch.n.  
+Unmarked LUs of this frame indicate that something is easy, while LUs of this frame that mean the opposite of easy are marked with the semantic type "Negative", as in difficult.a, arduous.a, and a bitch.n.
 
 &lt;ex&gt;(1) &lt;fex name="Activity"&gt;John&lt;/fex&gt; &lt;m&gt;is&lt;/m&gt; &lt;t&gt;easy&lt;/t&gt; &lt;fex name="Activity"&gt;to please&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;(2) It &lt;m&gt;is&lt;/m&gt; &lt;t&gt;easy&lt;/t&gt; &lt;fex name="Activity"&gt;to get Alex annoyed&lt;/fex&gt;.&lt;/ex&gt;

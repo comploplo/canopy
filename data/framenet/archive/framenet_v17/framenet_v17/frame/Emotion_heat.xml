@@ -18,9 +18,9 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:08 PST Wed" abbrev="Emo" name="Emotion" ID="205">
-        <definition>&lt;def-root&gt;The Emotion experienced (usually restricted to words such as &lt;ment&gt;anger, fury, rage, passion&lt;/ment&gt;) can occur as the External Argument or in a PP Complement. Alternatively, there may be no expression of Emotion separate from the target verb: 
+        <definition>&lt;def-root&gt;The Emotion experienced (usually restricted to words such as &lt;ment&gt;anger, fury, rage, passion&lt;/ment&gt;) can occur as the External Argument or in a PP Complement. Alternatively, there may be no expression of Emotion separate from the target verb:
 
-&lt;ex&gt;&lt;fex name="Emotion"&gt;Rage&lt;/fex&gt; &lt;t&gt;boiled&lt;/t&gt; inside him.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Emotion"&gt;Rage&lt;/fex&gt; &lt;t&gt;boiled&lt;/t&gt; inside him.&lt;/ex&gt;
 
 &lt;ex&gt;He &lt;t&gt;boiled&lt;/t&gt; &lt;fex name="Emotion"&gt;with rage&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;Pat's behavior made me &lt;t&gt;seethe&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
@@ -29,7 +29,7 @@
         <definition>&lt;def-root&gt;The Cause of the Emotion can be expressed in a PP Complement headed by &lt;ment&gt;at&lt;/ment&gt;: &lt;ex&gt;Jo &lt;t&gt;burned&lt;/t&gt; with shame &lt;fex name="Cause"&gt;at the criticism&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:08 PST Wed" abbrev="sea" name="Seat_of_emotion" ID="207">
-        <definition>&lt;def-root&gt;The words in this frame can occur with an overtly expressed Seat of the Emotion. This frame element occurs as a PP Complement: 
+        <definition>&lt;def-root&gt;The words in this frame can occur with an overtly expressed Seat of the Emotion. This frame element occurs as a PP Complement:
 
 &lt;ex&gt;Fury &lt;t&gt;seethed&lt;/t&gt; &lt;fex name="sea"&gt;within her&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;I was &lt;t&gt;seething&lt;/t&gt; &lt;fex name="sea"&gt;inside&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>

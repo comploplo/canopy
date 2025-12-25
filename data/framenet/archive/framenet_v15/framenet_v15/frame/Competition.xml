@@ -42,8 +42,8 @@ EX: The Yankees won the game &lt;fex name="Score"&gt;by two points&lt;/fex&gt;.&
 &lt;ex&gt;The Mets  will play &lt;fex name="Venue"&gt;at Shea Stadium&lt;/fex&gt; tonight.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="243" cDate="11/27/2001 12:05:13 PST Tue" abbrev="Place" name="Place" ID="2136">
-        <definition>&lt;def-root&gt;Where the event takes place. 
-A constituent tagged as &lt;fen&gt;Place&lt;/fen&gt; may require annotation on a secondary FE-layer. 
+        <definition>&lt;def-root&gt;Where the event takes place.
+A constituent tagged as &lt;fen&gt;Place&lt;/fen&gt; may require annotation on a secondary FE-layer.
 &lt;ex&gt;First layer: John's first &lt;t&gt;competition&lt;/t&gt;  &lt;fex name="Place"&gt;at Wimbledon&lt;/fex&gt; astonished the crowd.&lt;/ex&gt;
 &lt;ex&gt;Second layer: John's first &lt;t&gt;competition&lt;/t&gt;  &lt;fex name="Competition"&gt;at Wimbledon&lt;/fex&gt; astonished the crowd.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Locative_relation" ID="182"/>

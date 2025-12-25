@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="KmG" cDate="06/24/2008 02:15:25 PDT Tue" name="Mention" ID="2080" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Communicator&lt;/fen&gt; or &lt;fen&gt;Medium&lt;/fen&gt; briefly references something in a &lt;fen&gt;Message&lt;/fen&gt;, in which only a subpart of the full content is profiled. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Communicator&lt;/fen&gt; or &lt;fen&gt;Medium&lt;/fen&gt; briefly references something in a &lt;fen&gt;Message&lt;/fen&gt;, in which only a subpart of the full content is profiled.
 
 &lt;ex&gt;&lt;fex name="Communicator"&gt;The General Secretary&lt;/fex&gt; &lt;t&gt;mentions&lt;/t&gt; &lt;fex name="Specified_content"&gt;some of them&lt;/fex&gt; &lt;fex name="Medium"&gt;in his report&lt;/fex&gt;.&lt;/ex&gt;
 
@@ -9,20 +9,20 @@
 
 &lt;ex&gt; When &lt;fex name="Specified_content"&gt;Barack Obama's name&lt;/fex&gt; was &lt;t&gt;mentioned&lt;/t&gt;, boos filled the room. &lt;fex name="Communicator"&gt;CNI&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="KmG" cDate="06/24/2008 02:15:25 PDT Tue" abbrev="Com" name="Communicator" ID="12891">
-        <definition>&lt;def-root&gt;The person who uses language in the written or spoken modality to convey a &lt;fen&gt;Message&lt;/fen&gt; to another person. 
+        <definition>&lt;def-root&gt;The person who uses language in the written or spoken modality to convey a &lt;fen&gt;Message&lt;/fen&gt; to another person.
 
 &lt;ex&gt;&lt;fex name="Communicator"&gt;Her father&lt;/fex&gt; never &lt;t&gt;mentioned&lt;/t&gt; it.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="KmG" cDate="06/24/2008 02:15:25 PDT Tue" abbrev="Add" name="Addressee" ID="12892">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; receives a &lt;fen&gt;Message&lt;/fen&gt; from the &lt;fen&gt;Communicator&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; receives a &lt;fen&gt;Message&lt;/fen&gt; from the &lt;fen&gt;Communicator&lt;/fen&gt;.
 
 &lt;ex&gt;I &lt;t&gt;mentioned&lt;/t&gt; it &lt;fex name="Addressee"&gt;to him&lt;/fex&gt; in direct terms.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="KmG" cDate="06/24/2008 02:15:25 PDT Tue" abbrev="Mes" name="Message" ID="12893">
-        <definition>&lt;def-root&gt; A proposition or set of propositions that the &lt;fen&gt;Communicator&lt;/fen&gt; wants the &lt;fen&gt;Addressee&lt;/fen&gt; to believe or take for granted. 
+        <definition>&lt;def-root&gt; A proposition or set of propositions that the &lt;fen&gt;Communicator&lt;/fen&gt; wants the &lt;fen&gt;Addressee&lt;/fen&gt; to believe or take for granted.
 
 &lt;ex&gt;A CBS report did &lt;t&gt;mention&lt;/t&gt; &lt;fex name="Message"&gt;that the First Lady was required to wear a flak jacket for her safety&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
@@ -30,7 +30,7 @@
         <excludesFE name="Specified_content" ID="12930"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="KmG" cDate="06/24/2008 02:15:25 PDT Tue" abbrev="Medium" name="Medium" ID="12895">
-        <definition>&lt;def-root&gt;The physical or abstract setting in which the &lt;fen&gt;Message&lt;/fen&gt; is conveyed. 
+        <definition>&lt;def-root&gt;The physical or abstract setting in which the &lt;fen&gt;Message&lt;/fen&gt; is conveyed.
 
 &lt;ex&gt;&lt;fex name="Medium"&gt;The report&lt;/fex&gt; also &lt;t&gt;mentioned&lt;/t&gt; contamination problems during the manufacture.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

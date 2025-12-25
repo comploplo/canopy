@@ -59,7 +59,7 @@
         <definition>&lt;def-root&gt;A consecutive event to the starting of the &lt;fen&gt;Activity&lt;/fen&gt; of the &lt;fen&gt;Agent&lt;/fen&gt;.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="000000" coreType="Extra-Thematic" cBy="361" cDate="06/06/2006 11:56:14 PDT Tue" abbrev="" name="Epistemic_stance" ID="10242">
-        <definition>&lt;def-root&gt;This FE modifies the target to indicate the legal- or other domain within which it is true or operational. 
+        <definition>&lt;def-root&gt;This FE modifies the target to indicate the legal- or other domain within which it is true or operational.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="7FFF00" fgColor="000000" coreType="Extra-Thematic" cBy="361" cDate="03/21/2007 11:09:08 PDT Wed" abbrev="Con" name="Concessive" ID="11239">

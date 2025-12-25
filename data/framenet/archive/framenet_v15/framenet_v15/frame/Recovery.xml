@@ -3,14 +3,14 @@
 <frame cBy="731" cDate="02/07/2001 04:12:09 PST Wed" name="Recovery" ID="51" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;These words describe the recovery or healing of a &lt;fen&gt;Patient&lt;/fen&gt; from an &lt;fen&gt;Affliction&lt;/fen&gt; without reference to the influence of any Treatment or Healer (see the Cure frame). &lt;/def-root&gt;</definition>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:09 PST Wed" abbrev="Pat" name="Patient" ID="213">
-        <definition>&lt;def-root&gt;The    Patient may either be expressed as the External Argument or, as in Health.Cure, may occur as the possessor of the Affliction (an example of FE conflation): 
+        <definition>&lt;def-root&gt;The    Patient may either be expressed as the External Argument or, as in Health.Cure, may occur as the possessor of the Affliction (an example of FE conflation):
 &lt;ex&gt;&lt;fex name="Patient"&gt;Pat&lt;/fex&gt; is &lt;t&gt;convalescing&lt;/t&gt; from surgery.&lt;/ex&gt;
 &lt;ex&gt;Pat's wound is &lt;t&gt;healing&lt;/t&gt;.&lt;/ex&gt;
 In the second example, &lt;ment&gt;Pat's wound&lt;/ment&gt; is the &lt;fen&gt;Body_part&lt;/fen&gt;, but &lt;ment&gt;Pat's&lt;/ment&gt; is also an instantiation of the &lt;fen&gt;Patient&lt;/fen&gt;.&lt;/def-root&gt;</definition>
         <requiresFE name="Affliction" ID="214"/>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:09 PST Wed" abbrev="Affl" name="Affliction" ID="214">
-        <definition>&lt;def-root&gt;This FE is the injury, pain or disease experienced by the Patient.  Affliction occurs either as an External Argument of verbs or as a PP Complement of nouns or verbs: 
+        <definition>&lt;def-root&gt;This FE is the injury, pain or disease experienced by the Patient.  Affliction occurs either as an External Argument of verbs or as a PP Complement of nouns or verbs:
 &lt;ex&gt;&lt;fex name="Affliction"&gt;The wound&lt;/fex&gt; is &lt;t&gt;healing&lt;/t&gt; well.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Affliction"&gt;Pat's wound&lt;/fex&gt; is &lt;t&gt;healing&lt;/t&gt; well.&lt;/ex&gt;
 &lt;ex&gt;Pat is &lt;t&gt;recovering&lt;/t&gt; &lt;fex name="Affliction"&gt;from scarlet fever&lt;/fex&gt;.&lt;/ex&gt;
@@ -18,7 +18,7 @@ In the second example, &lt;ment&gt;Pat's wound&lt;/ment&gt; is the &lt;fen&gt;Bo
         <requiresFE name="Patient" ID="213"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:09 PST Wed" abbrev="BodP" name="Body_part" ID="215">
-        <definition>&lt;def-root&gt;Where Body Part is expressed as a separate constituent (rather than in phrases such as &lt;ment&gt;the wound on Pat's arm&lt;/ment&gt;), it occurs as an External Argument: 
+        <definition>&lt;def-root&gt;Where Body Part is expressed as a separate constituent (rather than in phrases such as &lt;ment&gt;the wound on Pat's arm&lt;/ment&gt;), it occurs as an External Argument:
 &lt;ex&gt;&lt;fex name="Body_part"&gt;Pat's arm&lt;/fex&gt; &lt;t&gt;healed&lt;/t&gt; up quickly.&lt;/ex&gt;
  Body Part is treated as a separate Frame Element although it may be viewed as metonymic for Affliction. &lt;/def-root&gt;</definition>
         <semType name="Body_part" ID="10"/>

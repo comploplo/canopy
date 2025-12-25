@@ -10,7 +10,7 @@
 
 &lt;ex&gt;&lt;fex name="phe"&gt;Student disciplinary matters&lt;/fex&gt; are &lt;t&gt;confidential&lt;/t&gt; and should only be discussed with appropriate university officials&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="06/28/2004 11:13:39 PDT Mon" abbrev="phe" name="Phenomenon" ID="6607">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Phenomenon&lt;/fen&gt; is the activity, state or object that is purposefully hidden from the awareness of a potential cognizer. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Phenomenon&lt;/fen&gt; is the activity, state or object that is purposefully hidden from the awareness of a potential cognizer.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="06/28/2004 11:13:39 PDT Mon" abbrev="Degr" name="Degree" ID="6610">

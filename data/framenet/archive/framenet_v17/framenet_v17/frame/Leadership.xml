@@ -8,9 +8,9 @@
 &lt;ex&gt;&lt;fex name="Leader"&gt;Louis XIV&lt;/fex&gt; &lt;t&gt;ruled&lt;/t&gt; &lt;fex name="Governed"&gt;over his people&lt;/fex&gt; &lt;fex name="Role"&gt;as king&lt;/fex&gt; &lt;fex name="Duration"&gt;for the longest period of any European monarch&lt;/fex&gt;.&lt;/ex&gt;
 Compare to: Appellations. &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:24 PST Wed" abbrev="lea" name="Leader" ID="347">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Leader&lt;/fen&gt; is the one who has the role of leading.  With verbs, and with predicate nominals linking an individual to a &lt;fen&gt;Role&lt;/fen&gt;, the &lt;fen&gt;Leader&lt;/fen&gt; is usually the External Argument: 
-&lt;ex&gt;&lt;fex name="Leader"&gt;King Hussein&lt;/fex&gt; &lt;t&gt;ruled&lt;/t&gt; Jordan.&lt;/ex&gt; 
-&lt;ex&gt;&lt;fex name="Leader"&gt;Hussein&lt;/fex&gt; was &lt;t&gt;King&lt;/t&gt; of Jordan.&lt;/ex&gt; 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Leader&lt;/fen&gt; is the one who has the role of leading.  With verbs, and with predicate nominals linking an individual to a &lt;fen&gt;Role&lt;/fen&gt;, the &lt;fen&gt;Leader&lt;/fen&gt; is usually the External Argument:
+&lt;ex&gt;&lt;fex name="Leader"&gt;King Hussein&lt;/fex&gt; &lt;t&gt;ruled&lt;/t&gt; Jordan.&lt;/ex&gt;
+&lt;ex&gt;&lt;fex name="Leader"&gt;Hussein&lt;/fex&gt; was &lt;t&gt;King&lt;/t&gt; of Jordan.&lt;/ex&gt;
 With leadership nouns, the frame element &lt;fen&gt;Leader&lt;/fen&gt; is most frequently instantiated by the target itself.
 &lt;ex&gt;The &lt;fex name="Leader"&gt;&lt;t&gt;queen&lt;/t&gt;&lt;/fex&gt; announced her upcoming visit to Belgium.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     </FE>

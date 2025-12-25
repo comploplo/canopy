@@ -22,34 +22,34 @@ class Change():
         self.change_type = change_type
         self.old_class = old_class
         self.notes = notes
-        
+
     def __eq__(self, other):
         if type(self) == type(other):
             return (self.element_name == other.element_name and self.element_type == other.element_type and self.change_type == other.change_type and self.old_class == other.old_class)
         else:
             return False
-            
+
     def __hash__(self):
         return (hash(self.element_name) + hash(self.element_type) + hash(self.change_type) + hash(self.old_class))
-        
+
     def __str__(self):
         return str(self.element_name + " " + self.element_type + " " + self.change_type + " " + self.old_class + " " + self.notes).strip()
-        
-def test_changes():    
+
+def test_changes():
     try:
         c1 = Change('grow','member','insert','120.21','this is a new change')
         c2 = Change('grow','member','insert','120.21','this one is the same')
-    
+
         c3 = Change('break','member','insert','120.21','this one is different')
         c4 = Change('grow','member','delete','120.21','this one is also different')
         print('test 1 success : init works')
-        
+
         change_dict = {}
         change_dict[c1] = False
         change_dict[c2] = True
         change_dict[c3] = False
         change_dict[c4] = False
-        
+
         if len(change_dict) == 3 and change_dict[c1]:
             print ('test 2 success : hashing works')
         else:
@@ -57,7 +57,7 @@ def test_changes():
     except Exception as e:
         print (e)
         print ('test 1 failed : changes not created successfully')
-        
+
     if (c1 != c2):
         print ('test 3 failed : c1 != c2')
     elif (c1 == c3):
@@ -72,7 +72,7 @@ def test_changes():
     else:
         print ('test 6 failed, str broken', str(c1))
 
-        
+
     try:
         Change('grow','member','member','120.21','this has an invalid change type')
         print ('test 7 failed : invalid change type accepted')
@@ -113,6 +113,6 @@ def test_member_comparisons():
                 if potential_members:
                     print("%s marked as Deleted could be in %s" % (change.element_name, ', '.join(potential_members)))
 
-                                                                      
+
 test_changes()
 #test_member_comparisons()

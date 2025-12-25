@@ -10,13 +10,13 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="03/19/2002 05:51:53 PST Tue" abbrev="Add" name="Addressee" ID="2491">
-        <definition>&lt;def-root&gt;The person that receives a Message from the Speaker. 
+        <definition>&lt;def-root&gt;The person that receives a Message from the Speaker.
 &lt;ex&gt;You're &lt;t&gt;kidding&lt;/t&gt; &lt;fex name="Addressee"&gt;me&lt;/fex&gt;!&lt;/ex&gt;
 &lt;ex&gt;Satan &lt;t&gt;lies&lt;/t&gt; &lt;fex name="Addressee"&gt;to everyone, including himself&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="03/19/2002 05:51:55 PST Tue" abbrev="Top" name="Topic" ID="2492">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Topic&lt;/fen&gt; is the entity to which the proposition or propositions  relate, that they are about. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Topic&lt;/fen&gt; is the entity to which the proposition or propositions  relate, that they are about.
 &lt;ex&gt;You &lt;t&gt;deceived&lt;/t&gt; me &lt;fex name="Topic"&gt;about the location of the diamonds&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="07/12/2011 11:48:14 PDT Tue" abbrev="" name="Place" ID="14491">

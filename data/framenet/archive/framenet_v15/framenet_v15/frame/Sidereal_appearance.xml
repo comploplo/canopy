@@ -58,7 +58,7 @@
         <semType name="Source" ID="151"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="664" cDate="05/02/2005 03:48:43 PDT Mon" abbrev="Result" name="Result" ID="7932">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Result&lt;/fen&gt; of the &lt;fen&gt;Astronomical_entity&lt;/fen&gt;'s motion. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Result&lt;/fen&gt; of the &lt;fen&gt;Astronomical_entity&lt;/fen&gt;'s motion.
 
 &lt;ex&gt; As we continued moving east, the sun &lt;t&gt;rose&lt;/t&gt; &lt;fex name="Result"&gt;high&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

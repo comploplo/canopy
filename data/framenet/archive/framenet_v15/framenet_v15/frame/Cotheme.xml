@@ -3,46 +3,46 @@
 <frame cBy="731" cDate="02/07/2001 04:12:11 PST Wed" name="Cotheme" ID="56" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;This frame contains words that necessarily indicate the motion of two distinct objects. The &lt;fen&gt;Theme&lt;/fen&gt; is typically animate and is expressed the same way a Self-mover is expressed in the Self-motion frame--i.e. as the subject of a target verb. The &lt;fen&gt;Cotheme&lt;/fen&gt; may or may not be animate and is typically expressed as a direct object or an oblique. &lt;fen&gt;Source&lt;/fen&gt;, &lt;fen&gt;Path&lt;/fen&gt;, &lt;fen&gt;Goal&lt;/fen&gt;, and the other frame elements common to motion words also regularly occur with the words in this frame. &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:11 PST Wed" abbrev="Thm" name="Theme" ID="235">
-        <definition>&lt;def-root&gt;This is the entity, frequently a living being, which moves in relation to the &lt;fen&gt;Cotheme&lt;/fen&gt;. Normally the &lt;fen&gt;Theme&lt;/fen&gt; frame element is expressed as an external argument. 
+        <definition>&lt;def-root&gt;This is the entity, frequently a living being, which moves in relation to the &lt;fen&gt;Cotheme&lt;/fen&gt;. Normally the &lt;fen&gt;Theme&lt;/fen&gt; frame element is expressed as an external argument.
 &lt;ex&gt;&lt;fex name="Theme"&gt;Pat&lt;/fex&gt; &lt;t&gt;accompanied&lt;/t&gt; me for five miles in a blue Toyota.&lt;/ex&gt;&lt;ex&gt; &lt;fex name="Theme"&gt;The squirrel&lt;/fex&gt; &lt;t&gt;chased&lt;/t&gt; the nut across the road.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="Physical_object" ID="68"/>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:11 PST Wed" abbrev="Thm_c" name="Cotheme" ID="236">
-        <definition>&lt;def-root&gt;This frame element is the second moving object, expressed as a direct object or an oblique: 
+        <definition>&lt;def-root&gt;This frame element is the second moving object, expressed as a direct object or an oblique:
 
-&lt;ex&gt;Pat &lt;t&gt;accompanied&lt;/t&gt;  &lt;fex name="Cotheme"&gt;me&lt;/fex&gt; down the street.&lt;/ex&gt; 
+&lt;ex&gt;Pat &lt;t&gt;accompanied&lt;/t&gt;  &lt;fex name="Cotheme"&gt;me&lt;/fex&gt; down the street.&lt;/ex&gt;
 &lt;ex&gt;The squirrel &lt;t&gt;chased&lt;/t&gt; &lt;fex name="Cotheme"&gt; after the nut &lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Physical_object" ID="68"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:11 PST Wed" abbrev="Src" name="Source" ID="237">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Source&lt;/fen&gt; marks any expression which implies a definite starting-point of the motion of the &lt;fen&gt;Cotheme&lt;/fen&gt;. In prepositional phrases, the  object expresses the starting point of motion. With particles, the starting point of motion is understood from context. 
-&lt;ex&gt;The cat &lt;t&gt;chased&lt;/t&gt; the mouse &lt;fex name="Source"&gt;out of the house&lt;/fex&gt;.&lt;/ex&gt; 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Source&lt;/fen&gt; marks any expression which implies a definite starting-point of the motion of the &lt;fen&gt;Cotheme&lt;/fen&gt;. In prepositional phrases, the  object expresses the starting point of motion. With particles, the starting point of motion is understood from context.
+&lt;ex&gt;The cat &lt;t&gt;chased&lt;/t&gt; the mouse &lt;fex name="Source"&gt;out of the house&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;The cat &lt;t&gt;chased&lt;/t&gt; the mouse &lt;fex name="Source"&gt;out&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="Source" ID="151"/>
         <excludesFE name="Area" ID="242"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:12 PST Wed" abbrev="Path" name="Path" ID="238">
         <definition>&lt;def-root&gt;&lt;fen&gt;Path&lt;/fen&gt; marks phrases that describe the &lt;fen&gt;Theme&lt;/fen&gt; and &lt;fen&gt;Cotheme&lt;/fen&gt;'s trajectory of motion and which are neither expressions of the  &lt;fen&gt;Source&lt;/fen&gt; nor the &lt;fen&gt;Goal&lt;/fen&gt; of motion. The notion &lt;fen&gt;Path&lt;/fen&gt; also includes directional expressions.
-&lt;ex&gt; The bikers &lt;t&gt;followed&lt;/t&gt; the truck &lt;fex name="Path"&gt;west&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt; The bikers &lt;t&gt;followed&lt;/t&gt; the truck &lt;fex name="Path"&gt;west&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;The bikers &lt;t&gt;followed&lt;/t&gt; the truck &lt;fex name="Path"&gt;through the desert&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Path" ID="152"/>
         <excludesFE name="Area" ID="242"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:12 PST Wed" abbrev="Goal" name="Goal" ID="239">
-        <definition>&lt;def-root&gt;Any expression which tells where the &lt;fen&gt;Cotheme&lt;/fen&gt; ends up as a result of the motion expresses the frame element &lt;fen&gt;Goal&lt;/fen&gt;. Note that if the &lt;fen&gt;Cotheme&lt;/fen&gt; is animate, the &lt;fen&gt;Theme&lt;/fen&gt; need not also end up in the same place. Some particles imply the existence of a &lt;fen&gt;Goal&lt;/fen&gt; which is understood in the context of utterance. 
+        <definition>&lt;def-root&gt;Any expression which tells where the &lt;fen&gt;Cotheme&lt;/fen&gt; ends up as a result of the motion expresses the frame element &lt;fen&gt;Goal&lt;/fen&gt;. Note that if the &lt;fen&gt;Cotheme&lt;/fen&gt; is animate, the &lt;fen&gt;Theme&lt;/fen&gt; need not also end up in the same place. Some particles imply the existence of a &lt;fen&gt;Goal&lt;/fen&gt; which is understood in the context of utterance.
 &lt;ex&gt;The children &lt;t&gt;chased&lt;/t&gt; the ball &lt;fex name="Goal"&gt;into the park&lt;/fex&gt;. (The children end up in the park.)&lt;/ex&gt;
 &lt;ex&gt;The children &lt;t&gt;chased&lt;/t&gt; the dog &lt;fex name="Goal"&gt;into the park&lt;/fex&gt;.  (The dog ends up in the park; the children may not have entered the park.) &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>
         <excludesFE name="Area" ID="242"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="731" cDate="02/07/2001 04:12:12 PST Wed" abbrev="Manr" name="Manner" ID="240">
-        <definition>&lt;def-root&gt;Phrases marked with this frame element  describe a property of motion which is not directly related to the trajectory of the &lt;fen&gt;Theme&lt;/fen&gt;'s motion. Descriptions of steadiness, grace, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions. 
+        <definition>&lt;def-root&gt;Phrases marked with this frame element  describe a property of motion which is not directly related to the trajectory of the &lt;fen&gt;Theme&lt;/fen&gt;'s motion. Descriptions of steadiness, grace, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.
 
 &lt;ex&gt;The bikers &lt;t&gt;followed&lt;/t&gt; the truck &lt;fex name="Manner"&gt;furiously&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="FFFF00" fgColor="000000" coreType="Peripheral" cBy="731" cDate="02/07/2001 04:12:12 PST Wed" abbrev="Dist" name="Distance" ID="241">
-        <definition>&lt;def-root&gt;Any expression which characterizes the extent of the motion of the &lt;fen&gt;Theme&lt;/fen&gt; and &lt;fen&gt;Cotheme&lt;/fen&gt; expresses the frame element &lt;fen&gt;Distance&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;Any expression which characterizes the extent of the motion of the &lt;fen&gt;Theme&lt;/fen&gt; and &lt;fen&gt;Cotheme&lt;/fen&gt; expresses the frame element &lt;fen&gt;Distance&lt;/fen&gt;.
 &lt;ex&gt;The police &lt;t&gt;tailed&lt;/t&gt; the suspects &lt;fex name="Distance"&gt;for several miles&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Quantity" ID="59"/>
     </FE>
@@ -76,7 +76,7 @@
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="09/17/2001 04:28:35 PDT Mon" abbrev="MoT" name="Mode_of_transportation" ID="1878">
         <definition>&lt;def-root&gt;This frame element denotes the means of conveyance on which the &lt;fen&gt;Theme&lt;/fen&gt; is traveling. The &lt;fen&gt;Mode_of_Transportation&lt;/fen&gt; can be the &lt;fen&gt;Theme&lt;/fen&gt;'s  own body or a vehicle. Vehicles can move in any way and in any medium.
 
-&lt;ex&gt;The husband &lt;t&gt;accompanied&lt;/t&gt; his wife to the hospital &lt;fex name="Mode_of_Transportation"&gt;in the ambulance&lt;/fex&gt;&lt;/ex&gt; 
+&lt;ex&gt;The husband &lt;t&gt;accompanied&lt;/t&gt; his wife to the hospital &lt;fex name="Mode_of_Transportation"&gt;in the ambulance&lt;/fex&gt;&lt;/ex&gt;
 &lt;ex&gt;Lily &lt;t&gt;accompanied&lt;/t&gt; me to the store &lt;fex name="Mode_of_Transportation"&gt;on foot&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="09/17/2001 04:32:04 PDT Mon" abbrev="Spd" name="Speed" ID="1880">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="11/03/2003 05:15:44 PST Mon" name="Being_in_operation" ID="880" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Device&lt;/fen&gt; or machine is in (or out of) service. Note that being broken or functional is a separate issue from being turned on or off. This latter notion is what the present frame is concerned with. &lt;br /&gt; The &lt;fen&gt;Time&lt;/fen&gt; when and the &lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Device&lt;/fen&gt; is in use may be specified, as may be the Purpose a backgrounded human User had in turning the Device on or off. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Device&lt;/fen&gt; or machine is in (or out of) service. Note that being broken or functional is a separate issue from being turned on or off. This latter notion is what the present frame is concerned with. &lt;br /&gt; The &lt;fen&gt;Time&lt;/fen&gt; when and the &lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Device&lt;/fen&gt; is in use may be specified, as may be the Purpose a backgrounded human User had in turning the Device on or off.
 
 
 &lt;ex&gt;&lt;fex name="Device"&gt;The TV&lt;/fex&gt; is &lt;t&gt;on&lt;/t&gt;&lt;/ex&gt;

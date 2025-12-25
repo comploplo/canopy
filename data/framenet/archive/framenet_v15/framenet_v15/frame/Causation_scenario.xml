@@ -4,7 +4,7 @@
     <definition>&lt;def-root&gt;A Causation event (the &lt;fen&gt;Cause&lt;/fen&gt;) causes a Result event (the &lt;fen&gt;Effect&lt;/fen&gt;).  &lt;/def-root&gt;</definition>
     <semType name="Non-Lexical Frame" ID="16"/>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="09/03/2002 07:29:04 PDT Tue" abbrev="Cause" name="Cause" ID="3693">
-        <definition>&lt;def-root&gt;An animate or inanimate entity, a force, or event that produces an effect. Volitionality is not a necessary characteristic of &lt;fen&gt;Cause&lt;/fen&gt;s. 
+        <definition>&lt;def-root&gt;An animate or inanimate entity, a force, or event that produces an effect. Volitionality is not a necessary characteristic of &lt;fen&gt;Cause&lt;/fen&gt;s.
 &lt;ex&gt;&lt;fex name="Cause"&gt;John&lt;/fex&gt; &lt;t&gt;made&lt;/t&gt; me give up smoking.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Cause"&gt;The wind&lt;/fex&gt; &lt;t&gt;made&lt;/t&gt; the door rattle.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Cause"&gt;The accident&lt;/fex&gt; &lt;t&gt;caused&lt;/t&gt; them to be more careful the next time.&lt;/ex&gt;&lt;/def-root&gt;</definition>

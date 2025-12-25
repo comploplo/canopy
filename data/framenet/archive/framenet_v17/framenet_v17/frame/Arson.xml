@@ -51,7 +51,7 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="Hay" cDate="10/02/2003 11:40:55 PDT Thu" abbrev="Freq" name="Frequency" ID="5467">
-        <definition>&lt;def-root&gt;The frequency with which an act of arson is committed. 
+        <definition>&lt;def-root&gt;The frequency with which an act of arson is committed.
 
 &lt;ex&gt;The churches were plagued with &lt;fex name="Freq"&gt;frequent&lt;/fex&gt; &lt;t&gt;arson&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

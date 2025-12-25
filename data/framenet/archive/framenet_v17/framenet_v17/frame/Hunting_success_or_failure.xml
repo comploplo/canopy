@@ -15,7 +15,7 @@
         <semType name="Physical_entity" ID="70"/>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Peripheral" cBy="KmG" cDate="02/07/2008 03:29:45 PST Thu" abbrev="Ins" name="Instrument" ID="12158">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Instrument&lt;/fen&gt; is used by the &lt;fen&gt;Hunter&lt;/fen&gt; as a tool to obtain &lt;fen&gt;Food&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Instrument&lt;/fen&gt; is used by the &lt;fen&gt;Hunter&lt;/fen&gt; as a tool to obtain &lt;fen&gt;Food&lt;/fen&gt;.
 
 &lt;ex&gt;He could easily &lt;t&gt;catch&lt;/t&gt; fish &lt;fex name="Instrument"&gt;with his hands&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

@@ -9,7 +9,7 @@
 &lt;ex&gt;&lt;fex name="Byr"&gt;Gem&lt;/fex&gt; &lt;t&gt;paid&lt;/t&gt; fifty dollars for a shirt&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="ACW" cDate="07/16/2001 03:35:24 PDT Mon" abbrev="Gds" name="Goods" ID="1410">
-        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Goods&lt;/fen&gt; is anything (including labor or time, for example) which is exchanged for &lt;fen&gt;Money&lt;/fen&gt; in a transaction. 
+        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Goods&lt;/fen&gt; is anything (including labor or time, for example) which is exchanged for &lt;fen&gt;Money&lt;/fen&gt; in a transaction.
 &lt;ex&gt;Kim &lt;t&gt;paid&lt;/t&gt; fifty dollars &lt;fex name="Gds"&gt;for the shirt&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="ACW" cDate="07/16/2001 03:35:24 PDT Mon" abbrev="Mns" name="Means" ID="1411">
@@ -34,7 +34,7 @@ Robin &lt;t&gt;paid&lt;/t&gt; for the car &lt;fex name="Means"&gt;by check&lt;/f
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="ACW" cDate="07/16/2001 03:35:24 PDT Mon" abbrev="Unit" name="Unit" ID="1415">
         <definition>&lt;def-root&gt;This FE is any unit in which goods or services can be measured.
-Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP. 
+Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP.
 &lt;ex&gt;Bob &lt;t&gt;pays&lt;/t&gt; for peppers &lt;fex name="Unit"&gt;by the pound&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/21/2001 08:30:02 PDT Tue" abbrev="Place" name="Place" ID="1728">
@@ -59,8 +59,8 @@ Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP.
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="FFFF00" fgColor="000000" coreType="Extra-Thematic" cBy="MiL" cDate="11/17/2005 04:39:13 PST Thu" abbrev="Cir" name="Circumstances" ID="9401">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Circumstances&lt;/fen&gt; describe the state of the world (at a particular time and place) which is specifically independent of the event itself and any of its participants. 
-  
+        <definition>&lt;def-root&gt;&lt;fen&gt;Circumstances&lt;/fen&gt; describe the state of the world (at a particular time and place) which is specifically independent of the event itself and any of its participants.
+
 
 &lt;ex&gt;Worker 's compensation &lt;t&gt;payments&lt;/t&gt; alone &lt;fex name="Circumstances"&gt;in cases involving falls&lt;/fex&gt; , now average more than $8500 per incident in North America .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

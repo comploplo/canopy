@@ -94,7 +94,7 @@ has medical reasons&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="000000" coreType="Extra-Thematic" cBy="MiL" cDate="07/20/2005 12:23:55 PDT Wed" abbrev="" name="Beneficiary" ID="8672">
         <definition>&lt;def-root&gt;This FE applies to participants that derive a benefit from the &lt;fen&gt;Sought_entity&lt;/fen&gt; or &lt;fen&gt;State_of_affairs&lt;/fen&gt; .
- 
+
 &lt;ex&gt;Jed &lt;t&gt;sought&lt;/t&gt; the world's largest diamond &lt;fex name="Beneficiary"&gt;for his Jeda&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <frameRelation type="Inherits from">

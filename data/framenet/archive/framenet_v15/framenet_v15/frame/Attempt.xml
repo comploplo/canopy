@@ -62,7 +62,7 @@
         <definition>&lt;def-root&gt;The state of the world (at a particular time and place) which is independent of the the attempt of the &lt;fen&gt;Agent&lt;/fen&gt; to achieve the &lt;fen&gt;Goal&lt;/fen&gt;. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="361" cDate="02/09/2007 11:57:31 PST Fri" abbrev="Dom" name="Domain" ID="11011">
-        <definition>&lt;def-root&gt;The area of work to which the Attempt event belongs. 
+        <definition>&lt;def-root&gt;The area of work to which the Attempt event belongs.
 
 &lt;ex&gt;This is a market society where paid work is generally valued more than any &lt;fex name="Domain"&gt;domestic&lt;/fex&gt; &lt;t&gt;endeavor&lt;/t&gt;.&lt;/ex&gt;
 

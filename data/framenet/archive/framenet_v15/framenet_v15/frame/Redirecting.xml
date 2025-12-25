@@ -41,7 +41,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="06/23/2005 02:15:58 PDT Thu" abbrev="Manr" name="Manner" ID="8330">
-        <definition>&lt;def-root&gt;Any description of the redirection which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of the &lt;fen&gt;Agent&lt;/fen&gt; that affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the redirection which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of the &lt;fen&gt;Agent&lt;/fen&gt; that affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 
 &lt;ex&gt;Anything flagged as suspect by this system would be &lt;fex name="Manr"&gt;carefully&lt;/fex&gt; &lt;t&gt;diverted&lt;/t&gt; to another nearby area, remote from public access. and well shielded, for a second screening .&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

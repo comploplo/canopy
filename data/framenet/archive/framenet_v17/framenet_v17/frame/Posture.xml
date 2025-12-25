@@ -5,12 +5,12 @@
 
 &lt;ex&gt;&lt;fex name="Agent"&gt;He&lt;/fex&gt; &lt;t&gt;knelt&lt;/t&gt; &lt;fex name="Location"&gt;down&lt;/fex&gt;, &lt;fex name="Depictive"&gt;hand on heart&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:51 PST Wed" abbrev="Agt" name="Agent" ID="81">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Agent&lt;/fen&gt; is the individual whose body is in a particular posture.  The &lt;fen&gt;Agent&lt;/fen&gt; FE is generally expressed as the external argument of verbs: 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Agent&lt;/fen&gt; is the individual whose body is in a particular posture.  The &lt;fen&gt;Agent&lt;/fen&gt; FE is generally expressed as the external argument of verbs:
 &lt;ex&gt;&lt;fex name="Agent"&gt;Kim&lt;/fex&gt; was &lt;t&gt;kneeling&lt;/t&gt; by the window.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:51 PST Wed" abbrev="Loc" name="Location" ID="82">
-        <definition>&lt;def-root&gt;A description of the position of the &lt;fen&gt;Agent&lt;/fen&gt;.  The &lt;fen&gt;Location&lt;/fen&gt; of the &lt;fen&gt;Agent&lt;/fen&gt; is frequently expressed and generally occurs as a PP Complement: 
+        <definition>&lt;def-root&gt;A description of the position of the &lt;fen&gt;Agent&lt;/fen&gt;.  The &lt;fen&gt;Location&lt;/fen&gt; of the &lt;fen&gt;Agent&lt;/fen&gt; is frequently expressed and generally occurs as a PP Complement:
 &lt;ex&gt;Kim was &lt;t&gt;kneeling&lt;/t&gt; &lt;fex name="Location"&gt;by the window&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Location" ID="54"/>
     </FE>

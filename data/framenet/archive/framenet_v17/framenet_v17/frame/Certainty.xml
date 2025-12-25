@@ -22,7 +22,7 @@ It only includes uses where a &lt;fen&gt;Cognizer&lt;/fen&gt; is expressed.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="06/26/2001 05:52:24 PDT Tue" abbrev="Content" name="Content" ID="1093">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Content&lt;/fen&gt; denotes the mental content that the &lt;fen&gt;Cognizer&lt;/fen&gt; is certain or uncertain about. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Content&lt;/fen&gt; denotes the mental content that the &lt;fen&gt;Cognizer&lt;/fen&gt; is certain or uncertain about.
 
 &lt;ex&gt;I &lt;m&gt;am&lt;/m&gt; &lt;t&gt;sure&lt;/t&gt; &lt;fex name="Content"&gt;that we'll arrive on time&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Content" ID="55"/>
@@ -42,7 +42,7 @@ It only includes uses where a &lt;fen&gt;Cognizer&lt;/fen&gt; is expressed.
 
 &lt;ex&gt;She caught sight of her mother's &lt;t&gt;dubious&lt;/t&gt; &lt;fex name="Exr"&gt;expression&lt;/fex&gt;.&lt;/ex&gt;
 
-Notice that we do NOT tag possessives such as 'her mother's' or 'on her face' that occur within the noun phrase of which the target adjective is a part. In sentences such as 
+Notice that we do NOT tag possessives such as 'her mother's' or 'on her face' that occur within the noun phrase of which the target adjective is a part. In sentences such as
 
 &lt;ex&gt;She had a &lt;t&gt;dubious&lt;/t&gt; &lt;fex name="Exr"&gt;look&lt;/fex&gt; on her face.&lt;/ex&gt;
 

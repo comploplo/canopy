@@ -19,7 +19,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="04/02/2007 03:34:57 PDT Mon" abbrev="man" name="Manner" ID="11604">
-        <definition>&lt;def-root&gt;Any description of the Change event which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;) and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the Change event which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;) and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;).
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

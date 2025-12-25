@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="731" cDate="02/07/2001 04:12:16 PST Wed" name="Placing" ID="62" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;Generally without overall (translational) motion,  an &lt;fen&gt;Agent&lt;/fen&gt; places a &lt;fen&gt;Theme&lt;/fen&gt; at a location, the &lt;fen&gt;Goal&lt;/fen&gt;, which is profiled.  In this frame, the &lt;fen&gt;Theme&lt;/fen&gt; is under the control of the &lt;fen&gt;Agent&lt;/fen&gt;/&lt;fen&gt;Cause&lt;/fen&gt; at the time of its arrival at the &lt;fen&gt;Goal&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;Generally without overall (translational) motion,  an &lt;fen&gt;Agent&lt;/fen&gt; places a &lt;fen&gt;Theme&lt;/fen&gt; at a location, the &lt;fen&gt;Goal&lt;/fen&gt;, which is profiled.  In this frame, the &lt;fen&gt;Theme&lt;/fen&gt; is under the control of the &lt;fen&gt;Agent&lt;/fen&gt;/&lt;fen&gt;Cause&lt;/fen&gt; at the time of its arrival at the &lt;fen&gt;Goal&lt;/fen&gt;.
 &lt;ex&gt;&lt;fex name="Agent"&gt;David&lt;/fex&gt; &lt;t&gt;placed&lt;/t&gt; &lt;fex name="Theme"&gt;his briefcase&lt;/fex&gt; &lt;fex name="Goal"&gt;on the floor&lt;/fex&gt;.&lt;/ex&gt;
 
 This frame differs from Filling in that it focuses on the &lt;fen&gt;Theme&lt;/fen&gt; rather than the effect on the &lt;fen&gt;Goal&lt;/fen&gt; entity.  It differs from Removing in focusing on the &lt;fen&gt;Goal&lt;/fen&gt; rather than the &lt;fen&gt;Source&lt;/fen&gt; of motion for the &lt;fen&gt;Theme&lt;/fen&gt;.&lt;/def-root&gt;</definition>
@@ -18,7 +18,7 @@ This frame differs from Filling in that it focuses on the &lt;fen&gt;Theme&lt;/f
         <semType name="Physical_object" ID="68"/>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="731" cDate="02/07/2001 04:12:16 PST Wed" abbrev="Src" name="Source" ID="275">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Source&lt;/fen&gt; is the initial location of the &lt;fen&gt;Theme&lt;/fen&gt;, before it changes location. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Source&lt;/fen&gt; is the initial location of the &lt;fen&gt;Theme&lt;/fen&gt;, before it changes location.
 &lt;ex&gt;Her mother &lt;t&gt;shelved&lt;/t&gt; the cans &lt;fex name="Src"&gt;from the countertop&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Source" ID="151"/>
     </FE>
@@ -28,7 +28,7 @@ This frame differs from Filling in that it focuses on the &lt;fen&gt;Theme&lt;/f
 &lt;ex&gt;The mail carrier &lt;t&gt;stuck&lt;/t&gt; the letters &lt;fex name="Path"&gt;through the slot&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:16 PST Wed" abbrev="Goal" name="Goal" ID="277">
-        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Goal&lt;/fen&gt; is the location where the &lt;fen&gt;Theme&lt;/fen&gt; ends up. This FE is profiled by words in this frame.  
+        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Goal&lt;/fen&gt; is the location where the &lt;fen&gt;Theme&lt;/fen&gt; ends up. This FE is profiled by words in this frame.
 &lt;ex&gt;The waiter &lt;t&gt;placed&lt;/t&gt; the food &lt;fex name="Goal"&gt;on the table&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>
@@ -91,7 +91,7 @@ This frame differs from Filling in that it focuses on the &lt;fen&gt;Theme&lt;/f
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFFF00" fgColor="000000" coreType="Peripheral" cBy="664" cDate="09/18/2001 05:10:50 PDT Tue" abbrev="Dist" name="Distance" ID="1972">
-        <definition>&lt;def-root&gt;This FE is any expression which characterizes the extent of motion.  
+        <definition>&lt;def-root&gt;This FE is any expression which characterizes the extent of motion.
 
 &lt;ex&gt;I &lt;t&gt;plunged&lt;/t&gt; my hands &lt;fex name="Distance"&gt;wrist deep&lt;/fex&gt; in the fragrant herbs and rubbed the dry fragments between the fingertips&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

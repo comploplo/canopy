@@ -32,7 +32,7 @@ Cicadas &lt;t&gt;screech&lt;/t&gt; &lt;fex name="Depictive"&gt;unseen from withi
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Core-Unexpressed" cBy="664" cDate="09/03/2002 07:55:12 PDT Tue" abbrev="Cause" name="Cause" ID="3709">
-        <definition>&lt;def-root&gt;An animate or inanimate entity, a force, or event that produces an effect. Volitionality is not a necessary characteristic of &lt;fen&gt;Cause&lt;/fen&gt;s. 
+        <definition>&lt;def-root&gt;An animate or inanimate entity, a force, or event that produces an effect. Volitionality is not a necessary characteristic of &lt;fen&gt;Cause&lt;/fen&gt;s.
 &lt;/def-root&gt;</definition>
         <excludesFE name="Creator" ID="8715"/>
     </FE>

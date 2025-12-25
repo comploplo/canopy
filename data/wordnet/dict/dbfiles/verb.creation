@@ -294,7 +294,7 @@
 { redecorate, decorate,@ frames: 8 (redo the decoration of an apartment or house) }
 { [ panel, noun.artifact:panel,+ noun.artifact:panelling,+ noun.artifact:paneling,+ ] decorate,@ frames: 8 (decorate with panels; "panel the walls with wood") }
 { bejewel, [ jewel, noun.artifact:jewel,+ noun.person:jeweller,+ noun.person:jeweler,+ noun.person:jeweller1,+ noun.person:jeweler1,+ noun.artifact:jewelry,+ noun.artifact:jewellery,+ ] decorate,@ frames: 8,9,10 (adorn or decorate with precious stones; "jeweled dresses") }
-{ [ fillet, noun.artifact:fillet,+ ] [ filet, noun.artifact:filet,+ ] decorate,@ frames: 8 (decorate with a lace of geometric designs) } 
+{ [ fillet, noun.artifact:fillet,+ ] [ filet, noun.artifact:filet,+ ] decorate,@ frames: 8 (decorate with a lace of geometric designs) }
 { [ scallop, noun.shape:scallop,+ ] decorate,@ frames: 8 (decorate an edge with scallops; "the dress had a scalloped skirt") }
 { bedizen, decorate,@ frames: 8 (decorate tastelessly) }
 { dress_ship, decorate,@ frames: 2 (decorate a ship with flags) }

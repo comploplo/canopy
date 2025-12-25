@@ -62,7 +62,7 @@ hand, &lt;fex name="cou"&gt;he&lt;/fex&gt; &lt;t&gt;undercut&lt;/t&gt; &lt;fex n
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="12/07/2005 11:43:49 PST Wed" abbrev="man" name="Manner" ID="9661">
-        <definition>&lt;def-root&gt;Any description of the intentional act which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of a &lt;fen&gt;Counter_actor&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the intentional act which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of a &lt;fen&gt;Counter_actor&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

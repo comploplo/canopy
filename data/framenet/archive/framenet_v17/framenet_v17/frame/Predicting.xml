@@ -14,7 +14,7 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="11/22/2002 04:48:08 PST Fri" abbrev="Eventuality" name="Eventuality" ID="3915">
-        <definition>&lt;def-root&gt;This FE marks expressions that indicate an event or state that is predicted to occur or hold at a future time. A single &lt;fen&gt;Eventuality&lt;/fen&gt; may be expressed discontinuously in a raising construction. This FE is also used for expressions that denote entities with variable attributes about which the &lt;fen&gt;Speaker&lt;/fen&gt; makes predictions. 
+        <definition>&lt;def-root&gt;This FE marks expressions that indicate an event or state that is predicted to occur or hold at a future time. A single &lt;fen&gt;Eventuality&lt;/fen&gt; may be expressed discontinuously in a raising construction. This FE is also used for expressions that denote entities with variable attributes about which the &lt;fen&gt;Speaker&lt;/fen&gt; makes predictions.
 
 &lt;ex&gt; &lt;t&gt;Predicting&lt;/t&gt; &lt;fex name="Eventuality"&gt;the weather&lt;/fex&gt; is risky business.&lt;/ex&gt;
 &lt;ex&gt;&lt;t&gt;Predicting&lt;/t&gt; &lt;fex name="Eventuality"&gt;the numbers of disabled elderly&lt;/fex&gt; into the future is problematic as it depends upon the projection forward of current patterns of disability .&lt;/ex&gt;
@@ -39,7 +39,7 @@
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="11/27/2002 07:30:20 PST Wed" abbrev="Mnr" name="Manner" ID="3946">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Manner&lt;/fen&gt; marks any description of the &lt;fen&gt;Speaker&lt;/fen&gt;'s prediction making  that is not covered by more specific FEs. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Manner&lt;/fen&gt; marks any description of the &lt;fen&gt;Speaker&lt;/fen&gt;'s prediction making  that is not covered by more specific FEs.
 
 &lt;ex&gt;Smeagol &lt;fex name="Mnr"&gt;confidently&lt;/fex&gt; &lt;t&gt;predicted&lt;/t&gt; that he would win the race.&lt;/ex&gt;
 &lt;ex&gt;One commentator &lt;fex name="Manner"&gt;rashly&lt;/fex&gt; &lt;t&gt;predicted&lt;/t&gt; that the fad for adaptions wouldn't last much longer&lt;/ex&gt;

@@ -16,7 +16,7 @@
 The frames that inherit the general Motion frame add some elaboration to this simple idea.  Inheriting frames can add Goal-profiling (&lt;ment&gt;arrive, reach&lt;/ment&gt;), Source-profiling (&lt;ment&gt;leave, depart&lt;/ment&gt;), or Path-profiling (&lt;ment&gt;traverse, cross&lt;/ment&gt;), or aspects of the manner of motion (&lt;ment&gt;run, jog&lt;/ment&gt;) or assumptions about the shape-properties, etc., of any of the places involved (&lt;ment&gt;insert, extract&lt;/ment&gt;).
 A particularly complex area in the vocabulary of Motion is the depiction of the relation of Vehicles to the Theme.  In some cases, no separate Theme is expressed:
 
-&lt;ex&gt;The plane &lt;t&gt;flew&lt;/t&gt; over the city.&lt;/ex&gt; 
+&lt;ex&gt;The plane &lt;t&gt;flew&lt;/t&gt; over the city.&lt;/ex&gt;
 
 In this case, the sentence is annotated in Self_motion.  When the Vehicle is profiled as being operated by a Driver, the sentence is annotated in the Operate_vehicles frame:
 
@@ -29,7 +29,7 @@ This is very similar to the Bringing frame which covers cases where the Vehicle 
 Some of the same vocabulary is also used to describe the situation where Passengers Ride_vehicle or Operate_vehicle (each of these a perspective on Use_vehicles):
 
 &lt;ex&gt;I &lt;t&gt;flew&lt;/t&gt; to Chicago on the red-eye.&lt;/ex&gt;
-&lt;ex&gt;I &lt;t&gt;flew&lt;/t&gt; my plane across the Canadian border&lt;/ex&gt; 
+&lt;ex&gt;I &lt;t&gt;flew&lt;/t&gt; my plane across the Canadian border&lt;/ex&gt;
 
 Finally, there are cases where, despite the use of similar vocabulary, there is no self-propelled Vehicle involved at all:
 
@@ -67,7 +67,7 @@ This last type is annotated in the simple Motion frame.&lt;/def-root&gt;</defini
 &lt;ex&gt;Emily &lt;t&gt;moved&lt;/t&gt; restlessly &lt;fex name="Area"&gt;around the room&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="09/18/2001 05:03:41 PDT Tue" abbrev="Dist" name="Distance" ID="1965">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Distance&lt;/fen&gt; is any expression which characterizes the extent of the Motion. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Distance&lt;/fen&gt; is any expression which characterizes the extent of the Motion.
 &lt;ex&gt;The twig &lt;t&gt;floated&lt;/t&gt; atop the water &lt;fex name="Dist"&gt;for about 100 yards&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Area" ID="30"/>
     </FE>
@@ -86,7 +86,7 @@ This last type is annotated in the simple Motion frame.&lt;/def-root&gt;</defini
         <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Duration&lt;/fen&gt; of  time for which the Motion takes place.
 
 &lt;ex&gt;The balloon &lt;t&gt;floated&lt;/t&gt; &lt;fex name="Dur"&gt;for  hours&lt;/fex&gt;.&lt;/ex&gt;
- 
+
 &lt;/def-root&gt;</definition>
         <semType name="Duration" ID="142"/>
     </FE>

@@ -5,7 +5,7 @@
 
 &lt;ex&gt;&lt;/ex&gt;
 
-The Core roles in this frame and its subframes include &lt;fen&gt;Authorities&lt;/fen&gt;, &lt;fen&gt;Charges&lt;/fen&gt;, &lt;fen&gt;Court&lt;/fen&gt;, &lt;fen&gt;Defendant&lt;/fen&gt;, &lt;fen&gt;Defense&lt;/fen&gt;, &lt;fen&gt;Judge&lt;/fen&gt;, &lt;fen&gt;Jury&lt;/fen&gt;, &lt;fen&gt;Offense&lt;/fen&gt;, &lt;fen&gt;Prosecution&lt;/fen&gt;, and &lt;fen&gt;Suspect&lt;/fen&gt;.  
+The Core roles in this frame and its subframes include &lt;fen&gt;Authorities&lt;/fen&gt;, &lt;fen&gt;Charges&lt;/fen&gt;, &lt;fen&gt;Court&lt;/fen&gt;, &lt;fen&gt;Defendant&lt;/fen&gt;, &lt;fen&gt;Defense&lt;/fen&gt;, &lt;fen&gt;Judge&lt;/fen&gt;, &lt;fen&gt;Jury&lt;/fen&gt;, &lt;fen&gt;Offense&lt;/fen&gt;, &lt;fen&gt;Prosecution&lt;/fen&gt;, and &lt;fen&gt;Suspect&lt;/fen&gt;.
 Non-Core roles include &lt;fen&gt;Place&lt;/fen&gt;, &lt;fen&gt;Time&lt;/fen&gt;, &lt;fen&gt;Victim&lt;/fen&gt;, and &lt;fen&gt;Witness&lt;/fen&gt;. &lt;/def-root&gt;</definition>
     <semType name="Non-Lexical Frame" ID="16"/>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="08/16/2001 10:35:43 PDT Thu" abbrev="Crt" name="Court" ID="1624">

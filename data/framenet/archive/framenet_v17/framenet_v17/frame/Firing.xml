@@ -6,7 +6,7 @@
 &lt;ex&gt;&lt;fex name="Employer"&gt;He&lt;/fex&gt; &lt;t&gt;fired&lt;/t&gt; &lt;fex name="Employee"&gt;me&lt;/fex&gt; &lt;fex name="Position"&gt;as annotator&lt;/fex&gt; &lt;fex name="Explanation"&gt;for being too slow&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="05/15/2002 02:40:46 PDT Wed" abbrev="Empee" name="Employee" ID="2839">
-        <definition>&lt;def-root&gt;The person who is let go by their &lt;fen&gt;Employer&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;The person who is let go by their &lt;fen&gt;Employer&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Empee"&gt;I&lt;/fex&gt; was just &lt;t&gt;fired&lt;/t&gt; yesterday!&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -53,7 +53,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MJE" cDate="05/15/2002 02:43:02 PDT Wed" abbrev="Exp" name="Explanation" ID="2848">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; for which the &lt;fen&gt;Employee&lt;/fen&gt; is terminated. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; for which the &lt;fen&gt;Employee&lt;/fen&gt; is terminated.
 
 &lt;ex&gt;North was &lt;t&gt;dismissed&lt;/t&gt; &lt;fex name="Explanation"&gt;for gross mismanagement of funds&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

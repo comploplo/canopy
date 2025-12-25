@@ -32,7 +32,7 @@
 &lt;ex&gt;More books were &lt;t&gt;translated&lt;/t&gt; &lt;fex name="sour"&gt;from other languages&lt;/fex&gt; into Russian in the 1980s , including record numbers from English , German and French.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="11/16/2005 01:57:03 PST Wed" abbrev="Manr" name="Manner" ID="9294">
-        <definition>&lt;def-root&gt;Any description of the translation event which is not covered by more specific FEs, including secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may indicate salient characteristics of the Cognizer that also affect the action (deliberately, eagerly, carefully). 
+        <definition>&lt;def-root&gt;Any description of the translation event which is not covered by more specific FEs, including secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may indicate salient characteristics of the Cognizer that also affect the action (deliberately, eagerly, carefully).
 
 &lt;ex&gt;His book, &lt;fex name="Manner"&gt;carefully&lt;/fex&gt; &lt;t&gt;translated&lt;/t&gt; by Teresa Lavender Fagan, is a fascinating account for the layman, of the cuisine of the Mesopotamia. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

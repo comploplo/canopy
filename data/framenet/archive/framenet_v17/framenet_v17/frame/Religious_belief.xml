@@ -38,7 +38,7 @@
         <requiresFE name="Element" ID="6069"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="03/05/2004 06:21:30 PST Fri" abbrev="el" name="Element" ID="6069">
-        <definition>&lt;def-root&gt;A predefined, fixed idea to which reference is made throughout the belief system. 
+        <definition>&lt;def-root&gt;A predefined, fixed idea to which reference is made throughout the belief system.
 
 
 &lt;ex&gt;I believe &lt;fex name="Element"&gt;in Jesus&lt;/fex&gt;&lt;/ex&gt;

@@ -45,7 +45,7 @@
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="605" cDate="06/20/2005 05:51:10 PDT Mon" abbrev="cir" name="Circumstances" ID="8214">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Circumstances&lt;/fen&gt; describe the state of the world (at a particular time and place) which is specifically independent of the Surrendering event itself and any of its participants. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Circumstances&lt;/fen&gt; describe the state of the world (at a particular time and place) which is specifically independent of the Surrendering event itself and any of its participants.
 
 
 &lt;ex&gt;John &lt;t&gt;surrendered&lt;/t&gt; the gun &lt;fex name="cir"&gt;with everybody looking on in stunned silence&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>

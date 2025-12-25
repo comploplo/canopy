@@ -1,6 +1,6 @@
 Welcome to Release 1.5 of the FrameNet data!
 
-If you just want to start looking at the data, you should be able to 
+If you just want to start looking at the data, you should be able to
 open any of the index files, frameIndex.xml, luIndex.xml or
 fulltextIndex.xml in Firefox or other popular browsers and browse
 through it.  (If you have difficulty doing this, please see the
@@ -38,7 +38,3 @@ International Computer Science Institute
 Berkeley, California, 94704
 
 collinb@icsi.berkeley.edu
-
-
-
-

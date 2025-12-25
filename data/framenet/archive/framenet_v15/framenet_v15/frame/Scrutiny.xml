@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="731" cDate="02/07/2001 04:11:58 PST Wed" name="Scrutiny" ID="31" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame concerns a &lt;fen&gt;Cognizer&lt;/fen&gt; (a person or other intelligent being) paying close attention to something, the &lt;fen&gt;Ground&lt;/fen&gt;, in order to discover and note its salient characteristics.  The &lt;fen&gt;Cognizer&lt;/fen&gt; may be interested in a particular characteristic or entity, the &lt;fen&gt;Phenomenon&lt;/fen&gt;, that belongs to the &lt;fen&gt;Ground&lt;/fen&gt; or is contained in the &lt;fen&gt;Ground&lt;/fen&gt; (or to ensure that such a property of entity is not present). 
+    <definition>&lt;def-root&gt;This frame concerns a &lt;fen&gt;Cognizer&lt;/fen&gt; (a person or other intelligent being) paying close attention to something, the &lt;fen&gt;Ground&lt;/fen&gt;, in order to discover and note its salient characteristics.  The &lt;fen&gt;Cognizer&lt;/fen&gt; may be interested in a particular characteristic or entity, the &lt;fen&gt;Phenomenon&lt;/fen&gt;, that belongs to the &lt;fen&gt;Ground&lt;/fen&gt; or is contained in the &lt;fen&gt;Ground&lt;/fen&gt; (or to ensure that such a property of entity is not present).
 Some words in this frame allow alternate expressions of the &lt;fen&gt;Ground&lt;/fen&gt;and the &lt;fen&gt;Phenomenon&lt;/fen&gt;:
 &lt;ex&gt;We &lt;t&gt;searched&lt;/t&gt; &lt;fex name="Ground"&gt;the yard&lt;/fex&gt; &lt;fex name="Phen"&gt; for my contact lens&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:11:58 PST Wed" abbrev="Cog" name="Cognizer" ID="128">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Cognizer&lt;/fen&gt; pays attention to an entity in order to discover something about it. The FE is normally expressed as an External Argument: 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Cognizer&lt;/fen&gt; pays attention to an entity in order to discover something about it. The FE is normally expressed as an External Argument:
 &lt;ex&gt;&lt;fex name="Cognizer"&gt;Leslie&lt;/fex&gt; &lt;t&gt;examined&lt;/t&gt; the glass for cracks.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
@@ -33,7 +33,7 @@ Some words in this frame allow alternate expressions of the &lt;fen&gt;Ground&lt
         <semType name="Degree" ID="172"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="664" cDate="02/15/2002 05:46:44 PST Fri" abbrev="Dir" name="Direction" ID="2335">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Direction&lt;/fen&gt; is used for all path-like expressions, except those indicating the location of the perceiver, that describe how the perceiver's attention is directed during the act of perception. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Direction&lt;/fen&gt; is used for all path-like expressions, except those indicating the location of the perceiver, that describe how the perceiver's attention is directed during the act of perception.
 &lt;ex&gt;The detective &lt;t&gt;looked&lt;/t&gt; &lt;fex name="Direction"&gt;across the street&lt;/fex&gt; at the suspect.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="268" cDate="05/30/2003 03:17:29 PDT Fri" abbrev="Purp" name="Purpose" ID="4511">
@@ -43,7 +43,7 @@ Some words in this frame allow alternate expressions of the &lt;fen&gt;Ground&lt
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Core" cBy="203" cDate="08/25/2004 12:00:05 PDT Wed" abbrev="Med" name="Medium" ID="7030">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Medium&lt;/fen&gt; is the piece of text or work in which the &lt;fen&gt;Cognizer&lt;/fen&gt; pays attention to an entity in order to discover something about it. The FE is normally expressed as an External Argument: 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Medium&lt;/fen&gt; is the piece of text or work in which the &lt;fen&gt;Cognizer&lt;/fen&gt; pays attention to an entity in order to discover something about it. The FE is normally expressed as an External Argument:
 &lt;ex&gt;&lt;fex name="Medium"&gt;Chapter four&lt;/fex&gt; &lt;t&gt;examined&lt;/t&gt; the case for free speech.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="10/19/2005 11:12:20 PDT Wed" abbrev="ins" name="Instrument" ID="9143">

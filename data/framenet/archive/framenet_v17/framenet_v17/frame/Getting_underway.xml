@@ -15,12 +15,12 @@
 
 &lt;ex&gt;&lt;fex name="Self_mover"&gt;The band "Killers"&lt;/fex&gt; is &lt;t&gt;heading&lt;/t&gt; &lt;t&gt;out&lt;/t&gt; &lt;fex name="Journey"&gt;on 25-date tour through Europe and Japan&lt;/fex&gt; &lt;fex name="Time"&gt;this week&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="11/10/2005 02:36:03 PST Thu" abbrev="sel" name="Self_mover" ID="9185">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Self_mover&lt;/fen&gt; is the volitional agent that moves. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Self_mover&lt;/fen&gt; is the volitional agent that moves.
 
 &lt;ex&gt;&lt;fex name="Self_mover"&gt;Tom and I&lt;/fex&gt; &lt;t&gt;got&lt;/t&gt; &lt;t&gt;under&lt;/t&gt; &lt;t&gt;way&lt;/t&gt; in the wee hours of the morning, planning to get to the confluence area between the onsets of nautical and civil twilight.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="11/10/2005 02:36:04 PST Thu" abbrev="Src" name="Source" ID="9186">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Source&lt;/fen&gt; refers to the starting-point of the &lt;fen&gt;Self_mover&lt;/fen&gt;'s motion. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Source&lt;/fen&gt; refers to the starting-point of the &lt;fen&gt;Self_mover&lt;/fen&gt;'s motion.
 
 &lt;ex&gt; The vessel &lt;t&gt;got&lt;/t&gt; &lt;t&gt;under&lt;/t&gt; &lt;t&gt;way&lt;/t&gt; &lt;fex name="Source"&gt;from San Francisco&lt;/fex&gt; on 14 June and completed two round-trips to Manila before the cessation of hostilies.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Source" ID="151"/>
@@ -31,7 +31,7 @@
 &lt;ex&gt;We can &lt;t&gt;get&lt;/t&gt; &lt;t&gt;going&lt;/t&gt; &lt;fex name="Path"&gt;via Fife&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="11/10/2005 02:36:04 PST Thu" abbrev="Goal" name="Goal" ID="9188">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Goal&lt;/fen&gt; is any expression that tells where the &lt;fen&gt;Self_mover&lt;/fen&gt; ends up, or would end up, as a result of the motion. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Goal&lt;/fen&gt; is any expression that tells where the &lt;fen&gt;Self_mover&lt;/fen&gt; ends up, or would end up, as a result of the motion.
 
 &lt;ex&gt;On the 17th, the vessel &lt;t&gt;got&lt;/t&gt; &lt;t&gt;under&lt;/t&gt; &lt;t&gt;way&lt;/t&gt; &lt;fex name="Goal"&gt;for Tarawa, Gilbert Islands&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>

@@ -5,7 +5,7 @@
 
 &lt;ex&gt;&lt;fex name="Name"&gt;Berkeley&lt;/fex&gt; is a &lt;fex name="Descriptor"&gt;wonderful&lt;/fex&gt; &lt;fex name="Locale"&gt;&lt;t&gt;city&lt;/t&gt;&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/10/2001 05:01:49 PDT Fri" abbrev="Constp" name="Constituent_parts" ID="1580">
-        <definition>&lt;def-root&gt;The materials or &lt;fen&gt;Constituent_parts&lt;/fen&gt; that make up a &lt;fen&gt;Locale&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;The materials or &lt;fen&gt;Constituent_parts&lt;/fen&gt; that make up a &lt;fen&gt;Locale&lt;/fen&gt;.
 &lt;ex&gt;New York is a &lt;t&gt;city&lt;/t&gt; &lt;fex name="Constp"&gt;of glass and steel&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/10/2001 05:01:49 PDT Fri" abbrev="ContP" name="Container_possessor" ID="1581">

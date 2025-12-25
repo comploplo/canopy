@@ -19,7 +19,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="03/08/2004 03:33:43 PST Mon" abbrev="Place" name="Place" ID="6097">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Theme&lt;/fen&gt;'s motion stops. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Theme&lt;/fen&gt;'s motion stops.
 
 &lt;ex&gt; She &lt;t&gt;stopped&lt;/t&gt; &lt;fex name="Place"&gt;on the threshold&lt;/fex&gt; with a sinking heart&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Locative_relation" ID="182"/>

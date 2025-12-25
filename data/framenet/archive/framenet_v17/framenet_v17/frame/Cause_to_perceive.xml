@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="AnW" cDate="08/03/2009 02:10:23 PDT Mon" name="Cause_to_perceive" ID="2161" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Agent&lt;/fen&gt;, &lt;fen&gt;Actor&lt;/fen&gt;, &lt;fen&gt;Entity&lt;/fen&gt;, or &lt;fen&gt;Medium&lt;/fen&gt; causes a &lt;fen&gt;Phenomenon&lt;/fen&gt; to be perceived by a &lt;fen&gt;Perceiver&lt;/fen&gt;.  With an &lt;fen&gt;Actor&lt;/fen&gt;, &lt;fen&gt;Entity&lt;/fen&gt;, or &lt;fen&gt;Medium&lt;/fen&gt;, the &lt;fen&gt;Perceiver&lt;/fen&gt; is usually unspecified. 
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Agent&lt;/fen&gt;, &lt;fen&gt;Actor&lt;/fen&gt;, &lt;fen&gt;Entity&lt;/fen&gt;, or &lt;fen&gt;Medium&lt;/fen&gt; causes a &lt;fen&gt;Phenomenon&lt;/fen&gt; to be perceived by a &lt;fen&gt;Perceiver&lt;/fen&gt;.  With an &lt;fen&gt;Actor&lt;/fen&gt;, &lt;fen&gt;Entity&lt;/fen&gt;, or &lt;fen&gt;Medium&lt;/fen&gt;, the &lt;fen&gt;Perceiver&lt;/fen&gt; is usually unspecified.
 
 &lt;ex&gt;&lt;fex name="Agent"&gt;Aileen&lt;/fex&gt; &lt;t&gt;showed&lt;/t&gt; &lt;fex name="Perceiver"&gt;Rob&lt;/fex&gt; &lt;fex name="Phenomenon"&gt;the book&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Actor"&gt;He&lt;/fex&gt; &lt;t&gt;exhibited&lt;/t&gt; &lt;fex name="Phenomenon"&gt;great interest in the project&lt;/fex&gt;.&lt;/ex&gt;

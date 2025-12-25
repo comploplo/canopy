@@ -44,14 +44,14 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="12/08/2005 04:36:12 PST Thu" abbrev="exp" name="Explanation" ID="9705">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the event of the &lt;fen&gt;Device&lt;/fen&gt;'s being caused to operate or cease to operate logically follows. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the event of the &lt;fen&gt;Device&lt;/fen&gt;'s being caused to operate or cease to operate logically follows.
 
 
 &lt;ex&gt;It works great for this price, I haven't &lt;t&gt;activated&lt;/t&gt; the cable box &lt;fex name="Explanation"&gt;because analog cable works like any TV tuner would&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="12/08/2005 04:38:31 PST Thu" abbrev="man" name="Manner" ID="9706">
-        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including force (&lt;ment&gt;hard&lt;/ment&gt;, &lt;ment&gt;softly&lt;/ment&gt;), secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In agentive uses, it may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that also affect the action (&lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including force (&lt;ment&gt;hard&lt;/ment&gt;, &lt;ment&gt;softly&lt;/ment&gt;), secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In agentive uses, it may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that also affect the action (&lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;).
 
 &lt;ex&gt;I &lt;fex name="Manner"&gt;carefully&lt;/fex&gt; &lt;t&gt;turned&lt;/t&gt; &lt;t&gt;off&lt;/t&gt; the computers, turned off the lights, locked that back
 door, and went to my office to do the paper work.&lt;/ex&gt;&lt;/def-root&gt;</definition>

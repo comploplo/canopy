@@ -949,7 +949,7 @@
 { Belarusian_monetary_unit, monetary_unit,@ (monetary unit in Belarus) }
 { rubel, Belarusian_monetary_unit,@ (the basic unit of money in Belarus) }
 { kapeika, Belarusian_monetary_unit,@ (100 kapeikas equal 1 rubel in Belarus) }
- 
+
 { Estonian_monetary_unit, monetary_unit,@ (monetary unit in Estonia) }
 { kroon, Estonian_monetary_unit,@ (the basic unit of money in Estonia) }
 { sent, Estonian_monetary_unit,@ (100 senti equal 1 kroon in Estonia) }
@@ -963,7 +963,7 @@
 { tiyin, Kazakhstani_monetary_unit,@ (100 tiyin equal 1 tenge in Kazakhstan) }
 
 { Latvian_monetary_unit, monetary_unit,@ (monetary unit in Latvia) }
-{ lats, Latvian_monetary_unit,@ (the basic unit of money in Latvia) } 
+{ lats, Latvian_monetary_unit,@ (the basic unit of money in Latvia) }
 { santims, Latvian_monetary_unit,@ (100 santimi equal 1 lats in Latvia) }
 
 { Lithuanian_monetary_unit, monetary_unit,@ (monetary unit in Lithuania) }
@@ -1158,7 +1158,7 @@
 { dram1, avoirdupois_unit,@ ounce1,#p (1/16 ounce or 1.771 grams) }
 { ounce1, oz., avoirdupois_unit,@ pound9,#p (a unit of weight equal to one sixteenth of a pound or 16 drams or 28.349 grams) }
 { pound9, lb, avoirdupois_unit,@ stone,#p quarter2,#p (16 ounces avoirdupois; "he got a hernia when he tried to lift 100 pounds") }
-{ pound10, force_unit,@ (a unit of apothecary weight equal to 12 ounces troy) } 
+{ pound10, force_unit,@ (a unit of apothecary weight equal to 12 ounces troy) }
 { half_pound, avoirdupois_unit,@ pound9,#p (8 ounces avoirdupois) }
 { quarter_pound, avoirdupois_unit,@ pound,#p (4 ounces avoirdupois) }
 { stone, avoirdupois_unit,@ quarter2,#p noun.location:Britain,;r (an avoirdupois unit used to measure the weight of a human body; equal to 14 pounds; "a heavy chap who must have weighed more than twenty stone") }
@@ -1565,6 +1565,3 @@
 { proof, noun.Tops:measure,@ (a measure of alcoholic strength expressed as an integer twice the percentage of alcohol present (by volume)) }
 
 { STP, s.t.p., standard_temperature,@ standard_pressure,@ (standard temperature and pressure) }
-
-
-

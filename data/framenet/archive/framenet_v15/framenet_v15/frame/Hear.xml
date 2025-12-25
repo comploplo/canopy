@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="731" cDate="02/07/2001 04:12:01 PST Wed" name="Hear" ID="37" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;The &lt;fen&gt;Hearer&lt;/fen&gt; receives a &lt;fen&gt;Message&lt;/fen&gt; or communication on a particular &lt;fen&gt;Topic&lt;/fen&gt;. Words in this frame denote events of verbal communication, but express the &lt;fen&gt;Hearer&lt;/fen&gt; rather than the &lt;fen&gt;Speaker&lt;/fen&gt; as an External Argument. 
+    <definition>&lt;def-root&gt;The &lt;fen&gt;Hearer&lt;/fen&gt; receives a &lt;fen&gt;Message&lt;/fen&gt; or communication on a particular &lt;fen&gt;Topic&lt;/fen&gt;. Words in this frame denote events of verbal communication, but express the &lt;fen&gt;Hearer&lt;/fen&gt; rather than the &lt;fen&gt;Speaker&lt;/fen&gt; as an External Argument.
 
-&lt;ex&gt;&lt;fex name="Hearer"&gt;Teenage fans&lt;/fex&gt; first &lt;t&gt;heard&lt;/t&gt; &lt;fex name="Topic"&gt;about the tragedy&lt;/fex&gt; &lt;fex name="Medium"&gt;on a popular radio show&lt;/fex&gt;.&lt;/ex&gt;  
+&lt;ex&gt;&lt;fex name="Hearer"&gt;Teenage fans&lt;/fex&gt; first &lt;t&gt;heard&lt;/t&gt; &lt;fex name="Topic"&gt;about the tragedy&lt;/fex&gt; &lt;fex name="Medium"&gt;on a popular radio show&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Hearer"&gt;Teenage fans&lt;/fex&gt; first &lt;t&gt;heard&lt;/t&gt; &lt;fex name="Message"&gt;the tragic news&lt;/fex&gt; &lt;fex name="Medium"&gt;on a popular radio show&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Peripheral" cBy="731" cDate="02/07/2001 04:12:01 PST Wed" abbrev="Spkr" name="Speaker" ID="152">
-        <definition>&lt;def-root&gt;This is the person who produces a Message. Typically, it is expressed in this frame as a PP-complement headed by &lt;ment&gt;from&lt;/ment&gt;: 
+        <definition>&lt;def-root&gt;This is the person who produces a Message. Typically, it is expressed in this frame as a PP-complement headed by &lt;ment&gt;from&lt;/ment&gt;:
 
 &lt;ex&gt;The students &lt;t&gt;heard&lt;/t&gt; &lt;fex name="Speaker"&gt;from Pat&lt;/fex&gt; that class was canceled.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>

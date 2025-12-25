@@ -18,12 +18,12 @@
 
 &lt;ex&gt;&lt;fex name="Theme"&gt;Boyner&lt;/fex&gt; has been &lt;t&gt;&lt;fex name="Path_shape"&gt;crisscrossing&lt;/fex&gt;&lt;/t&gt; &lt;fex name="Area"&gt;the country&lt;/fex&gt; &lt;fex name="dur"&gt;since May&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="01/26/2005 01:54:07 PST Wed" abbrev="Thm" name="Theme" ID="7455">
-        <definition>&lt;def-root&gt;This is the object which moves. In many sentences this FE will be expressed as something which moves under its own power. However, this FE is not &lt;ment&gt;required&lt;/ment&gt; to be an animate mover, so it is different from Self_mover. 
+        <definition>&lt;def-root&gt;This is the object which moves. In many sentences this FE will be expressed as something which moves under its own power. However, this FE is not &lt;ment&gt;required&lt;/ment&gt; to be an animate mover, so it is different from Self_mover.
 &lt;ex&gt;&lt;fex name="Theme"&gt;Kim&lt;/fex&gt; &lt;t&gt;crossed&lt;/t&gt; through the woods.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Physical_object" ID="68"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="01/26/2005 01:54:07 PST Wed" abbrev="Src" name="Source" ID="7456">
-        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of motion expresses the frame element &lt;fen&gt;Source&lt;/fen&gt;. In prepositional phrases, the prepositional object expresses the starting point of motion. In particles, the starting point of motion is understood from context. 
+        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of motion expresses the frame element &lt;fen&gt;Source&lt;/fen&gt;. In prepositional phrases, the prepositional object expresses the starting point of motion. In particles, the starting point of motion is understood from context.
 
 &lt;ex&gt;The cat &lt;t&gt;crossed&lt;/t&gt; the street &lt;fex name="Source"&gt;from her yard&lt;/fex&gt;.&lt;/ex&gt;
 
@@ -32,7 +32,7 @@
         <excludesFE name="Area" ID="7462"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="01/26/2005 01:54:07 PST Wed" abbrev="Path" name="Path" ID="7457">
-        <definition>&lt;def-root&gt;Any description of a trajectory of motion which is neither a &lt;fen&gt;Source&lt;/fen&gt; nor a &lt;fen&gt;Goal&lt;/fen&gt; (see below) expresses the frame element &lt;fen&gt;Path&lt;/fen&gt;, including directional expressions: 
+        <definition>&lt;def-root&gt;Any description of a trajectory of motion which is neither a &lt;fen&gt;Source&lt;/fen&gt; nor a &lt;fen&gt;Goal&lt;/fen&gt; (see below) expresses the frame element &lt;fen&gt;Path&lt;/fen&gt;, including directional expressions:
 
 &lt;ex&gt;The bikers &lt;t&gt;crisscrossed&lt;/t&gt; &lt;fex name="Path"&gt;through the desert&lt;/fex&gt;.&lt;/ex&gt;
 
@@ -40,27 +40,27 @@
         <excludesFE name="Area" ID="7462"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="01/26/2005 01:54:07 PST Wed" abbrev="Goal" name="Goal" ID="7458">
-        <definition>&lt;def-root&gt;Any expression which tells where the &lt;fen&gt;Theme&lt;/fen&gt; ends up as a result of the motion expresses the frame element Goal. 
+        <definition>&lt;def-root&gt;Any expression which tells where the &lt;fen&gt;Theme&lt;/fen&gt; ends up as a result of the motion expresses the frame element Goal.
 
 &lt;ex&gt;The children &lt;t&gt;hopped&lt;/t&gt; &lt;fex name="Goal"&gt;into the neighbor's yard&lt;/fex&gt;.&lt;/ex&gt;
 
-Some particles imply the existence of a Goal which is understood in the context of utterance: 
+Some particles imply the existence of a Goal which is understood in the context of utterance:
 &lt;ex&gt;The children &lt;t&gt;hopped&lt;/t&gt; &lt;fex name="Goal"&gt;over&lt;/fex&gt; and sat down.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>
         <excludesFE name="Area" ID="7462"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="01/26/2005 01:54:08 PST Wed" abbrev="Manr" name="Manner" ID="7460">
-        <definition>&lt;def-root&gt;Any expression which describes a property of motion which is not directly related to the trajectory of motion expresses the frame element &lt;fen&gt;Manner&lt;/fen&gt;. Descriptions of speed, steadiness, grace, means of motion, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.  
+        <definition>&lt;def-root&gt;Any expression which describes a property of motion which is not directly related to the trajectory of motion expresses the frame element &lt;fen&gt;Manner&lt;/fen&gt;. Descriptions of speed, steadiness, grace, means of motion, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.
 &lt;ex&gt;The bikers &lt;t&gt;crossed&lt;/t&gt; &lt;fex name="Manner"&gt;furiously&lt;/fex&gt; through the desert.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="FFFF00" fgColor="000000" coreType="Core" cBy="MJE" cDate="01/26/2005 01:54:08 PST Wed" abbrev="Dist" name="Distance" ID="7461">
-        <definition>&lt;def-root&gt;Any expression which characterizes the extent of motion expresses the frame element &lt;fen&gt;Distance&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;Any expression which characterizes the extent of motion expresses the frame element &lt;fen&gt;Distance&lt;/fen&gt;.
 &lt;ex&gt;I &lt;t&gt;leaped&lt;/t&gt; &lt;fex name="Distance"&gt;twenty feet&lt;/fex&gt; before slipping and falling.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Area" ID="7462"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="01/26/2005 01:54:08 PST Wed" abbrev="Area" name="Area" ID="7462">
-        <definition>&lt;def-root&gt;This frame element is used for expressions which describe a general area in which motion takes place when the motion is understood to be irregular and not to consist of a single linear path.  
+        <definition>&lt;def-root&gt;This frame element is used for expressions which describe a general area in which motion takes place when the motion is understood to be irregular and not to consist of a single linear path.
 &lt;ex&gt;The bikers &lt;t&gt;crisscrossed&lt;/t&gt; &lt;fex name="Area"&gt;the desert&lt;/fex&gt;.&lt;/ex&gt;
 Note that this FE should not be used for any locational modifier which would occur just as naturally with a non-motion predicate, like speech.
 
@@ -80,7 +80,7 @@ Note that this FE should not be used for any locational modifier which would occ
         <semType name="Speed" ID="234"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="000000" coreType="Extra-Thematic" cBy="MJE" cDate="01/26/2005 01:54:08 PST Wed" abbrev="Thm_c" name="Cotheme" ID="7468">
-        <definition>&lt;def-root&gt;This is the second moving object, expressed as a direct object or an oblique: 
+        <definition>&lt;def-root&gt;This is the second moving object, expressed as a direct object or an oblique:
 
 &lt;ex&gt;The squirrel &lt;t&gt;leaped&lt;/t&gt; &lt;fex name="Cotheme"&gt;after it&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

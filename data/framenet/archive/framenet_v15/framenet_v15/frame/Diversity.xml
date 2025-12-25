@@ -8,7 +8,7 @@
 
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="03/23/2007 07:50:44 PDT Fri" abbrev="" name="Group" ID="11243">
-        <definition>&lt;def-root&gt;This FE marks constituents that express the set of objects or types whose diversity is at issue. 
+        <definition>&lt;def-root&gt;This FE marks constituents that express the set of objects or types whose diversity is at issue.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="03/23/2007 07:50:45 PDT Fri" abbrev="" name="Dimension" ID="11246">

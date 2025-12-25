@@ -26,7 +26,7 @@
         <definition>&lt;def-root&gt;When the infection occurs.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 03:05:59 PDT Thu" abbrev="" name="Depictive" ID="16529">
-        <definition>&lt;def-root&gt;Depictive phrase describing a participant in the event. 
+        <definition>&lt;def-root&gt;Depictive phrase describing a participant in the event.
 
 &lt;/def-root&gt;</definition>
     </FE>

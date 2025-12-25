@@ -7,23 +7,23 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:08 PST Wed" abbrev="Pat" name="Patient" ID="209">
-        <definition>&lt;def-root&gt;This   is the sufferer of the injury, disease or pain and can occur as an NP Object in this frame. However, Patient may not be expressed as a separate Frame Element but frequently occurs as the possessor of the Affliction, an example of  FE Conflation:  (See section on Conflation.) 
+        <definition>&lt;def-root&gt;This   is the sufferer of the injury, disease or pain and can occur as an NP Object in this frame. However, Patient may not be expressed as a separate Frame Element but frequently occurs as the possessor of the Affliction, an example of  FE Conflation:  (See section on Conflation.)
 
 &lt;ex&gt;Acupuncture &lt;t&gt;cured&lt;/t&gt; &lt;fex name="Patient"&gt;Pat&lt;/fex&gt; of his depression.&lt;/ex&gt;
 &lt;ex&gt;Acupunture &lt;t&gt;cured&lt;/t&gt; &lt;fex name="Patient"&gt;Pat's&lt;/fex&gt; depression.&lt;/ex&gt;
 The Patient may therefore not be tagged in a sentence although explicitly identified. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:08 PST Wed" abbrev="Affl" name="Affliction" ID="210">
-        <definition>&lt;def-root&gt;The Frame Element Affliction is generally the NP Object of a verb, frequently incorporating the Patient as a possessor, as described above: 
+        <definition>&lt;def-root&gt;The Frame Element Affliction is generally the NP Object of a verb, frequently incorporating the Patient as a possessor, as described above:
 &lt;ex&gt;This potion &lt;t&gt;heals&lt;/t&gt; &lt;fex name="Affliction"&gt;a broken heart&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;The potion &lt;t&gt;healed&lt;/t&gt; &lt;fex name="Affliction"&gt;Kim's broken heart&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:08 PST Wed" abbrev="Trtm" name="Treatment" ID="211">
-        <definition>&lt;def-root&gt;The FE Treatment is used for treatments and means, distinguished by separate FEs in FN-1. 
+        <definition>&lt;def-root&gt;The FE Treatment is used for treatments and means, distinguished by separate FEs in FN-1.
 &lt;ex&gt;He emphasized treatment &lt;fex name="Treatment"&gt;by surgical means&lt;/fex&gt;. &lt;/ex&gt;
 &lt;ex&gt;He will undergo &lt;fex name="Treatment"&gt;radiation&lt;/fex&gt; treatment. &lt;/ex&gt;
 
-A  method used to treat the Affliction can be the External Argument of these verbs, or expressed in a  PP Complement: 
+A  method used to treat the Affliction can be the External Argument of these verbs, or expressed in a  PP Complement:
 &lt;ex&gt;&lt;fex name="Treatment"&gt;These herbs&lt;/fex&gt; can &lt;t&gt;cure&lt;/t&gt; insomnia.&lt;/ex&gt;
 &lt;ex&gt;Insomnia can be &lt;t&gt;cured&lt;/t&gt; &lt;fex name="Treatment"&gt;with herbs&lt;/fex&gt;. &lt;/ex&gt;
 
@@ -40,7 +40,7 @@ Target nouns (e.g. therapy, treatment, etc.) will NOT be tagged with this FE.&lt
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="09/24/2001 01:15:21 PDT Mon" abbrev="Med" name="Medication" ID="1996">
         <definition>&lt;def-root&gt;The injested, applied, injected, etc. substance designed to cure the Patient.
 &lt;ex&gt;He needs prolonged &lt;t&gt;treatment&lt;/t&gt; &lt;fex name="Medication"&gt;with anibiotics&lt;/fex&gt;. &lt;/ex&gt;
-                            
+
 Note the tight relationship between Treatment and Medicine.&lt;/def-root&gt;</definition>
         <semType name="Physical_entity" ID="70"/>
     </FE>

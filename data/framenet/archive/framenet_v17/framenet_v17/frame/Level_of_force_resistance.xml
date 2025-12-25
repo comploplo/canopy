@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="KmG" cDate="06/04/2008 03:09:43 PDT Wed" name="Level_of_force_resistance" ID="2061" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Resisting_entity&lt;/fen&gt; is capable of resisting or does resist a physical &lt;fen&gt;Opposing_force&lt;/fen&gt; to a level specified by the target. With certain LUs (e.g. &lt;m&gt;impregnable.a&lt;/m&gt;), the &lt;fen&gt;Opposing_force&lt;/fen&gt; FE is incorporated, and with many LUs, it is mostly null instantiated. This frame covers both individual-level/static uses ("the DURABILITY of jade") as well as stage-level/dynamic uses ("the shoulder is PLIABLE after stretching"), although the individual-level meaning is the more basic and is much more prominent in the data. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Resisting_entity&lt;/fen&gt; is capable of resisting or does resist a physical &lt;fen&gt;Opposing_force&lt;/fen&gt; to a level specified by the target. With certain LUs (e.g. &lt;m&gt;impregnable.a&lt;/m&gt;), the &lt;fen&gt;Opposing_force&lt;/fen&gt; FE is incorporated, and with many LUs, it is mostly null instantiated. This frame covers both individual-level/static uses ("the DURABILITY of jade") as well as stage-level/dynamic uses ("the shoulder is PLIABLE after stretching"), although the individual-level meaning is the more basic and is much more prominent in the data.
 
 &lt;ex&gt;The great and &lt;t&gt;impregnable&lt;/t&gt; &lt;fex name="Ent"&gt;fortress&lt;/fex&gt; still stands today.&lt;/ex&gt;
 
-&lt;ex&gt;&lt;fex name="Ent"&gt;His heart&lt;/fex&gt; is &lt;fex name="Degree"&gt;by no means&lt;/fex&gt; &lt;t&gt;strong&lt;/t&gt;, so he should ease into his exercise regime. &lt;fex name="Opp"&gt;INI&lt;/fex&gt;&lt;/ex&gt;	
+&lt;ex&gt;&lt;fex name="Ent"&gt;His heart&lt;/fex&gt; is &lt;fex name="Degree"&gt;by no means&lt;/fex&gt; &lt;t&gt;strong&lt;/t&gt;, so he should ease into his exercise regime. &lt;fex name="Opp"&gt;INI&lt;/fex&gt;&lt;/ex&gt;
 
 &lt;ex&gt;They were strapping athletic lads with fine belts and &lt;t&gt;sturdy&lt;/t&gt; &lt;fex name="Ent"&gt;boots&lt;/fex&gt;. &lt;fex name="Opp"&gt;INI&lt;/fex&gt;&lt;/ex&gt;
 
-&lt;ex&gt;&lt;fex name="Ent"&gt;The staircase&lt;/fex&gt; &lt;m&gt;remained&lt;/m&gt; &lt;t&gt;robust&lt;/t&gt; &lt;fex name="Opp"&gt;under decades of heavy use&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Ent"&gt;The staircase&lt;/fex&gt; &lt;m&gt;remained&lt;/m&gt; &lt;t&gt;robust&lt;/t&gt; &lt;fex name="Opp"&gt;under decades of heavy use&lt;/fex&gt;.&lt;/ex&gt;
 
 Productive metaphors include cases where the social resistance of an entity to (an) opposing social force(s) is conceptualized as the physical resistance of an entity to an opposing physical force. More specifically, the ‘resistance’ is an entity’s propensity to resist change in social realms such as the economic, political, and cultural:
 &lt;ex&gt;California has had (until now) a &lt;t&gt;robust&lt;/t&gt; &lt;fex name="Ent"&gt;property market&lt;/fex&gt;. &lt;fex name="Opp"&gt;INI&lt;/fex&gt;&lt;/ex&gt;
@@ -24,11 +24,11 @@ Similarly, there are instances where the entity’s resistance is psychological 
 
 Compare to: Level_of_force_exertion. &lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="KmG" cDate="06/04/2008 03:09:43 PDT Wed" abbrev="Ent" name="Resisting_entity" ID="12707">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Resisting_entity&lt;/fen&gt; is the item that resists the &lt;fen&gt;Opposing_force&lt;/fen&gt; to the level specified by the target. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Resisting_entity&lt;/fen&gt; is the item that resists the &lt;fen&gt;Opposing_force&lt;/fen&gt; to the level specified by the target.
 
 &lt;ex&gt;These are made from a &lt;t&gt;tough&lt;/t&gt; &lt;fex name="Ent"&gt;plastic foam&lt;/fex&gt; and are very light to wear.&lt;/ex&gt;
 
-&lt;ex&gt;A great number of &lt;t&gt;hardy&lt;/t&gt; &lt;fex name="Ent"&gt;plants&lt;/fex&gt; usually succeed in blooming even in the severest season.&lt;/ex&gt; 
+&lt;ex&gt;A great number of &lt;t&gt;hardy&lt;/t&gt; &lt;fex name="Ent"&gt;plants&lt;/fex&gt; usually succeed in blooming even in the severest season.&lt;/ex&gt;
 
 &lt;ex&gt;The &lt;t&gt;fragile&lt;/t&gt; &lt;fex name="Ent"&gt;canoe&lt;/fex&gt; did not capsize!&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -49,32 +49,32 @@ Where &lt;fen&gt;Degree&lt;/fen&gt; is expressed by a comparative or superlative
         <semType name="Location" ID="54"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="KmG" cDate="06/04/2008 03:09:43 PDT Wed" abbrev="Tim" name="Time" ID="12712">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Time&lt;/fen&gt; when the &lt;fen&gt;Resisting_entity&lt;/fen&gt; resists an external force. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Time&lt;/fen&gt; when the &lt;fen&gt;Resisting_entity&lt;/fen&gt; resists an external force.
 
 &lt;ex&gt;The retaining wall was even &lt;t&gt;weaker&lt;/t&gt; &lt;fex name="Tim"&gt;yesterday&lt;/fex&gt;, and had begun to crumble.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="KmG" cDate="06/04/2008 04:53:35 PDT Wed" abbrev="Cir" name="Circumstances" ID="12719">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; under which the &lt;fen&gt;Resisting_entity&lt;/fen&gt; resists an external force. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; under which the &lt;fen&gt;Resisting_entity&lt;/fen&gt; resists an external force.
 
 &lt;ex&gt;Wexford thought the yellow chair felt &lt;t&gt;flimsy&lt;/t&gt; &lt;fex name="Cir"&gt;as he lowered his heavy body into it&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Peripheral" cBy="HPh" cDate="09/10/2015 07:57:02 PDT Thu" abbrev="Desc" name="Descriptor" ID="16712">
-        <definition>&lt;def-root&gt;This FE describes the force resistance of the &lt;fen&gt;Resisting_entity&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;This FE describes the force resistance of the &lt;fen&gt;Resisting_entity&lt;/fen&gt;.
 
 &lt;ex&gt;Scottish ancestors had given her an &lt;fex name="Desc"&gt;amazing&lt;/fex&gt; &lt;t&gt;toughness&lt;/t&gt; which enabled her to endure the hardships of life.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="7CCD7C" fgColor="000000" coreType="Peripheral" cBy="HPh" cDate="10/22/2015 06:55:01 PDT Thu" abbrev="Dom" name="Domain" ID="16751">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Domain&lt;/fen&gt; is the field in which the &lt;fen&gt;Resisting_entity&lt;/fen&gt; resists an external force. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Domain&lt;/fen&gt; is the field in which the &lt;fen&gt;Resisting_entity&lt;/fen&gt; resists an external force.
 
 &lt;ex&gt;Factors that determine the choice of materials include &lt;fex name="Dom"&gt;physical&lt;/fex&gt; &lt;t&gt;robustness&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="HPh" cDate="10/27/2015 06:17:49 PDT Tue" abbrev="Opp" name="Opposing_force" ID="16760">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Opposing_force&lt;/fen&gt; is the item placed in opposition to the &lt;fen&gt;Resisting_entity&lt;/fen&gt;. &lt;fen&gt;Opposing_force&lt;/fen&gt; hinders, blocks, helps, or allows (lets) the &lt;fen&gt;Resisting_entity&lt;/fen&gt; to resist at the level specified by the target. Sometimes this Core FE is incorporated in the target; otherwise, it is often null instantiated in example sentences. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Opposing_force&lt;/fen&gt; is the item placed in opposition to the &lt;fen&gt;Resisting_entity&lt;/fen&gt;. &lt;fen&gt;Opposing_force&lt;/fen&gt; hinders, blocks, helps, or allows (lets) the &lt;fen&gt;Resisting_entity&lt;/fen&gt; to resist at the level specified by the target. Sometimes this Core FE is incorporated in the target; otherwise, it is often null instantiated in example sentences.
 
-&lt;ex&gt;The fortress was &lt;t&gt;impregnable&lt;/t&gt; &lt;fex name="Opp"&gt;to attack by hostile invaders&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;The fortress was &lt;t&gt;impregnable&lt;/t&gt; &lt;fex name="Opp"&gt;to attack by hostile invaders&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt;Its best-known feature is its soft and &lt;t&gt;pliable&lt;/t&gt; duck-like beak. &lt;fex name="Opp"&gt;INI&lt;/fex&gt; &lt;/ex&gt; 
+&lt;ex&gt;Its best-known feature is its soft and &lt;t&gt;pliable&lt;/t&gt; duck-like beak. &lt;fex name="Opp"&gt;INI&lt;/fex&gt; &lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
     <frameRelation type="Inherits from">

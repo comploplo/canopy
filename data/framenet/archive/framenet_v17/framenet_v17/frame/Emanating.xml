@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ACW" cDate="06/24/2002 11:42:49 PDT Mon" name="Emanating" ID="361" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame an &lt;fen&gt;Emission&lt;/fen&gt; emanates from a &lt;fen&gt;Source&lt;/fen&gt; along a &lt;fen&gt;Path&lt;/fen&gt; or to a &lt;fen&gt;Goal&lt;/fen&gt;. 
-&lt;ex&gt;&lt;fex name="Emission"&gt;The light&lt;/fex&gt; &lt;t&gt;emanates&lt;/t&gt; &lt;fex name="Source"&gt;from the tower&lt;/fex&gt;.&lt;/ex&gt; 
+    <definition>&lt;def-root&gt;In this frame an &lt;fen&gt;Emission&lt;/fen&gt; emanates from a &lt;fen&gt;Source&lt;/fen&gt; along a &lt;fen&gt;Path&lt;/fen&gt; or to a &lt;fen&gt;Goal&lt;/fen&gt;.
+&lt;ex&gt;&lt;fex name="Emission"&gt;The light&lt;/fex&gt; &lt;t&gt;emanates&lt;/t&gt; &lt;fex name="Source"&gt;from the tower&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt; &lt;fex name="Emission"&gt;The uranium particles&lt;/fex&gt; &lt;t&gt;radiate&lt;/t&gt; &lt;fex name="Source"&gt;from the nuclear plant&lt;/fex&gt; . &lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="7CCD73" fgColor="FFFFFF" coreType="Peripheral" cBy="ACW" cDate="06/24/2002 11:44:03 PDT Mon" abbrev="Area" name="Area" ID="3173">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Area&lt;/fen&gt; is used for expressions which describe a general area in which the emanating takes place when the motion is understood to be irregular or not to consist of a single, linear path. &lt;/def-root&gt;</definition>

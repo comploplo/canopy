@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="731" cDate="02/07/2001 04:12:01 PST Wed" name="Gesture" ID="36" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;The words in this frame have to do with non-verbal communication. Topic is not normally expressed with these words. This seems to be related to the absence of a verbal code in cases of gestural communication. Topic can be viewed as a partial characterization of a &lt;fen&gt;Message&lt;/fen&gt;, but such partial characterization is either difficult or irrelevant in the absence of a verbal code. 
+    <definition>&lt;def-root&gt;The words in this frame have to do with non-verbal communication. Topic is not normally expressed with these words. This seems to be related to the absence of a verbal code in cases of gestural communication. Topic can be viewed as a partial characterization of a &lt;fen&gt;Message&lt;/fen&gt;, but such partial characterization is either difficult or irrelevant in the absence of a verbal code.
 
 &lt;ex&gt;&lt;fex name="Communicator"&gt;I&lt;/fex&gt; &lt;t&gt;gestured&lt;/t&gt; &lt;fex name="Body_part"&gt;with my hand&lt;/fex&gt; &lt;fex name="Message"&gt;for him to come over&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:01 PST Wed" abbrev="Com" name="Communicator" ID="149">

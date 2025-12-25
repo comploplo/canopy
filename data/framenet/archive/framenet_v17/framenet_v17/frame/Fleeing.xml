@@ -22,18 +22,18 @@
         <semType name="Path" ID="152"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="11/22/2005 07:21:27 PST Tue" abbrev="Goal" name="Goal" ID="9456">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Goal&lt;/fen&gt; is used for any expression which tells where the &lt;fen&gt;Self_mover&lt;/fen&gt; ends up as a result of the motion. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Goal&lt;/fen&gt; is used for any expression which tells where the &lt;fen&gt;Self_mover&lt;/fen&gt; ends up as a result of the motion.
 &lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="11/22/2005 07:21:27 PST Tue" abbrev="Manr" name="Manner" ID="9457">
-        <definition>&lt;def-root&gt;An expression which describes a property of motion which is not directly related to the trajectory or rate of motion. Descriptions of steadiness, grace, means of motion, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions. 
+        <definition>&lt;def-root&gt;An expression which describes a property of motion which is not directly related to the trajectory or rate of motion. Descriptions of steadiness, grace, means of motion, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.
 
 &lt;ex&gt;They had to &lt;t&gt;flee&lt;/t&gt; &lt;fex name="Manner"&gt;on foot&lt;/fex&gt; through the desert.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="FFFF00" fgColor="000000" coreType="Peripheral" cBy="MJE" cDate="11/22/2005 07:21:27 PST Tue" abbrev="Dist" name="Distance" ID="9458">
-        <definition>&lt;def-root&gt;Any expression which characterizes the extent of motion expresses the frame element &lt;fen&gt;Distance&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;Any expression which characterizes the extent of motion expresses the frame element &lt;fen&gt;Distance&lt;/fen&gt;.
 &lt;/def-root&gt;</definition>
         <semType name="Quantity" ID="59"/>
     </FE>
@@ -86,7 +86,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="90876C" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MJE" cDate="11/22/2005 07:21:28 PST Tue" abbrev="ext" name="External_cause" ID="9471">
-        <definition>&lt;def-root&gt;&lt;fen&gt;External_cause&lt;/fen&gt; is something in the external environment that causes the &lt;fen&gt;Self_mover&lt;/fen&gt; to move. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;External_cause&lt;/fen&gt; is something in the external environment that causes the &lt;fen&gt;Self_mover&lt;/fen&gt; to move.
 
 &lt;ex&gt;They &lt;t&gt;fled&lt;/t&gt; &lt;fex name="ext"&gt;at the sound of her voice&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

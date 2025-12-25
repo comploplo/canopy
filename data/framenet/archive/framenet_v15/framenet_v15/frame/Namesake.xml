@@ -21,7 +21,7 @@
 &lt;ex&gt;&lt;fex name="nam"&gt;Claire&lt;/fex&gt; is her &lt;t&gt;namesake&lt;/t&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="11/19/2004 07:30:03 PST Fri" abbrev="anc" name="Anchor" ID="7249">
-        <definition>&lt;def-root&gt;A domain, often a place or time, in which the &lt;fen&gt;Namesake&lt;/fen&gt; of the &lt;fen&gt;Entity&lt;/fen&gt; is located. 
+        <definition>&lt;def-root&gt;A domain, often a place or time, in which the &lt;fen&gt;Namesake&lt;/fen&gt; of the &lt;fen&gt;Entity&lt;/fen&gt; is located.
 
 &lt;ex&gt;Karam is a member of the Parti Socialiste Guyanais (PSG), which has long been the
 strongest political party and is allied to its &lt;fex name="anc"&gt;French&lt;/fex&gt; &lt;t&gt;namesake&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>

@@ -39,8 +39,8 @@ Note that each modifer of the target gets its own FE (and, hence, its own GF and
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="599" cDate="06/23/2001 02:26:41 PDT Sat" abbrev="Use" name="Use" ID="973">
-        <definition>&lt;def-root&gt;This FE identifes the &lt;fen&gt;Use&lt;/fen&gt; for which a &lt;fen&gt;Garment&lt;/fen&gt; is worn or was made. 
- 
+        <definition>&lt;def-root&gt;This FE identifes the &lt;fen&gt;Use&lt;/fen&gt; for which a &lt;fen&gt;Garment&lt;/fen&gt; is worn or was made.
+
 &lt;ex&gt;Mike wore a new &lt;fex name="Use"&gt;riding&lt;/fex&gt; jacket.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="669" cDate="05/01/2002 11:33:15 PDT Wed" abbrev="Body_loc" name="Body_location" ID="2725">

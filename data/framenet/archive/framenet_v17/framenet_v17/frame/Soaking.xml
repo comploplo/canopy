@@ -8,7 +8,7 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="ACW" cDate="05/30/2002 03:12:58 PDT Thu" abbrev="Thm" name="Theme" ID="2872">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Theme&lt;/fen&gt; is the entity that changes location. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Theme&lt;/fen&gt; is the entity that changes location.
 &lt;ex&gt; Ellen &lt;t&gt;soaked&lt;/t&gt; &lt;fex name="Theme"&gt;the beans&lt;/fex&gt; &lt;fex name="Medium"&gt;in the water&lt;/fex&gt;  &lt;fex name="Duration"&gt;for 30 seconds&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Physical_object" ID="68"/>
     </FE>
@@ -24,7 +24,7 @@
         <definition>&lt;def-root&gt;&lt;fen&gt;Medium&lt;/fen&gt; is the substance in which the &lt;fen&gt;Theme&lt;/fen&gt; is submerged.&lt;ex&gt;Bobby &lt;t&gt;soaked&lt;/t&gt; the potatoes &lt;fex name="Medium"&gt;in water&lt;/fex&gt; overnight.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Peripheral" cBy="ACW" cDate="05/30/2002 03:17:03 PDT Thu" abbrev="Container" name="Container" ID="2876">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Container&lt;/fen&gt; that holds the &lt;fen&gt;Theme&lt;/fen&gt; which is submerged and the &lt;fen&gt;Medium&lt;/fen&gt; that it is in. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Container&lt;/fen&gt; that holds the &lt;fen&gt;Theme&lt;/fen&gt; which is submerged and the &lt;fen&gt;Medium&lt;/fen&gt; that it is in.
 &lt;ex&gt;&lt;t&gt;soak&lt;/t&gt; the potatoes &lt;fex name="Container"&gt;in a medium-sized pan&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="ACW" cDate="05/30/2002 03:18:38 PDT Thu" abbrev="Place" name="Place" ID="2877">

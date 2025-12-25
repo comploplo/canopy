@@ -3,15 +3,15 @@
 <frame cBy="731" cDate="02/07/2001 04:12:23 PST Wed" name="Sensation" ID="71" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;This frame contains nouns that refer to sensations in different modalities. The FE &lt;fen&gt;Source&lt;/fen&gt; is used for the phenomenon that gives rise to the sensation in question. The FE &lt;fen&gt;Percept&lt;/fen&gt; is used for the characteristic quality of the sensation. In cases of veridical perception these are not typically distinguished from one another; we use the FE &lt;fen&gt;Percept&lt;/fen&gt; as the default in these cases. With some nouns in this frame it is possible to express the being who experiences the sensation, or the part of the body of such a being. We mark such expressions with the FEs &lt;fen&gt;Perceiver_passive&lt;/fen&gt; and &lt;fen&gt;Body_part&lt;/fen&gt;, respectively. (The &lt;ment&gt;-passive&lt;/ment&gt; part of this label serves to distinguish this FE from the Perceiver-Agentive FE used in other frames.) &lt;/def-root&gt;</definition>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:23 PST Wed" abbrev="Perc-Pass" name="Perceiver_passive" ID="339">
-        <definition>&lt;def-root&gt;This FE is only expressed with certain nouns in this frame, and then only with the help of a support verb, such as &lt;ment&gt;have&lt;/ment&gt;: 
+        <definition>&lt;def-root&gt;This FE is only expressed with certain nouns in this frame, and then only with the help of a support verb, such as &lt;ment&gt;have&lt;/ment&gt;:
 &lt;ex&gt;&lt;fex name="Perceiver_passive"&gt;I&lt;/fex&gt; &lt;ment&gt;have&lt;/ment&gt; a tingling &lt;t&gt;sensation&lt;/t&gt; in my hands.&lt;/ex&gt;
- With most nouns in this frame, a perceiver can only be expressed as the subject of a perception verb such as &lt;ment&gt;detect&lt;/ment&gt; or &lt;ment&gt;sense&lt;/ment&gt;: 
+ With most nouns in this frame, a perceiver can only be expressed as the subject of a perception verb such as &lt;ment&gt;detect&lt;/ment&gt; or &lt;ment&gt;sense&lt;/ment&gt;:
 &lt;ex&gt;The dog &lt;ment&gt;detected&lt;/ment&gt; the &lt;t&gt;scent&lt;/t&gt; of explosives.&lt;/ex&gt;
 In sentences like these the perceiver-denoting expression is not annotated because it is introduced by another perception word, which is treated independently in a different frame. &lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:24 PST Wed" abbrev="Src" name="Source" ID="340">
-        <definition>&lt;def-root&gt;This is the entity or phenomenon which gives rise to the sensation. In cases of veridical sensation, this FE is not typically distinguished from &lt;fen&gt;Percept&lt;/fen&gt;. Most of the phrases that express this FE can be paraphrased as &lt;ment&gt;from&lt;/ment&gt;-phrases, e.g. 
+        <definition>&lt;def-root&gt;This is the entity or phenomenon which gives rise to the sensation. In cases of veridical sensation, this FE is not typically distinguished from &lt;fen&gt;Percept&lt;/fen&gt;. Most of the phrases that express this FE can be paraphrased as &lt;ment&gt;from&lt;/ment&gt;-phrases, e.g.
 &lt;ex&gt;The &lt;t&gt;smell&lt;/t&gt; &lt;fex name="Source"&gt;of the garlic&lt;/fex&gt; made me hungry.&lt;/ex&gt;
 &lt;ex&gt;The &lt;t&gt;smell&lt;/t&gt; &lt;fex name="Source"&gt;from the garlic&lt;/fex&gt; made me hungry.&lt;/ex&gt;
 &lt;ex&gt;The &lt;t&gt;smell&lt;/t&gt; &lt;ment&gt;of garlic&lt;/ment&gt; made me hungry.&lt;/ex&gt;
@@ -21,12 +21,12 @@ The first sentence, in which the object of the prepostion &lt;ment&gt;of&lt;/men
         <semType name="Source" ID="151"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:24 PST Wed" abbrev="Pcpt" name="Percept" ID="341">
-        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Percept&lt;/fen&gt; is used for phrases that express the characteristic property of a sensation. Typically this characteristic property is described with reference to the entity or phenomenon that produces the sensation---that  is why this FE can be difficult to distinguish from Source. It is possible for Source and Percept to be expressed separately, however: 
+        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Percept&lt;/fen&gt; is used for phrases that express the characteristic property of a sensation. Typically this characteristic property is described with reference to the entity or phenomenon that produces the sensation---that  is why this FE can be difficult to distinguish from Source. It is possible for Source and Percept to be expressed separately, however:
 &lt;ex&gt;&lt;fex name="Source"&gt;This herb&lt;/fex&gt; &lt;gov&gt;gives off&lt;/gov&gt; a &lt;t&gt;smell&lt;/t&gt; &lt;fex name="Percept"&gt;of garlic&lt;/fex&gt;.&lt;/ex&gt;
  In cases in which it is impossible to distinguish between Source and Percept, Percept is used as the default FE. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:24 PST Wed" abbrev="BodP" name="Body_part" ID="342">
-        <definition>&lt;def-root&gt;This FE is assigned to phrases expressing the body part in which a sensation is located. Since touch is the least localized of sense modalities, words relating to haptic sensations are the ones most likely to occur with this FE: 
+        <definition>&lt;def-root&gt;This FE is assigned to phrases expressing the body part in which a sensation is located. Since touch is the least localized of sense modalities, words relating to haptic sensations are the ones most likely to occur with this FE:
 &lt;ex&gt;I have a tingling &lt;t&gt;feeling&lt;/t&gt; &lt;fex name="Body_part"&gt;in my hands&lt;/fex&gt;.&lt;/ex&gt;
  Words for other sense modalities can occasionally express this FE as well:
 &lt;ex&gt;There is a bitter &lt;t&gt;taste&lt;/t&gt; &lt;fex name="Body_part"&gt;on the back of my tongue&lt;/fex&gt;.&lt;/ex&gt;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:11:59 PST Wed" name="Candidness" ID="32" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame contains adjectives and nouns that describe the truth or sincerity of communication. These words, analogously to behaver-evaluating words, can apply either to &lt;fen&gt;Speaker&lt;/fen&gt;s or to the &lt;fen&gt;Message&lt;/fen&gt;s they produce. They can occur with &lt;ment&gt;about&lt;/ment&gt;-PPs expressing &lt;fen&gt;Topic&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;This frame contains adjectives and nouns that describe the truth or sincerity of communication. These words, analogously to behaver-evaluating words, can apply either to &lt;fen&gt;Speaker&lt;/fen&gt;s or to the &lt;fen&gt;Message&lt;/fen&gt;s they produce. They can occur with &lt;ment&gt;about&lt;/ment&gt;-PPs expressing &lt;fen&gt;Topic&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Speaker"&gt;Evelyn&lt;/fex&gt; was &lt;t&gt;candid&lt;/t&gt; &lt;fex name="Addressee"&gt;with me&lt;/fex&gt; &lt;fex name="Topic"&gt;about the party&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:59 PST Wed" abbrev="Spkr" name="Speaker" ID="131">

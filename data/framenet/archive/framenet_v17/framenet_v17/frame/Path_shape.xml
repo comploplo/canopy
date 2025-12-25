@@ -3,19 +3,19 @@
 <frame cBy="ChW" cDate="02/07/2001 04:12:15 PST Wed" name="Path_shape" ID="61" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;The words in this frame describe the "fictive" motion of a stationary &lt;fen&gt;Road&lt;/fen&gt;.
 
-Some of the targets cast the scene primarily in terms of the &lt;fen&gt;Path_shape&lt;/fen&gt;: 
+Some of the targets cast the scene primarily in terms of the &lt;fen&gt;Path_shape&lt;/fen&gt;:
 &lt;ex&gt;&lt;fex name="Road"&gt;The long mountain road&lt;/fex&gt; &lt;t&gt;meandered&lt;/t&gt; &lt;fex name="Area"&gt;through the woods&lt;/fex&gt;.&lt;/ex&gt;
 
-Some of the words in this frame imply a &lt;fen&gt;Source&lt;/fen&gt; or &lt;fen&gt;Goal&lt;/fen&gt; which is expressed by a direct object: 
+Some of the words in this frame imply a &lt;fen&gt;Source&lt;/fen&gt; or &lt;fen&gt;Goal&lt;/fen&gt; which is expressed by a direct object:
 &lt;ex&gt;&lt;fex name="Road"&gt;The path&lt;/fex&gt; &lt;t&gt;entered&lt;/t&gt; &lt;fex name="Goal"&gt;the garden&lt;/fex&gt; &lt;fex name="Place"&gt;on the west side&lt;/fex&gt;.&lt;/ex&gt;
 
 Other members of the frame refer to a &lt;fen&gt;Direction&lt;/fen&gt;:
 &lt;ex&gt;Then &lt;fex name="Road"&gt;the path&lt;/fex&gt; &lt;t&gt;bears&lt;/t&gt; &lt;fex name="dir"&gt;a little to the right&lt;/fex&gt;.&lt;/ex&gt;
 
-Yet others indicate a &lt;fen&gt;Path&lt;/fen&gt; which requires mention of a landmark: 
+Yet others indicate a &lt;fen&gt;Path&lt;/fen&gt; which requires mention of a landmark:
 &lt;ex&gt;&lt;fex name="Road"&gt;The otherwise arrow-straight highway&lt;/fex&gt; veers north and &lt;t&gt;skirts&lt;/t&gt; &lt;fex name="Path"&gt;the lake&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:15 PST Wed" abbrev="Src" name="Source" ID="266">
-        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of the &lt;fen&gt;Road&lt;/fen&gt;. In prepositional phrases, the prepositional object expresses the starting point of motion. In particles, the starting point of motion is understood from context. 
+        <definition>&lt;def-root&gt;Any expression which implies a definite starting-point of the &lt;fen&gt;Road&lt;/fen&gt;. In prepositional phrases, the prepositional object expresses the starting point of motion. In particles, the starting point of motion is understood from context.
 
 &lt;ex&gt;The Way &lt;t&gt;descends&lt;/t&gt; &lt;fex name="Source"&gt;from the City of the Peak&lt;/fex&gt; through a dense forest.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Source" ID="151"/>
@@ -28,7 +28,7 @@ Yet others indicate a &lt;fen&gt;Path&lt;/fen&gt; which requires mention of a la
         <excludesFE name="Area" ID="272"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:15 PST Wed" abbrev="Goal" name="Goal" ID="268">
-        <definition>&lt;def-root&gt;Any expression which tells where the fictive mover travelling along a &lt;fen&gt;Road&lt;/fen&gt; would end up. 
+        <definition>&lt;def-root&gt;Any expression which tells where the fictive mover travelling along a &lt;fen&gt;Road&lt;/fen&gt; would end up.
 
 &lt;ex&gt;&lt;fex name="Goal"&gt;Where&lt;/fex&gt; does Interstate 80 &lt;t&gt;enter&lt;/t&gt; the city ?&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>
@@ -39,18 +39,18 @@ Yet others indicate a &lt;fen&gt;Path&lt;/fen&gt; which requires mention of a la
 &lt;fex name="Road"&gt;The bike trail&lt;/fex&gt; &lt;t&gt;zigzagged&lt;/t&gt; through the woods. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="ChW" cDate="02/07/2001 04:12:15 PST Wed" abbrev="Manr" name="Manner" ID="270">
-        <definition>&lt;def-root&gt;Any expression which describes a property of motion which is not directly related to the trajectory of motion expresses the frame element &lt;fen&gt;Manner&lt;/fen&gt;. Descriptions of the kind of motion a hypothetical mover would have (including steadiness, grace, and general comparisons) count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.  
+        <definition>&lt;def-root&gt;Any expression which describes a property of motion which is not directly related to the trajectory of motion expresses the frame element &lt;fen&gt;Manner&lt;/fen&gt;. Descriptions of the kind of motion a hypothetical mover would have (including steadiness, grace, and general comparisons) count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.
 
 &lt;ex&gt;Drifting clouds lent a mystical touch while the narrow road &lt;t&gt;twisted&lt;/t&gt; &lt;fex name="Manner"&gt;crazily&lt;/fex&gt; through ancient stone villages on the valley floor.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="FFFF00" fgColor="000000" coreType="Peripheral" cBy="ChW" cDate="02/07/2001 04:12:16 PST Wed" abbrev="Dist" name="Distance" ID="271">
-        <definition>&lt;def-root&gt;Any expression which characterizes the extent of motion expresses the frame element &lt;fen&gt;Distance&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;Any expression which characterizes the extent of motion expresses the frame element &lt;fen&gt;Distance&lt;/fen&gt;.
 
 &lt;ex&gt;The thin line of dirt and gravel &lt;t&gt;wound&lt;/t&gt; &lt;fex name="Distance"&gt;another ten miles&lt;/fex&gt; and on into the Ozarks before it petered out completely.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:16 PST Wed" abbrev="Area" name="Area" ID="272">
-        <definition>&lt;def-root&gt;This frame element is used for expressions which describe a general area in which motion takes place when the motion is understood to be irregular and not to consist of a single linear path.  
+        <definition>&lt;def-root&gt;This frame element is used for expressions which describe a general area in which motion takes place when the motion is understood to be irregular and not to consist of a single linear path.
 
 &lt;ex&gt;The paths &lt;t&gt;crisscrossed&lt;/t&gt; &lt;fex name="Area"&gt;the desert&lt;/fex&gt;.&lt;/ex&gt;
 

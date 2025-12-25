@@ -7,14 +7,14 @@
 &lt;ex&gt;"Good," said Matt as &lt;fex name="Driver"&gt;he&lt;/fex&gt; &lt;t&gt;pulled&lt;/t&gt; &lt;fex name="Vehicle"&gt;the car&lt;/fex&gt; &lt;fex name="Source"&gt;out of the parking space&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;The next day, after &lt;t&gt;weighing&lt;/t&gt; &lt;t&gt;anchor&lt;/t&gt;, &lt;fex name="Driver"&gt;we&lt;/fex&gt; cleared Longboat Pass Bridge, and exited the ICW into the open waters of the Gulf of Mexico.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="04/13/2005 04:28:18 PDT Wed" abbrev="Driv" name="Driver" ID="7768">
-        <definition>&lt;def-root&gt;This is the being, typically human, that prepares the &lt;fen&gt;Vehicle&lt;/fen&gt; for motion, and will control it once it is in motion. 
+        <definition>&lt;def-root&gt;This is the being, typically human, that prepares the &lt;fen&gt;Vehicle&lt;/fen&gt; for motion, and will control it once it is in motion.
 
 
 &lt;ex&gt;&lt;fex name="Driver"&gt;He&lt;/fex&gt; shook his head in amazement and slowly &lt;t&gt;pulled&lt;/t&gt; the car out of the parking lot.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="04/13/2005 04:28:18 PDT Wed" abbrev="Veh" name="Vehicle" ID="7769">
-        <definition>&lt;def-root&gt;The device--such as a car, boat, spaceship,. etc.--which is used for transport and is prepared for travel by the &lt;fen&gt;Driver&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The device--such as a car, boat, spaceship,. etc.--which is used for transport and is prepared for travel by the &lt;fen&gt;Driver&lt;/fen&gt;.
 
 &lt;ex&gt;Lyle was feeling very pleased with himself as he &lt;t&gt;pulled&lt;/t&gt; &lt;fex name="Veh"&gt;the BMW&lt;/fex&gt; out of its parking space.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -31,7 +31,7 @@
         <semType name="Goal" ID="153"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="04/13/2005 04:28:18 PDT Wed" abbrev="Manr" name="Manner" ID="7773">
-        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may also indicate salient characteristics of the Driver that affect the action (&lt;ment&gt;presumptuously&lt;/ment&gt;, &lt;ment&gt;coldly&lt;/ment&gt;, &lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may also indicate salient characteristics of the Driver that affect the action (&lt;ment&gt;presumptuously&lt;/ment&gt;, &lt;ment&gt;coldly&lt;/ment&gt;, &lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;).
 
 
 &lt;ex&gt;The Duchess of Northumberland &lt;fex name="Manr"&gt;slowly&lt;/fex&gt; &lt;t&gt;weighed&lt;/t&gt; &lt;t&gt;anchor&lt;/t&gt; and pulled away from the wharf at London.&lt;/ex&gt;&lt;/def-root&gt;</definition>

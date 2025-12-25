@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ACW" cDate="06/04/2002 11:46:53 PDT Tue" name="Reshaping" ID="344" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;Deformer&lt;/fen&gt; deforms a &lt;fen&gt;Patient&lt;/fen&gt; possibly against a &lt;fen&gt;Resistant_surface&lt;/fen&gt; such that it undergoes a shape-change from its canonical or original shape into the &lt;fen&gt;Configuration&lt;/fen&gt;, a new shape. Some of these words indicate that the &lt;fen&gt;Configuration&lt;/fen&gt; is an undesirable alteration of the norm, and in such cases the lexical unit is marked with the semantic type Negative_judgement.   This frame does not include senses that specifically indicate causing harm to a living being.  
+    <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;Deformer&lt;/fen&gt; deforms a &lt;fen&gt;Patient&lt;/fen&gt; possibly against a &lt;fen&gt;Resistant_surface&lt;/fen&gt; such that it undergoes a shape-change from its canonical or original shape into the &lt;fen&gt;Configuration&lt;/fen&gt;, a new shape. Some of these words indicate that the &lt;fen&gt;Configuration&lt;/fen&gt; is an undesirable alteration of the norm, and in such cases the lexical unit is marked with the semantic type Negative_judgement.   This frame does not include senses that specifically indicate causing harm to a living being.
 
-&lt;ex&gt;&lt;fex name="Def"&gt;Ellen&lt;/fex&gt; &lt;t&gt;crumpled&lt;/t&gt; &lt;fex name="Patient"&gt;the paper&lt;/fex&gt; &lt;fex name="Configuration"&gt;into a ball&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Def"&gt;Ellen&lt;/fex&gt; &lt;t&gt;crumpled&lt;/t&gt; &lt;fex name="Patient"&gt;the paper&lt;/fex&gt; &lt;fex name="Configuration"&gt;into a ball&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt;&lt;fex name="Def"&gt;Michael&lt;/fex&gt; &lt;t&gt;flattened&lt;/t&gt; &lt;fex name="Patient"&gt;the can&lt;/fex&gt; &lt;fex name="Resistant_surface"&gt;against his head&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Def"&gt;Michael&lt;/fex&gt; &lt;t&gt;flattened&lt;/t&gt; &lt;fex name="Patient"&gt;the can&lt;/fex&gt; &lt;fex name="Resistant_surface"&gt;against his head&lt;/fex&gt;.&lt;/ex&gt;
 
-&lt;ex&gt;Mix butter and sardines very thoroughly , &lt;t&gt;mashing&lt;/t&gt; &lt;fex name="Patient"&gt;them&lt;/fex&gt; &lt;fex name="Ins"&gt;with a fork&lt;/fex&gt; &lt;fex name="Configuration"&gt;until you have a smooth paste&lt;/fex&gt;. &lt;fex name="Def"&gt;CNI&lt;/fex&gt;&lt;/ex&gt; 
+&lt;ex&gt;Mix butter and sardines very thoroughly , &lt;t&gt;mashing&lt;/t&gt; &lt;fex name="Patient"&gt;them&lt;/fex&gt; &lt;fex name="Ins"&gt;with a fork&lt;/fex&gt; &lt;fex name="Configuration"&gt;until you have a smooth paste&lt;/fex&gt;. &lt;fex name="Def"&gt;CNI&lt;/fex&gt;&lt;/ex&gt;
 
 &lt;ex&gt;&lt;fex name="Cause"&gt;A killer hurricane&lt;/fex&gt; &lt;fex name="Mnr"&gt;nearly&lt;/fex&gt; &lt;t&gt;flattened&lt;/t&gt; &lt;fex name="Patient"&gt;Sylvester Stallone's five luxury homes in Hawaii&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ACW" cDate="06/04/2002 11:52:38 PDT Tue" abbrev="Def" name="Deformer" ID="2957">

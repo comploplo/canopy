@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:11:47 PST Wed" name="Separating" ID="15" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;These words refer to separating a &lt;fen&gt;Whole&lt;/fen&gt; into &lt;fen&gt;Parts&lt;/fen&gt;, or separating one part from another.  The separation is made by an &lt;fen&gt;Agent&lt;/fen&gt; or &lt;fen&gt;Cause&lt;/fen&gt; and may be made on the basis of some &lt;fen&gt;Criterion&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;These words refer to separating a &lt;fen&gt;Whole&lt;/fen&gt; into &lt;fen&gt;Parts&lt;/fen&gt;, or separating one part from another.  The separation is made by an &lt;fen&gt;Agent&lt;/fen&gt; or &lt;fen&gt;Cause&lt;/fen&gt; and may be made on the basis of some &lt;fen&gt;Criterion&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Agent"&gt;I&lt;/fex&gt; &lt;t&gt;divided&lt;/t&gt; &lt;fex name="Whole"&gt;the class&lt;/fex&gt; &lt;fex name="Parts"&gt;into groups&lt;/fex&gt; &lt;fex name="Criterion"&gt;in alphabetical order&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:47 PST Wed" abbrev="Whole" name="Whole" ID="62">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Whole&lt;/fen&gt; is a single entity or an aggregate of entities which is separated into &lt;fen&gt;Parts&lt;/fen&gt;.  It is usually the NP Object of a target verb. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Whole&lt;/fen&gt; is a single entity or an aggregate of entities which is separated into &lt;fen&gt;Parts&lt;/fen&gt;.  It is usually the NP Object of a target verb.
 &lt;ex&gt;The directors &lt;t&gt;split&lt;/t&gt; &lt;fex name="Whole"&gt;the company&lt;/fex&gt; in two.&lt;/ex&gt;
 &lt;ex&gt; The teacher &lt;t&gt;divided&lt;/t&gt; &lt;fex name="Whole"&gt;the children&lt;/fex&gt; into groups. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <requiresFE name="Parts" ID="63"/>
@@ -18,7 +18,7 @@
         <requiresFE name="Whole" ID="62"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:48 PST Wed" abbrev="Part-1" name="Part_1" ID="64">
-        <definition>&lt;def-root&gt;Part-1 is the first of two Parts mentioned. This is most often the Object of a verb. 
+        <definition>&lt;def-root&gt;Part-1 is the first of two Parts mentioned. This is most often the Object of a verb.
 &lt;ex&gt;First, &lt;t&gt;separate&lt;/t&gt; &lt;fex name="Part_1"&gt;the yolks&lt;/fex&gt; from the whites. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <requiresFE name="Part_2" ID="65"/>
         <excludesFE name="Parts" ID="63"/>
@@ -29,12 +29,12 @@
         <excludesFE name="Parts" ID="63"/>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:48 PST Wed" abbrev="Agt" name="Agent" ID="66">
-        <definition>&lt;def-root&gt;With causative uses of these verbs, an Agent separates or divides something.  The Agent is usually expressed as the External Argument: 
+        <definition>&lt;def-root&gt;With causative uses of these verbs, an Agent separates or divides something.  The Agent is usually expressed as the External Argument:
 &lt;ex&gt;&lt;fex name="Agent"&gt;The researcher&lt;/fex&gt; &lt;t&gt;divided&lt;/t&gt; subjects into groups. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Peripheral" cBy="ChW" cDate="02/07/2001 04:11:48 PST Wed" abbrev="Crit" name="Criterion" ID="67">
-        <definition>&lt;def-root&gt;This frame element expresses a property of the Parts or components of the Whole which is used as the basis for separation. Criterion is typically expressed as a PP headed by &lt;ment&gt;by&lt;/ment&gt;, or as a complex PP of the form &lt;ment&gt;on the basis of&lt;/ment&gt;.... 
+        <definition>&lt;def-root&gt;This frame element expresses a property of the Parts or components of the Whole which is used as the basis for separation. Criterion is typically expressed as a PP headed by &lt;ment&gt;by&lt;/ment&gt;, or as a complex PP of the form &lt;ment&gt;on the basis of&lt;/ment&gt;....
 &lt;ex&gt;The researcher &lt;t&gt;divided&lt;/t&gt; subjects into groups &lt;fex name="Criterion"&gt;on the basis of eye color&lt;/fex&gt;.&lt;/ex&gt;
 As with the frame General.Joining (above), words in this frame can be used statively, as in &lt;ment&gt;The rooms are separated by a partition&lt;/ment&gt;, inchoatively, as in &lt;ment&gt;The group separated&lt;/ment&gt; or causatively, as in &lt;ment&gt;I separated the laundry&lt;/ment&gt;. &lt;/def-root&gt;</definition>
     </FE>
@@ -63,7 +63,7 @@ As with the frame General.Joining (above), words in this frame can be used stati
         <excludesFE name="Agent" ID="66"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="ACW" cDate="08/21/2002 10:22:02 PDT Wed" abbrev="Recs" name="Recipients" ID="3595">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Recipients&lt;/fen&gt; are the groups who come into possession of the &lt;fen&gt;Parts&lt;/fen&gt; of the &lt;fen&gt;Whole&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Recipients&lt;/fen&gt; are the groups who come into possession of the &lt;fen&gt;Parts&lt;/fen&gt; of the &lt;fen&gt;Whole&lt;/fen&gt;.
 &lt;ex&gt;&lt;fex name="Agent"&gt;Mrs. Simpson&lt;/fex&gt; &lt;t&gt;divided&lt;/t&gt; &lt;fex name="Whole"&gt;the candy&lt;/fex&gt; &lt;fex name="Recipients"&gt;between her children&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="RLG" cDate="07/01/2003 09:52:07 PDT Tue" abbrev="" name="Time" ID="4705">

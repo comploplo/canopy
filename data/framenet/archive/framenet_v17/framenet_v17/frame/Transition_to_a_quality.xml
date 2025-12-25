@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MJE" cDate="08/29/2015 03:02:32 PDT Sat" name="Transition_to_a_quality" ID="2972" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; ends up with a particular new &lt;fen&gt;Final_quality&lt;/fen&gt;.  
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; ends up with a particular new &lt;fen&gt;Final_quality&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Entity"&gt;The milk&lt;/fex&gt; has &lt;t&gt;gone&lt;/t&gt; &lt;fex name="Final_quality"&gt;sour&lt;/fex&gt; &lt;fex name="Time"&gt;already&lt;/fex&gt; .&lt;/ex&gt;
 
@@ -26,7 +26,7 @@ There is only one lexical unit, go.v, that evokes this frame directly in English
         <semType name="Duration" ID="142"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="000000" coreType="Peripheral" cBy="MJE" cDate="08/29/2015 03:02:33 PDT Sat" abbrev="man" name="Manner" ID="16611">
-        <definition>&lt;def-root&gt;Any description of the event which is not covered by more specific FEs, including epistemic modification (&lt;ment&gt;probably, presumably, mysteriously&lt;/ment&gt;), secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In cases where the &lt;fen&gt;Entity&lt;/fen&gt; is intentional, &lt;fen&gt;Manner&lt;/fen&gt; may indicate salient characteristics of an intentional &lt;fen&gt;Entity&lt;/fen&gt; that also affect the event (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the event which is not covered by more specific FEs, including epistemic modification (&lt;ment&gt;probably, presumably, mysteriously&lt;/ment&gt;), secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In cases where the &lt;fen&gt;Entity&lt;/fen&gt; is intentional, &lt;fen&gt;Manner&lt;/fen&gt; may indicate salient characteristics of an intentional &lt;fen&gt;Entity&lt;/fen&gt; that also affect the event (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 
 &lt;ex&gt;The majority &lt;fex name="man"&gt;slowly&lt;/fex&gt; &lt;t&gt;went&lt;/t&gt; silent .&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="361" cDate="02/08/2008 04:07:55 PST Fri" name="Make_possible_to_do" ID="2011" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Enablement&lt;/fen&gt; provides the circumstances for an &lt;fen&gt;Enabled_action&lt;/fen&gt; to occur. 
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Enablement&lt;/fen&gt; provides the circumstances for an &lt;fen&gt;Enabled_action&lt;/fen&gt; to occur.
 
 &lt;ex&gt;&lt;fex name="Enablement"&gt;Technology&lt;/fex&gt; has &lt;t&gt;permitted&lt;/t&gt; &lt;fex name="Enabled_action"&gt;firms&lt;/fex&gt; &lt;fex name="Enabled_action"&gt;to link together more closely&lt;/fex&gt;.&lt;/ex&gt;
 

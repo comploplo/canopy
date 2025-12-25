@@ -3,7 +3,7 @@
 <frame cBy="ChW" cDate="02/07/2001 04:12:26 PST Wed" name="Cause_expansion" ID="77" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;An  &lt;fen&gt;Agent&lt;/fen&gt; or non-human &lt;fen&gt;Cause&lt;/fen&gt; causes an &lt;fen&gt;Item&lt;/fen&gt; to change its physical size.  The &lt;fen&gt;Size_change&lt;/fen&gt; of an &lt;fen&gt;Item&lt;/fen&gt; may be explicitly indicated or characterized in terms of &lt;fen&gt;Initial_size&lt;/fen&gt; and/or &lt;fen&gt;Result_size&lt;/fen&gt;.  In the default case, expansion is along all dimensions, but sometimes the &lt;fen&gt;Dimension&lt;/fen&gt; of expansion is incorporated or made explicit.
 
-&lt;ex&gt;If the design crashes too often, then try &lt;t&gt;lengthening&lt;/t&gt; &lt;fex name="Item"&gt;the wings&lt;/fex&gt; &lt;fex name="Size_change"&gt;by a few centimeters&lt;/fex&gt;, &lt;fex name="Result_size"&gt;to perhaps 30cm total&lt;/fex&gt;.  &lt;fex name="Agent"&gt;CNI&lt;/fex&gt; &lt;fex name="Dimension"&gt;INI&lt;/fex&gt; &lt;/ex&gt; 
+&lt;ex&gt;If the design crashes too often, then try &lt;t&gt;lengthening&lt;/t&gt; &lt;fex name="Item"&gt;the wings&lt;/fex&gt; &lt;fex name="Size_change"&gt;by a few centimeters&lt;/fex&gt;, &lt;fex name="Result_size"&gt;to perhaps 30cm total&lt;/fex&gt;.  &lt;fex name="Agent"&gt;CNI&lt;/fex&gt; &lt;fex name="Dimension"&gt;INI&lt;/fex&gt; &lt;/ex&gt;
 
 &lt;ex&gt;As the juice churned with natural process of changing into wine, &lt;fex name="Cause"&gt;the gas it created&lt;/fex&gt; would &lt;t&gt;expand&lt;/t&gt; &lt;fex name="Item"&gt;the balloon&lt;/fex&gt;, and when the balloon eventually deflated, it was ready to drink.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:26 PST Wed" abbrev="Agt" name="Agent" ID="361">
@@ -34,7 +34,7 @@
 &lt;ex&gt;A &lt;fex name="Sizec"&gt;2-3cm&lt;/fex&gt; &lt;t&gt;expansion&lt;/t&gt; in width is required.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="ChW" cDate="02/07/2001 04:12:27 PST Wed" abbrev="Dim" name="Dimension" ID="366">
-        <definition>&lt;def-root&gt;Change of size may be limited to or described in terms of a single &lt;fen&gt;Dimension&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;Change of size may be limited to or described in terms of a single &lt;fen&gt;Dimension&lt;/fen&gt;.
 
 &lt;ex&gt;The image was &lt;t&gt;enlarged&lt;/t&gt; &lt;fex name="Dim"&gt;in height&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;The machinist &lt;t&gt;narrowed&lt;/t&gt; the tube by 6 inches &lt;fex name="Dim"&gt;in diameter&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>

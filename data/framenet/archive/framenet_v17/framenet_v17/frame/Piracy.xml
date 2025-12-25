@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="HCB" cDate="05/31/2001 02:56:06 PDT Thu" name="Piracy" ID="123" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;The words in this frame describe situations in which a &lt;fen&gt;Perpetrator&lt;/fen&gt; forcibly seizes control over a &lt;fen&gt;Victim&lt;/fen&gt;'s &lt;fen&gt;Vehicle&lt;/fen&gt; to gain some end. 
+    <definition>&lt;def-root&gt;The words in this frame describe situations in which a &lt;fen&gt;Perpetrator&lt;/fen&gt; forcibly seizes control over a &lt;fen&gt;Victim&lt;/fen&gt;'s &lt;fen&gt;Vehicle&lt;/fen&gt; to gain some end.
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Perp"&gt;French farmers&lt;/fex&gt; have &lt;t&gt;hijacked&lt;/t&gt; &lt;fex name="Vehicle"&gt;a lorry&lt;/fex&gt; and destroyed its load of strawberries.&lt;/ex&gt;
 
@@ -14,7 +14,7 @@
         <definition>&lt;def-root&gt;This is the means of transportation which gets under the control of the perpetrator. Example: The terrorists hijacked &lt;fex name="Vehicle"&gt;the plane&lt;/fex&gt;.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="HCB" cDate="05/31/2001 03:16:42 PDT Thu" abbrev="Vic" name="Victim" ID="661">
-        <definition>&lt;def-root&gt;This FE describes the people that are suffering as a result of the &lt;fen&gt;Perpetrator&lt;/fen&gt;'s action. 
+        <definition>&lt;def-root&gt;This FE describes the people that are suffering as a result of the &lt;fen&gt;Perpetrator&lt;/fen&gt;'s action.
 &lt;ex&gt;The rebels skyjacked a plane &lt;fex name="Victim"&gt;with 89 passangers&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>

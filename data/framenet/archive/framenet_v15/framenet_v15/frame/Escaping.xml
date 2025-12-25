@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="669" cDate="02/20/2002 01:27:55 PST Wed" name="Escaping" ID="273" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A Self-moving &lt;fen&gt;Escapee&lt;/fen&gt; departs from an &lt;fen&gt;Undesirable_location&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;A Self-moving &lt;fen&gt;Escapee&lt;/fen&gt; departs from an &lt;fen&gt;Undesirable_location&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Escapee"&gt;Benjamin&lt;/fex&gt; &lt;t&gt;escaped&lt;/t&gt; &lt;fex name="Undesirable_location"&gt;from Germany&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="02/25/2002 05:55:19 PST Mon" abbrev="Esc" name="Escapee" ID="2356">
@@ -9,14 +9,14 @@
 &lt;ex&gt;&lt;fex name="Escapee"&gt;Benjamin&lt;/fex&gt; &lt;t&gt;escaped&lt;/t&gt; from Germany.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="02/25/2002 05:55:34 PST Mon" abbrev="Goal" name="Goal" ID="2357">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Goal&lt;/fen&gt; identifies any expression which tells where the Escapee ends up, or would end up, as a result of the motion. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Goal&lt;/fen&gt; identifies any expression which tells where the Escapee ends up, or would end up, as a result of the motion.
 &lt;ex&gt;Benjamin &lt;t&gt;escaped&lt;/t&gt; &lt;fex name="Goal"&gt;to the United States&lt;/fex&gt;.&lt;/ex&gt;
 
 &lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="02/25/2002 05:55:54 PST Mon" abbrev="Mns" name="Means" ID="2358">
-        <definition>&lt;def-root&gt;&lt;fex name="Means"&gt;&lt;/fex&gt; covers any act performed by the &lt;fen&gt;Escapee&lt;/fen&gt; brings about the escape. 
+        <definition>&lt;def-root&gt;&lt;fex name="Means"&gt;&lt;/fex&gt; covers any act performed by the &lt;fen&gt;Escapee&lt;/fen&gt; brings about the escape.
 
 &lt;ex&gt;Benjamin &lt;t&gt;escaped&lt;/t&gt; from Germany &lt;fex name="Means"&gt;by bribing the border guards&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

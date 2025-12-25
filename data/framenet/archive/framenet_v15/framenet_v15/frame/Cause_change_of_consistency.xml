@@ -47,7 +47,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="07/29/2002 11:49:26 PDT Mon" abbrev="Und" name="Undergoer" ID="3431">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Undergoer&lt;/fen&gt; is the entity that undergoes a change. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Undergoer&lt;/fen&gt; is the entity that undergoes a change.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="07/29/2002 11:51:26 PDT Mon" abbrev="Agt" name="Agent" ID="3433">

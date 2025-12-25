@@ -204,9 +204,9 @@
         <superType supID="215" superTypeName="Value_for_degree"/>
     </semType>
     <semType abbrev="agt" name="Agentive_noun" ID="102">
-        <definition>A sentient being that acts volitionally to perform an activity. 
+        <definition>A sentient being that acts volitionally to perform an activity.
 &lt;ex&gt;&lt;/ex&gt;
-Use of this semantic type indicates that a target participates in a nominalization construction with frame elements appropriate to entities (cf. People frame), which can appear in addition to frame elements approporiate to the event. 
+Use of this semantic type indicates that a target participates in a nominalization construction with frame elements appropriate to entities (cf. People frame), which can appear in addition to frame elements approporiate to the event.
 </definition>
         <superType supID="216" superTypeName="Biframal_LU"/>
     </semType>
@@ -405,7 +405,7 @@ Use of this semantic type indicates that a target participates in a nominalizati
     </semType>
     <semType abbrev="Bound_LU" name="Bound_LU" ID="223">
         <definition>This ST is used for LUs of a frame that cannot be used (for interpretation or generation) unless they co-occur with the right other words as governors or dependents.  (The limiting case, where a precise group of words must
-all co-occur in order to evoke a frame, is handled in FrameNet by the use of multi-word lexical units.)  
+all co-occur in order to evoke a frame, is handled in FrameNet by the use of multi-word lexical units.)
 The Support subtype of bound lexical unit is exemplified by give with a causal meaning:
 
 Receiving the notification so late almost gave me a heart attack.
@@ -414,7 +414,7 @@ Give.v in the Causation frame is usable with a large number of dependents denoti
 
 Releasing these old files nearly gave a disaster.
 
-The Bound_dependent_LU type is used for LUs like pickle.n in the Predicament frame, which occurs virtually only with the supports in and out of. 
+The Bound_dependent_LU type is used for LUs like pickle.n in the Predicament frame, which occurs virtually only with the supports in and out of.
 </definition>
         <superType supID="180" superTypeName="Lexical_type"/>
     </semType>

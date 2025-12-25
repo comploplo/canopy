@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ACW" cDate="08/15/2002 11:50:33 PDT Thu" name="Feeling" ID="396" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame an &lt;fen&gt;Experiencer&lt;/fen&gt; experiences an &lt;fen&gt;Emotion&lt;/fen&gt; or is in an &lt;fen&gt;Emotional_state&lt;/fen&gt;. There can also be an &lt;fen&gt;Evaluation&lt;/fen&gt; of the internal experiential state.  
-&lt;ex&gt;&lt;fex name="Experiencer"&gt;John&lt;/fex&gt; &lt;t&gt;feels&lt;/t&gt; &lt;fex name="Emotion"&gt;anger towards his mother&lt;/fex&gt;.&lt;/ex&gt; 
+    <definition>&lt;def-root&gt;In this frame an &lt;fen&gt;Experiencer&lt;/fen&gt; experiences an &lt;fen&gt;Emotion&lt;/fen&gt; or is in an &lt;fen&gt;Emotional_state&lt;/fen&gt;. There can also be an &lt;fen&gt;Evaluation&lt;/fen&gt; of the internal experiential state.
+&lt;ex&gt;&lt;fex name="Experiencer"&gt;John&lt;/fex&gt; &lt;t&gt;feels&lt;/t&gt; &lt;fex name="Emotion"&gt;anger towards his mother&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Experiencer"&gt;Martha&lt;/fex&gt; &lt;t&gt;feels&lt;/t&gt; &lt;fex name="Emotional_state"&gt;angry&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Experiencer"&gt;Dr. Hibbert&lt;/fex&gt; &lt;t&gt;feels&lt;/t&gt; &lt;fex name="Evaluation"&gt;good&lt;/fex&gt;.&lt;/ex&gt;
-Inalienably possessed aspects of the &lt;fen&gt;Experiencer&lt;/fen&gt; frequently stand in for the &lt;fen&gt;Experiencer&lt;/fen&gt;. 
+Inalienably possessed aspects of the &lt;fen&gt;Experiencer&lt;/fen&gt; frequently stand in for the &lt;fen&gt;Experiencer&lt;/fen&gt;.
 &lt;ex&gt;&lt;fex name="Experiencer"&gt;Her heart&lt;/fex&gt; &lt;t&gt;felt&lt;/t&gt; &lt;fex name="Emotional_state"&gt;angry&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ACW" cDate="08/15/2002 12:07:43 PDT Thu" abbrev="Exp" name="Experiencer" ID="3554">

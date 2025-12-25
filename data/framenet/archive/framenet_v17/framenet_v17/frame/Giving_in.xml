@@ -17,7 +17,7 @@
 
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="06/17/2005 04:15:20 PDT Fri" abbrev="cap" name="Capitulator" ID="8189">
-        <definition>&lt;def-root&gt;The individual that yields to the &lt;fen&gt;Force&lt;/fen&gt; exerted by the &lt;fen&gt;Compeller&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The individual that yields to the &lt;fen&gt;Force&lt;/fen&gt; exerted by the &lt;fen&gt;Compeller&lt;/fen&gt;.
 
 &lt;ex&gt;I sensed that if &lt;fex name="cap"&gt;John&lt;/fex&gt; &lt;t&gt;caved in&lt;/t&gt; to her that it would hurt his game.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
@@ -73,7 +73,7 @@ of the Romans and finally &lt;t&gt;yielded&lt;/t&gt; to them &lt;fex name="pur"&
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="06/20/2005 03:08:26 PDT Mon" abbrev="deg" name="Degree" ID="8203">
-        <definition>&lt;def-root&gt;A modifier expressing the deviation of how the &lt;fen&gt;Issue&lt;/fen&gt; is resolved from the desires of the &lt;fen&gt;Compeller&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;A modifier expressing the deviation of how the &lt;fen&gt;Issue&lt;/fen&gt; is resolved from the desires of the &lt;fen&gt;Compeller&lt;/fen&gt;.
 
 &lt;ex&gt;She &lt;fex name="deg"&gt;partially&lt;/fex&gt; &lt;t&gt;gave in&lt;/t&gt;, admitting her anti-urban bias was mostly in part to her parents brainwashing her from a young age.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Degree" ID="172"/>

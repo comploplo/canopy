@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="361" cDate="03/29/2007 04:55:31 PDT Thu" name="Aging" ID="1919" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; is undergoing a change in age typically associated with some deterioration or change in state. 
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; is undergoing a change in age typically associated with some deterioration or change in state.
 
 &lt;ex&gt;&lt;fex name="Entity"&gt;This bark&lt;/fex&gt; &lt;t&gt;ages&lt;/t&gt; and turns black.&lt;/ex&gt;
 
 &lt;ex&gt;The U.S. is to upgrade &lt;t&gt;aging&lt;/t&gt; &lt;fex name="Entity"&gt;missile defense systems&lt;/fex&gt; with advanced tech.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="361" cDate="03/29/2007 04:55:31 PDT Thu" abbrev="ent" name="Entity" ID="11542">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Entity&lt;/fen&gt; which is undergoing aging. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Entity&lt;/fen&gt; which is undergoing aging.
 
 &lt;/def-root&gt;</definition>
     </FE>

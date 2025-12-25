@@ -62,13 +62,13 @@
         <semType name="Degree" ID="172"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="07/14/2004 05:31:09 PDT Wed" abbrev="man" name="Manner" ID="6852">
-        <definition>&lt;def-root&gt; Any description of the  event causing the change of the Entity which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may also indicate salient characteristics of the Agent that also affect the action (deliberately, eagerly, carefully). 
+        <definition>&lt;def-root&gt; Any description of the  event causing the change of the Entity which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may also indicate salient characteristics of the Agent that also affect the action (deliberately, eagerly, carefully).
 
 &lt;ex&gt;Taking out his Driver's Ed pass certificate, Blair &lt;fex name="man"&gt;carefully&lt;/fex&gt; &lt;t&gt;changed&lt;/t&gt; the '6' of 1969 to an '8' making it read 23rd February 1989.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="07/14/2004 05:31:32 PDT Wed" abbrev="Exp" name="Explanation" ID="6853">
-        <definition>&lt;def-root&gt;A state of affairs that the &lt;fen&gt;Agent&lt;/fen&gt; is responding to in bringing about the change in the &lt;fen&gt;Entity&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;A state of affairs that the &lt;fen&gt;Agent&lt;/fen&gt; is responding to in bringing about the change in the &lt;fen&gt;Entity&lt;/fen&gt;.
 
 &lt;ex&gt;I didn't &lt;t&gt;change&lt;/t&gt; its name &lt;fex name="Explanation"&gt;because I think it has already got used to it&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
@@ -97,7 +97,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="10/18/2005 03:27:20 PDT Tue" abbrev="mea" name="Means" ID="9140">
-        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Agent&lt;/fen&gt; (or event resulting from the &lt;fen&gt;Cause&lt;/fen&gt;) that produces a change in the &lt;fen&gt;Entity&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Agent&lt;/fen&gt; (or event resulting from the &lt;fen&gt;Cause&lt;/fen&gt;) that produces a change in the &lt;fen&gt;Entity&lt;/fen&gt;.
 
 &lt;ex&gt;Ling said he had &lt;t&gt;transformed&lt;/t&gt; the car &lt;fex name="Means"&gt;by putting slicks on&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

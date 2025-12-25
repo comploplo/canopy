@@ -16,7 +16,7 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="7CCD73" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="03/24/2006 02:32:01 PST Fri" abbrev="Dist" name="Distance" ID="9974">
-        <definition>&lt;def-root&gt;This FE is any expression characterizing the extent of motion of the &lt;fen&gt;Projectile&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;This FE is any expression characterizing the extent of motion of the &lt;fen&gt;Projectile&lt;/fen&gt;.
 &lt;ex&gt;Pat &lt;t&gt;threw&lt;/t&gt; the Javelin &lt;fex name="Distance"&gt;50 meters&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="03/24/2006 02:32:01 PST Fri" abbrev="Goal" name="Goal" ID="9975">

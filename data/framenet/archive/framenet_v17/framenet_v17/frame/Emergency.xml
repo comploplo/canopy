@@ -18,7 +18,7 @@
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="04/21/2014 02:17:47 PDT Mon" abbrev="" name="Domain" ID="16072">
-        <definition>&lt;def-root&gt;The domain of the situation which the emergency is affecting. 
+        <definition>&lt;def-root&gt;The domain of the situation which the emergency is affecting.
 
 &lt;ex&gt;While the exact numbers were still up in the air, it became clear that we were facing a serious budget emergency.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -30,11 +30,11 @@
         <definition>&lt;def-root&gt;When the Emergency occurs.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:35:18 PDT Thu" abbrev="" name="Manner" ID="16549">
-        <definition>&lt;def-root&gt;Any description of the event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), force (hard, softly), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). 
+        <definition>&lt;def-root&gt;Any description of the event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), force (hard, softly), secondary effects (quietly, loudly), and general descriptions comparing events (the same way).
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:35:38 PDT Thu" abbrev="" name="Timespan" ID="16550">
-        <definition>&lt;def-root&gt;The period within which an Emergency has occurred. 
+        <definition>&lt;def-root&gt;The period within which an Emergency has occurred.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:35:58 PDT Thu" abbrev="" name="Duration" ID="16551">
@@ -42,7 +42,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:36:16 PDT Thu" abbrev="" name="Frequency" ID="16552">
-        <definition>&lt;def-root&gt;How often the Emergency occurs. 
+        <definition>&lt;def-root&gt;How often the Emergency occurs.
 &lt;/def-root&gt;</definition>
     </FE>
     <frameRelation type="Inherits from">

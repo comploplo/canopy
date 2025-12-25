@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="JKR" cDate="11/01/2002 03:39:30 PST Fri" name="Isolated_places" ID="420" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Place&lt;/fen&gt; is located far off from centers of population, culture, and/or trade. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Place&lt;/fen&gt; is located far off from centers of population, culture, and/or trade.
 
 &lt;ex&gt;I'm from the &lt;fex name="Place"&gt;&lt;t&gt;middle&lt;/t&gt; &lt;/fex&gt;&lt;fex name="Place"&gt;&lt;t&gt;of&lt;/t&gt; &lt;/fex&gt;&lt;fex name="Place"&gt;&lt;t&gt;nowhere&lt;/t&gt;&lt;/fex&gt;, &lt;fex name="Relative_location"&gt;California&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="11/01/2002 04:29:33 PST Fri" abbrev="Place" name="Place" ID="3871">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="PKe" cDate="08/01/2011 03:17:41 PDT Mon" name="Business_closure" ID="2590" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A business locale, the &lt;fen&gt;Entity&lt;/fen&gt;, ceases to provide services and closes. 
+    <definition>&lt;def-root&gt;A business locale, the &lt;fen&gt;Entity&lt;/fen&gt;, ceases to provide services and closes.
 
 &lt;ex&gt;&lt;fex name="ent"&gt;Exxon&lt;/fex&gt; &lt;t&gt;went under&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="PKe" cDate="08/01/2011 03:29:08 PDT Mon" abbrev="ent" name="Entity" ID="14608">

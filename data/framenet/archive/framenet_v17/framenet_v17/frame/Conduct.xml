@@ -5,7 +5,7 @@
 
 &lt;ex&gt; &lt;fex name="Agent"&gt;He&lt;/fex&gt; pledges to  &lt;t&gt;conduct&lt;/t&gt; himself  &lt;fex name="Manner"&gt;with honesty and humility&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt; This year &lt;fex name="Agent"&gt;they&lt;/fex&gt; have &lt;t&gt;behaved&lt;/t&gt; themselves &lt;fex name="Manner"&gt;particularly impudently&lt;/fex&gt;.&lt;/ex&gt;
-&lt;ex&gt; His appearance was as   immaculate as ever and &lt;fex name="Agent"&gt;his&lt;/fex&gt; &lt;t&gt;bearing&lt;/t&gt; 
+&lt;ex&gt; His appearance was as   immaculate as ever and &lt;fex name="Agent"&gt;his&lt;/fex&gt; &lt;t&gt;bearing&lt;/t&gt;
 &lt;fex name="Manner"&gt;composed and dignified&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="01/14/2003 05:59:45 PST Tue" abbrev="" name="Agent" ID="4031">
         <definition>&lt;def-root&gt;This FE marks expressions that denote the person whose conduct is being evaluated.

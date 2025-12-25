@@ -23,7 +23,7 @@ The &lt;fen&gt;Activity&lt;/fen&gt; is what the &lt;fen&gt;Cognizer&lt;/fen&gt; 
 &lt;ex&gt;Does biology really matter more than a &lt;t&gt;willingness&lt;/t&gt; &lt;fex name="act"&gt;to take an active role in a child's life&lt;/fex&gt;? &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="10/12/2005 01:49:31 PDT Wed" abbrev="exp" name="Explanation" ID="9098">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the &lt;fen&gt;Cognizer&lt;/fen&gt;'s willingness logically follows. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the &lt;fen&gt;Cognizer&lt;/fen&gt;'s willingness logically follows.
 
 &lt;ex&gt;The other companies would have been &lt;t&gt;unwilling&lt;/t&gt; to participate &lt;fex name="exp"&gt;because of the project's high risk&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

@@ -59,7 +59,7 @@
         <definition>&lt;def-root&gt;The state of the world (at a particular time and place) which is independent of the the attempt of the &lt;fen&gt;Agent&lt;/fen&gt; to achieve the &lt;fen&gt;Goal&lt;/fen&gt;. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="RLG" cDate="03/16/2007 03:55:49 PDT Fri" abbrev="Dom" name="Domain" ID="11233">
-        <definition>&lt;def-root&gt;The domain or area within which the work towards the &lt;fen&gt;Goal&lt;/fen&gt; belongs. 
+        <definition>&lt;def-root&gt;The domain or area within which the work towards the &lt;fen&gt;Goal&lt;/fen&gt; belongs.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Core" cBy="RLG" cDate="03/16/2007 04:02:30 PDT Fri" abbrev="sal_ent" name="Salient_entity" ID="11234">

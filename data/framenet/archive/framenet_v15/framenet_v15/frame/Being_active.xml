@@ -40,7 +40,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="06/30/2005 12:21:19 PDT Thu" abbrev="Manr" name="Manner" ID="8376">
-        <definition>&lt;def-root&gt;Any description of the &lt;fen&gt;Activity&lt;/fen&gt; which is not covered by more specific FEs, including epistemic modification (&lt;ment&gt;probably&lt;/ment&gt;, &lt;ment&gt;presumably&lt;/ment&gt;, &lt;ment&gt;mysteriously&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that  affect the action (&lt;ment&gt;presumptuously&lt;/ment&gt;, &lt;ment&gt;deliberately&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the &lt;fen&gt;Activity&lt;/fen&gt; which is not covered by more specific FEs, including epistemic modification (&lt;ment&gt;probably&lt;/ment&gt;, &lt;ment&gt;presumably&lt;/ment&gt;, &lt;ment&gt;mysteriously&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that  affect the action (&lt;ment&gt;presumptuously&lt;/ment&gt;, &lt;ment&gt;deliberately&lt;/ment&gt;).
 
 &lt;ex&gt;The Government was &lt;fex name="Manner"&gt;deliberately&lt;/fex&gt; &lt;t&gt;inactive&lt;/t&gt; in respect of Maori. language teacher training and teaching.&lt;/ex&gt;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="CFB" cDate="02/23/2001 03:20:11 PST Fri" name="Attempt_suasion" ID="87" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;The  &lt;fen&gt;Speaker&lt;/fen&gt; expresses through language his wish to get the &lt;fen&gt;Addressee&lt;/fen&gt; to act in some way that will help to bring about events or states described in the &lt;fen&gt;Content&lt;/fen&gt;. There is no implication that the &lt;fen&gt;Addressee&lt;/fen&gt; forms an intention to act, let alone acts.  
+    <definition>&lt;def-root&gt;The  &lt;fen&gt;Speaker&lt;/fen&gt; expresses through language his wish to get the &lt;fen&gt;Addressee&lt;/fen&gt; to act in some way that will help to bring about events or states described in the &lt;fen&gt;Content&lt;/fen&gt;. There is no implication that the &lt;fen&gt;Addressee&lt;/fen&gt; forms an intention to act, let alone acts.
 
 
 &lt;ex&gt;&lt;fex name="Speaker"&gt;Mr Smithers&lt;/fex&gt; always &lt;t&gt;encourages&lt;/t&gt; &lt;fex name="Add"&gt;the employees&lt;/fex&gt; &lt;fex name="Content"&gt;to stay late and work harder&lt;/fex&gt;.&lt;/ex&gt;

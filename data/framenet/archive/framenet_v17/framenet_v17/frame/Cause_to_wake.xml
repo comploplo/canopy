@@ -39,7 +39,7 @@ Mary &lt;t&gt;woke&lt;/t&gt; him &lt;fex name="Explanation"&gt;because he looked
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Core" cBy="ACW" cDate="04/02/2002 10:18:06 PST Tue" abbrev="Cause" name="Cause" ID="2536">
-        <definition>&lt;def-root&gt;An animate or inanimate entity, a force, or event that produces an effect. Volitionality is not a necessary characteristic of Causes. 
+        <definition>&lt;def-root&gt;An animate or inanimate entity, a force, or event that produces an effect. Volitionality is not a necessary characteristic of Causes.
 &lt;ex&gt;&lt;fex name="Cause"&gt;The rain&lt;/fex&gt; &lt;t&gt;woke&lt;/t&gt; me.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Cause"&gt;The smell of cooking&lt;/fex&gt; &lt;t&gt;woke&lt;/t&gt; the children.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Agent" ID="2530"/>

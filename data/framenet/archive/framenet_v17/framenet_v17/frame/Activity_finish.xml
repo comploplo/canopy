@@ -55,7 +55,7 @@
         <definition>&lt;def-root&gt;Circumstances describe the state of the world (at a particular time and place) which is specifically independent of the event itself and any of its participants. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="7CCD73" fgColor="000000" coreType="Extra-Thematic" cBy="KmG" cDate="05/26/2006 02:58:07 PDT Fri" abbrev="" name="Containing_event" ID="10132">
-        <definition>&lt;def-root&gt;This FE identifies an event during which the &lt;fen&gt;Agent&lt;/fen&gt; finishes the &lt;fen&gt;Activity&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;This FE identifies an event during which the &lt;fen&gt;Agent&lt;/fen&gt; finishes the &lt;fen&gt;Activity&lt;/fen&gt;.
 
 &lt;/def-root&gt;</definition>
     </FE>

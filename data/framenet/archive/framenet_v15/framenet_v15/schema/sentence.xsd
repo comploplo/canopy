@@ -14,15 +14,15 @@
             targetNamespace="http://framenet.icsi.berkeley.edu"
             xmlns="http://framenet.icsi.berkeley.edu"
             elementFormDefault="qualified">
-    
-    <!-- 
+
+    <!--
       There is a <sentence> element specified.
       The <sentence> element must contain, first, a <text> element, which in
       turn can contain only text.  After the <text> element, the <sentence>
       may contain an arbitrary number of <annotationSet> elements.
       The <annotationSet> element contains any number of <layer> elements,
       which in turn contain any number of <label> elements:
-      
+
       <sentence>
           <text> Sample sentence . </text>
           <annotationSet>
@@ -33,7 +33,7 @@
               ...
           </anotationSet>
           ...
-      </sentence>      
+      </sentence>
    -->
     <xsd:include schemaLocation="commonTypes.xsd"/>
     <xsd:complexType name="sentenceType">

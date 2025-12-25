@@ -60,7 +60,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="05/27/2005 01:48:05 PDT Fri" abbrev="con" name="Containing_event" ID="8052">
-        <definition>&lt;def-root&gt;This FE identifies an event during which the &lt;fen&gt;Agent&lt;/fen&gt; attempts to achieve a &lt;fen&gt;Goal&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;This FE identifies an event during which the &lt;fen&gt;Agent&lt;/fen&gt; attempts to achieve a &lt;fen&gt;Goal&lt;/fen&gt;.
 
 &lt;ex&gt;He was &lt;t&gt;successful&lt;/t&gt; &lt;fex name="con"&gt;in the Smithers v Burns case&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

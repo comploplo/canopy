@@ -69,7 +69,7 @@ The &lt;fen&gt;Outcome&lt;/fen&gt; is the failure or success of an attempt to ac
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="597" cDate="05/04/2009 09:58:29 PDT Mon" abbrev="Dom" name="Domain" ID="13167">
         <definition>&lt;def-root&gt;Note: this FE might not be in frame.  It is temporarily here during the early stage of annotation. (JGK)
 
-The area of work to which the Attempt event belongs. 
+The area of work to which the Attempt event belongs.
 
 
 &lt;/def-root&gt;</definition>

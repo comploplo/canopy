@@ -84,11 +84,11 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                     // update frameIndex link with banner
                     document.getElementById('frameIndexLink').href = 'frameIndex.xml?banner=' + banner;
                 }
-				
+
 				if (window.ActiveXObject) { // Internet Explorer
                     // just load the xml and xsl directly
 					xml = CreateXMLFileParser('luIndex.xml');
-					xsl = CreateXMLFileParser('luIndex.xsl');					
+					xsl = CreateXMLFileParser('luIndex.xsl');
 				} else { // Firefox, Safari, etc.
                     // perform a GET to get the xml
                     // (Safari can't load the xml directly the same
@@ -187,7 +187,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
 						window.alert("Browser does not support XML parsing.");
 						return false;
 					}
-				} 
+				}
 				return xmlDoc;
 			}
 

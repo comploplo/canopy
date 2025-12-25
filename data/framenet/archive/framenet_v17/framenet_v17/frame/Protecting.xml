@@ -62,8 +62,8 @@ have &lt;fex name="man"&gt;carefully&lt;/fex&gt; &lt;t&gt;protected&lt;/t&gt; th
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="10/11/2005 06:55:55 PDT Tue" abbrev="eve" name="Event_description" ID="9094">
-        <definition>&lt;def-root&gt;Tthis FE is used for phrases that describe the protecting event as a whole.  It applies to appraisals of the event, typically a judgment of its expectedness. The notion of appraisal requires a factive portrayal of the event. 
-It also applies to descriptions of the protecting event as a role filler in another frame. 
+        <definition>&lt;def-root&gt;Tthis FE is used for phrases that describe the protecting event as a whole.  It applies to appraisals of the event, typically a judgment of its expectedness. The notion of appraisal requires a factive portrayal of the event.
+It also applies to descriptions of the protecting event as a role filler in another frame.
 
 &lt;/def-root&gt;</definition>
     </FE>

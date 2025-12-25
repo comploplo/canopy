@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="731" cDate="02/07/2001 04:11:53 PST Wed" name="Categorization" ID="21" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Cognizer&lt;/fen&gt; construes an &lt;fen&gt;Item&lt;/fen&gt; as belonging to a certain &lt;fen&gt;Category&lt;/fen&gt;.  In this process, the &lt;fen&gt;Cognizer&lt;/fen&gt; may either passively perceive the &lt;fen&gt;Item&lt;/fen&gt; and note that it fits the &lt;fen&gt;Criteria&lt;/fen&gt; for a &lt;fen&gt;Category&lt;/fen&gt;, or, alternatively, actively examine the &lt;fen&gt;Item&lt;/fen&gt; for certain &lt;fen&gt;Criteria&lt;/fen&gt; that define a &lt;fen&gt;Category&lt;/fen&gt; (or set of &lt;fen&gt;Category&lt;/fen&gt;s).  
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Cognizer&lt;/fen&gt; construes an &lt;fen&gt;Item&lt;/fen&gt; as belonging to a certain &lt;fen&gt;Category&lt;/fen&gt;.  In this process, the &lt;fen&gt;Cognizer&lt;/fen&gt; may either passively perceive the &lt;fen&gt;Item&lt;/fen&gt; and note that it fits the &lt;fen&gt;Criteria&lt;/fen&gt; for a &lt;fen&gt;Category&lt;/fen&gt;, or, alternatively, actively examine the &lt;fen&gt;Item&lt;/fen&gt; for certain &lt;fen&gt;Criteria&lt;/fen&gt; that define a &lt;fen&gt;Category&lt;/fen&gt; (or set of &lt;fen&gt;Category&lt;/fen&gt;s).
 
 Most members of the frame can also describe a resulting cognitive state of the &lt;fen&gt;Cognizer&lt;/fen&gt; with respect to the &lt;fen&gt;Item&lt;/fen&gt; and &lt;fen&gt;Category&lt;/fen&gt; which no longer requires the current perception or consideration of the &lt;fen&gt;Item&lt;/fen&gt;.  A few LUs (e.g. &lt;ment&gt;peg.v, pigeonhole.v&lt;/ment&gt;) do not readily allow stative interpretation, and a few LUs (e.g. &lt;ment&gt;deem.v, regard.v&lt;/ment&gt;) only allow stative interpretation.
 
@@ -13,7 +13,7 @@ Most members of the frame can also describe a resulting cognitive state of the &
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:11:53 PST Wed" abbrev="Item" name="Item" ID="93">
-        <definition>&lt;def-root&gt;This is the entity which is construed or treated by the &lt;fen&gt;Cognizer&lt;/fen&gt; as being an instance of a particular &lt;fen&gt;Category&lt;/fen&gt;. Typically, the &lt;fen&gt;Item&lt;/fen&gt; is expressed as an Object. 
+        <definition>&lt;def-root&gt;This is the entity which is construed or treated by the &lt;fen&gt;Cognizer&lt;/fen&gt; as being an instance of a particular &lt;fen&gt;Category&lt;/fen&gt;. Typically, the &lt;fen&gt;Item&lt;/fen&gt; is expressed as an Object.
 
 &lt;ex&gt;Kim &lt;t&gt;categorized&lt;/t&gt; &lt;fex name="Item"&gt;the books&lt;/fex&gt; under fiction.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

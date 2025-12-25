@@ -28,7 +28,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="02/19/2002 06:34:08 PST Tue" abbrev="Src" name="Source" ID="2342">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Source&lt;/fen&gt; identifies the starting point of the &lt;fen&gt;Air&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Source&lt;/fen&gt; identifies the starting point of the &lt;fen&gt;Air&lt;/fen&gt;.
 &lt;ex&gt;Lee &lt;t&gt;exhaled&lt;/t&gt; &lt;fex name="Source"&gt;from the bottom of his lungs&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Source" ID="151"/>
     </FE>
@@ -76,7 +76,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="05/19/2005 03:36:56 PDT Thu" abbrev="int" name="Internal_cause" ID="7999">
-        <definition>&lt;def-root&gt;This FE designates internal events/states that cause the &lt;fen&gt;Agent&lt;/fen&gt; to exhibit the specified type of breathing. Further, the internal state of the &lt;fen&gt;Agent&lt;/fen&gt; is perceivable to others because of the breathing event. 
+        <definition>&lt;def-root&gt;This FE designates internal events/states that cause the &lt;fen&gt;Agent&lt;/fen&gt; to exhibit the specified type of breathing. Further, the internal state of the &lt;fen&gt;Agent&lt;/fen&gt; is perceivable to others because of the breathing event.
 
 &lt;ex&gt;He &lt;t&gt;gasped&lt;/t&gt; &lt;fex name="int"&gt;in horror&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

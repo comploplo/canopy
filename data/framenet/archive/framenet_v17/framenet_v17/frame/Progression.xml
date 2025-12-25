@@ -39,7 +39,7 @@ This frame is not equivalent to the frame Improvement_or_decline for two reasons
 &lt;ex&gt;His captaincy has &lt;fex name="rat"&gt;slowly&lt;/fex&gt; &lt;t&gt;matured&lt;/t&gt; until he has made us forget the sulky Nasser Hussian era&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="03/01/2005 04:39:24 PST Tue" abbrev="man" name="Manner" ID="7565">
-        <definition>&lt;def-root&gt;A description of the progress, generally a description comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;A description of the progress, generally a description comparing events (&lt;ment&gt;the same way&lt;/ment&gt;).
 
 &lt;ex&gt;Recovery in our major overseas markets has &lt;t&gt;progressed&lt;/t&gt; &lt;fex name="man"&gt;tentatively&lt;/fex&gt; and increased spending by consumers and government does not appear to be benefiting this .&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

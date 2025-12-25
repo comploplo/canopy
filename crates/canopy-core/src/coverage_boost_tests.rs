@@ -46,7 +46,7 @@ mod coverage_boost_tests {
 
         for word in words {
             // Test all operations
-            let debug_str = format!("{:?}", word);
+            let debug_str = format!("{word:?}");
             assert!(!debug_str.is_empty());
 
             let cloned = word.clone();
@@ -91,7 +91,7 @@ mod coverage_boost_tests {
         ];
 
         for pos in all_upos.iter() {
-            let debug_str = format!("{:?}", pos);
+            let debug_str = format!("{pos:?}");
             assert!(!debug_str.is_empty());
 
             let cloned = *pos;
@@ -101,7 +101,7 @@ mod coverage_boost_tests {
         // Test in HashMap to exercise Hash trait
         let mut pos_map = HashMap::new();
         for pos in all_upos.iter() {
-            pos_map.insert(*pos, format!("{:?}", pos));
+            pos_map.insert(*pos, format!("{pos:?}"));
         }
         assert_eq!(pos_map.len(), all_upos.len());
     }
@@ -152,11 +152,11 @@ mod coverage_boost_tests {
         ];
 
         for rel in all_deprels.iter() {
-            let debug_str = format!("{:?}", rel);
+            let debug_str = format!("{rel:?}");
             assert!(!debug_str.is_empty());
 
             // Test alternate debug formatting
-            let alt_debug = format!("{:#?}", rel);
+            let alt_debug = format!("{rel:#?}");
             assert!(!alt_debug.is_empty());
         }
     }
@@ -179,10 +179,10 @@ mod coverage_boost_tests {
         ];
 
         for role in all_roles.iter() {
-            let debug_str = format!("{:?}", role);
+            let debug_str = format!("{role:?}");
             assert!(!debug_str.is_empty());
 
-            let alt_debug = format!("{:#?}", role);
+            let alt_debug = format!("{role:#?}");
             assert!(!alt_debug.is_empty());
 
             let cloned = *role;
@@ -210,7 +210,7 @@ mod coverage_boost_tests {
         let _ = features.raw_features;
 
         // Test debug formatting
-        let debug_str = format!("{:?}", features);
+        let debug_str = format!("{features:?}");
         assert!(debug_str.contains("MorphFeatures"));
 
         // Test cloning
@@ -266,7 +266,7 @@ mod coverage_boost_tests {
         let _ = &doc.sentences;
 
         // Test debug formatting
-        let debug_str = format!("{:?}", doc);
+        let debug_str = format!("{doc:?}");
         assert!(debug_str.contains("Document"));
 
         // Test cloning
@@ -335,7 +335,7 @@ mod coverage_boost_tests {
         };
 
         // Should handle extreme values gracefully
-        let debug_str = format!("{:?}", edge_word);
+        let debug_str = format!("{edge_word:?}");
         assert!(!debug_str.is_empty());
 
         let cloned = edge_word.clone();

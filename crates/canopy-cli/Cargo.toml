@@ -12,8 +12,7 @@ path = "src/main.rs"
 
 [dependencies]
 canopy-core = { path = "../canopy-core" }
-canopy-semantic-layer = { path = "../canopy-semantic-layer" }
-canopy-lsp = { path = "../canopy-lsp" }
+canopy-tokenizer = { path = "../canopy-tokenizer" }
 tokio = { workspace = true }
 clap = { version = "4.4", features = ["derive"] }
 tracing = { workspace = true }

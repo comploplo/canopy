@@ -10,7 +10,7 @@
         <excludesFE name="Exchangers" ID="7224"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="08/21/2001 07:56:24 PDT Tue" abbrev="Gds" name="Goods" ID="1700">
-        <definition>&lt;def-root&gt;The FE Goods is anything (including labor or time, for example) which is exchanged for Money in a transaction. 
+        <definition>&lt;def-root&gt;The FE Goods is anything (including labor or time, for example) which is exchanged for Money in a transaction.
 &lt;ex&gt;Kim &lt;t&gt;bought&lt;/t&gt; &lt;fex name="Goods"&gt;the sweater&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;Kim &lt;t&gt;sold&lt;/t&gt; &lt;fex name="Goods"&gt;the sweater&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -35,7 +35,7 @@ Robin &lt;t&gt;paid&lt;/t&gt; for the car &lt;fex name="Means"&gt;by check&lt;/f
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/21/2001 07:56:24 PDT Tue" abbrev="Unit" name="Unit" ID="1705">
         <definition>&lt;def-root&gt;This FE is any unit in which goods or services can be measured.
-Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP. 
+Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP.
 &lt;ex&gt;Bob &lt;t&gt;sells&lt;/t&gt; peppers &lt;fex name="Unit"&gt;by the pound&lt;/fex&gt;. &lt;/ex&gt;
 &lt;ex&gt;Lee &lt;t&gt;buys&lt;/t&gt; potatoes &lt;fex name="Unit"&gt;by the pound&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

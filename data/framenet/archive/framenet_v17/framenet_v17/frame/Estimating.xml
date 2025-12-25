@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="JKR" cDate="06/21/2005 06:46:04 PDT Tue" name="Estimating" ID="1513" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Cognizer&lt;/fen&gt; carries out an approximate calculation or considers some &lt;fen&gt;Evidence&lt;/fen&gt; so as to arrive at an approximate &lt;fen&gt;Value&lt;/fen&gt; for some &lt;fen&gt;Feature&lt;/fen&gt; of an &lt;fen&gt;Item&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Cognizer&lt;/fen&gt; carries out an approximate calculation or considers some &lt;fen&gt;Evidence&lt;/fen&gt; so as to arrive at an approximate &lt;fen&gt;Value&lt;/fen&gt; for some &lt;fen&gt;Feature&lt;/fen&gt; of an &lt;fen&gt;Item&lt;/fen&gt;.
 
 There are two alternative construals. In one, the &lt;fen&gt;Feature&lt;/fen&gt; is presented as a &lt;fen&gt;Question&lt;/fen&gt; about the &lt;fen&gt;Item&lt;/fen&gt; and the &lt;fen&gt;Value&lt;/fen&gt; is conceived as an answer to the &lt;fen&gt;Question&lt;/fen&gt;.
 

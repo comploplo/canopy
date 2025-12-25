@@ -2,52 +2,198 @@
 //!
 //! This module provides the main VerbNet engine that implements canopy-engine traits
 //! for semantic analysis using VerbNet verb classes, roles, and frames.
+//!
+//! ## Performance: Binary Caching
+//!
+//! VerbNet XML parsing takes ~10-15 seconds. To optimize this, the engine uses binary caching:
+//! - First load: Parse XML (~10-15s), save to `data/cache/verbnet.bin`
+//! - Subsequent loads: Load from binary cache (~50ms)
 
 use crate::types::{VerbClass, VerbNetAnalysis, VerbNetConfig, VerbNetStats};
+use canopy_core::paths::cache_path;
 use canopy_engine::{
-    traits::DataInfo, CachedEngine, DataLoader, EngineCache, EngineError, EngineResult,
-    EngineStats, PerformanceMetrics, SemanticEngine, SemanticResult, StatisticsProvider, XmlParser,
+    traits::DataInfo, BaseEngine, CacheKeyFormat, CommonDataLoader, EngineConfig, EngineCore,
+    EngineResult, SemanticResult,
 };
 use indexmap::IndexMap;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::hash::{Hash, Hasher};
 use std::path::Path;
-use std::time::Instant;
-use tracing::{debug, info};
+use tracing::{debug, info, warn};
+
+/// Input type for VerbNet analysis
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct VerbNetInput {
+    pub verb: String,
+}
+
+impl Hash for VerbNetInput {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.verb.hash(state);
+    }
+}
+
+/// Cached VerbNet data - serializable subset of engine state
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct VerbNetData {
+    verb_classes: IndexMap<String, VerbClass>,
+}
+
+impl VerbNetData {
+    /// Load from binary cache file (uses absolute workspace path)
+    fn load_from_cache() -> Option<Self> {
+        let path = cache_path("verbnet.bin");
+        if !path.exists() {
+            return None;
+        }
+        match std::fs::read(&path) {
+            Ok(bytes) => match bincode::deserialize(&bytes) {
+                Ok(data) => {
+                    info!("Loaded VerbNet data from cache ({} bytes)", bytes.len());
+                    Some(data)
+                }
+                Err(e) => {
+                    warn!("Failed to deserialize VerbNet cache: {}", e);
+                    None
+                }
+            },
+            Err(e) => {
+                warn!("Failed to read VerbNet cache: {}", e);
+                None
+            }
+        }
+    }
+
+    /// Save to binary cache file (uses absolute workspace path)
+    fn save_to_cache(&self) -> Result<(), String> {
+        let path = cache_path("verbnet.bin");
+        let bytes = bincode::serialize(self)
+            .map_err(|e| format!("Failed to serialize VerbNet data: {}", e))?;
+        std::fs::write(&path, &bytes)
+            .map_err(|e| format!("Failed to write VerbNet cache: {}", e))?;
+        info!("Saved VerbNet data to cache ({} bytes)", bytes.len());
+        Ok(())
+    }
+}
 
 /// VerbNet semantic analysis engine
 #[derive(Debug)]
 pub struct VerbNetEngine {
+    /// Base engine handling cache, stats, and metrics
+    base_engine: BaseEngine<VerbNetInput, VerbNetAnalysis>,
     /// VerbNet verb classes loaded from XML
     verb_classes: IndexMap<String, VerbClass>,
     /// Verb-to-classes mapping for quick lookup
     verb_index: HashMap<String, Vec<String>>,
-    /// Engine configuration
-    config: VerbNetConfig,
-    /// Result cache
-    cache: EngineCache<String, VerbNetAnalysis>,
-    /// Performance statistics
+    /// VerbNet-specific configuration
+    verbnet_config: VerbNetConfig,
+    /// VerbNet-specific statistics
     stats: VerbNetStats,
-    /// Performance metrics
-    performance_metrics: PerformanceMetrics,
-    /// Engine statistics
-    engine_stats: EngineStats,
 }
 
 impl VerbNetEngine {
-    /// Create a new VerbNet engine with default configuration
-    pub fn new() -> Self {
+    /// Create a new VerbNet engine with default configuration and REQUIRED data loading
+    /// This constructor will FAIL if VerbNet XML files cannot be loaded - NO STUBS!
+    pub fn new() -> EngineResult<Self> {
         Self::with_config(VerbNetConfig::default())
     }
 
-    /// Create a new VerbNet engine with custom configuration
-    pub fn with_config(config: VerbNetConfig) -> Self {
-        let cache = EngineCache::new(config.cache_capacity);
+    /// Create a new VerbNet engine with custom configuration and REQUIRED data loading
+    /// This constructor will FAIL if VerbNet XML files cannot be loaded - NO STUBS!
+    pub fn with_config(verbnet_config: VerbNetConfig) -> EngineResult<Self> {
+        // Convert VerbNetConfig to EngineConfig
+        let engine_config = EngineConfig {
+            enable_cache: verbnet_config.enable_cache,
+            cache_capacity: verbnet_config.cache_capacity,
+            enable_metrics: true,
+            enable_parallel: false,
+            max_threads: 4,
+            confidence_threshold: verbnet_config.confidence_threshold,
+        };
 
-        Self {
-            verb_classes: IndexMap::new(),
+        // Check if data path exists - if not, fail fast (don't use cache for invalid paths)
+        let data_path_str = &verbnet_config.data_path;
+        let data_path = Path::new(data_path_str);
+        if !data_path.exists() {
+            return Err(canopy_engine::EngineError::data_load(format!(
+                "VerbNet data path does not exist: {}",
+                verbnet_config.data_path
+            )));
+        }
+
+        // Only use binary cache for the default VerbNet data path (not for test data)
+        let is_default_path = data_path_str.contains("data/verbnet/vn-gl");
+
+        // Helper to load from XML
+        let load_from_xml = |should_cache: bool| -> EngineResult<IndexMap<String, VerbClass>> {
+            info!("Parsing VerbNet XML files...");
+            let start = std::time::Instant::now();
+
+            let data_loader = CommonDataLoader::new();
+            let (raw_classes, loading_stats) = data_loader
+                .load_xml_directory::<VerbClass>(Path::new(&verbnet_config.data_path))?;
+
+            if raw_classes.is_empty() {
+                return Err(canopy_engine::EngineError::data_load(format!(
+                    "No VerbNet XML files found in {}",
+                    verbnet_config.data_path
+                )));
+            }
+
+            let indexed_classes =
+                data_loader.validate_and_index(raw_classes, |vc| vc.id.clone())?;
+
+            let mut classes = IndexMap::new();
+            for (class_id, verb_class) in indexed_classes {
+                debug!(
+                    "Loaded VerbNet class: {} ({})",
+                    verb_class.id, verb_class.class_name
+                );
+                classes.insert(class_id, verb_class);
+            }
+
+            info!(
+                "Parsed VerbNet XML in {:.2}s ({} classes)",
+                start.elapsed().as_secs_f64(),
+                loading_stats.items_loaded
+            );
+
+            // Save to cache only for default path
+            if should_cache {
+                let data = VerbNetData {
+                    verb_classes: classes.clone(),
+                };
+                if let Err(e) = data.save_to_cache() {
+                    warn!("Failed to save VerbNet cache: {}", e);
+                }
+            }
+
+            Ok(classes)
+        };
+
+        let verb_classes = if is_default_path {
+            // Try loading from binary cache first (fast path: ~50ms)
+            if let Some(cached) = VerbNetData::load_from_cache() {
+                info!(
+                    "Using cached VerbNet data ({} classes)",
+                    cached.verb_classes.len()
+                );
+                cached.verb_classes
+            } else {
+                // Cache miss: parse XML (slow path: ~10-15s), then cache for next time
+                load_from_xml(true)?
+            }
+        } else {
+            // Non-default path (e.g., test data): don't use or save to cache
+            load_from_xml(false)?
+        };
+
+        let mut engine = Self {
+            base_engine: BaseEngine::new(engine_config, "VerbNet".to_string()),
+            verb_classes,
             verb_index: HashMap::new(),
-            config,
-            cache,
+            verbnet_config,
             stats: VerbNetStats {
                 total_classes: 0,
                 total_verbs: 0,
@@ -56,70 +202,26 @@ impl VerbNetEngine {
                 cache_misses: 0,
                 avg_query_time_us: 0.0,
             },
-            performance_metrics: PerformanceMetrics::new(),
-            engine_stats: EngineStats::new("VerbNet".to_string()),
-        }
+        };
+
+        // Build index and update stats
+        engine.stats.total_classes = engine.verb_classes.len();
+        engine.build_verb_index();
+
+        info!(
+            "VerbNet engine initialized with {} classes and {} verbs",
+            engine.stats.total_classes, engine.stats.total_verbs
+        );
+
+        Ok(engine)
     }
 
     /// Analyze a verb and return matching classes and semantic information
-    pub fn analyze_verb(&mut self, verb: &str) -> EngineResult<SemanticResult<VerbNetAnalysis>> {
-        let start_time = Instant::now();
-        self.stats.total_queries += 1;
-
-        // Check cache first
-        if self.config.enable_cache {
-            let cache_key = format!("verb:{verb}");
-            if let Some(cached_result) = self.cache.get(&cache_key) {
-                self.stats.cache_hits += 1;
-                let _processing_time = start_time.elapsed().as_micros() as u64;
-                return Ok(SemanticResult::cached(
-                    cached_result.clone(),
-                    cached_result.confidence,
-                ));
-            }
-        }
-
-        self.stats.cache_misses += 1;
-
-        // Find matching verb classes
-        let matching_classes = self.find_verb_classes(verb)?;
-
-        if matching_classes.is_empty() {
-            debug!("No VerbNet classes found for verb: {}", verb);
-            let analysis = VerbNetAnalysis::new(verb.to_string(), Vec::new(), 0.1);
-            let processing_time = start_time.elapsed().as_micros() as u64;
-            self.update_performance_metrics(processing_time);
-            return Ok(SemanticResult::new(analysis, 0.1, false, processing_time));
-        }
-
-        // Calculate confidence based on number of matches and class specificity
-        let confidence = self.calculate_confidence(&matching_classes);
-
-        // Create analysis result
-        let analysis = VerbNetAnalysis::new(verb.to_string(), matching_classes, confidence);
-
-        // Cache the result
-        if self.config.enable_cache {
-            let cache_key = format!("verb:{verb}");
-            self.cache.insert(cache_key, analysis.clone());
-        }
-
-        let processing_time = start_time.elapsed().as_micros() as u64;
-        self.update_performance_metrics(processing_time);
-
-        debug!(
-            "VerbNet analysis for '{}': {} classes found, confidence: {:.2}",
-            verb,
-            analysis.verb_classes.len(),
-            confidence
-        );
-
-        Ok(SemanticResult::new(
-            analysis,
-            confidence,
-            false,
-            processing_time,
-        ))
+    pub fn analyze_verb(&self, verb: &str) -> EngineResult<SemanticResult<VerbNetAnalysis>> {
+        let input = VerbNetInput {
+            verb: verb.to_string(),
+        };
+        self.base_engine.analyze(&input, self)
     }
 
     /// Find verb classes that contain the given verb
@@ -198,7 +300,7 @@ impl VerbNetEngine {
     }
 
     /// Calculate confidence score based on matching classes
-    fn calculate_confidence(&self, classes: &[VerbClass]) -> f32 {
+    fn calculate_verb_confidence(&self, classes: &[VerbClass]) -> f32 {
         if classes.is_empty() {
             return 0.0;
         }
@@ -247,17 +349,6 @@ impl VerbNetEngine {
         );
     }
 
-    /// Update performance metrics
-    fn update_performance_metrics(&mut self, processing_time_us: u64) {
-        // Update running average of query time
-        let query_count = self.stats.total_queries as f64;
-        self.stats.avg_query_time_us = ((self.stats.avg_query_time_us * (query_count - 1.0))
-            + processing_time_us as f64)
-            / query_count;
-
-        self.performance_metrics.record_query(processing_time_us);
-    }
-
     /// Get verb class by ID
     pub fn get_verb_class(&self, class_id: &str) -> Option<&VerbClass> {
         self.verb_classes.get(class_id)
@@ -291,138 +382,222 @@ impl VerbNetEngine {
     }
 }
 
-impl DataLoader for VerbNetEngine {
-    fn load_from_directory<P: AsRef<Path>>(&mut self, path: P) -> EngineResult<()> {
-        let path = path.as_ref();
-        info!("Loading VerbNet data from: {}", path.display());
+/// Implementation of EngineCore trait for BaseEngine integration
+impl EngineCore<VerbNetInput, VerbNetAnalysis> for VerbNetEngine {
+    fn perform_analysis(&self, input: &VerbNetInput) -> EngineResult<VerbNetAnalysis> {
+        // Find matching verb classes
+        let matching_classes = self.find_verb_classes(&input.verb)?;
 
-        let parser = XmlParser::new();
-        let verb_classes = parser.parse_directory::<VerbClass>(path)?;
-
-        self.verb_classes.clear();
-        for verb_class in verb_classes {
-            info!(
-                "Loaded VerbNet class: {} ({})",
-                verb_class.id, verb_class.class_name
-            );
-            self.verb_classes.insert(verb_class.id.clone(), verb_class);
+        if matching_classes.is_empty() {
+            debug!("No VerbNet classes found for verb: {}", input.verb);
+            return Ok(VerbNetAnalysis::new(input.verb.clone(), Vec::new(), 0.1));
         }
 
-        self.stats.total_classes = self.verb_classes.len();
-        self.build_verb_index();
+        // Calculate confidence based on number of matches and class specificity
+        let confidence = self.calculate_verb_confidence(&matching_classes);
 
-        info!(
-            "VerbNet data loading complete: {} classes, {} verbs",
-            self.stats.total_classes, self.stats.total_verbs
+        // Create analysis result
+        let analysis = VerbNetAnalysis::new(input.verb.clone(), matching_classes, confidence);
+
+        debug!(
+            "VerbNet analysis for '{}': {} classes found, confidence: {:.2}",
+            input.verb,
+            analysis.verb_classes.len(),
+            confidence
         );
 
-        Ok(())
+        Ok(analysis)
     }
 
-    fn load_test_data(&mut self) -> EngineResult<()> {
-        // For now, just indicate that test data isn't implemented
-        Err(EngineError::data_load(
-            "Test data loading not implemented".to_string(),
-        ))
+    fn calculate_confidence(&self, _input: &VerbNetInput, output: &VerbNetAnalysis) -> f32 {
+        output.confidence
     }
 
-    fn reload(&mut self) -> EngineResult<()> {
-        // For now, just clear and indicate reload needs a path
-        self.verb_classes.clear();
-        self.verb_index.clear();
-        Err(EngineError::data_load(
-            "Reload requires a data path".to_string(),
-        ))
+    fn generate_cache_key(&self, input: &VerbNetInput) -> String {
+        CacheKeyFormat::Typed("verbnet".to_string(), input.verb.clone()).to_string()
     }
 
-    fn data_info(&self) -> DataInfo {
-        DataInfo::new(self.config.data_path.clone(), self.verb_classes.len())
-    }
-}
-
-impl SemanticEngine for VerbNetEngine {
-    type Input = String;
-    type Output = VerbNetAnalysis;
-    type Config = VerbNetConfig;
-
-    fn analyze(&self, input: &Self::Input) -> EngineResult<SemanticResult<Self::Output>> {
-        // Since analyze_verb requires &mut self, we need to work around this
-        // For now, we'll create a minimal implementation
-        let verb = input;
-        let matching_classes = if let Some(class_ids) = self.verb_index.get(verb) {
-            class_ids
-                .iter()
-                .filter_map(|id| self.verb_classes.get(id))
-                .cloned()
-                .collect()
-        } else {
-            Vec::new()
-        };
-
-        let confidence = if matching_classes.is_empty() {
-            0.1
-        } else {
-            0.8
-        };
-        let analysis = VerbNetAnalysis::new(verb.clone(), matching_classes, confidence);
-
-        Ok(SemanticResult::new(analysis, confidence, false, 0))
-    }
-
-    fn name(&self) -> &'static str {
+    fn engine_name(&self) -> &'static str {
         "VerbNet"
     }
 
-    fn version(&self) -> &'static str {
+    fn engine_version(&self) -> &'static str {
         "3.4"
     }
 
     fn is_initialized(&self) -> bool {
         !self.verb_classes.is_empty()
     }
+}
 
-    fn config(&self) -> &Self::Config {
-        &self.config
+impl VerbNetEngine {
+    /// Create VerbNet engine with test data for testing only
+    #[cfg(test)]
+    pub fn new_with_test_data<P: AsRef<Path>>(test_data_path: P) -> EngineResult<Self> {
+        let config = VerbNetConfig {
+            data_path: test_data_path.as_ref().to_string_lossy().to_string(),
+            ..Default::default()
+        };
+        Self::with_config(config)
+    }
+
+    /// Load VerbNet data from directory using CommonDataLoader
+    pub fn load_from_directory<P: AsRef<Path>>(&mut self, path: P) -> EngineResult<()> {
+        let path = path.as_ref();
+        info!("Loading VerbNet data from: {}", path.display());
+
+        let data_loader = CommonDataLoader::new();
+        let (verb_classes, loading_stats) = data_loader.load_xml_directory::<VerbClass>(path)?;
+
+        // Check if no classes were loaded and return error for compatibility
+        if verb_classes.is_empty() {
+            return Err(canopy_engine::EngineError::data_load(format!(
+                "No VerbNet XML files found in {}",
+                path.display()
+            )));
+        }
+
+        self.verb_classes.clear();
+        let indexed_classes = data_loader.validate_and_index(verb_classes, |vc| vc.id.clone())?;
+
+        for (class_id, verb_class) in indexed_classes {
+            info!(
+                "Loaded VerbNet class: {} ({})",
+                verb_class.id, verb_class.class_name
+            );
+            self.verb_classes.insert(class_id, verb_class);
+        }
+
+        self.stats.total_classes = self.verb_classes.len();
+        self.build_verb_index();
+
+        info!(
+            "VerbNet data loading complete: {} classes, {} verbs in {}ms",
+            loading_stats.items_loaded, self.stats.total_verbs, loading_stats.loading_time_ms
+        );
+
+        Ok(())
+    }
+
+    /// Reload VerbNet data (clears current data)
+    pub fn reload(&mut self) -> EngineResult<()> {
+        self.verb_classes.clear();
+        self.verb_index.clear();
+        self.base_engine.clear_cache();
+        // Return error to match expected behavior
+        Err(canopy_engine::EngineError::data_load(
+            "Reload requires a data path".to_string(),
+        ))
+    }
+
+    /// Get engine statistics from BaseEngine
+    pub fn get_stats(&self) -> canopy_engine::EngineStats {
+        self.base_engine.get_stats()
+    }
+
+    /// Get performance metrics from BaseEngine
+    pub fn get_performance_metrics(&self) -> canopy_engine::PerformanceMetrics {
+        self.base_engine.get_performance_metrics()
+    }
+
+    /// Get quality metrics from BaseEngine
+    pub fn get_quality_metrics(&self) -> canopy_engine::QualityMetrics {
+        self.base_engine.get_quality_metrics()
+    }
+
+    /// Get cache statistics from BaseEngine
+    pub fn cache_stats(&self) -> canopy_engine::CacheStats {
+        self.base_engine.cache_stats()
+    }
+
+    /// Clear cache via BaseEngine
+    pub fn clear_cache(&self) {
+        self.base_engine.clear_cache();
+    }
+
+    /// Get VerbNet configuration (for backward compatibility)
+    pub fn config(&self) -> &VerbNetConfig {
+        &self.verbnet_config
+    }
+
+    /// Get engine statistics (alias for get_stats)
+    pub fn statistics(&self) -> canopy_engine::EngineStats {
+        self.get_stats()
+    }
+
+    /// Get performance metrics (alias for get_performance_metrics)
+    pub fn performance_metrics(&self) -> canopy_engine::PerformanceMetrics {
+        self.get_performance_metrics()
+    }
+
+    /// Engine name (for backward compatibility)
+    pub fn name(&self) -> &'static str {
+        "VerbNet"
+    }
+
+    /// Engine version (for backward compatibility)
+    pub fn version(&self) -> &'static str {
+        "3.4"
+    }
+
+    /// Analyze using string input (for backward compatibility)
+    pub fn analyze(&self, input: &str) -> EngineResult<SemanticResult<VerbNetAnalysis>> {
+        self.analyze_verb(input)
+    }
+
+    /// Load test data (placeholder for compatibility)
+    pub fn load_test_data(&mut self) -> EngineResult<()> {
+        Err(canopy_engine::EngineError::data_load(
+            "Test data loading not implemented".to_string(),
+        ))
+    }
+
+    /// Get data info (for compatibility)
+    pub fn data_info(&self) -> DataInfo {
+        DataInfo::new(
+            self.verbnet_config.data_path.clone(),
+            self.verb_classes.len(),
+        )
+    }
+
+    /// Set cache capacity (for compatibility)
+    pub fn set_cache_capacity(&mut self, capacity: usize) {
+        // Update the verbnet config to reflect the new capacity
+        self.verbnet_config.cache_capacity = capacity;
+        // Note: BaseEngine doesn't support changing capacity after creation
+        // This is a limitation of the current design
     }
 }
 
-impl CachedEngine for VerbNetEngine {
-    fn cache_stats(&self) -> canopy_engine::CacheStats {
-        self.cache.stats()
-    }
-
-    fn clear_cache(&self) {
-        // Note: The trait requires &self, not &mut self, so we can't actually clear
-        // This is a limitation of the current trait design
-    }
-
-    fn set_cache_capacity(&mut self, capacity: usize) {
-        self.config.cache_capacity = capacity;
-        // Note: EngineCache doesn't have set_capacity method, would need to recreate
-    }
-}
-
-impl StatisticsProvider for VerbNetEngine {
-    fn statistics(&self) -> EngineStats {
-        self.engine_stats.clone()
-    }
-
-    fn performance_metrics(&self) -> PerformanceMetrics {
-        self.performance_metrics.clone()
-    }
-}
-
-impl Default for VerbNetEngine {
-    fn default() -> Self {
-        Self::new()
-    }
-}
+// No Default implementation - engines must explicitly load data to prevent stubs
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use once_cell::sync::OnceCell;
     use std::fs;
+    use std::path::Path;
+    use std::sync::Mutex;
     use tempfile::tempdir;
+
+    // Shared engine singleton - loaded once per test binary
+    static SHARED_ENGINE: OnceCell<Mutex<VerbNetEngine>> = OnceCell::new();
+
+    /// Check if VerbNet data is available
+    fn verbnet_available() -> bool {
+        canopy_core::paths::data_path("data/verbnet").exists()
+    }
+
+    /// Get shared VerbNet engine, or None if data unavailable
+    fn shared_engine() -> Option<&'static Mutex<VerbNetEngine>> {
+        if !verbnet_available() {
+            return None;
+        }
+        Some(SHARED_ENGINE.get_or_init(|| {
+            eprintln!("🔧 Loading shared VerbNet engine (one-time)...");
+            Mutex::new(VerbNetEngine::new().expect("VerbNet data required"))
+        }))
+    }
 
     fn create_test_verbnet_xml() -> &'static str {
         r#"<?xml version="1.0" encoding="UTF-8"?>
@@ -481,11 +656,20 @@ mod tests {
     }
 
     #[test]
-    fn test_verbnet_engine_creation() {
-        let engine = VerbNetEngine::new();
-        assert_eq!(engine.stats.total_classes, 0);
-        assert_eq!(engine.stats.total_verbs, 0);
-        assert!(!engine.is_loaded());
+    fn test_verbnet_engine_creation_with_path_resolution() {
+        // Use shared engine (loaded once, reused across tests)
+        let Some(engine_ref) = shared_engine() else {
+            eprintln!("Skipping test: VerbNet data not available");
+            return;
+        };
+
+        let engine = engine_ref.lock().unwrap();
+        // Engine should be loaded with real data
+        assert!(engine.is_loaded(), "Engine should be loaded with real data");
+        assert!(
+            engine.stats.total_classes > 0,
+            "Should have loaded verb classes"
+        );
     }
 
     #[test]
@@ -494,8 +678,7 @@ mod tests {
         let xml_path = temp_dir.path().join("give-13.1.xml");
         fs::write(&xml_path, create_test_verbnet_xml()).unwrap();
 
-        let mut engine = VerbNetEngine::new();
-        engine.load_from_directory(temp_dir.path()).unwrap();
+        let engine = VerbNetEngine::new_with_test_data(temp_dir.path()).unwrap();
 
         assert!(engine.is_loaded());
         assert_eq!(engine.stats.total_classes, 1);
@@ -508,8 +691,7 @@ mod tests {
         let xml_path = temp_dir.path().join("give-13.1.xml");
         fs::write(&xml_path, create_test_verbnet_xml()).unwrap();
 
-        let mut engine = VerbNetEngine::new();
-        engine.load_from_directory(temp_dir.path()).unwrap();
+        let engine = VerbNetEngine::new_with_test_data(temp_dir.path()).unwrap();
 
         let result = engine.analyze_verb("give").unwrap();
         assert!(result.confidence > 0.5);
@@ -524,8 +706,7 @@ mod tests {
         let xml_path = temp_dir.path().join("give-13.1.xml");
         fs::write(&xml_path, create_test_verbnet_xml()).unwrap();
 
-        let mut engine = VerbNetEngine::new();
-        engine.load_from_directory(temp_dir.path()).unwrap();
+        let engine = VerbNetEngine::new_with_test_data(temp_dir.path()).unwrap();
 
         // Test basic lemmatization
         let result = engine.analyze_verb("giving").unwrap();
@@ -539,26 +720,34 @@ mod tests {
         let xml_path = temp_dir.path().join("give-13.1.xml");
         fs::write(&xml_path, create_test_verbnet_xml()).unwrap();
 
-        let mut engine = VerbNetEngine::new();
-        engine.load_from_directory(temp_dir.path()).unwrap();
+        let engine = VerbNetEngine::new_with_test_data(temp_dir.path()).unwrap();
 
         // First query - should miss cache
         let result1 = engine.analyze_verb("give").unwrap();
         assert!(!result1.from_cache);
-        assert_eq!(engine.stats.cache_misses, 1);
 
         // Second query - should hit cache
         let result2 = engine.analyze_verb("give").unwrap();
         assert!(result2.from_cache);
-        assert_eq!(engine.stats.cache_hits, 1);
+
+        // Check cache stats from BaseEngine
+        let cache_stats = engine.cache_stats();
+        assert!(cache_stats.hits > 0);
+        assert!(cache_stats.total_lookups >= 2);
     }
 
     #[test]
     fn test_confidence_calculation() {
-        let engine = VerbNetEngine::new();
+        // Use shared engine (loaded once, reused across tests)
+        let Some(engine_ref) = shared_engine() else {
+            eprintln!("Skipping test: VerbNet data not available");
+            return;
+        };
+
+        let engine = engine_ref.lock().unwrap();
 
         // Test empty classes
-        assert_eq!(engine.calculate_confidence(&[]), 0.0);
+        assert_eq!(engine.calculate_verb_confidence(&[]), 0.0);
 
         // Test single class
         let single_class = vec![VerbClass {
@@ -570,7 +759,7 @@ mod tests {
             frames: vec![],
             subclasses: vec![],
         }];
-        let confidence = engine.calculate_confidence(&single_class);
+        let confidence = engine.calculate_verb_confidence(&single_class);
         assert!(confidence > 0.8);
     }
 }

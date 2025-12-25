@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="296" cDate="01/23/2003 01:46:58 PST Thu" name="Deny_permission" ID="520" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame, an &lt;fen&gt;Authority&lt;/fen&gt; orders a &lt;fen&gt;Protagonist&lt;/fen&gt; not to engage in an &lt;fen&gt;Action&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;In this frame, an &lt;fen&gt;Authority&lt;/fen&gt; orders a &lt;fen&gt;Protagonist&lt;/fen&gt; not to engage in an &lt;fen&gt;Action&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Authority"&gt;The police officer&lt;/fex&gt; &lt;t&gt;forbid&lt;/t&gt; &lt;fex name="Protagonist"&gt;me&lt;/fex&gt; &lt;fex name="Action"&gt;from turning around&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="01/23/2003 01:56:37 PST Thu" abbrev="Auth" name="Authority" ID="4121">

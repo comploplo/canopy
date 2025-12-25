@@ -12,7 +12,7 @@
         <definition>&lt;def-root&gt;The Item which occupies the Rank in the hierarchy.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="EEE8AA" fgColor="000000" coreType="Core" cBy="CFB" cDate="04/10/2005 10:50:18 PDT Sun" abbrev="dim" name="Dimension" ID="7731">
-        <definition>&lt;def-root&gt;The dimension along which the ranking is defined.  
+        <definition>&lt;def-root&gt;The dimension along which the ranking is defined.
 &lt;ex&gt;He &lt;t&gt;ranks&lt;/t&gt; second in his class &lt;fex name="Dimension"&gt;in mathematics&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="CFB" cDate="04/10/2005 10:59:25 PDT Sun" abbrev="" name="Time" ID="7732">

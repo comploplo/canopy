@@ -852,7 +852,7 @@
 { [ nameless, noun.state:namelessness,+ ] unidentified, unknown, unnamed, (being or having an unknown or unnamed source; "a poem by an unknown author"; "corporations responsible to nameless owners"; "an unnamed donor") }
 ----
 { [ ONYMOUS, ANONYMOUS,!] (bearing a name; "articles in magazines are usually onymous") }
-{ binomial, binominal, (having or characterized by two names, especially those of genus and species in taxonomies; "binomial nomenclature of bacteria")} 
+{ binomial, binominal, (having or characterized by two names, especially those of genus and species in taxonomies; "binomial nomenclature of bacteria")}
 { [ pseudonymous, noun.communication:pseudonym,+ ] (bearing or identified by an assumed (often pen) name; "the writings of Mark Twain are pseudonymous") }]
 
 [{ [ ANTEMORTEM, POSTMORTEM,!] (preceding death; "antemortem confession") }
@@ -988,7 +988,7 @@
 { delinquent, overdue, (past due; not paid at the scheduled time; "an overdue installment"; "a delinquent account") }
 { receivable, (awaiting payment; "accounts receivable") }
 { on_time, (payable in installments within a designated period of time; "we were short of cash, so we purchased our refrigerator on time") }
-{ out-of-pocket, (calling for the spending of cash; "his out-of-pocket costs were $10") } 
+{ out-of-pocket, (calling for the spending of cash; "his out-of-pocket costs were $10") }
 { repayable, (subject to repayment; "business loans are usually repayable in regular installments") }
 ----
 { [ UNDUE, DUE,!] (not yet payable; "an undue loan") }]
@@ -2029,7 +2029,7 @@
 { [ dusky, noun.time:dusk,+ noun.state:duskiness,+ ] twilight(a), twilit, (lighted by or as if by twilight; "The dusky night rides down the sky/And ushers in the morn"-Henry Fielding; "the twilight glow of the sky"; "a boat on a twilit river") }
 { glooming, [ gloomy, noun.state:gloom1,+ noun.attribute:gloominess,+ ] gloomful, sulky, (depressingly dark; "the gloomy forest"; "the glooming interior of an old inn"; "`gloomful' is archaic") }
 { [ lightless, noun.state:lightlessness,+ ] unilluminated, unlighted, unlit, (without illumination; "came up the lightless stairs"; "the unilluminated side of Mars"; "through dark unlighted (or unlit) streets") }
-{ [ semidark, noun.state:semidarkness,+ ] (partially devoid of light or brightness; "semidark room")} 
+{ [ semidark, noun.state:semidarkness,+ ] (partially devoid of light or brightness; "semidark room")}
 { tenebrous, tenebrific, tenebrious, (dark and gloomy; "a tenebrous cave") }]
 
 [{ [ SHADED1, UNSHADED1,!] (protected from heat and light with shade or shadow; "shaded avenues"; "o'er the shaded billows rushed the night"- Alexander Pope) }
@@ -2304,7 +2304,7 @@
 [{ [ CARVEL-BUILT, CLINKER-BUILT,!] noun.artifact:ship,;c ((of ships) built with flush (rather than overlapping) hull planks) }
 { flush-seamed, (laid edge to edge (not overlapping)) }
 ----
-{ [ CLINKER-BUILT, CARVEL-BUILT,!] clincher-built, lap-strake, lap-straked, lap-streak, lap-streaked, noun.artifact:ship,;c (having overlapping hull planks) }] 
+{ [ CLINKER-BUILT, CARVEL-BUILT,!] clincher-built, lap-strake, lap-straked, lap-streak, lap-streaked, noun.artifact:ship,;c (having overlapping hull planks) }]
 
 [{ [ CARVED, UNCARVED,!] carven, noun.communication:literature,;c (made for or formed by carving (`carven' is archaic or literary); "the carved fretwork"; "an intricately carved door"; "stood as if carven from stone") }
 { engraved, etched, graven1, incised, inscribed, (cut or impressed into a surface; "an incised design"; "engraved invitations") }
@@ -2955,7 +2955,7 @@
 { [ fluorescent, verb.perception:fluoresce,+ ] (brilliantly colored and apparently giving off light; "fluorescent colors") }
 { [ prismatic, noun.artifact:prism,+ ] (exhibiting spectral colors formed by refraction of light through a prism; "prismatic light") }
 { psychedelic, (having the vivid colors and bizarre patterns associated with psychedelic states; "a psychedelic painting") }
-{ [ shrill, noun.attribute:shrillness1,+ ] (of colors that are bright and gaudy; "a shrill turquoise") } 
+{ [ shrill, noun.attribute:shrillness1,+ ] (of colors that are bright and gaudy; "a shrill turquoise") }
 { vibrant, (of colors that are bright and striking) }
 ----
 { [ COLORLESS2, noun.attribute:colorlessness,+ COLORFUL,!] [ colourless2, noun.attribute:colourlessness,+ ] ACHROMATIC,^ noun.attribute:color3,= (weak in color; not colorful) }
@@ -3426,7 +3426,7 @@
 [{ [ COMBUSTIBLE, noun.substance:combustible,+ verb.weather:combust2,+ verb.weather:combust,+ verb.change:combust,+ NONCOMBUSTIBLE,!] (capable of igniting and burning) }
 { [ burnable, verb.weather:burn2,+ verb.change:burn3,+ verb.change:burn2,+ verb.change:burn1,+ verb.change:burn,+ ] [ ignitable, verb.weather:ignite1,+ verb.weather:ignite,+ ] [ ignitible, verb.weather:ignite1,+ verb.weather:ignite,+ ] (capable of burning) }
 { comburent, comburant, [ combustive, verb.weather:combust2,+ verb.weather:combust,+ verb.change:combust,+ ] (supporting combustion) }
-{ [ flammable, noun.attribute:flammability,+ ] [ inflammable, noun.attribute:inflammability,+ ] (easily ignited) } 
+{ [ flammable, noun.attribute:flammability,+ ] [ inflammable, noun.attribute:inflammability,+ ] (easily ignited) }
 { ignescent, (can emit sparks or burst into flame) }
 { incendiary, (capable of catching fire spontaneously or causing fires or burning readily; "an incendiary agent"; "incendiary bombs") }
 ----
@@ -3536,7 +3536,7 @@
 { chronic, inveterate, (habitual; "a chronic smoker")}
 { [ regular, noun.attribute:regularity,+ ] (in accord with regular practice or procedure; "took his regular morning walk"; "her regular bedtime") }
 ----
-	
+
 { [ UNUSUAL, noun.attribute:unusualness,+ USUAL,!] UNCOMMON,^ noun.attribute:usualness,= (not usual or common or ordinary; "a scene of unusual beauty"; "a man of unusual ability"; "cruel and unusual punishment"; "an unusual meteorite") }
 { [ different, verb.stative:differ,+ ] (differing from all others; not ordinary; "advertising that strives continually to be different"; "this new music is certainly different but I don't really like it") }
 { extraordinary(p), ((of an official) serving an unusual or special function in addition to those of the regular officials; "an ambassador extraordinary") }
@@ -4873,7 +4873,7 @@
 { [ crude, noun.attribute:crudeness,+ noun.attribute:crudity,+ ] earthy, [ gross, noun.attribute:grossness,+ ] [ vulgar, noun.attribute:vulgarity1,+ ] (conspicuously and tastelessly indecent; "coarse language"; "a crude joke"; "crude behavior"; "an earthy sense of humor"; "a revoltingly gross expletive"; "a vulgar gesture"; "full of language so vulgar it should have been edited") }
 { Hollywood, (flashy and vulgar; "young white women dressed Hollywood style"; "Hollywood philandering") }
 { indelicate, (verging on the indecent; "an indelicate proposition") }
-{ [ obscene, noun.attribute:obscenity,+ ] (designed to incite to indecency or lust; "the dance often becomes flagrantly obscene"-Margaret Mead)} 
+{ [ obscene, noun.attribute:obscenity,+ ] (designed to incite to indecency or lust; "the dance often becomes flagrantly obscene"-Margaret Mead)}
 { suggestive, (tending to suggest something improper or indecent; "a suggestive nod"; "suggestive poses")}]
 
 [{ [ DECISIVE, verb.cognition:decide6,+ noun.attribute:decisiveness1,+ INDECISIVE,!] CONCLUSIVE,^ CRUCIAL,^ (determining or having the power to determine an outcome; "cast the decisive vote"; "two factors had a decisive influence") }
@@ -5634,7 +5634,7 @@
 { [ bacchanalian, noun.act:bacchanal,+ ] [ bacchanal, noun.act:bacchanal,+ ] bacchic, carousing, [ orgiastic, noun.act:orgy2,+ noun.act:orgy,+ ] (used of riotously drunken merrymaking; "a night of bacchanalian revelry"; "carousing bands of drunken soldiers"; "orgiastic festivity") }
 { [ beery, noun.food:beer,+ ] (smelling of beer) }
 { besotted, blind_drunk1, blotto, crocked, cockeyed, fuddled, loaded, pie-eyed, pissed, pixilated, plastered, slopped, sloshed, smashed, soaked, soused, sozzled, squiffy, stiff, tight, wet, noun.communication:slang,;u (very drunk) }
-{ potty, tiddly, [ tipsy, noun.state:tipsiness,+ ] (slightly intoxicated)} 
+{ potty, tiddly, [ tipsy, noun.state:tipsiness,+ ] (slightly intoxicated)}
 { bibulous2, [ boozy, noun.food:booze,+ ] [ drunken2, noun.state:drunkenness,+ ] [ sottish, noun.state:sottishness,+ noun.attribute:sottishness,+ ] (given to or marked by the consumption of alcohol; "a bibulous fellow"; "a bibulous evening"; "his boozy drinking companions"; "thick boozy singing"; "a drunken binge"; "two drunken gentlemen holding each other up"; "sottish behavior") }
 { doped, drugged, narcotized, narcotised, (under the influence of narcotics; "knocked out by doped wine"; "a drugged sleep"; "were under the effect of the drugged sweets"; "in a stuperous narcotized state") }
 { half-seas-over, (British informal for `intoxicated') }
@@ -5714,7 +5714,7 @@
 { slashing, (as if striking with slashing blows; "his slashing demon-ridden cadenza") }
 ----
 { [ UNDYNAMIC, DYNAMIC,!] adynamic4, (characterized by an absence of force or forcefulness) }
-{ backward, (having made less than normal progress; "an economically backward country")} 
+{ backward, (having made less than normal progress; "an economically backward country")}
 { [ stagnant, noun.state:stagnancy,+ verb.stative:stagnate1,+ ] moribund, (not growing or changing; without force or vitality) }]
 
 [{ [ EAGER, noun.feeling:eagerness,+ UNEAGER,!] ENTHUSIASTIC,^ (having or showing keen interest or intense desire or impatient expectancy; "eager to learn"; "eager to travel abroad"; "eager for success"; "eager helpers"; "an eager look") }
@@ -6125,7 +6125,7 @@
 { [ EXOERGIC, ENDOERGIC,!] energy-releasing, EXOTHERMIC,^ ((of a nuclear reaction) occurring with evolution or releasing of energy) }]
 
 [{ [ ENDOTHERMIC, EXOTHERMIC,!] endothermal, heat-absorbing, ENDOERGIC,^ ((of a chemical reaction or compound) occurring or formed with absorption of heat) }
-{ [ decalescent, noun.phenomenon:decalescence,+ ] (absorbing heat without increase in temperature when heated beyond a certain point; "the decalescent point of steel") } 
+{ [ decalescent, noun.phenomenon:decalescence,+ ] (absorbing heat without increase in temperature when heated beyond a certain point; "the decalescent point of steel") }
 ----
 { [ EXOTHERMIC, noun.substance:exotherm,+ ENDOTHERMIC,!] exothermal, heat-releasing, EXOERGIC,^ ((of a chemical reaction or compound) occurring or formed with the liberation of heat) }]
 
@@ -6327,7 +6327,7 @@
 ----
 { [ INESSENTIAL, noun.attribute:inessentiality,+ ESSENTIAL,!] unessential, DISPENSABLE,^ EXPENDABLE,^ EXTRINSIC,^ SECONDARY1,^ UNIMPORTANT,^ UNNECESSARY,^ noun.attribute:essentiality,= (not basic or fundamental) }
 { [ accessorial, noun.artifact:accessory1,+ noun.artifact:accessory,+ ] (nonessential but helpful; "accessorial services included sorting and packing") }
-{ adscititious, (supplemental; not part of the real or essential nature of a thing; "adscititious vowels")} 
+{ adscititious, (supplemental; not part of the real or essential nature of a thing; "adscititious vowels")}
 { incidental, [ nonessential, noun.object:nonessential,+ ] accidental, (not of prime or central importance; "nonessential to the integral meanings of poetry"- Pubs.MLA; "the character's motives remain accidental to the plot") }]
 
 
@@ -6431,7 +6431,7 @@
 [{ [ EXCHANGEABLE, UNEXCHANGEABLE,!] (suitable to be exchanged) }
 { [ commutable, noun.attribute:commutability1,+ ] [ substitutable, noun.attribute:substitutability,+ ] (capable of being exchanged for another or for something else that is equivalent) }
 { [ fungible, noun.artifact:fungible,+ noun.attribute:fungibility,+ ] noun.group:law,;c (of goods or commodities; freely exchangeable for or replaceable by another of like nature or kind in the satisfaction of an obligation) }
-{ [ transposable, noun.attribute:transposability,+ ] [ permutable, noun.attribute:permutableness,+ noun.attribute:permutability,+ ] (capable of changing sequence)} 
+{ [ transposable, noun.attribute:transposability,+ ] [ permutable, noun.attribute:permutableness,+ noun.attribute:permutability,+ ] (capable of changing sequence)}
 { vicarious, (suffered or done by one person as a substitute for another; "vicarious atonement") }
 ----
 { [ UNEXCHANGEABLE, noun.attribute:unexchangeability,+ EXCHANGEABLE,!] (not suitable to be exchanged) }
@@ -6521,7 +6521,7 @@
 { anticipated, awaited(p), hoped-for, (expected hopefully) }
 { due(p), (scheduled to arrive; "the train is due in 15 minutes") }
 { expectable, (to be expected; "differences of opinion are quite expectable given the present information") }
-{ matter-of-course, (expected or depended upon as a natural or logical outcome)} 
+{ matter-of-course, (expected or depended upon as a natural or logical outcome)}
 ----
 { [ UNEXPECTED, noun.attribute:unexpectedness,+ EXPECTED,!] SURPRISING,^ (not expected or anticipated; "unexpected guests"; "unexpected news") }
 { unannounced, unheralded, unpredicted, (without warning or announcement; "they arrived unannounced"; "a totally unheralded telegram that his daughter...died last night"- M.A.D.Howe) }
@@ -7963,7 +7963,7 @@
 { [ SUDDEN, noun.attribute:suddenness,+ GRADUAL1,!] FAST1,^ (happening without warning or in a short space of time; "a sudden storm"; "a sudden decision"; "a sudden cure") }
 { [ abrupt, noun.attribute:abruptness,+ ] (exceedingly sudden and unexpected; "came to an abrupt stop"; "an abrupt change in the weather") }
 { choppy, jerky, (marked by abrupt transitions; "choppy prose") }
-{ [ emergent, noun.event:emergency,+ ] (occurring unexpectedly and requiring urgent action; "emergent repair of an aorta")} 
+{ [ emergent, noun.event:emergency,+ ] (occurring unexpectedly and requiring urgent action; "emergent repair of an aorta")}
 { explosive, (sudden and loud; "an explosive laugh") }
 { [ fulminant, verb.change:fulminate1,+ ] (sudden and severe; "fulminant pain"; "fulminant fever") }
 { sharp, (very sudden and in great amount or degree; "a sharp drop in the stock market") }]
@@ -8119,7 +8119,7 @@
 { [ good, noun.attribute:goodness2,+ ] salutary, (tending to promote physical well-being; beneficial to health; "beneficial effects of a balanced diet"; "a good night's sleep"; "the salutary influence of pure air") }
 { [ medicative, verb.body:medicate1,+ verb.body:medicate,+ ] [ medicinal, noun.artifact:medicine,+ ] (having the properties of medicine; "medicative drugs"; "medicinal herbs"; "medicinal properties") }
 { organic, (simple and healthful and close to nature; "an organic lifestyle") }
-{ orthomolecular, (designating or relating to a form of treatment of mental disorders that seeks to restore biochemical balance in the body with large doses of vitamins and minerals; "orthomolecular medicine"; "orthomolecular therapy")} 
+{ orthomolecular, (designating or relating to a form of treatment of mental disorders that seeks to restore biochemical balance in the body with large doses of vitamins and minerals; "orthomolecular medicine"; "orthomolecular therapy")}
 { [ preventive, noun.artifact:preventive1,+ ] preventative, [ prophylactic, noun.artifact:prophylactic1,+ noun.act:prophylaxis,+ ] (preventing or contributing to the prevention of disease; "preventive medicine"; "vaccines are prophylactic"; "a prophylactic drug") }
 { [ recuperative, verb.body:recuperate1,+ verb.body:recuperate,+ ] [ restorative, noun.artifact:restorative1,+ noun.artifact:restorative,+ verb.change:restore,+ ] (promoting recuperation; "recuperative powers"; "strongly recuperative remedies"; "restorative effects of exercise") }
 ----
@@ -8347,7 +8347,7 @@
 { [ HOMOGENEOUS, noun.attribute:homogeny,+ noun.attribute:homogeneousness,+ noun.attribute:homogeneity,+ HETEROGENEOUS,!] [ homogenous, noun.attribute:homogeny,+ ] SAME,^ UNDIVERSIFIED,^ UNIFORM,^ (all of the same or similar kind or nature; "a close-knit homogeneous group") }
 { consistent, [ uniform, noun.attribute:uniformness,+ noun.attribute:uniformity1,+ noun.attribute:uniformity,+ ] (the same throughout in structure or composition; "bituminous coal is often treated as a consistent and homogeneous product") }
 { [ solid, noun.attribute:solidness,+ ] (of one substance or character throughout; "solid gold"; "carved out of solid rock") }
-{ solid3, self-colored, self-coloured, (of the same color throughout; "solid color")} 
+{ solid3, self-colored, self-coloured, (of the same color throughout; "solid color")}
 { homogenized, homogenised, (made homogeneous) }]
 
 [{ [ HOMOZYGOUS, noun.state:homozygosity,+ HETEROZYGOUS,!] noun.cognition:genetics,;c (having identical alleles at corresponding chromosomal loci; "these two fruit flies are homozygous for red eye color") }
@@ -8863,7 +8863,7 @@
 [{ [ IMPORTANT, noun.attribute:importance,+ UNIMPORTANT,!] of_import, ESSENTIAL,^ SIGNIFICANT,^ VALUABLE,^ noun.attribute:importance,= (of great significance or value; "important people"; "the important questions of the day") }
 { all-important(a), all_important(p), [ crucial, noun.state:cruciality,+ ] [ essential, noun.cognition:essence,+ noun.attribute:essentialness,+ noun.attribute:essentiality,+ ] of_the_essence(p), (of the greatest importance; "the all-important subject of disarmament"; "crucial information"; "in chess cool nerves are of the essence") }
 { [ alpha, noun.event:alpha,+ ] (first in order of importance; "the alpha male in the group of chimpanzees"; "the alpha star in a constellation is the brightest or main star") }
-{ beta, (second in order of importance; "the candidate, considered a beta male, was perceived to be unable to lead his party to victory" ) } 
+{ beta, (second in order of importance; "the candidate, considered a beta male, was perceived to be unable to lead his party to victory" ) }
 { big, noun.communication:colloquialism,;u (significant; "graduation was a big day in his life") }
 { burning(a), (of immediate import; "burning issues of the day") }
 { cardinal, [ central, noun.cognition:center1,+ noun.cognition:center,+ ] fundamental, key, primal, (serving as an essential component; "a cardinal rule"; "the central cause of the problem"; "an example that was fundamental to the argument"; "computers are fundamental to modern industrial structure") }
@@ -8985,7 +8985,7 @@
 { [ DEDUCTIVE, verb.communication:deduce,+ verb.cognition:deduce,+ INDUCTIVE,!] A_PRIORI,^ ANALYTIC1,^ (involving inferences from general principles) }
 { [ deducible, verb.communication:deduce,+ ] (capable of being deduced) }
 { illative, noun.cognition:grammar,;c (expressing or preceding an inference; "`therefore' is an illative word") }
-{ illative2, [ inferential2, noun.cognition:inference,+ ] (resembling or dependent on or arrived at by inference; "an illative conclusion"; "inferential reasoning") } 
+{ illative2, [ inferential2, noun.cognition:inference,+ ] (resembling or dependent on or arrived at by inference; "an illative conclusion"; "inferential reasoning") }
 { inferential1, noun.cognition:logic,;c (of reasoning; proceeding from general premisses to a necessary and specific conclusion)}]
 
 
@@ -9523,7 +9523,7 @@
 [{ [ KNOWABLE, verb.cognition:know15,+ verb.cognition:know12,+verb.cognition:know4,+ verb.cognition:know2,+ verb.cognition:know1,+UNKNOWABLE,!] cognizable, cognisable, cognoscible, (capable of being known) }
 ----
 { [UNKNOWABLE, KNOWABLE,!] (not knowable; "the unknowable mysteries of life") }
-{ [ transcendent, noun.state:transcendency1,+ noun.state:transcendence1,+ verb.stative:transcend1,+ verb.stative:transcend,+ ] (beyond and outside the ordinary range of human experience or understanding; "the notion of any transcendent reality beyond thought") }] 
+{ [ transcendent, noun.state:transcendency1,+ noun.state:transcendence1,+ verb.stative:transcend1,+ verb.stative:transcend,+ ] (beyond and outside the ordinary range of human experience or understanding; "the notion of any transcendent reality beyond thought") }]
 
 [{ [ KNOWN, UNKNOWN,!] ACKNOWLEDGED,^ FAMILIAR,^ GLORIOUS,^ (apprehended with certainty; "a known quantity"; "the limits of the known world"; "a musician known throughout the world"; "a known criminal") }
 { best-known, (most familiar or renowned; "Stevenson's best-known work is probably `Treasure Island'") }
@@ -9599,7 +9599,7 @@
 { [ extensive, noun.attribute:extensiveness,+ verb.change:extend1,+ ] extended, (large in spatial extent or range or scope or quantity; "an extensive Roman settlement in northwest England"; "extended farm lands"; "surgeons with extended experience"; "they suffered extensive damage") }
 { [ gigantic1, noun.person:giant3,+ noun.person:giant2,+ noun.person:giant,+ noun.group:giant,+ noun.animal:giant,+ ] [ mammoth1, noun.animal:mammoth,+ ] (so exceedingly large or extensive as to suggest a giant or mammoth; "a gigantic redwood"; "gigantic disappointment"; "a mammoth ship"; "a mammoth multinational corporation") }
 { [ great1, noun.attribute:greatness1,+ ] (relatively large in size or number or extent; larger than others of its kind; "a great juicy steak"; "a great multitude"; "the great auk"; "a great old oak"; "a great ocean liner"; "a great delay") }
-{ [ grand, noun.attribute:grandness2,+ noun.attribute:grandness1,+ ] (large and impressive in physical size or extent; "the bridge is a grand structure")} 
+{ [ grand, noun.attribute:grandness2,+ noun.attribute:grandness1,+ ] (large and impressive in physical size or extent; "the bridge is a grand structure")}
 { huge1, [ immense1, noun.attribute:immenseness,+ noun.attribute:immensity,+ ] [ vast, noun.attribute:vastness,+ ] Brobdingnagian, (unusually great in size or amount or degree or especially extent or scope; "huge government spending"; "huge country estates"; "huge popular demand for higher education"; "a huge wave"; "the Los Angeles aqueduct winds like an immense snake along the base of the mountains"; "immense numbers of birds"; "at vast (or immense) expense"; "the vast reaches of outer space"; "the vast accumulation of knowledge...which we call civilization"- W.R.Inge) }
 { hulking, [ hulky, noun.person:hulk,+ ] (of great size and bulk; "a hulking figure of a man"; "three hulking battleships") }
 { humongous, banging, thumping, whopping, walloping, noun.communication:colloquialism,;u ((used informally) very large; "a thumping loss") }
@@ -9966,7 +9966,7 @@
 { [ MIDI, MAXI,! MINI,!] noun.communication:combining_form,;u (used of women's clothing having a hemline at mid-calf; "midiskirts"; "wore her dresses midi length") }
 ----
 { [ MAXI, MINI,! MIDI,!] noun.communication:combining_form,;u (used of women's clothing having a hemline at the ankle; "wanted a maxi-length coat"; "a maxidress") }]
- 
+
 [{ [ LOSSY, noun.process:loss,+ LOSSLESS,!] (characterized by or causing dissipation of energy) }
 ----
 { [ LOSSLESS, LOSSY,!] (characterized by or causing no dissipation of energy) }]
@@ -10252,7 +10252,7 @@
 ----
 { [ MINOR2, MAJOR2,!] (lesser in scope or effect; "had minor differences"; "a minor disturbance") }]
 
-[{ [ MAJOR3, noun.time:majority,+ MINOR3,!] noun.group:law,;c (of full legal age) } 
+[{ [ MAJOR3, noun.time:majority,+ MINOR3,!] noun.group:law,;c (of full legal age) }
 ----
 { [ MINOR3, noun.time:minority,+ MAJOR3,!] nonaged, underage, noun.group:law,;c (not of legal age; "minor children") }]
 
@@ -10927,7 +10927,7 @@
 [{ [ MOVED(p), UNMOVED,!] affected2, stirred, touched1, AFFECTED,^ EMOTIONAL,^ (being excited or provoked to the expression of an emotion; "too moved to speak"; "very touched by the stranger's kindness") }
 { sick, (deeply affected by a strong feeling; "sat completely still, sick with envy"; "she was sick with longing") }
 ----
-{ [ UNMOVED(p), MOVED,!] unaffected2, untouched1, UNAFFECTED,^ UNEMOTIONAL,^ (emotionally unmoved; "always appeared completely unmoved and imperturbable")}] 
+{ [ UNMOVED(p), MOVED,!] unaffected2, untouched1, UNAFFECTED,^ UNEMOTIONAL,^ (emotionally unmoved; "always appeared completely unmoved and imperturbable")}]
 
 [{ [ MOVING1, UNMOVING,!] EMOTIONAL,^ IMPRESSIVE,^ STIMULATING,^ (arousing or capable of arousing deep emotion; "she laid her case of destitution before him in a very moving letter"- N. Hawthorne) }
 { affecting, [ poignant, noun.attribute:poignancy,+ ] touching, (arousing affect; "the homecoming of the released hostages was an affecting scene"; "poignant grief cannot endure forever"; "his gratitude was simple and touching") }
@@ -11056,7 +11056,7 @@
 
 [{ [ NECESSARY, noun.state:necessity,+ noun.object:necessity,+ UNNECESSARY,!] ESSENTIAL,^ INDISPENSABLE,^ OBLIGATORY,^ noun.state:necessity,= (absolutely essential) }
 { [ essential, noun.object:essential,+ noun.attribute:essentialness,+ ] [ indispensable, noun.attribute:indispensableness,+ noun.attribute:indispensability,+ ] (absolutely necessary; vitally necessary; "essential tools and materials"; "funds essential to the completion of the project"; "an indispensable worker") }
-{ incumbent, (necessary (for someone) as a duty or responsibility; morally binding; "it is incumbent on them to pay their own debts")} 
+{ incumbent, (necessary (for someone) as a duty or responsibility; morally binding; "it is incumbent on them to pay their own debts")}
 { needed, needful, required, [ requisite, noun.object:requisite,+ noun.state:requisiteness,+ ] (necessary for relief or supply; "provided them with all things needful") }
 { obligatory, (required by obligation or compulsion or convention; "he made all the obligatory apologies") }
 ----
@@ -11664,7 +11664,7 @@
 { [ DISORDERLY, ORDERLY,!] (undisciplined and unruly; "disorderly youths"; "disorderly conduct") }
 { [ boisterous, noun.attribute:boisterousness,+ ] rambunctious, robustious, rumbustious, [ unruly, noun.attribute:unruliness,+ ] (noisy and lacking in restraint or discipline; "a boisterous crowd"; "a social gathering that became rambunctious and out of hand"; "a robustious group of teenagers"; "beneath the rumbustious surface of his paintings is sympathy for the vulnerability of ordinary human beings"; "an unruly class") }
 { mobbish, moblike, (characteristic of a mob; disorderly or lawless; "fanned mounting tension into mobbish terrorizing"; "moblike mentality") }
-{ raucous, [ rowdy, noun.state:rowdiness,+ ] (disturbing the public peace; loud and rough; "a raucous party"; "rowdy teenagers") } 
+{ raucous, [ rowdy, noun.state:rowdiness,+ ] (disturbing the public peace; loud and rough; "a raucous party"; "rowdy teenagers") }
 { rough-and-tumble,bare-knuckle, bare-knuckled, (characterized by disorderly action and disregard for rules; "a rough-and-tumble fight"; "rough-and-tumble politics"; "undisguised bare-knuckle capitalism") }]
 
 [{ [ ORDERED, DISORDERED,!] (having a systematic arrangement; especially having elements succeeding in order according to rule; "an ordered sequence") }
@@ -11956,7 +11956,7 @@
 { biting, bitter, (causing a sharply painful or stinging sensation; used especially of cold; "bitter cold"; "a biting wind") }
 { chafed, galled, (painful from having the skin abraded) }
 { [ poignant, noun.state:poignance,+ noun.state:poignancy,+ ] (keenly distressing to the mind or feelings; "poignant anxiety") }
-{ [ itchy, noun.cognition:itch,+ noun.cognition:itchiness,+ ] (causing an irritating cutaneous sensation; being affect with an itch; "he had an itchy toe from the mosquito bite")} 
+{ [ itchy, noun.cognition:itch,+ noun.cognition:itchiness,+ ] (causing an irritating cutaneous sensation; being affect with an itch; "he had an itchy toe from the mosquito bite")}
 { racking, wrenching, (causing great physical or mental suffering; "a wrenching pain") }
 { saddle-sore, ((of a rider) sore after riding a horse) }
 { [ sensitive, noun.cognition:sensitivity,+ ] [ sore, noun.state:soreness,+ ] [ raw, noun.state:rawness1,+ ] [ tender, noun.state:tenderness,+ ] (hurting; "the tender spot on his jaw") }
@@ -11989,7 +11989,7 @@
 { [ UNDELINEATED, DELINEATED,!] (not represented accurately or precisely) }
 { undepicted, unpictured, (not pictured) }
 { undrawn, (not represented in a drawing) }]
-			 
+
 [{ [ PAINTABLE, UNPAINTABLE,!] (lending itself to being painted; "a highly paintable landscape"; "made of sturdy eminently paintable wood") }
 ----
 { [ UNPAINTABLE, PAINTABLE,!] (not paintable especially not suitable for artistic representation on canvas; "the inexpressible, unpaintable `tick' in the unconscious") }]
@@ -12386,7 +12386,7 @@
 { semipermeable, ((of a membrane) selectively permeable) }
 ----
 { [ IMPERMEABLE, noun.attribute:impermeableness,+ noun.attribute:impermeability,+ PERMEABLE,!] IMPERVIOUS,^ TIGHT2,^ (preventing especially liquids to pass or diffuse through; "impermeable stone"; "an impermeable layer of scum"; "a coat impermeable to rain") }
-{ [ retentive, noun.attribute:retentiveness2,+ noun.attribute:retentivity,+ ] (having the power, capacity, or quality of retaining water; "soils retentive of moisture") } 
+{ [ retentive, noun.attribute:retentiveness2,+ noun.attribute:retentivity,+ ] (having the power, capacity, or quality of retaining water; "soils retentive of moisture") }
 { water-repellent, water-resistant, (hindering the penetration of water; "a water-repellent coat") }]
 
 [{ [ PERVIOUS, noun.attribute:perviousness,+ IMPERVIOUS,!] PERMEABLE,^ (admitting of passage or entrance; "pervious soil"; "a metal pervious to heat") }
@@ -12459,7 +12459,7 @@
 
 [{ [ SECULAR, RELIGIOUS1,!] (of or relating to clergy not bound by monastic vows; "the secular clergy")}
 ----
-{ [ RELIGIOUS1, noun.person:religious,+ SECULAR,!] (of or relating to clergy bound by monastic vows; "the religious or regular clergy conducts the service")}] 
+{ [ RELIGIOUS1, noun.person:religious,+ SECULAR,!] (of or relating to clergy bound by monastic vows; "the religious or regular clergy conducts the service")}]
 
 [{ [ RELIGIOUS, noun.attribute:religiousness,+ noun.cognition:religion,+ IRRELIGIOUS,!] PIOUS,^ (having or showing belief in and reverence for a deity; "a religious man"; "religious attitude") }
 { churchgoing, (actively practicing a religion) }
@@ -12554,7 +12554,7 @@
 { [ elaborate, noun.attribute:elaborateness1,+ ] [ luxuriant, noun.attribute:luxuriance,+ ] (marked by complexity and richness of detail; "an elaborate lace pattern") }
 { embattled, battlemented, castled, castellated, (having or resembling repeated square indentations like those in a battlement; "a crenelated molding") }
 { fanciful, (having a curiously intricate quality; "a fanciful pattern with intertwined vines and flowers") }
-{ fantastic, (extravagantly fanciful in design, construction, appearance; "Gaudi's fantastic architecture")} 
+{ fantastic, (extravagantly fanciful in design, construction, appearance; "Gaudi's fantastic architecture")}
 { [ lacy, noun.artifact:lace,+ ] lacelike, (made of or resembling lace; "a lacy gown"; "a lacy leaf") }
 { puff, puffed, (gathered for protruding fullness; "puff sleeves") }
 { rococo, (having excessive asymmetrical ornamentation; "an exquisite gilded rococo mirror") }
@@ -12583,7 +12583,7 @@
 ----
 { [ IMPLAUSIBLE, noun.attribute:implausibleness,+ noun.attribute:implausibility,+ PLAUSIBLE,!] INCREDIBLE,^ (having a quality that provokes disbelief; "gave the teacher an implausible excuse") }
 { cockamamie, cockamamy, noun.communication:colloquialism,;u  (informal term for ridiculous and implausible; "he gave me a cockamamie reason for not going")  }
-{ farfetched, far-fetched, ((of an idea or story) so exaggerated or ludicrous as to be improbable; "He was always full of far-fetched plans, none of which ever worked") } 
+{ farfetched, far-fetched, ((of an idea or story) so exaggerated or ludicrous as to be improbable; "He was always full of far-fetched plans, none of which ever worked") }
 { [ improbable, noun.attribute:improbableness,+ ] unbelievable, unconvincing, [ unlikely, noun.attribute:unlikeliness,+ ] (having a probability too low to inspire belief) }]
 
 [{ [ PLEASANT, noun.feeling:pleasance,+ noun.attribute:pleasantness,+ verb.emotion:please,+ UNPLEASANT,!] GOOD-NATURED,^ NICE,^ PLEASING,^ AESTHETIC,^ AGREEABLE,^ noun.attribute:pleasantness,= (affording pleasure; being in harmony with your taste or likings; "we had a pleasant evening together"; "a pleasant scene"; "pleasant sensations") }
@@ -12770,7 +12770,7 @@
 { [ mighty, noun.attribute:might,+ noun.attribute:mightiness,+ ] (having or showing great strength or force or intensity; "struck a mighty blow"; "the mighty logger Paul Bunyan"; "the pen is mightier than the sword"- Bulwer-Lytton) }
 { muscular, (having or suggesting great physical power or force; "the muscular and passionate Fifth Symphony") }
 { [ potent, noun.attribute:potency1,+ ] strong, (having or wielding force or authority; "providing the ground soldier with increasingly potent weapons") }
-{ [ puissant, noun.attribute:puissance,+ ] noun.communication:archaism,;u (powerful) } 
+{ [ puissant, noun.attribute:puissance,+ ] noun.communication:archaism,;u (powerful) }
 { [ regent(ip), noun.person:regent,+ noun.act:regency,+ ] noun.communication:combining_form,;u (acting or functioning as a regent or ruler; "prince-regent") }
 { regnant, reigning, ruling, (exercising power or authority) }
 ----
@@ -13406,8 +13406,8 @@
 [{ [ RESTFUL, noun.attribute:restfulness,+ RESTLESS,!] reposeful, relaxing, (affording physical or mental rest; "she spent a restful night at home")}
 { [ slumberous, noun.state:slumber,+ ] [ slumbrous, noun.state:slumber,+ ] (quiet and tranquil; "a slumberous June morning")}
 ----
-{ [RESTLESS, noun.attribute:restlessness,+ RESTFUL,!] [uneasy5, noun.attribute:uneasiness,+] (lacking or not affording physical or mental rest; "a restless night"; "she fell into an uneasy sleep")}] 
- 
+{ [RESTLESS, noun.attribute:restlessness,+ RESTFUL,!] [uneasy5, noun.attribute:uneasiness,+] (lacking or not affording physical or mental rest; "a restless night"; "she fell into an uneasy sleep")}]
+
 [{ [ QUIET2, noun.feeling:quietness,+ UNQUIET,!] PEACEFUL,^ TAME2,^ UNAGITATED,^ (characterized by an absence or near absence of agitation or activity; "a quiet life"; "a quiet throng of onlookers"; "quiet peace-loving people"; "the factions remained quiet for almost 10 years") }
 { [ quiescent, noun.act:quiescency,+ noun.act:quiescence,+ ] (marked by a state of tranquil repose; "the quiescent melancholy of the town") }
 { untroubled, (free from turmoil or worries; "untroubled times") }
@@ -13720,10 +13720,10 @@
 { [ oscillatory, verb.motion:oscillate,+ ] oscillating, (having periodic vibrations) }
 { diurnal, (having a daily cycle or occurring every day; "diurnal rotation of the heavens") }
 { [daily, noun.time:day,+] day-to-day, day-by-day, day-after-day, (of or belonging to or occurring every day; "daily routine"; "a daily paper") }
-{ [ nightly, noun.time:night,+ ] (happening every night; "nightly television now goes on until 3:00 or 4:00 a.m.") } 
+{ [ nightly, noun.time:night,+ ] (happening every night; "nightly television now goes on until 3:00 or 4:00 a.m.") }
 { [weekly, noun.time:week,+] [hebdomadal, noun.time:hebdomad,+] [hebdomadary, noun.time:hebdomad,+] (of or occurring every seven days; "a weekly visit"; "weekly paper")}
 { semiweekly, biweekly1, (occurring twice a week) }
-{ [ hourly, noun.time:hour,+ ] (occurring every hour or payable by the hour; "hourly chimes"; "hourly pay") } 
+{ [ hourly, noun.time:hour,+ ] (occurring every hour or payable by the hour; "hourly chimes"; "hourly pay") }
 { half-hourly, (occurring ever half hour)}
 { [ fortnightly, noun.time:fortnight,+] biweekly, (occurring every two weeks) }
 { annual, [yearly, noun.time:year1,+] (occurring or payable every year; "an annual trip to Paris"; "yearly medical examinations"; "annual (or yearly) income") }
@@ -13734,7 +13734,7 @@
 { bimonthly, [ bimestrial, noun.time:bimester,+ ] (occurring every two months; "bimonthly visits") }
 { semimonthly, bimonthly1, (occurring twice a month; "a semimonthly publication") }
 { [ semestral, noun.time:semester2,+ noun.time:semester1,+] [ semestrial, noun.time:semester2,+ ] (occurring every six months or during every period of six months) }
-{ [ midweekly, noun.time:midweek,+ ] (occurring during the middle of the week; "midweekly prayer meetings") } 
+{ [ midweekly, noun.time:midweek,+ ] (occurring during the middle of the week; "midweekly prayer meetings") }
 ----
 { [ APERIODIC, PERIODIC,!] nonperiodic, (not recurring at regular intervals) }
 { noncyclic, (not having repeated cycles) }
@@ -13929,8 +13929,8 @@
 { answering, [ respondent, noun.person:respondent,+ verb.cognition:respond,+ ] (replying; "an answering glance"; "an answering smile") }
 ----
 { [ UNRESPONSIVE, noun.attribute:unresponsiveness,+ RESPONSIVE,!] INSENSITIVE1,^ INSENSITIVE2,^ (not responding to some influence or stimulus) }
-{ refractory, (temporarily unresponsive or not fully responsive to a process or stimulus; "the refractory period of a muscle fiber")} ] 
-				 
+{ refractory, (temporarily unresponsive or not fully responsive to a process or stimulus; "the refractory period of a muscle fiber")} ]
+
 
 [{ [ RESTRAINED, UNRESTRAINED,!] CONTROLLED,^ INHIBITED,^ RESERVED1,^ (under restraint) }
 { close, (strictly confined or guarded; "kept under close custody") }
@@ -14076,7 +14076,7 @@
 { plainspoken, (using simple and direct language; "a plainspoken country doctor") }]
 
 [{ [ RHYTHMICAL, noun.attribute:rhythm1,+ UNRHYTHMICAL,!] [ rhythmic, noun.time:rhythm,+ noun.attribute:rhythm1,+ noun.attribute:rhythmicity,+ ] REGULAR,^ (recurring with measured regularity; "the rhythmic chiming of church bells"- John Galsworthy; "rhythmical prose") }
-{ Adonic, (having a rhythm consisting of a dactyl followed by a spondee or a trochee; "the verse of the laments is Adonic")} 
+{ Adonic, (having a rhythm consisting of a dactyl followed by a spondee or a trochee; "the verse of the laments is Adonic")}
 { cadenced, [ cadent, noun.attribute:cadence,+ noun.attribute:cadency,+ ] (marked by a rhythmical cadence; "the cadenced crunch of marching feet") }
 { danceable, (suitable for dancing) }
 { [ jazzy, noun.communication:jazz1,+ noun.communication:jazz,+ ] (resembling jazz (especially in its rhythm)) }
@@ -15933,7 +15933,7 @@
 
 [{ [SPINOUS, SPINELESS,!] spiny, (having spines; "the dorsal fin is spinous")}
 ----
-{ [SPINELESS, SPINOUS,!] (lacking spiny processes; "spineless fins")}] 
+{ [SPINELESS, SPINOUS,!] (lacking spiny processes; "spineless fins")}]
 
 [{ [ SPIRITED, noun.attribute:spiritedness,+ SPIRITLESS,!] ENERGETIC,^ ENTHUSIASTIC,^ LIVELY,^ noun.attribute:spiritedness,= (displaying animation, vigor, or liveliness) }
 { boisterous, knockabout, (full of rough and exuberant animal spirits; "boisterous practical jokes"; "knockabout comedy") }
@@ -16009,7 +16009,7 @@
 
 [{ [SYLLABIC2, NONSYLLABIC2,!] ((of speech sounds) forming the nucleus of a syllable; "the syllabic `nl' in `riddle'")}
 ----
-{ [NONSYLLABIC2, SYLLABIC2,!] ((of speech sounds) not forming or capable of forming the nucleus of a syllable; "initial `l' in `little' is nonsyllabic")}] 
+{ [NONSYLLABIC2, SYLLABIC2,!] ((of speech sounds) not forming or capable of forming the nucleus of a syllable; "initial `l' in `little' is nonsyllabic")}]
 
 [{ [ SYLLABIC, noun.communication:syllable,+ NONSYLLABIC,!] (consisting of a syllable or syllables) }
 { disyllabic, (having or characterized by or consisting of two syllables) }
@@ -16078,7 +16078,7 @@
 
 [{ [ STANDARD3, NONSTANDARD3,!] received4, noun.cognition:linguistics,;c (conforming to the established language usage of educated native speakers; "standard English" (American); "received standard English is sometimes called the King's English" (British)) }
 { [ acceptable, noun.attribute:acceptability,+ noun.attribute:acceptableness,+ ] noun.cognition:linguistics,;c (judged to be in conformity with approved usage; "acceptable English usage") }
-{ classical, (of or relating to the languages used by ancient standard authors; "classical Greek")} 
+{ classical, (of or relating to the languages used by ancient standard authors; "classical Greek")}
 ----
 { [ NONSTANDARD3, STANDARD3,!] noun.cognition:linguistics,;c (not conforming to the language usage of a prestige group within a community; "a nonstandard dialect is one used by uneducated speakers or socially disfavored groups"; "the common core of nonstandard words and phrases in folk speech"- A.R.Dunlap) }
 { bad, noun.cognition:linguistics,;c noun.communication:colloquialism,;u (nonstandard; "so-called bad grammar") }
@@ -16129,7 +16129,7 @@
 { [ palpitant, verb.motion:palpitate2,+ verb.motion:palpitate1,+ verb.motion:palpitate,+ ] palpitating, (having a slight and rapid trembling motion; "palpitant movements rather than violent eruptions"; "my palpitating heart") }
 { [ shaky, noun.state:shakiness,+ ] shivering, trembling, (vibrating slightly and irregularly; as e.g. with fear or cold or like the leaves of an aspen in a breeze; "a quaking bog"; "the quaking child asked for more"; "quivering leaves of a poplar tree"; "with shaking knees"; "seemed shaky on her feet"; "sparkling light from the shivering crystals of the chandelier"; "trembling hands") }
 { quavering, tremulous, ((of the voice) quivering as from weakness or fear; "the old lady's quavering voice"; "spoke timidly in a tremulous voice") }
-{ shifting, [ shifty, noun.attribute:shiftiness1,+ noun.act:shift,+ ] (changing position or direction; "he drifted into the shifting crowd"; "their nervous shifting glances"; "shifty winds")} 
+{ shifting, [ shifty, noun.attribute:shiftiness1,+ noun.act:shift,+ ] (changing position or direction; "he drifted into the shifting crowd"; "their nervous shifting glances"; "shifty winds")}
 { shuddering, (shaking convulsively or violently) }
 { tottering, tottery, (unsteady in gait as from infirmity or old age; "a tottering skeleton of a horse"; "a tottery old man") }
 { uneven5, (variable and recurring at irregular intervals; "an uneven gait"; "uneven spacing")}
@@ -16759,7 +16759,7 @@
 { full-bodied, [ racy, noun.attribute:raciness1,+ ] [ rich, noun.attribute:richness5,+ ] robust, (marked by richness and fullness of flavor; "a rich ruby port"; "full-bodied wines"; "a robust claret"; "the robust flavor of fresh-brewed coffee") }
 { [ peppery, noun.food:pepper1,+ ] (having the piquant burning taste of peppers; "corn chips with peppery salsa") }
 { gingery, (having a taste like that of ginger)}
-{ [ hot, noun.attribute:hotness1,+ ] [ spicy1, noun.attribute:spiciness,+ ] (producing a burning sensation on the taste nerves; "hot salsa"; "jalapeno peppers are very hot"; "a spicy sauce"; "I like my chili extra spicy") } 
+{ [ hot, noun.attribute:hotness1,+ ] [ spicy1, noun.attribute:spiciness,+ ] (producing a burning sensation on the taste nerves; "hot salsa"; "jalapeno peppers are very hot"; "a spicy sauce"; "I like my chili extra spicy") }
 { [ grapey, noun.food:grape,+ ] [ grapy, noun.food:grape,+ ] (having a taste like that of grapes; "a grapey wine") }
 { mild-tasting, (having a mild taste) }
 { minty, (of the flavor of mint, particularly peppermint) }
@@ -16834,7 +16834,7 @@
 ----
 { [ RELAXED, TENSE3,!] EASY2,^ UNAGITATED,^ (without strain or anxiety; "gave the impression of being quite relaxed"; "a relaxed and informal discussion") }
 { degage, (free and relaxed in manner; "rather degage after the nervousness he had shown at dinner"- Edmund Wilson) }
-{ laid-back, [ mellow, noun.attribute:mellowness2,+ ] (unhurried and relaxed; "a mellow conversation")} 
+{ laid-back, [ mellow, noun.attribute:mellowness2,+ ] (unhurried and relaxed; "a mellow conversation")}
 { unstrained, (not placed under psychological stress; "the campaign would not leave party loyalties unstrained") }]
 
 [{ [ HYPERTONIC1, noun.state:hypertonus,+ noun.state:hypertonia,+ HYPOTONIC1,!] ((of living tissue) in a state of abnormally high tension; "hypertonic muscle tissue") }
@@ -16844,7 +16844,7 @@
 [{ [ TERRITORIAL, EXTRATERRITORIAL,!] (belonging to the territory of any state or ruler; "territorial rights") }
 { [ jurisdictional, noun.location:jurisdiction,+ ] (restricted to the geographic area under a particular jurisdiction; "the jurisdictional limits of a state") }
 { regional, (related or limited to a particular region; "a regional dialect") }
-{ sectional, (related or limited to a distinct region or subdivision of a territory or community or group of people; "sectional tensions arose over slavery")} 
+{ sectional, (related or limited to a distinct region or subdivision of a territory or community or group of people; "sectional tensions arose over slavery")}
 ----
 { [ EXTRATERRITORIAL, TERRITORIAL,!] exterritorial, (outside territorial limits or jurisdiction; "fishing in extraterritorial waters"; "enjoying exterritorial privileges and rights") }]
 
@@ -16905,7 +16905,7 @@
 [{ [ THINKABLE, UNTHINKABLE,!] CREDIBLE,^ POSSIBLE,^ (capable of being conceived or imagined or considered) }
 { cogitable, ponderable, (capable of being thought about; "space flight to other galaxies becomes more cogitable") }
 { [ conceivable, noun.state:conceivableness,+ noun.state:conceivability,+ ] imaginable, (capable of being imagined; "that is one possible answer") }
-{ presumable, supposable, surmisable, (capable of being inferred on slight grounds) }	
+{ presumable, supposable, surmisable, (capable of being inferred on slight grounds) }
 ----
 { [UNTHINKABLE, THINKABLE,!] IMPOSSIBLE,^ INCREDIBLE,^ (incapable of being conceived or considered) }
 { [ impossible, noun.state:impossibleness,+ ] [ inconceivable, noun.state:inconceivableness,+ noun.state:inconceivability,+ ] out_of_the_question, unimaginable, (totally unlikely) }]
@@ -17551,7 +17551,7 @@
 
 [{ [ VARIABLE, noun.object:variable,+ noun.attribute:variableness,+ verb.change:vary1,+ verb.stative:vary1,+ noun.attribute:variability,+ INVARIABLE,! ] INCONSISTENT,^ INCONSTANT,^ (liable to or capable of change; "rainfall in the tropics is notoriously variable"; "variable winds"; "variable expenses") }
 { [ changeable, noun.attribute:changeability,+ noun.attribute:changeableness,+ ] uncertain, unsettled, (subject to change; "a changeable climate"; "the weather is uncertain"; "unsettled weather with rain and hail and sunshine coming one right after the other") }
-{ [ covariant, noun.cognition:covariance,+ ] (changing so that interrelations with another variable quantity or set of quantities remain unchanged) } 
+{ [ covariant, noun.cognition:covariance,+ ] (changing so that interrelations with another variable quantity or set of quantities remain unchanged) }
 { multivariate, noun.cognition:statistics,;c (pertaining to any procedure involving two or more variables) }
 { [ protean, noun.person:proteus,+ ] (taking on different forms; "eyes...of that baffling protean grey which is never twice the same") }
 { shifting, (continuously varying; "taffeta with shifting colors") }
@@ -17735,7 +17735,7 @@
 { water-cooled, (kept cool or designed to be kept cool by means of water especially circulating water; "a water-cooled engine") }]
 
 [{ [ WARM2, noun.feeling:warmness,+ COOL2,!] EMOTIONAL,^ FRIENDLY1,^ noun.attribute:emotionality,= (psychologically warm; friendly and responsive; "a warm greeting"; "a warm personality"; "warm support") }
-{ [ cordial, noun.attribute:cordiality,+ ] (politely warm and friendly; "a cordial handshake")} 
+{ [ cordial, noun.attribute:cordiality,+ ] (politely warm and friendly; "a cordial handshake")}
 { [ hearty, noun.feeling:heart4,+ noun.attribute:heartiness,+ ] (showing warm and heartfelt friendliness; "gave us a cordial reception"; "a hearty welcome") }
 ----
 { [ COOL2, noun.attribute:coolness1,+ WARM2,!] UNAGITATED,^ COLD2,^ UNEMOTIONAL,^ UNFRIENDLY1,^ noun.attribute:emotionality,= (psychologically cool and unenthusiastic; unfriendly or unresponsive or showing dislike; "relations were cool and polite"; "a cool reception"; "cool to the idea of higher taxes") }
@@ -17853,7 +17853,7 @@
 { palsied, (affected with palsy or uncontrollable tremor; "palsied hands")}
 { [ paralytic, noun.person:paralytic,+ noun.state:paralysis,+ ] paralyzed, (affected with paralysis) }
 { [ paraplegic, noun.person:paraplegic,+ noun.state:paraplegia,+ ] (suffering complete paralysis of the lower half of the body usually resulting from damage to the spinal cord) }
-{ rickety, [ rachitic, noun.state:rachitis1,+ noun.state:rachitis,+ ] (affected with, suffering from, or characteristic of rickets; "rickety limbs and joints"; "a rachitic patient") } 
+{ rickety, [ rachitic, noun.state:rachitis1,+ noun.state:rachitis,+ ] (affected with, suffering from, or characteristic of rickets; "rickety limbs and joints"; "a rachitic patient") }
 { [ scrofulous, noun.state:scrofula,+ ] (afflicted with scrofula) }
 { [ sneezy, noun.state:sneeze,+ ] (inclined to sneeze) }
 { [ spastic, noun.state:spastic_paralysis,+ noun.attribute:spasticity,+ ] (suffering from spastic paralysis; "a spastic child") }
@@ -17874,7 +17874,7 @@
 { [ muggy, noun.state:mugginess,+ ] steamy, sticky1, (hot or warm and humid; "muggy weather"; "the steamy tropics"; "sticky weather") }
 { reeking, [ watery1, noun.attribute:wateriness,+ ] (wet with secreted or exuded moisture such as sweat or tears; "wiped his reeking neck") }
 { [ rheumy, noun.substance:rheum,+ ] (moist, damp, wet (especially of air); "the raw and theumy damp of night air") }
-{ [ sloppy1, noun.state:sloppiness1,+ ] (wet or smeared with a spilled liquid or moist material; "a sloppy floor"; "a sloppy saucer" )} 
+{ [ sloppy1, noun.state:sloppiness1,+ ] (wet or smeared with a spilled liquid or moist material; "a sloppy floor"; "a sloppy saucer" )}
 { [ showery, noun.phenomenon:shower,+ ] [ rainy, noun.substance:rain,+ noun.phenomenon:rain,+ ] ((of weather) wet by periods of rain; "showery weather"; "rainy days") }
 { steaming, [ steamy1, noun.attribute:steaminess,+ ] (filled with steam or emitting moisture in the form of vapor or mist; "a steaming kettle"; "steamy towels") }
 { [ sticky2, noun.attribute:stickiness,+ ] (moist as with undried perspiration and with clothing sticking to the body; "felt sticky and chilly at the same time") }
@@ -17921,7 +17921,7 @@
 [{ [ WHEELED, WHEELLESS,!] (having wheels; often used in combination) }
 ----
 { [ WHEELLESS, WHEELED,!] (having no wheels or having no wheeled vehicles; "dragging a wheelless stoneboat filled with rocks"; "wheelless societies") }]
- 
+
 [{ [ WHITE-COLLAR, BLUE-COLLAR,!] SKILLED,^ (of or designating salaried professional or clerical work or workers; "the coal miner's son aspired to a white-collar occupation as a bookkeeper") }
 { [ clerical, noun.person:clerk,+ ] (appropriate for or engaged in office work; "clerical skills"; "a clerical job"; "the clerical staff") }
 { professional, (engaged in by members of a profession; "professional occupations include medicine and the law and teaching") }
@@ -18021,7 +18021,7 @@
 { all-knowing, [ omniscient, noun.state:omniscience,+ ] (infinitely wise) }
 { [ perspicacious, noun.cognition:perspicaciousness,+ noun.cognition:perspicacity,+ ] [ sagacious, noun.cognition:sagaciousness,+ ] [ sapient, noun.cognition:sapience,+ ] (acutely insightful and wise; "much too perspicacious to be taken in by such a spurious argument"; "observant and thoughtful, he was given to asking sagacious questions"; "a source of valuable insights and sapient advice to educators") }
 { owlish, (resembling an owl; solemn and wise in appearance) }
-{ sapiential, (characterized by wisdom, especially the wisdom of God; "a sapiential government") } 
+{ sapiential, (characterized by wisdom, especially the wisdom of God; "a sapiential government") }
 { sage, (having wisdom that comes with age and experience) }
 ----
 { [ FOOLISH, noun.cognition:foolishness,+ WISE,!] IMPOLITIC,^ IMPRUDENT,^ INADVISABLE,^ ILL-ADVISED,^ (devoid of good sense or judgment; "foolish remarks"; "a foolish decision") }
@@ -18211,7 +18211,7 @@
 { [ MALIGNANT2, noun.state:malignancy,+ noun.state:malignance,+ BENIGN2,! ] noun.cognition:pathology,;c (dangerous to health; characterized by progressive and uncontrolled growth (especially of a tumor)) }
 { [ cancerous, noun.state:cancer,+ ] (relating to or affected with cancer; "a cancerous growth") }]
 
-[{ [ CALCICOLOUS, CALCIFUGOUS,! ] (growing or living in soil rich in lime) } 
+[{ [ CALCICOLOUS, CALCIFUGOUS,! ] (growing or living in soil rich in lime) }
 ----
 { [ CALCIFUGOUS, CALCICOLOUS,! ] (growing or living in acid soil) }]
 
@@ -18221,7 +18221,7 @@
 
 [ { [ IMMUNOCOMPETENT, noun.state:immunocompetence,+ IMMUNODEFICIENT,! ] (capable of developing an immune response following exposure to an antigen; "immunocompetent cells") }
 ----
-{ [ IMMUNODEFICIENT, noun.state:immunodeficiency,+ IMMUNOCOMPETENT,! ] (incapable of developing an immune response following exposure to an antigen; "immunodeficient rodents") } ] 
+{ [ IMMUNODEFICIENT, noun.state:immunodeficiency,+ IMMUNOCOMPETENT,! ] (incapable of developing an immune response following exposure to an antigen; "immunodeficient rodents") } ]
 
 [ { [ ALLOGENEIC, noun.cognition:immunology,+ XENOGENEIC,! ] (denoting or relating to cells or tissues from individuals belonging to the same species but genetically dissimilar (and hence immunologically incompatible)) }
 ----
@@ -18261,9 +18261,3 @@
 { [ transsexual(a), noun.person:transsexual2,+ noun.person:transsexual,+ ] (identifying with the opposite gender from the one that one is born with) }
 { [ transvestic, noun.person:transvestite,+ ] [transvestite, noun.person:transvestite,+] (receiving sexual gratification from wearing clothing of the opposite sex) }
 { [ tribadistic, noun.act:tribadism,+ ] (of female homosexual behavior that attempts to simulate heterosexual behavior) }
-
-
-
-
-
-

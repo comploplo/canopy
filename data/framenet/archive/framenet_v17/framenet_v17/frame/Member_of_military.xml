@@ -34,7 +34,7 @@
     </FE>
     <FE bgColor="7CCD7C" fgColor="FFFFFF" coreType="Peripheral" cBy="RLG" cDate="10/12/2011 03:22:00 PDT Wed" abbrev="rnk" name="Rank" ID="15147">
         <definition>&lt;def-root&gt;&lt;fen&gt;Rank&lt;/fen&gt; is the position in the military hierarchy that the &lt;fen&gt;Person&lt;/fen&gt; occupies.
- 	
+
 &lt;ex&gt;Robin is the &lt;fex name="rnk"&gt;highest-ranking&lt;/fex&gt; &lt;t&gt;soldier&lt;/t&gt; at the facility.&lt;/ex&gt;
  &lt;/def-root&gt;</definition>
     </FE>

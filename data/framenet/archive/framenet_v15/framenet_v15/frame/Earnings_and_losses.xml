@@ -13,12 +13,12 @@
         <definition>&lt;def-root&gt;The &lt;fen&gt;Earner&lt;/fen&gt; is involved in a transaction or set of transactions as the party that receives payment.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="02/12/2007 06:32:35 PST Mon" abbrev="Mny" name="Earnings" ID="11037">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Earnings&lt;/fen&gt; are the money given to the &lt;fen&gt;Earner&lt;/fen&gt; in a transaction, generally in exchange for &lt;fen&gt;Goods&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Earnings&lt;/fen&gt; are the money given to the &lt;fen&gt;Earner&lt;/fen&gt; in a transaction, generally in exchange for &lt;fen&gt;Goods&lt;/fen&gt;.
 
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="02/12/2007 06:32:35 PST Mon" abbrev="Gds" name="Goods" ID="11038">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Goods&lt;/fen&gt; is anything including labor or time, for example, which is exchanged for &lt;fen&gt;Earnings&lt;/fen&gt; in a transaction. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Goods&lt;/fen&gt; is anything including labor or time, for example, which is exchanged for &lt;fen&gt;Earnings&lt;/fen&gt; in a transaction.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="02/12/2007 06:32:35 PST Mon" abbrev="Rate" name="Rate" ID="11039">
@@ -26,7 +26,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="02/12/2007 06:32:35 PST Mon" abbrev="Unit" name="Unit" ID="11040">
-        <definition>&lt;def-root&gt;This FE is any unit in which goods or services can be measured. Generally, it occurs in a 	&lt;ment&gt;by&lt;/ment&gt;-PP. 
+        <definition>&lt;def-root&gt;This FE is any unit in which goods or services can be measured. Generally, it occurs in a 	&lt;ment&gt;by&lt;/ment&gt;-PP.
 
 &lt;/def-root&gt;</definition>
     </FE>

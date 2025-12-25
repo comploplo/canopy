@@ -6,7 +6,7 @@
 &lt;ex&gt;Specialties include deep fried shredded beef , duck , prawn dishes and &lt;fex name="Descriptor"&gt;hand-made&lt;/fex&gt; &lt;t&gt;noodles&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <semType name="Physical_object" ID="68"/>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="613" cDate="06/26/2002 10:33:50 PDT Wed" abbrev="Desc" name="Descriptor" ID="3244">
-        <definition>&lt;def-root&gt;This FE indicates a characteristic or description of the food. 
+        <definition>&lt;def-root&gt;This FE indicates a characteristic or description of the food.
 &lt;ex&gt; She drinks &lt;fex name="Desc"&gt;low-fat&lt;/fex&gt; &lt;t&gt;milk&lt;/t&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="613" cDate="06/26/2002 02:44:05 PDT Wed" abbrev="Type" name="Type" ID="3250">

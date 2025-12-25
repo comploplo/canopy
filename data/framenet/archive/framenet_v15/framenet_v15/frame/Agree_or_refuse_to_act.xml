@@ -34,7 +34,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="605" cDate="09/01/2005 04:44:46 PDT Thu" abbrev="Int" name="Internal_cause" ID="9050">
-        <definition>&lt;def-root&gt;The response may be prompted by either some outside phenomenon or occurrence, or by an &lt;fen&gt;Internal_cause&lt;/fen&gt;, the &lt;fen&gt;Speaker&lt;/fen&gt; mental or emotional state.  
+        <definition>&lt;def-root&gt;The response may be prompted by either some outside phenomenon or occurrence, or by an &lt;fen&gt;Internal_cause&lt;/fen&gt;, the &lt;fen&gt;Speaker&lt;/fen&gt; mental or emotional state.
 
 &lt;/def-root&gt;</definition>
     </FE>

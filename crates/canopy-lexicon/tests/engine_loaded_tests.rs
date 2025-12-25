@@ -23,7 +23,7 @@ mod loaded_engine_tests {
     <author>Test</author>
     <license>MIT</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="test-stop-words" name="Test Stop Words" type="stop-words" priority="10">
       <description>Test stop words</description>
@@ -36,7 +36,7 @@ mod loaded_engine_tests {
         <word pos="CC">and</word>
       </words>
     </word-class>
-    
+
     <word-class id="test-negation" name="Test Negation" type="negation" priority="9">
       <description>Test negation words</description>
       <words>
@@ -53,7 +53,7 @@ mod loaded_engine_tests {
         </pattern>
       </patterns>
     </word-class>
-    
+
     <word-class id="test-discourse" name="Test Discourse" type="discourse-markers" priority="8">
       <description>Test discourse markers</description>
       <words>
@@ -61,7 +61,7 @@ mod loaded_engine_tests {
         <word pos="CC">therefore</word>
       </words>
     </word-class>
-    
+
     <word-class id="test-quantifiers" name="Test Quantifiers" type="quantifiers" priority="7">
       <description>Test quantifiers</description>
       <words>
@@ -86,7 +86,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_successful_data_loading() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
 
         // Test loading succeeds
         let result = engine.load_data();
@@ -111,7 +111,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_word_classification_with_loaded_data() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         // Test stop word detection
@@ -134,7 +134,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_get_words_by_type() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         // Test getting stop words
@@ -167,7 +167,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_analyze_text() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         let text = "The cat is not happy, however it is resting.";
@@ -190,7 +190,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_get_semantic_weight() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         // Test semantic weight for stop words (should be low)
@@ -211,7 +211,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_analyze_negation_scope() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         let text = "I do not like this, no way!";
@@ -230,7 +230,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_extract_discourse_structure() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         let text = "I like cats. However, dogs are also nice. Therefore, I like both.";
@@ -257,7 +257,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_filter_stop_words() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         let words = vec![
@@ -283,7 +283,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_get_intensifier_strength() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         // Test with a non-intensifier word
@@ -301,17 +301,17 @@ mod loaded_engine_tests {
     #[test]
     fn test_pattern_matching_with_loaded_data() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         // Test pattern matching with "un-" prefix
         let analysis = engine.analyze_word("unhappy").unwrap();
         assert!(
-            !analysis.pattern_matches.is_empty(),
+            !analysis.data.pattern_matches.is_empty(),
             "Should match un- prefix pattern"
         );
 
-        let pattern_match = &analysis.pattern_matches[0];
+        let pattern_match = &analysis.data.pattern_matches[0];
         assert_eq!(pattern_match.pattern_id, "neg-prefix-un");
         assert_eq!(pattern_match.matched_text, "unhappy");
     }
@@ -319,7 +319,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_semantic_engine_trait_with_loaded_data() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         // Test analyze method from SemanticEngine trait
@@ -338,7 +338,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_cache_functionality() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         // First analysis - not from cache
@@ -359,7 +359,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_data_loader_interface() {
         let (temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
 
         // First load the data successfully
         engine.load_data().expect("Failed to load initial data");
@@ -380,11 +380,11 @@ mod loaded_engine_tests {
             "Should succeed to load from valid directory"
         );
 
-        // Test load_test_data (should fail as not implemented)
+        // Test load_test_data (should succeed with minimal data)
         let test_data_result = engine.load_test_data();
         assert!(
-            test_data_result.is_err(),
-            "Test data loading should fail (not implemented)"
+            test_data_result.is_ok(),
+            "Test data loading should succeed with minimal data"
         );
     }
 
@@ -393,13 +393,13 @@ mod loaded_engine_tests {
         let (_temp_dir, mut config) = create_test_lexicon_with_data();
         config.enable_patterns = false;
 
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         // Analysis should not include pattern matches
         let analysis = engine.analyze_word("unhappy").unwrap();
         assert!(
-            analysis.pattern_matches.is_empty(),
+            analysis.data.pattern_matches.is_empty(),
             "Pattern matches should be empty when disabled"
         );
     }
@@ -410,13 +410,13 @@ mod loaded_engine_tests {
         config.min_confidence = 0.9; // Very high threshold
         config.max_classifications = 1;
 
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         let analysis = engine.analyze_word("the").unwrap();
         // With high confidence threshold, might filter out results
         assert!(
-            analysis.classifications.len() <= 1,
+            analysis.data.classifications.len() <= 1,
             "Should respect max_classifications limit"
         );
     }
@@ -424,7 +424,7 @@ mod loaded_engine_tests {
     #[test]
     fn test_engine_statistics_with_loaded_data() {
         let (_temp_dir, config) = create_test_lexicon_with_data();
-        let mut engine = LexiconEngine::new(config);
+        let mut engine = LexiconEngine::with_config(config);
         engine.load_data().expect("Failed to load data");
 
         let stats = engine.statistics();

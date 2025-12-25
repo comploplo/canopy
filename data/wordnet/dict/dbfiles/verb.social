@@ -277,7 +277,7 @@
 { [ adjourn, noun.act:adjournment1,+ frames: 8 ] [ withdraw, noun.act:withdrawal,+ ] retire, verb.change:withdraw,$ meet,* close,@ frames: 2,22 (break from a meeting or gathering; "We adjourned for lunch"; "The men retired to the library")}
 { [ prorogue, noun.act:prorogation,+ ] adjourn,@ frames: 2 (adjourn by royal prerogative; without dissolving the legislative body) }
 { [ meet, noun.group:meeting1,+ noun.act:meeting,+ ] [ gather, noun.group:gathering,+ noun.act:gathering,+ ] [ assemble, noun.group:assemblage,+ noun.act:assemblage,+ ] forgather, foregather, interact,@ frames: 2,22 (collect in one place; "We assembled in the church basement"; "Let's gather in the dining room") }
-{ [turn_out3, noun.group:turnout,+ noun.act:turnout,+ ] assemble,@ frames: 2 (come and gather for a public event; "Hundreds of thousands turned out for the anti-war rally in New York")} 
+{ [turn_out3, noun.group:turnout,+ noun.act:turnout,+ ] assemble,@ frames: 2 (come and gather for a public event; "Hundreds of thousands turned out for the anti-war rally in New York")}
 { [ caucus, noun.group:caucus,+ ] meet,@ frames: 2 (meet to select a candidate or promote a policy) }
 { [ call4, noun.person:caller2,+ ] meet,> verb.communication:request1,@ frames: 8 (call a meeting; invite or command to meet; "The Wannsee Conference was called to discuss the `Final Solution'"; "The new dean calls meetings every week") }
 { band_oneself, league_together, join,@ frames: 2 (attach oneself to a group) }

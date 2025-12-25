@@ -28,6 +28,7 @@ pub mod container;
 pub mod error;
 pub mod models;
 pub mod pipeline;
+pub mod real_implementations;
 // pub mod real_benchmarks;  // Temporarily disabled due to deprecated dependency references
 pub mod traits;
 
@@ -58,8 +59,8 @@ pub use models::{ModelInfo, ModelManager, SupportedModel};
 
 // Re-export core pipeline
 pub use pipeline::{
-    LinguisticPipeline, PipelineBuilder, PipelineContext, PipelineMetrics, PipelineStage,
-    StageResult,
+    AnalysisTiming, FullAnalysisResult, LinguisticPipeline, PipelineBuilder, PipelineContext,
+    PipelineMetrics, PipelineStage, StageResult,
 };
 
 // Re-export dependency injection
@@ -80,7 +81,13 @@ pub use benchmarks::{
 // Re-export types from underlying crates for convenience
 pub use canopy_core::ThetaRole;
 pub use canopy_core::{DepRel, MorphFeatures, UPos, Word};
-pub use canopy_semantic_layer::{SemanticLayer1Output, SemanticPredicate};
+pub use canopy_tokenizer::{SemanticLayer1Output, SemanticPredicate};
+
+// Re-export Layer 2 event composition types
+pub use canopy_events::{
+    ComposedEvent, ComposedEvents, DependencyArc, EventComposer, EventComposerConfig, LittleVType,
+    SentenceAnalysis, SentenceAnalysisBuilder,
+};
 
 /// Version information for the pipeline
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -119,7 +126,7 @@ pub async fn analyze_text(
 /// use canopy_pipeline::analyze_text_sync;
 ///
 /// let result = analyze_text_sync("John gave Mary a book.", None)?;
-/// println!("Found {} events", result.events.len());
+/// println!("Found {} tokens", result.analysis.tokens.len());
 /// # Ok::<(), Box<dyn std::error::Error>>(())
 /// ```
 pub fn analyze_text_sync(
@@ -144,7 +151,7 @@ pub fn is_model_available(model_name: &str) -> bool {
 ///
 /// This is the recommended way to get a production-ready analyzer that includes:
 /// - VerbNet engine (verb semantic classes and theta roles)
-/// - FrameNet engine (frame semantics and frame elements)  
+/// - FrameNet engine (frame semantics and frame elements)
 /// - WordNet engine (lexical semantics and word relationships)
 /// - Lexicon engine (morphological and lexical analysis)
 /// - Intelligent caching and performance optimization
@@ -156,13 +163,13 @@ pub fn is_model_available(model_name: &str) -> bool {
 ///
 /// let analyzer = create_l1_analyzer()?;
 /// let result = analyzer.analyze("running")?;
-/// println!("Found {} semantic sources", result.semantic_sources.len());
+/// println!("Found {} semantic sources", result.sources.len());
 /// # Ok::<(), Box<dyn std::error::Error>>(())
 /// ```
 pub fn create_l1_analyzer()
--> Result<canopy_semantic_layer::SemanticCoordinator, Box<dyn std::error::Error>> {
-    use canopy_semantic_layer::SemanticCoordinator;
-    use canopy_semantic_layer::coordinator::CoordinatorConfig;
+-> Result<canopy_tokenizer::SemanticCoordinator, Box<dyn std::error::Error>> {
+    use canopy_tokenizer::SemanticCoordinator;
+    use canopy_tokenizer::coordinator::CoordinatorConfig;
 
     let config = CoordinatorConfig {
         // Enable all engines for comprehensive analysis
@@ -175,7 +182,6 @@ pub fn create_l1_analyzer()
         enable_lemmatization: true,
 
         // Production-ready settings
-        graceful_degradation: true,
         confidence_threshold: 0.1,
         l1_cache_memory_mb: 100,
 

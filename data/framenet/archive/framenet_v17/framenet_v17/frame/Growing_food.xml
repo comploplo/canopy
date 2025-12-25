@@ -11,7 +11,7 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="KmG" cDate="02/14/2008 02:30:15 PST Thu" abbrev="Foo" name="Food" ID="12207">
-        <definition>&lt;def-root&gt;&lt;fex name="Food"&gt;Food&lt;/fex&gt; is the item grown by the &lt;fen&gt;Grower&lt;/fen&gt;, which can include things not traditionally eaten, like flowers, etc., or items for other consumption-related uses, like medicines, smokables, etc. 
+        <definition>&lt;def-root&gt;&lt;fex name="Food"&gt;Food&lt;/fex&gt; is the item grown by the &lt;fen&gt;Grower&lt;/fen&gt;, which can include things not traditionally eaten, like flowers, etc., or items for other consumption-related uses, like medicines, smokables, etc.
 
 &lt;ex&gt;&lt;fex name="Grower"&gt;He&lt;/fex&gt; &lt;t&gt;grew&lt;/t&gt; &lt;fex name="Food"&gt;flowers and potatoes&lt;/fex&gt;.&lt;/ex&gt;
 
@@ -24,7 +24,7 @@
 &lt;ex&gt;Heavy-yielding crops are &lt;t&gt;grown&lt;/t&gt; &lt;fex name="Instrument"&gt;with chemical fertilizers&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="KmG" cDate="02/14/2008 02:30:15 PST Thu" abbrev="Dur" name="Duration" ID="12209">
-        <definition>&lt;def-root&gt;For what length of time the &lt;fen&gt;Grower&lt;/fen&gt; is growing &lt;fen&gt;Food&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;For what length of time the &lt;fen&gt;Grower&lt;/fen&gt; is growing &lt;fen&gt;Food&lt;/fen&gt;.
 
 &lt;/def-root&gt;</definition>
     </FE>

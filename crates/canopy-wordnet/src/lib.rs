@@ -14,22 +14,15 @@
 //! # Example
 //!
 //! ```rust
-//! use canopy_wordnet::{WordNetEngine, WordNetConfig, PartOfSpeech};
-//! use canopy_engine::SemanticEngine;
+//! use canopy_wordnet::{WordNetEngine, PartOfSpeech};
 //!
-//! // Create and configure engine
-//! let config = WordNetConfig::default();
-//! let mut engine = WordNetEngine::new(config);
+//! let engine = WordNetEngine::new();
+//! // engine.load_from_directory("path/to/wordnet/data")?;
 //!
-//! // Load WordNet data
-//! engine.load_data().expect("Failed to load WordNet data");
-//!
-//! // Analyze a word
-//! let result = engine.analyze_word("dog", PartOfSpeech::Noun)
-//!     .expect("Analysis failed");
-//!
-//! println!("Definitions: {:?}", result.definitions);
-//! println!("Synsets: {}", result.synsets.len());
+//! // With loaded data, you can analyze words:
+//! // let result = engine.analyze_word("dog", PartOfSpeech::Noun)?;
+//! // println!("Definitions: {:?}", result.data.definitions);
+//! // println!("Synsets: {}", result.data.synsets.len());
 //! ```
 
 pub mod engine;

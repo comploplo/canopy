@@ -14,7 +14,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="10/04/2001 03:38:17 PDT Thu" abbrev="Area" name="Area" ID="2054">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Area&lt;/fen&gt; is the setting in which the &lt;fen&gt;Theme&lt;/fen&gt;'s movement takes place. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Area&lt;/fen&gt; is the setting in which the &lt;fen&gt;Theme&lt;/fen&gt;'s movement takes place.
 
 &lt;ex&gt;Emily rose to her feet and &lt;t&gt;moved&lt;/t&gt; restlessly &lt;fex name="Area"&gt;around the room&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -54,7 +54,7 @@
         <semType name="Speed" ID="234"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="10/04/2001 03:38:17 PDT Thu" abbrev="Thm" name="Theme" ID="2061">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Theme&lt;/fen&gt; is the entity that changes location. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Theme&lt;/fen&gt; is the entity that changes location.
 
 &lt;ex&gt;The explosion made &lt;fex name="Thm"&gt;me&lt;/fex&gt; &lt;t&gt;move&lt;/t&gt; in a hurry.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="Physical_object" ID="68"/>

@@ -1,8 +1,6 @@
 //! Tests for VerbNetEngine trait implementations to achieve coverage targets
 
-use canopy_engine::{
-    traits::DataInfo, CachedEngine, DataLoader, SemanticEngine, StatisticsProvider,
-};
+use canopy_engine::{traits::DataInfo, CachedEngine, EngineCore, SemanticEngine};
 use canopy_verbnet::{VerbNetConfig, VerbNetEngine};
 use std::fs;
 use tempfile::TempDir;
@@ -12,7 +10,7 @@ fn create_test_verbnet_data() -> (TempDir, VerbNetEngine) {
 
     // Create a simple VerbNet XML file for testing
     let verbnet_xml = r#"<?xml version="1.0" encoding="UTF-8"?>
-<VNCLASS ID="give-13.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<VNCLASS ID="give-13.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vn_schema-3.xsd">
     <MEMBERS>
         <MEMBER name="give" wn="give%2:40:00" grouping="give.01"/>
@@ -66,7 +64,7 @@ fn create_test_verbnet_data() -> (TempDir, VerbNetEngine) {
         ..Default::default()
     };
 
-    let mut engine = VerbNetEngine::with_config(config);
+    let mut engine = VerbNetEngine::with_config(config).unwrap();
     engine
         .load_from_directory(temp_dir.path())
         .expect("Failed to load test data");
@@ -136,29 +134,31 @@ fn test_statistics_provider_trait_implementation() {
 
 #[test]
 fn test_data_loader_trait_implementation() {
-    let temp_dir = TempDir::new().unwrap();
-    let mut engine = VerbNetEngine::new();
+    // Engine auto-loads on creation
+    let mut engine = match VerbNetEngine::new() {
+        Ok(e) => e,
+        Err(e) => {
+            println!("Skipping test: VerbNet data not available: {}", e);
+            return;
+        }
+    };
 
-    // Test loading from empty directory
-    let result = engine.load_from_directory(temp_dir.path());
-    assert!(result.is_err()); // Should error when no XML files found
-
-    // Test data info
+    // Test data info - should reflect loaded data
     let data_info = engine.data_info();
     assert!(!data_info.source.is_empty());
-    assert_eq!(data_info.entry_count, 0); // No data loaded
+    assert!(data_info.entry_count > 0, "Should have loaded verb classes");
     assert_eq!(data_info.format_version, "1.0");
 
-    // Test loading test data - may not be implemented
+    // Test loading test data - not implemented for real engines
     let result = engine.load_test_data();
-    // load_test_data is not implemented, so it will fail
     assert!(result.is_err());
 
-    // Entry count remains 0 since test data loading failed
-    let data_info_after_test = engine.data_info();
-    assert_eq!(data_info_after_test.entry_count, 0);
+    // Test loading from empty directory - should fail (no XML files)
+    let temp_dir = TempDir::new().unwrap();
+    let result = engine.load_from_directory(temp_dir.path());
+    assert!(result.is_err());
 
-    // Test reload - will fail since no data path is set
+    // Test reload - current implementation returns error
     let result = engine.reload();
     assert!(result.is_err());
 }
@@ -178,23 +178,40 @@ fn test_data_info_methods() {
 }
 
 #[test]
-fn test_engine_configuration() {
+fn test_engine_configuration_with_invalid_path_fails() {
+    // Engine with invalid path should fail to create
     let config = VerbNetConfig {
-        data_path: "/test/path".to_string(),
+        data_path: "/nonexistent/test/path".to_string(),
         enable_cache: false,
         cache_capacity: 2000,
         confidence_threshold: 0.8,
         settings: std::collections::HashMap::new(),
     };
 
-    let engine = VerbNetEngine::with_config(config.clone());
+    // Creation should fail with invalid path
+    let result = VerbNetEngine::with_config(config);
+    assert!(
+        result.is_err(),
+        "Engine creation should fail with invalid path"
+    );
+}
+
+#[test]
+fn test_engine_configuration_accessors() {
+    // Use engine created with real data
+    let engine = match VerbNetEngine::new() {
+        Ok(e) => e,
+        Err(e) => {
+            println!("Skipping test: VerbNet data not available: {}", e);
+            return;
+        }
+    };
     let engine_config = engine.config();
 
-    assert_eq!(engine_config.data_path, "/test/path");
-    assert_eq!(engine_config.enable_cache, false);
-    assert_eq!(engine_config.cache_capacity, 2000);
-    assert_eq!(engine_config.confidence_threshold, 0.8);
-    assert!(engine_config.settings.is_empty());
+    // Test config accessors work
+    assert!(!engine_config.data_path.is_empty());
+    assert!(engine_config.enable_cache);
+    assert_eq!(engine_config.cache_capacity, 10000);
 }
 
 #[test]
@@ -263,13 +280,23 @@ fn test_multiple_verb_analysis() {
 
 #[test]
 fn test_default_implementation() {
-    let engine = VerbNetEngine::default();
+    // Engine auto-loads on creation
+    let engine = match VerbNetEngine::new() {
+        Ok(e) => e,
+        Err(e) => {
+            println!("Skipping test: VerbNet data not available: {}", e);
+            return;
+        }
+    };
 
-    // Test that default engine is properly initialized
+    // Test that default engine is properly initialized with real data
     assert!(!engine.name().is_empty());
     assert!(!engine.version().is_empty());
-    // Default engine is not initialized until data is loaded
-    assert!(!engine.is_initialized());
+    // Engine IS initialized after auto-loading
+    assert!(
+        engine.is_initialized(),
+        "Engine should be initialized after auto-loading"
+    );
 
     let config = engine.config();
     assert!(!config.data_path.is_empty());
@@ -277,7 +304,7 @@ fn test_default_implementation() {
 
 #[test]
 fn test_engine_error_handling() {
-    let mut engine = VerbNetEngine::new();
+    let mut engine = VerbNetEngine::new().unwrap();
 
     // Test loading from non-existent directory
     let result = engine.load_from_directory("/non/existent/path");

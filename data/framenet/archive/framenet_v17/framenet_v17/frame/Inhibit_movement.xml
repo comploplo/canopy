@@ -3,7 +3,7 @@
 <frame cBy="MJE" cDate="12/11/2001 07:12:10 PST Tue" name="Inhibit_movement" ID="245" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;An &lt;fen&gt;Agent&lt;/fen&gt; restricts the movement of a &lt;fen&gt;Theme&lt;/fen&gt; to within the vicinity of the &lt;fen&gt;Holding_location&lt;/fen&gt;, despite the &lt;fen&gt;Theme&lt;/fen&gt;'s desire, plan, or tendency towards motion; the &lt;fen&gt;Agent&lt;/fen&gt; may also use an &lt;fen&gt;Instrument&lt;/fen&gt;. Alternatively, there may be a non-sentient &lt;fen&gt;Cause&lt;/fen&gt; instead of an &lt;fen&gt;Agent&lt;/fen&gt; restricting the &lt;fen&gt;Theme&lt;/fen&gt;.
 
-For many of these targets, the means is incorporated.  For some LUs, the &lt;fen&gt;Theme&lt;/fen&gt; is required to be a sentient entity.  Several of these LUs may be used to describe punishment situations when the &lt;fen&gt;Theme&lt;/fen&gt; is a sentient entity.  
+For many of these targets, the means is incorporated.  For some LUs, the &lt;fen&gt;Theme&lt;/fen&gt; is required to be a sentient entity.  Several of these LUs may be used to describe punishment situations when the &lt;fen&gt;Theme&lt;/fen&gt; is a sentient entity.
 
 &lt;ex&gt;&lt;fex name="Agent"&gt;They&lt;/fex&gt; &lt;t&gt;held&lt;/t&gt; &lt;fex name="Theme"&gt;the package&lt;/fex&gt; &lt;fex name="Duration"&gt;for two months&lt;/fex&gt; &lt;fex name="Holding_location"&gt;in the border-patrol locker room&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="12/11/2001 07:21:37 PST Tue" abbrev="Thm" name="Theme" ID="2150">
@@ -19,7 +19,7 @@ For many of these targets, the means is incorporated.  For some LUs, the &lt;fen
         <semType name="Goal" ID="153"/>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="12/15/2001 09:53:28 PST Sat" abbrev="Agt" name="Agent" ID="2174">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Agent&lt;/fen&gt; is the person intentionally restricting the movement of the &lt;fen&gt;Theme&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Agent&lt;/fen&gt; is the person intentionally restricting the movement of the &lt;fen&gt;Theme&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Agt"&gt;He&lt;/fex&gt; &lt;t&gt;confined&lt;/t&gt; 340 mutineers in Burford Church for the next three days under general sentence of death.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
@@ -52,7 +52,7 @@ For many of these targets, the means is incorporated.  For some LUs, the &lt;fen
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="12/15/2001 09:54:20 PST Sat" abbrev="Mns" name="Means" ID="2181">
-        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Agent&lt;/fen&gt; that accomplishes the action indicated by the target. 
+        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Agent&lt;/fen&gt; that accomplishes the action indicated by the target.
 &lt;ex&gt;The Lilliputians &lt;t&gt;tied&lt;/t&gt; him down &lt;fex name="Mns"&gt;by catching him unconscious and traversing his body with their thickest ropes&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
     </FE>

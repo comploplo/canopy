@@ -130,8 +130,7 @@ pub fn update_confidence(events: &mut ComposedEvents, calculator: &ConfidenceCal
         calculator.apply_unbound_penalty(total_confidence, events.unbound_entities.len());
 
     // Boost for source agreement
-    total_confidence =
-        calculator.apply_source_agreement_boost(total_confidence, &events.sources);
+    total_confidence = calculator.apply_source_agreement_boost(total_confidence, &events.sources);
 
     events.confidence = total_confidence;
 }

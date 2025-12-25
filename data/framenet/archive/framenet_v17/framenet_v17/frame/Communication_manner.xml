@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:12:02 PST Wed" name="Communication_manner" ID="38" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;The words in this frame describe &lt;fen&gt;Manner&lt;/fen&gt;s of verbal communication.  All of them can occur with quoted expressions. 
+    <definition>&lt;def-root&gt;The words in this frame describe &lt;fen&gt;Manner&lt;/fen&gt;s of verbal communication.  All of them can occur with quoted expressions.
 
 &lt;ex&gt;&lt;fex name="Speaker"&gt;He&lt;/fex&gt; &lt;t&gt;slurred&lt;/t&gt; &lt;fex name="Message"&gt;his confession&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:02 PST Wed" abbrev="Spkr" name="Speaker" ID="157">
-        <definition>&lt;def-root&gt;Speaker is the sentient entity that produces a Message or communicates about a Topic. It is expressed as the External Argument of verbs: 
+        <definition>&lt;def-root&gt;Speaker is the sentient entity that produces a Message or communicates about a Topic. It is expressed as the External Argument of verbs:
 &lt;ex&gt;&lt;fex name="Speaker"&gt;The boy&lt;/fex&gt; &lt;t&gt;mumbled&lt;/t&gt; an apology. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:02 PST Wed" abbrev="Add" name="Addressee" ID="158">
-        <definition>&lt;def-root&gt;Addressee is the person to whom the Speaker  is communicating.  When expressed, the Addressee occurs as a PP Complement:  
+        <definition>&lt;def-root&gt;Addressee is the person to whom the Speaker  is communicating.  When expressed, the Addressee occurs as a PP Complement:
 &lt;ex&gt;The taxi driver &lt;t&gt;chattered&lt;/t&gt; away &lt;fex name="Addressee"&gt;to me&lt;/fex&gt; about gardening. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:02 PST Wed" abbrev="Msg" name="Message" ID="159">
-        <definition>&lt;def-root&gt;Message is the content which is communicated by the Speaker. The Message may be a direct quote, a finite complement clause or an NP Object: 
+        <definition>&lt;def-root&gt;Message is the content which is communicated by the Speaker. The Message may be a direct quote, a finite complement clause or an NP Object:
 &lt;ex&gt;&lt;fex name="Message"&gt;"I- It was an accident,"&lt;/fex&gt; Jo &lt;t&gt;stammered&lt;/t&gt;.&lt;/ex&gt;
 &lt;ex&gt; Jo &lt;t&gt;stammered&lt;/t&gt; &lt;fex name="Message"&gt;that it was an accident&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt; Jo &lt;t&gt;stammered&lt;/t&gt; &lt;fex name="Message"&gt;an apology&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Message" ID="56"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:02 PST Wed" abbrev="Top" name="Topic" ID="160">
-        <definition>&lt;def-root&gt;Topic is the subject matter of the communicated Message.  It is normally expressed as a PP Complement headed by &lt;ment&gt;about&lt;/ment&gt; and, in this frame, is frequently preceded by a quantificational noun which is treated as referring to the Message: 
+        <definition>&lt;def-root&gt;Topic is the subject matter of the communicated Message.  It is normally expressed as a PP Complement headed by &lt;ment&gt;about&lt;/ment&gt; and, in this frame, is frequently preceded by a quantificational noun which is treated as referring to the Message:
 &lt;ex&gt;The actor &lt;t&gt;chattered&lt;/t&gt; &lt;fex name="Topic"&gt;about the difficulties of being famous&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;The person next to me &lt;t&gt;muttered&lt;/t&gt; something &lt;fex name="Topic"&gt;about pride coming before a fall&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Peripheral" cBy="ChW" cDate="02/07/2001 04:12:02 PST Wed" abbrev="Medium" name="Medium" ID="161">
-        <definition>&lt;def-root&gt;This frame element expresses the medium of communication, such as the language used or the specific type of text in which the Message occurs. It is normally expressed as a PP-complement headed by &lt;ment&gt;on&lt;/ment&gt; or &lt;ment&gt;in&lt;/ment&gt;: 
+        <definition>&lt;def-root&gt;This frame element expresses the medium of communication, such as the language used or the specific type of text in which the Message occurs. It is normally expressed as a PP-complement headed by &lt;ment&gt;on&lt;/ment&gt; or &lt;ment&gt;in&lt;/ment&gt;:
 &lt;ex&gt;The Beatles &lt;t&gt;sang&lt;/t&gt; &lt;fex name="Medium"&gt;on the Ed Sullivan show&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;The drunk man &lt;t&gt;mumbled&lt;/t&gt; &lt;fex name="Medium"&gt;in French&lt;/fex&gt;. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

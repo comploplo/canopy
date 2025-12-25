@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="243" cDate="08/15/2002 06:28:37 PDT Thu" name="Containing" ID="397" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;Container&lt;/fen&gt; holds within its physical boundaries the &lt;fen&gt;Contents&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;Container&lt;/fen&gt; holds within its physical boundaries the &lt;fen&gt;Contents&lt;/fen&gt;.
 &lt;ex&gt;&lt;fex name="Container"&gt;The box&lt;/fex&gt; &lt;t&gt;holds&lt;/t&gt; &lt;fex name="Contents"&gt;three hundred pictures&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="243" cDate="08/15/2002 06:30:40 PDT Thu" abbrev="Container" name="Container" ID="3562">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Container&lt;/fen&gt; is the physical object which holds within its boundaries the &lt;fen&gt;Contents&lt;/fen&gt;

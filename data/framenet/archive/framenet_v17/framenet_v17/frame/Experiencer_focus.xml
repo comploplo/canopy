@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:12:07 PST Wed" name="Experiencer_focus" ID="48" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;The words in this frame describe an &lt;fen&gt;Experiencer&lt;/fen&gt;'s emotions with respect to some &lt;fen&gt;Content&lt;/fen&gt;. A &lt;fen&gt;Reason&lt;/fen&gt; for the emotion may also be expressed.  Although the &lt;fen&gt;Content&lt;/fen&gt; may refer to an actual, current state of affairs, quite often it refers to a general situation which causes the emotion. 
- 
+    <definition>&lt;def-root&gt;The words in this frame describe an &lt;fen&gt;Experiencer&lt;/fen&gt;'s emotions with respect to some &lt;fen&gt;Content&lt;/fen&gt;. A &lt;fen&gt;Reason&lt;/fen&gt; for the emotion may also be expressed.  Although the &lt;fen&gt;Content&lt;/fen&gt; may refer to an actual, current state of affairs, quite often it refers to a general situation which causes the emotion.
+
 &lt;ex&gt; &lt;fex name="Experiencer"&gt;My&lt;/fex&gt; &lt;t&gt;enjoyment&lt;/t&gt; &lt;fex name="Content"&gt;of the movie&lt;/fex&gt; was considerably impaired by the seven-foot guy sitting in front of me. &lt;/ex&gt;
 &lt;ex&gt; &lt;fex name="Experiencer"&gt;Smithers&lt;/fex&gt; &lt;m&gt;takes&lt;/m&gt; &lt;fex name="Degree"&gt;great&lt;/fex&gt; &lt;t&gt;pleasure&lt;/t&gt; &lt;fex name="Content"&gt;in collecting matchboxes&lt;/fex&gt;.&lt;/ex&gt;
-&lt;ex&gt; &lt;fex name="Experiencer"&gt;Sergio&lt;/fex&gt; &lt;m&gt;derives&lt;/m&gt; &lt;fex name="Degree"&gt;great&lt;/fex&gt; &lt;t&gt;pleasure&lt;/t&gt; 
+&lt;ex&gt; &lt;fex name="Experiencer"&gt;Sergio&lt;/fex&gt; &lt;m&gt;derives&lt;/m&gt; &lt;fex name="Degree"&gt;great&lt;/fex&gt; &lt;t&gt;pleasure&lt;/t&gt;
 &lt;fex name="Content"&gt;from  smoking&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt; Smoking &lt;ment&gt;gives&lt;/ment&gt; &lt;fex name="Experiencer"&gt;me&lt;/fex&gt; &lt;fex name="Degree"&gt;extreme&lt;/fex&gt; &lt;t&gt;pleasure&lt;/t&gt;.&lt;/ex&gt;
 With certain verbs, the &lt;fen&gt;Circumstances&lt;/fen&gt; can be expressed in a finite clausal or wh- complement which may optionally be preceded by a Null NP Object:

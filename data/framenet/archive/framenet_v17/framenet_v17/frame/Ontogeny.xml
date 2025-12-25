@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="CVa" cDate="01/20/2012 12:26:28 PST Fri" name="Ontogeny" ID="2693" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; develops from a &lt;fen&gt;Prior_state&lt;/fen&gt; to a &lt;fen&gt;Post_state&lt;/fen&gt;.  The &lt;fen&gt;Entity&lt;/fen&gt; can also be represented by an entity-denoting adjective which is labeled &lt;fen&gt;Domain&lt;/fen&gt; as shown in the first example below.   NOTE: This frame is not intended for the evolution of an entire species, but rather the development of a single organism. 
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Entity&lt;/fen&gt; develops from a &lt;fen&gt;Prior_state&lt;/fen&gt; to a &lt;fen&gt;Post_state&lt;/fen&gt;.  The &lt;fen&gt;Entity&lt;/fen&gt; can also be represented by an entity-denoting adjective which is labeled &lt;fen&gt;Domain&lt;/fen&gt; as shown in the first example below.   NOTE: This frame is not intended for the evolution of an entire species, but rather the development of a single organism.
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;Yesterday we learned about &lt;fex name="Domain"&gt;neural&lt;/fex&gt; &lt;t&gt;development&lt;/t&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;/ex&gt;
@@ -11,7 +11,7 @@
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Entity"&gt;This small bud&lt;/fex&gt; will &lt;t&gt;grow&lt;/t&gt; &lt;fex name="Post_state"&gt;into a flower&lt;/fex&gt; &lt;fex name="Time"&gt;someday soon&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="CVa" cDate="01/20/2012 12:33:11 PST Fri" abbrev="Ent" name="Entity" ID="15411">
-        <definition>&lt;def-root&gt;The part of the &lt;fen&gt;Organism&lt;/fen&gt; which is undergoing biological development.  
+        <definition>&lt;def-root&gt;The part of the &lt;fen&gt;Organism&lt;/fen&gt; which is undergoing biological development.
 
 &lt;ex&gt;The &lt;t&gt;development&lt;/t&gt; &lt;fex name="Ent"&gt;of a human embryo&lt;/fex&gt; is fascinating to study.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Domain" ID="15418"/>

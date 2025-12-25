@@ -33,7 +33,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="03/03/2005 10:44:15 PST Thu" abbrev="man" name="Manner" ID="7638">
-        <definition>&lt;def-root&gt;A description of the progress, generally a description comparing events (&lt;ment&gt;the same way&lt;/ment&gt;); in addition, it may describe characteristics and states of the &lt;fen&gt;Agent&lt;/fen&gt; that also affect the development. 
+        <definition>&lt;def-root&gt;A description of the progress, generally a description comparing events (&lt;ment&gt;the same way&lt;/ment&gt;); in addition, it may describe characteristics and states of the &lt;fen&gt;Agent&lt;/fen&gt; that also affect the development.
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

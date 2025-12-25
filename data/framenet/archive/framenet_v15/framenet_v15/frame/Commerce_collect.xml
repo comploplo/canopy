@@ -8,7 +8,7 @@
         <semType name="Source" ID="151"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="08/21/2001 07:51:24 PDT Tue" abbrev="Gds" name="Goods" ID="1693">
-        <definition>&lt;def-root&gt;The FE Goods is anything (including labor or time, for example) which is exchanged for Money in a transaction. 
+        <definition>&lt;def-root&gt;The FE Goods is anything (including labor or time, for example) which is exchanged for Money in a transaction.
 &lt;ex&gt;Lee was &lt;t&gt;charged&lt;/t&gt; $100 &lt;fex name="Gds"&gt;for dry-cleaning&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/21/2001 07:51:24 PDT Tue" abbrev="Mns" name="Means" ID="1694">
@@ -31,7 +31,7 @@
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/21/2001 07:51:24 PDT Tue" abbrev="Unit" name="Unit" ID="1698">
         <definition>&lt;def-root&gt;This FE is any unit in which goods or services can be measured.
-Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP. 
+Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP.
 &lt;ex&gt;I &lt;t&gt;bill&lt;/t&gt; for etiquette lessons &lt;fex name="Unit"&gt;by the hour&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>

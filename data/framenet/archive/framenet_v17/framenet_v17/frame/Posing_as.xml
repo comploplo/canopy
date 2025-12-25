@@ -31,7 +31,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="12/01/2005 05:14:45 PST Thu" abbrev="exp" name="Explanation" ID="9512">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the posing event logically follows. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the posing event logically follows.
 
 &lt;ex&gt;They &lt;t&gt;posed&lt;/t&gt; as patients &lt;fex name="exp"&gt;because the paper's previous attempt at a formal survey met strong resistance&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

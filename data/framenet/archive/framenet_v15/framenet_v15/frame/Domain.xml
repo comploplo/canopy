@@ -5,7 +5,7 @@
 
 
 &lt;ex&gt;The Normal College is &lt;fex name="Domain"&gt;&lt;t&gt;geographically&lt;/t&gt;&lt;/fex&gt; &lt;fex name="Predicate"&gt;adjacent to the University of North Wales&lt;/fex&gt;.&lt;/ex&gt;
-&lt;ex&gt;&lt;fex name="Domain"&gt;&lt;t&gt;Geographically&lt;/t&gt;&lt;/fex&gt;, &lt;fex name="Predicate"&gt;Britain is a group of island off the mainland of Europe&lt;/fex&gt;.  &lt;fex name="Domain"&gt;&lt;t&gt;Culturally&lt;/t&gt;&lt;/fex&gt; , &lt;fex name="Predicate"&gt;it has always been linked to the continent&lt;/fex&gt; .&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Domain"&gt;&lt;t&gt;Geographically&lt;/t&gt;&lt;/fex&gt;, &lt;fex name="Predicate"&gt;Britain is a group of island off the mainland of Europe&lt;/fex&gt;.  &lt;fex name="Domain"&gt;&lt;t&gt;Culturally&lt;/t&gt;&lt;/fex&gt; , &lt;fex name="Predicate"&gt;it has always been linked to the continent&lt;/fex&gt; .&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Domain"&gt;&lt;t&gt;Socially&lt;/t&gt;&lt;/fex&gt; and demographically &lt;fex name="Predicate"&gt;the period has been dominated by two factors -- the fall in the size of families and the increase in the expectation of survival to retirement , the effects of which are still far from having exhausted themselves &lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="12/05/2002 06:59:13 PST Thu" abbrev="Predicate" name="Predicate" ID="3961">
         <definition>&lt;def-root&gt;This Frame Element denotes the &lt;fen&gt;Predicate&lt;/fen&gt; which is applied to the &lt;fen&gt;Domain&lt;/fen&gt;.

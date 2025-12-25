@@ -13,7 +13,7 @@
         <semType name="Physical_object" ID="68"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="07/11/2005 03:01:46 PDT Mon" abbrev="loc" name="Location" ID="8446">
-        <definition>&lt;def-root&gt;The location where the &lt;fen&gt;Theme&lt;/fen&gt; is kept. 
+        <definition>&lt;def-root&gt;The location where the &lt;fen&gt;Theme&lt;/fen&gt; is kept.
 &lt;/def-root&gt;</definition>
         <semType name="Goal" ID="153"/>
     </FE>

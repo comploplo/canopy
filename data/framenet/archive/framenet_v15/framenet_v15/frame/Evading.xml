@@ -16,7 +16,7 @@
 &lt;ex&gt;Smithers &lt;t&gt;evaded&lt;/t&gt; the police &lt;fex name="Path"&gt;through the empty field&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="02/26/2002 05:39:15 PST Tue" abbrev="Evad" name="Evader" ID="2376">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Evader&lt;/fen&gt; moves under its own power to &lt;fen&gt;Capture&lt;/fen&gt; or contact with the &lt;fen&gt;Pursuer&lt;/fen&gt;. Normally the &lt;fen&gt;Evader&lt;/fen&gt; frame element is expressed as an external argument. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Evader&lt;/fen&gt; moves under its own power to &lt;fen&gt;Capture&lt;/fen&gt; or contact with the &lt;fen&gt;Pursuer&lt;/fen&gt;. Normally the &lt;fen&gt;Evader&lt;/fen&gt; frame element is expressed as an external argument.
 
 &lt;ex&gt;&lt;fex name="Evader"&gt;The mouse&lt;/fex&gt; &lt;t&gt;eluded&lt;/t&gt; the cats for only a few minutes.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
@@ -28,7 +28,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="02/26/2002 05:39:21 PST Tue" abbrev="Mns" name="Means" ID="2379">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Means&lt;/fen&gt; by which the &lt;fen&gt;Evader&lt;/fen&gt; bringd about the evasion. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Means&lt;/fen&gt; by which the &lt;fen&gt;Evader&lt;/fen&gt; bringd about the evasion.
 
 &lt;ex&gt;Smithers &lt;t&gt;evaded&lt;/t&gt; the police &lt;fex name="Mns"&gt;by ducking behind the dumpster&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

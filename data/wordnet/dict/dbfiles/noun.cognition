@@ -688,7 +688,7 @@
 { star_topology, star, topology3,@ (the topology of a network whose components are connected to a hub) }
 { mesh_topology, mesh, topology3,@ (the topology of a network whose components are all connected directly to every other component) }
 { physical_topology, topology3,@ (the appearance of the network; "the physical topologies of local area networks include the bus, the ring and the star") }
-{ logical_topology, topology3,@ (the way the network works; "a network that looks like a star can have the logical topology of a bus") } 
+{ logical_topology, topology3,@ (the way the network works; "a network that looks like a star can have the logical topology of a bus") }
 { unitization, unitisation, [ chunking, verb.cognition:chunk13,+ ] configuration,@ noun.cognition:psychology,;c ((psychology) the configuration of smaller units of information into large coordinated units) }
 { [ configuration, verb.creation:configure,+ ] [ constellation, verb.stative:constellate,+ verb.motion:constellate,+ verb.change:constellate,+ ] design1,@ (an arrangement of parts or elements; "the outcome depends on the configuration of influences at the time") }
 { space_lattice, crystal_lattice, Bravais_lattice, lattice,@ (a 3-dimensional geometric arrangement of the atoms or molecules or ions composing a crystal) }
@@ -1704,7 +1704,7 @@
 { strand, form,@ (a pattern forming a unity within a larger structural whole; "he tried to pick up the strands of his former life"; "I could hear several melodic strands simultaneously") }
 { sonata_form, art_form,@ (the form of a movement, which consists of exposition and development and recapitulation) }
 { visual_percept, visual_image, percept,@ (a percept that arises from the eyes; an image in the visual system) }
-{ eye_candy, visual_percept,@ (visual images that are pleasing to see but are intellectually undemanding; "he wanted to put some eye candy on their web site") } 
+{ eye_candy, visual_percept,@ (visual images that are pleasing to see but are intellectually undemanding; "he wanted to put some eye candy on their web site") }
 { field1, field_of_view, visual_percept,@ (the area that is visible (as through an optical instrument)) }
 { [ sight1, verb.perception:sight,+ ] visual_percept,@ (an instance of visual perception; "the sight of his wife brought him back to reality"; "the train was an unexpected sight") }
 { [ view1, verb.perception:view2,+ ] aspect1, prospect, [ scene, adj.all:beautiful^scenic,+ ] vista, [ panorama, adj.all:wide^panoramic,+ ] visual_percept,@ (the visual percept of a region; "the most desirable feature of the park are the beautiful views") }
@@ -1910,7 +1910,7 @@
 { [ determinism, adj.all:settled2^deterministic,+ noun.person:determinist,+ ] philosophical_doctrine,@ philosophy,;c ((philosophy) a philosophical theory holding that all events are inevitable consequences of antecedent sufficient causes; often understood as denying the possibility of free will) }
 { [ fatalism, adj.pert:fatalistic,+ noun.person:fatalist,+ ] determinism,@ (a philosophical doctrine holding that all events are predetermined in advance for all time and human beings are powerless to change them) }
 { [ formalism, adj.pert:formalistic,+ ] philosophical_doctrine,@ philosophy,;c ((philosophy) the philosophical theory that formal (logical or mathematical) statements have no meaning but that its symbols (regarded as physical entities) exhibit a form that has useful applications) }
-{ [ hereditarianism, environmentalism,! ] philosophical_doctrine,@ (the philosophical doctrine that heredity is more important than environment in determining intellectual growth) } 
+{ [ hereditarianism, environmentalism,! ] philosophical_doctrine,@ (the philosophical doctrine that heredity is more important than environment in determining intellectual growth) }
 { [ idealism, adj.pert:idealistic,+ ] philosophical_doctrine,@ philosophy,;c ((philosophy) the philosophical theory that ideas are the only reality) }
 { intuitionism, philosophical_doctrine,@ philosophy,;c ((philosophy) the doctrine that knowledge is acquired primarily by intuition) }
 { logicism, philosophical_doctrine,@ philosophy,;c ((philosophy) the philosophical theory that all of mathematics can be derived from formal logic) }

@@ -229,7 +229,7 @@
 { re-examine, examine1,@ noun.group:law,;c frames: 9 (question after cross-examination by opposing counsel; "re-examine one's witness")}
 { [ investigate, noun.act:investigation,+ noun.person:investigator1,+ noun.act:investigating,+ ] look_into, verb.cognition:analyze,@ frames: 8,9,29 (investigate scientifically; "Let's investigate the syntax of Chinese") }
 { [ call1, noun.person:caller1,+ noun.communication:call1,+ ] [ telephone, noun.communication:telephone,+ noun.artifact:telephone,+ noun.person:telephoner,+ ] call_up, [ phone, noun.artifact:phone,+ noun.person:phoner,+ ] [ ring, noun.event:ring,+ ] dial,* telecommunicate,@ noun.communication:telephone,;c frames: 9,2 (get or try to get into communication (with someone) by telephone; "I tried to call you all night"; "Take two aspirin and call me in the morning")}
-{ [cell_phone, noun.artifact:cellphone,+] phone,@ noun.communication:telephone,;c frames: 2,9,8 (call up by using a cellular phone; "If the train is late, I will cell phone you")} 
+{ [cell_phone, noun.artifact:cellphone,+] phone,@ noun.communication:telephone,;c frames: 2,9,8 (call up by using a cellular phone; "If the train is late, I will cell phone you")}
 { [call_in, noun.communication:call-in,+ ] telephone,@ noun.communication:telephone,;c frames: 2,7 (make a phone call; "call in to a radio station"; "call in sick") }
 { [ dial, noun.artifact:dial1,+ ] verb.contact:operate,@ noun.communication:telephone,;c frames: 2 (operate a dial to select a telephone number; "You must take the receiver off the hook before you dial") }
 { hang_on, hold_the_line, hold_on, telephone,* verb.cognition:wait,@ noun.communication:telephone,;c frames: 2 (hold the phone line open; "Please hang on while I get your folder") }
@@ -968,7 +968,7 @@
 { [ relate, noun.communication:relation1,+ ] tell1,@ frames: 8,11,15,26 (give an account of; "The witness related the events") }
 { [ tell1, noun.communication:tale,+ noun.person:teller3,+ noun.communication:telling1,+ frames: 14] [ narrate, adj.all:communicative^narrative,+ noun.communication:narration2,+ noun.communication:narration1,+ noun.communication:narration,+ noun.person:narrator,+ ] [ recount, noun.communication:recounting,+ ] [ recite1, noun.communication:recital4,+ noun.communication:recital1,+ ] inform,@ frames: 8,15,11 (narrate or give a detailed account of; "Tell what happened"; "The father told a story to his child") }
 { spin, present,@ frames: 8,11 (twist and turn so as to give an intended interpretation; "The President's spokesmen had to spin the story to make it less embarrassing")}
-{ [ crack, noun.communication:crack,+ ] tell1,@ frames: 8 (tell spontaneously; "crack a joke")} 
+{ [ crack, noun.communication:crack,+ ] tell1,@ frames: 8 (tell spontaneously; "crack a joke")}
 { [ yarn, noun.communication:yarn,+ ] tell1,@ frames: 2 (tell or spin a yarn) }
 { [ rhapsodize1, noun.communication:rhapsody,+ ] [ rhapsodise1, noun.communication:rhapsody,+ ] recite1,@ frames: 2 (recite a rhapsody) }
 { [ narrate1, noun.communication:narration1,+ noun.communication:narration,+ ] inform,@ frames: 2,8 (provide commentary for a film, for example)}
@@ -1210,7 +1210,7 @@
 { [ quote7, noun.communication:quote,+ ] verb.change:mark8,@ frames: 8 (put quote marks around; "Here the author is quoting his colleague")}
 { [ notch, noun.act:notch,+ noun.artifact:notch,+ ] record,@ frames: 8,11 (notch a surface to record something) }
 { [ type, noun.artifact:type,+ noun.communication:type1,+ noun.person:typist,+ noun.communication:typing,+ ] [ typewrite, noun.artifact:typewriter,+ noun.communication:typewriting,+ ] write,@ frames: 2,8 (write by means of a keyboard with types; "type the acceptance letter, please") }
-{ shift4, type,@ frames: 2 (use a shift key on a keyboard; "She could not shift so all her letters are written in lower case")} 
+{ shift4, type,@ frames: 2 (use a shift key on a keyboard; "She could not shift so all her letters are written in lower case")}
 { [ handwrite, noun.communication:handwriting,+ noun.act:handwriting,+ ] write,@ frames: 8 (write by hand; "You should handwrite the note to your guests")}
 { [ backspace, noun.artifact:backspacer,+ ] type,@ frames: 2 (hit the backspace key on a computer or typewriter keyboard; "To erase, you must backspace") }
 { double-space, type,@ frames: 8 (type with a full space between lines) }

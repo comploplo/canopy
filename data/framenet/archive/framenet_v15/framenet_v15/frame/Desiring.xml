@@ -29,7 +29,7 @@
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="664" cDate="07/12/2002 12:06:12 PDT Fri" abbrev="Reas" name="Reason" ID="3370">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Reason&lt;/fen&gt; shows why the &lt;fen&gt;Experiencer&lt;/fen&gt; wants the &lt;fen&gt;Event&lt;/fen&gt; to occur.  This FE occurs frequently as a PP complement headed by &lt;ment&gt;for&lt;/ment&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Reason&lt;/fen&gt; shows why the &lt;fen&gt;Experiencer&lt;/fen&gt; wants the &lt;fen&gt;Event&lt;/fen&gt; to occur.  This FE occurs frequently as a PP complement headed by &lt;ment&gt;for&lt;/ment&gt;.
 
 &lt;ex&gt;She thinks people only &lt;t&gt;want&lt;/t&gt; her on the project &lt;fex name="Reas"&gt;for the money she will contribute&lt;/fex&gt;.&lt;/ex&gt;
 

@@ -6,7 +6,7 @@
 //! - Performance characteristics
 //! - Error handling and graceful degradation
 
-use canopy_semantic_layer::{
+use canopy_tokenizer::{
     SemanticCoordinator,
     coordinator::{CoordinatorConfig, create_l1_analyzer},
 };
@@ -53,9 +53,15 @@ fn test_semantic_coordinator_with_custom_config() {
         enable_lexicon: true,
         enable_lemmatization: true,
         use_advanced_lemmatization: false,
-        graceful_degradation: true,
         confidence_threshold: 0.2,
         l1_cache_memory_mb: 25,
+        use_treebank_lemmas: true,
+        lemma_confidence_threshold: 0.3,
+        enable_shared_lemma_cache: true,
+        cache_capacity: 1000,
+        cache_warmup_common_words: true,
+        enable_cache_warmup: true,
+        ..Default::default()
     };
 
     let result = SemanticCoordinator::new(config);
@@ -389,9 +395,12 @@ fn test_configuration_variations() {
                 enable_lexicon: true, // Keep at least one engine
                 enable_lemmatization: true,
                 use_advanced_lemmatization: false,
-                graceful_degradation: true,
                 confidence_threshold: 0.1,
                 l1_cache_memory_mb: 10,
+                use_treebank_lemmas: true,
+                lemma_confidence_threshold: 0.3,
+                enable_shared_lemma_cache: true,
+                ..Default::default()
             },
         ),
         (
@@ -403,9 +412,12 @@ fn test_configuration_variations() {
                 enable_lexicon: true,
                 enable_lemmatization: true,
                 use_advanced_lemmatization: false, // Keep false to avoid NLP dependencies
-                graceful_degradation: true,
                 confidence_threshold: 0.05,
                 l1_cache_memory_mb: 100,
+                use_treebank_lemmas: true,
+                lemma_confidence_threshold: 0.3,
+                enable_shared_lemma_cache: true,
+                ..Default::default()
             },
         ),
     ];

@@ -621,7 +621,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                     // remove special target tag
                     charLabel = charLabel.substring(0, targetIndex) +
                         charLabel.substring(targetIndex + 8, charLabel.length);
-                       
+
                     // check for another target tag (rare case)
                     targetIndex = charLabel.indexOf("<TARGET>");
                     if (targetIndex != -1) {

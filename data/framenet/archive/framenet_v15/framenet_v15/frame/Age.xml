@@ -53,7 +53,7 @@ There are additional patterns that the LUs in this frame occur in which are not 
         <definition>&lt;def-root&gt;Some specification of the circumstances under which the &lt;fen&gt;Entity&lt;/fen&gt; has a particular &lt;fen&gt;Age&lt;/fen&gt;.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="07/20/2004 02:25:22 PDT Tue" abbrev="Exp" name="Expressor" ID="6970">
-        <definition>&lt;def-root&gt;The Frame Element &lt;fen&gt;Expressor&lt;/fen&gt; marks expressions that indicate a body part, gesture or other expression of the &lt;fen&gt;Entity&lt;/fen&gt; that reflect its age. 
+        <definition>&lt;def-root&gt;The Frame Element &lt;fen&gt;Expressor&lt;/fen&gt; marks expressions that indicate a body part, gesture or other expression of the &lt;fen&gt;Entity&lt;/fen&gt; that reflect its age.
 
 
 &lt;ex&gt;"Who's there?" she barked. "Ensign Kim, ma'me," the &lt;t&gt;youngish&lt;/t&gt; &lt;fex name="exp"&gt;voice&lt;/fex&gt; of Voyager's young Harry Kim came over the comm line. "&lt;/ex&gt;&lt;/def-root&gt;</definition>

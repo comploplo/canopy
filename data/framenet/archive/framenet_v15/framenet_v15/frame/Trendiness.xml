@@ -75,7 +75,7 @@
         <lexeme order="1" headword="false" breakBefore="false" POS="N" name="fashion"/>
     </lexUnit>
     <lexUnit status="Created" POS="A" name="chic.a" ID="13948" lemmaID="6261" cBy="361" cDate="03/12/2007 10:56:28 PDT Mon">
-        <definition>COD: elegantly and stylishly fashionable. 
+        <definition>COD: elegantly and stylishly fashionable.
 
 </definition>
         <sentenceCount annotated="0" total="0"/>

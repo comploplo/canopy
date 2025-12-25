@@ -3,7 +3,7 @@
 <frame cBy="618" cDate="01/15/2003 01:40:41 PST Wed" name="Suspicion" ID="503" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;A person or group, the &lt;fen&gt;Authority&lt;/fen&gt;, believes that another person, the &lt;fen&gt;Suspect&lt;/fen&gt; is a participant in a criminal &lt;fen&gt;Incident&lt;/fen&gt;.
 
-&lt;ex&gt;&lt;fex name="Authority"&gt;The police&lt;/fex&gt; &lt;t&gt;suspect&lt;/t&gt; &lt;fex name="Suspect"&gt;Noah Rogers&lt;/fex&gt; 
+&lt;ex&gt;&lt;fex name="Authority"&gt;The police&lt;/fex&gt; &lt;t&gt;suspect&lt;/t&gt; &lt;fex name="Suspect"&gt;Noah Rogers&lt;/fex&gt;
 &lt;fex name="Incident"&gt;of aiding the robbery last night at Shop-n-drive&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="618" cDate="01/15/2003 01:58:59 PST Wed" abbrev="Aut" name="Authority" ID="4049">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Authority&lt;/fen&gt; is the group or person who suspects the &lt;fen&gt;Suspect&lt;/fen&gt; of criminal activity.&lt;/def-root&gt;</definition>

@@ -30,7 +30,7 @@
 Note that this FE is syntactically omissible.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="01/07/2002 01:27:25 PST Mon" abbrev="C_portal" name="Container_portal" ID="2224">
-        <definition>&lt;def-root&gt;This FE identifies the active zone of the container that may be expressed as the direct object of the target verb.  
+        <definition>&lt;def-root&gt;This FE identifies the active zone of the container that may be expressed as the direct object of the target verb.
 &lt;ex&gt;We &lt;t&gt;zipped&lt;/t&gt; &lt;fex name="Container_portal"&gt;the tent flap&lt;/fex&gt;.&lt;/ex&gt;
 The sentence refers to the closure of the tent, hence is different from sentences where the action involves the manipulation of a fastener, e.g. We unscrewed the lid.&lt;/def-root&gt;</definition>
     </FE>

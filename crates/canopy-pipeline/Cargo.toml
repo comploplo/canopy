@@ -8,7 +8,9 @@ description = "Central pipeline orchestration for Canopy linguistic analysis"
 
 [dependencies]
 canopy-core = { path = "../canopy-core" }
-canopy-semantic-layer = { path = "../canopy-semantic-layer" }
+canopy-events = { path = "../canopy-events" }
+canopy-tokenizer = { path = "../canopy-tokenizer" }
+canopy-treebank = { path = "../canopy-treebank" }
 serde = { workspace = true, features = ["derive"] }
 thiserror = { workspace = true }
 tracing = { workspace = true }

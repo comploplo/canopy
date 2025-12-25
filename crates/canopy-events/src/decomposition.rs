@@ -382,7 +382,11 @@ impl EventDecomposer {
                     for sem_pred in &frame.semantics {
                         let pred_name = sem_pred.value.to_lowercase();
                         if let Some(template) = self.predicate_map.get(&pred_name) {
-                            return self.apply_template(template, predicate, Some(class.id.clone()));
+                            return self.apply_template(
+                                template,
+                                predicate,
+                                Some(class.id.clone()),
+                            );
                         }
                     }
                 }
@@ -400,7 +404,11 @@ impl EventDecomposer {
                 // Try class prefix match (e.g., "give-13.1-1" matches "give-13.1")
                 for (pattern, lv_type) in &self.class_defaults {
                     if class.id.starts_with(pattern) {
-                        return self.apply_default_type(*lv_type, predicate, Some(class.id.clone()));
+                        return self.apply_default_type(
+                            *lv_type,
+                            predicate,
+                            Some(class.id.clone()),
+                        );
                     }
                 }
             }

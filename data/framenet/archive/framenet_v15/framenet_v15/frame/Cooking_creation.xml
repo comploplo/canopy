@@ -68,7 +68,7 @@ Things that apply the heat directly are &lt;fen&gt;Heating_Instrument&lt;/fen&gt
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="669" cDate="02/12/2002 03:56:11 PST Tue" abbrev="Ingr" name="Ingredients" ID="2311">
-        <definition>&lt;def-root&gt;The Ingredients  which are altered by 
+        <definition>&lt;def-root&gt;The Ingredients  which are altered by
 The &lt;fen&gt;Cook&lt;/fen&gt; alters &lt;fen&gt;Ingredients&lt;/fen&gt; to create the &lt;fen&gt;Produced_food&lt;/fen&gt;.
 &lt;ex&gt;Drew &lt;t&gt;baked&lt;/t&gt; a pie &lt;fex name="Ingr"&gt;with apples, nuts, and raisins.&lt;/fex&gt;&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

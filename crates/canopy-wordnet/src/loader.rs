@@ -213,40 +213,38 @@ impl WordNetLoader {
 
         // Parse verb frames (only for verbs)
         let mut frames = Vec::new();
-        if pos == PartOfSpeech::Verb && field_idx < fields.len() {
-            if let Ok(f_cnt) = utils::parse_numeric_field::<u16>(&fields[field_idx], "f_cnt") {
-                field_idx += 1;
+        if pos == PartOfSpeech::Verb
+            && field_idx < fields.len()
+            && let Ok(f_cnt) = utils::parse_numeric_field::<u16>(&fields[field_idx], "f_cnt")
+        {
+            field_idx += 1;
 
-                for _ in 0..f_cnt {
-                    if field_idx + 1 < fields.len() {
-                        if fields[field_idx] == "+" {
-                            let frame_number = utils::parse_numeric_field::<u8>(
-                                &fields[field_idx + 1],
-                                "frame_number",
-                            )?;
-                            let word_number = if field_idx + 2 < fields.len() {
-                                utils::parse_numeric_field::<u8>(
-                                    &fields[field_idx + 2],
-                                    "word_number",
-                                )
+            for _ in 0..f_cnt {
+                if field_idx + 1 < fields.len() {
+                    if fields[field_idx] == "+" {
+                        let frame_number = utils::parse_numeric_field::<u8>(
+                            &fields[field_idx + 1],
+                            "frame_number",
+                        )?;
+                        let word_number = if field_idx + 2 < fields.len() {
+                            utils::parse_numeric_field::<u8>(&fields[field_idx + 2], "word_number")
                                 .unwrap_or(0)
-                            } else {
-                                0
-                            };
-
-                            frames.push(VerbFrame {
-                                frame_number,
-                                word_number,
-                                template: format!("Frame {frame_number}"), // Simplified
-                            });
-
-                            field_idx += 3;
                         } else {
-                            field_idx += 1;
-                        }
+                            0
+                        };
+
+                        frames.push(VerbFrame {
+                            frame_number,
+                            word_number,
+                            template: format!("Frame {frame_number}"), // Simplified
+                        });
+
+                        field_idx += 3;
                     } else {
-                        break;
+                        field_idx += 1;
                     }
+                } else {
+                    break;
                 }
             }
         }

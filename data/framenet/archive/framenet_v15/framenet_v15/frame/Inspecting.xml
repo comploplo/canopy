@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="11/19/2004 08:55:20 PST Fri" name="Inspecting" ID="1262" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Inspector&lt;/fen&gt; directs his perceptual attention to a &lt;fen&gt;Ground&lt;/fen&gt; to ascertain whether the &lt;fen&gt;Ground&lt;/fen&gt; is intact or  whether an &lt;fen&gt;Unwanted_entity&lt;/fen&gt; is present. Alternatively, the desired outcome of the inspection may be presented as a &lt;fen&gt;Purpose&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Inspector&lt;/fen&gt; directs his perceptual attention to a &lt;fen&gt;Ground&lt;/fen&gt; to ascertain whether the &lt;fen&gt;Ground&lt;/fen&gt; is intact or  whether an &lt;fen&gt;Unwanted_entity&lt;/fen&gt; is present. Alternatively, the desired outcome of the inspection may be presented as a &lt;fen&gt;Purpose&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="insp"&gt;The police&lt;/fex&gt; removed Flonnory and Barbour from the automobile and &lt;t&gt;frisked&lt;/t&gt; &lt;fex name="gro"&gt;them&lt;/fex&gt; &lt;fex name="unw"&gt;for weapons&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;t&gt;Double-check&lt;/t&gt; the form &lt;fex name="pur"&gt;to make sure all of the information has been entered correctly&lt;/fex&gt;.&lt;/ex&gt;

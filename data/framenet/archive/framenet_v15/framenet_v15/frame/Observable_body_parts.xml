@@ -8,7 +8,7 @@
 &lt;ex&gt;&lt;fex name="Poss"&gt;Kim's&lt;/fex&gt; arm is broken.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Peripheral" cBy="243" cDate="06/01/2001 01:39:56 PDT Fri" abbrev="Desc" name="Descriptor" ID="691">
-        <definition>&lt;def-root&gt;This Frame Element is used for a characteristic or description of the &lt;fen&gt;Body_part&lt;/fen&gt;. Note that &lt;fen&gt;Descriptor&lt;/fen&gt; is not an FE of the same character as other FEs.  Specifically, rather than filling a slot, it identifies a modifier of its head noun. 
+        <definition>&lt;def-root&gt;This Frame Element is used for a characteristic or description of the &lt;fen&gt;Body_part&lt;/fen&gt;. Note that &lt;fen&gt;Descriptor&lt;/fen&gt; is not an FE of the same character as other FEs.  Specifically, rather than filling a slot, it identifies a modifier of its head noun.
 
 &lt;ex&gt;Kim has &lt;fex name="Desc"&gt;beautiful&lt;/fex&gt; &lt;t&gt;eyes&lt;/t&gt;.&lt;/ex&gt;
 &lt;ex&gt;His &lt;fex name="Desc"&gt;trembling&lt;/fex&gt; &lt;t&gt;hands&lt;/t&gt;....&lt;/ex&gt;&lt;/def-root&gt;</definition>

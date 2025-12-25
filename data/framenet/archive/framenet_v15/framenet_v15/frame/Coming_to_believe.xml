@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="731" cDate="02/07/2001 04:11:54 PST Wed" name="Coming_to_believe" ID="23" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A person (the &lt;fen&gt;Cognizer&lt;/fen&gt;) comes to believe something (the &lt;fen&gt;Content&lt;/fen&gt;), sometimes after a process of reasoning. This change in belief is usually initiated by a person or piece of &lt;fen&gt;Evidence&lt;/fen&gt;. Occasionally words in this domain are accompanied by phrases expressing &lt;fen&gt;Topic&lt;/fen&gt;, i.e. that which the mental &lt;fen&gt;Content&lt;/fen&gt; is about. 
+    <definition>&lt;def-root&gt;A person (the &lt;fen&gt;Cognizer&lt;/fen&gt;) comes to believe something (the &lt;fen&gt;Content&lt;/fen&gt;), sometimes after a process of reasoning. This change in belief is usually initiated by a person or piece of &lt;fen&gt;Evidence&lt;/fen&gt;. Occasionally words in this domain are accompanied by phrases expressing &lt;fen&gt;Topic&lt;/fen&gt;, i.e. that which the mental &lt;fen&gt;Content&lt;/fen&gt; is about.
 
-&lt;ex&gt;&lt;fex name="Evidence"&gt;Based on the most recent census&lt;/fex&gt; &lt;fex name="Cognizer"&gt;I&lt;/fex&gt; have &lt;t&gt;concluded&lt;/t&gt; &lt;fex name="Content"&gt;that most Americans sleep too much&lt;/fex&gt;.&lt;/ex&gt;    
+&lt;ex&gt;&lt;fex name="Evidence"&gt;Based on the most recent census&lt;/fex&gt; &lt;fex name="Cognizer"&gt;I&lt;/fex&gt; have &lt;t&gt;concluded&lt;/t&gt; &lt;fex name="Content"&gt;that most Americans sleep too much&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:11:54 PST Wed" abbrev="Cog" name="Cognizer" ID="98">
         <definition>&lt;def-root&gt;Cognizer is the person who comes to believe something. &lt;fex name="Cognizer"&gt;Sue&lt;/fex&gt; &lt;t&gt;realized&lt;/t&gt; that Bob was lost. &lt;/def-root&gt;</definition>

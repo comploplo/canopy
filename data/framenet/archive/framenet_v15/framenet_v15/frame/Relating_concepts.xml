@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="361" cDate="05/16/2008 03:44:40 PDT Fri" name="Relating_concepts" ID="2060" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Concept_1&lt;/fen&gt; is related to &lt;fen&gt;Concept_2&lt;/fen&gt; by some &lt;fen&gt;Evidence&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Concept_1&lt;/fen&gt; is related to &lt;fen&gt;Concept_2&lt;/fen&gt; by some &lt;fen&gt;Evidence&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Evidence"&gt;The single remaining piece of evidence&lt;/fex&gt; &lt;t&gt;linked&lt;/t&gt; &lt;fex name="Concept_1"&gt;Kirov the tailor&lt;/fex&gt; &lt;fex name="Concept_2"&gt;to Kirov the dissident activist&lt;/fex&gt;.&lt;/ex&gt;
 
 &lt;ex&gt;There is &lt;fex name="Evidence"&gt;ample data&lt;/fex&gt; &lt;t&gt;relating&lt;/t&gt; &lt;fex name="Concept_1"&gt;earnings&lt;/fex&gt; &lt;fex name="Concept_2"&gt;to years of schooling.&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="361" cDate="05/16/2008 03:44:40 PDT Fri" abbrev="C1" name="Concept_1" ID="12650">
-        <definition>&lt;def-root&gt;The concept which is linked to &lt;fen&gt;Concept_2&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;The concept which is linked to &lt;fen&gt;Concept_2&lt;/fen&gt;.
 
 &lt;ex&gt;High death rates among smokers &lt;t&gt;connect&lt;/t&gt; &lt;fex name="Concept_1"&gt;cigarettes&lt;/fex&gt; with disease.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="361" cDate="05/16/2008 03:44:40 PDT Fri" abbrev="C2" name="Concept_2" ID="12651">
-        <definition>&lt;def-root&gt;The concept which is tied to &lt;fen&gt;Concept_1&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;The concept which is tied to &lt;fen&gt;Concept_1&lt;/fen&gt;.
 
 &lt;ex&gt;Skid marks on the street &lt;t&gt;connects&lt;/t&gt; my neighbor's car &lt;fex name="Concept_2"&gt;to my broken mailbox&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

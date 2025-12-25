@@ -61,7 +61,7 @@ Batavia Asylum&lt;/fex&gt; shortly after the visit to St. Charles.&lt;/ex&gt;&lt
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="08/24/2005 11:43:10 PDT Wed" abbrev="man" name="Manner" ID="8969">
-        <definition>&lt;def-root&gt;Any description of the institutionalization event which is not covered by more specific FEs, including general descriptions comparing events (the same way). It may also indicate salient characteristics of the &lt;fen&gt;Authority&lt;/fen&gt; that affect the action (&lt;ment&gt;ruthlessly&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the institutionalization event which is not covered by more specific FEs, including general descriptions comparing events (the same way). It may also indicate salient characteristics of the &lt;fen&gt;Authority&lt;/fen&gt; that affect the action (&lt;ment&gt;ruthlessly&lt;/ment&gt;).
 
 
 &lt;ex&gt;St Remy, of course, is most noted for being the place where Van Gogh &lt;t&gt;committed&lt;/t&gt;
@@ -86,7 +86,7 @@ himself &lt;fex name="man"&gt;voluntarily&lt;/fex&gt; to an asylum.&lt;/ex&gt;&l
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="08/24/2005 12:35:43 PDT Wed" abbrev="dep" name="Depictive" ID="8974">
-        <definition>&lt;def-root&gt;This FE describes a participant of the institutionalization as being in some state during the action. 
+        <definition>&lt;def-root&gt;This FE describes a participant of the institutionalization as being in some state during the action.
 
 &lt;ex&gt;A man was &lt;t&gt;hospitalized&lt;/t&gt; &lt;fex name="dep"&gt;in stable condition&lt;/fex&gt; after he was mauled by a ?pet? bear.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

@@ -27,14 +27,14 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:22:34 PDT Thu" abbrev="" name="Depictive" ID="16544">
-        <definition>&lt;def-root&gt;Depictive phrase describing the Cognizer. 
+        <definition>&lt;def-root&gt;Depictive phrase describing the Cognizer.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:22:59 PDT Thu" abbrev="" name="Manner" ID="16545">
         <definition>&lt;def-root&gt;Manner of performing an action&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:23:18 PDT Thu" abbrev="" name="Place" ID="16546">
-        <definition>&lt;def-root&gt;The location at which the Cognizer realizes the State_of_affairs. 
+        <definition>&lt;def-root&gt;The location at which the Cognizer realizes the State_of_affairs.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:24:25 PDT Thu" abbrev="" name="Time" ID="16547">

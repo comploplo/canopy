@@ -23,6 +23,7 @@ mod tests {
             performance_mode: PerformanceMode::Balanced,
             enable_parallel: false,
             batch_size: 5,
+            enable_semantic_analysis: false,
         }
     }
 

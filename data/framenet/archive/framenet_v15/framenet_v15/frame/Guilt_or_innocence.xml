@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="05/12/2004 02:27:43 PDT Wed" name="Guilt_or_innocence" ID="1110" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Accused&lt;/fen&gt; individual is deemed by a (usually implicit) &lt;fen&gt;Judge&lt;/fen&gt; to be involved (or not) in a &lt;fen&gt;Misdeed&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Accused&lt;/fen&gt; individual is deemed by a (usually implicit) &lt;fen&gt;Judge&lt;/fen&gt; to be involved (or not) in a &lt;fen&gt;Misdeed&lt;/fen&gt;.
 
 
 &lt;ex&gt;&lt;fex name="acc"&gt;I&lt;/fex&gt; &lt;m&gt;am&lt;/m&gt; &lt;t&gt;innocent&lt;/t&gt; &lt;fex name="mis"&gt;of this crime&lt;/fex&gt; and so is James Griffiths . &lt;/ex&gt;
@@ -31,7 +31,7 @@ Note that this frame is not  limited to technical, legal uses. The use of guilty
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="05/12/2004 03:09:56 PDT Wed" abbrev="deg" name="Degree" ID="6430">
-        <definition>&lt;def-root&gt;The extent to which the &lt;fen&gt;Accused&lt;/fen&gt; is involved in the &lt;fen&gt;Misdeed&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The extent to which the &lt;fen&gt;Accused&lt;/fen&gt; is involved in the &lt;fen&gt;Misdeed&lt;/fen&gt;.
 
 &lt;ex&gt;Sammy Sosa was &lt;fex name="deg"&gt;completely&lt;/fex&gt; &lt;t&gt;guilty&lt;/t&gt; of corking.&lt;/ex&gt;
 &lt;ex&gt;For his part, the writer is &lt;fex name="deg"&gt;somewhat&lt;/fex&gt; &lt;t&gt;guilty&lt;/t&gt; of his usual charges: undue casual talk of nudity.&lt;/ex&gt;&lt;/def-root&gt;</definition>

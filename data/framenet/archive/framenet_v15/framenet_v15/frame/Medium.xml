@@ -14,7 +14,7 @@
         <definition>&lt;def-root&gt;The piece of information or expression that is contained within the &lt;fen&gt;Text&lt;/fen&gt;. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Peripheral" cBy="361" cDate="01/30/2008 04:27:00 PST Wed" abbrev="Fre" name="Frequency" ID="12094">
-        <definition>&lt;def-root&gt;How often the &lt;fen&gt;Item&lt;/fen&gt; appears in the &lt;fen&gt;Text&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;How often the &lt;fen&gt;Item&lt;/fen&gt; appears in the &lt;fen&gt;Text&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Frequency"&gt;Everyday&lt;/fex&gt; &lt;t&gt;in&lt;/t&gt; &lt;fex name="Text"&gt;the newspaper&lt;/fex&gt; &lt;fex name="Item"&gt;there are articles relating to science and technology&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

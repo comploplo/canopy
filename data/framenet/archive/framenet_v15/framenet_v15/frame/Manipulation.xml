@@ -6,24 +6,24 @@
 &lt;ex&gt;&lt;/ex&gt;
 A number of lexemes listed in this frame also occur in the frame Cause-to-move (for example, &lt;ment&gt;push, yank&lt;/ment&gt;).  Only the non-motion uses of these words belong in this frame, e.g., combinations such as &lt;ment&gt;push at, push on, yank at&lt;/ment&gt;. &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:11:50 PST Wed" abbrev="Agt" name="Agent" ID="77">
-        <definition>&lt;def-root&gt;The Agent manipulates an object. Agent typically refers to animate beings, but is also extended to mechanical and other inanimate objects.  Agent is most frequently expressed as the external argument of verbs: 
+        <definition>&lt;def-root&gt;The Agent manipulates an object. Agent typically refers to animate beings, but is also extended to mechanical and other inanimate objects.  Agent is most frequently expressed as the external argument of verbs:
 
 &lt;ex&gt;&lt;fex name="Agent"&gt;A robot arm&lt;/fex&gt; &lt;t&gt;grasps&lt;/t&gt; the box on the conveyor belt and seals it.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:11:50 PST Wed" abbrev="Enty" name="Entity" ID="78">
-        <definition>&lt;def-root&gt;The Entity being manipulated often occurs as the direct object of verbs: 
+        <definition>&lt;def-root&gt;The Entity being manipulated often occurs as the direct object of verbs:
 
 &lt;ex&gt;&lt;t&gt;Squeeze&lt;/t&gt; &lt;fex name="Entity"&gt;the ball&lt;/fex&gt; as many times as you can.&lt;/ex&gt;
 &lt;ex&gt;Pat &lt;t&gt;squeezed&lt;/t&gt; &lt;fex name="Entity"&gt;Jo's hand&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="000000" coreType="Extra-Thematic" cBy="731" cDate="02/07/2001 04:11:50 PST Wed" abbrev="Locus" name="Locus" ID="79">
-        <definition>&lt;def-root&gt;The Agent's manipulation of an Entity may be further specified as being localized to some part of the Entity, a Locus.  The Locus is usually expressed as a PP Complement. 
+        <definition>&lt;def-root&gt;The Agent's manipulation of an Entity may be further specified as being localized to some part of the Entity, a Locus.  The Locus is usually expressed as a PP Complement.
 &lt;ex&gt;Pat &lt;t&gt;squeezed&lt;/t&gt; Jo &lt;fex name="Locus"&gt;by the hand&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:11:51 PST Wed" abbrev="AgBP" name="Bodypart_of_agent" ID="80">
-        <definition>&lt;def-root&gt;The part of the Agent's body being used to manipulate the &lt;fen&gt;Entity&lt;/fen&gt; may also be expressed. While the default is for an &lt;fen&gt;Agent&lt;/fen&gt; to use his/her hands, other body parts may be specified. This frame element usually occurs as a PP-complement. 
+        <definition>&lt;def-root&gt;The part of the Agent's body being used to manipulate the &lt;fen&gt;Entity&lt;/fen&gt; may also be expressed. While the default is for an &lt;fen&gt;Agent&lt;/fen&gt; to use his/her hands, other body parts may be specified. This frame element usually occurs as a PP-complement.
 &lt;ex&gt;Kim &lt;t&gt;grasped&lt;/t&gt; the needle &lt;fex name="Bodypart_of_agent"&gt;between finger and thumb&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Body_part" ID="10"/>
     </FE>

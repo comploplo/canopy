@@ -3,7 +3,7 @@
 <frame cBy="JKR" cDate="06/21/2005 10:07:59 PDT Tue" name="Intercepting" ID="1522" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;A volitionally acting &lt;fen&gt;Interceptor&lt;/fen&gt; takes control, without being authorized to do so by the sender, of a &lt;fen&gt;Theme&lt;/fen&gt; that is underway from a sender to a recipient. The &lt;fen&gt;Interceptor&lt;/fen&gt; (or somebody on whose behalf they act) believes that the &lt;fen&gt;Theme&lt;/fen&gt; reaching its goal would be against their interest.
 
-The &lt;fen&gt;Theme&lt;/fen&gt; may be a physical thing that is being conveyed, a self-moving entity, or information that is broadcast. 
+The &lt;fen&gt;Theme&lt;/fen&gt; may be a physical thing that is being conveyed, a self-moving entity, or information that is broadcast.
 
 &lt;ex&gt;&lt;fex name="Interceptor"&gt;Police&lt;/fex&gt; &lt;t&gt;intercepted&lt;/t&gt; &lt;fex name="Theme"&gt;the call&lt;/fex&gt; and raided the address.&lt;/ex&gt;
 

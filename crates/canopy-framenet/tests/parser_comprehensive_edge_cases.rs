@@ -238,7 +238,7 @@ mod edge_case_tests {
         assert_eq!(lu.id, "555");
         assert_eq!(lu.name, "give.v");
         // Valence parsing may not be fully implemented yet
-        assert!(lu.valences.is_empty() || lu.valences.len() > 0);
+        assert!(lu.valences.is_empty() || !lu.valences.is_empty());
     }
 
     #[test]
@@ -256,7 +256,7 @@ mod edge_case_tests {
         assert_eq!(lu.id, "456");
         assert_eq!(lu.name, "phrasal.v");
         // Lexeme parsing may not be fully implemented yet
-        assert!(lu.lexemes.is_empty() || lu.lexemes.len() > 0);
+        assert!(lu.lexemes.is_empty() || !lu.lexemes.is_empty());
     }
 
     #[test]
@@ -277,7 +277,7 @@ mod edge_case_tests {
         assert_eq!(frame.id, "139");
         assert_eq!(frame.name, "TestFrame");
         // Frame relation parsing may not be fully implemented yet
-        assert!(frame.frame_relations.is_empty() || frame.frame_relations.len() > 0);
+        assert!(frame.frame_relations.is_empty() || !frame.frame_relations.is_empty());
     }
 
     #[test]
@@ -299,7 +299,7 @@ mod edge_case_tests {
         let fe = &frame.frame_elements[0];
         assert_eq!(fe.name, "Agent");
         // Semantic type parsing may not be fully implemented yet
-        assert!(fe.semantic_types.is_empty() || fe.semantic_types.len() > 0);
+        assert!(fe.semantic_types.is_empty() || !fe.semantic_types.is_empty());
     }
 
     #[test]
@@ -321,7 +321,7 @@ mod edge_case_tests {
         let fe = &frame.frame_elements[0];
         assert_eq!(fe.name, "Agent");
         // FE relation parsing may not be fully implemented yet
-        assert!(fe.fe_relations.is_empty() || fe.fe_relations.len() > 0);
+        assert!(fe.fe_relations.is_empty() || !fe.fe_relations.is_empty());
     }
 
     #[test]
@@ -442,10 +442,10 @@ mod edge_case_tests {
         <frame   ID="123"    name="TestFrame"   >
             <definition   >
                 Text with    multiple
-                
-                
+
+
                 whitespace sections
-                
+
             </definition>
         </frame>"#;
 

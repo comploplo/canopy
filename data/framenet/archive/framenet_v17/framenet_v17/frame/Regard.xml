@@ -15,7 +15,7 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="04/21/2005 02:19:44 PDT Thu" abbrev="eva" name="Evaluee" ID="7841">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Evaluee&lt;/fen&gt; is the person or thing that a judgment is made with respect to. With verbs this FE is typically expressed as Object: 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Evaluee&lt;/fen&gt; is the person or thing that a judgment is made with respect to. With verbs this FE is typically expressed as Object:
 &lt;ex&gt;He &lt;t&gt;regarded&lt;/t&gt; &lt;fex name="eva"&gt;her&lt;/fex&gt; poorly.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="90876C" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MJE" cDate="04/21/2005 02:19:44 PDT Thu" abbrev="exp" name="Explanation" ID="7842">

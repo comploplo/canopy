@@ -5,12 +5,12 @@
 
 &lt;ex&gt;The &lt;fex name="Product"&gt;consumer electronics&lt;/fex&gt; &lt;fex name="Business"&gt;&lt;t&gt;company&lt;/t&gt;&lt;/fex&gt; &lt;fex name="Business_Name"&gt;Apple&lt;/fex&gt; has exploded with popularity in recent years.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="Tess" cDate="07/03/2002 10:34:44 PDT Wed" abbrev="Prd" name="Product" ID="3323">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Product&lt;/fen&gt; identifies the product or service provided by the business.  
+        <definition>&lt;def-root&gt;&lt;fen&gt;Product&lt;/fen&gt; identifies the product or service provided by the business.
 &lt;ex&gt;Josh runs a &lt;fex name="Product"&gt;copier toner&lt;/fex&gt; &lt;t&gt;business&lt;/t&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Peripheral" cBy="Tess" cDate="07/03/2002 10:41:09 PDT Wed" abbrev="Pptr" name="Proprietor" ID="3324">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Proprietor&lt;/fen&gt; is the owner or chief participant in the business. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Proprietor&lt;/fen&gt; is the owner or chief participant in the business.
 &lt;ex&gt;I worked in &lt;fex name="Pptr"&gt;Goldberg's&lt;/fex&gt; legal &lt;t&gt;practice&lt;/t&gt; .&lt;/ex&gt;
 &lt;ex&gt;I didn't want to go into the &lt;fex name="Pptr"&gt;family&lt;/fex&gt; &lt;t&gt;business&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

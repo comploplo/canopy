@@ -9,7 +9,7 @@
 &lt;ex&gt;&lt;fex name="Undergoer"&gt;The lake&lt;/fex&gt; &lt;t&gt;froze&lt;/t&gt; &lt;fex name="Result"&gt;into ice&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Undergoer"&gt;The lake&lt;/fex&gt; &lt;t&gt;froze&lt;/t&gt; &lt;fex name="Degree"&gt;to depths of 30 feet&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="05/31/2002 12:29:48 PDT Fri" abbrev="Und" name="Undergoer" ID="2883">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Undergoer&lt;/fen&gt; is the entity that undergoes a change of phase. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Undergoer&lt;/fen&gt; is the entity that undergoes a change of phase.
 
 &lt;ex&gt;&lt;fex name="Undergoer"&gt;The water&lt;/fex&gt; &lt;t&gt;froze&lt;/t&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

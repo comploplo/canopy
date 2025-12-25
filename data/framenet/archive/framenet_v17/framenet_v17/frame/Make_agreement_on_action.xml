@@ -48,14 +48,14 @@ within a prepositional phrase (e.g. headed by with).
 &lt;ex&gt;Some types of alloy steel have been covered in the expiring &lt;fex name="top"&gt;trade&lt;/fex&gt; &lt;t&gt;agreement&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="03/01/2005 06:08:22 PST Tue" abbrev="med" name="Medium" ID="7583">
-        <definition>&lt;def-root&gt;As with other frames in the Communication domain, the &lt;fen&gt;Medium&lt;/fen&gt; of communication may be expressed. &lt;fen&gt;Medium&lt;/fen&gt; is the physical entity or channel used to record or negotiate the &lt;fen&gt;Obligation&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;As with other frames in the Communication domain, the &lt;fen&gt;Medium&lt;/fen&gt; of communication may be expressed. &lt;fen&gt;Medium&lt;/fen&gt; is the physical entity or channel used to record or negotiate the &lt;fen&gt;Obligation&lt;/fen&gt;.
 
 
 &lt;ex&gt;The parties made a &lt;fex name="med"&gt;written&lt;/fex&gt; &lt;t&gt;agreement&lt;/t&gt; to arbitrate disputes arising in connection with the contract.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="03/01/2005 06:08:22 PST Tue" abbrev="man" name="Manner" ID="7584">
-        <definition>&lt;def-root&gt;Any description of the act of making an agreement which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of either &lt;fen&gt;Party_1&lt;/fen&gt; or &lt;fen&gt;Parties&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the act of making an agreement which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of either &lt;fen&gt;Party_1&lt;/fen&gt; or &lt;fen&gt;Parties&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 
 &lt;ex&gt;I &lt;fex name="man"&gt;readily&lt;/fex&gt; &lt;t&gt;agreed&lt;/t&gt; with her to end our wrestling match.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

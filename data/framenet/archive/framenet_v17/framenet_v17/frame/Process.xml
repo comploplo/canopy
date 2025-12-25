@@ -3,7 +3,7 @@
 <frame cBy="MJE" cDate="09/27/2001 06:36:09 PDT Thu" name="Process" ID="233" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;This frame describes a complex event which lasts some amount of time, consisting of a beginning stage, a stage where the process is ongoing, and a finish or end.  In some cases the process may pause, and then possibly resume.
 
-In this frame and its subframes, the distinguished argument is a &lt;fen&gt;Process&lt;/fen&gt;, and there is no reference to an Entity which undergoes this &lt;fen&gt;Process&lt;/fen&gt; or an Agent which initiates this &lt;fen&gt;Process&lt;/fen&gt;.  
+In this frame and its subframes, the distinguished argument is a &lt;fen&gt;Process&lt;/fen&gt;, and there is no reference to an Entity which undergoes this &lt;fen&gt;Process&lt;/fen&gt; or an Agent which initiates this &lt;fen&gt;Process&lt;/fen&gt;.
 
 In formal terms, this frame refers to an overall controller x-schema (Narayanan 1997) with subframes corresponding to parts of the x-schema.
 

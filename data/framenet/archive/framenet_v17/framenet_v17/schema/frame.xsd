@@ -4,7 +4,7 @@
             targetNamespace="http://framenet.icsi.berkeley.edu"
             xmlns="http://framenet.icsi.berkeley.edu"
             elementFormDefault="qualified">
-<!-- 
+<!--
     1. Root element is 'frame'
     2. 'frame' has 3 attributes:
         1. 'ID', a nonNegativeInteger
@@ -60,7 +60,7 @@
                 </xsd:element>
                 <xsd:element name="frameRelation" type="fn:relatedFramesType"
                     maxOccurs="unbounded"/>
-                <xsd:element name="lexUnit" type="fn:frameLUType" 
+                <xsd:element name="lexUnit" type="fn:frameLUType"
                     minOccurs="0" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="ID" type="fn:IDType" use="required"/>
@@ -92,7 +92,7 @@
         <xsd:attribute name="ID" type="xsd:int" use="required"/>
         <xsd:attribute name="name" type="xsd:string" use="required"/>
     </xsd:complexType>
-    
+
     <!-- Related frames type -->
     <xsd:complexType name="relatedFramesType">
         <xsd:sequence>
@@ -101,7 +101,7 @@
         </xsd:sequence>
         <xsd:attribute name="type" type="xsd:string" use="required"/>
     </xsd:complexType>
-    
+
     <!-- frame-embedded lexUnit type -->
     <xsd:complexType name="frameLUType">
         <xsd:sequence>
@@ -132,18 +132,18 @@
             </xsd:extension>
           </xsd:simpleContent>
     </xsd:complexType>
- 
- 
+
+
     <!-- Related frames id name type -->
     <!-- Changed type from fn:frameNameType to fn type -->
-    <!--     
+    <!--
     <xsd:complexType name="relatedFramesIDNameType">
         <xsd:sequence>
             <xsd:element name="relatedFrame" type="fn:frameIDNameType"
                 minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
         <xsd:attribute name="type" type="xsd:string" use="required"/>
-    </xsd:complexType> 
+    </xsd:complexType>
     -->
 
 

@@ -53,7 +53,7 @@
 &lt;ex&gt;John's mother &lt;t&gt;bore&lt;/t&gt; him &lt;fex name="Result"&gt;into a wealthy family&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="01/25/2006 06:22:17 PST Wed" abbrev="man" name="Manner" ID="9887">
-        <definition>&lt;def-root&gt;Any description of the intentional act which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of the &lt;fen&gt;Parents&lt;/fen&gt; (or a &lt;fen&gt;Father&lt;/fen&gt; or &lt;fen&gt;Mother&lt;/fen&gt;) that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the intentional act which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of the &lt;fen&gt;Parents&lt;/fen&gt; (or a &lt;fen&gt;Father&lt;/fen&gt; or &lt;fen&gt;Mother&lt;/fen&gt;) that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 
 &lt;ex&gt;They &lt;fex name="Manner"&gt;eagerly&lt;/fex&gt; &lt;t&gt;spawned&lt;/t&gt; more of their kind until there was no room for more.&lt;/ex&gt;
 

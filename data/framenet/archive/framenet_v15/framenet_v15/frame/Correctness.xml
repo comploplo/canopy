@@ -35,7 +35,7 @@
         <definition>&lt;def-root&gt;Circumstances describe the state of the world (at a particular time and place) which is specifically independent of the event itself and any of its participants.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Core" cBy="361" cDate="05/16/2007 04:04:51 PDT Wed" abbrev="sou" name="Source" ID="11735">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Source&lt;/fen&gt; is the agent who holds the correct/incorrect information. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Source&lt;/fen&gt; is the agent who holds the correct/incorrect information.
 
 &lt;ex&gt;&lt;fex name="Source"&gt;He&lt;/fex&gt; is correct&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Topic" ID="13452"/>

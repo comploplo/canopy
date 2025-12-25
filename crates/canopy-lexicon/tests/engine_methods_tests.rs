@@ -67,7 +67,7 @@ fn create_test_lexicon() -> (TempDir, LexiconEngine) {
         ..Default::default()
     };
 
-    let mut engine = LexiconEngine::new(config);
+    let mut engine = LexiconEngine::with_config(config);
     engine.load_data().expect("Failed to load test data");
 
     (temp_dir, engine)

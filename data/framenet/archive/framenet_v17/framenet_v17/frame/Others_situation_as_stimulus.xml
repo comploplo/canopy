@@ -32,7 +32,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="KmG" cDate="04/08/2008 03:48:15 PDT Tue" abbrev="cir" name="Circumstances" ID="12478">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; is the condition(s) under which the &lt;fen&gt;Other&lt;/fen&gt; evokes its response.  
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; is the condition(s) under which the &lt;fen&gt;Other&lt;/fen&gt; evokes its response.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Peripheral" cBy="KmG" cDate="04/08/2008 03:48:15 PDT Tue" abbrev="Par" name="Parameter" ID="12481">

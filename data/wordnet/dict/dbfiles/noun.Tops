@@ -54,4 +54,3 @@
 { [ communication, adj.all:communicative^communicational,+ verb.possession:communicate10,+ verb.communication:communicate8,+ verb.communication:communicate7,+ verb.communication:communicate2,+ verb.communication:communicate1,+ verb.communication:communicate,+ ] abstraction,@  (something that is communicated by or to or between people or groups) }
 { [ measure, verb.cognition:measure1,+ verb.change:measure,+ verb.cognition:measure,+ ] quantity, [ amount, verb.stative:amount1,+ ] abstraction,@ (how much there is or how many there are of something that you can quantify) }
 { phenomenon, process,@ (any state or process known through the senses rather than by intuition or reasoning) }
-

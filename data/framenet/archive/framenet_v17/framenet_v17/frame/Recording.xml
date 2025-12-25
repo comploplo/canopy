@@ -20,7 +20,7 @@ government&lt;/fex&gt; were &lt;t&gt;registered&lt;/t&gt; &lt;fex name="med"&gt;
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="08/17/2005 12:13:12 PDT Wed" abbrev="Phen" name="Phenomenon" ID="8887">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Phenomenon&lt;/fen&gt; is the entity or situation in the world of which a &lt;fen&gt;Agent&lt;/fen&gt; becomes aware. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Phenomenon&lt;/fen&gt; is the entity or situation in the world of which a &lt;fen&gt;Agent&lt;/fen&gt; becomes aware.
 
 &lt;ex&gt;Adams took some very good advice and meticulously &lt;t&gt;recorded&lt;/t&gt; &lt;fex name="Phen"&gt;the events that ensued&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

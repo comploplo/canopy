@@ -3,7 +3,7 @@
 <frame cBy="664" cDate="08/01/2001 06:09:20 PDT Wed" name="Biological_area" ID="193" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt; This frame contains words that denote large ecological areas as well as smaller locations characterized by the type of life present--in other words, geography locations as defined by biota. &lt;/def-root&gt;</definition>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/10/2001 05:00:30 PDT Fri" abbrev="Cnst" name="Constituent_parts" ID="1575">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Constituent_parts&lt;/fen&gt; make up a &lt;fen&gt;Locale&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Constituent_parts&lt;/fen&gt; make up a &lt;fen&gt;Locale&lt;/fen&gt;.
 &lt;ex&gt;This is the  oldest  &lt;fex name="Cnst"&gt;oak&lt;/fex&gt; &lt;t&gt;forest&lt;/t&gt; in California.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/10/2001 05:00:30 PDT Fri" abbrev="ContP" name="Container_possessor" ID="1576">
@@ -25,7 +25,7 @@ This FE is also used for words  that indicate no salient formation.
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/13/2001 11:30:47 PDT Mon" abbrev="Name" name="Name" ID="1597">
         <definition>&lt;def-root&gt;This FE indicates the &lt;fen&gt;Name&lt;/fen&gt;s of &lt;fen&gt;Locale&lt;/fen&gt;s.
 &lt;ex&gt;Jon explored the &lt;t&gt;forests&lt;/t&gt; &lt;fex name="Name"&gt;of California&lt;/fex&gt;.&lt;/ex&gt;
-&lt;ex&gt;Jon hiked around &lt;fex name="Name"&gt;Muir&lt;/fex&gt; &lt;t&gt;Woods&lt;/t&gt;. &lt;/ex&gt; 
+&lt;ex&gt;Jon hiked around &lt;fex name="Name"&gt;Muir&lt;/fex&gt; &lt;t&gt;Woods&lt;/t&gt;. &lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/13/2001 11:51:05 PDT Mon" abbrev="RelLoc" name="Relative_location" ID="1600">

@@ -54,7 +54,7 @@ the steamboat &lt;fex name="Means"&gt;by climbing up and over or jumping down an
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="06/15/2005 07:10:26 PDT Wed" abbrev="Mnr" name="Manner" ID="8171">
-        <definition>&lt;def-root&gt;Any description of the running of the &lt;fen&gt;System&lt;/fen&gt;  which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Operator&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the running of the &lt;fen&gt;System&lt;/fen&gt;  which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Operator&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 
 &lt;ex&gt;The farm is owned and &lt;fex name="Mnr"&gt;carefully&lt;/fex&gt; &lt;t&gt;operated&lt;/t&gt; by John and Janice Maloney in Newberry Springs, California.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

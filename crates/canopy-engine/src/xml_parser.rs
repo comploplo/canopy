@@ -172,12 +172,9 @@ impl XmlParser {
 
     /// Parse all XML files in a directory in parallel (if rayon feature is enabled)
     #[cfg(feature = "parallel")]
-    pub fn parse_directory_parallel<T: XmlResource + Send>(
-        &self,
-        dir_path: &Path,
-    ) -> EngineResult<Vec<T>>
+    pub fn parse_directory_parallel<T>(&self, dir_path: &Path) -> EngineResult<Vec<T>>
     where
-        T: Send + Sync,
+        T: XmlResource + Send + Sync,
     {
         use rayon::prelude::*;
 
@@ -420,7 +417,6 @@ pub mod utils {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::io::Cursor;
 
     // Test resource for parsing
     #[derive(Debug, PartialEq)]
@@ -450,7 +446,7 @@ mod tests {
                             let value_str =
                                 utils::extract_text_content(reader, &mut buf, b"value")?;
                             value = value_str.parse().map_err(|e| {
-                                EngineError::data_load(format!("Invalid value: {}", e))
+                                EngineError::data_load(format!("Invalid value: {e}"))
                             })?;
                         }
                         _ => {}
@@ -459,7 +455,7 @@ mod tests {
                         break;
                     }
                     Ok(Event::Eof) => break,
-                    Err(e) => return Err(EngineError::data_load(format!("XML error: {}", e))),
+                    Err(e) => return Err(EngineError::data_load(format!("XML error: {e}"))),
                     _ => {}
                 }
                 buf.clear();

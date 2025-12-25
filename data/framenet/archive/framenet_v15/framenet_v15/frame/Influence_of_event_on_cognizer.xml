@@ -30,7 +30,7 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="04/16/2004 03:49:30 PDT Fri" abbrev="act" name="Action" ID="6305">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Action&lt;/fen&gt; that the &lt;fen&gt;Cognizer&lt;/fen&gt; is influenced to do. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Action&lt;/fen&gt; that the &lt;fen&gt;Cognizer&lt;/fen&gt; is influenced to do.
 
 &lt;ex&gt;Everyone in the town also enjoyed her writing, which &lt;t&gt;influenced&lt;/t&gt; her &lt;fex name="act"&gt;to continue&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -41,7 +41,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="04/16/2004 04:01:28 PDT Fri" abbrev="man" name="Manner" ID="6307">
-        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), and general descriptions comparing events (the same way). 
+        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), and general descriptions comparing events (the same way).
 
 &lt;ex&gt;I can't say that any single writer has &lt;t&gt;influenced&lt;/t&gt; me &lt;fex name="man"&gt;directly&lt;/fex&gt;, that I'm aware of ...&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

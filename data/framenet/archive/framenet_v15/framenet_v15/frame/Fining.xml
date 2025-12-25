@@ -31,7 +31,7 @@ John &lt;t&gt;flattered&lt;/t&gt; her &lt;fex name="Purpose"&gt;to receive a rai
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="08/31/2001 01:24:56 PDT Fri" abbrev="" name="Payer" ID="1815">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Payer&lt;/fen&gt; is the person or thing about whom/which a judgment is made.  With verbs this FE is typically expressed as Object: 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Payer&lt;/fen&gt; is the person or thing about whom/which a judgment is made.  With verbs this FE is typically expressed as Object:
 &lt;ex&gt;The mental control officer &lt;t&gt;fined&lt;/t&gt; &lt;fex name="Payer"&gt;you&lt;/fex&gt; for your lack of diligence.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Source" ID="151"/>
     </FE>
@@ -57,8 +57,8 @@ Pat paid &lt;fex name="Money"&gt;14 dollars&lt;/fex&gt; in &lt;t&gt;fines&lt;/t&
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/31/2001 01:34:41 PDT Fri" abbrev="Unit" name="Unit" ID="1822">
         <definition>&lt;def-root&gt;This FE is any unit in which goods or services can be measured.
-Generally, it occurs in a &lt;t&gt;by&lt;/t&gt;-PP. 
-Bob &lt;t&gt;sells&lt;/t&gt; peppers &lt;fex name="Unit"&gt;by weight&lt;/fex&gt;. 
+Generally, it occurs in a &lt;t&gt;by&lt;/t&gt;-PP.
+Bob &lt;t&gt;sells&lt;/t&gt; peppers &lt;fex name="Unit"&gt;by weight&lt;/fex&gt;.
 Lee &lt;t&gt;buys&lt;/t&gt; potatoes &lt;fex name="Unit"&gt;by the pound&lt;/fex&gt;. &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFFFFF" fgColor="FF0000" coreType="Peripheral" cBy="664" cDate="06/12/2003 01:43:50 PDT Thu" abbrev="Ev" name="Event" ID="4629">

@@ -1,0 +1,71 @@
+# Nextest configuration for canopy
+# https://nexte.st/docs/configuration/
+
+[profile.default]
+# Default profile excludes slow integration tests that load real semantic data
+# These tests take 30+ seconds each as they initialize VerbNet/FrameNet/WordNet
+#
+# Two types of slow tests are excluded:
+# 1. Binary pattern matches: Test files with integration/loaded/comprehensive/caching in name
+# 2. Test name pattern matches: Inline tests that load SemanticCoordinator
+default-filter = """
+not binary(~integration) & \
+not binary(~loaded) & \
+not binary(~comprehensive) & \
+not binary(~caching) & \
+not test(~full_pipeline) & \
+not test(~unified_statistics) & \
+not test(~aspectual_class) & \
+not test(~confidence_threshold_filtering) & \
+not test(~frame_element_extraction) & \
+not test(~error_handling_paths) & \
+not test(~different_input_lengths) & \
+not test(~analyze_token_method) & \
+not test(~quantifier_analysis) & \
+not test(~semantic_role_enhancement) & \
+not test(~semantic_integration) & \
+not test(~dev_data_integration) & \
+not test(~engine_error_handling) & \
+not test(~confidence_calculation)
+"""
+
+[profile.ci]
+# CI profile - same as default for fast feedback
+default-filter = """
+not binary(~integration) & \
+not binary(~loaded) & \
+not binary(~comprehensive) & \
+not binary(~caching) & \
+not test(~full_pipeline) & \
+not test(~unified_statistics) & \
+not test(~aspectual_class) & \
+not test(~confidence_threshold_filtering) & \
+not test(~frame_element_extraction) & \
+not test(~error_handling_paths) & \
+not test(~different_input_lengths) & \
+not test(~analyze_token_method) & \
+not test(~quantifier_analysis) & \
+not test(~semantic_role_enhancement) & \
+not test(~semantic_integration) & \
+not test(~dev_data_integration) & \
+not test(~engine_error_handling) & \
+not test(~confidence_calculation)
+"""
+
+[profile.full]
+# Full profile runs everything including slow integration tests
+# Use: cargo nextest run --profile full
+default-filter = "all()"
+
+[profile.integration]
+# Only run slow integration tests
+# Use: cargo nextest run --profile integration
+default-filter = """
+binary(~integration) | \
+binary(~loaded) | \
+binary(~comprehensive) | \
+binary(~caching) | \
+test(~full_pipeline) | \
+test(~unified_statistics) | \
+test(~semantic_integration)
+"""

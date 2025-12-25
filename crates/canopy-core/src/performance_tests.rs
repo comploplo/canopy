@@ -21,7 +21,7 @@ mod performance_edge_case_tests {
                 let global_id = (sentence_id - 1) * 20 + word_id;
                 words.push(Word::new(
                     global_id,
-                    format!("word{}", word_id),
+                    format!("word{word_id}"),
                     (global_id - 1) * 5,
                     global_id * 5,
                 ));
@@ -43,8 +43,7 @@ mod performance_edge_case_tests {
         // Performance should be reasonable (under 1 second for creation)
         assert!(
             creation_time.as_millis() < 1000,
-            "Document creation took too long: {:?}",
-            creation_time
+            "Document creation took too long: {creation_time:?}"
         );
     }
 
@@ -58,7 +57,7 @@ mod performance_edge_case_tests {
                 let global_id = (sentence_id - 1) * 50 + word_id;
                 words.push(Word::new(
                     global_id,
-                    format!("word{}", word_id),
+                    format!("word{word_id}"),
                     (global_id - 1) * 6,
                     global_id * 6,
                 ));
@@ -93,8 +92,7 @@ mod performance_edge_case_tests {
         // Iteration should be fast (under 100ms)
         assert!(
             iteration_time.as_millis() < 100,
-            "Document iteration took too long: {:?}",
-            iteration_time
+            "Document iteration took too long: {iteration_time:?}"
         );
     }
 
@@ -105,7 +103,7 @@ mod performance_edge_case_tests {
         for word_id in 1..=100_000 {
             words.push(Word::new(
                 word_id,
-                format!("word{}", word_id),
+                format!("word{word_id}"),
                 (word_id - 1) * 5,
                 word_id * 5,
             ));
@@ -127,8 +125,7 @@ mod performance_edge_case_tests {
         // Random access should be very fast (under 10ms)
         assert!(
             access_time.as_millis() < 10,
-            "Word access took too long: {:?}",
-            access_time
+            "Word access took too long: {access_time:?}"
         );
     }
 
@@ -152,20 +149,20 @@ mod performance_edge_case_tests {
                 voice: Some(UDVoice::Active),
                 degree: Some(UDDegree::Positive),
                 verbform: Some(UDVerbForm::Finite),
-                raw_features: Some(format!("Feature{}", i)),
+                raw_features: Some(format!("Feature{i}")),
             };
 
             let word = Word {
                 id: i,
-                text: format!("complexword{}", i),
-                lemma: format!("lemma{}", i),
+                text: format!("complexword{i}"),
+                lemma: format!("lemma{i}"),
                 upos: UPos::Verb,
-                xpos: Some(format!("VB{}", i)),
+                xpos: Some(format!("VB{i}")),
                 feats: morph_features,
-                head: Some(if i > 1 { i - 1 } else { 0 }),
+                head: Some(i.saturating_sub(1)),
                 deprel: DepRel::Root,
-                deps: Some(format!("{}:nsubj", i)),
-                misc: Some(format!("SpaceAfter=No|Misc{}", i)),
+                deps: Some(format!("{i}:nsubj")),
+                misc: Some(format!("SpaceAfter=No|Misc{i}")),
                 start: (i - 1) * 10,
                 end: i * 10,
             };
@@ -215,13 +212,11 @@ mod performance_edge_case_tests {
         // Both creation and processing should be fast
         assert!(
             creation_time.as_millis() < 500,
-            "Feature creation took too long: {:?}",
-            creation_time
+            "Feature creation took too long: {creation_time:?}"
         );
         assert!(
             processing_time.as_millis() < 100,
-            "Feature processing took too long: {:?}",
-            processing_time
+            "Feature processing took too long: {processing_time:?}"
         );
     }
 
@@ -234,24 +229,24 @@ mod performance_edge_case_tests {
         for i in 1..=1_000 {
             let agent = Entity {
                 id: i * 2,
-                text: format!("agent{}", i),
+                text: format!("agent{i}"),
                 animacy: Some(Animacy::Human),
                 definiteness: Some(Definiteness::Definite),
             };
 
             let theme = Entity {
                 id: i * 2 + 1,
-                text: format!("theme{}", i),
+                text: format!("theme{i}"),
                 animacy: Some(Animacy::Inanimate),
                 definiteness: Some(Definiteness::Indefinite),
             };
 
             let action = Action {
-                predicate: format!("action{}", i),
-                manner: Some(format!("manner{}", i)),
+                predicate: format!("action{i}"),
+                manner: Some(format!("manner{i}")),
                 instrument: Some(Entity {
                     id: i * 3,
-                    text: format!("instrument{}", i),
+                    text: format!("instrument{i}"),
                     animacy: Some(Animacy::Inanimate),
                     definiteness: Some(Definiteness::Indefinite),
                 }),
@@ -268,7 +263,7 @@ mod performance_edge_case_tests {
 
             let event = Event {
                 id: i,
-                predicate: format!("predicate{}", i),
+                predicate: format!("predicate{i}"),
                 little_v,
                 participants,
                 aspect: AspectualClass::Activity,
@@ -306,13 +301,11 @@ mod performance_edge_case_tests {
         // Performance should be reasonable
         assert!(
             creation_time.as_millis() < 1000,
-            "Event creation took too long: {:?}",
-            creation_time
+            "Event creation took too long: {creation_time:?}"
         );
         assert!(
             processing_time.as_millis() < 100,
-            "Event processing took too long: {:?}",
-            processing_time
+            "Event processing took too long: {processing_time:?}"
         );
     }
 
@@ -344,15 +337,11 @@ mod performance_edge_case_tests {
         // Time should scale roughly linearly (within 2x factor per 10x increase)
         assert!(
             time2.as_nanos() < time1.as_nanos() * 25,
-            "Medium processing too slow: {:?} vs {:?}",
-            time2,
-            time1
+            "Medium processing too slow: {time2:?} vs {time1:?}"
         );
         assert!(
             time3.as_nanos() < time2.as_nanos() * 25,
-            "Large processing too slow: {:?} vs {:?}",
-            time3,
-            time2
+            "Large processing too slow: {time3:?} vs {time2:?}"
         );
     }
 
@@ -361,8 +350,8 @@ mod performance_edge_case_tests {
         for i in 1..=count {
             words.push(Word {
                 id: i,
-                text: format!("word{}", i),
-                lemma: format!("lemma{}", i),
+                text: format!("word{i}"),
+                lemma: format!("lemma{i}"),
                 upos: if i % 3 == 0 { UPos::Verb } else { UPos::Noun },
                 xpos: None,
                 feats: MorphFeatures::default(),
@@ -390,8 +379,8 @@ mod performance_edge_case_tests {
         for i in 1..=depth {
             words.push(Word {
                 id: i,
-                text: format!("word{}", i),
-                lemma: format!("lemma{}", i),
+                text: format!("word{i}"),
+                lemma: format!("lemma{i}"),
                 upos: UPos::Noun,
                 xpos: None,
                 feats: MorphFeatures::default(),
@@ -433,8 +422,7 @@ mod performance_edge_case_tests {
         // Deep traversal should still be reasonably fast
         assert!(
             traversal_time.as_millis() < 100,
-            "Dependency traversal took too long: {:?}",
-            traversal_time
+            "Dependency traversal took too long: {traversal_time:?}"
         );
     }
 
@@ -445,7 +433,7 @@ mod performance_edge_case_tests {
         // Create many enhanced words with semantic features
         let mut enhanced_words = Vec::new();
         for i in 1..=5_000 {
-            let base_word = Word::new(i, format!("word{}", i), i * 5, (i + 1) * 5);
+            let base_word = Word::new(i, format!("word{i}"), i * 5, (i + 1) * 5);
 
             let semantic_features = SemanticFeatures {
                 animacy: Some(if i % 4 == 0 {
@@ -515,13 +503,11 @@ mod performance_edge_case_tests {
         // Both creation and analysis should be efficient
         assert!(
             creation_time.as_millis() < 500,
-            "Enhanced word creation took too long: {:?}",
-            creation_time
+            "Enhanced word creation took too long: {creation_time:?}"
         );
         assert!(
             analysis_time.as_millis() < 50,
-            "Feature analysis took too long: {:?}",
-            analysis_time
+            "Feature analysis took too long: {analysis_time:?}"
         );
     }
 
@@ -541,7 +527,7 @@ mod performance_edge_case_tests {
                     let global_id = (doc_id - 1) * 1000 + (sent_id - 1) * 20 + word_id;
                     words.push(Word::new(
                         global_id,
-                        format!("word{}", word_id),
+                        format!("word{word_id}"),
                         (word_id - 1) * 5,
                         word_id * 5,
                     ));
@@ -549,7 +535,7 @@ mod performance_edge_case_tests {
                 sentences.push(Sentence::new(words));
             }
 
-            documents.push(Document::new(format!("Document {}", doc_id), sentences));
+            documents.push(Document::new(format!("Document {doc_id}"), sentences));
         }
 
         let creation_time = start.elapsed();
@@ -574,13 +560,11 @@ mod performance_edge_case_tests {
         // Performance should scale well for multiple documents
         assert!(
             creation_time.as_millis() < 2000,
-            "Multi-document creation took too long: {:?}",
-            creation_time
+            "Multi-document creation took too long: {creation_time:?}"
         );
         assert!(
             processing_time.as_millis() < 100,
-            "Multi-document processing took too long: {:?}",
-            processing_time
+            "Multi-document processing took too long: {processing_time:?}"
         );
     }
 
@@ -599,7 +583,7 @@ mod performance_edge_case_tests {
                     role,
                     Entity {
                         id: i * 100 + j,
-                        text: format!("entity_{}_{}", i, j),
+                        text: format!("entity_{i}_{j}"),
                         animacy: Some(if j % 2 == 0 {
                             Animacy::Human
                         } else {
@@ -616,14 +600,14 @@ mod performance_edge_case_tests {
 
             let agent = participants.get(&ThetaRole::Agent).unwrap().clone();
             let action = Action {
-                predicate: format!("complex_action_{}", i),
-                manner: Some(format!("manner_{}", i)),
+                predicate: format!("complex_action_{i}"),
+                manner: Some(format!("manner_{i}")),
                 instrument: participants.get(&ThetaRole::Instrument).cloned(),
             };
 
             let event = Event {
                 id: i,
-                predicate: format!("complex_predicate_{}", i),
+                predicate: format!("complex_predicate_{i}"),
                 little_v: LittleV::Do { agent, action },
                 participants,
                 aspect: AspectualClass::Activity,

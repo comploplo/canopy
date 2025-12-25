@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="04/23/2004 12:00:05 PDT Fri" name="Objective_influence" ID="1084" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Influencing_variable&lt;/fen&gt;, an &lt;fen&gt;Influencing_situation&lt;/fen&gt;, or an &lt;fen&gt;Influencing_entity&lt;/fen&gt; has an influence on a &lt;fen&gt;Dependent_entity&lt;/fen&gt;, &lt;fen&gt;Dependent_variable&lt;/fen&gt;,  or a &lt;fen&gt;Dependent_situation&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Influencing_variable&lt;/fen&gt;, an &lt;fen&gt;Influencing_situation&lt;/fen&gt;, or an &lt;fen&gt;Influencing_entity&lt;/fen&gt; has an influence on a &lt;fen&gt;Dependent_entity&lt;/fen&gt;, &lt;fen&gt;Dependent_variable&lt;/fen&gt;,  or a &lt;fen&gt;Dependent_situation&lt;/fen&gt;.
 
 
 &lt;ex&gt;More and more doctors realise that &lt;fex name="infs"&gt;diet&lt;/fex&gt; can &lt;t&gt;influence&lt;/t&gt; &lt;fex name="deps"&gt;disease&lt;/fex&gt;.&lt;/ex&gt;

@@ -31,7 +31,7 @@
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="03/04/2002 03:05:05 PST Mon" abbrev="Manr" name="Manner" ID="2434">
         <definition>&lt;def-root&gt;Manner of performing an action.  This frame includes some peculiar examples of manner phrases.
-&lt;t&gt;Write&lt;/t&gt; it &lt;fex name="Manner"&gt;in pen&lt;/fex&gt;.  
+&lt;t&gt;Write&lt;/t&gt; it &lt;fex name="Manner"&gt;in pen&lt;/fex&gt;.
 &lt;t&gt;Write&lt;/t&gt; it &lt;fex name="Manner"&gt;in ink&lt;/fex&gt;.&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

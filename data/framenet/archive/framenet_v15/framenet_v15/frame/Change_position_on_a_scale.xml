@@ -19,7 +19,7 @@ The analysis is more complicated when an event-denoting noun phrase occurs as th
 
 &lt;ex&gt;(1)&lt;fex name="Item"&gt;Accidents&lt;/fex&gt; &lt;t&gt;increased&lt;/t&gt; &lt;fex name="Difference"&gt;20%&lt;/fex&gt; &lt;fex name="val2"&gt;to 345&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;(1--second FE layer)Accidents &lt;t&gt;increased&lt;/t&gt; 20% &lt;fex name="Attribute"&gt;to 345&lt;/fex&gt;.&lt;/ex&gt;
-&lt;ex&gt;(2) &lt;fex name="Item"&gt;Attacks on civilians&lt;/fex&gt; &lt;t&gt;decreased&lt;/t&gt; &lt;fex name="Time"&gt;over the last 4 months&lt;/fex&gt; 
+&lt;ex&gt;(2) &lt;fex name="Item"&gt;Attacks on civilians&lt;/fex&gt; &lt;t&gt;decreased&lt;/t&gt; &lt;fex name="Time"&gt;over the last 4 months&lt;/fex&gt;
 &lt;fex name="Attribute"&gt;DNI&lt;/fex&gt;.&lt;/ex&gt;
 
 In cases  like (1), we will tag the &lt;fen&gt;Attribute&lt;/fen&gt; on the second layer below the &lt;fen&gt;Final_value&lt;/fen&gt; label, as that FE makes
@@ -27,7 +27,7 @@ it clear that the &lt;fen&gt;Attribute&lt;/fen&gt; is simply cardinality. In cas
 to understand a particular &lt;fen&gt;Attribute&lt;/fen&gt; rather than just some or any appropriate &lt;fen&gt;Attribute&lt;/fen&gt; of the
 &lt;fen&gt;Item&lt;/fen&gt;.  Note that the above pattern can be compared to cases involving tangible &lt;fen&gt;Item&lt;/fen&gt;s, where the &lt;fen&gt;Attribute&lt;/fen&gt; may similarly be missing when the incidence or frequency of the &lt;fen&gt;Item&lt;/fen&gt; is specified.
 
-&lt;ex&gt;(3) &lt;fex name="Item"&gt;Woodland birds&lt;/fex&gt; &lt;t&gt;increased&lt;/t&gt;&lt;fex name="val2"&gt;to their highest level since 1990&lt;/fex&gt; &lt;fex name="Attribute"&gt;DNI&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;(3) &lt;fex name="Item"&gt;Woodland birds&lt;/fex&gt; &lt;t&gt;increased&lt;/t&gt;&lt;fex name="val2"&gt;to their highest level since 1990&lt;/fex&gt; &lt;fex name="Attribute"&gt;DNI&lt;/fex&gt;.&lt;/ex&gt;
 
 A more complicated case involving event-denoting subjects is when the &lt;fen&gt;Attribute&lt;/fen&gt; measured is not the incidence of the type of event specified but rather an &lt;fen&gt;Attribute&lt;/fen&gt; of an event-participant. In (4), it is not the &lt;ment&gt;number of times&lt;/ment&gt; that turbot was caught that has changed but the &lt;ment&gt;amount&lt;/ment&gt; of fish caught.
 
@@ -53,7 +53,7 @@ Under one reading, (6a), the population could be understood as referring to "the
 
 &lt;ex&gt;(6a) &lt;fex name="ite"&gt;The population of Smallville&lt;/fex&gt; &lt;t&gt;increased&lt;/t&gt; &lt;fex name="Diff"&gt;fourfold&lt;/fex&gt; &lt;fex name="att"&gt;in size&lt;/fex&gt; &lt;fex name="val2"&gt;to 807&lt;/fex&gt;.&lt;/ex&gt;
 
-Under another reading, (6b), population is an &lt;fen&gt;Attribute&lt;/fen&gt; that habitats or locations possess. In this case, the whole NP "the population of Smallville" is treated as the &lt;fen&gt;Attribute&lt;/fen&gt; and on the second layer "of Smallville" is tagged as &lt;fen&gt;Item&lt;/fen&gt;. 
+Under another reading, (6b), population is an &lt;fen&gt;Attribute&lt;/fen&gt; that habitats or locations possess. In this case, the whole NP "the population of Smallville" is treated as the &lt;fen&gt;Attribute&lt;/fen&gt; and on the second layer "of Smallville" is tagged as &lt;fen&gt;Item&lt;/fen&gt;.
 
 &lt;ex&gt;(6b) &lt;fex name="att"&gt;The population of Smallville&lt;/fex&gt; &lt;t&gt;increased&lt;/t&gt; &lt;fex name="Diff"&gt;fourfold&lt;/fex&gt; &lt;fex name="val2"&gt;to 807&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;(6b-second FE layer) The population &lt;fex name="ite"&gt;of Smallville&lt;/fex&gt; &lt;t&gt;increased&lt;/t&gt; fourfold to 807.&lt;/ex&gt;

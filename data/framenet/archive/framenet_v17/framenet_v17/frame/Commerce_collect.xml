@@ -10,7 +10,7 @@
         <semType name="Source" ID="151"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="08/21/2001 07:51:24 PDT Tue" abbrev="Gds" name="Goods" ID="1693">
-        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Goods&lt;/fen&gt; is anything (including labor or time, for example) which is exchanged for &lt;fen&gt;Money&lt;/fen&gt; in a transaction. 
+        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Goods&lt;/fen&gt; is anything (including labor or time, for example) which is exchanged for &lt;fen&gt;Money&lt;/fen&gt; in a transaction.
 &lt;ex&gt;The man at the counter &lt;t&gt;collected&lt;/t&gt; payment from Lee &lt;fex name="Goods"&gt;for his dry-cleaning&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/21/2001 07:51:24 PDT Tue" abbrev="Mns" name="Means" ID="1694">
@@ -33,7 +33,7 @@
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/21/2001 07:51:24 PDT Tue" abbrev="Unit" name="Unit" ID="1698">
         <definition>&lt;def-root&gt;This FE is any unit in which goods or services can be measured.
-Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP. 
+Generally, it occurs in a &lt;ment&gt;by&lt;/ment&gt;-PP.
 
 &lt;/def-root&gt;</definition>
     </FE>

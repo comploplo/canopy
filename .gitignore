@@ -6,6 +6,11 @@ models/
 *.tar.gz
 *.zip
 
+# External data with embedded git repos
+data/propbank/
+data/ud_english-ewt/
+data/cache/
+
 # Cache files
 .serena/cache/
 .DS_Store
@@ -16,3 +21,19 @@ tarpaulin-report.html
 
 # Temporary files
 delete-me.md
+debug_*.rs
+
+# Agent/Claude files
+.claude/
+*.claude
+
+# Generated reports
+coverage.json
+.benchmarks/
+
+# Backup/obsolete files
+*.backup
+*.obsolete
+
+# Binary caches
+data/cache/

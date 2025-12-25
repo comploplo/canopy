@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="664" cDate="07/15/2005 06:18:50 PDT Fri" name="Product_delivery" ID="1570" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In order to facilitate the purchase of &lt;fen&gt;Goods&lt;/fen&gt; which start off in a location distant from a &lt;fen&gt;Purchaser&lt;/fen&gt;, a &lt;fen&gt;Deliverer&lt;/fen&gt; transports and hands off the &lt;fen&gt;Goods&lt;/fen&gt; to a &lt;fen&gt;Purchaser&lt;/fen&gt; or (more indirectly) a &lt;fen&gt;Goal&lt;/fen&gt; location which is accessible to the &lt;fen&gt;Purchaser&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;In order to facilitate the purchase of &lt;fen&gt;Goods&lt;/fen&gt; which start off in a location distant from a &lt;fen&gt;Purchaser&lt;/fen&gt;, a &lt;fen&gt;Deliverer&lt;/fen&gt; transports and hands off the &lt;fen&gt;Goods&lt;/fen&gt; to a &lt;fen&gt;Purchaser&lt;/fen&gt; or (more indirectly) a &lt;fen&gt;Goal&lt;/fen&gt; location which is accessible to the &lt;fen&gt;Purchaser&lt;/fen&gt;.
 &lt;/def-root&gt;</definition>
     <semType name="Non-Lexical Frame" ID="16"/>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="07/15/2005 06:18:50 PDT Fri" abbrev="del" name="Deliverer" ID="8567">

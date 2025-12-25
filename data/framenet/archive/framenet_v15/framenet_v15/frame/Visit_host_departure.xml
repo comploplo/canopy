@@ -32,7 +32,7 @@
         <semType name="Speed" ID="234"/>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Peripheral" cBy="618" cDate="05/21/2007 03:39:22 PDT Mon" abbrev="MoT" name="Mode_of_transportation" ID="11828">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Mode_of_transportation&lt;/fen&gt; expresses how the motion of the &lt;fen&gt;Visitor&lt;/fen&gt; is effected, by its body or by a vehicle which holds and conveys the &lt;fen&gt;Visitor&lt;/fen&gt;. Vehicles can move in any way and in any medium. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Mode_of_transportation&lt;/fen&gt; expresses how the motion of the &lt;fen&gt;Visitor&lt;/fen&gt; is effected, by its body or by a vehicle which holds and conveys the &lt;fen&gt;Visitor&lt;/fen&gt;. Vehicles can move in any way and in any medium.
 
 In this frame, &lt;fen&gt;Mode_of_transportation&lt;/fen&gt; is often expressed obliquely in a prepositional phrase headed by 'in' or 'by'.&lt;/def-root&gt;</definition>
     </FE>

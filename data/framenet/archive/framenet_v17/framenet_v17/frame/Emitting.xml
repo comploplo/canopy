@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ACW" cDate="06/19/2002 04:41:53 PDT Wed" name="Emitting" ID="359" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;Source_emitter&lt;/fen&gt; discharges its &lt;fen&gt;Emission&lt;/fen&gt; along a &lt;fen&gt;Path&lt;/fen&gt; or to a &lt;fen&gt;Goal&lt;/fen&gt;. 
-&lt;ex&gt; (1) &lt;fex name="Source_emitter"&gt;The factory&lt;/fex&gt; &lt;t&gt;exudes&lt;/t&gt; &lt;fex name="Emission"&gt;toxic fumes&lt;/fex&gt; &lt;fex name="Sub-source"&gt;from three large chimneys&lt;/fex&gt;.&lt;/ex&gt; 
-The &lt;fen&gt;Sub-source&lt;/fen&gt; is only present when the actual &lt;fen&gt;Source_emitter&lt;/fen&gt; is also given or is present in a possessive. 
-&lt;ex&gt; (2) &lt;fex name="Emission"&gt;Light&lt;/fex&gt; is &lt;t&gt;emitted&lt;/t&gt; &lt;fex name="Source_emitter"&gt; from the tower&lt;/fex&gt; . &lt;/ex&gt; 
-&lt;ex&gt; (3) &lt;fex name="Emission"&gt;Noxious odors&lt;/fex&gt; are &lt;t&gt;emitted&lt;/t&gt; &lt;fex name="Sub-source"&gt;from his feet&lt;/fex&gt; . &lt;/ex&gt; 
+    <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;Source_emitter&lt;/fen&gt; discharges its &lt;fen&gt;Emission&lt;/fen&gt; along a &lt;fen&gt;Path&lt;/fen&gt; or to a &lt;fen&gt;Goal&lt;/fen&gt;.
+&lt;ex&gt; (1) &lt;fex name="Source_emitter"&gt;The factory&lt;/fex&gt; &lt;t&gt;exudes&lt;/t&gt; &lt;fex name="Emission"&gt;toxic fumes&lt;/fex&gt; &lt;fex name="Sub-source"&gt;from three large chimneys&lt;/fex&gt;.&lt;/ex&gt;
+The &lt;fen&gt;Sub-source&lt;/fen&gt; is only present when the actual &lt;fen&gt;Source_emitter&lt;/fen&gt; is also given or is present in a possessive.
+&lt;ex&gt; (2) &lt;fex name="Emission"&gt;Light&lt;/fex&gt; is &lt;t&gt;emitted&lt;/t&gt; &lt;fex name="Source_emitter"&gt; from the tower&lt;/fex&gt; . &lt;/ex&gt;
+&lt;ex&gt; (3) &lt;fex name="Emission"&gt;Noxious odors&lt;/fex&gt; are &lt;t&gt;emitted&lt;/t&gt; &lt;fex name="Sub-source"&gt;from his feet&lt;/fex&gt; . &lt;/ex&gt;
 In (3) we would tag 'his' as &lt;fen&gt;Source_emitter&lt;/fen&gt; on a second layer because the inalienable possession on the &lt;fen&gt;Sub-source&lt;/fen&gt; indicates the &lt;fen&gt;Source_emitter&lt;/fen&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="ACW" cDate="06/19/2002 04:43:07 PDT Wed" abbrev="Mnr" name="Manner" ID="3135">
         <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Manner&lt;/fen&gt; in which  the &lt;fen&gt;Source_emitter&lt;/fen&gt; emits the &lt;fen&gt;Emission&lt;/fen&gt;&lt;/def-root&gt;</definition>

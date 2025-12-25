@@ -8,8 +8,8 @@
 &lt;ex&gt;Jo's mother will visit &lt;fex name="RelT"&gt; this coming&lt;/fex&gt; &lt;t&gt;Tuesday&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="243" cDate="09/20/2001 10:19:31 PDT Thu" abbrev="Name" name="Name" ID="1995">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Name&lt;/fen&gt; is used for the name of a day (month, etc.).  
-Note that only the word (or words) that is the name is (are) tagged, not the target word. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Name&lt;/fen&gt; is used for the name of a day (month, etc.).
+Note that only the word (or words) that is the name is (are) tagged, not the target word.
 &lt;ex&gt;&lt;fex name="Name"&gt;Labor&lt;/fex&gt; &lt;t&gt;Day&lt;/t&gt; is just around the corner.&lt;/ex&gt;
 &lt;ex&gt;January is &lt;fex name="Name"&gt;Black History&lt;/fex&gt; &lt;t&gt;Month&lt;/t&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

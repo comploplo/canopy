@@ -21,7 +21,7 @@
 to 11,000-year-old specimens&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="11/18/2004 08:46:43 PST Thu" abbrev="lab" name="Label" ID="7244">
-        <definition>&lt;def-root&gt;The linguistic sign that the &lt;fen&gt;Speaker&lt;/fen&gt; uses to designate the &lt;fen&gt;Entity&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The linguistic sign that the &lt;fen&gt;Speaker&lt;/fen&gt; uses to designate the &lt;fen&gt;Entity&lt;/fen&gt;.
 
 &lt;ex&gt;In Texas, we &lt;t&gt;call&lt;/t&gt; it &lt;fex name="lab"&gt;walking"&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;Americans &lt;t&gt;call&lt;/t&gt; it &lt;fex name="lab"&gt;a faucet&lt;/fex&gt;. What do the British call it ?&lt;/ex&gt;&lt;/def-root&gt;</definition>
@@ -33,7 +33,7 @@ to 11,000-year-old specimens&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="11/18/2004 08:58:10 PST Thu" abbrev="pla" name="Place" ID="7246">
-        <definition>&lt;def-root&gt;A physical space whose occupants use the &lt;fen&gt;Label&lt;/fen&gt; to refer to the &lt;fen&gt;Entity&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;A physical space whose occupants use the &lt;fen&gt;Label&lt;/fen&gt; to refer to the &lt;fen&gt;Entity&lt;/fen&gt;.
 
 &lt;ex&gt;I really loved this movie. &lt;fex name="Place"&gt;In France&lt;/fex&gt;, they &lt;t&gt;called&lt;/t&gt; it "Turbo Interceptor".&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Locative_relation" ID="182"/>

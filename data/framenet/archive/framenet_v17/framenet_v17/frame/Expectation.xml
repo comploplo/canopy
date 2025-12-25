@@ -12,7 +12,7 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:11:56 PST Wed" abbrev="Phen" name="Phenomenon" ID="110">
-        <definition>&lt;def-root&gt;This is what the Cognizer believes will happen in the future. It can be expressed as a Finite Clause Complement, an NP Object, or a VP Complement with or without an NP Object (see General Grammatical Observations): 
+        <definition>&lt;def-root&gt;This is what the Cognizer believes will happen in the future. It can be expressed as a Finite Clause Complement, an NP Object, or a VP Complement with or without an NP Object (see General Grammatical Observations):
 &lt;ex&gt;Pat &lt;t&gt;expects&lt;/t&gt; &lt;fex name="Phenomenon"&gt;that the Yankees will win the World Series&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;Pat &lt;t&gt;expects&lt;/t&gt; &lt;fex name="Phenomenon"&gt;a big win&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;Pat &lt;t&gt;expects&lt;/t&gt; &lt;fex name="Phenomenon"&gt;the Yankees&lt;/fex&gt; &lt;fex name="Phenomenon"&gt;to win the World Series&lt;/fex&gt;.&lt;/ex&gt;

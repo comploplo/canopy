@@ -35,7 +35,7 @@ reciprocal. Instead of a specific mention of the &lt;fen&gt;Obligation&lt;/fen&g
 &lt;ex&gt;Some types of alloy steel have been covered in the expiring &lt;fex name="top"&gt;trade&lt;/fex&gt; &lt;t&gt;agreement&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="04/11/2005 11:56:11 PDT Mon" abbrev="med" name="Medium" ID="7746">
-        <definition>&lt;def-root&gt;As with other frames in the Communication domain, the &lt;fen&gt;Medium&lt;/fen&gt; of communication may be expressed. &lt;fen&gt;Medium&lt;/fen&gt; is the physical entity or channel used to record or negotiate the &lt;fen&gt;Obligation&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;As with other frames in the Communication domain, the &lt;fen&gt;Medium&lt;/fen&gt; of communication may be expressed. &lt;fen&gt;Medium&lt;/fen&gt; is the physical entity or channel used to record or negotiate the &lt;fen&gt;Obligation&lt;/fen&gt;.
 
 
 &lt;ex&gt;The parties have a &lt;fex name="med"&gt;written&lt;/fex&gt; &lt;t&gt;agreement&lt;/t&gt; to arbitrate disputes arising in connection with the contract.&lt;/ex&gt;

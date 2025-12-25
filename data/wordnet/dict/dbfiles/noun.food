@@ -2228,7 +2228,7 @@
 { bock, bock_beer, lager,@ (a very strong lager traditionally brewed in the fall and aged through the winter for consumption in the spring) }
 { lager, lager_beer, beer,@ (a general term for beer made with bottom fermenting yeast (usually by decoction mashing); originally it was brewed in March or April and matured until September) }
 { light_beer, lager,@ (lager with reduced alcohol content) }
-{ Oktoberfest, Octoberfest, lager,@ (a strong lager made originally in Germany for the Oktoberfest celebration; sweet and copper-colored) } 
+{ Oktoberfest, Octoberfest, lager,@ (a strong lager made originally in Germany for the Oktoberfest celebration; sweet and copper-colored) }
 { Pilsner, Pilsener, lager,@ (a pale lager with strong flavor of hops; first brewed in the Bohemian town of Pilsen) }
 { shebeen2, noun.artifact:tavern,@ (unlicensed drinking establishment) }
 { Weissbier, white_beer, wheat_beer, ale,@ noun.location:Germany,;r (a general name for beers made from wheat by top fermentation; usually very pale and cloudy and effervescent) }

@@ -32,7 +32,7 @@
 &lt;ex&gt;Abby is wearing &lt;fex name="Use"&gt;stage&lt;/fex&gt; &lt;t&gt;make-up&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Peripheral" cBy="669" cDate="05/02/2002 12:11:28 PDT Thu" abbrev="Type" name="Type" ID="2729">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Type&lt;/fen&gt; designates different kinds of body decorations.  Often this FE will label part of a multi-word or compound word target. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Type&lt;/fen&gt; designates different kinds of body decorations.  Often this FE will label part of a multi-word or compound word target.
 &lt;ex&gt;Abby wore &lt;fex name="Type"&gt;SPF 15&lt;/fex&gt; &lt;t&gt;make-up&lt;/t&gt; to work, everyday.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <frameRelation type="Inherits from">

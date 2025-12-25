@@ -307,7 +307,7 @@ mod traits_tests {
 
     #[test]
     fn test_cached_result_creation() {
-        use canopy_semantic_layer::{AnalysisMetrics, LogicalForm, SemanticLayer1Output};
+        use canopy_tokenizer::{AnalysisMetrics, LogicalForm, SemanticLayer1Output};
         use std::collections::HashMap;
 
         // Create a minimal SemanticLayer1Output for testing

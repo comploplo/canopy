@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:12:21 PST Wed" name="Perception_body" ID="68" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame contains words describing physical experiences that can affect virtually any part of the body. The body part affected is almost always mentioned with these words. It is typically expressed by the noun heading the external argument, and this noun is typically accompanied by a possessive determiner that refers to the possessor of the body part, as in the first example below: 
+    <definition>&lt;def-root&gt;This frame contains words describing physical experiences that can affect virtually any part of the body. The body part affected is almost always mentioned with these words. It is typically expressed by the noun heading the external argument, and this noun is typically accompanied by a possessive determiner that refers to the possessor of the body part, as in the first example below:
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Body_part"&gt;My head&lt;/fex&gt; &lt;t&gt;hurts&lt;/t&gt;!&lt;/ex&gt;
 

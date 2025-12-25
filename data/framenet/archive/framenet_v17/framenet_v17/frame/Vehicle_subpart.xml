@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MLC" cDate="09/29/2010 05:21:51 PDT Wed" name="Vehicle_subpart" ID="2426" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An entity is integrated into a vehicle as a &lt;fen&gt;Part&lt;/fen&gt; of a (possibly unexpressed) &lt;fen&gt;Whole&lt;/fen&gt; which may refer to the whole vehicle or merely to a sub-part of the vehicle. 
+    <definition>&lt;def-root&gt;An entity is integrated into a vehicle as a &lt;fen&gt;Part&lt;/fen&gt; of a (possibly unexpressed) &lt;fen&gt;Whole&lt;/fen&gt; which may refer to the whole vehicle or merely to a sub-part of the vehicle.
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;The &lt;fex name="Whole"&gt;car's&lt;/fex&gt; &lt;fex name="Part"&gt;&lt;t&gt;engine&lt;/t&gt;&lt;/fex&gt; started smoking so we pulled over.&lt;/ex&gt;
 &lt;ex&gt;Put the bags in the &lt;fex name="Part"&gt;&lt;t&gt;trunk&lt;/t&gt;&lt;/fex&gt;.&lt;/ex&gt;

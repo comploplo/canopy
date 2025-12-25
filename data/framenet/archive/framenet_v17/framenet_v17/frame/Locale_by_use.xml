@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MJE" cDate="08/09/2001 08:59:42 PDT Thu" name="Locale_by_use" ID="196" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;Geography as defined by its use. 
+    <definition>&lt;def-root&gt;Geography as defined by its use.
 
 &lt;ex&gt;You must land in the next &lt;t&gt;&lt;fex name="Locale"&gt;airfield&lt;/fex&gt;&lt;/t&gt;, as this one is currently having difficulties.&lt;/ex&gt;
 &lt;ex&gt;The new &lt;fex name="Use"&gt;sports&lt;/fex&gt; &lt;fex name="Locale"&gt;&lt;t&gt;complex&lt;/t&gt;&lt;/fex&gt; was the tallest building on campus, oddly enough.&lt;/ex&gt;
 &lt;ex&gt;&lt;t&gt;&lt;fex name="Locale"&gt;Cities&lt;/fex&gt;&lt;/t&gt; &lt;fex name="Container_possessor"&gt;of the Northeast&lt;/fex&gt; tend to be dingier.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/10/2001 05:02:08 PDT Fri" abbrev="Cnst" name="Constituent_parts" ID="1585">
-        <definition>&lt;def-root&gt;FN: Salient parts that make up a Locale.  
+        <definition>&lt;def-root&gt;FN: Salient parts that make up a Locale.
 &lt;ex&gt;This is the oldest &lt;fex name="Cnst"&gt;apartment&lt;/fex&gt; &lt;t&gt;complex&lt;/t&gt; in Florida.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MJE" cDate="08/10/2001 05:02:08 PDT Fri" abbrev="ContP" name="Container_possessor" ID="1586">

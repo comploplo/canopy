@@ -34,7 +34,7 @@ mod comprehensive_parser_tests {
     <author>Test Author</author>
     <license>MIT License</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="attr-stop-words" name="Attributed Stop Words" type="stop-words" priority="5">
       <description>Stop words with various attributes</description>
@@ -51,7 +51,7 @@ mod comprehensive_parser_tests {
         <word pos="IN" confidence="0.80">of</word>
       </words>
     </word-class>
-    
+
     <word-class id="attr-negation" name="Negation with Patterns" type="negation" priority="8">
       <description>Negation words with patterns</description>
       <words>
@@ -101,7 +101,7 @@ mod comprehensive_parser_tests {
     <author>Pattern Tester</author>
     <license>Apache 2.0</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="pattern-test" name="Pattern Test Class" type="functional" priority="1">
       <description>Testing various pattern types</description>
@@ -160,7 +160,7 @@ mod comprehensive_parser_tests {
     <author>Complex Tester</author>
     <license>BSD</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="complex-class1" name="Complex Class One" type="pronouns" priority="10">
       <description>First complex class</description>
@@ -321,7 +321,7 @@ mod comprehensive_parser_tests {
     <author>Version Tester</author>
     <license>MIT</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="version-test" name="Version Test" type="stop-words" priority="10">
       <description>Testing version handling</description>
@@ -366,7 +366,7 @@ mod comprehensive_parser_tests {
     <author>Language Tester</author>
     <license>MIT</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="lang-test" name="Language Test" type="functional" priority="1">
       <description>Testing language handling</description>
@@ -407,7 +407,7 @@ mod comprehensive_parser_tests {
     <author>Property Tester</author>
     <license>MIT</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="prop-test" name="Property Test" type="intensifiers" priority="6">
       <description>Testing property variations</description>
@@ -461,7 +461,7 @@ mod comprehensive_parser_tests {
     <author>Attribute Tester</author>
     <license>MIT</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="word-attr-test" name="Word Attribute Test" type="hedge-words" priority="4">
       <description>Testing various word attributes</description>
@@ -507,14 +507,14 @@ mod comprehensive_parser_tests {
     <author>Empty Tester</author>
     <license>MIT</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="empty-test1" name="Empty Test One" type="sentiment" priority="3">
       <description>Class with empty words</description>
       <words>
       </words>
     </word-class>
-    
+
     <word-class id="empty-test2" name="Empty Test Two" type="modal" priority="2">
       <description>Class with empty patterns</description>
       <words>
@@ -553,7 +553,7 @@ mod comprehensive_parser_tests {
     <author>Error Tester</author>
     <license>MIT</license>
   </metadata>
-  
+
   <word-classes>
     <word-class id="recovery-test" name="Recovery Test" type="temporal" priority="5">
       <description>Testing recovery from minor issues</description>

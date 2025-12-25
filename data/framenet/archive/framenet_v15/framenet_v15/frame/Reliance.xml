@@ -3,7 +3,7 @@
 <frame cBy="605" cDate="11/25/2003 10:24:23 PST Tue" name="Reliance" ID="901" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;A &lt;fen&gt;Protagonist&lt;/fen&gt; needs a &lt;fen&gt;Means&lt;/fen&gt; action performed for their &lt;fen&gt;Benefit&lt;/fen&gt;.  The relevant &lt;fen&gt;Means&lt;/fen&gt; action is often evoked only by reference to  an &lt;fen&gt;Intermediary&lt;/fen&gt; who performs it. Also, if the &lt;fen&gt;Protagonist&lt;/fen&gt; performs the &lt;fen&gt;Means&lt;/fen&gt; action themselves, the &lt;fen&gt;Instrument&lt;/fen&gt; that they use may be referred to in place of the &lt;fen&gt;Means&lt;/fen&gt; Note that when one of the three interrelated FEs &lt;fen&gt;Means&lt;/fen&gt;, &lt;fen&gt;Instrument&lt;/fen&gt; and &lt;fen&gt;Intermediary&lt;/fen&gt; is realized overtly, the other two are blocked from overt realization as clause-level arguments of the target.&lt;ex&gt;&lt;/ex&gt;
 
-When the &lt;fen&gt;Protagonist&lt;/fen&gt; is a sentient being, it is implied that they put their trust in the &lt;fen&gt;Intermediary&lt;/fen&gt; to help in the achievement of the &lt;fen&gt;Benefit&lt;/fen&gt;. 
+When the &lt;fen&gt;Protagonist&lt;/fen&gt; is a sentient being, it is implied that they put their trust in the &lt;fen&gt;Intermediary&lt;/fen&gt; to help in the achievement of the &lt;fen&gt;Benefit&lt;/fen&gt;.
 
 The extent to which the &lt;fen&gt;Protagonist&lt;/fen&gt; is dependent on an &lt;fen&gt;Intermediary&lt;/fen&gt; or &lt;fen&gt;Instrument&lt;/fen&gt; can be indicated in a &lt;fen&gt;Degree&lt;/fen&gt; phrase.&lt;ex&gt;&lt;/ex&gt;
 

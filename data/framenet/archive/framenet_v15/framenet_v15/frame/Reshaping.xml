@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="296" cDate="06/04/2002 11:46:53 PDT Tue" name="Reshaping" ID="344" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame an &lt;fen&gt;Deformer&lt;/fen&gt; deforms an &lt;fen&gt;Undergoer&lt;/fen&gt; possibly against a &lt;fen&gt;Resistant_surface&lt;/fen&gt; such that it undergoes a shape-change from its canonical or original shape into the &lt;fen&gt;Result&lt;/fen&gt;, a new shape. Some of these words indicate that the &lt;fen&gt;Result&lt;/fen&gt; is an undesirable alteration of the norm, and in such cases the lexical unit is marked with the semantic type Negative.  
+    <definition>&lt;def-root&gt;In this frame an &lt;fen&gt;Deformer&lt;/fen&gt; deforms an &lt;fen&gt;Undergoer&lt;/fen&gt; possibly against a &lt;fen&gt;Resistant_surface&lt;/fen&gt; such that it undergoes a shape-change from its canonical or original shape into the &lt;fen&gt;Result&lt;/fen&gt;, a new shape. Some of these words indicate that the &lt;fen&gt;Result&lt;/fen&gt; is an undesirable alteration of the norm, and in such cases the lexical unit is marked with the semantic type Negative.
 This frame does not include senses that specifically indicate causing harm to a living being.
 
 &lt;ex&gt;&lt;fex name="Def"&gt;Ellen&lt;/fex&gt; &lt;t&gt;crumpled&lt;/t&gt; &lt;fex name="Undergoer"&gt;the paper&lt;/fex&gt; &lt;fex name="Result"&gt;into a ball&lt;/fex&gt;.&lt;/ex&gt;

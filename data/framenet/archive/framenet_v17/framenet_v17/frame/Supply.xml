@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="JKR" cDate="03/02/2005 07:05:56 PST Wed" name="Supply" ID="1346" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Supplier&lt;/fen&gt; gives a &lt;fen&gt;Theme&lt;/fen&gt; to a &lt;fen&gt;Recipient&lt;/fen&gt; to fulfill a need or purpose (&lt;fen&gt;Imposed_purpose&lt;/fen&gt;) of the &lt;fen&gt;Recipient&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Supplier&lt;/fen&gt; gives a &lt;fen&gt;Theme&lt;/fen&gt; to a &lt;fen&gt;Recipient&lt;/fen&gt; to fulfill a need or purpose (&lt;fen&gt;Imposed_purpose&lt;/fen&gt;) of the &lt;fen&gt;Recipient&lt;/fen&gt;.
 
 &lt;ex&gt;Habituating the ground nesting chimp groups is done by &lt;t&gt;provisioning&lt;/t&gt; &lt;fex name="Recipient"&gt;them&lt;/fex&gt; &lt;fex name="Theme"&gt;with sugar cane&lt;/fex&gt;. &lt;fex name="Supplier"&gt;CNI&lt;/fex&gt; &lt;fex name="Imposed_purpose"&gt;INI&lt;/fex&gt;&lt;/ex&gt;
 
@@ -66,7 +66,7 @@ MPI with the product approval process in an efficient and effective way&lt;/fex&
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="03/02/2005 07:05:56 PST Wed" abbrev="cir" name="Circumstances" ID="7618">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; are the conditions under which the &lt;fen&gt;Theme&lt;/fen&gt; is supplied. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; are the conditions under which the &lt;fen&gt;Theme&lt;/fen&gt; is supplied.
 
 
 &lt;ex&gt;&lt;fex name="Supplier"&gt;I&lt;/fex&gt; &lt;t&gt;supplied&lt;/t&gt; &lt;fex name="Theme"&gt;the food&lt;/fex&gt; &lt;fex name="Circumstances"&gt;free of charge&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>

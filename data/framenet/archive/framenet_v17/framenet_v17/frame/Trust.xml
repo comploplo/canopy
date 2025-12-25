@@ -19,7 +19,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="03/30/2006 10:48:25 PST Thu" abbrev="Content" name="Content" ID="10020">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Content&lt;/fen&gt; denotes the mental content that the &lt;fen&gt;Cognizer&lt;/fen&gt; is certain or uncertain about. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Content&lt;/fen&gt; denotes the mental content that the &lt;fen&gt;Cognizer&lt;/fen&gt; is certain or uncertain about.
 
 &lt;/def-root&gt;</definition>
         <semType name="Content" ID="55"/>

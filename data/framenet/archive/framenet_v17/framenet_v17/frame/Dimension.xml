@@ -3,7 +3,7 @@
 <frame cBy="JKR" cDate="05/21/2001 03:46:32 PDT Mon" name="Dimension" ID="108" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;This frame concerns  words that express an &lt;fen&gt;Object&lt;/fen&gt;'s position on a scale, its &lt;fen&gt;Measurement&lt;/fen&gt;, with respect to some attribute, its &lt;fen&gt;Dimension&lt;/fen&gt;.  &lt;fen&gt;Location&lt;/fen&gt;,  identifying the sub-region of the &lt;fen&gt;Object&lt;/fen&gt; where the &lt;fen&gt;Dimension&lt;/fen&gt; is measured, may also be expressed.
 
-&lt;ex&gt;&lt;fex name="Object"&gt;The tower&lt;/fex&gt; is &lt;fex name="Measurement"&gt;10 feet&lt;/fex&gt; &lt;t&gt;tall&lt;/t&gt;.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Object"&gt;The tower&lt;/fex&gt; is &lt;fex name="Measurement"&gt;10 feet&lt;/fex&gt; &lt;t&gt;tall&lt;/t&gt;.&lt;/ex&gt;
 
 &lt;ex&gt;&lt;fex name="Object"&gt;The  new vase&lt;/fex&gt; is &lt;fex name="Measurement"&gt;5 cm&lt;/fex&gt; in &lt;t&gt;circumference&lt;/t&gt; &lt;fex name="Locus"&gt;at the top&lt;/fex&gt;.&lt;/ex&gt;
 

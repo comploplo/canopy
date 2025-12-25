@@ -5,7 +5,7 @@
 
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="11/08/2002 02:56:28 PST Fri" abbrev="Agt" name="Agent" ID="3880">
-        <definition>&lt;def-root&gt;The conscious entity, generally a person, that moves the &lt;fen&gt;Goods&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;The conscious entity, generally a person, that moves the &lt;fen&gt;Goods&lt;/fen&gt;.
 &lt;ex&gt;&lt;fex name="Agent"&gt;Bath and Bodyworks&lt;/fex&gt; &lt;t&gt;imports&lt;/t&gt; all of its soaps from Scotland.&lt;/ex&gt;
 Very often, an &lt;fen&gt;Exporting_area&lt;/fen&gt;, &lt;fen&gt;Importing_area&lt;/fen&gt;, or &lt;fen&gt;Path&lt;/fen&gt; will metonymically stand in for the person or persons directly responsible for the movement of the &lt;fen&gt;Goods&lt;/fen&gt;.  In such cases the constituent should be labeled &lt;fen&gt;Agent&lt;/fen&gt; on the first layer and with the appropriate locational FE on the second layer.
 &lt;ex&gt;&lt;fex name="Agent"&gt;The U.S.&lt;/fex&gt; &lt;t&gt;exports&lt;/t&gt; most of its peanut products.&lt;/ex&gt;&lt;/def-root&gt;</definition>

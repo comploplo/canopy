@@ -13,18 +13,18 @@
             targetNamespace="http://framenet.icsi.berkeley.edu"
             xmlns="http://framenet.icsi.berkeley.edu"
             elementFormDefault="qualified">
-    
-    <!-- 
+
+    <!--
         XML Schema for FrameNet Full-Text XML format
         Under the root (<fulltext-annotation>), there is a <header> element
         followed by any number of <sentence> elements.  The <sentence>
         element has the same structure as the lexicographic annotation
         XML format.
     -->
-    
+
     <xsd:include schemaLocation="header.xsd"/>
     <xsd:include schemaLocation="sentence.xsd"/>
-    
+
     <xsd:element name="fullTextAnnotation">
         <xsd:complexType>
             <xsd:sequence>
@@ -34,5 +34,5 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-        
+
 </xsd:schema>

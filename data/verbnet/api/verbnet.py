@@ -331,7 +331,7 @@ class VerbClass(AbstractXML):
 
     def _subclass(self):
         """Get every subclass listed, if any"""
-        subclasses_soup = self.soup.find_all("SUBCLASSES")        
+        subclasses_soup = self.soup.find_all("SUBCLASSES")
         if len(subclasses_soup) < 1 or len(subclasses_soup[0].text) < 1:
             return []
         return [VerbClass(sub_soup, self.version) for sub_soup in \

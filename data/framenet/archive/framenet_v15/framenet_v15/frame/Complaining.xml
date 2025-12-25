@@ -11,7 +11,7 @@
 
 &lt;ex&gt;&lt;fex name="Time"&gt;On the rare occasions&lt;/fex&gt; &lt;fex name="Complainer"&gt;I&lt;/fex&gt; &lt;t&gt;complained&lt;/t&gt; &lt;fex name="Add"&gt;to him&lt;/fex&gt; &lt;fex name="Topic"&gt;about media bias&lt;/fex&gt;, Peter immediately ordered up a story that included conservative objections to mainstream reports .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="08/25/2005 02:46:33 PDT Thu" abbrev="cmplnr" name="Complainer" ID="8975">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Complainer&lt;/fen&gt; is the sentient entity that produces the &lt;fen&gt;Complaint&lt;/fen&gt; (whether spoken or written).  
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Complainer&lt;/fen&gt; is the sentient entity that produces the &lt;fen&gt;Complaint&lt;/fen&gt; (whether spoken or written).
 
 
 &lt;ex&gt;&lt;fex name="Complainer"&gt;Peter&lt;/fex&gt; has &lt;t&gt;moaned&lt;/t&gt; about it on another thread but it sure must be nice for him to wallow
@@ -19,29 +19,29 @@ again.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="08/25/2005 02:46:33 PDT Thu" abbrev="Add" name="Addressee" ID="8976">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; is the person to whom the &lt;fen&gt;Complaint&lt;/fen&gt; is communicated. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; is the person to whom the &lt;fen&gt;Complaint&lt;/fen&gt; is communicated.
 
 &lt;ex&gt;Fresh out of prison, Martin &lt;t&gt;whinged&lt;/t&gt; &lt;fex name="Add"&gt;to Sonia&lt;/fex&gt; about his life.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="08/25/2005 02:46:33 PDT Thu" abbrev="com" name="Complaint" ID="8977">
-        <definition>&lt;def-root&gt;The lamentable situation that the &lt;fen&gt;Complainer&lt;/fen&gt; is communicating to the &lt;fen&gt;Addressee&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;The lamentable situation that the &lt;fen&gt;Complainer&lt;/fen&gt; is communicating to the &lt;fen&gt;Addressee&lt;/fen&gt;.
 
 &lt;ex&gt;One observer &lt;t&gt;groused&lt;/t&gt; &lt;fex name="com"&gt;that Skagway was "little better than hell on earth."&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="08/25/2005 02:46:33 PDT Thu" abbrev="Top" name="Topic" ID="8978">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Topic&lt;/fen&gt; is the subject matter to which the &lt;fen&gt;Complaint&lt;/fen&gt; pertains. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Topic&lt;/fen&gt; is the subject matter to which the &lt;fen&gt;Complaint&lt;/fen&gt; pertains.
 
 &lt;ex&gt;Ferdinand attended the reception at the city hall and &lt;t&gt;complained&lt;/t&gt; vociferously &lt;fex name="Topic"&gt;about his reception at the city&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="08/25/2005 02:46:33 PDT Thu" abbrev="Manr" name="Manner" ID="8979">
-        <definition>&lt;def-root&gt;Any description of the complaining event (or state) which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may also indicate salient characteristics of the &lt;fen&gt;Complainer&lt;/fen&gt; that affect the action (&lt;ment&gt;presumptuously&lt;/ment&gt;, &lt;ment&gt;bitterly&lt;/ment&gt;, &lt;ment&gt;vociferoursly&lt;/ment&gt; ). 
+        <definition>&lt;def-root&gt;Any description of the complaining event (or state) which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly&lt;/ment&gt;, &lt;ment&gt;loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). It may also indicate salient characteristics of the &lt;fen&gt;Complainer&lt;/fen&gt; that affect the action (&lt;ment&gt;presumptuously&lt;/ment&gt;, &lt;ment&gt;bitterly&lt;/ment&gt;, &lt;ment&gt;vociferoursly&lt;/ment&gt; ).
 
 &lt;ex&gt;The crowd &lt;t&gt;complained&lt;/t&gt; &lt;fex name="Manr"&gt;vociferously&lt;/fex&gt; when the other aldermen met Brewer?s proposal with silence.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="605" cDate="08/25/2005 02:46:33 PDT Thu" abbrev="fre" name="Frequency" ID="8980">
-        <definition>&lt;def-root&gt;This frame element is defined as the number of times an event occurs per some unit of time. 
+        <definition>&lt;def-root&gt;This frame element is defined as the number of times an event occurs per some unit of time.
 
 
 &lt;ex&gt;Robert &lt;fex name="fre"&gt;always&lt;/fex&gt; &lt;t&gt;complains&lt;/t&gt; to the neighbor whose children step on his flowers and ride bikes on his lawn.&lt;/ex&gt;&lt;/def-root&gt;</definition>

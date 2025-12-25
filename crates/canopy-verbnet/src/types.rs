@@ -3,6 +3,7 @@
 //! These types mirror the VerbNet 3.4 XML schema structure, providing
 //! Rust representations of VerbNet classes, roles, frames, and semantics.
 
+use canopy_core::paths::data_path_string;
 use canopy_core::ThetaRole as CoreThetaRole;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -222,7 +223,7 @@ pub struct VerbNetConfig {
 impl Default for VerbNetConfig {
     fn default() -> Self {
         Self {
-            data_path: "data/verbnet/vn-gl".to_string(),
+            data_path: data_path_string("data/verbnet/vn-gl"),
             enable_cache: true,
             cache_capacity: 10000,
             confidence_threshold: 0.5,
@@ -383,7 +384,13 @@ mod tests {
     #[test]
     fn test_verbnet_config_default() {
         let config = VerbNetConfig::default();
-        assert_eq!(config.data_path, "data/verbnet/vn-gl");
+        // Path is resolved to workspace-relative, so just check it contains expected suffix
+        assert!(
+            config.data_path.ends_with("data/verbnet/vn-gl")
+                || config.data_path.contains("verbnet/vn-gl"),
+            "Expected path to contain verbnet/vn-gl, got: {}",
+            config.data_path
+        );
         assert!(config.enable_cache);
         assert_eq!(config.cache_capacity, 10000);
     }

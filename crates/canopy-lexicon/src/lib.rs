@@ -21,7 +21,7 @@
 //!
 //! // Create and configure engine
 //! let config = LexiconConfig::default();
-//! let mut engine = LexiconEngine::new(config);
+//! let mut engine = LexiconEngine::with_config(config);
 //!
 //! // Load lexicon data
 //! engine.load_data().expect("Failed to load lexicon data");
@@ -32,7 +32,7 @@
 //!
 //! // Analyze patterns
 //! let analysis = engine.analyze_word("unhappy").expect("Analysis failed");
-//! println!("Pattern matches: {}", analysis.pattern_matches.len());
+//! println!("Pattern matches: {}", analysis.data.pattern_matches.len());
 //! ```
 //!
 //! # Word Classes

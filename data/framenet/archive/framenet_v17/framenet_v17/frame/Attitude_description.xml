@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="CVa" cDate="03/22/2012 11:23:37 PDT Thu" name="Attitude_description" ID="2713" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;The lexical units in this frame are descriptions of a &lt;fen&gt;Cognizer&lt;/fen&gt;'s &lt;fen&gt;Attitude&lt;/fen&gt; about or outlook on a &lt;fen&gt;State_of_affairs&lt;/fen&gt;.   
+    <definition>&lt;def-root&gt;The lexical units in this frame are descriptions of a &lt;fen&gt;Cognizer&lt;/fen&gt;'s &lt;fen&gt;Attitude&lt;/fen&gt; about or outlook on a &lt;fen&gt;State_of_affairs&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Cog"&gt;Carl&lt;/fex&gt; is becoming &lt;fex name="Deg"&gt;more&lt;/fex&gt; &lt;t&gt;pessimistic&lt;/t&gt; &lt;fex name="State"&gt;about the negotiations&lt;/fex&gt; every day.&lt;/ex&gt;
@@ -31,7 +31,7 @@ The &lt;fen&gt;State_of_affairs&lt;/fen&gt; can be expressed without a &lt;fen&g
 &lt;ex&gt;&lt;fex name="State"&gt;The economy&lt;/fex&gt; &lt;m&gt;looks&lt;/m&gt; quite &lt;t&gt;grim&lt;/t&gt; at this moment.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="000000" coreType="Peripheral" cBy="CVa" cDate="03/22/2012 12:34:15 PDT Thu" abbrev="Deg" name="Degree" ID="15555">
-        <definition>&lt;def-root&gt;The degree of the &lt;fen&gt;Attitude&lt;/fen&gt; description.  
+        <definition>&lt;def-root&gt;The degree of the &lt;fen&gt;Attitude&lt;/fen&gt; description.
 
 &lt;ex&gt;The team was &lt;fex name="Deg"&gt;very&lt;/fex&gt; &lt;t&gt;hopeful&lt;/t&gt; about the prospective victory. &lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

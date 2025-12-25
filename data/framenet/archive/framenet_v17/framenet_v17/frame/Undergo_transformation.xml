@@ -24,13 +24,13 @@
 &lt;ex&gt;The viccar &lt;t&gt;converted&lt;/t&gt; &lt;fex name="inic"&gt;from a professional clergyman&lt;/fex&gt; into an anti-ecclesiastical activist.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/29/2015 03:40:20 PDT Sat" abbrev="tim" name="Time" ID="16625">
-        <definition>&lt;def-root&gt;The time at which the &lt;fen&gt;Entity&lt;/fen&gt; undergoes the transformation.  
+        <definition>&lt;def-root&gt;The time at which the &lt;fen&gt;Entity&lt;/fen&gt; undergoes the transformation.
 
 &lt;ex&gt;&lt;fex name="tim"&gt;Then&lt;/fex&gt; she &lt;t&gt;turned&lt;/t&gt; into a lizard.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="000000" coreType="Peripheral" cBy="MJE" cDate="08/29/2015 03:40:20 PDT Sat" abbrev="man" name="Manner" ID="16629">
-        <definition>&lt;def-root&gt;Any description of the Transformation event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). 
+        <definition>&lt;def-root&gt;Any description of the Transformation event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way).
 
 &lt;ex&gt;Dublin is experiencing the &lt;fex name="Manner"&gt;same&lt;/fex&gt; &lt;t&gt;transformation&lt;/t&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

@@ -1,0 +1,183 @@
+# Canonical test sentences for semantic analysis
+# Selected to cover key syntactic constructions for testing
+
+# sent_id = canonical-001
+# text = John gave Mary a book.
+1	John	John	PROPN	NNP	Number=Sing	2	nsubj	_	_
+2	gave	give	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	0	root	_	_
+3	Mary	Mary	PROPN	NNP	Number=Sing	2	iobj	_	_
+4	a	a	DET	DT	Definite=Ind|PronType=Art	5	det	_	_
+5	book	book	NOUN	NN	Number=Sing	2	obj	_	SpaceAfter=No
+6	.	.	PUNCT	.	_	2	punct	_	_
+
+# sent_id = canonical-002
+# text = The book was given to Mary.
+1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_	_
+2	book	book	NOUN	NN	Number=Sing	4	nsubj:pass	_	_
+3	was	be	AUX	VBD	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
+4	given	give	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_	_
+5	to	to	ADP	IN	_	6	case	_	_
+6	Mary	Mary	PROPN	NNP	Number=Sing	4	obl	_	SpaceAfter=No
+7	.	.	PUNCT	.	_	4	punct	_	_
+
+# sent_id = canonical-003
+# text = What did John give to Mary?
+1	What	what	PRON	WP	PronType=Int	4	obj	_	_
+2	did	do	AUX	VBD	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux	_	_
+3	John	John	PROPN	NNP	Number=Sing	4	nsubj	_	_
+4	give	give	VERB	VB	VerbForm=Inf	0	root	_	_
+5	to	to	ADP	IN	_	6	case	_	_
+6	Mary	Mary	PROPN	NNP	Number=Sing	4	obl	_	SpaceAfter=No
+7	?	?	PUNCT	.	_	4	punct	_	_
+
+# sent_id = canonical-004
+# text = John seems to like books.
+1	John	John	PROPN	NNP	Number=Sing	2	nsubj	_	_
+2	seems	seem	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+3	to	to	PART	TO	_	4	mark	_	_
+4	like	like	VERB	VB	VerbForm=Inf	2	xcomp	_	_
+5	books	book	NOUN	NNS	Number=Plur	4	obj	_	SpaceAfter=No
+6	.	.	PUNCT	.	_	2	punct	_	_
+
+# sent_id = canonical-005
+# text = John wants to read.
+1	John	John	PROPN	NNP	Number=Sing	2	nsubj	_	_
+2	wants	want	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+3	to	to	PART	TO	_	4	mark	_	_
+4	read	read	VERB	VB	VerbForm=Inf	2	xcomp	_	SpaceAfter=No
+5	.	.	PUNCT	.	_	2	punct	_	_
+
+# sent_id = canonical-006
+# text = The book that John gave to Mary is interesting.
+1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_	_
+2	book	book	NOUN	NN	Number=Sing	8	nsubj	_	_
+3	that	that	PRON	WDT	PronType=Rel	5	obj	_	_
+4	John	John	PROPN	NNP	Number=Sing	5	nsubj	_	_
+5	gave	give	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	2	acl:relcl	_	_
+6	to	to	ADP	IN	_	7	case	_	_
+7	Mary	Mary	PROPN	NNP	Number=Sing	5	obl	_	_
+8	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+9	interesting	interesting	ADJ	JJ	Degree=Pos	8	acomp	_	SpaceAfter=No
+10	.	.	PUNCT	.	_	8	punct	_	_
+
+# sent_id = canonical-007
+# text = Mary ran quickly.
+1	Mary	Mary	PROPN	NNP	Number=Sing	2	nsubj	_	_
+2	ran	run	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	0	root	_	_
+3	quickly	quickly	ADV	RB	_	2	advmod	_	SpaceAfter=No
+4	.	.	PUNCT	.	_	2	punct	_	_
+
+# sent_id = canonical-008
+# text = The cat is sleeping.
+1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_	_
+2	cat	cat	NOUN	NN	Number=Sing	4	nsubj	_	_
+3	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	aux	_	_
+4	sleeping	sleep	VERB	VBG	Tense=Pres|VerbForm=Part	0	root	_	SpaceAfter=No
+5	.	.	PUNCT	.	_	4	punct	_	_
+
+# sent_id = canonical-009
+# text = She will have finished by tomorrow.
+1	She	she	PRON	PRP	Case=Nom|Gender=Fem|Number=Sing|Person=3|PronType=Prs	4	nsubj	_	_
+2	will	will	AUX	MD	VerbForm=Fin	4	aux	_	_
+3	have	have	AUX	VB	VerbForm=Inf	4	aux	_	_
+4	finished	finish	VERB	VBN	Tense=Past|VerbForm=Part	0	root	_	_
+5	by	by	ADP	IN	_	6	case	_	_
+6	tomorrow	tomorrow	NOUN	NN	Number=Sing	4	obl	_	SpaceAfter=No
+7	.	.	PUNCT	.	_	4	punct	_	_
+
+# sent_id = canonical-010
+# text = The dog chased the cat.
+1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_	_
+2	dog	dog	NOUN	NN	Number=Sing	3	nsubj	_	_
+3	chased	chase	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	0	root	_	_
+4	the	the	DET	DT	Definite=Def|PronType=Art	5	det	_	_
+5	cat	cat	NOUN	NN	Number=Sing	3	obj	_	SpaceAfter=No
+6	.	.	PUNCT	.	_	3	punct	_	_
+
+# sent_id = canonical-011
+# text = Mary believes that John is smart.
+1	Mary	Mary	PROPN	NNP	Number=Sing	2	nsubj	_	_
+2	believes	believe	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+3	that	that	SCONJ	IN	_	6	mark	_	_
+4	John	John	PROPN	NNP	Number=Sing	6	nsubj	_	_
+5	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	cop	_	_
+6	smart	smart	ADJ	JJ	Degree=Pos	2	ccomp	_	SpaceAfter=No
+7	.	.	PUNCT	.	_	2	punct	_	_
+
+# sent_id = canonical-012
+# text = They are running.
+1	They	they	PRON	PRP	Case=Nom|Number=Plur|Person=3|PronType=Prs	3	nsubj	_	_
+2	are	be	AUX	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	3	aux	_	_
+3	running	run	VERB	VBG	Tense=Pres|VerbForm=Part	0	root	_	SpaceAfter=No
+4	.	.	PUNCT	.	_	3	punct	_	_
+
+# sent_id = canonical-013
+# text = I think she knows.
+1	I	I	PRON	PRP	Case=Nom|Number=Sing|Person=1|PronType=Prs	2	nsubj	_	_
+2	think	think	VERB	VBP	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	0	root	_	_
+3	she	she	PRON	PRP	Case=Nom|Gender=Fem|Number=Sing|Person=3|PronType=Prs	4	nsubj	_	_
+4	knows	know	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	2	ccomp	_	SpaceAfter=No
+5	.	.	PUNCT	.	_	2	punct	_	_
+
+# sent_id = canonical-014
+# text = The man who lives there is tall.
+1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_	_
+2	man	man	NOUN	NN	Number=Sing	7	nsubj	_	_
+3	who	who	PRON	WP	PronType=Rel	4	nsubj	_	_
+4	lives	live	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	2	acl:relcl	_	_
+5	there	there	ADV	RB	PronType=Dem	4	advmod	_	_
+6	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	cop	_	_
+7	tall	tall	ADJ	JJ	Degree=Pos	0	root	_	SpaceAfter=No
+8	.	.	PUNCT	.	_	7	punct	_	_
+
+# sent_id = canonical-015
+# text = She made him leave.
+1	She	she	PRON	PRP	Case=Nom|Gender=Fem|Number=Sing|Person=3|PronType=Prs	2	nsubj	_	_
+2	made	make	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	0	root	_	_
+3	him	he	PRON	PRP	Case=Acc|Gender=Masc|Number=Sing|Person=3|PronType=Prs	4	nsubj	_	_
+4	leave	leave	VERB	VB	VerbForm=Inf	2	xcomp	_	SpaceAfter=No
+5	.	.	PUNCT	.	_	2	punct	_	_
+
+# sent_id = canonical-016
+# text = He promised to help.
+1	He	he	PRON	PRP	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	2	nsubj	_	_
+2	promised	promise	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	0	root	_	_
+3	to	to	PART	TO	_	4	mark	_	_
+4	help	help	VERB	VB	VerbForm=Inf	2	xcomp	_	SpaceAfter=No
+5	.	.	PUNCT	.	_	2	punct	_	_
+
+# sent_id = canonical-017
+# text = The window was broken by John.
+1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_	_
+2	window	window	NOUN	NN	Number=Sing	4	nsubj:pass	_	_
+3	was	be	AUX	VBD	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
+4	broken	break	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_	_
+5	by	by	ADP	IN	_	6	case	_	_
+6	John	John	PROPN	NNP	Number=Sing	4	obl:agent	_	SpaceAfter=No
+7	.	.	PUNCT	.	_	4	punct	_	_
+
+# sent_id = canonical-018
+# text = Walking is good exercise.
+1	Walking	walk	VERB	VBG	VerbForm=Ger	4	nsubj	_	_
+2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
+3	good	good	ADJ	JJ	Degree=Pos	4	amod	_	_
+4	exercise	exercise	NOUN	NN	Number=Sing	0	root	_	SpaceAfter=No
+5	.	.	PUNCT	.	_	4	punct	_	_
+
+# sent_id = canonical-019
+# text = It is easy to understand.
+1	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	3	expl	_	_
+2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	cop	_	_
+3	easy	easy	ADJ	JJ	Degree=Pos	0	root	_	_
+4	to	to	PART	TO	_	5	mark	_	_
+5	understand	understand	VERB	VB	VerbForm=Inf	3	csubj	_	SpaceAfter=No
+6	.	.	PUNCT	.	_	3	punct	_	_
+
+# sent_id = canonical-020
+# text = I saw Mary and John.
+1	I	I	PRON	PRP	Case=Nom|Number=Sing|Person=1|PronType=Prs	2	nsubj	_	_
+2	saw	see	VERB	VBD	Mood=Ind|Tense=Past|VerbForm=Fin	0	root	_	_
+3	Mary	Mary	PROPN	NNP	Number=Sing	2	obj	_	_
+4	and	and	CCONJ	CC	_	5	cc	_	_
+5	John	John	PROPN	NNP	Number=Sing	3	conj	_	SpaceAfter=No
+6	.	.	PUNCT	.	_	2	punct	_	_

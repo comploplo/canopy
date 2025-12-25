@@ -2,11 +2,11 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
 
-<!-- SECTION I.  
-	  
+<!-- SECTION I.
+
 	  This part of the Schema defines the structure of a VerbNet file.
-	  Alterations should be made with great care. -->   
-  
+	  Alterations should be made with great care. -->
+
 
 <xsd:element name="VNCLASS">
   <xsd:complexType>
@@ -48,10 +48,10 @@
       <xsd:attribute name="Value" use="required" type="boolValue"/>
       <xsd:attribute name="type" use="required" type="selrestrType"/>
     </xsd:complexType></xsd:element>
-    <xsd:element ref="SELRESTRS"/> 
-  </xsd:choice>  
+    <xsd:element ref="SELRESTRS"/>
+  </xsd:choice>
   <xsd:attribute name="logic" use="optional" type="xsd:string"/>
-</xsd:complexType></xsd:element>          
+</xsd:complexType></xsd:element>
 
 <xsd:element name="SYNRESTRS"><xsd:complexType>
   <xsd:choice minOccurs="0" maxOccurs="unbounded">
@@ -59,10 +59,10 @@
       <xsd:attribute name="Value" use="required" type="boolValue"/>
       <xsd:attribute name="type" use="required" type="synrestrType"/>
     </xsd:complexType></xsd:element>
-    <xsd:element ref="SYNRESTRS"/> 
-  </xsd:choice>  
+    <xsd:element ref="SYNRESTRS"/>
+  </xsd:choice>
   <xsd:attribute name="logic" use="optional" type="xsd:string"/>
-</xsd:complexType></xsd:element>          
+</xsd:complexType></xsd:element>
 
 <xsd:element name="FRAMES"><xsd:complexType><xsd:sequence>
   <xsd:element name="FRAME" minOccurs="0" maxOccurs="unbounded"><xsd:complexType>
@@ -72,19 +72,19 @@
         <xsd:attribute name="primary" use="required" type="primaryDescriptionType"/>
         <xsd:attribute name="secondary" use="optional" type="xsd:string"/>
 	<xsd:attribute name="xtag" use="required" type="xsd:string"/>
-      </xsd:complexType></xsd:element>  
+      </xsd:complexType></xsd:element>
       <xsd:element name="EXAMPLES"><xsd:complexType><xsd:sequence>
         <xsd:element name="EXAMPLE" minOccurs="0" maxOccurs="unbounded"/>
       </xsd:sequence></xsd:complexType></xsd:element>
       <xsd:element ref="SYNTAX"/>
-      <xsd:element ref="SEMANTICS"/>       
+      <xsd:element ref="SEMANTICS"/>
     </xsd:sequence>
   </xsd:complexType></xsd:element>
 </xsd:sequence></xsd:complexType></xsd:element>
 
 <xsd:element name="NP">
   <xsd:complexType>
-  <xsd:choice> 
+  <xsd:choice>
     <xsd:element ref="SELRESTRS"/>
     <xsd:element ref="SYNRESTRS"/>
   </xsd:choice>
@@ -106,7 +106,7 @@
   </xsd:sequence>
   <xsd:attribute name="value" use="optional" type="xsd:string"/>
 </xsd:complexType></xsd:element>
-  
+
 <xsd:element name="LEX"><xsd:complexType>
   <xsd:attribute name="value" use="required" type="xsd:string"/>
 </xsd:complexType></xsd:element>
@@ -134,12 +134,12 @@
       <xsd:element ref="PREP"/>
       <xsd:element ref="LEX"/>
     </xsd:choice>
-  </xsd:sequence>  
+  </xsd:sequence>
 </xsd:complexType></xsd:element>
 
 <xsd:element name="SEMANTICS"><xsd:complexType>
   <xsd:sequence minOccurs="1" maxOccurs="unbounded">
-    <xsd:element name="PRED"><xsd:complexType>    
+    <xsd:element name="PRED"><xsd:complexType>
       <xsd:sequence>
         <xsd:element name="ARGS"><xsd:complexType>
           <xsd:sequence minOccurs="1" maxOccurs="unbounded">
@@ -149,20 +149,20 @@
       </xsd:sequence>
       <xsd:attribute name="bool" use="optional" type="xsd:string"/>
       <xsd:attribute name="value" use="required" type="predType"/>
-    </xsd:complexType></xsd:element>    
+    </xsd:complexType></xsd:element>
   </xsd:sequence>
 </xsd:complexType></xsd:element>
 
 <xsd:element name="ARG"><xsd:complexType>
   <xsd:attribute name="type" use="required" type="argType"/>
   <xsd:attribute name="value" use="required" type="xsd:string"/>
-</xsd:complexType></xsd:element>  
+</xsd:complexType></xsd:element>
 
 <xsd:element name="SUBCLASSES"><xsd:complexType><xsd:sequence>
   <xsd:element ref="VNSUBCLASS" minOccurs="0" maxOccurs="unbounded"/>
 </xsd:sequence></xsd:complexType></xsd:element>
 
-<xsd:element name="VNSUBCLASS"> 
+<xsd:element name="VNSUBCLASS">
   <xsd:complexType>
     <xsd:sequence>
       <xsd:element ref="MEMBERS"/>
@@ -172,7 +172,7 @@
     </xsd:sequence>
     <xsd:attribute name="ID" use="required" type="xsd:ID"/>
   </xsd:complexType>
-</xsd:element>       
+</xsd:element>
 
 
 
@@ -180,7 +180,7 @@
 <!-- SECTION II.
 
 	  This section defines the VerbNet data types.  This part of the
-	  document should be updated when the data types are expanded --> 
+	  document should be updated when the data types are expanded -->
 
 
 <!-- Each Wordnet SenseKey must conform to this RE -->
@@ -212,11 +212,11 @@
 
 <!-- These are types thematic roles as they appear in the VerbNet -->
 <xsd:simpleType name="themRoleType">
-  <xsd:restriction base="xsd:string">	
+  <xsd:restriction base="xsd:string">
     <xsd:enumeration value="Affector"/>
     <xsd:enumeration value="?Affector"/>
     <xsd:enumeration value="Agent"/>
-    <xsd:enumeration value="?Agent"/>	
+    <xsd:enumeration value="?Agent"/>
     <xsd:enumeration value="Agent_i"/>
     <xsd:enumeration value="Agent_j"/>
     <xsd:enumeration value="Asset"/>
@@ -237,7 +237,7 @@
     <xsd:enumeration value="Co-Patient"/>
     <xsd:enumeration value="?Co-Patient"/>
     <xsd:enumeration value="Context"/>
-    <xsd:enumeration value="?Context"/>   
+    <xsd:enumeration value="?Context"/>
     <xsd:enumeration value="Destination"/>
     <xsd:enumeration value="?Destination"/>
     <xsd:enumeration value="Direction"/>
@@ -256,7 +256,7 @@
     <xsd:enumeration value="Goal_j"/>
     <xsd:enumeration value="Initial_Location"/>
     <xsd:enumeration value="?Initial_Location"/>
-    <xsd:enumeration value="Initial_State"/> 
+    <xsd:enumeration value="Initial_State"/>
     <xsd:enumeration value="?Initial_State"/>
     <xsd:enumeration value="Init_Time"/>
     <xsd:enumeration value="?Init_Time"/>
@@ -317,7 +317,7 @@
     <xsd:enumeration value="?Trajectory"/>
     <xsd:enumeration value="Value"/>
     <xsd:enumeration value="?Value"/>
-  </xsd:restriction>  
+  </xsd:restriction>
 </xsd:simpleType>
 
 <xsd:simpleType name="boolValue">
@@ -359,11 +359,11 @@
       <xsd:enumeration value="+fear"/>
       <xsd:enumeration value="+deprive_feeling"/>
       <xsd:enumeration value="+desire"/>
-      
+
       <!-- bump-18.4 class      -->
-      <xsd:enumeration value="+produce_sound"/>      
-      <xsd:enumeration value="+manner_violent"/>      
-      <xsd:enumeration value="+manner_gentle"/>       
+      <xsd:enumeration value="+produce_sound"/>
+      <xsd:enumeration value="+manner_violent"/>
+      <xsd:enumeration value="+manner_gentle"/>
       <xsd:enumeration value="+instrument_head"/>
       <xsd:enumeration value="+instrument_hammer"/>
       <xsd:enumeration value="+instrument_palm"/>
@@ -384,10 +384,10 @@
       <xsd:enumeration value="+stew"/>
       <xsd:enumeration value="+roast"/>
       <xsd:enumeration value="+brown"/>
-      <xsd:enumeration value="+heat"/>      
+      <xsd:enumeration value="+heat"/>
       <xsd:enumeration value="+shape"/>
       <xsd:enumeration value="+cover"/>
-      
+
       <!-- crane-40.3.2 class     -->
       <xsd:enumeration value="+bodyPartMotion_hand_palm"/>
       <xsd:enumeration value="+bodyPartMotion_hand"/>
@@ -396,7 +396,7 @@
       <xsd:enumeration value="+bodyPartMotion_fingers"/>
       <xsd:enumeration value="+bodyPartMotion_joint"/>
       <xsd:enumeration value="+bodyPartMotion_eyelashes"/>
-      <xsd:enumeration value="+bodyPartMotion_teeth"/>      
+      <xsd:enumeration value="+bodyPartMotion_teeth"/>
       <xsd:enumeration value="+bodyPartMotion_head"/>
       <xsd:enumeration value="+bodyPartMotion_shoulders"/>
       <xsd:enumeration value="+bodyPartMotion_foot"/>
@@ -457,7 +457,7 @@
       <xsd:enumeration value="+disrespect"/>
       <xsd:enumeration value="+positive_evaluation"/>
       <xsd:enumeration value="+forgive"/>
-      
+
       <!-- meander-47.7 class -->
       <xsd:enumeration value="+directionOfMotion"/>
       <xsd:enumeration value="+directionOfMotion_up"/>
@@ -465,24 +465,24 @@
       <xsd:enumeration value="+directionOfMotion_change"/>
 
       <!-- for the manner_speaking-37.3 class -->
-      <xsd:enumeration value="+act_smiling"/>  
-      <xsd:enumeration value="+act_laughing"/> 
-      <xsd:enumeration value="+act_singing"/> 
-      <xsd:enumeration value="+act_sobbing"/>  
+      <xsd:enumeration value="+act_smiling"/>
+      <xsd:enumeration value="+act_laughing"/>
+      <xsd:enumeration value="+act_singing"/>
+      <xsd:enumeration value="+act_sobbing"/>
       <xsd:enumeration value="+feeling_astonished"/>
       <xsd:enumeration value="+feeling_anger"/>
       <xsd:enumeration value="+feeling_despair"/>
       <xsd:enumeration value="+intention_threatening"/>
       <xsd:enumeration value="+intention_scornful"/>
       <xsd:enumeration value="+intention_involuntary"/>
-      <xsd:enumeration value="+manner_breathy"/>      
+      <xsd:enumeration value="+manner_breathy"/>
       <xsd:enumeration value="+manner_singing"/>
       <xsd:enumeration value="+manner_harsh"/>
       <xsd:enumeration value="+unintelligible"/>
       <xsd:enumeration value="+aggressive"/>
       <xsd:enumeration value="+human_agent"/>
       <xsd:enumeration value="+complaining"/>
-      <xsd:enumeration value="+loud"/>                      
+      <xsd:enumeration value="+loud"/>
       <xsd:enumeration value="+repeated"/>
       <xsd:enumeration value="+trivial_content"/>
       <xsd:enumeration value="+voice_manner"/>
@@ -524,7 +524,7 @@
       <xsd:enumeration value="+change_direction"/>
       <xsd:enumeration value="+change_feeling"/>
       <xsd:enumeration value="+change_behavior"/>
-      <xsd:enumeration value="+change_age"/>      
+      <xsd:enumeration value="+change_age"/>
       <xsd:enumeration value="+mix"/>
 
       <!-- preparing-26.3 class -->
@@ -536,7 +536,7 @@
       <xsd:enumeration value="+cooking_boil"/>
       <xsd:enumeration value="+cooking_roast"/>
       <xsd:enumeration value="+cooking_fry"/>
-      
+
       <!-- remedy-45.7 class -->
       <xsd:enumeration value="+cognitive"/>
       <xsd:enumeration value="+chemical"/>
@@ -549,7 +549,7 @@
       <xsd:enumeration value="+deprive"/>
       <xsd:enumeration value="+add_part"/>
       <xsd:enumeration value="+remove_part"/>
-      <xsd:enumeration value="+change_freedom"/>      
+      <xsd:enumeration value="+change_freedom"/>
 
       <!-- sight-30.2 class -->
       <xsd:enumeration value="+seeing"/>
@@ -557,7 +557,7 @@
       <xsd:enumeration value="+hearing"/>
       <xsd:enumeration value="+tasting"/>
       <xsd:enumeration value="+smelling"/>
-      
+
       <!-- steal-10.5 class -->
       <xsd:enumeration value="+illegal"/>
       <xsd:enumeration value="+legal"/>
@@ -578,7 +578,7 @@
       <!-- weekend-56 class -->
       <xsd:enumeration value="+V_Duration"/>
 
-      
+
 
       <xsd:enumeration value="None"/>
 	  </xsd:restriction>
@@ -586,7 +586,7 @@
       </xsd:list>
     </xsd:simpleType>
   <xsd:minLength value="1"/>
-  </xsd:restriction>  
+  </xsd:restriction>
 </xsd:simpleType>
 
 <!-- selectional restrictions -->
@@ -631,15 +631,15 @@
     <xsd:enumeration value="vehicle"/>
     <xsd:enumeration value="vehicle_part"/>
 
-    
-  </xsd:restriction>    
+
+  </xsd:restriction>
 </xsd:simpleType>
 
 <!-- selectional restrictions for argument of preposition -->
 <xsd:simpleType name="preprestrType">
   <xsd:restriction base="xsd:string">
     <xsd:enumeration value="dest"/>
-    <xsd:enumeration value="dest_dir"/>	
+    <xsd:enumeration value="dest_dir"/>
     <xsd:enumeration value="dest_conf"/>
     <xsd:enumeration value="dir"/>
     <xsd:enumeration value="loc"/>
@@ -647,9 +647,9 @@
     <xsd:enumeration value="plural"/>
     <xsd:enumeration value="spatial"/>
     <xsd:enumeration value="src"/>
-    <xsd:enumeration value="at"/> 
+    <xsd:enumeration value="at"/>
     <xsd:enumeration value="gol"/>
-    <xsd:enumeration value="src_conf"/>    
+    <xsd:enumeration value="src_conf"/>
 
 
   </xsd:restriction>
@@ -674,7 +674,7 @@
     <xsd:enumeration value="np_to_inf"/>
     <xsd:enumeration value="oc_bare_inf"/>
     <xsd:enumeration value="oc_ing"/>
-    <xsd:enumeration value="oc_to_inf"/>	
+    <xsd:enumeration value="oc_to_inf"/>
     <xsd:enumeration value="plural"/>
     <xsd:enumeration value="poss_ing"/>
     <xsd:enumeration value="quotation"/>
@@ -696,14 +696,14 @@
     <xsd:enumeration value="what_extract"/>
     <xsd:enumeration value="wheth_inf"/>
   </xsd:restriction>
-</xsd:simpleType>    
+</xsd:simpleType>
 
 <!-- types of predicates -->
 <xsd:simpleType name="predType">
   <xsd:restriction base="xsd:string">
     <xsd:enumeration value="about"/>
     <xsd:enumeration value="abstain"/>
-    <xsd:enumeration value="act"/> 
+    <xsd:enumeration value="act"/>
     <xsd:enumeration value="adjust"/>
     <xsd:enumeration value="adjusted"/>
     <xsd:enumeration value="admit"/>
@@ -758,7 +758,7 @@
     <xsd:enumeration value="correlate"/>
     <xsd:enumeration value="correlated"/>
     <xsd:enumeration value="cost"/>
-    <xsd:enumeration value="co-temporal"/>    
+    <xsd:enumeration value="co-temporal"/>
     <xsd:enumeration value="covered"/>
     <xsd:enumeration value="created_image"/>
     <xsd:enumeration value="create_image"/>
@@ -772,19 +772,19 @@
     <xsd:enumeration value="designated"/>
     <xsd:enumeration value="desire"/>
     <xsd:enumeration value="destroyed"/>
-    <xsd:enumeration value="develop"/>    
+    <xsd:enumeration value="develop"/>
     <xsd:enumeration value="different"/>
     <xsd:enumeration value="direction"/>
     <xsd:enumeration value="disappear"/>
     <xsd:enumeration value="discomfort"/>
     <xsd:enumeration value="discover"/>
     <xsd:enumeration value="do"/>
-    <xsd:enumeration value="duration"/>    
+    <xsd:enumeration value="duration"/>
     <xsd:enumeration value="earn"/>
     <xsd:enumeration value="elliptical_motion"/>
     <xsd:enumeration value="emit"/>
     <xsd:enumeration value="emotional_state"/>
-    <xsd:enumeration value="end"/> 
+    <xsd:enumeration value="end"/>
     <xsd:enumeration value="enforce"/>
     <xsd:enumeration value="ensure"/>
     <xsd:enumeration value="equals"/>
@@ -793,7 +793,7 @@
     <xsd:enumeration value="exist"/>
     <xsd:enumeration value="experience"/>
     <xsd:enumeration value="express"/>
-    <xsd:enumeration value="fictive_motion"/>    
+    <xsd:enumeration value="fictive_motion"/>
     <xsd:enumeration value="filled_with"/>
     <xsd:enumeration value="financial_relationship"/>
     <xsd:enumeration value="financial_interest_in"/>
@@ -810,27 +810,27 @@
     <xsd:enumeration value="has_possession"/>
     <xsd:enumeration value="have_opinion"/>
     <xsd:enumeration value="has_location"/>
-    <xsd:enumeration value="has_state"/>    
-    <xsd:enumeration value="has_information"/> 
+    <xsd:enumeration value="has_state"/>
+    <xsd:enumeration value="has_information"/>
     <xsd:enumeration value="has_organization_role"/>
-    <xsd:enumeration value="has_position"/> 
-    <xsd:enumeration value="has_property"/>            
-    <xsd:enumeration value="has_val"/>            
+    <xsd:enumeration value="has_position"/>
+    <xsd:enumeration value="has_property"/>
+    <xsd:enumeration value="has_val"/>
     <xsd:enumeration value="has_set_member"/>
-    <xsd:enumeration value="has_configuration"/>  
-    <xsd:enumeration value="has_orientation"/>  
-    <xsd:enumeration value="has_role"/>  
+    <xsd:enumeration value="has_configuration"/>
+    <xsd:enumeration value="has_orientation"/>
+    <xsd:enumeration value="has_role"/>
     <xsd:enumeration value="help"/>
     <xsd:enumeration value="hide"/>
     <xsd:enumeration value="hold"/>
     <xsd:enumeration value="in"/>
     <xsd:enumeration value="indicate"/>
     <xsd:enumeration value="intend"/>
-    <xsd:enumeration value="intrinsic_motion"/>    
+    <xsd:enumeration value="intrinsic_motion"/>
     <xsd:enumeration value="in_reaction_to"/>
     <xsd:enumeration value="involuntary"/>
     <xsd:enumeration value="involve"/>
-    <xsd:enumeration value="irrealis"/>    
+    <xsd:enumeration value="irrealis"/>
     <xsd:enumeration value="license"/>
     <xsd:enumeration value="limit"/>
     <xsd:enumeration value="linger"/>
@@ -838,7 +838,7 @@
     <xsd:enumeration value="made_of"/>
     <xsd:enumeration value="manner"/>
     <xsd:enumeration value="masquerade"/>
-    <xsd:enumeration value="material_integrity_state"/>    
+    <xsd:enumeration value="material_integrity_state"/>
     <xsd:enumeration value="meets"/>
     <xsd:enumeration value="mingled"/>
     <xsd:enumeration value="motion"/>
@@ -847,9 +847,9 @@
     <xsd:enumeration value="nonagentive_cause"/>
     <xsd:enumeration value="occur"/>
     <xsd:enumeration value="occurred"/>
-    <xsd:enumeration value="opposition"/>    
-    <xsd:enumeration value="overlaps"/>    
-    <xsd:enumeration value="part_of"/>        
+    <xsd:enumeration value="opposition"/>
+    <xsd:enumeration value="overlaps"/>
+    <xsd:enumeration value="part_of"/>
     <xsd:enumeration value="path"/>
     <xsd:enumeration value="path_rel"/>
     <xsd:enumeration value="penetrating"/>
@@ -911,52 +911,52 @@
 <!-- syntactic descriptions provided in frames -->
 <xsd:simpleType name="primaryDescriptionType">
   <xsd:restriction base="xsd:string">
-    <xsd:enumeration value="NP V NP PP.trajectory"/> 
-    <xsd:enumeration value="NP V NP ADV PP.goal"/>     
-    <xsd:enumeration value="NP V PP.pivot"/>  
-    <xsd:enumeration value="NP V NP.patient PP.extent PP.initial_state PP.result"/>  
-    <xsd:enumeration value="NP.patient V NP.extent PP.initial_state PP.result"/>  
-    <xsd:enumeration value="NP.patient V PP.extent PP.initial_state PP.result"/> 
-    <xsd:enumeration value="NP.attribute V NP.extent PP.initial_state PP.result"/>  
-    <xsd:enumeration value="NP.attribute V PP.extent PP.initial_state PP.result"/>  
-    <xsd:enumeration value="NP.patient V PP.attribute NP.extent PP.initial_state PP.result"/>  
-    <xsd:enumeration value="NP.patient V PP.attribute PP.extent PP.initial_state PP.result"/>  
-    <xsd:enumeration value="NP V NP.patient NP.extent PP.initial_state PP.result"/>  
-    <xsd:enumeration value="NP V NP.source PP.theme"/>  
-    <xsd:enumeration value="NP.source V"/>  
-    <xsd:enumeration value="NP V NP PP.source PP.destination"/>  
-    <xsd:enumeration value="NP V NP.theme PP.co-theme"/>  
-    <xsd:enumeration value="NP V NP.theme PP.co-theme PP.instrument"/>  
-    <xsd:enumeration value="NP V PP.theme PP.beneficary"/>  
-    <xsd:enumeration value="NP V PP.attribute PP.beneficiary"/>  
-    <xsd:enumeration value="NP V PP.attribute PP.theme PP.beneficiary"/>  
-    <xsd:enumeration value="NP.patient V PP.product"/>  
-    <xsd:enumeration value="NP.product V PP.patient"/>  
-    <xsd:enumeration value="NP V NP.product PP.patient"/> 
-    <xsd:enumeration value="NP V NP.patient PP.product"/>  
-    <xsd:enumeration value="NP V NP.initial_location PP.destination"/>  
-    <xsd:enumeration value="NP V NP.patient PP.product"/>  
-    <xsd:enumeration value="NP V PP.theme PP.instrument"/> 
-    <xsd:enumeration value="NP V NP.instrument PP.theme"/>  
-    <xsd:enumeration value="NP V PP.patient PP.instrument"/>  
-    <xsd:enumeration value="NP V NP.theme PP.instsrument"/>  
-    <xsd:enumeration value="NP.instrument V NP.theme"/>  
-    <xsd:enumeration value="NP V NP PP.source PP.destination PP.trajectory"/>  
-    <xsd:enumeration value="NP.theme V PP.source PP.trajectory PP.destination"/>  
-    <xsd:enumeration value="NP.agent V NP.theme PP.source PP.trajectory PP.destination"/>  
-    <xsd:enumeration value="NP V ADJ.result"/>  
-    <xsd:enumeration value="NP V NP ADJ.result"/>  
-    <xsd:enumeration value="NP V NP.extent PP.trajectory"/>  
-    <xsd:enumeration value="NP.agent V NP.theme NP.extent"/>  
-    <xsd:enumeration value="NP.agent V NP.theme NP.extent PP.trajectory"/>  
-    <xsd:enumeration value="NP V NP.theme PP.predicate"/>  
-    <xsd:enumeration value="NP V NP.predicate"/>  
-    <xsd:enumeration value="NP V PP.co-agent that S"/>  
-    <xsd:enumeration value="NP V NP.destination PP.initial_location"/>  
-    <xsd:enumeration value="NP V apart ADV-Middle"/> 
-    <xsd:enumeration value="NP V NP PP.co-patient PP.instrument"/> 
-    <xsd:enumeration value="NP V NP PP.theme PP.instrument"/> 
-    <xsd:enumeration value="NP V NP.theme PP.recipient PP.stimulus"/>     
+    <xsd:enumeration value="NP V NP PP.trajectory"/>
+    <xsd:enumeration value="NP V NP ADV PP.goal"/>
+    <xsd:enumeration value="NP V PP.pivot"/>
+    <xsd:enumeration value="NP V NP.patient PP.extent PP.initial_state PP.result"/>
+    <xsd:enumeration value="NP.patient V NP.extent PP.initial_state PP.result"/>
+    <xsd:enumeration value="NP.patient V PP.extent PP.initial_state PP.result"/>
+    <xsd:enumeration value="NP.attribute V NP.extent PP.initial_state PP.result"/>
+    <xsd:enumeration value="NP.attribute V PP.extent PP.initial_state PP.result"/>
+    <xsd:enumeration value="NP.patient V PP.attribute NP.extent PP.initial_state PP.result"/>
+    <xsd:enumeration value="NP.patient V PP.attribute PP.extent PP.initial_state PP.result"/>
+    <xsd:enumeration value="NP V NP.patient NP.extent PP.initial_state PP.result"/>
+    <xsd:enumeration value="NP V NP.source PP.theme"/>
+    <xsd:enumeration value="NP.source V"/>
+    <xsd:enumeration value="NP V NP PP.source PP.destination"/>
+    <xsd:enumeration value="NP V NP.theme PP.co-theme"/>
+    <xsd:enumeration value="NP V NP.theme PP.co-theme PP.instrument"/>
+    <xsd:enumeration value="NP V PP.theme PP.beneficary"/>
+    <xsd:enumeration value="NP V PP.attribute PP.beneficiary"/>
+    <xsd:enumeration value="NP V PP.attribute PP.theme PP.beneficiary"/>
+    <xsd:enumeration value="NP.patient V PP.product"/>
+    <xsd:enumeration value="NP.product V PP.patient"/>
+    <xsd:enumeration value="NP V NP.product PP.patient"/>
+    <xsd:enumeration value="NP V NP.patient PP.product"/>
+    <xsd:enumeration value="NP V NP.initial_location PP.destination"/>
+    <xsd:enumeration value="NP V NP.patient PP.product"/>
+    <xsd:enumeration value="NP V PP.theme PP.instrument"/>
+    <xsd:enumeration value="NP V NP.instrument PP.theme"/>
+    <xsd:enumeration value="NP V PP.patient PP.instrument"/>
+    <xsd:enumeration value="NP V NP.theme PP.instsrument"/>
+    <xsd:enumeration value="NP.instrument V NP.theme"/>
+    <xsd:enumeration value="NP V NP PP.source PP.destination PP.trajectory"/>
+    <xsd:enumeration value="NP.theme V PP.source PP.trajectory PP.destination"/>
+    <xsd:enumeration value="NP.agent V NP.theme PP.source PP.trajectory PP.destination"/>
+    <xsd:enumeration value="NP V ADJ.result"/>
+    <xsd:enumeration value="NP V NP ADJ.result"/>
+    <xsd:enumeration value="NP V NP.extent PP.trajectory"/>
+    <xsd:enumeration value="NP.agent V NP.theme NP.extent"/>
+    <xsd:enumeration value="NP.agent V NP.theme NP.extent PP.trajectory"/>
+    <xsd:enumeration value="NP V NP.theme PP.predicate"/>
+    <xsd:enumeration value="NP V NP.predicate"/>
+    <xsd:enumeration value="NP V PP.co-agent that S"/>
+    <xsd:enumeration value="NP V NP.destination PP.initial_location"/>
+    <xsd:enumeration value="NP V apart ADV-Middle"/>
+    <xsd:enumeration value="NP V NP PP.co-patient PP.instrument"/>
+    <xsd:enumeration value="NP V NP PP.theme PP.instrument"/>
+    <xsd:enumeration value="NP V NP.theme PP.recipient PP.stimulus"/>
     <xsd:enumeration value="NP V NP PP.theme whether S_INF"/>
     <xsd:enumeration value="NP V NP PP.theme what S"/>
     <xsd:enumeration value="NP V NP PP.theme what S_INF"/>
@@ -980,7 +980,7 @@
     <xsd:enumeration value="NP V PP that S"/>
     <xsd:enumeration value="NP V PP.source PP.theme what S"/>
     <xsd:enumeration value="NP V NP ADJ"/>
-    <xsd:enumeration value="NP V PP.cause"/> 
+    <xsd:enumeration value="NP V PP.cause"/>
     <xsd:enumeration value="NP.location V NP"/>
     <xsd:enumeration value="NP V whether S"/>
     <xsd:enumeration value="NP V PP.location PP.theme"/>
@@ -997,7 +997,7 @@
     <xsd:enumeration value="NP V together ADV-Middle"/>
     <xsd:enumeration value="NP V PP.recipient S_INF"/>
     <xsd:enumeration value="NP V NP down"/>
-    <xsd:enumeration value="NP V NP PP.product PP.beneficiary"/>   
+    <xsd:enumeration value="NP V NP PP.product PP.beneficiary"/>
     <xsd:enumeration value="NP V PP.theme NP S_ING"/>
     <xsd:enumeration value="NP V what S"/>
     <xsd:enumeration value="NP V ADVP-Middle PP"/>

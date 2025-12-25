@@ -7,7 +7,7 @@
         <definition>&lt;def-root&gt;Result of an event&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="599" cDate="07/04/2001 02:28:10 PDT Wed" abbrev="Agt" name="Agent" ID="1288">
-        <definition>&lt;def-root&gt;The agent is the person who does the grooming.  
+        <definition>&lt;def-root&gt;The agent is the person who does the grooming.
 &lt;ex&gt;&lt;fex name="Agent"&gt;She&lt;/fex&gt; washed the baby&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
     </FE>

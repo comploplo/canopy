@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MLC" cDate="05/18/2011 11:14:34 PDT Wed" name="Thermodynamic_phase" ID="2550" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame describes the attributes of a thermodynamic &lt;fen&gt;Phase&lt;/fen&gt; of &lt;fen&gt;Matter&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;This frame describes the attributes of a thermodynamic &lt;fen&gt;Phase&lt;/fen&gt; of &lt;fen&gt;Matter&lt;/fen&gt;.
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;The &lt;fex name="Phase"&gt;molten&lt;/fex&gt; &lt;t&gt;state&lt;/t&gt;&lt;fex name="Matter"&gt;of the lava&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="MLC" cDate="05/18/2011 11:59:55 PDT Wed" abbrev="" name="Matter" ID="14430">

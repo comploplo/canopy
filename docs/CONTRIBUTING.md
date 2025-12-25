@@ -6,11 +6,11 @@ canopy.rs follows **infrastructure-first development** with rigorous performance
 monitoring and quality gates. We prioritize:
 
 1. **Performance-First Mindset**: Establish baselines before building features
-2. **Type Safety**: Use Rust's type system to enforce linguistic constraints
-3. **Theory-Driven Design**: Every architectural decision grounded in linguistic
+1. **Type Safety**: Use Rust's type system to enforce linguistic constraints
+1. **Theory-Driven Design**: Every architectural decision grounded in linguistic
    theory
-4. **Comprehensive Testing**: Property-based tests, golden tests, benchmarks
-5. **Developer Experience**: Fast feedback loops and excellent tooling
+1. **Comprehensive Testing**: Property-based tests, golden tests, benchmarks
+1. **Developer Experience**: Fast feedback loops and excellent tooling
 
 ## Development Workflow
 
@@ -77,18 +77,18 @@ just smoke        # Quick verification everything works
 ### Test Types Required
 
 1. **Unit Tests**: Component-level with high coverage
-2. **Property Tests**: Linguistic invariants with `proptest`
-3. **Golden Tests**: Deterministic output validation with `insta`
-4. **Benchmarks**: Performance regression detection with `criterion`
-5. **Integration Tests**: End-to-end LSP scenarios
+1. **Property Tests**: Linguistic invariants with `proptest`
+1. **Golden Tests**: Deterministic output validation with `insta`
+1. **Benchmarks**: Performance regression detection with `criterion`
+1. **Integration Tests**: End-to-end LSP scenarios
 
 ### Quality Gates (ALL MUST PASS)
 
 - ✅ **Tests**: 100% pass rate (`just test`)
 - ✅ **Lints**: Zero clippy warnings (`just lint`)
 - ✅ **Format**: Code properly formatted (`just fmt-check`)
-- ✅ **Performance**: <5% regression (`just perf-check`)
-- 🎯 **Coverage**: >90% target (M2+)
+- ✅ **Performance**: \<5% regression (`just perf-check`)
+- 🎯 **Coverage**: ~70% target (M7), 50% gate currently
 
 ### Golden Test Philosophy
 
@@ -110,10 +110,10 @@ From Python V1 system: Use deterministic output validation for:
 
 ### Performance Targets (from ROADMAP.md)
 
-- Parse Latency: <10ms (vs 100ms Python)
-- LSP Response: <50ms (vs 200ms Python)
+- Parse Latency: \<10ms (vs 100ms Python)
+- LSP Response: \<50ms (vs 200ms Python)
 - Throughput: >100 sent/sec (vs 10 Python)
-- Memory/Sentence: <25KB (vs 250KB Python)
+- Memory/Sentence: \<25KB (vs 250KB Python)
 
 ### Performance Workflow
 
@@ -132,10 +132,10 @@ just memprof         # Check memory usage
 ### Before Submitting PR
 
 1. **Run quality checks**: `just check-all`
-2. **Update benchmarks**: `just bench` if performance-critical changes
-3. **Update documentation**: README, architecture docs if needed
-4. **Add tests**: Unit, property, golden tests as appropriate
-5. **Check coverage**: Maintain high coverage standards
+1. **Update benchmarks**: `just bench` if performance-critical changes
+1. **Update documentation**: README, architecture docs if needed
+1. **Add tests**: Unit, property, golden tests as appropriate
+1. **Check coverage**: Maintain high coverage standards
 
 ### PR Requirements
 
@@ -285,7 +285,7 @@ test(golden): add lambda calculus β-reduction test cases
 
 - **Documentation**: [ARCHITECTURE.md](ARCHITECTURE.md),
   [ROADMAP.md](ROADMAP.md)
-- **Code Examples**: See `examples/` directory (M2+)
+- **Code Examples**: See `crates/canopy-tokenizer/examples/` and `examples/`
 - **Benchmarks**: Check `target/criterion/` for performance analysis
 
 ### Questions
@@ -312,7 +312,7 @@ All releases must pass:
 - Performance benchmarks within 5% of baseline
 - Documentation builds without errors
 
----
+______________________________________________________________________
 
 **Remember**: Infrastructure-first development means we build the tools and
 processes that enable rapid, high-quality feature development. Quality gates are

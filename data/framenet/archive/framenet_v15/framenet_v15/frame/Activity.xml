@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="243" cDate="06/01/2001 04:23:25 PDT Fri" name="Activity" ID="124" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;This is an abstract frame for durative activities, in which the &lt;fen&gt;Agent&lt;/fen&gt; enters an ongoing state of the &lt;fen&gt;Activity&lt;/fen&gt;, remains in this state for some &lt;fen&gt;Duration&lt;/fen&gt; of &lt;fen&gt;Time&lt;/fen&gt;, and leaves this state either by finishing or by stopping.   The &lt;fen&gt;Agent&lt;/fen&gt;'s &lt;fen&gt;Activity&lt;/fen&gt; should be intentional.
-  
+
 This frame is intended mostly for the inheritance of common FEs, and to provide the frame structure for the beginning, ongoing, finish, or stop stage of an &lt;fen&gt;Activity&lt;/fen&gt;, each of which constitutes a subframe of this frame. This frame should be compared to the Process frame.&lt;/def-root&gt;</definition>
     <semType name="Non-Lexical Frame" ID="16"/>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core-Unexpressed" cBy="243" cDate="06/01/2001 04:26:15 PDT Fri" abbrev="Act" name="Activity" ID="695">

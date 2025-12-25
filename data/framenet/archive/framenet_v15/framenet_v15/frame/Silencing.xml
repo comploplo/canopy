@@ -48,7 +48,7 @@
 &lt;ex&gt;&lt;fex name="Agent"&gt;The teacher&lt;/fex&gt; &lt;t&gt;quieted&lt;/t&gt; &lt;fex name="Expressor"&gt;the children's laughter&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="309" cDate="10/02/2003 11:36:49 PDT Thu" abbrev="Mnr" name="Manner" ID="5324">
-        <definition>&lt;def-root&gt;Any description of the silencing event  which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously) and general descriptions comparing events (the same way). 
+        <definition>&lt;def-root&gt;Any description of the silencing event  which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously) and general descriptions comparing events (the same way).
 
 &lt;ex&gt;Kim &lt;t&gt;shushed&lt;/t&gt; Pat &lt;fex name="Manner"&gt;rather haughtily&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

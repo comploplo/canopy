@@ -1,8 +1,8 @@
 //! Tests for LexiconDatabase methods to achieve coverage targets
 
 use canopy_lexicon::types::{
-    ClassificationType, LexiconDatabase, LexiconPattern, LexiconStats, LexiconWord, PatternType,
-    PropertyValue, WordClass, WordClassType,
+    ClassificationType, LexiconDatabase, LexiconPattern, LexiconWord, PatternType, PropertyValue,
+    WordClass, WordClassType,
 };
 use regex::Regex;
 use std::collections::HashMap;

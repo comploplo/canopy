@@ -1001,7 +1001,7 @@
 { Oran, city,@i port,@i Algeria,#p (a port city in northwestern Algeria and the country's 2nd largest city) }
 { Constantine, city,@i Algeria,#p (a walled city in northeastern Algeria to the east of Algiers; was destroyed in warfare in the 4th century and rebuilt by Constantine I) }
 { Djanet, town,@i Algeria,#p (a desert town in southeastern Algeria) }
-{ Hippo, Hippo_Regius, town,@i Algeria,#p (an ancient Numidian town in northwestern Africa adjoining present-day Annaba in northeastern Algeria) } 
+{ Hippo, Hippo_Regius, town,@i Algeria,#p (an ancient Numidian town in northwestern Africa adjoining present-day Annaba in northeastern Algeria) }
 { Reggane, town,@i Algeria,#p (a town in central Algeria) }
 { Timgad, town,@i Algeria,#p (an ancient town founded by the Romans; noted for extensive and well-preserved ruins) }
 { Timimoun, town,@i Algeria,#p (a town in central Algeria in the Atlas Mountains) }
@@ -1857,7 +1857,7 @@
 { Waterford, city,@i port,@i Ireland1,#p (a port city in southern Ireland; famous for glass industry) }
 
 { Scotland, European_country,@i United_Kingdom,#p Great_Britain,#p noun.object:Europe,#p (one of the four countries that make up the United Kingdom of Great Britain and Northern Ireland; located on the northern part of the island of Great Britain; famous for bagpipes and plaids and kilts) }
-{ Caledonia, geographical_area,@i Scotland,#p (the geographical area (in Roman times) to the north of the Antonine Wall; now a poetic name for Scotland) } 
+{ Caledonia, geographical_area,@i Scotland,#p (the geographical area (in Roman times) to the north of the Antonine Wall; now a poetic name for Scotland) }
 { [ Highlands, noun.person:highlander1,+ noun.person:highlander,+ ] Highlands_of_Scotland, noun.object:highland,@i Scotland,#p (a mountainous region of northern Scotland famous for its rugged beauty; known for the style of dress (the kilt and tartan) and the clan system (now in disuse)) }
 { [ Lowlands, noun.person:lowlander,+ ] Lowlands_of_Scotland, noun.object:lowland,@i Scotland,#p (the southern part of Scotland that is not mountainous) }
 { [ Galloway, adj.pert:galwegian,+ ] district,@i Scotland,#p (a district in southwestern Scotland) }
@@ -2263,7 +2263,7 @@
 { Natal, KwaZulu-Natal, district,@i South_Africa,#p (a region of eastern South Africa on the Indian Ocean; "Natal was renamed KwaZulu-Natal in 1994") }
 { New_Zealand1, New_Zealand_Islands, noun.object:island,@i noun.object:Pacific,#p (North Island and South Island and adjacent small islands in the South Pacific) }
 { North_Island, noun.object:island,@i New_Zealand1,#p (the smaller but more populous of two main islands of New Zealand; separated from South Island by Cook Strait) }
-{ South_Island, noun.object:island,@i New_Zealand1,#p (the larger but less populous of two main islands of New Zealand; separated from North Island by Cook Strait) } 
+{ South_Island, noun.object:island,@i New_Zealand1,#p (the larger but less populous of two main islands of New Zealand; separated from North Island by Cook Strait) }
 { New_Zealand, country,@i New_Zealand1,#p noun.group:British_Commonwealth,#m British_Empire,#m (an independent country within the British Commonwealth; achieved independence from the United Kingdom in 1907; known for sheep and spectacular scenery) }
 { Auckland, city,@i port,@i New_Zealand,#p (the largest city and principal port of New Zealand) }
 { Christchurch, city,@i New_Zealand,#p (industrial city at the center of a rich agricultural region) }

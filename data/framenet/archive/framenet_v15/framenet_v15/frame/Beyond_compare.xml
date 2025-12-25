@@ -16,7 +16,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="06/17/2002 05:52:07 PDT Mon" abbrev="Vrble" name="Variable" ID="3089">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Variable&lt;/fen&gt; is a property that evokes a scale along which the &lt;fen&gt;Standard&lt;/fen&gt; is located closest to one extreme in  comparison to its &lt;fen&gt;Competitors&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Variable&lt;/fen&gt; is a property that evokes a scale along which the &lt;fen&gt;Standard&lt;/fen&gt; is located closest to one extreme in  comparison to its &lt;fen&gt;Competitors&lt;/fen&gt;.
 &lt;ex&gt;Hilary possessed &lt;t&gt;matchless&lt;/t&gt; &lt;fex name="Variable"&gt;integrity&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>

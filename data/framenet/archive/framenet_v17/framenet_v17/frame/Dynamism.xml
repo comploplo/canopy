@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MLC" cDate="11/10/2010 12:47:31 PST Wed" name="Dynamism" ID="2440" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A physical &lt;fen&gt;Exerter&lt;/fen&gt;, &lt;fen&gt;Action&lt;/fen&gt;, or &lt;fen&gt;Force&lt;/fen&gt; exerts energy at a level specified by the target. This frame covers both individual-level/static uses ("an INTENSE person") as well as stage-level/dynamic uses ("an INTENSE look"), although the individual-level meaning seems more basic. 
+    <definition>&lt;def-root&gt;A physical &lt;fen&gt;Exerter&lt;/fen&gt;, &lt;fen&gt;Action&lt;/fen&gt;, or &lt;fen&gt;Force&lt;/fen&gt; exerts energy at a level specified by the target. This frame covers both individual-level/static uses ("an INTENSE person") as well as stage-level/dynamic uses ("an INTENSE look"), although the individual-level meaning seems more basic.
 
 &lt;ex&gt;Although an &lt;t&gt;energetic&lt;/t&gt; and able &lt;fex name="Exer"&gt;warrior&lt;/fex&gt;, Charlemagne tended to direct battles rather than fight in person.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Act"&gt;She dumped a mug on the bedside table&lt;/fex&gt; with &lt;fex name="Deg"&gt;such&lt;/fex&gt; &lt;t&gt;vigor&lt;/t&gt; that steaming coffee spashed out.&lt;/ex&gt;
-&lt;ex&gt;Swing the racket with &lt;t&gt;dynamic&lt;/t&gt; &lt;fex name="For"&gt;force&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;Swing the racket with &lt;t&gt;dynamic&lt;/t&gt; &lt;fex name="For"&gt;force&lt;/fex&gt;.&lt;/ex&gt;
 
 &lt;ex&gt;&lt;fex name="Exer"&gt;I&lt;/fex&gt; felt &lt;fex name="Deg"&gt;particularly&lt;/fex&gt; &lt;t&gt;sluggish&lt;/t&gt; &lt;fex name="Pla"&gt;at work&lt;/fex&gt; &lt;fex name="Tim"&gt;that day&lt;/fex&gt;.&lt;/ex&gt;
-&lt;fen&gt;Exerter&lt;/fen&gt;, &lt;fen&gt;Action&lt;/fen&gt;, and &lt;fen&gt;Force&lt;/fen&gt; belong to a Core set. 
+&lt;fen&gt;Exerter&lt;/fen&gt;, &lt;fen&gt;Action&lt;/fen&gt;, and &lt;fen&gt;Force&lt;/fen&gt; belong to a Core set.
 &lt;ex&gt;&lt;/ex&gt;
 This frame also covers several productive metaphor cases. In the first one, movement or change caused by a social entity is conveyed as energy exerted by a physical entity. 'Social' here encompasses entities that are economic, political, technological, historical, cultural, and intimate:
 &lt;ex&gt;&lt;fex name="Exer"&gt;The private sector&lt;/fex&gt; is &lt;fex name="Deg"&gt;so much more&lt;/fex&gt; &lt;t&gt;dynamic&lt;/t&gt;.&lt;/ex&gt;
@@ -29,12 +29,12 @@ Further, there is a metonymy wherein energy exerted by people carrying out an ac
 &lt;ex&gt;&lt;/ex&gt;
 Compare to: Level_of_force_exertion. &lt;/def-root&gt;</definition>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="MLC" cDate="11/10/2010 01:07:42 PST Wed" abbrev="Act" name="Action" ID="14260">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Action&lt;/fen&gt; that exerts an energy of the level specified by the target. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Action&lt;/fen&gt; that exerts an energy of the level specified by the target.
 
 &lt;ex&gt;He was given a &lt;t&gt;vigorous&lt;/t&gt; &lt;fex name="Act"&gt;slap&lt;/fex&gt; on the ear for his behavior.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="MLC" cDate="11/10/2010 01:09:00 PST Wed" abbrev="Exer" name="Exerter" ID="14261">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Exerter&lt;/fen&gt; which exerts an energy of the level specified by the target. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Exerter&lt;/fen&gt; which exerts an energy of the level specified by the target.
 
 &lt;ex&gt;More deadly and painful is the chemical weaponry of the camouflaged but &lt;t&gt;lethargic&lt;/t&gt; &lt;fex name="Exer"&gt;stonefish&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
     </FE>
@@ -53,23 +53,23 @@ Where &lt;fen&gt;Degree&lt;/fen&gt; is expressed by a comparative or superlative
         <semType name="Degree" ID="172"/>
     </FE>
     <FE bgColor="FFA500" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="06/30/2015 05:29:13 PDT Tue" abbrev="Tim" name="Time" ID="16495">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Time&lt;/fen&gt; during which the &lt;fen&gt;Exerter&lt;/fen&gt;, &lt;fen&gt;Action&lt;/fen&gt;, or &lt;fen&gt;Force&lt;/fen&gt; exerts an energy. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Time&lt;/fen&gt; during which the &lt;fen&gt;Exerter&lt;/fen&gt;, &lt;fen&gt;Action&lt;/fen&gt;, or &lt;fen&gt;Force&lt;/fen&gt; exerts an energy.
 
 &lt;ex&gt;Charlie's workout was &lt;t&gt;intense&lt;/t&gt; even &lt;fex name="Tim"&gt;first thing in the morning&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Core" cBy="HPh" cDate="09/10/2015 06:06:35 PDT Thu" abbrev="For" name="Force" ID="16705">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Force&lt;/fen&gt; that exerts an energy of the level specified by the target. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Force&lt;/fen&gt; that exerts an energy of the level specified by the target.
 
 &lt;ex&gt; They were trying to harness some of the lightening's &lt;t&gt;intense&lt;/t&gt; &lt;fex name="For"&gt;power&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="HPh" cDate="09/10/2015 06:26:08 PDT Thu" abbrev="Cir" name="Circumstances" ID="16706">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; under which the &lt;fen&gt;Exerter&lt;/fen&gt;, &lt;fen&gt;Action&lt;/fen&gt;, or &lt;fen&gt;Force&lt;/fen&gt; exerts an energy. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Circumstances&lt;/fen&gt; under which the &lt;fen&gt;Exerter&lt;/fen&gt;, &lt;fen&gt;Action&lt;/fen&gt;, or &lt;fen&gt;Force&lt;/fen&gt; exerts an energy.
 
 &lt;ex&gt;Athletes gradually release &lt;t&gt;energy&lt;/t&gt; &lt;fex name="Cir"&gt;in long-distance events&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="HPh" cDate="09/10/2015 07:12:10 PDT Thu" abbrev="Pla" name="Place" ID="16709">
-        <definition>&lt;def-root&gt;The location where the &lt;fen&gt;Exerter&lt;/fen&gt;, &lt;fen&gt;Action&lt;/fen&gt;, or &lt;fen&gt;Force&lt;/fen&gt; exerts its energy. 
+        <definition>&lt;def-root&gt;The location where the &lt;fen&gt;Exerter&lt;/fen&gt;, &lt;fen&gt;Action&lt;/fen&gt;, or &lt;fen&gt;Force&lt;/fen&gt; exerts its energy.
 &lt;ex&gt;Because of the added space, our ultimate frisbee game was more &lt;t&gt;vigorous&lt;/t&gt; &lt;fex name="Pla"&gt;in Golden Gate Park&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Location" ID="54"/>
     </FE>

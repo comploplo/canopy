@@ -82,7 +82,7 @@ Episodic memory is the  explicit memory of events. It includes time, place, and 
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="10/09/2004 06:29:17 PDT Sat" abbrev="man" name="Manner" ID="7173">
-        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously) and general descriptions comparing events (the same way). It may also indicate salient characteristics of the &lt;fen&gt;Cognizer&lt;/fen&gt; that affect the action (fondly). 
+        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously) and general descriptions comparing events (the same way). It may also indicate salient characteristics of the &lt;fen&gt;Cognizer&lt;/fen&gt; that affect the action (fondly).
 
 &lt;ex&gt;Bill will be &lt;fex name="man"&gt;fondly&lt;/fex&gt; &lt;t&gt;remembered&lt;/t&gt; by all.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

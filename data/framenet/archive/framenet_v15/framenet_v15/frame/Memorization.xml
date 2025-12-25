@@ -32,7 +32,7 @@ This frame differs from Education_teaching in that the &lt;fen&gt;Cognizer&lt;/f
         <semType name="Locative_relation" ID="182"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="06/23/2004 12:40:04 PDT Wed" abbrev="man" name="Manner" ID="6553">
-        <definition>&lt;def-root&gt;Any description of the memorization event  which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously),  secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may also indicate salient characteristics of a &lt;fen&gt;Cognizer&lt;/fen&gt; that affect the action (presumptuously, coldly, deliberately, eagerly, carefully). 
+        <definition>&lt;def-root&gt;Any description of the memorization event  which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously),  secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may also indicate salient characteristics of a &lt;fen&gt;Cognizer&lt;/fen&gt; that affect the action (presumptuously, coldly, deliberately, eagerly, carefully).
 
 &lt;ex&gt;&lt;fex name="man"&gt;Hurriedly&lt;/fex&gt;, the bus-driver &lt;t&gt;memorized&lt;/t&gt; the new route.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
@@ -43,7 +43,7 @@ This frame differs from Education_teaching in that the &lt;fen&gt;Cognizer&lt;/f
 &lt;ex&gt;Whomever you emulate, internalize the sound of the soloist and &lt;t&gt;memorize&lt;/t&gt; it &lt;fex name="com"&gt;exactly&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="06/23/2004 12:48:14 PDT Wed" abbrev="mea" name="Means" ID="6555">
-        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Cognizer&lt;/fen&gt; by which they achieve memorization. 
+        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Cognizer&lt;/fen&gt; by which they achieve memorization.
 
 &lt;ex&gt;Don't &lt;t&gt;memorize&lt;/t&gt; Morse code  &lt;fex name="mea"&gt;by counting dots and dashes&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

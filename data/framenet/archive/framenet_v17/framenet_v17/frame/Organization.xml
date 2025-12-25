@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="CFB" cDate="04/08/2005 03:03:41 PDT Fri" name="Organization" ID="1371" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame describes intentionally formed human social groups (here termed &lt;fen&gt;Organization&lt;/fen&gt;s) with some definite structure and &lt;fen&gt;Members&lt;/fen&gt;.  They may be relatively informal, consisting only of a group of individuals who are aware of who is and who is not a fellow member, or they may be complex and long-lasting, such as the Roman Catholic Church or the Conservative Party. 
+    <definition>&lt;def-root&gt;This frame describes intentionally formed human social groups (here termed &lt;fen&gt;Organization&lt;/fen&gt;s) with some definite structure and &lt;fen&gt;Members&lt;/fen&gt;.  They may be relatively informal, consisting only of a group of individuals who are aware of who is and who is not a fellow member, or they may be complex and long-lasting, such as the Roman Catholic Church or the Conservative Party.
 
 &lt;ex&gt;&lt;fex name="Members"&gt;Lucien&lt;/fex&gt; is in the &lt;t&gt;&lt;fex name="Organization"&gt;brotherhood&lt;/fex&gt;&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="CFB" cDate="04/08/2005 03:38:36 PDT Fri" abbrev="" name="Organization" ID="7698">

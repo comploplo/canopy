@@ -24,12 +24,12 @@
 Notice that when the FE &lt;fen&gt;Items&lt;/fen&gt; occurs, neither &lt;fen&gt;Item&lt;/fen&gt; nor &lt;fen&gt;Source&lt;/fen&gt; can occur.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="04/18/2005 12:32:53 PDT Mon" abbrev="Mnr" name="Manner" ID="7826">
-        <definition>&lt;def-root&gt;Any description of the detaching event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously),  secondary effects (quietly, loudly), and general descriptions comparing events (the same way). 
+        <definition>&lt;def-root&gt;Any description of the detaching event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously),  secondary effects (quietly, loudly), and general descriptions comparing events (the same way).
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="04/18/2005 12:32:53 PDT Mon" abbrev="Place" name="Place" ID="7827">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Item&lt;/fen&gt;  becomes detached. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Place&lt;/fen&gt; where the &lt;fen&gt;Item&lt;/fen&gt;  becomes detached.
 
 &lt;/def-root&gt;</definition>
         <semType name="Locative_relation" ID="182"/>

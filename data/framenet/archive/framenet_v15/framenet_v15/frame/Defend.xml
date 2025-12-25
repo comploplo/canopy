@@ -24,7 +24,7 @@
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="02/28/2005 03:42:21 PST Mon" abbrev="Mns" name="Means" ID="7545">
-        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Defender&lt;/fen&gt; that accomplishes their defense of the &lt;fen&gt;Victim&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Defender&lt;/fen&gt; that accomplishes their defense of the &lt;fen&gt;Victim&lt;/fen&gt;.
 &lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
     </FE>
@@ -51,7 +51,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="605" cDate="02/28/2005 03:42:21 PST Mon" abbrev="Src" name="Location_of_participant" ID="7550">
-        <definition>&lt;def-root&gt;The starting-point of the motion of the &lt;fen&gt;Defender&lt;/fen&gt; or projectiles of the &lt;fen&gt;Defender&lt;/fen&gt; as they move toward the the &lt;fen&gt;Place&lt;/fen&gt; that the &lt;fen&gt;Assailant&lt;/fen&gt; is occupying.  In prepositional phrases, the prepositional object expresses the starting point of motion.  
+        <definition>&lt;def-root&gt;The starting-point of the motion of the &lt;fen&gt;Defender&lt;/fen&gt; or projectiles of the &lt;fen&gt;Defender&lt;/fen&gt; as they move toward the the &lt;fen&gt;Place&lt;/fen&gt; that the &lt;fen&gt;Assailant&lt;/fen&gt; is occupying.  In prepositional phrases, the prepositional object expresses the starting point of motion.
 &lt;/def-root&gt;</definition>
         <semType name="Location" ID="54"/>
     </FE>

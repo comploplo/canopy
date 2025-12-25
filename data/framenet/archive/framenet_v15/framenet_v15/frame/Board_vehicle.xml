@@ -14,7 +14,7 @@
 &lt;ex&gt;At approximately 07:30 hours &lt;fex name="tra"&gt;we&lt;/fex&gt; &lt;t&gt;emplaned&lt;/t&gt; in England and after circling to gather other units that made up the 1st Airborne Army, we headed for the Rhine.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="10/14/2005 11:25:07 PDT Fri" abbrev="veh" name="Vehicle" ID="9110">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Vehicle&lt;/fen&gt; is the intended means of conveyance of the &lt;fen&gt;Traveller&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Vehicle&lt;/fen&gt; is the intended means of conveyance of the &lt;fen&gt;Traveller&lt;/fen&gt;.
 
 &lt;ex&gt;When he had &lt;t&gt;mounted&lt;/t&gt; &lt;fex name="Vehicle"&gt;the horse&lt;/fex&gt;, his armour glittered in the sun, and he looked so brave and handsome.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

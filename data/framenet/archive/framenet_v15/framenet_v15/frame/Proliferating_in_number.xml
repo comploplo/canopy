@@ -10,7 +10,7 @@
 
 &lt;ex&gt;&lt;fex name="Set"&gt;Problems in the banking industry&lt;/fex&gt; &lt;t&gt;proliferated&lt;/t&gt; &lt;fex name="Degree"&gt;dramatically&lt;/fex&gt; &lt;fex name="Time"&gt;in the 1980s&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="08/02/2005 03:09:58 PDT Tue" abbrev="att" name="Attribute" ID="8766">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Attribute&lt;/fen&gt; is the number of entities that make up the &lt;fen&gt;Set&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Attribute&lt;/fen&gt; is the number of entities that make up the &lt;fen&gt;Set&lt;/fen&gt;.
 
 
 &lt;/def-root&gt;</definition>

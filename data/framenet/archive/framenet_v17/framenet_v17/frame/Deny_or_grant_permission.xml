@@ -5,7 +5,7 @@
 
 
 &lt;ex&gt;&lt;fex name="Authority"&gt;The police officer&lt;/fex&gt; &lt;t&gt;forbid&lt;/t&gt; &lt;fex name="Protagonist"&gt;me&lt;/fex&gt; &lt;fex name="Action"&gt;from turning around&lt;/fex&gt; .&lt;/ex&gt;
-&lt;ex&gt; &lt;fex name="Authority"&gt;My mother&lt;/fex&gt; &lt;t&gt;okayed&lt;/t&gt; &lt;fex name="Protagonist"&gt;me&lt;/fex&gt; &lt;fex name="Action"&gt;to go to the movies with Simon&lt;/fex&gt; . &lt;/ex&gt; 
+&lt;ex&gt; &lt;fex name="Authority"&gt;My mother&lt;/fex&gt; &lt;t&gt;okayed&lt;/t&gt; &lt;fex name="Protagonist"&gt;me&lt;/fex&gt; &lt;fex name="Action"&gt;to go to the movies with Simon&lt;/fex&gt; . &lt;/ex&gt;
 
 &lt;ex&gt; &lt;fex name="Authority"&gt;The teacher&lt;/fex&gt; &lt;m&gt;gave&lt;/m&gt; &lt;fex name="Protagonist"&gt;the children&lt;/fex&gt; &lt;t&gt;permission&lt;/t&gt; &lt;fex name="Action"&gt;to eat their lunch outside&lt;/fex&gt;. &lt;/ex&gt;
 

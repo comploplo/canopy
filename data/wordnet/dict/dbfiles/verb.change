@@ -913,7 +913,7 @@
 { habilitate, qualify,@ frames: 2 (qualify for teaching at a university in Europe; "He habilitated after his sabbatical at a prestigious American university") }
 { [ capacitate, noun.attribute:capacity,+ ] qualify,@ frames: 10 (make capable; "This instruction capacitates us to understand the problem") }
 { [ disqualify, noun.attribute:disqualification,+ noun.act:disqualification,+ qualify,!] unfit, indispose, change1,@ frames: 11,10 (make unfit or unsuitable; "Your income disqualifies you") }
-{ shoehorn, adapt1,@ frames: 8 (fit for a specific purpose even when not well suited)} 
+{ shoehorn, adapt1,@ frames: 8 (fit for a specific purpose even when not well suited)}
 { tailor, orient, adapt1,@ frames: 8 (adjust to a specific need or market; "a magazine oriented towards young people"; "tailor your needs to your surroundings")}
 { domesticate2, tame2, adapt1,@ noun.Tops:animal,;c frames: 8 (make fit for cultivation, domestic life, and service to humans; "The horse was domesticated a long time ago"; "The wolf was tamed and evolved into the house dog")}
 { domesticate, domesticize, domesticise, reclaim4, [ tame4, adj.all:tractable^tameable,+ adj.all:tractable^tamable,+ noun.person:tamer,+ ] domesticate2,$ change1,@ noun.Tops:animal,;c frames: 8,9 (overcome the wildness of; make docile and tractable; "He tames lions for the circus"; "reclaim falcons") }
@@ -1016,7 +1016,7 @@
 { coddle, cook,@ noun.act:cookery,;c frames: 8 (cook in nearly boiling water; "coddle eggs") }
 { [ fire, noun.process:fire,+ ] bake,@ noun.act:cookery,;c frames: 8 (bake in a kiln so as to harden; "fire pottery") }
 { [farce, noun.food:farce,+] [ stuff, noun.food:stuffing,+ ] fill1,@ noun.act:cookery,;c frames: 8,31,21 (fill with a stuffing while cooking; "Have you stuffed the turkey yet?") }
-{ [fetishize, noun.act:fetish,+] verb.emotion:adore,@ frames: 8,9 (make a fetish of)} 
+{ [fetishize, noun.act:fetish,+] verb.emotion:adore,@ frames: 8,9 (make a fetish of)}
 { [feudalize, noun.group:feudalism,+] convert3,@ frames: 8 (bring (a country or people) under feudalism)}
 { [ stuff2, noun.person:stuffer,+ ] stuff,$ fill1,@ frames: 8,31,21 (fill tightly with a material; "stuff a pillow with feathers")}
 { cork, stuff2,@ frames: 8 (stuff with cork; "The baseball player stuffed his bat with cork to make it lighter")}
@@ -1754,7 +1754,7 @@
 { decimate1, decimate,$ verb.contact:kill,@ frames: 9 (kill one in every ten, as of mutineers in Roman armies)}
 { cancel_out, [wipe_out4, noun.event:wipeout,+] eliminate1,@ frames: 11 (wipe out the effect of something; "The new tax effectively cancels out my raise"; "The `A' will cancel out the `C' on your record") }
 { decouple, eliminate1,@ noun.cognition:electronics,;c frames: 8 (reduce or eliminate the coupling of (one circuit or part to another))}
-{ decouple1, eliminate1,@ noun.cognition:physics,;c frames: 8 (eliminate airborne shock waves from (an explosive))} 
+{ decouple1, eliminate1,@ noun.cognition:physics,;c frames: 8 (eliminate airborne shock waves from (an explosive))}
 { extinguish3, [ eliminate1, noun.act:elimination2,+ noun.act:elimination1,+ noun.object:eliminator,+ ] get_rid_of, do_away_with, verb.creation:destroy,@ frames: 8,9,10,11 (terminate, end, or take out; "Let's eliminate the course on Akkadian hieroglyphics"; "Socialism extinguished these archaic customs"; "eliminate my debts") }
 { [ obliterate3, adj.all:eradicable^obliterable,+ noun.event:obliteration,+ noun.act:obliteration,+ noun.object:obliterator,+ ] eliminate1,@ frames: 8,11 (do away with completely, without leaving a trace)}
 { knock_out1, eliminate1,@ frames: 8,11 (eliminate; "knock out a target") }
@@ -2377,7 +2377,7 @@
 { duplex, convert3,@ frames: 8 (change into a duplex)}
 { eroticize, sex_up, change1,@ frames: 8 (give erotic character to or make more interesting; "eroticize the ads")}
 { gum, change,@ frames: 1 (become sticky)}
-{ piggyback, change1,@ frames: 8 (bring into alignment with; "an amendment to piggyback the current law")} 
+{ piggyback, change1,@ frames: 8 (bring into alignment with; "an amendment to piggyback the current law")}
 { repress, change,@ frames: 8 (block the action of; "the process of repressing gene transcription";) }
 { downsize, reduce,@ frames: 8 ((of a company) reduce in size or number of employees; "the company downsized its research staff")}
 { downsize1, reduce5,@ frames: 8 (design or manufacture in a smaller size; "the car makers downsized the SUVs when fuel became very expensive")}
@@ -2390,5 +2390,5 @@
 { lifehack, change1,@ frames: 2 (make one's day-to-day activities more efficient)}
 { cloud4, change1,@ frames: 11 (make less clear; "the stroke clouded memories of her youth")}
 { damage1, change,@ frames: 1 (suffer or be susceptible to damage; "These fine china cups damage easily")}
-{ fire2, light1, ignite, frames: 8 (start or maintain a fire in; "fire the furnace")} 
+{ fire2, light1, ignite, frames: 8 (start or maintain a fire in; "fire the furnace")}
 { fire3, flame_up, fire2,> frames: 1 (become ignited; "The furnace wouldn't fire")}

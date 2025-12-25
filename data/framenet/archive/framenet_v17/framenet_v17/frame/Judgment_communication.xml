@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MJE" cDate="08/29/2001 05:18:08 PDT Wed" name="Judgment_communication" ID="219" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Communicator&lt;/fen&gt; communicates a judgment of an &lt;fen&gt;Evaluee&lt;/fen&gt; to an &lt;fen&gt;Addressee&lt;/fen&gt;.  The judgment may be positive (e.g. &lt;ment&gt;praise&lt;/ment&gt;) or negative (e.g. &lt;ment&gt;criticize&lt;/ment&gt;), and this is indicated by the semantic types Positive and Negative attached to the lexical units.  This frame does not contain words where &lt;fen&gt;Evaluee&lt;/fen&gt; and the &lt;fen&gt;Addressee&lt;/fen&gt; are necessarily the same . 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Communicator&lt;/fen&gt; communicates a judgment of an &lt;fen&gt;Evaluee&lt;/fen&gt; to an &lt;fen&gt;Addressee&lt;/fen&gt;.  The judgment may be positive (e.g. &lt;ment&gt;praise&lt;/ment&gt;) or negative (e.g. &lt;ment&gt;criticize&lt;/ment&gt;), and this is indicated by the semantic types Positive and Negative attached to the lexical units.  This frame does not contain words where &lt;fen&gt;Evaluee&lt;/fen&gt; and the &lt;fen&gt;Addressee&lt;/fen&gt; are necessarily the same .
 &lt;ex&gt;&lt;fex name="Com"&gt;I&lt;/fex&gt; &lt;t&gt;commended&lt;/t&gt; &lt;fex name="Evaluee"&gt;his handling of the crisis&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Com"&gt;Gaston&lt;/fex&gt; &lt;t&gt;denounced&lt;/t&gt; &lt;fex name="Evaluee"&gt;him&lt;/fex&gt; &lt;fex name="Addressee"&gt;to the committee&lt;/fex&gt;.&lt;/ex&gt;
 This is distinct from the Judgment frame in that it involves the communication of an evaluation, rather than merely forming and holding a particular evaluation.&lt;/def-root&gt;</definition>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="08/29/2001 05:22:16 PDT Wed" abbrev="Add" name="Addressee" ID="1770">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; hears the judgement from the &lt;fen&gt;Communicator&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Addressee&lt;/fen&gt; hears the judgement from the &lt;fen&gt;Communicator&lt;/fen&gt;.
 
 &lt;ex&gt; Jon &lt;t&gt;belittled&lt;/t&gt; Madie &lt;fex name="Add"&gt;to her colleagues&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
@@ -16,14 +16,14 @@ This is distinct from the Judgment frame in that it involves the communication o
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="FFFF00" fgColor="000000" coreType="Core" cBy="MJE" cDate="08/29/2001 05:22:16 PDT Wed" abbrev="Medium" name="Medium" ID="1772">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Medium&lt;/fen&gt; identifies the physical or abstract setting in which the evaluation is conveyed. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Medium&lt;/fen&gt; identifies the physical or abstract setting in which the evaluation is conveyed.
 
 &lt;ex&gt;Jon &lt;t&gt;belittled&lt;/t&gt; Madie &lt;fex name="Medium"&gt;over the telephone&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Communicator"&gt;The party&lt;/fex&gt; &lt;t&gt;denounced&lt;/t&gt; &lt;fex name="Evaluee"&gt;the General&lt;/fex&gt; &lt;fex name="Medium"&gt;in vehement terms&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Communicator"&gt;Mayor Quimby&lt;/fex&gt; &lt;t&gt;criticized&lt;/t&gt; &lt;fex name="Evaluee"&gt;the townspeople&lt;/fex&gt; &lt;fex name="Medium"&gt;in his annual speech&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="08/29/2001 05:22:16 PDT Wed" abbrev="Top" name="Topic" ID="1774">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Topic&lt;/fen&gt; identifies the entity to which the proposition or propositions conveyed relate. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Topic&lt;/fen&gt; identifies the entity to which the proposition or propositions conveyed relate.
 &lt;ex&gt;Jon &lt;t&gt;criticized&lt;/t&gt; Madie &lt;fex name="Topic"&gt;about her managerial style&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MJE" cDate="08/29/2001 05:27:13 PDT Wed" abbrev="Degr" name="Degree" ID="1775">
@@ -31,11 +31,11 @@ This is distinct from the Judgment frame in that it involves the communication o
         <semType name="Degree" ID="172"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="08/29/2001 05:27:13 PDT Wed" abbrev="Eval" name="Evaluee" ID="1777">
-        <definition>&lt;def-root&gt;A judgment is made about the &lt;fen&gt;Evaluee&lt;/fen&gt;  With verbs this FE is typically expressed as Object: 
+        <definition>&lt;def-root&gt;A judgment is made about the &lt;fen&gt;Evaluee&lt;/fen&gt;  With verbs this FE is typically expressed as Object:
 &lt;ex&gt;Jon &lt;t&gt;belittled&lt;/t&gt; &lt;fex name="Eval"&gt;Madie&lt;/fex&gt; to her colleagues.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="08/29/2001 05:27:13 PDT Wed" abbrev="Exr" name="Expressor" ID="1778">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Expressor&lt;/fen&gt; is the body part or action by a body part that conveys the judgment made by the &lt;fen&gt;Communicator&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Expressor&lt;/fen&gt; is the body part or action by a body part that conveys the judgment made by the &lt;fen&gt;Communicator&lt;/fen&gt;.
 &lt;ex&gt;She viewed him with a &lt;t&gt;critical&lt;/t&gt; &lt;fex name="Expressor"&gt;gaze&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Communicator" ID="1771"/>
     </FE>
@@ -48,7 +48,7 @@ This is distinct from the Judgment frame in that it involves the communication o
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="08/29/2001 05:27:14 PDT Wed" abbrev="Reas" name="Reason" ID="1781">
-        <definition>&lt;def-root&gt;Typically, there is a constituent expressing the &lt;t&gt;Reason&lt;/t&gt; for the &lt;fen&gt;Communicator&lt;/fen&gt;'s judgment. It is usually a &lt;ment&gt;for&lt;/ment&gt;-PP. 
+        <definition>&lt;def-root&gt;Typically, there is a constituent expressing the &lt;t&gt;Reason&lt;/t&gt; for the &lt;fen&gt;Communicator&lt;/fen&gt;'s judgment. It is usually a &lt;ment&gt;for&lt;/ment&gt;-PP.
 &lt;ex&gt;Jon &lt;t&gt;extolled&lt;/t&gt; Madie &lt;fex name="Reason"&gt;for her efforts&lt;/fex&gt;.&lt;/ex&gt;
 It can also sometimes be expressed as an &lt;ment&gt;as&lt;/ment&gt;-phrase, when that phrase picks out the reason for the praise or critique.
 &lt;ex&gt;&lt;fex name="Evaluee"&gt;The book&lt;/fex&gt; was &lt;t&gt;ridiculed&lt;/t&gt; &lt;fex name="Reason"&gt;as an example of all the worst of post-modernism&lt;/fex&gt;.&lt;/ex&gt;

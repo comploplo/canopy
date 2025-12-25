@@ -56,7 +56,7 @@ selling some excess power at high wholesale prices&lt;/fex&gt;.&lt;/ex&gt;&lt;/d
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="JKR" cDate="07/18/2005 10:21:49 PDT Mon" abbrev="exp" name="Explanation" ID="8638">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the &lt;fen&gt;Agent&lt;/fen&gt;'s decision to temporarily forgo a &lt;fen&gt;Desirable_action&lt;/fen&gt; or to not interact with a &lt;fen&gt;Salient_entity&lt;/fen&gt; logically follows. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Explanation&lt;/fen&gt; denotes a proposition from which the &lt;fen&gt;Agent&lt;/fen&gt;'s decision to temporarily forgo a &lt;fen&gt;Desirable_action&lt;/fen&gt; or to not interact with a &lt;fen&gt;Salient_entity&lt;/fen&gt; logically follows.
 
 &lt;ex&gt;Yes yes I saw them, but I &lt;t&gt;waited&lt;/t&gt; with a reply for sometime &lt;fex name="exp"&gt;because I wanted first to show them to my guildmates&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

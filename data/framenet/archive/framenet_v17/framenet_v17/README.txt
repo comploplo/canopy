@@ -6,28 +6,28 @@ The FrameNet database in XML format, with XSL scripts to make the data
 readable in a web browser:
 
      frame/        (one file/frame 1,221 files)
-     frameIndex.xml	  
-     frameIndex.xsl	  
-     frRelation.xml	
+     frameIndex.xml
+     frameIndex.xsl
+     frRelation.xml
      fulltext/	   (one file/document 107 files)
-     fulltextIndex.xml 
-     fulltextIndex.xsl 
+     fulltextIndex.xml
+     fulltextIndex.xsl
      lu            (one file/lexical unit, 13,572 files)
-     luIndex.xml	  
-     luIndex.xsl	  
-     		  
+     luIndex.xml
+     luIndex.xsl
+
      schema/       XML schemas for the data
      semTypes.xml  FrameNet semantic types and their relations
 
 
 Documentation:
 
-     docs/ 
+     docs/
           book.pdf FrameNet II: Extended Theory and Practice:
           Annotator's manual, 129 pages
 
 	  GeneralReleaseNotes1.7.pdf: description of changes in
-	  Release 1.7 
+	  Release 1.7
 
 	  R1.5XMLDocumentation.txt: A very detailed description of the
 	  XML formats used; almost all of this is still relevant for R1.7.

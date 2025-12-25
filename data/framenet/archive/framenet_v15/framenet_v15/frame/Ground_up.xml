@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="296" cDate="06/18/2002 02:08:15 PDT Tue" name="Ground_up" ID="357" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;In this frame an &lt;fen&gt;Undergoer&lt;/fen&gt; is in a state of having been broken into smaller pieces. 
+    <definition>&lt;def-root&gt;In this frame an &lt;fen&gt;Undergoer&lt;/fen&gt; is in a state of having been broken into smaller pieces.
 &lt;ex&gt; We enjoy eating &lt;t&gt;ground&lt;/t&gt; &lt;fex name="Undergoer"&gt;beef&lt;/fex&gt; . &lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="296" cDate="06/18/2002 02:10:24 PDT Tue" abbrev="Und" name="Undergoer" ID="3104">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Undergoer&lt;/fen&gt; is the entity acted on and that undergoes a change. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Undergoer&lt;/fen&gt; is the entity acted on and that undergoes a change.
 
 &lt;/def-root&gt;</definition>
     </FE>

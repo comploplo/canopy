@@ -3,7 +3,7 @@
 <frame cBy="ChW" cDate="02/07/2001 04:12:00 PST Wed" name="Discussion" ID="34" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;Two (or more) people (the &lt;fen&gt;Interlocutors&lt;/fen&gt;, also encodable as &lt;fen&gt;Interlocutor_1&lt;/fen&gt; and &lt;fen&gt;Interlocutor_2&lt;/fen&gt;) talk to one another. No person is construed as only a speaker or only an addressee. Rather, it is understood that both (or all) participants do some speaking and some listening--the process is understood to be symmetrical or reciprocal.  This frame differs from the Chatting frame in that the &lt;fen&gt;Interlocutors&lt;/fen&gt; have a particular question that they are attempting to decide or understand.
 
-&lt;ex&gt;&lt;fex name="Interlocutor_1"&gt;I&lt;/fex&gt; would rather &lt;t&gt;discuss&lt;/t&gt; &lt;fex name="Topic"&gt;politics&lt;/fex&gt; &lt;fex name="Interlocutor_2"&gt;with anyone but him&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Interlocutor_1"&gt;I&lt;/fex&gt; would rather &lt;t&gt;discuss&lt;/t&gt; &lt;fex name="Topic"&gt;politics&lt;/fex&gt; &lt;fex name="Interlocutor_2"&gt;with anyone but him&lt;/fex&gt;.&lt;/ex&gt;
 
 &lt;ex&gt;&lt;fex name="Interlocutors"&gt;World leaders&lt;/fex&gt; met to &lt;t&gt;discuss&lt;/t&gt; &lt;fex name="Topic"&gt;global warming&lt;/fex&gt; &lt;fex name="Time"&gt;on the coldest day of the year.&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:00 PST Wed" abbrev="Intlc_1" name="Interlocutor_1" ID="140">
@@ -21,8 +21,8 @@
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="ChW" cDate="02/07/2001 04:12:00 PST Wed" abbrev="Intlc_s" name="Interlocutors" ID="142">
         <definition>&lt;def-root&gt;In some sentences both participants are expressed by the Subject, and there is no 'with'-phrase (cf example 1). In sentences like this, the Subject is assigned the FE role &lt;fen&gt;Interlocutors&lt;/fen&gt;. In such sentences, the Subject always denotes more than one person, and it is understood that the reciprocal communication takes place between these two (or more) people. The Subject may denote two or more people either through conjunction, as in example 1, or through plurality, as in example 2, or by denoting a group, as in example 3. In each of these cases the FE &lt;fen&gt;Interlocutors&lt;/fen&gt; is assigned. Notice that for nouns in the Discussion frame, it is possible for the &lt;fen&gt;Interlocutors&lt;/fen&gt; role to be expressed by a prepositional phrase as in example 4.
- 
-&lt;ex&gt;(1) &lt;fex name="Interlocutors"&gt;The President and his advisor&lt;/fex&gt; &lt;t&gt;discussed&lt;/t&gt; the Venezuelan situation briefly before the summit.&lt;/ex&gt; 
+
+&lt;ex&gt;(1) &lt;fex name="Interlocutors"&gt;The President and his advisor&lt;/fex&gt; &lt;t&gt;discussed&lt;/t&gt; the Venezuelan situation briefly before the summit.&lt;/ex&gt;
 &lt;ex&gt;(2)&lt;fex name="Interlocutors"&gt; The lawyers&lt;/fex&gt; &lt;t&gt;conferred&lt;/t&gt; before the trial.&lt;/ex&gt;
 &lt;ex&gt;(3)&lt;fex name="Interlocutors"&gt;The committee&lt;/fex&gt; &lt;t&gt;debated&lt;/t&gt; the bill for only a few minutes.&lt;/ex&gt;
 &lt;ex&gt;(4) There was a brief &lt;t&gt;exchange&lt;/t&gt; &lt;fex name="Interlocutors"&gt;between the lawyers&lt;/fex&gt;.&lt;/ex&gt; &lt;/def-root&gt;</definition>

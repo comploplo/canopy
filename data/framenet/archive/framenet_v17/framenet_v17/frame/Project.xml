@@ -13,7 +13,7 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="06/30/2004 12:31:37 PDT Wed" abbrev="fie" name="Field" ID="6709">
-        <definition>&lt;def-root&gt;An area of human endeavor, typically scientifc in nature, in which the &lt;fen&gt;Agent&lt;/fen&gt;'s &lt;fen&gt;Activity&lt;/fen&gt; falls. 
+        <definition>&lt;def-root&gt;An area of human endeavor, typically scientifc in nature, in which the &lt;fen&gt;Agent&lt;/fen&gt;'s &lt;fen&gt;Activity&lt;/fen&gt; falls.
 
 &lt;ex&gt;Several &lt;t&gt;projects&lt;/t&gt; &lt;fex name="fie"&gt;in computational linguistics&lt;/fex&gt; have recently stalled due to lack of funding .&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

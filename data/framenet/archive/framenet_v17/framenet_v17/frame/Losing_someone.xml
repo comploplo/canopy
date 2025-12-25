@@ -23,12 +23,12 @@
         <definition>&lt;def-root&gt;This FE describes how the &lt;fen&gt;Deceased&lt;/fen&gt; passed away.&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:37:30 PDT Thu" abbrev="" name="Manner" ID="16553">
-        <definition>&lt;def-root&gt;Any description of the event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), force (hard, softly), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). 
+        <definition>&lt;def-root&gt;Any description of the event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), force (hard, softly), secondary effects (quietly, loudly), and general descriptions comparing events (the same way).
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="2E8B57" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:39:39 PDT Thu" abbrev="" name="Timespan" ID="16554">
-        <definition>&lt;def-root&gt;The period over which a loss has occurred. 
+        <definition>&lt;def-root&gt;The period over which a loss has occurred.
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:40:03 PDT Thu" abbrev="" name="Duration" ID="16555">
@@ -37,7 +37,7 @@
         <semType name="Duration" ID="142"/>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Peripheral" cBy="WMcQ" cDate="07/02/2015 05:42:19 PDT Thu" abbrev="" name="Frequency" ID="16556">
-        <definition>&lt;def-root&gt;How often the loss occurs. 
+        <definition>&lt;def-root&gt;How often the loss occurs.
 &lt;/def-root&gt;</definition>
     </FE>
     <frameRelation type="Inherits from">

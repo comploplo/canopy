@@ -14,7 +14,7 @@ for file in glob.glob('./*.xml'):
     if clsnum not in class_numbers:
         class_numbers[clsnum] = [clsname]
     else:
-        class_numbers[clsnum].append(clsname) 
+        class_numbers[clsnum].append(clsname)
 
     try:
         vncls = ET.parse(file)
@@ -23,7 +23,7 @@ for file in glob.glob('./*.xml'):
         if clsname != clsid:
             name_mismatch.append((clsname,clsid))
     except:
-        print 'Problem reading %s'%file 
+        print 'Problem reading %s'%file
 
 
 ### Multiple class names given class numbers:

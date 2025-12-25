@@ -8,7 +8,7 @@
 This frame necessitated the introduction of  the GF: Quant and the PT: Num used for expressions such as  the following:
 &lt;ex&gt;two &lt;t&gt;cups&lt;/t&gt; of coffee&lt;/ex&gt;
 &lt;ment&gt;FE: &lt;fen&gt;Count&lt;/fen&gt;, GF: Quant, PT: Num&lt;/ment&gt;&lt;ex&gt;&lt;/ex&gt;
-Note that we treat cardinal numbers and "a" (= 1) in the same way. 
+Note that we treat cardinal numbers and "a" (= 1) in the same way.
 &lt;ex&gt;a &lt;t&gt;cup&lt;/t&gt; of coffee&lt;/ex&gt;
 &lt;ment&gt;FE: &lt;fen&gt;Count&lt;/fen&gt;, GF: Quant, PT: Num&lt;/ment&gt;&lt;ex&gt;&lt;/ex&gt;
 For the present, we prefer not to annotate "many cups of coffee"

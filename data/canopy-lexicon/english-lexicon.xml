@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lexicon version="1.0" language="en" xmlns="http://canopy.rs/lexicon">
-  
+
   <metadata>
     <title>Canopy English Lexicon</title>
     <description>Comprehensive collection of closed-class words and functional lexical items for English NLP</description>
@@ -10,7 +10,7 @@
   </metadata>
 
   <word-classes>
-    
+
     <!-- Stop Words / Function Words -->
     <word-class id="stop-words-basic" name="Basic Stop Words" type="stop-words" priority="10">
       <description>Core stop words that typically carry little semantic meaning</description>
@@ -198,7 +198,7 @@
         <word context="temporal">later</word>
         <word context="temporal">afterwards</word>
         <word context="temporal">beforehand</word>
-        
+
         <!-- Causal -->
         <word context="causal">therefore</word>
         <word context="causal">thus</word>
@@ -208,7 +208,7 @@
         <word context="causal">because</word>
         <word context="causal">since</word>
         <word context="causal">so</word>
-        
+
         <!-- Contrastive -->
         <word context="contrastive">however</word>
         <word context="contrastive">nevertheless</word>
@@ -220,7 +220,7 @@
         <word context="contrastive">conversely</word>
         <word context="contrastive">instead</word>
         <word context="contrastive">rather</word>
-        
+
         <!-- Additive -->
         <word context="additive">also</word>
         <word context="additive">additionally</word>
@@ -229,7 +229,7 @@
         <word context="additive">besides</word>
         <word context="additive">likewise</word>
         <word context="additive">similarly</word>
-        
+
         <!-- Conclusive -->
         <word context="conclusive">overall</word>
         <word context="conclusive">ultimately</word>
@@ -276,7 +276,7 @@
         <word context="universal">each</word>
         <word context="universal">both</word>
         <word context="universal">either</word>
-        
+
         <!-- Existential -->
         <word context="existential">some</word>
         <word context="existential">any</word>
@@ -286,7 +286,7 @@
         <word context="existential">most</word>
         <word context="existential">much</word>
         <word context="existential">little</word>
-        
+
         <!-- Numerical -->
         <word context="numerical">one</word>
         <word context="numerical">two</word>
@@ -302,7 +302,7 @@
         <word context="numerical">thousand</word>
         <word context="numerical">million</word>
         <word context="numerical">billion</word>
-        
+
         <!-- Ordinal -->
         <word context="ordinal">first</word>
         <word context="ordinal">second</word>
@@ -310,7 +310,7 @@
         <word context="ordinal">fourth</word>
         <word context="ordinal">fifth</word>
         <word context="ordinal">last</word>
-        
+
         <!-- Degree -->
         <word context="degree">very</word>
         <word context="degree">quite</word>
@@ -368,7 +368,7 @@
         <word context="time-point">afternoon</word>
         <word context="time-point">evening</word>
         <word context="time-point">night</word>
-        
+
         <!-- Duration -->
         <word context="duration">always</word>
         <word context="duration">never</word>
@@ -378,7 +378,7 @@
         <word context="duration">rarely</word>
         <word context="duration">seldom</word>
         <word context="duration">occasionally</word>
-        
+
         <!-- Days -->
         <word context="day">monday</word>
         <word context="day">tuesday</word>
@@ -387,7 +387,7 @@
         <word context="day">friday</word>
         <word context="day">saturday</word>
         <word context="day">sunday</word>
-        
+
         <!-- Months -->
         <word context="month">january</word>
         <word context="month">february</word>
@@ -401,7 +401,7 @@
         <word context="month">october</word>
         <word context="month">november</word>
         <word context="month">december</word>
-        
+
         <!-- Relative Time -->
         <word context="relative">before</word>
         <word context="relative">after</word>
@@ -469,7 +469,7 @@
         <word pos="MD" context="future">will</word>
         <word pos="MD" context="conditional">would</word>
         <word pos="MD" context="hypothetical">shall</word>
-        
+
         <!-- Semi-modals --><word pos="VB" context="necessity">need</word>
         <word pos="VB" context="obligation">have to</word>
         <word pos="VB" context="obligation">has to</word>
@@ -506,7 +506,7 @@
         <word pos="VBD">did</word>
         <word pos="VBG">doing</word>
         <word pos="VBN">done</word>
-        
+
         <!-- Aspectual auxiliaries --><word pos="VB">keep</word>
         <word pos="VB">start</word>
         <word pos="VB">stop</word>
@@ -553,14 +553,14 @@
         <word pos="IN" context="spatial">upon</word>
         <word pos="IN" context="spatial">within</word>
         <word pos="IN" context="spatial">without</word>
-        
+
         <!-- Temporal --><word pos="IN" context="temporal">before</word>
         <word pos="IN" context="temporal">after</word>
         <word pos="IN" context="temporal">during</word>
         <word pos="IN" context="temporal">until</word>
         <word pos="IN" context="temporal">since</word>
         <word pos="IN" context="temporal">throughout</word>
-        
+
         <!-- Abstract/Other --><word pos="IN" context="abstract">of</word>
         <word pos="IN" context="abstract">for</word>
         <word pos="IN" context="abstract">with</word>
@@ -594,7 +594,7 @@
         <word pos="CC" context="coordinating">yet</word>
         <word pos="CC" context="coordinating">so</word>
         <word pos="CC" context="coordinating">for</word>
-        
+
         <!-- Subordinating --><word pos="IN" context="subordinating">because</word>
         <word pos="IN" context="subordinating">since</word>
         <word pos="IN" context="subordinating">although</word>
@@ -613,7 +613,7 @@
         <word pos="IN" context="subordinating">after</word>
         <word pos="IN" context="subordinating">until</word>
         <word pos="IN" context="subordinating">as</word>
-        
+
         <!-- Correlative --><word context="correlative">either</word>
         <word context="correlative">neither</word>
         <word context="correlative">both</word>
@@ -637,7 +637,7 @@
         <word pos="PRP" case="nominative" person="1" number="plural">we</word>
         <word pos="PRP" case="nominative" person="2" number="plural">you</word>
         <word pos="PRP" case="nominative" person="3" number="plural">they</word>
-        
+
         <!-- Object pronouns --><word pos="PRP" case="accusative" person="1" number="singular">me</word>
         <word pos="PRP" case="accusative" person="2" number="singular">you</word>
         <word pos="PRP" case="accusative" person="3" number="singular" gender="masculine">him</word>
@@ -646,7 +646,7 @@
         <word pos="PRP" case="accusative" person="1" number="plural">us</word>
         <word pos="PRP" case="accusative" person="2" number="plural">you</word>
         <word pos="PRP" case="accusative" person="3" number="plural">them</word>
-        
+
         <!-- Possessive pronouns --><word pos="PRP$" case="possessive" person="1" number="singular">my</word>
         <word pos="PRP$" case="possessive" person="2" number="singular">your</word>
         <word pos="PRP$" case="possessive" person="3" number="singular" gender="masculine">his</word>
@@ -655,7 +655,7 @@
         <word pos="PRP$" case="possessive" person="1" number="plural">our</word>
         <word pos="PRP$" case="possessive" person="2" number="plural">your</word>
         <word pos="PRP$" case="possessive" person="3" number="plural">their</word>
-        
+
         <!-- Independent possessive --><word pos="PRP" case="possessive-independent" person="1" number="singular">mine</word>
         <word pos="PRP" case="possessive-independent" person="2" number="singular">yours</word>
         <word pos="PRP" case="possessive-independent" person="3" number="singular" gender="masculine">his</word>
@@ -678,18 +678,18 @@
         <word pos="WP$" context="interrogative">whose</word>
         <word pos="WP" context="interrogative">what</word>
         <word pos="WDT" context="interrogative">which</word>
-        
+
         <!-- Interrogative adverbs --><word pos="WRB" context="interrogative">when</word>
         <word pos="WRB" context="interrogative">where</word>
         <word pos="WRB" context="interrogative">why</word>
         <word pos="WRB" context="interrogative">how</word>
-        
+
         <!-- Relative pronouns --><word pos="WP" context="relative">who</word>
         <word pos="WP" context="relative">whom</word>
         <word pos="WP$" context="relative">whose</word>
         <word pos="WDT" context="relative">which</word>
         <word pos="WDT" context="relative">that</word>
-        
+
         <!-- Relative adverbs --><word pos="WRB" context="relative">when</word>
         <word pos="WRB" context="relative">where</word>
         <word pos="WRB" context="relative">why</word>
@@ -705,13 +705,13 @@
       <words>
         <!-- Proximal --><word pos="DT" context="proximal" number="singular">this</word>
         <word pos="DT" context="proximal" number="plural">these</word>
-        
+
         <!-- Distal --><word pos="DT" context="distal" number="singular">that</word>
         <word pos="DT" context="distal" number="plural">those</word>
-        
+
         <!-- Locative --><word pos="RB" context="proximal">here</word>
         <word pos="RB" context="distal">there</word>
-        
+
         <!-- Manner --><word pos="RB" context="manner">thus</word>
         <word pos="RB" context="manner">so</word>
       </words>
@@ -727,7 +727,7 @@
         <!-- Articles --><word pos="DT" definiteness="definite">the</word>
         <word pos="DT" definiteness="indefinite">a</word>
         <word pos="DT" definiteness="indefinite">an</word>
-        
+
         <!-- Other determiners --><word pos="DT">some</word>
         <word pos="DT">any</word>
         <word pos="DT">every</word>
@@ -794,7 +794,7 @@
         <word context="strong">totally</word>
         <word context="strong">utterly</word>
         <word context="strong">thoroughly</word>
-        
+
         <!-- Moderate intensifiers -->
         <word context="moderate">very</word>
         <word context="moderate">really</word>
@@ -804,7 +804,7 @@
         <word context="moderate">rather</word>
         <word context="moderate">considerably</word>
         <word context="moderate">substantially</word>
-        
+
         <!-- Weak intensifiers -->
         <word context="weak">somewhat</word>
         <word context="weak">slightly</word>
@@ -945,7 +945,7 @@
         <word pos="PRP" context="reflexive" person="1" number="plural">ourselves</word>
         <word pos="PRP" context="reflexive" person="2" number="plural">yourselves</word>
         <word pos="PRP" context="reflexive" person="3" number="plural">themselves</word>
-        
+
         <!-- Reciprocal -->
         <word context="reciprocal">each other</word>
         <word context="reciprocal">one another</word>
@@ -1006,10 +1006,10 @@
     </word-class>
 
   </word-classes>
-  
+
   <!-- Global Patterns -->
   <global-patterns>
-    
+
     <!-- Contraction Patterns -->
     <pattern id="contractions-general" type="contraction" confidence="0.9">
       <regex>\b\w+'(s|re|ve|ll|d|t|m)\b</regex>
@@ -1024,7 +1024,7 @@
         <example>I'm</example>
       </examples>
     </pattern>
-    
+
     <!-- Possessive Patterns -->
     <pattern id="possessive-s" type="possessive" confidence="0.95">
       <regex>\b\w+'s\b</regex>
@@ -1035,7 +1035,7 @@
         <example>children's</example>
       </examples>
     </pattern>
-    
+
     <!-- Plural Possessive -->
     <pattern id="possessive-plural" type="possessive" confidence="0.9">
       <regex>\b\w+s'\b</regex>
@@ -1046,6 +1046,6 @@
         <example>girls'</example>
       </examples>
     </pattern>
-    
+
   </global-patterns>
 </lexicon>

@@ -5,9 +5,9 @@
     Created on : July 26, 2007, 10:36 PM
     Author     : jhong
     Description:
-        XML schema for header information to include in full-text and 
+        XML schema for header information to include in full-text and
         lexunit annotation documents to provide a legend for document
-        and corpus information relevant to all sentences contained in 
+        and corpus information relevant to all sentences contained in
         the document.
 -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -16,7 +16,7 @@
             xmlns="http://framenet.icsi.berkeley.edu"
             elementFormDefault="qualified">
 
-   <!-- 
+   <!--
       TODO design your XML schema here.
       XML Schema Primer: http://www.w3.org/TR/xmlschema-0/
       Structures recommendation: http://www.w3.org/TR/xmlschema-1/
@@ -26,7 +26,7 @@
                The <address-book> can contain multiple <item> elements
                with unique <name> values.
                Notice that <mobile> element is specified as a restriction of xsd:string
-               and must match the pattern: three digits followed by a hypen followed 
+               and must match the pattern: three digits followed by a hypen followed
                by six digits.
    -->
     <xsd:include schemaLocation="commonTypes.xsd"/>

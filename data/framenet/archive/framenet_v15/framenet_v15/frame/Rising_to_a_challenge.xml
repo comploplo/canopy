@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="05/06/2005 02:57:54 PDT Fri" name="Rising_to_a_challenge" ID="1441" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt; A &lt;fen&gt;Protagonist&lt;/fen&gt;, by exerting great effort, comes to meet the pre-conditions for participating in an &lt;fen&gt;Activity&lt;/fen&gt; that is judged to be difficult for them to participate in, either due to their inherent properties or due to temporary &lt;fen&gt;Circumstances&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt; A &lt;fen&gt;Protagonist&lt;/fen&gt;, by exerting great effort, comes to meet the pre-conditions for participating in an &lt;fen&gt;Activity&lt;/fen&gt; that is judged to be difficult for them to participate in, either due to their inherent properties or due to temporary &lt;fen&gt;Circumstances&lt;/fen&gt;.
 
 &lt;ex&gt;In conclusion, &lt;fex name="pro"&gt;our staff&lt;/fex&gt; &lt;t&gt;rose&lt;/t&gt; &lt;fex name="act"&gt;to the challenge&lt;/fex&gt; &lt;fex name="mea"&gt;in developing the necessary training programs and delivery methods&lt;/fex&gt;.&lt;/ex&gt;
 
@@ -33,7 +33,7 @@
 &lt;ex&gt; I recalled how she &lt;t&gt;rose&lt;/t&gt; &lt;t&gt;to&lt;/t&gt; &lt;t&gt;the&lt;/t&gt; &lt;t&gt;occasion&lt;/t&gt; &lt;fex name="cir"&gt;in mishaps, avalanches, oxygen shortage, lack of food, loss of comrades&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="605" cDate="05/06/2005 02:57:54 PDT Fri" abbrev="cau" name="Cause" ID="7961">
-        <definition>&lt;def-root&gt;An entity, event, or state of affairs that causes the &lt;fen&gt;Protagonist&lt;/fen&gt; to expend the effort necessary to meet the pre-conditions for participating in the &lt;fen&gt;Activity&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;An entity, event, or state of affairs that causes the &lt;fen&gt;Protagonist&lt;/fen&gt; to expend the effort necessary to meet the pre-conditions for participating in the &lt;fen&gt;Activity&lt;/fen&gt;.
 
 &lt;ex&gt;The installation was anything but a routine project from the beginning and everyone involved &lt;t&gt;rose&lt;/t&gt; to the challenge &lt;fex name="cau"&gt;because it was gratifying to be contributing in some way to the tsunami relief effort&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -50,7 +50,7 @@ and &lt;t&gt;rise&lt;/t&gt; to the challenge &lt;fex name="rel"&gt;where career 
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="05/06/2005 03:16:08 PDT Fri" abbrev="tim" name="Time" ID="7964">
-        <definition>&lt;def-root&gt;The time at which the &lt;fen&gt;Protagonist&lt;/fen&gt; through expenditure of effort becomes capable of engaging in the &lt;fen&gt;Activity&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;The time at which the &lt;fen&gt;Protagonist&lt;/fen&gt; through expenditure of effort becomes capable of engaging in the &lt;fen&gt;Activity&lt;/fen&gt;.
 
 &lt;ex&gt;A president for whom the jury was still out for many Americans first appeared shaken, but &lt;fex name="tim"&gt;then&lt;/fex&gt; &lt;t&gt;rose&lt;/t&gt; to the&lt;/ex&gt; crisis.
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="CVa" cDate="01/11/2012 10:04:41 PST Wed" name="Product_development" ID="2691" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Developer&lt;/fen&gt; develops a &lt;fen&gt;Product&lt;/fen&gt;, in some cases for a &lt;fen&gt;Company&lt;/fen&gt;.   
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Developer&lt;/fen&gt; develops a &lt;fen&gt;Product&lt;/fen&gt;, in some cases for a &lt;fen&gt;Company&lt;/fen&gt;.
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;The &lt;t&gt;development&lt;/t&gt; &lt;fex name="Product"&gt;of a profitable product&lt;/fex&gt; will be necessary for the company to stay afloat. &lt;fex name="Dev"&gt;INI&lt;/fex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;/ex&gt;
@@ -31,7 +31,7 @@
         <semType name="Location" ID="54"/>
     </FE>
     <FE bgColor="FFA500" fgColor="000000" coreType="Peripheral" cBy="CVa" cDate="01/11/2012 10:29:16 PST Wed" abbrev="Time" name="Time" ID="15395">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Time&lt;/fen&gt; when the &lt;fen&gt;Product&lt;/fen&gt; is developed by the &lt;fen&gt;Developer&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Time&lt;/fen&gt; when the &lt;fen&gt;Product&lt;/fen&gt; is developed by the &lt;fen&gt;Developer&lt;/fen&gt;.
 
 &lt;ex&gt;The &lt;t&gt;development&lt;/t&gt; of unique, high-quality writing instruments &lt;fex name="Time"&gt;in the late 1990s&lt;/fex&gt; saved the company from going bankrupt. &lt;/ex&gt;
 

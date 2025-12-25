@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="731" cDate="02/07/2001 04:12:10 PST Wed" name="Cause_motion" ID="55" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Agent&lt;/fen&gt; causes a &lt;fen&gt;Theme&lt;/fen&gt; to undergo directed motion.  The motion may be described with respect to a &lt;fen&gt;Source&lt;/fen&gt;, &lt;fen&gt;Path&lt;/fen&gt; and/or &lt;fen&gt;Goal&lt;/fen&gt;. In contrast with Placing, the &lt;fen&gt;Goal&lt;/fen&gt; of motion is not emphasized.  For many of these words (cast.v, throw.v, chuck.v, etc.), the &lt;fen&gt;Agent&lt;/fen&gt; has control of the &lt;fen&gt;Theme&lt;/fen&gt; only at the &lt;fen&gt;Source&lt;/fen&gt; of motion, and does not experience overall motion.  
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Agent&lt;/fen&gt; causes a &lt;fen&gt;Theme&lt;/fen&gt; to undergo directed motion.  The motion may be described with respect to a &lt;fen&gt;Source&lt;/fen&gt;, &lt;fen&gt;Path&lt;/fen&gt; and/or &lt;fen&gt;Goal&lt;/fen&gt;. In contrast with Placing, the &lt;fen&gt;Goal&lt;/fen&gt; of motion is not emphasized.  For many of these words (cast.v, throw.v, chuck.v, etc.), the &lt;fen&gt;Agent&lt;/fen&gt; has control of the &lt;fen&gt;Theme&lt;/fen&gt; only at the &lt;fen&gt;Source&lt;/fen&gt; of motion, and does not experience overall motion.
 For others (e.g. drag.v, push.v, shove.v, etc.) the &lt;fen&gt;Agent&lt;/fen&gt; has control of the &lt;fen&gt;Theme&lt;/fen&gt; throughout the motion; for these words, the &lt;fen&gt;Theme&lt;/fen&gt; is resistant to motion due to some friction with the surface along which they move.  (They thus differ from the words of the Carrying frame in that they are supported by this surface, rather than a Carrier.)
 
 This frame contrasts with the following frames which talk about an &lt;fen&gt;Agent&lt;/fen&gt; changing a &lt;fen&gt;Theme&lt;/fen&gt;'s position with respect to a landmark (either &lt;fen&gt;Source&lt;/fen&gt; or &lt;fen&gt;Goal&lt;/fen&gt;):
 
 &lt;ex&gt;&lt;/ex&gt;In Placing, the figure (&lt;fen&gt;Theme&lt;/fen&gt;) is profiled as the object, and ends up on the ground (&lt;fen&gt;Goal&lt;/fen&gt;).
- 
+
 &lt;ex&gt;Joyce &lt;t&gt;placed&lt;/t&gt; &lt;fex name="Theme"&gt;the flowers&lt;/fex&gt; &lt;fex name="Goal"&gt;onto the bed&lt;/fex&gt;.&lt;/ex&gt;
 
 In Filling, the ground (&lt;fen&gt;Goal&lt;/fen&gt;) is profiled as the object, and the figure (&lt;fen&gt;Theme&lt;/fen&gt;) ends up on the ground (Goal).
- 
+
 &lt;ex&gt;John &lt;t&gt;filled&lt;/t&gt; &lt;fex name="Goal"&gt;the box&lt;/fex&gt; &lt;fex name="Theme"&gt;with old toys&lt;/fex&gt;.&lt;/ex&gt;
 
 In Removing, the figure (&lt;fen&gt;Theme&lt;/fen&gt;) is profiled, and is removed from the ground (&lt;fen&gt;Source&lt;/fen&gt;).
- 
+
 &lt;ex&gt;Jennifer &lt;t&gt;removed&lt;/t&gt; &lt;fex name="Theme"&gt;the flowers&lt;/fex&gt; &lt;fex name="Source"&gt;from the bed&lt;/fex&gt;.&lt;/ex&gt;
 
 In Emptying, the ground (&lt;fen&gt;Source&lt;/fen&gt;) is profiled and the figure (&lt;fen&gt;Theme&lt;/fen&gt;) is removed from it.
- 
+
 &lt;ex&gt;Jason &lt;t&gt;emptied&lt;/t&gt; &lt;fex name="Source"&gt;the box&lt;/fex&gt; &lt;fex name="Theme"&gt;of the old toys&lt;/fex&gt; .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:10 PST Wed" abbrev="Agt" name="Agent" ID="228">
         <definition>&lt;def-root&gt;The the &lt;fen&gt;Agent&lt;/fen&gt; is the one whose action causes the motion of a &lt;fen&gt;Theme&lt;/fen&gt;.  The &lt;fen&gt;Agent&lt;/fen&gt; is generally realized as the External Argument.
@@ -77,7 +77,7 @@ In Emptying, the ground (&lt;fen&gt;Source&lt;/fen&gt;) is profiled and the figu
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="664" cDate="08/28/2002 06:20:32 PDT Wed" abbrev="Manr" name="Manner" ID="3666">
-        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Manner&lt;/fen&gt; is any expression which describes a property of the motion of the &lt;fen&gt;Theme&lt;/fen&gt; which is not directly related to the trajectory of motion. Descriptions of steadiness, grace, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.  
+        <definition>&lt;def-root&gt;The FE &lt;fen&gt;Manner&lt;/fen&gt; is any expression which describes a property of the motion of the &lt;fen&gt;Theme&lt;/fen&gt; which is not directly related to the trajectory of motion. Descriptions of steadiness, grace, and other things count as &lt;fen&gt;Manner&lt;/fen&gt; expressions.
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

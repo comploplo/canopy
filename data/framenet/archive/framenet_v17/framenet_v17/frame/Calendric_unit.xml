@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="MRLP" cDate="09/13/2001 05:54:02 PDT Thu" name="Calendric_unit" ID="229" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;Words in this frame name the different parts of the calendric cycle, both man-made and natural. The &lt;fen&gt;Unit&lt;/fen&gt; (e.g. &lt;m&gt;Tuesday&lt;/m&gt;) specifies some time period as part of a specific larger temporal &lt;fen&gt;Whole&lt;/fen&gt; (Tuesday &lt;m&gt;of next week&lt;/m&gt;), or may be resolved to an exact time span by a &lt;fen&gt;Relative_time&lt;/fen&gt; (&lt;m&gt;next&lt;/m&gt; Tuesday).  
+    <definition>&lt;def-root&gt;Words in this frame name the different parts of the calendric cycle, both man-made and natural. The &lt;fen&gt;Unit&lt;/fen&gt; (e.g. &lt;m&gt;Tuesday&lt;/m&gt;) specifies some time period as part of a specific larger temporal &lt;fen&gt;Whole&lt;/fen&gt; (Tuesday &lt;m&gt;of next week&lt;/m&gt;), or may be resolved to an exact time span by a &lt;fen&gt;Relative_time&lt;/fen&gt; (&lt;m&gt;next&lt;/m&gt; Tuesday).
 &lt;ex&gt;Jo's mother will visit on &lt;fex name="Relative_time"&gt;this coming&lt;/fex&gt; &lt;fex name="Unit"&gt;&lt;t&gt;Tuesday&lt;/t&gt;&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;/ex&gt;
 Very frequently, the &lt;fen&gt;Whole&lt;/fen&gt; or &lt;fen&gt;Relative_time&lt;/fen&gt; are left out (i.e., DNI), and often should be interpreted as a time period overlapping with the communication, but more generally must be understood from context.  So, for example, in the first sentence below, we can imagine that the &lt;fen&gt;Whole&lt;/fen&gt; refers to a year (e.g., 1983) that was already mentioned or established in context.  In the second example below, the most likely interpretation is the nearest April, whether in this year or the next, and this interpretation is best indicated by indicating the &lt;fen&gt;Relative_time&lt;/fen&gt; is DNI.
 
-&lt;ex&gt;On &lt;t&gt;&lt;fex name="Unit"&gt;April&lt;/fex&gt;&lt;/t&gt; 2 , she finally found her mother . &lt;fex name="Whole"&gt;DNI&lt;/fex&gt;. &lt;/ex&gt; 
+&lt;ex&gt;On &lt;t&gt;&lt;fex name="Unit"&gt;April&lt;/fex&gt;&lt;/t&gt; 2 , she finally found her mother . &lt;fex name="Whole"&gt;DNI&lt;/fex&gt;. &lt;/ex&gt;
 &lt;ex&gt;I 'll come back in &lt;fex name="Unit"&gt;&lt;t&gt;April&lt;/t&gt;&lt;/fex&gt; .&lt;fex name="Relative_time"&gt;DNI&lt;/fex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;/ex&gt;
-Most members of this frame can be used with iterative events, either with a plural &lt;fen&gt;Unit&lt;/fen&gt; (&lt;m&gt;on Tuesdays&lt;/m&gt;), or marked with &lt;m&gt;every&lt;/m&gt; (&lt;m&gt;every April&lt;/m&gt;).  
+Most members of this frame can be used with iterative events, either with a plural &lt;fen&gt;Unit&lt;/fen&gt; (&lt;m&gt;on Tuesdays&lt;/m&gt;), or marked with &lt;m&gt;every&lt;/m&gt; (&lt;m&gt;every April&lt;/m&gt;).
 &lt;ex&gt;On &lt;fex name="Whole"&gt;Tuesday and Thursday&lt;/fex&gt; &lt;t&gt;afternoons&lt;/t&gt; , we have tea .&lt;/ex&gt;
 In this use, when the &lt;fen&gt;Whole&lt;/fen&gt; is omitted, the &lt;fen&gt;Whole&lt;/fen&gt; should be marked INI.
 &lt;ex&gt;On &lt;t&gt;Tuesdays&lt;/t&gt; , we have tea . &lt;fex name="Whole"&gt;INI&lt;/fex&gt; &lt;/ex&gt;
@@ -29,7 +29,7 @@ As described above for the lexical targets that evoke this frame, some non-lexic
 &lt;ex&gt;No-one has forgotten &lt;fex name="Trajector_event"&gt;what happened&lt;/fex&gt; &lt;fex name="Landmark_period"&gt;the 5th of November&lt;/fex&gt; !&lt;/ex&gt;
 &lt;ex&gt;&lt;/ex&gt;
 
-Words in this frame figure into a variety of temporal schemas, realized as constructions, primarily cases in which the Calendric_unit serves as a Landmark_period in the Temporal_collocation frame. There are families of constructions in which these words occur, including ones in which weekday names combine with day part names using particular prepositions (e.g. &lt;ment&gt;on Wednesday morning&lt;/ment&gt;, cf. &lt;ment&gt;on Wednesday&lt;/ment&gt;, but  &lt;ment&gt;in the morning&lt;/ment&gt;) and ones in which  calendric terms fill the slots in multi-word expressions such as  N-after-N (e.g. &lt;ment&gt;day after day&lt;/ment&gt;),  N-by-N (e.g. &lt;ment&gt;week by week&lt;/ment&gt;),  N-to-N (e.g. &lt;ment&gt;month to month&lt;/ment&gt;), etc. More can be found on these in Fillmore (2002).  Note, also, the connection between this frame and Frequency, specifically that many iterative adjectives and adverbs are based on calendric terms (e.g. &lt;ment&gt;daily&lt;/ment&gt;, &lt;ment&gt;weekly&lt;/ment&gt;, &lt;ment&gt;monthly&lt;/ment&gt;, etc.).   
+Words in this frame figure into a variety of temporal schemas, realized as constructions, primarily cases in which the Calendric_unit serves as a Landmark_period in the Temporal_collocation frame. There are families of constructions in which these words occur, including ones in which weekday names combine with day part names using particular prepositions (e.g. &lt;ment&gt;on Wednesday morning&lt;/ment&gt;, cf. &lt;ment&gt;on Wednesday&lt;/ment&gt;, but  &lt;ment&gt;in the morning&lt;/ment&gt;) and ones in which  calendric terms fill the slots in multi-word expressions such as  N-after-N (e.g. &lt;ment&gt;day after day&lt;/ment&gt;),  N-by-N (e.g. &lt;ment&gt;week by week&lt;/ment&gt;),  N-to-N (e.g. &lt;ment&gt;month to month&lt;/ment&gt;), etc. More can be found on these in Fillmore (2002).  Note, also, the connection between this frame and Frequency, specifically that many iterative adjectives and adverbs are based on calendric terms (e.g. &lt;ment&gt;daily&lt;/ment&gt;, &lt;ment&gt;weekly&lt;/ment&gt;, &lt;ment&gt;monthly&lt;/ment&gt;, etc.).
 
 
 &lt;/def-root&gt;</definition>
@@ -39,8 +39,8 @@ Words in this frame figure into a variety of temporal schemas, realized as const
 &lt;ex&gt;Jo's mother will visit &lt;fex name="RelT"&gt; this coming&lt;/fex&gt; &lt;t&gt;Tuesday&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="MRLP" cDate="09/20/2001 10:19:31 PDT Thu" abbrev="Name" name="Name" ID="1995">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Name&lt;/fen&gt; is used for the name of a day (month, etc.).  
-Note that only the word (or words) that is the name is (are) tagged, not the target word. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Name&lt;/fen&gt; is used for the name of a day (month, etc.).
+Note that only the word (or words) that is the name is (are) tagged, not the target word.
 &lt;ex&gt;&lt;fex name="Name"&gt;Labor&lt;/fex&gt; &lt;t&gt;Day&lt;/t&gt; is just around the corner.&lt;/ex&gt;
 &lt;ex&gt;January is &lt;fex name="Name"&gt;Black History&lt;/fex&gt; &lt;t&gt;Month&lt;/t&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>

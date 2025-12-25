@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ChW" cDate="02/07/2001 04:12:04 PST Wed" name="Communication_response" ID="42" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame deals with a &lt;fen&gt;Speaker&lt;/fen&gt; communicating a reply or response, a &lt;fen&gt;Message&lt;/fen&gt;, to some prior communication or action, the &lt;fen&gt;Trigger&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;This frame deals with a &lt;fen&gt;Speaker&lt;/fen&gt; communicating a reply or response, a &lt;fen&gt;Message&lt;/fen&gt;, to some prior communication or action, the &lt;fen&gt;Trigger&lt;/fen&gt;.
 &lt;ex&gt;&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Speaker"&gt;The landlord&lt;/fex&gt; has not yet &lt;t&gt;replied&lt;/t&gt; &lt;fex name="Medium"&gt;in writing&lt;/fex&gt; &lt;fex name="Addressee"&gt;to the tenant&lt;/fex&gt; &lt;fex name="Message"&gt;objecting the proposed alterations&lt;/fex&gt;.&lt;fex name="Trigger"&gt;DNI&lt;/fex&gt;&lt;/ex&gt;
 

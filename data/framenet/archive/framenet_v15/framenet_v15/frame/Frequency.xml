@@ -7,7 +7,7 @@
 &lt;ex&gt;China will have to face a &lt;fex name="Degree"&gt;high&lt;/fex&gt; &lt;t&gt;frequency&lt;/t&gt; &lt;fex name="Event"&gt;of sand storms&lt;/fex&gt; in the years to come.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="731" cDate="02/07/2001 04:12:28 PST Wed" abbrev="Evnt" name="Event" ID="371">
-        <definition>&lt;def-root&gt;This FE is used for any (bounded) &lt;fen&gt;Event&lt;/fen&gt; whose frequency or iteration is described. 
+        <definition>&lt;def-root&gt;This FE is used for any (bounded) &lt;fen&gt;Event&lt;/fen&gt; whose frequency or iteration is described.
 &lt;ex&gt;The country has been struck by &lt;t&gt;frequent&lt;/t&gt; &lt;fex name="Event"&gt;economic crises&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Event"&gt;The symptoms&lt;/fex&gt; were &lt;t&gt;sporadic&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
@@ -34,7 +34,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="08/17/2005 05:38:54 PDT Wed" abbrev="rat" name="Rate" ID="8921">
-        <definition>&lt;def-root&gt;The number of times per unit of real or scanning time that an &lt;fen&gt;Event&lt;/fen&gt; or &lt;fen&gt;Salient_entity&lt;/fen&gt; is encountered. 
+        <definition>&lt;def-root&gt;The number of times per unit of real or scanning time that an &lt;fen&gt;Event&lt;/fen&gt; or &lt;fen&gt;Salient_entity&lt;/fen&gt; is encountered.
 
 &lt;ex&gt;The state government spends its fiscal year 2006 budget of $23.4 billion at a &lt;t&gt;rate&lt;/t&gt; &lt;fex name="rat"&gt;of $742 per second&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Degree" ID="1894"/>

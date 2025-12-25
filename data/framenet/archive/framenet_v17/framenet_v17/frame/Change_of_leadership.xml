@@ -54,7 +54,7 @@
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="06/25/2001 05:21:40 PDT Mon" abbrev="Mns" name="Means" ID="1084">
-        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Means&lt;/fen&gt; by which  the &lt;fen&gt;Selector&lt;/fen&gt; accomplishes the change of leadership. 
+        <definition>&lt;def-root&gt;This FE identifies the &lt;fen&gt;Means&lt;/fen&gt; by which  the &lt;fen&gt;Selector&lt;/fen&gt; accomplishes the change of leadership.
 &lt;ex&gt;The rebels &lt;t&gt;overthrew&lt;/t&gt; the government &lt;fex name="Mns"&gt;by gaining the support of the military&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>
     </FE>

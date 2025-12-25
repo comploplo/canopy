@@ -11,7 +11,7 @@
 &lt;ex&gt;&lt;fex name="Message"&gt;"The whole Muslim society should respect these rights,"&lt;/fex&gt; &lt;fex name="Speaker"&gt;he&lt;/fex&gt; &lt;t&gt;stressed&lt;/t&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Speaker"&gt;The panelists&lt;/fex&gt; &lt;t&gt;stressed&lt;/t&gt; &lt;fex name="Addressee"&gt;to an audience of about 100 at North Dakota State University's Memorial Union&lt;/fex&gt; &lt;fex name="Message"&gt;that people of different religions in this community need to talk - and find out they're not all that different&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="07/07/2005 04:35:02 PDT Thu" abbrev="spe" name="Speaker" ID="8418">
-        <definition>&lt;def-root&gt;The person who uses language in the written or spoken modality to convey a &lt;fen&gt;Message&lt;/fen&gt; to another person. 
+        <definition>&lt;def-root&gt;The person who uses language in the written or spoken modality to convey a &lt;fen&gt;Message&lt;/fen&gt; to another person.
 
 &lt;ex&gt;&lt;fex name="Speaker"&gt;Juhl&lt;/fex&gt; &lt;t&gt;emphasized&lt;/t&gt; the importance of UPMC System investments, stating that their contribution to the school's funds had tripled in recent years.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
@@ -29,12 +29,12 @@
         <semType name="Message" ID="56"/>
     </FE>
     <FE bgColor="9F79EE" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="07/07/2005 04:35:02 PDT Thu" abbrev="Medium" name="Medium" ID="8422">
-        <definition>&lt;def-root&gt;The physical or abstract setting in which the &lt;fen&gt;Message&lt;/fen&gt; is conveyed. 
+        <definition>&lt;def-root&gt;The physical or abstract setting in which the &lt;fen&gt;Message&lt;/fen&gt; is conveyed.
 
 &lt;ex&gt;&lt;fex name="Medium"&gt;The report&lt;/fex&gt; &lt;t&gt;emphasized&lt;/t&gt; that Iraq's unwillingness to cooperate represents a serious problem for the progress of this work.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="07/07/2005 04:35:02 PDT Thu" abbrev="Manr" name="Manner" ID="8425">
-        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs,  in particular secondary effects (&lt;ment&gt;loudly&lt;/ment&gt;), general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;), and salient characteristics of an Agent that also affect the action (&lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs,  in particular secondary effects (&lt;ment&gt;loudly&lt;/ment&gt;), general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;), and salient characteristics of an Agent that also affect the action (&lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;eagerly&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;).
 
 
 &lt;ex&gt;You will note above that I have &lt;fex name="Manner"&gt;deliberately&lt;/fex&gt; &lt;t&gt;stressed&lt;/t&gt; our ability as mental health professional to make a determination of current suicide risk.&lt;/ex&gt;&lt;/def-root&gt;</definition>

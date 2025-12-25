@@ -225,7 +225,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                        }
                        return false;
                     }
-                    
+
                     var labelsCByDiv = document.createElement("div");
                     var cBys = new Array();
                     var cBy = '';
@@ -255,8 +255,8 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                             mainDivNoColor.style.display = "block"; // display no color div
                         }
                     }
-				} 
-                
+				}
+
                 /* LEXICAL ENTRY MODE */
                 else if (mode == "lexentry") {
                     // create the frameset and two frames for the Lexical Entry
@@ -345,7 +345,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
 							if (sentIDs[i] == sent_id)
 								return i;
 							return -1;
-					}					
+					}
 
                     // remove a sentID from the array sentIDs
 					function removeSentID(sent_id) {
@@ -471,7 +471,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
 						sent = getSentenceAnnotation(sentId);
 						colorSent = sent[0];
 						noColorSent = sent[1];
-						
+
                         // before the sentence, insert the [X] link,
                         // or nothing for the desktop reports
                         var pretext = "";
@@ -519,7 +519,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                     </xsl:if>
                     //<![CDATA[
 				}
-                                
+
                 /* GENERAL FUNCTIONS */
 
 				// extract XML file name from URL
@@ -589,7 +589,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
 				function getSentenceAnnotation(sentId) {
 					var sent;
                     var skipSent;
-					var sentOrig;					
+					var sentOrig;
 					var charLabelMap;
 					var rank2, rank3;
 					var sc_name;
@@ -642,7 +642,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                                 </xsl:call-template>
                             </xsl:variable>
                             sentOrig = "<xsl:value-of select='$processSent' />";
-                            
+
                             <!-- get labels and insert into charLabelMap -->
                             <xsl:for-each select="fn:annotationSet[@status='MANUAL'or@status='AUTO_EDITED'or@status='AUTO_APP']">
                                 <!-- annotationSet ID that may match passed in 'sentId' -->
@@ -935,7 +935,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
 							}
 							sent[0][noColor] += charLabels[0];
 						}
-						
+
 						// close and open invisible span for ranks 2 and 3
 						for (var r = 1; r < 3; r++) {
 							if (charLabels[r]) {
@@ -958,7 +958,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
 					}
 					if (charLabelMap[0][noColor]["itype"])
 						sent[0][noColor] += charLabelMap[0][noColor]["itype"];
-					return sent;					
+					return sent;
 				}
 
                 // the link on sentence counts to add sentences to the bottom
@@ -1052,7 +1052,7 @@ xmlns:fn="http://framenet.icsi.berkeley.edu">
                         luInfoDiv.innerHTML += "<br /><b>Incorporated FE: </b>" +
                                                "<span class='" + frName + "-" + incFE + "'>" + incFE + "</span>";
                     }
-                    
+
                     luInfoDiv.innerHTML += "<h3>Frame Elements and Their Syntactic Realizations</h3>" +
 											 "The Frame Elements for this word sense are (with realizations):";
 

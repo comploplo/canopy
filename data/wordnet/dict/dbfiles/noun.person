@@ -1091,7 +1091,7 @@
 
 { [ Eurafrican, adj.pert:eurafrican,+ ] European,@ African,@ (a person of mixed European and African descent) }
 { [ Eurasian, adj.pert:eurasian,+ ] European,@ Asian,@ (a person of mixed European and Asian descent) }
-{ European, inhabitant,@ (a native or inhabitant of Europe) } 
+{ European, inhabitant,@ (a native or inhabitant of Europe) }
 { sahib, European,@ (formerly a term of respect for important white Europeans in colonial India; used after the name) }
 { memsahib, sahib,@ (a woman sahib) }
 { [ Celt, adj.pert:celtic,+ ] Kelt, European,@ (a member of a European people who once occupied Britain and Spain and Gaul prior to Roman times) }
@@ -2478,7 +2478,7 @@
 { [ charmer, verb.emotion:charm,+ ] [ beguiler, verb.emotion:beguile,+ ] noun.Tops:person,@ (a person who charms others (usually by personal attractiveness)) }
 { chartered_accountant, accountant,@ (a British or Canadian accountant who is a member of a professional body that has a royal charter) }
 { charter_member, member,@ (one of the original members when an organization was founded) }
-{ [ chartist, noun.communication:chart,+ verb.creation:chart4,+ ] technical_analyst, market_analyst,@ (a stock market analyst who tries to predict market trends from graphs of recent prices of securities) } 
+{ [ chartist, noun.communication:chart,+ verb.creation:chart4,+ ] technical_analyst, market_analyst,@ (a stock market analyst who tries to predict market trends from graphs of recent prices of securities) }
 { [ Chartist1, noun.cognition:chartism,+ ] reformer,@ (a 19th century English reformer who advocated better social and economic conditions for working people) }
 { charwoman, char, cleaning_woman, cleaning_lady, woman2, cleaner,@ (a human female employed to do housework; "the char will clean the carpet"; "I have a woman who comes in four hours a day while I write") }
 { chatelaine, mistress,@ (the mistress of a chateau or large country house) }
@@ -2822,7 +2822,7 @@
 { countrywoman1, rustic,@ (a woman who lives in the country and has country ways) }
 { county_agent, agricultural_agent, extension_agent, advisor,@ (an advisor employed by the government to assist people in rural areas with methods of farming and home economics) }
 { coureur_de_bois, trapper,@ (a French Canadian trapper) }
-{ courser, hunter,@ (a huntsman who hunts small animals with fast dogs that use sight rather than scent to follow their prey) } 
+{ courser, hunter,@ (a huntsman who hunts small animals with fast dogs that use sight rather than scent to follow their prey) }
 { courtier, attendant,@ (an attendant at the court of a sovereign) }
 { [ cousin, adj.all:cousinly,+ ] first_cousin, cousin-german, full_cousin, relative,@ (the child of your aunt or uncle) }
 { couturier, fashion_designer, clothes_designer, [ designer1, verb.creation:design7,+ verb.creation:design1,+ ] creator,@ (someone who designs clothing) }
@@ -3248,7 +3248,7 @@
 { [ effecter, verb.social:effect15,+ verb.creation:effect,+ ] [ effector, verb.social:effect15,+ ] noun.Tops:person,@ (one who brings about a result or event; one who accomplishes a purpose) }
 { efficiency_expert, efficiency_engineer, expert,@ (an expert in increasing the efficient use of machines and personnel) }
 { [ egalitarian, adj.all:democratic^egalitarian,+ elitist,! ] equalitarian, moralist,@ (a person who believes in the equality of all people) }
-{ egghead, intellectual,@ (an intellectual; a very studious and academic person; "in spite of her love of reading she denied being an egghead") } 
+{ egghead, intellectual,@ (an intellectual; a very studious and academic person; "in spite of her love of reading she denied being an egghead") }
 { [ egocentric, adj.all:egocentric,+ ] [ egoist, adj.all:egoistic,+ noun.attribute:egoism,+ ] selfish_person,@ (a self-centered person with little regard for others) }
 { egomaniac, egotist,@ (an abnormally egotistical person) }
 { [ egotist, adj.all:proud^egotistic,+ adj.all:selfish^egotistical,+ adj.all:proud^egotistical,+ noun.feeling:egotism,+ noun.attribute:egotism,+ ] [ egoist1, adj.all:egoistic,+ noun.attribute:egoism,+ ] swellhead, unpleasant_person,@ (a conceited and self-centered person) }
@@ -3571,7 +3571,7 @@
 { folk_writer, writer,@ (a writer of folktales) }
 { [ follower, verb.social:follow10,+ leader,! ] noun.Tops:person,@ (a person who accepts the leadership of another) }
 { [ follower1, verb.motion:follow13,+ verb.motion:follow,+ ] traveler,@ (someone who travels behind or pursues another) }
-{ fondler1, molester,@ (a molester who touches the intimate parts of the victim; "the woman charged that her jailer was a fondler"; "not all fondlers are sexual perverts") } 
+{ fondler1, molester,@ (a molester who touches the intimate parts of the victim; "the woman charged that her jailer was a fondler"; "not all fondlers are sexual perverts") }
 { food_faddist, faddist,@ (a person who adheres briefly to different diets) }
 { food_manufacturer, manufacturer,@ (a person who manufactures food products) }
 { [ fool, verb.communication:fool1,+ verb.social:fool,+ ] sap, saphead, muggins, tomfool, simpleton,@ (a person who lacks good judgment) }
@@ -4783,7 +4783,7 @@
 { [ maroon, verb.possession:maroon,+ verb.change:maroon,+ ] unfortunate_person,@ (a person who is stranded (as on an island); "when the tide came in I was a maroon out there") }
 { marquess, peer1,@ (a British peer ranking below a duke and above an earl) }
 { marquis, marquess1, nobleman,@ (nobleman (in various countries) ranking above a count) }
-{ Marrano, Converso,@ ((medieval Spain and Portugal) a disparaging term for a Jew who converted to Christianity in order to avoid persecution but continued to practice their religion secretly) } 
+{ Marrano, Converso,@ ((medieval Spain and Portugal) a disparaging term for a Jew who converted to Christianity in order to avoid persecution but continued to practice their religion secretly) }
 { [ married, verb.social:marry,+ ] noun.Tops:person,@ (a person who is married; "we invited several young marrieds") }
 { [ marshal, noun.act:marshalship,+ ] marshall, lawman,@ (a law officer having duties similar to those of a sheriff in carrying out the judgments of a court of law) }
 { [ marshal1, noun.act:marshalship,+ verb.motion:marshal,+ ] marshall1, commissioned_military_officer,@ noun.group:military,;c ((in some countries) a military officer of highest rank) }
@@ -6297,7 +6297,7 @@
 { [ schizophrenic, adj.all:insane^schizophrenic1,+ ] psychotic,@ (someone who is afflicted with schizophrenia) }
 { schlemiel, shlemiel, simpleton,@ noun.communication:Yiddish,;c ((Yiddish) a dolt who is a habitual bungler) }
 { schlepper, shlepper, schlep, shlep, simpleton,@ noun.communication:Yiddish,;c ((Yiddish) an awkward and stupid person) }
-{ schlimazel, shlimazel, unfortunate,@ noun.communication:Yiddish,;c ((Yiddish) a very unlucky or inept person who fails at everything) } 
+{ schlimazel, shlimazel, unfortunate,@ noun.communication:Yiddish,;c ((Yiddish) a very unlucky or inept person who fails at everything) }
 { schlockmeister, shlockmeister, merchant,@ noun.communication:slang,;u ((slang) a merchant who deals in shoddy or inferior merchandise) }
 { schmuck, shmuck, schmo, shmo, jerk,@ noun.communication:Yiddish,;c ((Yiddish) a jerk) }
 { schnook, shnook, simpleton,@ noun.communication:Yiddish,;c ((Yiddish) a gullible simpleton more to be pitied than despised; "don't be such an apologetic shnook") }
@@ -8479,7 +8479,7 @@
 { Dietrich1, Paul_Heinrich_Dietrich, Thiry, Paul-Henri_Thiry, d'Holbach, baron_d'Holbach, philosopher,@i (French philosopher (born in Germany) famous as being one of the first self-described atheists in Europe) }
 { DiMaggio, Joe_DiMaggio, Joseph_Paul_DiMaggio, ballplayer,@i (United States professional baseball player noted for his batting ability (1914-1999)) }
 { Dinesen, Isak_Dinesen, Blixen, Karen_Blixen, Baroness_Karen_Blixen, writer,@i (Danish writer who lived in Kenya for 19 years and is remembered for her writings about Africa (1885-1962)) }
-{ Diocletian, Gaius_Aurelius_Valerius_Diocletian, Roman_Emperor,@i (Roman Emperor who when faced with military problems decided in 286 to divide the Roman Empire between himself in the east and Maximian in the west; he initiated the last persecution of the Christians in 303 (245-313)) } 
+{ Diocletian, Gaius_Aurelius_Valerius_Diocletian, Roman_Emperor,@i (Roman Emperor who when faced with military problems decided in 286 to divide the Roman Empire between himself in the east and Maximian in the west; he initiated the last persecution of the Christians in 303 (245-313)) }
 { Diogenes, philosopher,@i (an ancient Greek philosopher and Cynic who rejected social conventions (circa 400-325 BC)) }
 { Dionysius, Dionysius_the_Elder, tyrant2,@i (the tyrant of Syracuse who fought the Carthaginians (430-367 BC)) }
 { Diophantus, mathematician,@i (Greek mathematician who was the first to try to develop an algebraic notation (3rd century)) }

@@ -3,9 +3,9 @@
 <frame cBy="ACW" cDate="01/23/2003 02:22:41 PST Thu" name="Prohibiting_or_licensing" ID="521" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;In this frame a &lt;fen&gt;State_of_affairs&lt;/fen&gt; is prohibited (or allowed) by a &lt;fen&gt;Principle&lt;/fen&gt;. Raising constructions are common in this frame. Because laws and principles usually focus on what is not allowed, the words of this frame that are synonyms of prohibit.v are considered more basic, and the words that are synonyms of permit.v are marked with the semantic type "Negative".
 
-&lt;ex&gt; &lt;fex name="State_of_affairs"&gt;Guns&lt;/fex&gt; were &lt;t&gt;prohibited&lt;/t&gt; &lt;fex name="Place"&gt;in the airport&lt;/fex&gt; .&lt;/ex&gt; 
+&lt;ex&gt; &lt;fex name="State_of_affairs"&gt;Guns&lt;/fex&gt; were &lt;t&gt;prohibited&lt;/t&gt; &lt;fex name="Place"&gt;in the airport&lt;/fex&gt; .&lt;/ex&gt;
 &lt;ex&gt; &lt;fex name="Principle"&gt;Code 1425&lt;/fex&gt; &lt;t&gt;bans&lt;/t&gt; &lt;fex name="State_of_affairs"&gt;large trucks&lt;/fex&gt; &lt;fex name="Place"&gt;in the tunnel&lt;/fex&gt;.&lt;/ex&gt;
-&lt;ex&gt; &lt;fex name="State_of_affairs"&gt;Children&lt;/fex&gt; were not &lt;t&gt;permitted&lt;/t&gt; &lt;fex name="State_of_affairs"&gt;in the office&lt;/fex&gt;. &lt;fex name="Prin"&gt;CNI&lt;/fex&gt;&lt;/ex&gt; 
+&lt;ex&gt; &lt;fex name="State_of_affairs"&gt;Children&lt;/fex&gt; were not &lt;t&gt;permitted&lt;/t&gt; &lt;fex name="State_of_affairs"&gt;in the office&lt;/fex&gt;. &lt;fex name="Prin"&gt;CNI&lt;/fex&gt;&lt;/ex&gt;
 &lt;ex&gt; &lt;fex name="Principle"&gt;Code 1425&lt;/fex&gt; &lt;t&gt;allows&lt;/t&gt; &lt;fex name="State_of_affairs"&gt;us&lt;/fex&gt; &lt;fex name="State_of_affairs"&gt;to deduct interest payments&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Principle"&gt;No religion&lt;/fex&gt; &lt;t&gt;accepts&lt;/t&gt; &lt;fex name="State_of_affairs"&gt;discrimination against women&lt;/fex&gt;.&lt;/ex&gt;
 

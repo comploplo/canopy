@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="JKR" cDate="03/08/2004 04:50:09 PST Mon" name="Connecting_architecture" ID="1025" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An entity is integrated into a building as a &lt;fen&gt;Part&lt;/fen&gt; of a (possibly unexpressed) &lt;fen&gt;Whole&lt;/fen&gt; which may refer to the whole building or merely to a sub-part of the building.  The &lt;fen&gt;Part&lt;/fen&gt; itself connects locations within the building to each other, &lt;fen&gt;Connected_locations&lt;/fen&gt;. If a particular point of view is adopted in the context of real or imagined motion, then one of the locations can be construed as &lt;fen&gt;Goal&lt;/fen&gt; and the other as &lt;fen&gt;Source&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;An entity is integrated into a building as a &lt;fen&gt;Part&lt;/fen&gt; of a (possibly unexpressed) &lt;fen&gt;Whole&lt;/fen&gt; which may refer to the whole building or merely to a sub-part of the building.  The &lt;fen&gt;Part&lt;/fen&gt; itself connects locations within the building to each other, &lt;fen&gt;Connected_locations&lt;/fen&gt;. If a particular point of view is adopted in the context of real or imagined motion, then one of the locations can be construed as &lt;fen&gt;Goal&lt;/fen&gt; and the other as &lt;fen&gt;Source&lt;/fen&gt;.
 
 &lt;ex&gt;It was of great interest to me to see the star signs of Taurus the Bull and Leo the Lion on the &lt;t&gt;&lt;fex name="Part"&gt;staircase&lt;/fex&gt;&lt;/t&gt; &lt;fex name="Goal"&gt;to the upper Palace&lt;/fex&gt;.&lt;/ex&gt;
 

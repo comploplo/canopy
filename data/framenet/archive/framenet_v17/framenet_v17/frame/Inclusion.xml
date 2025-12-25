@@ -5,7 +5,7 @@
 
 &lt;ex&gt;&lt;fex name="Total"&gt;His collection&lt;/fex&gt; &lt;t&gt;included&lt;/t&gt; &lt;fex name="Part"&gt;two El Grecos&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="06/30/2004 07:49:19 PDT Wed" abbrev="tot" name="Total" ID="6673">
-        <definition>&lt;def-root&gt;A complex entity, either an aggregate or a unit, of which a &lt;fen&gt;Part&lt;/fen&gt;,  a constituent or a component, is specified. 
+        <definition>&lt;def-root&gt;A complex entity, either an aggregate or a unit, of which a &lt;fen&gt;Part&lt;/fen&gt;,  a constituent or a component, is specified.
 
 &lt;ex&gt;&lt;fex name="tot"&gt;His collection&lt;/fex&gt; &lt;t&gt;included&lt;/t&gt; two El Grecos&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

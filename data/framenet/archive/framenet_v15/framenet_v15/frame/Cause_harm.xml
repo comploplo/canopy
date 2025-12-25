@@ -40,7 +40,7 @@
         <semType name="Manner" ID="173"/>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Peripheral" cBy="197" cDate="05/23/2001 03:47:20 PDT Wed" abbrev="Means" name="Means" ID="554">
-        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Agent&lt;/fen&gt; that accomplishes the action indicated by the target. 
+        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Agent&lt;/fen&gt; that accomplishes the action indicated by the target.
 
 &lt;ex&gt;Rachael &lt;t&gt;injured&lt;/t&gt; her friend &lt;fex name="Means"&gt;by closing the car door on his left hand&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

@@ -3,7 +3,7 @@
 <frame cBy="664" cDate="05/15/2002 12:39:34 PDT Wed" name="Firing" ID="326" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;An &lt;fen&gt;Employer&lt;/fen&gt; ends an employment relationship with an &lt;fen&gt;Employee&lt;/fen&gt;.  There is often a &lt;fen&gt;Reason&lt;/fen&gt; given for the action.&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="05/15/2002 02:40:46 PDT Wed" abbrev="Empee" name="Employee" ID="2839">
-        <definition>&lt;def-root&gt;The person who is let go by their &lt;fen&gt;Employer&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;The person who is let go by their &lt;fen&gt;Employer&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Empee"&gt;I&lt;/fex&gt; was just &lt;t&gt;fired&lt;/t&gt; yesterday!&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -50,7 +50,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="008000" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="664" cDate="05/15/2002 02:43:02 PDT Wed" abbrev="Reas" name="Reason" ID="2848">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Reason&lt;/fen&gt; for which the &lt;fen&gt;Employee&lt;/fen&gt; is terminated. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Reason&lt;/fen&gt; for which the &lt;fen&gt;Employee&lt;/fen&gt; is terminated.
 
 &lt;ex&gt;North was &lt;t&gt;dismissed&lt;/t&gt; &lt;fex name="Reason"&gt;for gross mismanagement of funds&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

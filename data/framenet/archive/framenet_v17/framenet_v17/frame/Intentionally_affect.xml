@@ -34,7 +34,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="09/24/2001 01:32:45 PDT Mon" abbrev="Pat" name="Patient" ID="2006">
-        <definition>&lt;def-root&gt;Patient is the entity acted on and that may, but need not, undergo a change. 
+        <definition>&lt;def-root&gt;Patient is the entity acted on and that may, but need not, undergo a change.
 &lt;ex&gt;A professional dishwasher &lt;t&gt;does&lt;/t&gt; &lt;fex name="Patient"&gt;dishes&lt;/fex&gt; one at a time.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF69B4" fgColor="FFFFFF" coreType="Peripheral" cBy="MRLP" cDate="04/08/2002 11:12:24 PDT Mon" abbrev="Mnr" name="Manner" ID="2583">

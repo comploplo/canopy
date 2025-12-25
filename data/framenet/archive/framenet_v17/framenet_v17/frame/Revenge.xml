@@ -51,7 +51,7 @@
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="00008B" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="06/10/2002 03:32:39 PDT Mon" abbrev="Injry" name="Injury" ID="3018">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Injury&lt;/fen&gt; is the injurious action committed by the &lt;fen&gt;Offender&lt;/fen&gt; against the &lt;fen&gt;Injured_Party&lt;/fen&gt;. This Frame Element need not always be realized, although it is conceptually necessary. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Injury&lt;/fen&gt; is the injurious action committed by the &lt;fen&gt;Offender&lt;/fen&gt; against the &lt;fen&gt;Injured_Party&lt;/fen&gt;. This Frame Element need not always be realized, although it is conceptually necessary.
 
 &lt;ex&gt;The team sought &lt;t&gt;revenge&lt;/t&gt; &lt;fex name="Injury"&gt;for their 4-1 defeat last month&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
@@ -63,7 +63,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="06/10/2002 04:51:09 PDT Mon" abbrev="Injrd_prty" name="Injured_party" ID="3022">
-        <definition>&lt;def-root&gt;This frame element identifies the constituent that encodes who or what suffered the &lt;fen&gt;Injury&lt;/fen&gt; at the hands of the &lt;fen&gt;Offender&lt;/fen&gt;. Sometimes, an abstract concept such a person's honour or their blood is presented as the element that has suffered the &lt;fen&gt;Injury&lt;/fen&gt;. These also constitute instances of  &lt;fen&gt;Injured_party&lt;/fen&gt; 
+        <definition>&lt;def-root&gt;This frame element identifies the constituent that encodes who or what suffered the &lt;fen&gt;Injury&lt;/fen&gt; at the hands of the &lt;fen&gt;Offender&lt;/fen&gt;. Sometimes, an abstract concept such a person's honour or their blood is presented as the element that has suffered the &lt;fen&gt;Injury&lt;/fen&gt;. These also constitute instances of  &lt;fen&gt;Injured_party&lt;/fen&gt;
 
 &lt;ex&gt;Sam's brothers &lt;t&gt;avenged&lt;/t&gt; &lt;fex name="Injured_party"&gt;him&lt;/fex&gt;.&lt;/ex&gt;
 &lt;ex&gt;We will decide later how to &lt;t&gt;avenge&lt;/t&gt; &lt;fex name="Injured_party"&gt;the blood of the fallen&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>

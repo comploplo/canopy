@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="03/02/2005 08:21:19 PST Wed" name="Ingredients" ID="1348" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;A &lt;fen&gt;Material&lt;/fen&gt; is used to make a &lt;fen&gt;Product&lt;/fen&gt;. 
+    <definition>&lt;def-root&gt;A &lt;fen&gt;Material&lt;/fen&gt; is used to make a &lt;fen&gt;Product&lt;/fen&gt;.
 
 &lt;ex&gt;These &lt;fex name="use"&gt;cooking&lt;/fex&gt; &lt;t&gt;&lt;fex name="mat"&gt;ingredients&lt;/fex&gt;&lt;/t&gt; are readily available.&lt;/ex&gt;
 

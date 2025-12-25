@@ -73,12 +73,16 @@ pub mod confidence;
 pub mod config;
 pub mod decomposition;
 pub mod error;
+pub mod sentence_builder;
 pub mod types;
 
 // Re-export main types
 pub use composer::EventComposer;
 pub use config::EventComposerConfig;
 pub use error::{EventError, EventResult};
+pub use sentence_builder::{
+    SentenceAnalysisBuilder, extract_dependency_arcs, extract_metadata, layer1_tokens_from_parsed,
+};
 pub use types::{
     ComposedEvent, ComposedEvents, DecomposedEvent, DependencyArc, LittleVType, PredicateInfo,
     SentenceAnalysis, SentenceMetadata, UnbindingReason, UnboundEntity,

@@ -3,8 +3,8 @@
 <frame cBy="731" cDate="02/07/2001 04:12:26 PST Wed" name="Adorning" ID="76" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;This frame involves a static (primarily spatial) relationship between a &lt;fen&gt;Location&lt;/fen&gt; and a &lt;fen&gt;Theme&lt;/fen&gt;.  All of the verbs used statically in this frame can also occur in the frame Filling, producing pairs such as the following:
 
-&lt;ex&gt;Filling: Pat &lt;t&gt;covered&lt;/t&gt; the table with flowers.&lt;/ex&gt; 
-&lt;ex&gt;Adorning: Flowers &lt;t&gt;covered&lt;/t&gt; the table.&lt;/ex&gt; 
+&lt;ex&gt;Filling: Pat &lt;t&gt;covered&lt;/t&gt; the table with flowers.&lt;/ex&gt;
+&lt;ex&gt;Adorning: Flowers &lt;t&gt;covered&lt;/t&gt; the table.&lt;/ex&gt;
 
 Please note: &lt;ment&gt;adorned&lt;/ment&gt;, &lt;ment&gt;covered&lt;/ment&gt;, etc are in the Abounding_with frame because of the point of view shift.
 &lt;/def-root&gt;</definition>

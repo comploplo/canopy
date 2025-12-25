@@ -3,15 +3,15 @@
 <frame cBy="664" cDate="11/12/2008 02:03:33 PST Wed" name="Duration_relation" ID="2121" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;A &lt;fen&gt;Period&lt;/fen&gt; or &lt;fen&gt;Eventuality&lt;/fen&gt; is related to its &lt;fen&gt;Duration&lt;/fen&gt;.  Alternatively, an &lt;fen&gt;Entity&lt;/fen&gt; may stand in metonymically for an &lt;fen&gt;Eventuality&lt;/fen&gt; that it is involved in.&lt;/def-root&gt;</definition>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="11/12/2008 02:03:33 PST Wed" abbrev="Evty" name="Eventuality" ID="13105">
-        <definition>&lt;def-root&gt;A situation, action or event whose duration is being described.  The &lt;fen&gt;Eventuality&lt;/fen&gt; occurs as the External Argument if the adjective is used predicatively, or as the modified noun if the adjective is used attributively: 
+        <definition>&lt;def-root&gt;A situation, action or event whose duration is being described.  The &lt;fen&gt;Eventuality&lt;/fen&gt; occurs as the External Argument if the adjective is used predicatively, or as the modified noun if the adjective is used attributively:
 
-&lt;ex&gt;&lt;fex name="Eventuality"&gt;The lecture&lt;/fex&gt; did n't &lt;t&gt;last&lt;/t&gt; long .&lt;/ex&gt; 
+&lt;ex&gt;&lt;fex name="Eventuality"&gt;The lecture&lt;/fex&gt; did n't &lt;t&gt;last&lt;/t&gt; long .&lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Eventuality"&gt;My unease&lt;/fex&gt; &lt;t&gt;persisted&lt;/t&gt; for some time .&lt;/ex&gt;
 &lt;ex&gt;&lt;t&gt;Persisting&lt;/t&gt; decades past the end of the war , &lt;fex name="Eventuality"&gt;the economic disaster&lt;/fex&gt; was to shape the fate of central Europe .&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Period" ID="13106"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="11/12/2008 02:03:33 PST Wed" abbrev="Prd" name="Period" ID="13106">
-        <definition>&lt;def-root&gt;Sometimes a period of time, rather than an event or state is described.  
+        <definition>&lt;def-root&gt;Sometimes a period of time, rather than an event or state is described.
 
 &lt;ex&gt;&lt;fex name="Period"&gt;This difficult period&lt;/fex&gt; lasted only a short while .&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Entity" ID="13109"/>

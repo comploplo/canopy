@@ -3,7 +3,7 @@
 <frame cBy="605" cDate="06/30/2004 07:45:16 PDT Wed" name="Inclusion" ID="1153" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <definition>&lt;def-root&gt;A &lt;fen&gt;Total&lt;/fen&gt; has a &lt;fen&gt;Part&lt;/fen&gt;, either  as a member of an aggregate or as  a constituent part of a simple entity.&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="06/30/2004 07:49:19 PDT Wed" abbrev="tot" name="Total" ID="6673">
-        <definition>&lt;def-root&gt;A complex entity, either an aggregate or a unit, of which a &lt;fen&gt;Part&lt;/fen&gt;,  a constituent or a component, is specified. 
+        <definition>&lt;def-root&gt;A complex entity, either an aggregate or a unit, of which a &lt;fen&gt;Part&lt;/fen&gt;,  a constituent or a component, is specified.
 
 &lt;ex&gt;&lt;fex name="tot"&gt;His collection&lt;/fex&gt; &lt;t&gt;included&lt;/t&gt; two El Grecos&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

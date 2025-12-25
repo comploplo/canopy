@@ -35,13 +35,13 @@
 &lt;ex&gt;When Nadar &lt;t&gt;photographed&lt;/t&gt; &lt;fex name="repd"&gt;her&lt;/fex&gt;, Desbordes-Valmore was sixty-eight.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="d0d0d0" fgColor="00008B" coreType="Peripheral" cBy="605" cDate="11/18/2005 04:59:32 PST Fri" abbrev="depr" name="Depictive_of_represented" ID="9422">
-        <definition>&lt;def-root&gt;A characterization of the state in which the &lt;fen&gt;Represented&lt;/fen&gt; entity is presented. 
+        <definition>&lt;def-root&gt;A characterization of the state in which the &lt;fen&gt;Represented&lt;/fen&gt; entity is presented.
 
 
 &lt;ex&gt;He &lt;t&gt;carved&lt;/t&gt; St. Francis &lt;fex name="Depictive_of_represented"&gt;tumbling around&lt;/fex&gt;, and St. Thomas banging his fist on a table.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="11/18/2005 04:59:32 PST Fri" abbrev="man" name="Manner" ID="9423">
-        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may indicate salient characteristics of the &lt;fen&gt;Creator&lt;/fen&gt; that also affect the action (&lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the event (or state) which is not covered by more specific FEs, including secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may indicate salient characteristics of the &lt;fen&gt;Creator&lt;/fen&gt; that also affect the action (&lt;ment&gt;deliberately&lt;/ment&gt;, &lt;ment&gt;carefully&lt;/ment&gt;).
 
 &lt;ex&gt;She set up her plywood on saw horses and &lt;fex name="man"&gt;carefully&lt;/fex&gt; &lt;t&gt;drew&lt;/t&gt; her mother.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
@@ -52,7 +52,7 @@
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="A52A2A" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="605" cDate="11/18/2005 05:48:18 PST Fri" abbrev="dep" name="Depictive" ID="9425">
-        <definition>&lt;def-root&gt;This FE describes the &lt;fen&gt;Creator&lt;/fen&gt; as being in some state during the creation of the &lt;fen&gt;Representation&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;This FE describes the &lt;fen&gt;Creator&lt;/fen&gt; as being in some state during the creation of the &lt;fen&gt;Representation&lt;/fen&gt;.
 
 &lt;ex&gt;&lt;fex name="Depictive"&gt;As a young man&lt;/fex&gt; he &lt;t&gt;painted&lt;/t&gt; Philip IV as a fashionable equestrian.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

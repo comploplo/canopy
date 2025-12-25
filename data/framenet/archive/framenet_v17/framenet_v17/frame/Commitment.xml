@@ -37,7 +37,7 @@ year.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Peripheral" cBy="JKR" cDate="06/15/2005 10:31:42 PDT Wed" abbrev="pla" name="Place" ID="8159">
-        <definition>&lt;def-root&gt;The location in which the &lt;fen&gt;Speaker&lt;/fen&gt; makes the commitment. 
+        <definition>&lt;def-root&gt;The location in which the &lt;fen&gt;Speaker&lt;/fen&gt; makes the commitment.
 
 &lt;ex&gt;The july framework has reaffirmed what was &lt;t&gt;promised&lt;/t&gt; &lt;fex name="Place"&gt;at Doha&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Locative_relation" ID="182"/>

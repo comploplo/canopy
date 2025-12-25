@@ -132,7 +132,7 @@
 { viroid, virusoid, plant_virus,@ (the smallest of viruses; a plant virus with its RNA arranged in a circular chromosome without a protein coat) }
 { [ bacteriophage, adj.pert:bacteriophagic,+ adj.pert:bacteriophagous,+ ] phage, virus,@ (a virus that is parasitic (reproduces itself) in bacteria; "phage uses the bacterium's machinery and energy to produce more phage until the bacterium is destroyed and phage is released to invade surrounding bacteria") }
 { coliphage, bacteriophage,@ (a bacteriophage that infects the bacterium Escherichia coli) }
-{ typhoid_bacteriophage, bacteriophage,@ (a bacteriophage specific for the bacterium Salmonella typhi) } 
+{ typhoid_bacteriophage, bacteriophage,@ (a bacteriophage specific for the bacterium Salmonella typhi) }
 { plant_virus, virus,@ (a plant pathogen that is a virus consisting of a single strand of RNA) }
 { animal_virus, virus,@ (an animal pathogen that is a virus) }
 { hepadnavirus, animal_virus,@ (a group of animal DNA viruses including viruses of ducks and woodchucks and squirrels and others as well as the virus causing hepatitis B in humans) }
@@ -8081,5 +8081,3 @@
 { thorax1, noun.body:body_part,@ insect,#p (part of an insect's body that bears the wings and legs) }
 { prothorax, thorax1,@ (the anterior part of an insect's thorax; bears the first pair of legs) }
 { [ metamere, adj.all:divided^metameric,+ ] somite, noun.object:segment,@ (one of a series of similar body segments into which some animals are divided longitudinally) }
-
-

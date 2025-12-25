@@ -8,7 +8,7 @@ use canopy_core::Word;
 use canopy_pipeline::container::{ContainerBuilder, PipelineContainer};
 use canopy_pipeline::error::{AnalysisError, PipelineError};
 use canopy_pipeline::traits::*;
-use canopy_semantic_layer::SemanticLayer1Output as SemanticAnalysis;
+use canopy_tokenizer::SemanticLayer1Output as SemanticAnalysis;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
@@ -114,12 +114,12 @@ mod tests {
                 tokens: vec![],
                 frames: vec![],
                 predicates: vec![],
-                logical_form: canopy_semantic_layer::LogicalForm {
+                logical_form: canopy_tokenizer::LogicalForm {
                     predicates: vec![],
                     quantifiers: vec![],
                     variables: std::collections::HashMap::new(),
                 },
-                metrics: canopy_semantic_layer::AnalysisMetrics {
+                metrics: canopy_tokenizer::AnalysisMetrics {
                     total_time_us: 0,
                     tokenization_time_us: 0,
                     framenet_time_us: 0,

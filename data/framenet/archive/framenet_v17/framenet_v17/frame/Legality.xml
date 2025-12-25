@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="ACW" cDate="01/15/2003 12:23:01 PST Wed" name="Legality" ID="501" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;Words in this frame describe the status of an &lt;fen&gt;Action&lt;/fen&gt; with respect to a &lt;fen&gt;Code&lt;/fen&gt; of laws or rules. An &lt;fen&gt;Object&lt;/fen&gt; may also be in violation or compliance of the &lt;fen&gt;Code&lt;/fen&gt; by virtue of its existence, location or possession.  
+    <definition>&lt;def-root&gt;Words in this frame describe the status of an &lt;fen&gt;Action&lt;/fen&gt; with respect to a &lt;fen&gt;Code&lt;/fen&gt; of laws or rules. An &lt;fen&gt;Object&lt;/fen&gt; may also be in violation or compliance of the &lt;fen&gt;Code&lt;/fen&gt; by virtue of its existence, location or possession.
 
-&lt;ex&gt; &lt;t&gt;Illegal&lt;/t&gt; &lt;fex name="Action"&gt;drug use&lt;/fex&gt; is on the rise. &lt;/ex&gt; 
+&lt;ex&gt; &lt;t&gt;Illegal&lt;/t&gt; &lt;fex name="Action"&gt;drug use&lt;/fex&gt; is on the rise. &lt;/ex&gt;
 
-&lt;ex&gt; Scores of &lt;t&gt;illegal&lt;/t&gt; &lt;fex name="Object"&gt;immigrants&lt;/fex&gt; cross the border every year.&lt;/ex&gt; 
+&lt;ex&gt; Scores of &lt;t&gt;illegal&lt;/t&gt; &lt;fex name="Object"&gt;immigrants&lt;/fex&gt; cross the border every year.&lt;/ex&gt;
 
 &lt;ex&gt; &lt;fex name="Action"&gt;Feeding the buffalo&lt;/fex&gt; &lt;m&gt;is&lt;/m&gt; &lt;t&gt;prohibited&lt;/t&gt; &lt;fex name="Code"&gt;according to Code 138&lt;/fex&gt; . &lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="ACW" cDate="01/15/2003 12:34:25 PST Wed" abbrev="Act" name="Action" ID="4042">

@@ -7,7 +7,7 @@
 &lt;ex&gt;&lt;t&gt;Nevertheless&lt;/t&gt; , &lt;fex name="Main_statement"&gt;we did win&lt;/fex&gt; . &lt;fex name="Statement"&gt;DNI&lt;/fex&gt; &lt;/ex&gt;
 &lt;ex&gt;&lt;fex name="Statement"&gt;I wanted to come&lt;/fex&gt; , &lt;t&gt;but&lt;/t&gt; &lt;fex name="Main_statement"&gt;I did n't remember where the party was&lt;/fex&gt; . &lt;/ex&gt;&lt;/def-root&gt;</definition>
     <FE bgColor="800080" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="07/13/2009 02:59:03 PDT Mon" abbrev="Msg" name="Statement" ID="13302">
-        <definition>&lt;def-root&gt;A proposition or set of propositions that the speaker wants the addressee to believe or take for granted. 
+        <definition>&lt;def-root&gt;A proposition or set of propositions that the speaker wants the addressee to believe or take for granted.
 &lt;/def-root&gt;</definition>
         <semType name="Message" ID="56"/>
     </FE>

@@ -10,7 +10,7 @@
 
 &lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="HCB" cDate="03/23/2001 03:19:58 PST Fri" abbrev="Perp" name="Perpetrator" ID="451">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Perpetrator&lt;/fen&gt; is the person (or other agent) that takes the goods away. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Perpetrator&lt;/fen&gt; is the person (or other agent) that takes the goods away.
 
 &lt;ex&gt;&lt;fex name="Perp"&gt;Leslie&lt;/fex&gt; &lt;t&gt;stole&lt;/t&gt; the watch from Kim.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Sentient" ID="5"/>
@@ -21,7 +21,7 @@
         <semType name="Sentient" ID="5"/>
     </FE>
     <FE bgColor="006400" fgColor="FFFFFF" coreType="Core" cBy="HCB" cDate="03/23/2001 03:28:50 PST Fri" abbrev="Goods" name="Goods" ID="453">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Goods&lt;/fen&gt; is anything (including labor, time, or legal rights) that can be taken away. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Goods&lt;/fen&gt; is anything (including labor, time, or legal rights) that can be taken away.
 
 &lt;ex&gt;Leslie &lt;t&gt;STOLE&lt;/t&gt; &lt;fex name="Goods"&gt;the watch&lt;/fex&gt; from Kim.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>

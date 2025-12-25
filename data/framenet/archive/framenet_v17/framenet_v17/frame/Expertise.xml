@@ -34,11 +34,11 @@ With adjectives as targets in this frame, we annotate on two FE layers.
         <excludesFE name="Behavior_product" ID="1078"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="JKR" cDate="06/27/2001 01:49:49 PDT Wed" abbrev="" name="Role" ID="1113">
-        <definition>&lt;def-root&gt;This frame element denotes a role in which the protagonist has developed his expertise. 
+        <definition>&lt;def-root&gt;This frame element denotes a role in which the protagonist has developed his expertise.
 
 &lt;ex&gt;&lt;fex name="Protagonist"&gt;His&lt;/fex&gt; &lt;t&gt;prowess&lt;/t&gt; &lt;fex name="Role"&gt;as a surgeon&lt;/fex&gt; is impressive.&lt;/ex&gt;
 
-In many cases, the &lt;fen&gt;Role&lt;/fen&gt; noun secondarily evokes the &lt;fen&gt;Skill&lt;/fen&gt; that is at issue. 
+In many cases, the &lt;fen&gt;Role&lt;/fen&gt; noun secondarily evokes the &lt;fen&gt;Skill&lt;/fen&gt; that is at issue.
 &lt;/def-root&gt;</definition>
         <excludesFE name="Behavior_product" ID="1078"/>
     </FE>

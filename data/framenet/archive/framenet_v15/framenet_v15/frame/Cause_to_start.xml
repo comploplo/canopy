@@ -11,7 +11,7 @@
 
 &lt;ex&gt;&lt;fex name="Cause"&gt;A crime surge in a former coal town&lt;/fex&gt; &lt;t&gt;prompted&lt;/t&gt; &lt;fex name="Effect"&gt;a crackdown on illegal immigrants&lt;/fex&gt;&lt;/ex&gt;.&lt;/def-root&gt;</definition>
     <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="605" cDate="07/24/2002 03:00:07 PDT Wed" abbrev="Cause" name="Cause" ID="3400">
-        <definition>&lt;def-root&gt;An animate or inanimate entity, a force, or event that produces an effect. Volitionality is not a necessary characteristic of &lt;fen&gt;Cause&lt;/fen&gt;s. 
+        <definition>&lt;def-root&gt;An animate or inanimate entity, a force, or event that produces an effect. Volitionality is not a necessary characteristic of &lt;fen&gt;Cause&lt;/fen&gt;s.
 
 &lt;ex&gt;&lt;fex name="Cause"&gt;The programme&lt;/fex&gt; &lt;t&gt;sparked&lt;/t&gt; a public outcry.&lt;/ex&gt;
 

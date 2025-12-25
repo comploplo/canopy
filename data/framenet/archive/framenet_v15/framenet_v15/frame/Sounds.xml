@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="605" cDate="10/02/2003 08:20:57 PDT Thu" name="Sounds" ID="850" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;This frame is  concerned with the percepts that vibrations which travel through the air or another medium produce in hearing organs. Sounds are a subtype of sensation. In talking about sounds, speakers often provide information about how the sound was produced. A &lt;fen&gt;Noisy_event&lt;/fen&gt; may be mentioned which gives rise to the sound. Alternatively, the sound may be attributed to a &lt;fen&gt;Sound_source&lt;/fen&gt;, which is construed as a point source emitting the sound. A further possible specification of what gives rise to the sound is for speakers to talk about two physical entities coming into contact by motion, resulting in either friction or impact. 
+    <definition>&lt;def-root&gt;This frame is  concerned with the percepts that vibrations which travel through the air or another medium produce in hearing organs. Sounds are a subtype of sensation. In talking about sounds, speakers often provide information about how the sound was produced. A &lt;fen&gt;Noisy_event&lt;/fen&gt; may be mentioned which gives rise to the sound. Alternatively, the sound may be attributed to a &lt;fen&gt;Sound_source&lt;/fen&gt;, which is construed as a point source emitting the sound. A further possible specification of what gives rise to the sound is for speakers to talk about two physical entities coming into contact by motion, resulting in either friction or impact.
 &lt;/def-root&gt;</definition>
     <FE bgColor="FFFF00" fgColor="800080" coreType="Peripheral" cBy="605" cDate="10/02/2003 08:36:56 PDT Thu" abbrev="" name="Noisy_event" ID="5491">
         <definition>&lt;def-root&gt;An event during which sound is produced.&lt;/def-root&gt;</definition>
@@ -74,7 +74,7 @@
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="10/06/2003 03:07:50 PDT Mon" abbrev="" name="Path" ID="5518">
         <definition>&lt;def-root&gt;The &lt;fen&gt;Path&lt;/fen&gt; along which the sound travels away from the &lt;fen&gt;Sound_source&lt;/fen&gt;.
 
-&lt;ex&gt;As he opened the throttle, the roar of the BMW's engine bit into the moan and  &lt;t&gt;howl&lt;/t&gt; of the wind 
+&lt;ex&gt;As he opened the throttle, the roar of the BMW's engine bit into the moan and  &lt;t&gt;howl&lt;/t&gt; of the wind
 &lt;fex name="Path"&gt;across the culvert's mouth&lt;/fex&gt;&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <frameRelation type="Inherits from"/>

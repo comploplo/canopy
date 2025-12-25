@@ -65,11 +65,11 @@
 &lt;ex&gt;&lt;t&gt;Spin&lt;/t&gt; the dial &lt;fex name="Ang"&gt;a quarter turn&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="1E90FF" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="664" cDate="02/28/2002 04:14:17 PST Thu" abbrev="Locus" name="Locus" ID="2406">
-        <definition>&lt;def-root&gt;The &lt;fen&gt;Agent&lt;/fen&gt;'s manipulation of an &lt;fen&gt;Theme&lt;/fen&gt; may be further specified as being localized to some part of the &lt;fen&gt;Theme&lt;/fen&gt;, a &lt;fen&gt;Locus&lt;/fen&gt;.  This FE is usually expressed as a PP Complement. 
+        <definition>&lt;def-root&gt;The &lt;fen&gt;Agent&lt;/fen&gt;'s manipulation of an &lt;fen&gt;Theme&lt;/fen&gt; may be further specified as being localized to some part of the &lt;fen&gt;Theme&lt;/fen&gt;, a &lt;fen&gt;Locus&lt;/fen&gt;.  This FE is usually expressed as a PP Complement.
 &lt;ex&gt;Pat &lt;t&gt;squeezed&lt;/t&gt; Jo &lt;fex name="Locus"&gt;by the hand&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Core" cBy="664" cDate="02/28/2002 04:14:29 PST Thu" abbrev="AgBP" name="Bodypart_of_agent" ID="2407">
-        <definition>&lt;def-root&gt;This FE identifies the part of the Agent's body being used to manipulate the &lt;fen&gt;Theme&lt;/fen&gt;.  
+        <definition>&lt;def-root&gt;This FE identifies the part of the Agent's body being used to manipulate the &lt;fen&gt;Theme&lt;/fen&gt;.
 &lt;ex&gt;Kim &lt;t&gt;twirled&lt;/t&gt; the glass &lt;fex name="Bodypart_of_agent"&gt;in his fingers&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <excludesFE name="Cause" ID="2408"/>
     </FE>

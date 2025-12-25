@@ -37,7 +37,7 @@
         <semType name="Degree" ID="172"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="618" cDate="08/15/2006 01:32:23 PDT Tue" abbrev="man" name="Manner" ID="10494">
-        <definition>&lt;def-root&gt;Any description of the  event causing the change of the Event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may also indicate salient characteristics of the Agent that also affect the action (deliberately, eagerly, carefully). 
+        <definition>&lt;def-root&gt;Any description of the  event causing the change of the Event which is not covered by more specific FEs, including epistemic modification (probably, presumably, mysteriously), secondary effects (quietly, loudly), and general descriptions comparing events (the same way). It may also indicate salient characteristics of the Agent that also affect the action (deliberately, eagerly, carefully).
 
 &lt;ex&gt;Rain &lt;fex name="man"&gt;so cruelly&lt;/fex&gt; &lt;t&gt;cut&lt;/t&gt; &lt;t&gt;short&lt;/t&gt; the game against Bangladesh.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>

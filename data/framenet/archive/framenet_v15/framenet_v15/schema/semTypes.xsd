@@ -17,7 +17,7 @@ QUESTION: should this be required?
     4a. "ID", which is a non-negative integer
     4b. "name", which is a string
     4c. "abbrev", which is a string (could be identical to name)
-5. "semType" always have the element "definition" 
+5. "semType" always have the element "definition"
 6. "definition" is just text
 7. "semType" has the element "superType"
 9. "superType" element has two attibutes
@@ -30,7 +30,7 @@ QUESTION: Should <any> or <anyAttribute> be included?
 
 
 <!-- WARNING: May need to edit URL's and namespaces below -->
-<!-- WARNING: May need to edit contents of semtypes.xml that calls this file 
+<!-- WARNING: May need to edit contents of semtypes.xml that calls this file
 for validation -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:fn="http://framenet.icsi.berkeley.edu"
@@ -39,7 +39,7 @@ for validation -->
             elementFormDefault="qualified">
 
     <xsd:include schemaLocation="commonTypes.xsd"/>
-    
+
    <!-- 1. Root element is "semTypes" -->
     <xsd:element name="semTypes">
         <xsd:complexType>
@@ -53,11 +53,11 @@ for validation -->
             <xsd:attribute name="XMLCreated" type="fn:dateTimeType"/>
         </xsd:complexType>
     </xsd:element> <!-- "semTypes" -->
-    
+
     <!-- semType element -->
     <xsd:complexType name="semTypeType">
         <xsd:sequence>
-                       <!-- 5. "semType" always have the element "definition"  -->  
+                       <!-- 5. "semType" always have the element "definition"  -->
                        <!-- 6. "definition" is just text -->
             <xsd:element name="definition" type="xsd:string"/>
             <xsd:element name="superType" minOccurs="0" maxOccurs="unbounded"> <!-- Q: Should there be a maxOccurs? -->
@@ -65,9 +65,9 @@ for validation -->
                                 <!-- "superType" element has two attibutes
                                         1. "superTypeName", a string
                                         2. "supID", a non-negative integer-->
-                    <xsd:attribute name="superTypeName" 
+                    <xsd:attribute name="superTypeName"
                                    type="xsd:string" use="required" />
-                    <xsd:attribute name="supID" 
+                    <xsd:attribute name="supID"
                                    type="fn:IDType" use="required" />
                 </xsd:complexType>
             </xsd:element> <!-- "superType" -->

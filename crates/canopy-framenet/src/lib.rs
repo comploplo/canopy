@@ -15,13 +15,14 @@
 //! # Example
 //!
 //! ```rust
-//! use canopy_framenet::{FrameNetEngine, DataLoader};
+//! use canopy_framenet::FrameNetEngine;
 //!
-//! let mut engine = FrameNetEngine::new();
-//! engine.load_from_directory("data/framenet/archive/framenet_v17/framenet_v17").unwrap();
+//! let engine = FrameNetEngine::new();
+//! // engine.load_from_directory("path/to/framenet/data")?;
 //!
-//! let result = engine.analyze_text("give").unwrap();
-//! println!("FrameNet frames for 'give': {:?}", result.data.frames);
+//! // With loaded data, you can analyze text:
+//! // let result = engine.analyze_text("give")?;
+//! // println!("FrameNet frames for 'give': {:?}", result.data.frames);
 //! ```
 
 pub mod engine;

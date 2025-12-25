@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="frame.xsl"?>
 <frame cBy="840" cDate="05/22/2003 10:57:13 PDT Thu" name="Pardon" ID="681" xsi:schemaLocation="../schema/frame.xsd" xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <definition>&lt;def-root&gt;An &lt;fen&gt;Authority&lt;/fen&gt; excuses an &lt;fen&gt;Offense&lt;/fen&gt; that an &lt;fen&gt;Offender&lt;/fen&gt; has committed, with the effect of ending or preventing any punishment. 
- 
+    <definition>&lt;def-root&gt;An &lt;fen&gt;Authority&lt;/fen&gt; excuses an &lt;fen&gt;Offense&lt;/fen&gt; that an &lt;fen&gt;Offender&lt;/fen&gt; has committed, with the effect of ending or preventing any punishment.
+
 
 &lt;ex&gt;President Ford &lt;t&gt;pardoned&lt;/t&gt; &lt;fex name="off"&gt;her&lt;/fex&gt; &lt;fex name="tim"&gt;after it came to light she was being held in Japan as an "enemy alien" and was secretly working to subvert the broadcasts&lt;/fex&gt; &lt;fex name="fen"&gt;DNI&lt;/fex&gt; &lt;/ex&gt;
 
@@ -35,7 +35,7 @@
         <semType name="Time" ID="141"/>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Peripheral" cBy="605" cDate="04/28/2004 03:14:35 PDT Wed" abbrev="mea" name="Means" ID="6349">
-        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Authority&lt;/fen&gt;  that accomplishes the pardon. 
+        <definition>&lt;def-root&gt;An intentional action performed by the &lt;fen&gt;Authority&lt;/fen&gt;  that accomplishes the pardon.
 
 &lt;ex&gt;But Queen Mary, pitied his youth and &lt;t&gt;pardoned&lt;/t&gt; him &lt;fex name="mea"&gt;by a bill addressed to her chancellor, Stephen Gardener from St.James's, on 18th March 1554&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
         <semType name="State_of_affairs" ID="177"/>

@@ -14,17 +14,17 @@ NB:  This frame should be compared to the Scrutiny frame, in which the primary f
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="02/14/2002 11:19:00 PST Thu" abbrev="Ground" name="Ground" ID="2328">
         <definition>&lt;def-root&gt;This is the entity to which the &lt;fen&gt;Cognizer_agent&lt;/fen&gt; pays attention. It is referred to as &lt;fen&gt;Ground&lt;/fen&gt; because it serves as the background or context for the &lt;fen&gt;Sought_entity&lt;/fen&gt;. This FE can be expressed as an NP Object (first example) or as a PP Complement (second example).
 
-&lt;ex&gt;Leslie &lt;t&gt;examined&lt;/t&gt; &lt;fex name="Ground"&gt;the glass&lt;/fex&gt; for cracks.&lt;/ex&gt; 
+&lt;ex&gt;Leslie &lt;t&gt;examined&lt;/t&gt; &lt;fex name="Ground"&gt;the glass&lt;/fex&gt; for cracks.&lt;/ex&gt;
 &lt;ex&gt;Kim &lt;t&gt;searched&lt;/t&gt; &lt;fex name="Ground"&gt;in the woods&lt;/fex&gt; for mushrooms.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="0000FF" fgColor="FFFFFF" coreType="Core" cBy="MJE" cDate="02/14/2002 11:19:04 PST Thu" abbrev="Phen" name="Sought_entity" ID="2329">
-        <definition>&lt;def-root&gt;This is the entity that the &lt;fen&gt;Ground&lt;/fen&gt; may contain. Typically, it is expressed as a &lt;ment&gt;for&lt;/ment&gt;-PP. 
+        <definition>&lt;def-root&gt;This is the entity that the &lt;fen&gt;Ground&lt;/fen&gt; may contain. Typically, it is expressed as a &lt;ment&gt;for&lt;/ment&gt;-PP.
 
-&lt;ex&gt;Leslie &lt;t&gt;examined&lt;/t&gt; the glass &lt;fex name="Sought_entity"&gt;for cracks&lt;/fex&gt;.&lt;/ex&gt; 
-&lt;ex&gt;Kim &lt;t&gt;searched&lt;/t&gt; in the woods &lt;fex name="Sought_entity"&gt;for mushrooms&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;Leslie &lt;t&gt;examined&lt;/t&gt; the glass &lt;fex name="Sought_entity"&gt;for cracks&lt;/fex&gt;.&lt;/ex&gt;
+&lt;ex&gt;Kim &lt;t&gt;searched&lt;/t&gt; in the woods &lt;fex name="Sought_entity"&gt;for mushrooms&lt;/fex&gt;.&lt;/ex&gt;
 Some words in this frame allow alternate expressions of the &lt;fen&gt;Ground&lt;/fen&gt; and the &lt;fen&gt;Sought_entity&lt;/fen&gt;.
 
-&lt;ex&gt;We &lt;t&gt;searched&lt;/t&gt; the yard &lt;fex name="Phen"&gt;for my contact lens&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;We &lt;t&gt;searched&lt;/t&gt; the yard &lt;fex name="Phen"&gt;for my contact lens&lt;/fex&gt;.&lt;/ex&gt;
 
 &lt;ex&gt;We &lt;t&gt;searched&lt;/t&gt; &lt;fex name="Phen"&gt;for my contact lens&lt;/fex&gt; in the yard.&lt;/ex&gt; &lt;/def-root&gt;</definition>
         <semType name="Physical_entity" ID="70"/>

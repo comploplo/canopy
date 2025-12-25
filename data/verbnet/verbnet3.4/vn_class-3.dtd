@@ -37,8 +37,8 @@
 <!ELEMENT DESCRIPTION EMPTY>
 <!ATTLIST DESCRIPTION primary CDATA #REQUIRED
                       secondary CDATA #IMPLIED
-                      descriptionNumber CDATA #REQUIRED 
-                      xtag CDATA #REQUIRED> 
+                      descriptionNumber CDATA #REQUIRED
+                      xtag CDATA #REQUIRED>
 
 <!ELEMENT EXAMPLE (#PCDATA)>
 <!ELEMENT SYNTAX (NP|VERB|ADJ|ADV|PREP|LEX)+>
@@ -77,7 +77,3 @@
 <!ELEMENT QUALIA (#PCDATA)>
 <!ELEMENT EVENT_STRUCTURE (#PCDATA)>
 <!ELEMENT SUBCATEGORISATION (#PCDATA)>
-
-
-
-

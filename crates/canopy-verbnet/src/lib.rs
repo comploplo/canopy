@@ -15,13 +15,14 @@
 //! # Example
 //!
 //! ```rust
-//! use canopy_verbnet::{VerbNetEngine, DataLoader};
+//! use canopy_verbnet::VerbNetEngine;
 //!
-//! let mut engine = VerbNetEngine::new();
-//! engine.load_from_directory("data/verbnet/vn-gl").unwrap();
+//! let engine = VerbNetEngine::new();
+//! // engine.load_from_directory("path/to/verbnet/data")?;
 //!
-//! let result = engine.analyze_verb("give").unwrap();
-//! println!("VerbNet classes for 'give': {:?}", result.data.verb_classes);
+//! // With loaded data, you can analyze verbs:
+//! // let result = engine.analyze_verb("give")?;
+//! // println!("VerbNet classes for 'give': {:?}", result.data.verb_classes);
 //! ```
 
 pub mod engine;

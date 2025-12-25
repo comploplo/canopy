@@ -26,11 +26,11 @@
 &lt;ex&gt;The police placed Harry under &lt;fex name="Type"&gt;house&lt;/fex&gt; &lt;t&gt;arrest&lt;/t&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="808080" fgColor="FFFFFF" coreType="Core" cBy="MRLP" cDate="05/09/2002 05:36:18 PDT Thu" abbrev="Off" name="Offense" ID="2756">
-        <definition>&lt;def-root&gt;&lt;fen&gt;Offense&lt;/fen&gt; identifies the ordinary language use of the reason for which a &lt;fen&gt;Suspect&lt;/fen&gt; is arrested. 
+        <definition>&lt;def-root&gt;&lt;fen&gt;Offense&lt;/fen&gt; identifies the ordinary language use of the reason for which a &lt;fen&gt;Suspect&lt;/fen&gt; is arrested.
 &lt;ex&gt;They arrested Harry &lt;fex name="Offense"&gt;for shoplifting&lt;/fex&gt;.&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="07/01/2002 04:36:29 PDT Mon" abbrev="Mnr" name="Manner" ID="3319">
-        <definition>&lt;def-root&gt;Any description of the arresting event which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Authorities&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the arresting event which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Authorities&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
     </FE>

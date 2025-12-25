@@ -21,7 +21,7 @@
         <semType name="Physical_entity" ID="70"/>
     </FE>
     <FE bgColor="00BFFF" fgColor="FFFFFF" coreType="Peripheral" cBy="361" cDate="02/05/2008 04:21:03 PST Tue" abbrev="Dur" name="Duration" ID="12130">
-        <definition>&lt;def-root&gt;For what length of time the &lt;fen&gt;Gatherer&lt;/fen&gt; was gathering the &lt;fen&gt;Crop&lt;/fen&gt;. 
+        <definition>&lt;def-root&gt;For what length of time the &lt;fen&gt;Gatherer&lt;/fen&gt; was gathering the &lt;fen&gt;Crop&lt;/fen&gt;.
 
 &lt;/def-root&gt;</definition>
     </FE>

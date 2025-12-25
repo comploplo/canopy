@@ -54,7 +54,7 @@
     </FE>
     <FE bgColor="9400D3" fgColor="FFFFFF" coreType="Extra-Thematic" cBy="MJE" cDate="01/28/2002 04:12:21 PST Mon" abbrev="Depict" name="Depictive" ID="2259">
         <definition>&lt;def-root&gt;&lt;fen&gt;Depictive&lt;/fen&gt; identifes the phrase describing the participant in the act of building.
-&lt;ex&gt;Jack &lt;t&gt;built&lt;/t&gt; the new house &lt;fex name="Depict"&gt;naked&lt;/fex&gt;.&lt;/ex&gt; 
+&lt;ex&gt;Jack &lt;t&gt;built&lt;/t&gt; the new house &lt;fex name="Depict"&gt;naked&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="MJE" cDate="01/28/2002 05:04:49 PST Mon" abbrev="Manr" name="Manner" ID="2262">

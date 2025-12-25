@@ -33,7 +33,7 @@
 &lt;ex&gt;&lt;fex name="Fire"&gt;The fire&lt;/fex&gt; &lt;t&gt;went out&lt;/t&gt; this morning .&lt;/ex&gt;&lt;/def-root&gt;</definition>
     </FE>
     <FE bgColor="FFFF00" fgColor="000000" coreType="Peripheral" cBy="MJE" cDate="03/03/2014 04:29:27 PST Mon" abbrev="" name="Degree" ID="16012">
-        <definition>&lt;def-root&gt;This FE describes the how near the &lt;fen&gt;Fire&lt;/fen&gt; is to going out.  
+        <definition>&lt;def-root&gt;This FE describes the how near the &lt;fen&gt;Fire&lt;/fen&gt; is to going out.
 
 
 &lt;ex&gt;The firefighters have &lt;fex name="Degree"&gt;nearly&lt;/fex&gt;&lt;t&gt;extinguished&lt;/t&gt; the blaze.&lt;/ex&gt;&lt;/def-root&gt;</definition>

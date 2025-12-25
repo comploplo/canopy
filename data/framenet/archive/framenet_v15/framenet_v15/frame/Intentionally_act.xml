@@ -28,7 +28,7 @@ John &lt;t&gt;flattered&lt;/t&gt; her &lt;fex name="Purpose"&gt;to receive a rai
         <semType name="State_of_affairs" ID="177"/>
     </FE>
     <FE bgColor="FF00FF" fgColor="FFFFFF" coreType="Peripheral" cBy="243" cDate="04/05/2002 01:10:38 PST Fri" abbrev="Mnr" name="Manner" ID="2574">
-        <definition>&lt;def-root&gt;Any description of the intentional act which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;). 
+        <definition>&lt;def-root&gt;Any description of the intentional act which is not covered by more specific FEs, including secondary effects (&lt;ment&gt;quietly, loudly&lt;/ment&gt;), and general descriptions comparing events (&lt;ment&gt;the same way&lt;/ment&gt;). In addition, it may indicate salient characteristics of an &lt;fen&gt;Agent&lt;/fen&gt; that also affect the action (&lt;ment&gt;presumptuously, coldly, deliberately, eagerly, carefully&lt;/ment&gt;).
 &lt;ex&gt;'Twould be best it were &lt;t&gt;done&lt;/t&gt; &lt;fex name="Manner"&gt;quietly&lt;/fex&gt;.&lt;/ex&gt;
 &lt;/def-root&gt;</definition>
         <semType name="Manner" ID="173"/>
