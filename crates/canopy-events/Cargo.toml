@@ -1,0 +1,24 @@
+[package]
+name = "canopy-events"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Layer 2 Event Composition for Canopy - Neo-Davidsonian event semantics"
+
+[dependencies]
+canopy-core = { path = "../canopy-core" }
+canopy-engine = { path = "../canopy-engine" }
+canopy-verbnet = { path = "../canopy-verbnet" }
+canopy-framenet = { path = "../canopy-framenet" }
+canopy-wordnet = { path = "../canopy-wordnet" }
+canopy-treebank = { path = "../canopy-treebank" }
+canopy-tokenizer = { path = "../canopy-tokenizer" }
+
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "1.0"
+tracing = "0.1"
+indexmap = "2.0"
+
+[dev-dependencies]
+tempfile = "3.0"

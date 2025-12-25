@@ -4,12 +4,14 @@ members = [
     "crates/canopy-engine",         # Base engine infrastructure
     "crates/canopy-verbnet",        # VerbNet semantic analysis
     "crates/canopy-framenet",       # FrameNet semantic analysis
-    "crates/canopy-semantic-layer", # Semantic-first Layer 1 with consolidated engines
-    # "crates/canopy-parser",       # DEPRECATED: Legacy UDPipe replaced by semantic-layer
-    # "crates/canopy-semantics",    # DEPRECATED: Replaced by canopy-semantic-layer
-    "crates/canopy-pipeline",     # Re-enabled with new semantic coordinator integration
-    "crates/canopy-lsp",
-    "crates/canopy-cli", "crates/canopy-wordnet", "crates/canopy-lexicon",
+    "crates/canopy-propbank",       # PropBank semantic role labeling
+    "crates/canopy-treebank",       # UD Treebank dependency pattern analysis
+    "crates/canopy-tokenizer",      # Semantic tokenization with consolidated engines
+    "crates/canopy-events",         # Layer 2 event composition
+    "crates/canopy-pipeline",       # Pipeline with semantic coordinator integration
+    "crates/canopy-cli",
+    "crates/canopy-wordnet",
+    "crates/canopy-lexicon",
 ]
 resolver = "2"
 
@@ -19,7 +21,7 @@ edition = "2024"
 authors = ["canopy contributors"]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/your-org/canopy"
-description = "High-performance linguistic analysis LSP server in Rust"
+description = "High-performance semantic linguistic analysis library in Rust"
 
 [workspace.dependencies]
 # Core dependencies
@@ -29,10 +31,6 @@ serde_json = "1.0"
 thiserror = "1.0"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-
-# LSP and async
-tower-lsp = "0.20"
-tower = "0.4"
 
 # Testing and benchmarking
 criterion = { version = "0.5", features = ["html_reports"] }
@@ -57,11 +55,30 @@ description.workspace = true
 
 [dependencies]
 canopy-core = { path = "crates/canopy-core" }
-canopy-semantic-layer = { path = "crates/canopy-semantic-layer" } # Modern semantic-first architecture
-canopy-lsp = { path = "crates/canopy-lsp" }
+canopy-engine = { path = "crates/canopy-engine" }
+canopy-tokenizer = { path = "crates/canopy-tokenizer" }
+canopy-treebank = { path = "crates/canopy-treebank" }
 canopy-verbnet = { path = "crates/canopy-verbnet" }
 canopy-framenet = { path = "crates/canopy-framenet" }
+canopy-propbank = { path = "crates/canopy-propbank" }
+canopy-wordnet = { path = "crates/canopy-wordnet" }
+canopy-lexicon = { path = "crates/canopy-lexicon" }
+canopy-events = { path = "crates/canopy-events" }
 tokio = { workspace = true }
+tempfile = "3.0"
+rand = "0.8"
+rayon = { version = "1.10", optional = true }
+
+[features]
+default = ["parallel"]
+parallel = [
+    "rayon",
+    "canopy-engine/parallel",
+    "canopy-tokenizer/parallel",
+    "canopy-wordnet/parallel",
+    "canopy-framenet/parallel",
+    "canopy-lexicon/parallel",
+]
 
 [dev-dependencies]
 criterion = { workspace = true }
@@ -74,4 +91,6 @@ harness = false
 name = "basic_demo"
 path = "examples/basic_demo.rs"
 
-
+[[example]]
+name = "comprehensive_semantic_demo"
+path = "examples/comprehensive_semantic_demo.rs"
