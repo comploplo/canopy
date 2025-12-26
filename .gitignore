@@ -12,7 +12,7 @@ data/ud_english-ewt/
 data/cache/
 
 # Cache files
-.serena/cache/
+.serena/
 .DS_Store
 
 # Coverage reports (we'll add specific ones we want)
