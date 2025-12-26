@@ -1,103 +1,117 @@
 # Canopy
 
-**High-performance semantic linguistic analysis library in Rust**
+**Semantic linguistic analysis in Rust**
 
-Canopy is a semantic-first linguistic analysis library built for production use. It provides word-level semantic analysis through VerbNet, FrameNet, WordNet, and custom lexicon engines.
+Canopy is a high-performance library for deep semantic analysis of text. It combines multiple linguistic resources (VerbNet, FrameNet, WordNet, PropBank) to produce rich semantic representations including event structures, theta roles, and frame semantics.
 
-> ⚠️ **Current Limitation**: Canopy currently supports UD treebank sentences only. Arbitrary sentence analysis is planned for future releases.
+> **Note**: Canopy currently analyzes pre-parsed sentences from Universal Dependencies treebanks. Arbitrary text parsing is planned for future releases.
 
-## 🚀 Quick Start
+## Features
+
+- **Multi-engine semantic analysis** — VerbNet verb classes, FrameNet frames, WordNet synsets, and custom lexicon support
+- **Event composition** — Neo-Davidsonian event structures with theta role assignment
+- **Treebank integration** — Pattern matching against UD English-EWT corpus
+- **Production performance** — ~19ms per sentence end-to-end, with intelligent caching
+- **Pure Rust** — No external runtime dependencies, memory-safe, concurrent
+
+## Quick Start
 
 ```bash
-git clone https://github.com/username/canopy
+git clone https://github.com/yourusername/canopy
 cd canopy
-cargo build --workspace
-cargo run --example basic_demo
+cargo build --release
+
+# Run the event composition demo
+cargo run --release -p canopy-pipeline --example event_composition_demo
 ```
 
-## 🎯 Current Status: M7 Complete - Layer 2 Event Composition
+## Architecture
 
-✅ **Layer 1 Semantic Analysis**: VerbNet, FrameNet, WordNet, Lexicon engines
-✅ **Layer 2 Event Composition**: Neo-Davidsonian events with theta roles
-✅ **Full Pipeline**: L1→L2 integration with honest end-to-end timing
-✅ **Lemmatization**: 54.4% cache hit improvement
-✅ **Production Performance**: ~19ms per sentence (L1 + L2)
-
-## 🏗️ Architecture
-
-```text
-Text → Tokenization → Lemmatization → Layer 1: Semantic Analysis → Layer 2: Event Composition
-                                      [VerbNet + FrameNet + WordNet]  [Neo-Davidsonian Events]
+```
+Input Sentence
+     │
+     ▼
+┌─────────────────────────────────────────────────────────┐
+│  Layer 1: Semantic Analysis                             │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
+│  │ VerbNet │ │FrameNet │ │ WordNet │ │ Lexicon │       │
+│  └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘       │
+│       └──────────┬┴──────────┬┴───────────┘            │
+│                  ▼                                      │
+│           Unified Semantic Roles                        │
+└─────────────────────────────────────────────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────────────────────────┐
+│  Layer 2: Event Composition                             │
+│  Neo-Davidsonian events, theta binding, voice analysis  │
+└─────────────────────────────────────────────────────────┘
+                   │
+                   ▼
+            Event Structure
 ```
 
-**Current Implementation**: Full L1→L2 pipeline with semantic analysis and event composition.
+## Crates
 
-## 📊 Performance
+| Crate | Description |
+|-------|-------------|
+| `canopy-pipeline` | High-level analysis pipeline |
+| `canopy-events` | Neo-Davidsonian event composition |
+| `canopy-tokenizer` | Tokenization, lemmatization, coordination |
+| `canopy-treebank` | UD treebank parsing and pattern matching |
+| `canopy-verbnet` | VerbNet verb class engine |
+| `canopy-framenet` | FrameNet frame engine |
+| `canopy-wordnet` | WordNet synset engine |
+| `canopy-propbank` | PropBank semantic role engine |
+| `canopy-lexicon` | Custom lexicon support |
+| `canopy-engine` | Shared engine infrastructure |
+| `canopy-core` | Core types and utilities |
+| `canopy-cli` | Command-line interface |
 
-**Layer 1 (Semantic Analysis)**:
-
-- **Single word**: 85.4μs with lemmatization (11,703 words/sec)
-- **Cache hit rate**: 54.4% with lemmatization optimization
-
-**Layer 2 (Event Composition)**:
-
-- **Event composition**: 78-148μs per sentence
-- **End-to-end**: ~19ms per sentence (L1 dominates)
-- **Engine loading**: ~900ms one-time startup
-
-## 🔧 Key Features
-
-- **Two-Layer Pipeline**: L1 semantic analysis → L2 event composition
-- **Real Linguistic Data**: VerbNet/FrameNet/WordNet engines
-- **Neo-Davidsonian Events**: Theta roles, LittleV primitives, voice detection
-- **Lemmatization System**: Intelligent morphological analysis with confidence
-- **Parallel Processing**: Concurrent multi-engine analysis
-- **Smart Caching**: 54.4% hit rate improvement with lemmatization
-- **Production Ready**: ~67% test coverage with real-world benchmarks
-
-## 📖 Documentation
-
-- [**Roadmap**](docs/ROADMAP.md) - Current milestone progress and status
-- [**Architecture**](docs/ARCHITECTURE.md) - Current semantic-first design
-- [**Performance**](docs/reference/performance.md) - Benchmarks and optimization
-- [**Contributing**](docs/CONTRIBUTING.md) - Development guidelines
-
-## 🧪 Examples
+## Examples
 
 ```bash
-# Basic semantic analysis demo
-cargo run --example basic_demo
+# Full pipeline with event composition
+cargo run --release -p canopy-pipeline --example event_composition_demo
 
-# Comprehensive semantic analysis
-cargo run --example comprehensive_semantic_demo
+# Layer 1 semantic analysis
+cargo run --release -p canopy-tokenizer --example semantic_layer1_demo
+
+# Treebank pattern visualization
+cargo run --release -p canopy-treebank --example tree_visualization_demo
+
+# PropBank analysis
+cargo run --release -p canopy-propbank --example propbank_demo
 ```
 
-## 🔬 Technology Stack
+## Performance
 
-- **Rust 2024 Edition**: Memory safety and performance
-- **Semantic Engines**: VerbNet, FrameNet, WordNet, custom lexicon
-- **XML Parsing**: Real linguistic resource loading
-- **Parallel Processing**: Multi-engine concurrent analysis
-- **Smart Caching**: L1/L2 memory-budgeted cache system
+| Operation | Time |
+|-----------|------|
+| Engine loading | ~900ms (one-time) |
+| Layer 1 analysis | 15-22ms per sentence |
+| Layer 2 composition | 78-148μs per sentence |
 
-## 📋 Requirements
+Cache hit rates improve with lemmatization normalization.
 
-- Rust 1.75+ (2024 edition)
-- 4GB RAM recommended for full semantic data
-- Data files: VerbNet XML, FrameNet XML, WordNet database
+## Requirements
 
-## 🤝 Contributing
+- Rust 1.75+
+- ~4GB RAM for full semantic data loading
+- Linguistic data files (VerbNet XML, FrameNet XML, WordNet database)
 
-See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for development guidelines.
+## Documentation
 
-## 📄 License
+- [Roadmap](docs/ROADMAP.md) — Development milestones and progress
+- [Architecture](docs/ARCHITECTURE.md) — System design and data flow
+- [Contributing](docs/CONTRIBUTING.md) — Development guidelines
+- [Performance](docs/reference/performance.md) — Benchmarks and optimization
 
-MIT License - see [LICENSE](LICENSE) for details.
+## License
 
-______________________________________________________________________
+MIT — see [LICENSE](LICENSE) for details.
 
-**Current Milestone**: M7 Complete - Layer 2 Event Composition ✅
-**Next Milestone**: M8 Discourse Representation Theory (DRT)
-**Performance Achieved**: ~19ms per sentence (L1 + L2 end-to-end) ✅
+---
 
-> Note: Canopy currently supports UD treebank sentences. Arbitrary sentence parsing is planned for future releases.
+**Status**: M7 Complete — Layer 2 Event Composition
+**Next**: M8 Discourse Representation Theory (DRT)
