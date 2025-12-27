@@ -404,7 +404,7 @@ mod tests {
 
     #[test]
     fn test_type_compatibility() {
-        let type_checker = TypeChecker::new();
+        let _type_checker = TypeChecker::new();
 
         let entity = SemanticType::Entity;
         let function = SemanticType::Function(
@@ -629,12 +629,12 @@ mod tests {
             argument_roles: vec![canopy_core::ThetaRole::Agent, canopy_core::ThetaRole::Theme],
         };
 
-        let modifier_attach = CompositionPattern::ModifierAttachment {
+        let _modifier_attach = CompositionPattern::ModifierAttachment {
             modifier_type: "adverb".to_string(),
             target_type: "verb".to_string(),
         };
 
-        let quantifier_scope = CompositionPattern::QuantifierScoping {
+        let _quantifier_scope = CompositionPattern::QuantifierScoping {
             quantifier_type: "universal".to_string(),
             scope_type: "proposition".to_string(),
         };
@@ -687,13 +687,13 @@ mod tests {
             required_type: "entity".to_string(),
         };
 
-        let feature_constraint = CompositionCondition::FeatureConstraint {
+        let _feature_constraint = CompositionCondition::FeatureConstraint {
             element: "pred".to_string(),
             feature: "tense".to_string(),
             value: "present".to_string(),
         };
 
-        let semantic_constraint = CompositionCondition::SemanticConstraint {
+        let _semantic_constraint = CompositionCondition::SemanticConstraint {
             constraint: "animate_agent".to_string(),
         };
 

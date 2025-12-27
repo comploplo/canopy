@@ -58,8 +58,7 @@ mod tests {
 
         for offset in valid_offsets {
             let result = utils::parse_synset_offset(offset);
-            if result.is_ok() {
-                let parsed_offset = result.unwrap();
+            if let Ok(parsed_offset) = result {
                 assert!(parsed_offset > 0);
             }
         }
@@ -94,8 +93,7 @@ mod tests {
 
         for (code, expected_pos) in valid_codes {
             let result = utils::parse_pos(code);
-            if result.is_ok() {
-                let parsed_pos = result.unwrap();
+            if let Ok(parsed_pos) = result {
                 assert_eq!(parsed_pos, expected_pos);
             }
         }
@@ -123,8 +121,7 @@ mod tests {
 
         for num_str in valid_numbers {
             let result = utils::parse_numeric_field::<u32>(num_str, "test_field");
-            if result.is_ok() {
-                let num = result.unwrap();
+            if let Ok(num) = result {
                 assert!(num > 0);
                 assert_eq!(num.to_string(), num_str);
             }
@@ -278,7 +275,7 @@ mod tests {
         }
 
         // Test passes if it doesn't crash or run out of memory
-        assert!(true);
+        // Reaching here means test passed
     }
 
     #[test]
@@ -312,16 +309,19 @@ mod tests {
     #[test]
     fn test_config_validation() {
         // Test configuration validation
-        let mut config = WordNetParserConfig::default();
-
-        // Test extreme values
-        config.max_file_size = 0;
-        let parser = WordNetParser::with_config(config.clone());
+        let config = WordNetParserConfig {
+            max_file_size: 0,
+            ..WordNetParserConfig::default()
+        };
+        let parser = WordNetParser::with_config(config);
         // Should handle zero max file size gracefully
         assert_eq!(parser.config().max_file_size, 0);
 
-        config.max_file_size = 1000000000; // 1GB
-        let parser = WordNetParser::with_config(config);
+        let large_config = WordNetParserConfig {
+            max_file_size: 1000000000, // 1GB
+            ..WordNetParserConfig::default()
+        };
+        let parser = WordNetParser::with_config(large_config);
         // Should handle very large max file size
         assert_eq!(parser.config().max_file_size, 1000000000);
     }

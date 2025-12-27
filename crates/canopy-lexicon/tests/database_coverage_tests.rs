@@ -215,7 +215,7 @@ fn test_property_value_getters() {
     );
     properties.insert("bool_prop".to_string(), PropertyValue::Boolean(true));
     properties.insert("int_prop".to_string(), PropertyValue::Integer(42));
-    properties.insert("float_prop".to_string(), PropertyValue::Float(3.14));
+    properties.insert("float_prop".to_string(), PropertyValue::Float(2.72));
 
     // Test PropertyValue getters
     if let Some(PropertyValue::String(s)) = properties.get("string_prop") {
@@ -235,7 +235,7 @@ fn test_property_value_getters() {
     assert_eq!(int_val.as_float(), None);
 
     let float_val = properties.get("float_prop").unwrap();
-    assert_eq!(float_val.as_float(), Some(3.14));
+    assert_eq!(float_val.as_float(), Some(2.72));
     assert_eq!(float_val.as_int(), None);
 }
 

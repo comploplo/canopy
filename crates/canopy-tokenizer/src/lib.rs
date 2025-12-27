@@ -1010,12 +1010,10 @@ mod tests {
 
         // For stub implementations, we may not have semantic content
         // but the analysis should still complete successfully
-        assert!(result.frames.len() >= 0); // Can be empty with stub data
-        assert!(result.predicates.len() >= 0); // Can be empty with stub data
+        // frames and predicates can be empty with stub data
 
         // Should have logical form components (may be empty with stub data)
-        assert!(result.logical_form.predicates.len() >= 0);
-        assert!(result.logical_form.variables.len() >= 0);
+        // logical_form predicates and variables can be empty
 
         // Should have reasonable timing metrics
         assert!(result.metrics.total_time_us > 0);
@@ -1063,10 +1061,7 @@ mod tests {
         // Should have at least identified semantic classes for all tokens
         assert_eq!(token_classes.len(), 3); // every, student, runs
 
-        // Test that the logical form structure was created
-        assert!(result.logical_form.predicates.len() >= 0);
-        assert!(result.logical_form.variables.len() >= 0);
-        assert!(result.logical_form.quantifiers.len() >= 0);
+        // Test that the logical form structure was created - can be empty with stub data
     }
 
     #[test]
@@ -1148,7 +1143,7 @@ mod tests {
         let predicate_token = analyzer.analyze_token("run").unwrap();
         // Don't assert specific semantic class since engines may use stub data
         assert!(!predicate_token.text.is_empty());
-        assert!(predicate_token.verbnet_classes.len() >= 0); // Can be empty with stub data
+        // predicate_token.verbnet_classes can be empty with stub data
 
         // Test a potential argument
         let argument_token = analyzer.analyze_token("book").unwrap();

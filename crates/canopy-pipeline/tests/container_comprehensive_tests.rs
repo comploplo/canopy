@@ -12,7 +12,7 @@ mod tests {
         let _builder = ContainerBuilder::new();
         // Test that builder implements default
         let _builder2 = ContainerBuilder::default();
-        assert!(true); // Builder creation succeeds
+        // Reaching here without panic = builder creation succeeds
     }
 
     #[test]
@@ -25,7 +25,7 @@ mod tests {
         };
 
         let _builder = ContainerBuilder::new().with_parser(config);
-        assert!(true); // Configuration succeeds
+        // Reaching here without panic = configuration succeeds
     }
 
     #[test]
@@ -39,7 +39,7 @@ mod tests {
         };
 
         let _builder = ContainerBuilder::new().with_analyzer(config);
-        assert!(true); // Configuration succeeds
+        // Reaching here without panic = configuration succeeds
     }
 
     #[test]
@@ -52,7 +52,7 @@ mod tests {
 
         let _builder =
             ContainerBuilder::new().with_extractor("verbnet_extractor".to_string(), config);
-        assert!(true); // Configuration succeeds
+        // Reaching here without panic = configuration succeeds
     }
 
     #[test]
@@ -64,7 +64,7 @@ mod tests {
         };
 
         let _builder = ContainerBuilder::new().with_cache(config);
-        assert!(true); // Configuration succeeds
+        // Reaching here without panic = configuration succeeds
     }
 
     #[test]
@@ -76,7 +76,7 @@ mod tests {
         };
 
         let _builder = ContainerBuilder::new().with_metrics(config);
-        assert!(true); // Configuration succeeds
+        // Reaching here without panic = configuration succeeds
     }
 
     #[test]
@@ -114,8 +114,7 @@ mod tests {
             .with_extractor("custom_extractor".to_string(), extractor_config)
             .with_cache(cache_config);
 
-        // Test that all methods can be chained fluently
-        assert!(true);
+        // Reaching here without panic = all methods can be chained fluently
     }
 
     #[test]
@@ -146,7 +145,7 @@ mod tests {
         let _builder2 = ContainerBuilder::new().with_parser(config2);
         let _builder3 = ContainerBuilder::new().with_parser(config3);
 
-        assert!(true); // All performance modes work
+        // Reaching here without panic = all performance modes work
     }
 
     #[test]
@@ -169,7 +168,7 @@ mod tests {
         let _builder1 = ContainerBuilder::new().with_parser(config1);
         let _builder2 = ContainerBuilder::new().with_parser(config2);
 
-        assert!(true); // All model types work
+        // Reaching here without panic = all model types work
     }
 
     #[test]
@@ -197,7 +196,7 @@ mod tests {
         let _builder2 = ContainerBuilder::new().with_extractor("extractor2".to_string(), config2);
         let _builder3 = ContainerBuilder::new().with_extractor("extractor3".to_string(), config3);
 
-        assert!(true); // All extractor configurations work
+        // Reaching here without panic = all extractor configurations work
     }
 
     #[test]
@@ -225,7 +224,7 @@ mod tests {
         let _builder2 = ContainerBuilder::new().with_cache(redis_cache);
         let _builder3 = ContainerBuilder::new().with_cache(disk_cache);
 
-        assert!(true); // All cache types work
+        // Reaching here without panic = all cache types work
     }
 
     #[test]
@@ -253,7 +252,7 @@ mod tests {
         let _builder2 = ContainerBuilder::new().with_metrics(statsd_metrics);
         let _builder3 = ContainerBuilder::new().with_metrics(disabled_metrics);
 
-        assert!(true); // All metrics configurations work
+        // Reaching here without panic = all metrics configurations work
     }
 
     #[test]
@@ -296,7 +295,7 @@ mod tests {
         let _builder3 = ContainerBuilder::new().with_analyzer(config3);
         let _builder4 = ContainerBuilder::new().with_analyzer(config4);
 
-        assert!(true); // All analyzer configurations work
+        // Reaching here without panic = all analyzer configurations work
     }
 
     #[test]
@@ -325,7 +324,7 @@ mod tests {
             .with_extractor("custom".to_string(), custom_config)
             .with_extractor("mixed".to_string(), mixed_config);
 
-        assert!(true); // Multiple extractors work
+        // Reaching here without panic = multiple extractors work
     }
 
     #[test]
@@ -378,7 +377,7 @@ mod tests {
             .with_cache(cache_config)
             .with_metrics(metrics_config);
 
-        assert!(true); // Complete configuration works
+        // Reaching here without panic = complete configuration works
     }
 
     #[test]
@@ -424,7 +423,7 @@ mod tests {
             .with_cache(minimal_cache)
             .with_metrics(minimal_metrics);
 
-        assert!(true); // Minimal configurations work
+        // Reaching here without panic = minimal configurations work
     }
 
     #[test]
@@ -457,6 +456,6 @@ mod tests {
                 collection_interval_ms: 3000,
             });
 
-        assert!(true); // Partial configurations work
+        // Reaching here without panic = partial configurations work
     }
 }

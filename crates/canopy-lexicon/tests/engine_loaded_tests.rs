@@ -2,7 +2,7 @@
 //!
 //! Tests that require actual data loading to achieve higher coverage
 
-use canopy_engine::{CachedEngine, DataLoader, SemanticEngine, StatisticsProvider};
+use canopy_engine::{DataLoader, SemanticEngine, StatisticsProvider};
 use canopy_lexicon::types::WordClassType;
 use canopy_lexicon::{LexiconConfig, LexiconEngine};
 use std::fs;
@@ -234,14 +234,11 @@ mod loaded_engine_tests {
         engine.load_data().expect("Failed to load data");
 
         let text = "I like cats. However, dogs are also nice. Therefore, I like both.";
-        let discourse_markers = engine.extract_discourse_structure(text).unwrap();
+        let _discourse_markers = engine.extract_discourse_structure(text).unwrap();
 
         // Test that the function runs without error (markers may be empty if no context set)
         // This tests the code path rather than requiring specific content
-        assert!(
-            discourse_markers.len() >= 0,
-            "Function should return successfully"
-        );
+        // discourse_markers.len() check - reaching here means function succeeded
 
         // Test that we can find discourse markers in the text
         let however_found = engine.is_discourse_marker("however").unwrap();
@@ -326,7 +323,7 @@ mod loaded_engine_tests {
         let result = engine.analyze(&"the".to_string()).unwrap();
         assert!(result.data.has_results());
         assert!(result.confidence > 0.0);
-        assert_eq!(result.from_cache, false); // First time should not be from cache
+        assert!(!result.from_cache); // First time should not be from cache
         assert!(result.processing_time_us > 0);
 
         // Test version and name

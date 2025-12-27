@@ -16,7 +16,6 @@ use canopy_core::treebank_loader::TreebankSentenceLoader;
 use canopy_engine::traits::{CachedEngine, StatisticsProvider};
 use canopy_propbank::{PropBankConfig, PropBankEngine};
 use canopy_tokenizer::{SemanticCoordinator, coordinator::CoordinatorConfig};
-use canopy_treebank;
 use std::fs;
 use std::time::Instant;
 use tempfile::TempDir;
@@ -102,10 +101,11 @@ fn analyze_sentence_comprehensive(
         }
 
         // PropBank analysis
-        if let Ok(pb_result) = propbank_engine.analyze_word(&word.lemma) {
-            if pb_result.data.has_match() && pb_result.confidence > 0.3 {
-                propbank_predicates.push(word.lemma.clone());
-            }
+        if let Ok(pb_result) = propbank_engine.analyze_word(&word.lemma)
+            && pb_result.data.has_match()
+            && pb_result.confidence > 0.3
+        {
+            propbank_predicates.push(word.lemma.clone());
         }
     }
 

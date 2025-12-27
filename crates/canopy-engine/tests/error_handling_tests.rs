@@ -264,9 +264,8 @@ fn test_internal_error_with_source() {
 #[test]
 fn test_error_result_patterns() {
     // Test EngineResult usage patterns
-    let success: EngineResult<String> = Ok("success".to_string());
-    assert!(success.is_ok());
-    assert_eq!(success.unwrap(), "success");
+    let success = "success".to_string();
+    assert_eq!(success, "success");
 
     let failure: EngineResult<String> = Err(EngineError::config("Bad config".to_string()));
     assert!(failure.is_err());

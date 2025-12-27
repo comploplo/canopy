@@ -40,7 +40,7 @@ mod engines_tests {
 
     #[test]
     fn test_semantic_source_enum() {
-        let sources = vec![
+        let sources = [
             SemanticSource::FrameNet,
             SemanticSource::VerbNet,
             SemanticSource::WordNet,
@@ -263,15 +263,15 @@ mod engines_tests {
     #[test]
     fn test_source_combination_patterns() {
         // Test common source combinations
-        let verbnet_only = vec![SemanticSource::VerbNet];
-        let framenet_only = vec![SemanticSource::FrameNet];
-        let wordnet_only = vec![SemanticSource::WordNet];
-        let all_sources = vec![
+        let verbnet_only = [SemanticSource::VerbNet];
+        let framenet_only = [SemanticSource::FrameNet];
+        let wordnet_only = [SemanticSource::WordNet];
+        let all_sources = [
             SemanticSource::VerbNet,
             SemanticSource::FrameNet,
             SemanticSource::WordNet,
         ];
-        let partial_sources = vec![SemanticSource::VerbNet, SemanticSource::WordNet];
+        let partial_sources = [SemanticSource::VerbNet, SemanticSource::WordNet];
 
         assert_eq!(verbnet_only.len(), 1);
         assert_eq!(framenet_only.len(), 1);

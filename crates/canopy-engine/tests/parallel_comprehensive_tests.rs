@@ -13,6 +13,9 @@ use std::time::Duration;
 mod tests {
     use super::*;
 
+    /// Type alias for engine function vectors to reduce type complexity
+    type EngineFnVec<T> = Vec<Box<dyn Fn(&T) -> EngineResult<T> + Send + Sync>>;
+
     // ParallelProcessor Creation Tests
 
     #[test]
@@ -98,7 +101,8 @@ mod tests {
         assert_eq!(results[0].data, 15);
         assert!(!results[0].from_cache);
         assert_eq!(results[0].confidence, 1.0);
-        assert!(results[0].processing_time_us >= 0);
+        // processing_time_us is always valid (unsigned type)
+        let _ = results[0].processing_time_us;
     }
 
     #[test]
@@ -117,7 +121,8 @@ mod tests {
         for result in &results {
             assert!(!result.from_cache);
             assert_eq!(result.confidence, 1.0);
-            assert!(result.processing_time_us >= 0);
+            // processing_time_us is always valid (unsigned type)
+            let _ = result.processing_time_us;
         }
     }
 
@@ -155,7 +160,7 @@ mod tests {
 
         // All should have processing time
         for result in &results {
-            assert!(result.processing_time_us >= 0);
+            let _ = result.processing_time_us; // unsigned type, always valid
             assert_eq!(result.confidence, 1.0);
             assert!(!result.from_cache);
         }
@@ -298,7 +303,7 @@ mod tests {
         let processor = ParallelProcessor::new(2, true);
         let coordinator = MultiEngineCoordinator::new(processor);
 
-        let engines: Vec<Box<dyn Fn(&i32) -> EngineResult<i32> + Send + Sync>> = vec![];
+        let engines: EngineFnVec<i32> = vec![];
         let results = coordinator.query_engines(42, engines).unwrap();
 
         assert!(results.is_empty());
@@ -309,8 +314,7 @@ mod tests {
         let processor = ParallelProcessor::new(2, true);
         let coordinator = MultiEngineCoordinator::new(processor);
 
-        let engines: Vec<Box<dyn Fn(&i32) -> EngineResult<i32> + Send + Sync>> =
-            vec![Box::new(|&x| Ok(x * 3))];
+        let engines: EngineFnVec<i32> = vec![Box::new(|&x| Ok(x * 3))];
 
         let results = coordinator.query_engines(7, engines).unwrap();
         assert_eq!(results.len(), 1);
@@ -319,7 +323,7 @@ mod tests {
             Ok(result) => {
                 assert_eq!(result.data, 21);
                 assert_eq!(result.confidence, 1.0);
-                assert!(result.processing_time_us >= 0);
+                let _ = result.processing_time_us; // unsigned type, always valid
             }
             Err(e) => panic!("Expected success but got error: {:?}", e),
         }
@@ -330,7 +334,7 @@ mod tests {
         let processor = ParallelProcessor::new(2, true);
         let coordinator = MultiEngineCoordinator::new(processor);
 
-        let engines: Vec<Box<dyn Fn(&i32) -> EngineResult<i32> + Send + Sync>> = vec![
+        let engines: EngineFnVec<i32> = vec![
             Box::new(|&x| Ok(x + 1)),
             Box::new(|&x| Ok(x * 2)),
             Box::new(|&x| Ok(x - 1)),
@@ -355,7 +359,7 @@ mod tests {
         let processor = ParallelProcessor::new(2, true);
         let coordinator = MultiEngineCoordinator::new(processor);
 
-        let engines: Vec<Box<dyn Fn(&i32) -> EngineResult<i32> + Send + Sync>> = vec![
+        let engines: EngineFnVec<i32> = vec![
             Box::new(|&x| Ok(x + 1)),
             Box::new(|&x| Err(EngineError::analysis(x.to_string(), "simulated error"))),
             Box::new(|&x| Ok(x * 2)),
@@ -387,11 +391,10 @@ mod tests {
         // Set a very short timeout
         coordinator.set_engine_timeout("engine_0", Duration::from_millis(10));
 
-        let engines: Vec<Box<dyn Fn(&i32) -> EngineResult<i32> + Send + Sync>> =
-            vec![Box::new(|&x| {
-                std::thread::sleep(Duration::from_millis(100)); // Longer than timeout
-                Ok(x * 2)
-            })];
+        let engines: EngineFnVec<i32> = vec![Box::new(|&x| {
+            std::thread::sleep(Duration::from_millis(100)); // Longer than timeout
+            Ok(x * 2)
+        })];
 
         let results = coordinator.query_engines(5, engines).unwrap();
         assert_eq!(results.len(), 1);
@@ -411,7 +414,7 @@ mod tests {
         let processor = ParallelProcessor::new(2, true);
         let coordinator = MultiEngineCoordinator::new(processor);
 
-        let engines: Vec<Box<dyn Fn(&i32) -> EngineResult<i32> + Send + Sync>> = vec![
+        let engines: EngineFnVec<i32> = vec![
             Box::new(|&x| Ok(x + 1)),
             Box::new(|&_x| panic!("Engine panic!")),
         ];
@@ -458,7 +461,7 @@ mod tests {
         for result in &results {
             assert!(!result.from_cache);
             assert_eq!(result.confidence, 1.0);
-            assert!(result.processing_time_us >= 0);
+            let _ = result.processing_time_us; // unsigned type, always valid
         }
     }
 
@@ -518,7 +521,7 @@ mod tests {
         remainders.sort();
 
         // Should have many duplicates but correct range
-        assert!(remainders.iter().all(|&x| x >= 0 && x < 17));
+        assert!(remainders.iter().all(|&x| (0..17).contains(&x)));
     }
 
     #[test]
@@ -612,6 +615,6 @@ mod tests {
         assert_eq!(result.data, 42);
         assert_eq!(result.confidence, 1.0);
         assert!(!result.from_cache);
-        assert!(result.processing_time_us >= 0);
+        let _ = result.processing_time_us; // unsigned type, always valid
     }
 }

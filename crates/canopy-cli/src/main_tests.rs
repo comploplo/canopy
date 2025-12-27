@@ -29,8 +29,7 @@ mod cli_main_tests {
         // Should succeed with basic functionality
         match result {
             Ok(_) => {
-                // Success path covered
-                assert!(true);
+                // Success path covered - reaching here is the test
             }
             Err(e) => {
                 // Error path covered - ensure error is reasonable
@@ -72,17 +71,10 @@ mod cli_main_tests {
         // We can't easily test std::process::exit(1), but we can test the success path
 
         // This tests the successful branch of main()
-        let result = run_cli();
+        let _result = run_cli();
 
         // If run_cli succeeds, main should not call exit(1)
-        if result.is_ok() {
-            // This covers the success path where main doesn't call exit
-            assert!(true, "Success path covered - main should not exit(1)");
-        } else {
-            // This would cover the error path where main would call exit(1)
-            // We can't test actual exit, but we can test the error condition
-            assert!(result.is_err(), "Error condition covered");
-        }
+        // result.is_ok() or result.is_err() - either path covers main behavior
     }
 
     #[test]
@@ -92,6 +84,6 @@ mod cli_main_tests {
 
         // We can't call main() directly, but we can verify it exists
         // by testing that the binary would build
-        assert!(true, "Main function compiles successfully");
+        // Reaching here means main function compiles successfully
     }
 }

@@ -36,14 +36,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Extract sentences: split on sentence-ending punctuation
     // and filter to get good quality prose sentences
     let raw_sentences: Vec<&str> = content
-        .split(|c| c == '.' || c == '!' || c == '?')
+        .split(['.', '!', '?'])
         .map(|s| s.trim())
         .filter(|s| {
             let word_count = s.split_whitespace().count();
             // Keep sentences with 8-25 words (reasonable prose length)
             // Exclude chapter headers, page numbers, and metadata
-            word_count >= 8
-                && word_count <= 25
+            (8..=25).contains(&word_count)
                 && !s.contains("CHAPTER")
                 && !s.contains("MOBY-DICK")
                 && !s.chars().any(|c| c.is_ascii_digit())

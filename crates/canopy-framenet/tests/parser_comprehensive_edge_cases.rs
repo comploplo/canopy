@@ -66,14 +66,15 @@ mod edge_case_tests {
         let result = LexicalUnit::parse_xml(&mut reader);
 
         // Parser may allow missing name and use empty string
-        if result.is_ok() {
-            let lu = result.unwrap();
-            assert_eq!(lu.id, "456");
-            assert!(lu.name.is_empty()); // Empty name when missing
-        } else {
-            // Or it may error - both behaviors are acceptable
-            let error = result.unwrap_err();
-            assert!(matches!(error, EngineError::DataLoadError { .. }));
+        match result {
+            Ok(lu) => {
+                assert_eq!(lu.id, "456");
+                assert!(lu.name.is_empty()); // Empty name when missing
+            }
+            Err(error) => {
+                // Or it may error - both behaviors are acceptable
+                assert!(matches!(error, EngineError::DataLoadError { .. }));
+            }
         }
     }
 
@@ -103,14 +104,15 @@ mod edge_case_tests {
         let result = Frame::parse_xml(&mut reader);
 
         // Parser may handle EOF differently - accept either outcome
-        if result.is_err() {
-            let error = result.unwrap_err();
-            assert!(matches!(error, EngineError::DataLoadError { .. }));
-        } else {
-            // Or it may parse successfully with truncated content
-            let frame = result.unwrap();
-            assert_eq!(frame.id, "123");
-            assert_eq!(frame.name, "TestFrame");
+        match result {
+            Err(error) => {
+                assert!(matches!(error, EngineError::DataLoadError { .. }));
+            }
+            Ok(frame) => {
+                // Or it may parse successfully with truncated content
+                assert_eq!(frame.id, "123");
+                assert_eq!(frame.name, "TestFrame");
+            }
         }
     }
 
@@ -368,16 +370,13 @@ mod edge_case_tests {
         let result = Frame::parse_xml(&mut reader);
 
         // Parser may not handle self-closing frames correctly
-        if result.is_ok() {
-            let frame = result.unwrap();
+        if let Ok(frame) = result {
             assert_eq!(frame.id, "123");
             assert_eq!(frame.name, "TestFrame");
             assert!(frame.definition.is_empty());
             assert!(frame.frame_elements.is_empty());
-        } else {
-            // Self-closing may cause parsing issues
-            assert!(result.is_err());
         }
+        // Self-closing may cause parsing issues - error is acceptable
     }
 
     #[test]

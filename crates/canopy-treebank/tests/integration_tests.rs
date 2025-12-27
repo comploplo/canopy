@@ -15,7 +15,7 @@ use std::time::Instant;
 #[test]
 fn test_pattern_indexing_and_caching() {
     // Create synthetic corpus data for testing
-    let mut indexer = PatternIndexer::new();
+    let _indexer = PatternIndexer::new();
 
     // Add some test patterns
     for i in 0..100 {
@@ -28,7 +28,7 @@ fn test_pattern_indexing_and_caching() {
         };
 
         // Create mock sentence for pattern extraction
-        let pattern = DependencyPattern {
+        let _pattern = DependencyPattern {
             verb_lemma: verb.to_string(),
             dependencies: vec![
                 (DependencyRelation::NominalSubject, "NOUN".to_string()),
@@ -40,7 +40,7 @@ fn test_pattern_indexing_and_caching() {
         };
 
         // Simulate indexer would build this from corpus
-        let key = format!("{}|nsubj:NOUN,obj:NOUN", verb);
+        let _key = format!("{}|nsubj:NOUN,obj:NOUN", verb);
         // This is a simplified test - real indexer builds from sentences
     }
 
@@ -56,7 +56,7 @@ fn test_pattern_indexing_and_caching() {
     // Test pattern lookups
     let signature = create_test_signature("run");
     let start = Instant::now();
-    let pattern = cache.get_pattern(&signature);
+    let _pattern = cache.get_pattern(&signature);
     let lookup_time = start.elapsed();
 
     // Should be very fast
@@ -122,8 +122,8 @@ fn test_cache_tier_effectiveness() {
 
     // Create patterns with different frequencies (for tier assignment)
     let high_freq_patterns = create_patterns_with_frequency(10, 200); // Core cache tier
-    let med_freq_patterns = create_patterns_with_frequency(20, 50); // LRU cache tier
-    let low_freq_patterns = create_patterns_with_frequency(30, 1); // Disk tier
+    let _med_freq_patterns = create_patterns_with_frequency(20, 50); // LRU cache tier
+    let _low_freq_patterns = create_patterns_with_frequency(30, 1); // Disk tier
 
     // Populate core cache with high frequency patterns
     cache.populate_core_cache(&high_freq_patterns);
@@ -191,7 +191,7 @@ fn test_memory_bounds() {
 /// Test pattern key generation and matching
 #[test]
 fn test_pattern_key_generation() {
-    let cache = PatternCacheFactory::create_test_cache().expect("Failed to create test cache");
+    let _cache = PatternCacheFactory::create_test_cache().expect("Failed to create test cache");
 
     // Test signatures with different semantic information
     let basic_sig = SemanticSignature {
@@ -311,9 +311,4 @@ fn create_test_signature(lemma: &str) -> SemanticSignature {
         lemma_confidence: 0.95,
         hash_code: 0,
     }
-}
-
-fn signature_from_key(key: &str) -> SemanticSignature {
-    let lemma = key.split('|').next().unwrap_or("unknown");
-    create_test_signature(lemma)
 }

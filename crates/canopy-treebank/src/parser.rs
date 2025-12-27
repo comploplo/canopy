@@ -425,7 +425,7 @@ mod tests {
     #[test]
     fn test_parse_empty_file() {
         let mut temp_file = NamedTempFile::new().unwrap();
-        writeln!(temp_file, "").unwrap();
+        writeln!(temp_file).unwrap();
 
         let parser = ConlluParser::new(false);
         let result = parser.parse_file(temp_file.path()).unwrap();

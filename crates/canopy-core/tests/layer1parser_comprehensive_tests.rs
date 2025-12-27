@@ -176,13 +176,10 @@ mod layer1parser_comprehensive_tests {
         let result = handler.process("".to_string());
 
         // May return error or empty result depending on implementation
-        if result.is_ok() {
-            let words = result.unwrap();
+        if let Ok(words) = result {
             assert_eq!(words.len(), 0);
-        } else {
-            // Error is also acceptable for empty input
-            assert!(result.is_err());
         }
+        // Error is also acceptable for empty input
     }
 
     #[test]
@@ -191,13 +188,10 @@ mod layer1parser_comprehensive_tests {
         let result = handler.process("   \t\n  ".to_string());
 
         // May return error or empty result depending on implementation
-        if result.is_ok() {
-            let words = result.unwrap();
+        if let Ok(words) = result {
             assert_eq!(words.len(), 0);
-        } else {
-            // Error is also acceptable for whitespace-only input
-            assert!(result.is_err());
         }
+        // Error is also acceptable for whitespace-only input
     }
 
     #[test]
@@ -212,7 +206,7 @@ mod layer1parser_comprehensive_tests {
         }
 
         let words = result.unwrap();
-        assert!(words.len() > 0);
+        assert!(!words.is_empty());
         assert_eq!(words[0].text, "They");
         assert_eq!(words[0].id, 1);
     }
@@ -258,7 +252,7 @@ mod layer1parser_comprehensive_tests {
         }
 
         let words = result.unwrap();
-        assert!(words.len() > 0);
+        assert!(!words.is_empty());
 
         // Check that POS tags are assigned from treebank
         for word in &words {
@@ -427,14 +421,14 @@ mod layer1parser_comprehensive_tests {
         }
 
         let words = layer1_result.unwrap();
-        assert!(words.len() > 0);
+        assert!(!words.is_empty());
 
         // Then through semantic analysis
         let semantic_result = semantic_handler.process(words);
         assert!(semantic_result.is_ok());
 
         let final_words = semantic_result.unwrap();
-        assert!(final_words.len() > 0);
+        assert!(!final_words.is_empty());
     }
 
     #[test]

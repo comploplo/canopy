@@ -60,7 +60,7 @@ fn test_property_value_conversions() {
     let string_prop = PropertyValue::String("test".to_string());
     let bool_prop = PropertyValue::Boolean(true);
     let int_prop = PropertyValue::Integer(42);
-    let float_prop = PropertyValue::Float(3.14);
+    let float_prop = PropertyValue::Float(2.72);
 
     // Test as_string()
     assert_eq!(string_prop.as_string(), Some("test"));
@@ -84,7 +84,7 @@ fn test_property_value_conversions() {
     assert_eq!(string_prop.as_float(), None);
     assert_eq!(bool_prop.as_float(), None);
     assert_eq!(int_prop.as_float(), None);
-    assert_eq!(float_prop.as_float(), Some(3.14));
+    assert_eq!(float_prop.as_float(), Some(2.72));
 }
 
 #[test]

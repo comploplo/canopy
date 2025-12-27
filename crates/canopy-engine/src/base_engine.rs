@@ -334,9 +334,6 @@ mod tests {
     use super::*;
 
     #[derive(Debug, Clone)]
-    struct MockConfig;
-
-    #[derive(Debug, Clone)]
     struct MockInput(String);
 
     #[derive(Debug, Clone)]

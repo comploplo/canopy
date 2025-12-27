@@ -348,7 +348,7 @@ mod tests {
         )
         .unwrap();
         writeln!(file, "5\t.\t.\tPUNCT\t.\t_\t3\tpunct\t3:punct\t_").unwrap();
-        writeln!(file, "").unwrap();
+        writeln!(file).unwrap();
         writeln!(file, "# sent_id = train-002").unwrap();
         writeln!(file, "# text = Dogs bark loudly at cats.").unwrap();
         writeln!(

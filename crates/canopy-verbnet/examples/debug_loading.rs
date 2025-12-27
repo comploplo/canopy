@@ -7,7 +7,7 @@ fn main() {
     match VerbNetEngine::new() {
         Ok(engine) => {
             println!("✅ VerbNet engine created successfully!");
-            let stats = engine.statistics();
+            let _stats = engine.statistics();
             println!("   Engine initialized and ready");
 
             // Test analysis

@@ -228,10 +228,11 @@ impl ParticipantBinder {
                 // Agent and Experiencer typically require animacy
                 // If we have WordNet data, we could check animacy
                 // For now, accept proper nouns and pronouns as likely animate
-                if let Some(pos) = token.pos {
-                    if matches!(pos, canopy_core::UPos::Propn | canopy_core::UPos::Pron) {
-                        return true;
-                    }
+                if matches!(
+                    token.pos,
+                    Some(canopy_core::UPos::Propn | canopy_core::UPos::Pron)
+                ) {
+                    return true;
                 }
                 // Accept by default if no negative evidence
                 true
@@ -253,10 +254,11 @@ impl ParticipantBinder {
     /// Infer animacy from token
     fn infer_animacy(&self, token: &Layer1SemanticResult) -> Option<Animacy> {
         // Check POS - proper nouns and pronouns are often animate
-        if let Some(pos) = token.pos {
-            if matches!(pos, canopy_core::UPos::Propn | canopy_core::UPos::Pron) {
-                return Some(Animacy::Human);
-            }
+        if matches!(
+            token.pos,
+            Some(canopy_core::UPos::Propn | canopy_core::UPos::Pron)
+        ) {
+            return Some(Animacy::Human);
         }
 
         // Could check WordNet hypernyms for animacy here
@@ -268,10 +270,8 @@ impl ParticipantBinder {
     fn infer_definiteness(&self, token: &Layer1SemanticResult) -> Option<Definiteness> {
         // Could check for determiners in dependents
         // Proper nouns are typically definite
-        if let Some(pos) = token.pos {
-            if matches!(pos, canopy_core::UPos::Propn) {
-                return Some(Definiteness::Definite);
-            }
+        if matches!(token.pos, Some(canopy_core::UPos::Propn)) {
+            return Some(Definiteness::Definite);
         }
         None
     }

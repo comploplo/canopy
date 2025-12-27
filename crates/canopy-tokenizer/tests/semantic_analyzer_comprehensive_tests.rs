@@ -138,14 +138,14 @@ mod semantic_analyzer_tests {
         assert!(analysis.metrics.tokenization_time_us > 0);
 
         // Should potentially identify predicates
-        let predicate_tokens: Vec<_> = analysis
+        let _predicate_tokens: Vec<_> = analysis
             .tokens
             .iter()
             .filter(|t| t.semantic_class == SemanticClass::Predicate)
             .collect();
 
         // With real data, "gave" should be identified as a predicate
-        assert!(predicate_tokens.len() >= 0); // Can be 0 with stub data
+        // predicate_tokens.len() can be 0 with stub data - just verify analysis completed
     }
 
     #[test]
@@ -160,17 +160,17 @@ mod semantic_analyzer_tests {
         assert_eq!(analysis.tokens.len(), 5);
 
         // Check for quantifier identification
-        let quantifier_tokens: Vec<_> = analysis
+        let _quantifier_tokens: Vec<_> = analysis
             .tokens
             .iter()
             .filter(|t| t.semantic_class == SemanticClass::Quantifier)
             .collect();
 
         // Should find quantifiers like "every" and "all" if lexicon is working
-        assert!(quantifier_tokens.len() >= 0);
+        // quantifier_tokens.len() can be 0 with stub data
 
         // Check logical form has quantifier structures
-        assert!(analysis.logical_form.quantifiers.len() >= 0);
+        // analysis.logical_form.quantifiers.len() can be 0 with stub data
     }
 
     #[test]
@@ -192,7 +192,7 @@ mod semantic_analyzer_tests {
             .collect();
 
         // Should find "the", "is", "on"
-        assert!(function_tokens.len() >= 1); // At least "the" should be identified
+        assert!(!function_tokens.is_empty()); // At least "the" should be identified
     }
 
     #[test]
@@ -232,7 +232,7 @@ mod semantic_analyzer_tests {
         for (sentence, expected_class) in test_sentences {
             let result = analyzer
                 .analyze(sentence)
-                .expect(&format!("Failed to analyze: {}", sentence));
+                .unwrap_or_else(|_| panic!("Failed to analyze: {}", sentence));
 
             // Find predicates with expected aspectual class
             let matching_predicates: Vec<_> = result
@@ -243,7 +243,7 @@ mod semantic_analyzer_tests {
 
             // With real VerbNet data, should find appropriate aspectual classes
             // For stub data, this might be empty, so we just verify the analysis runs
-            assert!(matching_predicates.len() >= 0);
+            let _ = matching_predicates.len(); // Can be 0 with stub data
         }
     }
 
@@ -259,8 +259,7 @@ mod semantic_analyzer_tests {
 
         // Check if predicates have theta grids
         for predicate in &analysis.predicates {
-            // Theta grid can be empty with stub data
-            assert!(predicate.theta_grid.len() >= 0);
+            // Theta grid can be empty with stub data - just iterate to test structure
 
             // If theta roles are present, they should be valid types
             for theta_role in &predicate.theta_grid {
@@ -289,9 +288,8 @@ mod semantic_analyzer_tests {
                 }
             }
 
-            // Test selectional restrictions
-            assert!(predicate.selectional_restrictions.len() >= 0);
-            for (role, restrictions) in &predicate.selectional_restrictions {
+            // Test selectional restrictions - can be empty with stub data
+            for restrictions in predicate.selectional_restrictions.values() {
                 for restriction in restrictions {
                     assert!(!restriction.restriction_type.is_empty());
                     assert!(restriction.strength > 0.0 && restriction.strength <= 1.0);
@@ -336,14 +334,11 @@ mod semantic_analyzer_tests {
         let analysis = result.unwrap();
         let logical_form = &analysis.logical_form;
 
-        // Should have logical predicates
-        assert!(logical_form.predicates.len() >= 0);
+        // Should have logical predicates - can be empty with stub data
 
-        // Should have variables
-        assert!(logical_form.variables.len() >= 0);
+        // Should have variables - can be empty with stub data
 
-        // Should have quantifier structures for "every" and "some"
-        assert!(logical_form.quantifiers.len() >= 0);
+        // Should have quantifier structures for "every" and "some" - can be empty with stub data
 
         // Test quantifier types
         for quantifier in &logical_form.quantifiers {
@@ -408,7 +403,6 @@ mod semantic_analyzer_tests {
             assert!(!morph.lemma.is_empty());
 
             // Should have morphological features (can be empty)
-            assert!(morph.features.len() >= 0);
 
             // Should have inflection type
             match morph.inflection_type {
@@ -470,12 +464,9 @@ mod semantic_analyzer_tests {
         // Test metrics structure
         assert!(metrics.total_time_us > 0);
         assert!(metrics.tokenization_time_us > 0);
-        assert!(metrics.framenet_time_us >= 0);
-        assert!(metrics.verbnet_time_us >= 0);
-        assert!(metrics.wordnet_time_us >= 0);
+        // framenet_time_us, verbnet_time_us, wordnet_time_us are u64 (always >= 0)
         assert_eq!(metrics.token_count, 3);
-        assert!(metrics.frame_count >= 0);
-        assert!(metrics.predicate_count >= 0);
+        // frame_count and predicate_count are usize (always >= 0)
 
         // Timing relationships
         assert!(metrics.total_time_us >= metrics.tokenization_time_us);
@@ -606,7 +597,7 @@ mod semantic_analyzer_tests {
             assert!(result.is_ok(), "Failed to analyze: {}", text);
 
             let analysis = result.unwrap();
-            assert!(analysis.tokens.len() > 0);
+            assert!(!analysis.tokens.is_empty());
         }
     }
 

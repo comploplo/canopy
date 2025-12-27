@@ -44,7 +44,7 @@ mod tests {
 
     #[test]
     fn test_semantic_class_variants() {
-        let classes = vec![
+        let classes = [
             SemanticClass::Predicate,
             SemanticClass::Argument,
             SemanticClass::Modifier,
@@ -71,7 +71,7 @@ mod tests {
 
     #[test]
     fn test_inflection_type_variants() {
-        let types = vec![
+        let types = [
             InflectionType::Verbal,
             InflectionType::Nominal,
             InflectionType::Adjectival,
@@ -96,7 +96,7 @@ mod tests {
 
     #[test]
     fn test_aspectual_class_variants() {
-        let classes = vec![
+        let classes = [
             AspectualClass::State,
             AspectualClass::Activity,
             AspectualClass::Accomplishment,
@@ -122,7 +122,7 @@ mod tests {
 
     #[test]
     fn test_quantifier_type_variants() {
-        let types = vec![
+        let types = [
             QuantifierType::Universal,
             QuantifierType::Existential,
             QuantifierType::Definite,
@@ -147,7 +147,7 @@ mod tests {
 
     #[test]
     fn test_logical_term_variants() {
-        let terms = vec![
+        let terms = [
             LogicalTerm::Variable("x1".to_string()),
             LogicalTerm::Constant("john".to_string()),
             LogicalTerm::Function(
@@ -650,13 +650,8 @@ mod tests {
         let output = result.unwrap();
 
         // Should have tokenized the input (line 470 debug path)
-        assert!(output.tokens.len() >= 1);
-        assert!(output.metrics.tokenization_time_us >= 0);
-
-        // Should have attempted frame and predicate analysis (lines 485-511)
-        assert!(output.metrics.framenet_time_us >= 0);
-        assert!(output.metrics.verbnet_time_us >= 0);
-        assert!(output.metrics.wordnet_time_us >= 0);
+        assert!(!output.tokens.is_empty());
+        // tokenization_time_us, framenet_time_us, etc are u64, always >= 0
 
         // Should have timing metrics
         assert!(output.metrics.total_time_us > 0);
@@ -685,15 +680,11 @@ mod tests {
         // Should have multiple tokens
         assert!(output.tokens.len() >= 5);
 
-        // Should have metrics for all components
-        assert!(output.metrics.framenet_time_us >= 0);
-        assert!(output.metrics.verbnet_time_us >= 0);
-        assert!(output.metrics.wordnet_time_us >= 0);
+        // Should have metrics for all components (u64 values are always >= 0)
         assert!(output.metrics.total_time_us > 0);
 
-        // Should attempt to build logical form
-        assert!(output.logical_form.predicates.len() >= 0);
-        assert!(output.logical_form.variables.len() >= 0);
+        // Should attempt to build logical form (may or may not have results)
+        // predicates and variables are collections, len() is always >= 0
     }
 
     #[test]
@@ -734,13 +725,12 @@ mod tests {
         let low_output = low_result.unwrap();
 
         // Both should have basic analysis
-        assert!(high_output.tokens.len() >= 1);
-        assert!(low_output.tokens.len() >= 1);
+        assert!(!high_output.tokens.is_empty());
+        assert!(!low_output.tokens.is_empty());
 
         // Should have different results due to confidence filtering (lines 487-496)
         // This tests the confidence threshold filtering paths
-        assert!(high_output.metrics.frame_count >= 0);
-        assert!(low_output.metrics.frame_count >= 0);
+        // frame_count is usize, always >= 0
     }
 
     #[test]
@@ -753,7 +743,7 @@ mod tests {
         match empty_result {
             Ok(empty_output) => {
                 assert_eq!(empty_output.tokens.len(), 0);
-                assert!(empty_output.metrics.total_time_us >= 0);
+                // total_time_us is u64, always >= 0
             }
             Err(_) => {
                 // Empty string may cause tokenization error, which is acceptable
@@ -765,14 +755,14 @@ mod tests {
         let single_result = analyzer.analyze("run");
         assert!(single_result.is_ok());
         let single_output = single_result.unwrap();
-        assert!(single_output.tokens.len() >= 1);
+        assert!(!single_output.tokens.is_empty());
         assert!(single_output.metrics.total_time_us > 0);
 
         // Test punctuation
         let punct_result = analyzer.analyze("Hello, world!");
         assert!(punct_result.is_ok());
         let punct_output = punct_result.unwrap();
-        assert!(punct_output.tokens.len() >= 1);
+        assert!(!punct_output.tokens.is_empty());
         assert!(punct_output.metrics.token_count >= 1);
     }
 
@@ -819,8 +809,8 @@ mod tests {
             assert!(result.is_ok(), "Failed to analyze with config {}", i);
 
             let output = result.unwrap();
-            assert!(output.metrics.total_time_us >= 0);
-            assert!(output.tokens.len() >= 1);
+            // total_time_us is u64, always >= 0
+            assert!(!output.tokens.is_empty());
         }
     }
 }

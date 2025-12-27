@@ -1,6 +1,6 @@
 //! Tests for VerbNetEngine trait implementations to achieve coverage targets
 
-use canopy_engine::{traits::DataInfo, CachedEngine, EngineCore, SemanticEngine};
+use canopy_engine::{traits::DataInfo, EngineCore};
 use canopy_verbnet::{VerbNetConfig, VerbNetEngine};
 use std::fs;
 use tempfile::TempDir;
@@ -82,14 +82,14 @@ fn test_semantic_engine_trait_implementation() {
     assert!(engine.is_initialized());
 
     let config = engine.config();
-    assert!(config.data_path.len() > 0);
+    assert!(!config.data_path.is_empty());
 
     // Test analysis functionality
-    let result = engine.analyze(&"give".to_string()).unwrap();
+    let result = engine.analyze("give").unwrap();
     assert!(result.confidence > 0.0);
     assert!(!result.data.verb_classes.is_empty());
 
-    let result = engine.analyze(&"nonexistent_verb".to_string()).unwrap();
+    let result = engine.analyze("nonexistent_verb").unwrap();
     assert!(result.confidence <= 0.1);
     assert!(result.data.verb_classes.is_empty());
 }
@@ -99,7 +99,7 @@ fn test_cached_engine_trait_implementation() {
     let (_temp_dir, mut engine) = create_test_verbnet_data();
 
     // Test cache clearing
-    let _ = engine.analyze(&"give".to_string()).unwrap();
+    let _ = engine.analyze("give").unwrap();
     let cache_stats_before = engine.cache_stats();
 
     engine.clear_cache();
@@ -128,7 +128,7 @@ fn test_statistics_provider_trait_implementation() {
 
     // Test performance metrics
     let metrics = engine.performance_metrics();
-    assert!(metrics.total_queries >= 0);
+    assert!(metrics.total_queries < 1_000_000); // Reasonable upper bound
     assert!(metrics.avg_query_time_us >= 0.0);
 }
 
@@ -219,20 +219,20 @@ fn test_engine_analysis_types() {
     let (_temp_dir, engine) = create_test_verbnet_data();
 
     // Test with known verb
-    let result = engine.analyze(&"give".to_string()).unwrap();
+    let result = engine.analyze("give").unwrap();
     assert_eq!(result.data.verb, "give");
     assert!(!result.data.verb_classes.is_empty());
     assert!(result.confidence > 0.0);
     assert!(!result.from_cache); // First time should not be from cache
 
     // Test with empty string
-    let result = engine.analyze(&"".to_string()).unwrap();
+    let result = engine.analyze("").unwrap();
     assert_eq!(result.data.verb, "");
     assert!(result.data.verb_classes.is_empty());
     assert!(result.confidence <= 0.1);
 
     // Test with whitespace
-    let result = engine.analyze(&"  ".to_string()).unwrap();
+    let result = engine.analyze("  ").unwrap();
     assert_eq!(result.data.verb, "  ");
     assert!(result.data.verb_classes.is_empty());
     assert!(result.confidence <= 0.1);
@@ -240,14 +240,14 @@ fn test_engine_analysis_types() {
 
 #[test]
 fn test_cache_behavior() {
-    let (_temp_dir, mut engine) = create_test_verbnet_data();
+    let (_temp_dir, engine) = create_test_verbnet_data();
 
     // First analysis - should not be from cache
-    let result1 = engine.analyze(&"give".to_string()).unwrap();
+    let result1 = engine.analyze("give").unwrap();
     assert!(!result1.from_cache);
 
     // Second analysis - might be from cache depending on implementation
-    let result2 = engine.analyze(&"give".to_string()).unwrap();
+    let result2 = engine.analyze("give").unwrap();
     // We just verify the results are consistent
     assert_eq!(result1.data.verb, result2.data.verb);
     assert_eq!(
@@ -257,8 +257,8 @@ fn test_cache_behavior() {
 
     // Test cache stats
     let stats = engine.cache_stats();
-    assert!(stats.total_lookups >= 0);
-    assert!(stats.hits >= 0);
+    assert!(stats.total_lookups < 1_000_000); // Reasonable upper bound
+    assert!(stats.hits < 1_000_000); // Reasonable upper bound
 }
 
 #[test]
@@ -268,7 +268,7 @@ fn test_multiple_verb_analysis() {
     let verbs = vec!["give", "grant", "unknown_verb", "", "  GIVE  "];
 
     for verb in verbs {
-        let result = engine.analyze(&verb.to_string());
+        let result = engine.analyze(verb);
         assert!(result.is_ok());
 
         let analysis = result.unwrap();
@@ -312,6 +312,6 @@ fn test_engine_error_handling() {
     assert!(result.is_ok() || result.is_err());
 
     // Test analysis still works even with no data
-    let result = engine.analyze(&"test".to_string());
+    let result = engine.analyze("test");
     assert!(result.is_ok());
 }

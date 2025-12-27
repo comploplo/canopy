@@ -134,7 +134,7 @@ fn test_dev_data_integration() {
                 sentences.len()
             );
 
-            if sentences.len() > 0 {
+            if !sentences.is_empty() {
                 println!(
                     "Parser implementation is working! Found {} sentences",
                     sentences.len()

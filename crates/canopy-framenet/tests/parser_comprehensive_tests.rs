@@ -143,7 +143,7 @@ mod tests {
         // Just test that the frame parses successfully
         assert_eq!(frame.id, "139");
         assert_eq!(frame.name, "Giving");
-        assert!(frame.frame_relations.is_empty() || frame.frame_relations.len() > 0);
+        // Frame relations parsing may not be fully implemented - just verify parsing succeeds
     }
 
     #[test]
@@ -161,7 +161,7 @@ mod tests {
         // Just test that the frame parses successfully
         assert_eq!(frame.id, "139");
         assert_eq!(frame.name, "Giving");
-        assert!(frame.lexical_units.is_empty() || frame.lexical_units.len() > 0);
+        // Lexical units parsing may not be fully implemented - just verify parsing succeeds
     }
 
     #[test]
@@ -398,10 +398,9 @@ mod tests {
         let donor_valence = &lu.valences[0];
         // Parser may not fully implement valence parsing yet - check basic structure
         assert!(donor_valence.fe_name.is_empty() || donor_valence.fe_name == "Donor");
-        assert!(donor_valence.total == 0 || donor_valence.total > 0);
-        assert!(donor_valence.realizations.is_empty() || donor_valence.realizations.len() > 0);
+        // donor_valence.total and realizations may or may not be populated
 
-        if donor_valence.realizations.len() > 0 {
+        if !donor_valence.realizations.is_empty() {
             // Check that fields exist but may be empty if parser doesn't fully populate them
             assert!(
                 donor_valence.realizations[0]
@@ -413,16 +412,13 @@ mod tests {
                 donor_valence.realizations[0].phrase_type.is_empty()
                     || donor_valence.realizations[0].phrase_type == "NP"
             );
-            assert!(
-                donor_valence.realizations[0].count == 0 || donor_valence.realizations[0].count > 0
-            );
+            // count may or may not be populated
         }
 
         if lu.valences.len() > 1 {
             let theme_valence = &lu.valences[1];
             assert!(theme_valence.fe_name.is_empty() || theme_valence.fe_name == "Theme");
-            assert!(theme_valence.total == 0 || theme_valence.total > 0);
-            assert!(theme_valence.realizations.is_empty() || theme_valence.realizations.len() > 0);
+            // theme_valence.total and realizations may or may not be populated
         }
     }
 

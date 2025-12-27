@@ -950,6 +950,52 @@ impl Default for TreebankEngine {
     }
 }
 
+// Implement TreebankProvider trait for integration with semantic layer
+impl TreebankProvider for TreebankEngine {
+    fn analyze_word(&self, word: &str) -> Result<canopy_tokenizer::TreebankAnalysis, EngineError> {
+        // Use the existing analyze_word method from TreebankEngine
+        match self.analyze_word(word) {
+            Ok(treebank_result) => {
+                // Convert from treebank::TreebankAnalysis to semantic_layer::TreebankAnalysis
+                let mut semantic_result = canopy_tokenizer::TreebankAnalysis::new(
+                    treebank_result.data.word.clone(),
+                    treebank_result.confidence,
+                );
+
+                semantic_result.processing_time_us = treebank_result.processing_time_us;
+                semantic_result.from_cache = treebank_result.from_cache;
+
+                // Extract dependency relation from pattern if available
+                if let Some(ref pattern) = treebank_result.data.pattern {
+                    semantic_result.dependency_relation = Some(pattern.verb_lemma.clone());
+
+                    // Convert dependency features to voice and semantic features
+                    for (dep_rel, _role) in &pattern.dependencies {
+                        let dep_str = format!("{:?}", dep_rel).to_lowercase();
+                        if dep_str.contains("pass") {
+                            semantic_result.voice_features.push("passive".to_string());
+                        }
+                        if dep_str.contains("agent") {
+                            semantic_result.semantic_features.push("agent".to_string());
+                        }
+                        if dep_str.contains("subj") {
+                            semantic_result
+                                .semantic_features
+                                .push("subject".to_string());
+                        }
+                        if dep_str.contains("obj") {
+                            semantic_result.semantic_features.push("object".to_string());
+                        }
+                    }
+                }
+
+                Ok(semantic_result)
+            }
+            Err(e) => Err(e),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1005,51 +1051,5 @@ mod tests {
         // Verify StatisticsProvider trait bounds compile
         fn _test_trait_bounds<T: StatisticsProvider>() {}
         _test_trait_bounds::<TreebankEngine>();
-    }
-}
-
-// Implement TreebankProvider trait for integration with semantic layer
-impl TreebankProvider for TreebankEngine {
-    fn analyze_word(&self, word: &str) -> Result<canopy_tokenizer::TreebankAnalysis, EngineError> {
-        // Use the existing analyze_word method from TreebankEngine
-        match self.analyze_word(word) {
-            Ok(treebank_result) => {
-                // Convert from treebank::TreebankAnalysis to semantic_layer::TreebankAnalysis
-                let mut semantic_result = canopy_tokenizer::TreebankAnalysis::new(
-                    treebank_result.data.word.clone(),
-                    treebank_result.confidence,
-                );
-
-                semantic_result.processing_time_us = treebank_result.processing_time_us;
-                semantic_result.from_cache = treebank_result.from_cache;
-
-                // Extract dependency relation from pattern if available
-                if let Some(ref pattern) = treebank_result.data.pattern {
-                    semantic_result.dependency_relation = Some(pattern.verb_lemma.clone());
-
-                    // Convert dependency features to voice and semantic features
-                    for (dep_rel, _role) in &pattern.dependencies {
-                        let dep_str = format!("{:?}", dep_rel).to_lowercase();
-                        if dep_str.contains("pass") {
-                            semantic_result.voice_features.push("passive".to_string());
-                        }
-                        if dep_str.contains("agent") {
-                            semantic_result.semantic_features.push("agent".to_string());
-                        }
-                        if dep_str.contains("subj") {
-                            semantic_result
-                                .semantic_features
-                                .push("subject".to_string());
-                        }
-                        if dep_str.contains("obj") {
-                            semantic_result.semantic_features.push("object".to_string());
-                        }
-                    }
-                }
-
-                Ok(semantic_result)
-            }
-            Err(e) => Err(e),
-        }
     }
 }

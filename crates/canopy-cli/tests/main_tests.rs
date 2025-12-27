@@ -8,7 +8,7 @@ use std::process::{Command, Stdio};
 fn test_main_function_execution() {
     // Test the actual main function by running the binary
     let output = Command::new("cargo")
-        .args(&["run", "--bin", "canopy-cli"])
+        .args(["run", "--bin", "canopy-cli"])
         .current_dir(env!("CARGO_MANIFEST_DIR"))
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
@@ -75,17 +75,16 @@ fn test_main_uses_run_cli() {
 
     let result = canopy_cli::run_cli();
 
-    // Test both success and error paths
+    // Test both success and error paths - reaching either branch means no panic
     match result {
         Ok(_) => {
             // This exercises the Ok(_) => {} branch in main
-            assert!(true, "Success path works");
         }
         Err(_) => {
             // This exercises the Err(e) => { eprintln!(...); exit(1) } branch in main
-            assert!(true, "Error path works");
         }
     }
+    // Test passed if we reached here without panic
 }
 
 #[cfg(test)]

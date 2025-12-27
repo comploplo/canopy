@@ -175,10 +175,12 @@ fn test_caching_functionality() {
     let result2 = engine.analyze_word("give").unwrap();
     assert!(result2.from_cache);
 
-    // Verify cache stats - may be 0 if data not available
+    // Verify cache stats structure exists
     let cache_stats = engine.cache_stats();
-    assert!(cache_stats.hits >= 0); // Changed from > 0 to >= 0
-    assert!(cache_stats.total_lookups >= 0); // Changed requirement
+    // After two lookups, we should have at least 2 total_lookups
+    assert!(cache_stats.total_lookups >= 2);
+    // Second lookup should be a cache hit
+    assert!(cache_stats.hits >= 1);
 }
 
 #[test]
@@ -216,9 +218,8 @@ fn test_confidence_threshold_filtering() {
 
     // Fuzzy matches might fail threshold
     let fuzzy_result = engine.analyze_word("xyz");
-    if fuzzy_result.is_err() {
+    if let Err(error) = fuzzy_result {
         // Should fail due to confidence threshold or not found
-        let error = fuzzy_result.unwrap_err();
         // Should be an analysis error
         assert!(format!("{:?}", error).contains("Analysis"));
     }
@@ -307,11 +308,13 @@ fn test_statistics_provider_trait() {
 
     // Check engine statistics structure
     assert_eq!(stats.engine_name, "PropBank");
-    assert!(stats.performance.total_queries >= 0);
+    // Engine has been used, so queries should be tracked
+    // (This verifies the stats structure is properly populated)
+    let _ = stats.performance.total_queries;
 
-    // Test performance metrics
+    // Test performance metrics structure exists
     let perf_metrics = engine.performance_metrics();
-    assert!(perf_metrics.total_processing_time_ms >= 0);
+    let _ = perf_metrics.total_processing_time_ms;
 }
 
 #[test]
@@ -371,9 +374,8 @@ fn test_error_handling() {
 
     // Test word not in PropBank
     let result = engine.analyze_word("qwertyuiop");
-    if result.is_err() {
+    if let Err(error) = result {
         // Should fail gracefully
-        let error = result.unwrap_err();
         // Should be an Analysis error for not found cases
         assert!(format!("{:?}", error).contains("Analysis"));
     }
@@ -468,7 +470,8 @@ fn test_comprehensive_coverage() {
         }
     }
 
-    // Test that caching is working
+    // Test that caching structure is accessible
     let cache_stats = engine.cache_stats();
-    assert!(cache_stats.total_lookups >= 0); // May be 0 if no lookups happened
+    // Verify cache stats structure exists (lookups happened in the batch)
+    let _ = cache_stats.total_lookups;
 }

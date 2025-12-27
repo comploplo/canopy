@@ -415,11 +415,13 @@ impl EventDecomposer {
         }
 
         // Priority 3: Fallback to heuristic based on FrameNet
-        if let Some(ref framenet) = predicate.framenet_analysis {
-            if !framenet.frames.is_empty() {
-                // Use FrameNet frame elements to guess LittleV type
-                return self.decompose_from_framenet(predicate, framenet);
-            }
+        if let Some(framenet) = predicate
+            .framenet_analysis
+            .as_ref()
+            .filter(|f| !f.frames.is_empty())
+        {
+            // Use FrameNet frame elements to guess LittleV type
+            return self.decompose_from_framenet(predicate, framenet);
         }
 
         // Priority 4: Last resort - guess from lemma/POS

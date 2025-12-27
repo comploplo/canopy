@@ -2,7 +2,7 @@
 //!
 //! Tests basic container creation and type structures
 
-use canopy_pipeline::{ContainerBuilder, PipelineContainer, error::PipelineError, traits::*};
+use canopy_pipeline::{ContainerBuilder, traits::*};
 
 #[cfg(test)]
 mod container_tests {
@@ -11,18 +11,18 @@ mod container_tests {
     #[test]
     fn test_container_builder_creation() {
         let _builder = ContainerBuilder::new();
-        assert!(true);
+        // Reaching here without panic = test passes
     }
 
     #[test]
     fn test_container_builder_default() {
         let _builder = ContainerBuilder::default();
-        assert!(true);
+        // Reaching here without panic = test passes
     }
 
     #[test]
     fn test_performance_mode_variants() {
-        let modes = vec![
+        let modes = [
             PerformanceMode::Balanced,
             PerformanceMode::Speed,
             PerformanceMode::Accuracy,
@@ -38,7 +38,7 @@ mod container_tests {
 
     #[test]
     fn test_model_type_variants() {
-        let types = vec![
+        let types = [
             ModelType::UDPipe12,
             ModelType::UDPipe215,
             ModelType::Custom("test".to_string()),
@@ -135,9 +135,6 @@ mod container_tests {
 
     #[test]
     fn test_feature_set_creation() {
-        use canopy_core::ThetaRole;
-        use std::collections::HashMap;
-
         let mut feature_set = FeatureSet::default();
         feature_set
             .morphological
@@ -269,8 +266,6 @@ mod container_tests {
 
     #[test]
     fn test_metrics_creation() {
-        use std::collections::HashMap;
-
         let mut metrics = Metrics::default();
         metrics
             .timings

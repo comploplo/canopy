@@ -102,7 +102,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         // Add POS tags based on position heuristics (simple demo)
         for (i, token) in tokens.iter_mut().enumerate() {
-            token.pos = infer_pos(&test.dependencies, i, &test.words[i]);
+            token.pos = infer_pos(&test.dependencies, i, test.words[i]);
         }
         let l1_time = l1_start.elapsed();
         total_l1_time += l1_time;

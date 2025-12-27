@@ -28,21 +28,6 @@ fn load_dev_sample() -> Vec<ParsedSentence> {
     sentences.into_iter().take(50).collect()
 }
 
-/// Load full dev data for comprehensive testing
-fn load_full_dev() -> Vec<ParsedSentence> {
-    let dev_path = std::path::Path::new("data/ud_english-ewt/UD_English-EWT/en_ewt-ud-dev.conllu");
-
-    if !dev_path.exists() {
-        println!("Skipping test - dev data not found at {:?}", dev_path);
-        return Vec::new();
-    }
-
-    let parser = ConlluParser::new(false);
-    parser
-        .parse_file(dev_path)
-        .expect("Failed to parse dev data")
-}
-
 #[test]
 fn test_lemma_cache_basic_operations() {
     let cache = LemmaCache::default();
@@ -385,7 +370,7 @@ fn test_real_dev_data_validation() {
         "Should have at least 40% accuracy on real data"
     );
     assert!(
-        result.learned_irregulars.len() > 0,
+        !result.learned_irregulars.is_empty(),
         "Should learn some irregular patterns"
     );
 }

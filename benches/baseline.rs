@@ -25,7 +25,7 @@ fn semantic_coordinator_benchmark(c: &mut Criterion) {
 
     // Warm up the cache
     for word in test_words.iter() {
-        let _ = coordinator.analyze(*word);
+        let _ = coordinator.analyze(word);
     }
 
     group.bench_function("analyze_word_cached", |b| {

@@ -23,6 +23,7 @@ pub struct PropBankEngine {
     data: Arc<PropBankData>,
     config: PropBankConfig,
     cache: Arc<Mutex<HashMap<String, PropBankAnalysis>>>,
+    cache_tracking: Arc<Mutex<CacheStats>>,
     stats: Arc<Mutex<EngineStats>>,
     performance_metrics: Arc<Mutex<PerformanceMetrics>>,
 }
@@ -53,6 +54,7 @@ impl PropBankEngine {
 
         // Initialize components
         let cache = Arc::new(Mutex::new(HashMap::new()));
+        let cache_tracking = Arc::new(Mutex::new(CacheStats::empty()));
         let stats = Arc::new(Mutex::new(EngineStats::new("PropBank".to_string())));
         let performance_metrics = Arc::new(Mutex::new(PerformanceMetrics::new()));
 
@@ -60,6 +62,7 @@ impl PropBankEngine {
             data: Arc::new(data),
             config,
             cache,
+            cache_tracking,
             stats,
             performance_metrics,
         })
@@ -164,12 +167,28 @@ impl PropBankEngine {
 
         // Check cache first
         if self.config.enable_cache {
+            // Track lookup
+            if let Ok(mut tracking) = self.cache_tracking.lock() {
+                tracking.total_lookups += 1;
+            }
+
             if let Ok(cache) = self.cache.lock() {
                 if let Some(cached_analysis) = cache.get(&cache_key) {
+                    // Track cache hit
+                    if let Ok(mut tracking) = self.cache_tracking.lock() {
+                        tracking.hits += 1;
+                        tracking.hit_rate = tracking.hits as f64 / tracking.total_lookups as f64;
+                    }
                     return Ok(SemanticResult::cached(
                         cached_analysis.clone(),
                         cached_analysis.confidence,
                     ));
+                } else {
+                    // Track cache miss
+                    if let Ok(mut tracking) = self.cache_tracking.lock() {
+                        tracking.misses += 1;
+                        tracking.hit_rate = tracking.hits as f64 / tracking.total_lookups as f64;
+                    }
                 }
             }
         }
@@ -384,14 +403,15 @@ impl CachedEngine for PropBankEngine {
     }
 
     fn cache_stats(&self) -> CacheStats {
-        if let Ok(cache) = self.cache.lock() {
+        let cache_size = self.cache.lock().map(|c| c.len()).unwrap_or(0);
+        if let Ok(tracking) = self.cache_tracking.lock() {
             CacheStats {
-                hits: 0,   // Would need to track this separately
-                misses: 0, // Would need to track this separately
-                total_lookups: 0,
-                hit_rate: 0.0,
+                hits: tracking.hits,
+                misses: tracking.misses,
+                total_lookups: tracking.total_lookups,
+                hit_rate: tracking.hit_rate,
                 evictions: 0,
-                current_size: cache.len(),
+                current_size: cache_size,
                 has_ttl: false,
             }
         } else {
@@ -632,7 +652,7 @@ run.02: ARG0:agent ARG1:path"#;
         let stats = engine.statistics();
 
         assert_eq!(stats.engine_name, "PropBank");
-        assert!(stats.performance.total_queries >= 0);
+        // stats.performance.total_queries is unsigned, always >= 0
     }
 
     #[test]

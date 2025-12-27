@@ -310,7 +310,7 @@ mod semantic_layer1_tests {
         assert!(config.enable_framenet && config.enable_verbnet && config.enable_wordnet);
 
         // Verify that semantic classes cover the expected range
-        let classes = vec![
+        let classes = [
             SemanticClass::Predicate,
             SemanticClass::Argument,
             SemanticClass::Modifier,
@@ -321,7 +321,7 @@ mod semantic_layer1_tests {
         assert_eq!(classes.len(), 6);
 
         // Verify aspectual classes are complete
-        let aspects = vec![
+        let aspects = [
             AspectualClass::State,
             AspectualClass::Activity,
             AspectualClass::Accomplishment,
@@ -334,8 +334,7 @@ mod semantic_layer1_tests {
 
 #[cfg(test)]
 mod tokenization_integration_tests {
-    use super::*;
-    use canopy_tokenizer::tokenization::{Token, Tokenizer};
+    use canopy_tokenizer::tokenization::Tokenizer;
 
     #[test]
     fn test_tokenizer_integration() {

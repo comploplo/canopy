@@ -9,7 +9,7 @@ use std::process::{Command, Stdio};
 fn test_cli_binary_execution() {
     // Build the binary and test its execution
     let mut cmd = Command::new("cargo");
-    cmd.args(&["run", "--bin", "canopy-cli"])
+    cmd.args(["run", "--bin", "canopy-cli"])
         .current_dir(env!("CARGO_MANIFEST_DIR"))
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
@@ -32,7 +32,7 @@ fn test_cli_binary_execution() {
 fn test_cli_binary_help() {
     // Test CLI with help flag if supported
     let mut cmd = Command::new("cargo");
-    cmd.args(&["run", "--bin", "canopy-cli", "--", "--help"])
+    cmd.args(["run", "--bin", "canopy-cli", "--", "--help"])
         .current_dir(env!("CARGO_MANIFEST_DIR"))
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
@@ -58,14 +58,13 @@ fn test_cli_lib_function_coverage() {
     match result {
         Ok(_) => {
             println!("CLI lib function succeeded");
-            assert!(true);
         }
         Err(e) => {
             println!("CLI lib function failed with: {}", e);
             // Error is also acceptable, we just need to exercise the path
-            assert!(true);
         }
     }
+    // Test passed if we reached here without panic
 }
 
 #[test]

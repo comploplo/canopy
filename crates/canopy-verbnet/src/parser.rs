@@ -644,8 +644,6 @@ fn extract_class_name(class_id: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use canopy_engine::XmlParser;
-    use std::io::Cursor;
 
     #[test]
     fn test_parse_simple_verbclass() {
@@ -701,7 +699,7 @@ mod tests {
 
     #[test]
     fn test_thematic_role_restrictions() {
-        let xml = r#"
+        let _xml = r#"
         <THEMROLE type="Agent">
             <SELRESTRS logic="or">
                 <SELRESTR type="animate" Value="+"/>
@@ -767,8 +765,7 @@ mod tests {
         let mut reader = Reader::from_str(minimal_xml);
         let result = VerbClass::parse_xml(&mut reader);
 
-        if result.is_ok() {
-            let class = result.unwrap();
+        if let Ok(class) = result {
             assert_eq!(class.id, "minimal-1.0");
             assert_eq!(class.class_name, "minimal");
             assert_eq!(class.members.len(), 0);
@@ -792,8 +789,7 @@ mod tests {
         let mut reader = Reader::from_str(complex_members_xml);
         let result = VerbClass::parse_xml(&mut reader);
 
-        if result.is_ok() {
-            let class = result.unwrap();
+        if let Ok(class) = result {
             assert_eq!(class.members.len(), 3);
             assert!(class.members.iter().any(|m| m.name == "walk"));
             assert!(class.members.iter().any(|m| m.name == "run"));
@@ -826,8 +822,7 @@ mod tests {
         let mut reader = Reader::from_str(complex_themroles_xml);
         let result = VerbClass::parse_xml(&mut reader);
 
-        if result.is_ok() {
-            let class = result.unwrap();
+        if let Ok(class) = result {
             assert_eq!(class.themroles.len(), 3);
 
             // Check that we parsed different theme role types
@@ -892,18 +887,17 @@ mod tests {
         let mut reader = Reader::from_str(complex_frames_xml);
         let result = VerbClass::parse_xml(&mut reader);
 
-        if result.is_ok() {
-            let class = result.unwrap();
+        if let Ok(class) = result {
             assert_eq!(class.frames.len(), 2);
 
             // Check frame structure - examples should be present
-            assert!(class.frames[0].examples.len() >= 1);
-            assert!(class.frames[1].examples.len() >= 1);
+            assert!(!class.frames[0].examples.is_empty());
+            assert!(!class.frames[1].examples.is_empty());
 
             // Syntax elements may or may not be populated depending on parser implementation
-            // The key is that we've tested the parsing path
-            assert!(class.frames[0].syntax.elements.len() >= 0);
-            assert!(class.frames[1].syntax.elements.len() >= 0);
+            // The key is that we've tested the parsing path - accessing elements validates structure
+            let _ = class.frames[0].syntax.elements.len();
+            let _ = class.frames[1].syntax.elements.len();
         }
     }
 
@@ -942,8 +936,7 @@ mod tests {
         let result = VerbClass::parse_xml(&mut reader);
 
         // Should skip unknown elements and continue parsing known ones
-        if result.is_ok() {
-            let class = result.unwrap();
+        if let Ok(class) = result {
             assert_eq!(class.id, "unknown-1.0");
             assert_eq!(class.members.len(), 1); // Should still parse the MEMBERS section
             assert_eq!(class.members[0].name, "test");

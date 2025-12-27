@@ -1,5 +1,4 @@
 # CI/CD Pipeline for canopy.rs
-# TODO: Implement when ready to integrate with GitHub
 
 name: CI
 
@@ -11,6 +10,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
 
 jobs:
   test:
@@ -19,6 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: dtolnay/rust-toolchain@stable
+    - uses: Swatinem/rust-cache@v2
     - name: Run tests
       run: cargo test --workspace --verbose
 
@@ -30,23 +31,32 @@ jobs:
     - uses: dtolnay/rust-toolchain@stable
       with:
         components: rustfmt, clippy
+    - uses: Swatinem/rust-cache@v2
     - name: Check formatting
       run: cargo fmt --all -- --check
     - name: Run clippy
       run: cargo clippy --workspace --all-targets -- -D warnings
 
-  benchmark:
-    name: Performance Benchmarks
+  security:
+    name: Security Audit
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: rustsec/audit-check@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+  benchmark:
+    name: Performance Benchmarks
+    runs-on: ubuntu-latest
+    # Only run benchmarks on main branch pushes, not PRs
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
     - uses: dtolnay/rust-toolchain@stable
+    - uses: Swatinem/rust-cache@v2
     - name: Run benchmarks
       run: cargo bench --workspace
-    - name: Check for regressions
-      run: |
-        # TODO: Implement regression detection
-        echo "Performance regression check placeholder"
 
   coverage:
     name: Code Coverage
@@ -54,19 +64,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: dtolnay/rust-toolchain@stable
+    - uses: Swatinem/rust-cache@v2
     - name: Install tarpaulin
       run: cargo install cargo-tarpaulin
     - name: Generate coverage
-      run: cargo tarpaulin --workspace --out Xml
+      run: cargo tarpaulin --workspace --out xml --output-dir .
     - name: Upload to codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         files: cobertura.xml
-
-  # TODO: Add jobs for:
-  # - Security audit (cargo audit)
-  # - Dependency check (cargo outdated)
-  # - Documentation build
-  # - Release builds for multiple platforms
-  # - Performance regression analysis
-  # - Memory usage profiling
+        token: ${{ secrets.CODECOV_TOKEN }}
+        fail_ci_if_error: false

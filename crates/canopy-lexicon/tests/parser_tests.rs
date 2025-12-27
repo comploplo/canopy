@@ -387,7 +387,7 @@ mod parser_tests {
             let path_clone = Arc::clone(&path);
             let handle = thread::spawn(move || {
                 let parser = XmlParser::new();
-                let result = parser.parse_file::<LexiconXmlResource>(&*path_clone);
+                let result = parser.parse_file::<LexiconXmlResource>(&path_clone);
                 assert!(result.is_ok(), "Thread {} parsing should succeed", i);
                 result.unwrap().database.stats().total_words
             });

@@ -40,8 +40,7 @@ mod tests {
         let result = loader.load_database(temp_dir.to_str().unwrap());
 
         // Should handle empty directory
-        if result.is_ok() {
-            let database = result.unwrap();
+        if let Ok(database) = result {
             assert_eq!(database.synsets.len(), 0);
         }
 
@@ -78,9 +77,11 @@ mod tests {
 
     #[test]
     fn test_loader_with_custom_config() {
-        let mut config = WordNetParserConfig::default();
-        config.strict_mode = true;
-        config.max_file_size = 1024 * 1024; // 1MB
+        let config = WordNetParserConfig {
+            strict_mode: true,
+            max_file_size: 1024 * 1024, // 1MB
+            ..WordNetParserConfig::default()
+        };
 
         let loader = WordNetLoader::new(config);
 
@@ -156,10 +157,9 @@ mod tests {
         for path in test_paths {
             let result = loader.load_database(path);
             // All should handle errors gracefully
-            if result.is_ok() {
+            if let Ok(database) = result {
                 // If successful, database should be valid
-                let database = result.unwrap();
-                assert!(database.synsets.len() == 0);
+                assert!(database.synsets.is_empty());
             }
         }
     }
@@ -201,6 +201,6 @@ mod tests {
         }
 
         // This test passes if it doesn't crash or run out of memory
-        assert!(true);
+        // Reaching here means test passed
     }
 }

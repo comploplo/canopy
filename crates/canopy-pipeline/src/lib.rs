@@ -198,14 +198,15 @@ mod tests {
 
     #[test]
     fn test_version_info() {
-        assert!(!VERSION.is_empty());
-        assert!(!SUPPORTED_UDPIPE_VERSIONS.is_empty());
+        // VERSION and SUPPORTED_UDPIPE_VERSIONS are non-empty string constants
+        assert_eq!(VERSION, "0.1.0");
+        assert!(SUPPORTED_UDPIPE_VERSIONS.contains(&"1.2"));
     }
 
     #[test]
     fn test_model_listing() {
-        let models = list_available_models();
+        let _models = list_available_models();
         // Should at least detect if models are available
-        assert!(models.len() >= 0);
+        // Reaching here means list_available_models() succeeded
     }
 }

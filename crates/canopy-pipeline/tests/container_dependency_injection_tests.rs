@@ -34,7 +34,7 @@ mod tests {
             }
         }
 
-        fn parse_calls(&self) -> usize {
+        fn _parse_calls(&self) -> usize {
             *self.parse_count.lock().unwrap()
         }
     }
@@ -94,7 +94,7 @@ mod tests {
             }
         }
 
-        fn analyze_calls(&self) -> usize {
+        fn _analyze_calls(&self) -> usize {
             *self.analyze_count.lock().unwrap()
         }
     }
@@ -171,7 +171,7 @@ mod tests {
             }
         }
 
-        fn extract_calls(&self) -> usize {
+        fn _extract_calls(&self) -> usize {
             *self.extract_count.lock().unwrap()
         }
     }
@@ -226,7 +226,7 @@ mod tests {
             }
         }
 
-        fn load_calls(&self) -> usize {
+        fn _load_calls(&self) -> usize {
             *self.load_count.lock().unwrap()
         }
     }
@@ -409,7 +409,7 @@ mod tests {
             metrics
                 .timings
                 .entry(operation.to_string())
-                .or_insert_with(Vec::new)
+                .or_default()
                 .push(duration_ms);
         }
 

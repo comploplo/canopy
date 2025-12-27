@@ -309,7 +309,7 @@ mod tests {
         assert!(!book_sense.hypernyms.is_empty());
 
         // Test hypernym lookup
-        let hypernyms = engine.get_hypernyms(&book_sense.synset_id);
+        let _hypernyms = engine.get_hypernyms(&book_sense.synset_id);
         // Note: This will be empty in our simple test data structure
         // A full implementation would have proper bidirectional relations
     }

@@ -1,10 +1,8 @@
 //! Comprehensive tests for Pipeline functionality
 
-use canopy_pipeline::container::PipelineContainer;
 use canopy_pipeline::error::PipelineError;
 use canopy_pipeline::pipeline::{
-    LinguisticPipeline, PipelineBuilder, PipelineConfig, PipelineContext, PipelineMetrics,
-    PipelineStage, StageResult,
+    PipelineBuilder, PipelineConfig, PipelineContext, PipelineMetrics, PipelineStage, StageResult,
 };
 use canopy_pipeline::traits::PerformanceMode;
 use std::collections::HashMap;
@@ -92,11 +90,12 @@ mod tests {
     #[test]
     #[ignore] // Temporarily disabled due to test failure
     fn test_pipeline_metrics_edge_cases() {
-        let mut metrics = PipelineMetrics::default();
-
         // Test with zero total time but texts processed
-        metrics.texts_processed = 5;
-        metrics.total_time = Duration::ZERO;
+        let mut metrics = PipelineMetrics {
+            texts_processed: 5,
+            total_time: Duration::ZERO,
+            ..PipelineMetrics::default()
+        };
         assert!(metrics.throughput().is_infinite());
 
         // Test with non-zero time
@@ -143,7 +142,7 @@ mod tests {
 
     #[test]
     fn test_pipeline_stage_enum() {
-        let stages = vec![
+        let stages = [
             PipelineStage::Input,
             PipelineStage::Layer1Parsing,
             PipelineStage::FeatureExtraction,
@@ -187,8 +186,6 @@ mod tests {
     fn test_pipeline_builder_creation() {
         let builder = PipelineBuilder::new();
 
-        // Test that builder has default config
-        let default_config = PipelineConfig::default();
         // We can't directly access the config, but we can test the build fails without container
         let result = builder.build();
         assert!(result.is_err());
@@ -230,7 +227,7 @@ mod tests {
     #[test]
     fn test_performance_mode_variants() {
         // Test that all performance mode variants exist and are distinct
-        let modes = vec![
+        let modes = [
             PerformanceMode::Accuracy,
             PerformanceMode::Balanced,
             PerformanceMode::Speed,

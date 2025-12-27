@@ -80,7 +80,11 @@ fn test_performance_metrics_query_recording_comprehensive() {
 
     // Test QPS calculation (might be 0 if uptime is 0 in tests)
     assert!(metrics.queries_per_second >= 0.0);
-    assert!(metrics.uptime_secs >= 0);
+    // uptime_secs is u64, so it's always >= 0 by type - verify it's reasonable instead
+    assert!(
+        metrics.uptime_secs < 3600,
+        "uptime should be reasonable in tests"
+    );
 }
 
 #[test]

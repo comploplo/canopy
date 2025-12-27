@@ -3,12 +3,9 @@
 use canopy_framenet::{
     utils, CoreType, DataLoader, Frame, FrameElement, FrameElementRealization, FrameNetAnalysis,
     FrameNetConfig, FrameNetEngine, FrameParser, FrameRelation, Lexeme, LexicalUnit,
-    LexicalUnitRef, SemanticEngine, SemanticType, StatisticsProvider, SubcategorizationPattern,
-    ValencePattern, ValenceUnit,
+    LexicalUnitRef, SemanticEngine, SemanticType, SubcategorizationPattern, ValencePattern,
+    ValenceUnit,
 };
-use std::fs;
-use std::io::Write;
-use tempfile::TempDir;
 
 #[cfg(test)]
 mod framenet_tests {
@@ -116,55 +113,6 @@ mod framenet_tests {
                 }],
             }],
         }
-    }
-
-    fn create_test_xml_files(temp_dir: &TempDir) -> std::io::Result<()> {
-        let frames_dir = temp_dir.path().join("frame");
-        let lu_dir = temp_dir.path().join("lu");
-
-        fs::create_dir_all(&frames_dir)?;
-        fs::create_dir_all(&lu_dir)?;
-
-        // Create a simple frame XML file
-        let frame_xml = r#"<?xml version="1.0" encoding="UTF-8"?>
-<frame xmlns="http://framenet.icsi.berkeley.edu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" cBy="test" cDate="01/01/2023" name="Giving" ID="1">
-    <definition>A frame about giving actions</definition>
-    <FE bgColor="FF0000" fgColor="FFFFFF" coreType="Core" cBy="test" cDate="01/01/2023" abbrev="Agt" name="Agent" ID="1">
-        <definition>The entity that gives</definition>
-    </FE>
-    <FE bgColor="00FF00" fgColor="000000" coreType="Core" cBy="test" cDate="01/01/2023" abbrev="Thm" name="Theme" ID="2">
-        <definition>The entity that is given</definition>
-    </FE>
-    <lexUnit status="Created" POS="V" name="give.v" ID="1" lemmaID="1" cBy="test" cDate="01/01/2023" totalAnnotated="100">
-        <definition>To transfer possession</definition>
-        <lexeme POS="V" name="give" order="1" headword="true" breakBefore="false"/>
-    </lexUnit>
-    <frameRelation type="Inheritance">
-        <relatedFrame ID="2">Event</relatedFrame>
-    </frameRelation>
-</frame>"#;
-
-        let mut frame_file = fs::File::create(frames_dir.join("Giving.xml"))?;
-        frame_file.write_all(frame_xml.as_bytes())?;
-
-        // Create a simple LU XML file
-        let lu_xml = r#"<?xml version="1.0" encoding="UTF-8"?>
-<lexUnit xmlns="http://framenet.icsi.berkeley.edu" frame="Giving" frameID="1" POS="V" name="give.v" ID="1" cBy="test" cDate="01/01/2023" status="Created" totalAnnotated="100">
-    <definition>To transfer possession of something to someone</definition>
-    <lexeme POS="V" name="give" order="1" headword="true" breakBefore="false"/>
-    <valences>
-        <valence ID="1" total="50">
-            <FE name="Agent" total="45"/>
-            <FE name="Theme" total="50"/>
-            <FE name="Recipient" total="40"/>
-        </valence>
-    </valences>
-</lexUnit>"#;
-
-        let mut lu_file = fs::File::create(lu_dir.join("give.v.xml"))?;
-        lu_file.write_all(lu_xml.as_bytes())?;
-
-        Ok(())
     }
 
     #[test]
@@ -555,11 +503,13 @@ mod framenet_tests {
 
     #[test]
     fn test_engine_caching_behavior() {
-        let mut config = FrameNetConfig::default();
-        config.enable_cache = true;
-        config.cache_capacity = 100;
+        let config = FrameNetConfig {
+            enable_cache: true,
+            cache_capacity: 100,
+            ..FrameNetConfig::default()
+        };
 
-        let mut engine = FrameNetEngine::with_config(config).unwrap();
+        let engine = FrameNetEngine::with_config(config).unwrap();
 
         // First analysis
         let result1 = engine.analyze_text("test");
@@ -671,7 +621,7 @@ mod framenet_tests {
         for i in 0..5 {
             let engine_clone = Arc::clone(&engine);
             let handle = thread::spawn(move || {
-                let mut eng = engine_clone.lock().unwrap();
+                let eng = engine_clone.lock().unwrap();
                 let result = eng.analyze_text(&format!("test{}", i));
                 result.is_ok()
             });

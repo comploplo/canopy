@@ -1,6 +1,6 @@
 //! Comprehensive tests for VerbNet engine to achieve 95%+ coverage
 
-use canopy_engine::{CachedEngine, EngineCore, SemanticEngine};
+use canopy_engine::EngineCore;
 use canopy_verbnet::engine::VerbNetEngine;
 use canopy_verbnet::types::VerbNetConfig;
 use std::fs;
@@ -404,7 +404,7 @@ mod engine_coverage_tests {
         let result = engine.analyze(&input).unwrap();
         assert_eq!(result.data.verb, "walk");
         assert!(result.confidence > 0.5);
-        assert!(result.processing_time_us >= 0); // BaseEngine tracks actual processing time
+        assert!(result.processing_time_us < 1_000_000_000); // Reasonable upper bound
     }
 
     #[test]

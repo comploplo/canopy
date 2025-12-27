@@ -708,7 +708,7 @@ mod types_tests {
         let _database_debug = format!("{:?}", database);
 
         // If we reach here, Debug trait works for all types
-        assert!(true);
+        // Reaching here without panic = test passes
     }
 
     #[test]
@@ -765,8 +765,7 @@ mod types_tests {
         // Test empty strings and whitespace
         let synset2 = create_test_synset(2, PartOfSpeech::Noun, vec!["   "], "   ;   \"  \"  ");
         assert_eq!(synset2.definition(), "");
-        let examples2 = synset2.examples();
-        // The example parsing might not work as expected with whitespace, check actual behavior
-        assert!(examples2.len() >= 0);
+        let _examples2 = synset2.examples();
+        // The example parsing might not work as expected with whitespace - just verify it parses
     }
 }

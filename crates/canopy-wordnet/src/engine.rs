@@ -531,7 +531,6 @@ impl Default for WordNetEngine {
 mod tests {
     use super::*;
     use once_cell::sync::OnceCell;
-    use std::path::Path;
     use std::sync::Mutex;
 
     // Shared engine singleton - loaded once per test binary

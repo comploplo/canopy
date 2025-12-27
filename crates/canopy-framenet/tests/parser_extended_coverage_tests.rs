@@ -152,10 +152,9 @@ mod extended_coverage_tests {
         </frame>"#;
 
         let mut reader = Reader::from_str(xml);
-        let frame = Frame::parse_xml(&mut reader).unwrap();
+        let _frame = Frame::parse_xml(&mut reader).unwrap();
 
-        // Parser implementation may not fully populate these yet
-        assert!(frame.frame_relations.is_empty() || frame.frame_relations.len() > 0);
+        // Parser implementation may not fully populate these yet - just verify it parses
     }
 
     #[test]
@@ -172,7 +171,7 @@ mod extended_coverage_tests {
         // Basic structure validation - parser may not fully implement lexemes yet
         assert_eq!(lu.id, "456");
         assert_eq!(lu.name, "phrasal.v");
-        assert!(lu.lexemes.is_empty() || lu.lexemes.len() > 0); // May not be implemented yet
+        // lu.lexemes may or may not be implemented yet - just verify parsing succeeds
     }
 
     #[test]
@@ -287,8 +286,7 @@ mod extended_coverage_tests {
 
         assert_eq!(lu.id, "555");
         assert_eq!(lu.name, "complex.v");
-        // Valence parsing may not be fully implemented - check basic structure
-        assert!(lu.valences.is_empty() || lu.valences.len() > 0);
+        // Valence parsing may not be fully implemented - just verify parsing succeeds
     }
 
     #[test]
@@ -455,7 +453,6 @@ mod extended_coverage_tests {
         assert_eq!(frame.frame_elements.len(), 1);
         let fe = &frame.frame_elements[0];
         assert_eq!(fe.name, "Agent");
-        // Semantic types may not be fully implemented yet
-        assert!(fe.semantic_types.is_empty() || fe.semantic_types.len() > 0);
+        // Semantic types may not be fully implemented yet - just verify parsing succeeds
     }
 }

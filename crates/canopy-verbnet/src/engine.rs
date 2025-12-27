@@ -576,7 +576,6 @@ mod tests {
     use super::*;
     use once_cell::sync::OnceCell;
     use std::fs;
-    use std::path::Path;
     use std::sync::Mutex;
     use tempfile::tempdir;
 

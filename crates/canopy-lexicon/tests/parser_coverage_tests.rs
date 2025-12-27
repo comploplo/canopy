@@ -164,7 +164,7 @@ fn test_parse_error_handling() {
     let cursor = Cursor::new(invalid_xml);
     let mut reader = Reader::from_reader(cursor);
 
-    let result = LexiconXmlResource::parse_xml(&mut reader);
+    let _result = LexiconXmlResource::parse_xml(&mut reader);
     // Parser may not validate all error cases strictly
     // assert!(result.is_err());
 
@@ -183,7 +183,7 @@ fn test_parse_error_handling() {
     let cursor = Cursor::new(invalid_confidence);
     let mut reader = Reader::from_reader(cursor);
 
-    let result = LexiconXmlResource::parse_xml(&mut reader);
+    let _result = LexiconXmlResource::parse_xml(&mut reader);
     // Parser may not validate all error cases strictly
     // assert!(result.is_err());
 }
@@ -207,7 +207,7 @@ fn test_property_type_parsing() {
     let cursor = Cursor::new(xml);
     let mut reader = Reader::from_reader(cursor);
 
-    let result = LexiconXmlResource::parse_xml(&mut reader);
+    let _result = LexiconXmlResource::parse_xml(&mut reader);
     // Parser may not validate property types strictly - allowing this to pass
     // assert!(result.is_err());
 
@@ -229,7 +229,7 @@ fn test_property_type_parsing() {
     let cursor = Cursor::new(xml);
     let mut reader = Reader::from_reader(cursor);
 
-    let result = LexiconXmlResource::parse_xml(&mut reader);
+    let _result = LexiconXmlResource::parse_xml(&mut reader);
     // Parser may not validate all error cases strictly
     // assert!(result.is_err());
 }
@@ -256,7 +256,7 @@ fn test_pattern_error_handling() {
     let cursor = Cursor::new(xml);
     let mut reader = Reader::from_reader(cursor);
 
-    let result = LexiconXmlResource::parse_xml(&mut reader);
+    let _result = LexiconXmlResource::parse_xml(&mut reader);
     // Parser may not validate all error cases strictly
     // assert!(result.is_err());
 
@@ -280,7 +280,7 @@ fn test_pattern_error_handling() {
     let cursor = Cursor::new(xml);
     let mut reader = Reader::from_reader(cursor);
 
-    let result = LexiconXmlResource::parse_xml(&mut reader);
+    let _result = LexiconXmlResource::parse_xml(&mut reader);
     // Parser may not validate all error cases strictly
     // assert!(result.is_err());
 }
@@ -341,7 +341,7 @@ fn test_malformed_xml() {
     let cursor = Cursor::new(malformed_xml);
     let mut reader = Reader::from_reader(cursor);
 
-    let result = LexiconXmlResource::parse_xml(&mut reader);
+    let _result = LexiconXmlResource::parse_xml(&mut reader);
     // Parser may not validate all error cases strictly
     // assert!(result.is_err());
 }
@@ -362,7 +362,7 @@ fn test_unknown_word_class_type() {
     let cursor = Cursor::new(xml);
     let mut reader = Reader::from_reader(cursor);
 
-    let result = LexiconXmlResource::parse_xml(&mut reader);
+    let _result = LexiconXmlResource::parse_xml(&mut reader);
     // Parser may not validate all error cases strictly
     // assert!(result.is_err());
 }
@@ -386,7 +386,7 @@ fn test_empty_property_name() {
     let cursor = Cursor::new(xml);
     let mut reader = Reader::from_reader(cursor);
 
-    let result = LexiconXmlResource::parse_xml(&mut reader);
+    let _result = LexiconXmlResource::parse_xml(&mut reader);
     // Parser may not validate all error cases strictly
     // assert!(result.is_err());
 }

@@ -101,9 +101,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut processed = 0;
 
     for word in &test_words {
-        match coordinator.analyze(word) {
-            Ok(_) => processed += 1,
-            Err(_) => {}
+        if coordinator.analyze(word).is_ok() {
+            processed += 1;
         }
     }
 

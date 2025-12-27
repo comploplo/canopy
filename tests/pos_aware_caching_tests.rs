@@ -336,7 +336,7 @@ mod pos_aware_caching_tests {
         for word in suffix_words {
             let result = coordinator
                 .analyze(word)
-                .expect(&format!("Analysis of '{}' should succeed", word));
+                .unwrap_or_else(|_| panic!("Analysis of '{}' should succeed", word));
 
             // Verify we got a result (early exit found something)
             assert!(

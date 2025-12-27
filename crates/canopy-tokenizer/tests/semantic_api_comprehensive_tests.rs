@@ -73,9 +73,11 @@ mod tests {
 
     #[test]
     fn test_semantic_analyzer_with_custom_config() {
-        let mut config = SemanticConfig::default();
-        config.confidence_threshold = 0.8;
-        config.enable_gpu = false;
+        let config = SemanticConfig {
+            confidence_threshold: 0.8,
+            enable_gpu: false,
+            ..SemanticConfig::default()
+        };
 
         let analyzer = SemanticAnalyzer::new(config);
         assert!(analyzer.is_ok());
@@ -120,13 +122,13 @@ mod tests {
         assert_eq!(output.tokens.len(), 4);
 
         // Check for potential quantifier detection
-        let has_quantifier = output
+        let _has_quantifier = output
             .tokens
             .iter()
             .any(|t| t.semantic_class == SemanticClass::Quantifier);
 
-        // Even if no quantifier detected, the analysis should succeed
-        assert!(has_quantifier || !has_quantifier); // Always true but tests the path
+        // Analysis completes successfully regardless of quantifier detection
+        // The path through the quantifier check is tested by reaching here
     }
 
     #[test]
@@ -146,7 +148,8 @@ mod tests {
             .collect();
 
         // May or may not find predicates depending on engine data
-        assert!(predicate_tokens.len() >= 0);
+        // Verify count is reasonable (not absurdly large)
+        assert!(predicate_tokens.len() < 100);
     }
 
     #[test]
@@ -164,13 +167,15 @@ mod tests {
             .filter(|t| t.semantic_class == SemanticClass::Function)
             .collect();
 
-        assert!(function_tokens.len() >= 1); // "the" should be function word
+        assert!(!function_tokens.is_empty()); // "the" should be function word
     }
 
     #[test]
     fn test_confidence_threshold_filtering() {
-        let mut config = SemanticConfig::default();
-        config.confidence_threshold = 0.95; // Very high threshold
+        let config = SemanticConfig {
+            confidence_threshold: 0.95, // Very high threshold
+            ..SemanticConfig::default()
+        };
 
         let analyzer = SemanticAnalyzer::new(config).unwrap();
         let result = analyzer.analyze("John gave Mary a book");
@@ -186,8 +191,10 @@ mod tests {
 
     #[test]
     fn test_confidence_threshold_low() {
-        let mut config = SemanticConfig::default();
-        config.confidence_threshold = 0.1; // Very low threshold
+        let config = SemanticConfig {
+            confidence_threshold: 0.1, // Very low threshold
+            ..SemanticConfig::default()
+        };
 
         let analyzer = SemanticAnalyzer::new(config).unwrap();
         let result = analyzer.analyze("run jump fly");
@@ -213,9 +220,10 @@ mod tests {
         assert_eq!(token.text, "run");
         assert!(!token.lemma.is_empty());
         assert!(token.confidence >= 0.0 && token.confidence <= 1.0);
-        assert!(token.frames.len() >= 0);
-        assert!(token.verbnet_classes.len() >= 0);
-        assert!(token.wordnet_senses.len() >= 0);
+        // Verify result counts are reasonable (not absurdly large)
+        assert!(token.frames.len() < 1000);
+        assert!(token.verbnet_classes.len() < 1000);
+        assert!(token.wordnet_senses.len() < 1000);
     }
 
     #[test]
@@ -317,7 +325,7 @@ mod tests {
         assert_eq!(SemanticClass::Predicate, SemanticClass::Predicate);
         assert_ne!(SemanticClass::Predicate, SemanticClass::Argument);
 
-        let classes = vec![
+        let classes = [
             SemanticClass::Predicate,
             SemanticClass::Argument,
             SemanticClass::Modifier,
@@ -331,7 +339,7 @@ mod tests {
 
     #[test]
     fn test_aspectual_class_variants() {
-        let classes = vec![
+        let classes = [
             AspectualClass::State,
             AspectualClass::Activity,
             AspectualClass::Accomplishment,
@@ -346,7 +354,7 @@ mod tests {
 
     #[test]
     fn test_inflection_type_variants() {
-        let types = vec![
+        let types = [
             InflectionType::Verbal,
             InflectionType::Nominal,
             InflectionType::Adjectival,
@@ -360,7 +368,7 @@ mod tests {
 
     #[test]
     fn test_quantifier_type_variants() {
-        let types = vec![
+        let types = [
             QuantifierType::Universal,
             QuantifierType::Existential,
             QuantifierType::Definite,
@@ -622,10 +630,10 @@ mod tests {
         let output = result.unwrap();
         let logical_form = &output.logical_form;
 
-        // Should have some logical structure
-        assert!(logical_form.predicates.len() >= 0);
-        assert!(logical_form.variables.len() >= 0);
-        assert!(logical_form.quantifiers.len() >= 0);
+        // Should have reasonable logical structure (not absurdly large)
+        assert!(logical_form.predicates.len() < 1000);
+        assert!(logical_form.variables.len() < 1000);
+        assert!(logical_form.quantifiers.len() < 100);
 
         // Test quantifier detection logic
         for quantifier in &logical_form.quantifiers {
@@ -695,9 +703,10 @@ mod tests {
         // Check selectional restrictions on predicates
         for predicate in &output.predicates {
             // May or may not have restrictions depending on VerbNet data
-            assert!(predicate.selectional_restrictions.len() >= 0);
+            // Verify count is reasonable (not absurdly large)
+            assert!(predicate.selectional_restrictions.len() < 1000);
 
-            for (_role, restrictions) in &predicate.selectional_restrictions {
+            for restrictions in predicate.selectional_restrictions.values() {
                 for restriction in restrictions {
                     assert!(!restriction.restriction_type.is_empty());
                     assert!(restriction.strength >= 0.0);
@@ -710,13 +719,17 @@ mod tests {
     #[test]
     fn test_parallel_vs_sequential_processing() {
         // Test with parallel processing enabled
-        let mut parallel_config = SemanticConfig::default();
-        parallel_config.parallel_processing = true;
+        let parallel_config = SemanticConfig {
+            parallel_processing: true,
+            ..SemanticConfig::default()
+        };
         let parallel_analyzer = SemanticAnalyzer::new(parallel_config).unwrap();
 
         // Test with parallel processing disabled
-        let mut sequential_config = SemanticConfig::default();
-        sequential_config.parallel_processing = false;
+        let sequential_config = SemanticConfig {
+            parallel_processing: false,
+            ..SemanticConfig::default()
+        };
         let sequential_analyzer = SemanticAnalyzer::new(sequential_config).unwrap();
 
         let text = "The quick brown fox jumps over the lazy dog";
@@ -735,21 +748,27 @@ mod tests {
     #[test]
     fn test_engine_configuration_variants() {
         // Test with only FrameNet enabled
-        let mut framenet_config = SemanticConfig::default();
-        framenet_config.enable_verbnet = false;
-        framenet_config.enable_wordnet = false;
+        let framenet_config = SemanticConfig {
+            enable_verbnet: false,
+            enable_wordnet: false,
+            ..SemanticConfig::default()
+        };
         let framenet_analyzer = SemanticAnalyzer::new(framenet_config).unwrap();
 
         // Test with only VerbNet enabled
-        let mut verbnet_config = SemanticConfig::default();
-        verbnet_config.enable_framenet = false;
-        verbnet_config.enable_wordnet = false;
+        let verbnet_config = SemanticConfig {
+            enable_framenet: false,
+            enable_wordnet: false,
+            ..SemanticConfig::default()
+        };
         let verbnet_analyzer = SemanticAnalyzer::new(verbnet_config).unwrap();
 
         // Test with only WordNet enabled
-        let mut wordnet_config = SemanticConfig::default();
-        wordnet_config.enable_framenet = false;
-        wordnet_config.enable_verbnet = false;
+        let wordnet_config = SemanticConfig {
+            enable_framenet: false,
+            enable_verbnet: false,
+            ..SemanticConfig::default()
+        };
         let wordnet_analyzer = SemanticAnalyzer::new(wordnet_config).unwrap();
 
         let text = "John runs quickly";

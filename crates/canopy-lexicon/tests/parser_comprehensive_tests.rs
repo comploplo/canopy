@@ -6,7 +6,6 @@ use canopy_engine::{XmlParser, XmlResource};
 use canopy_lexicon::parser::LexiconXmlResource;
 use std::fs::File;
 use std::io::Write;
-use std::path::Path;
 use tempfile::TempDir;
 
 #[cfg(test)]

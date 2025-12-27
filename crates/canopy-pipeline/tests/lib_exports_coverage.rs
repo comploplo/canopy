@@ -7,14 +7,14 @@ fn test_pipeline_lib_exports() {
     // Test that key types can be accessed
     let _ = std::any::type_name::<error::PipelineError>();
     let _ = std::any::type_name::<pipeline::PipelineConfig>();
-    assert!(true, "Pipeline lib exports should be accessible");
+    // Reaching here means pipeline lib exports are accessible
 }
 
 #[test]
 fn test_pipeline_lib_functions() {
     // Test any public library functions
     // This exercises module initialization and exports
-    assert!(true, "Pipeline lib functions should be callable");
+    // Reaching here means pipeline lib functions are callable
 }
 
 #[test]
@@ -29,12 +29,12 @@ fn test_pipeline_lib_traits() {
 fn test_pipeline_lib_containers() {
     // Test container exports
     use canopy_pipeline::container::ContainerBuilder;
-    let builder = ContainerBuilder::new();
-    assert!(true, "Container builder should be accessible");
+    let _builder = ContainerBuilder::new();
+    // Reaching here means container builder is accessible
 }
 
 #[test]
 fn test_pipeline_lib_models() {
     // Test that models are exported
-    assert!(true, "Models should be accessible");
+    // Reaching here means models are accessible
 }

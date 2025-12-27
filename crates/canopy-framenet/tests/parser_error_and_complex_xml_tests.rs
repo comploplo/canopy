@@ -38,8 +38,7 @@ mod error_and_complex_xml_tests {
         let result = Frame::parse_xml(&mut reader);
 
         // Should either error during FE parsing or handle gracefully
-        if result.is_err() {
-            let error = result.unwrap_err();
+        if let Err(error) = result {
             assert!(matches!(error, EngineError::DataLoadError { .. }));
         }
     }
@@ -208,14 +207,15 @@ mod error_and_complex_xml_tests {
         let result = LexicalUnit::parse_xml(&mut reader);
 
         // Test validation logic for missing name
-        if result.is_err() {
-            let error = result.unwrap_err();
-            assert!(matches!(error, EngineError::DataLoadError { .. }));
-            assert!(error.to_string().contains("missing required name"));
-        } else {
-            // Or it may allow empty name - both are valid behaviors
-            let lu = result.unwrap();
-            assert!(lu.name.is_empty());
+        match result {
+            Err(error) => {
+                assert!(matches!(error, EngineError::DataLoadError { .. }));
+                assert!(error.to_string().contains("missing required name"));
+            }
+            Ok(lu) => {
+                // Or it may allow empty name - both are valid behaviors
+                assert!(lu.name.is_empty());
+            }
         }
     }
 
@@ -269,10 +269,7 @@ mod error_and_complex_xml_tests {
         let result = Frame::parse_xml(&mut reader);
 
         // Should either parse successfully (ignoring malformed attr) or error gracefully
-        assert!(result.is_ok() || result.is_err());
-
-        if result.is_ok() {
-            let frame = result.unwrap();
+        if let Ok(frame) = result {
             assert_eq!(frame.id, "123");
             assert_eq!(frame.name, "TestFrame");
         }
@@ -289,16 +286,17 @@ mod error_and_complex_xml_tests {
         let result = Frame::parse_xml(&mut reader);
 
         // Should handle XML parsing errors in text extraction gracefully
-        if result.is_err() {
-            let error = result.unwrap_err();
-            assert!(matches!(error, EngineError::DataLoadError { .. }));
-            // Accept any data load error message
-            assert!(!error.to_string().is_empty());
-        } else {
-            // Or extract what it can
-            let frame = result.unwrap();
-            assert_eq!(frame.id, "123");
-            assert_eq!(frame.name, "TestFrame");
+        match result {
+            Err(error) => {
+                assert!(matches!(error, EngineError::DataLoadError { .. }));
+                // Accept any data load error message
+                assert!(!error.to_string().is_empty());
+            }
+            Ok(frame) => {
+                // Or extract what it can
+                assert_eq!(frame.id, "123");
+                assert_eq!(frame.name, "TestFrame");
+            }
         }
     }
 
@@ -318,16 +316,17 @@ mod error_and_complex_xml_tests {
         let result = Frame::parse_xml(&mut reader);
 
         // Should handle XML errors during element skipping
-        if result.is_err() {
-            let error = result.unwrap_err();
-            assert!(matches!(error, EngineError::DataLoadError { .. }));
-            assert!(error.to_string().contains("XML parsing error"));
-        } else {
-            // Or skip the problematic element and continue
-            let frame = result.unwrap();
-            assert_eq!(frame.id, "123");
-            assert_eq!(frame.name, "TestFrame");
-            // Should have parsed the definition after skipping the unknown element
+        match result {
+            Err(error) => {
+                assert!(matches!(error, EngineError::DataLoadError { .. }));
+                assert!(error.to_string().contains("XML parsing error"));
+            }
+            Ok(frame) => {
+                // Or skip the problematic element and continue
+                assert_eq!(frame.id, "123");
+                assert_eq!(frame.name, "TestFrame");
+                // Should have parsed the definition after skipping the unknown element
+            }
         }
     }
 

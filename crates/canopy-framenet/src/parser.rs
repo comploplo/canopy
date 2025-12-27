@@ -766,7 +766,6 @@ fn clean_definition(definition: &str) -> String {
 mod tests {
     use super::*;
     use quick_xml::Reader;
-    use std::io::Cursor;
 
     #[test]
     fn test_parse_simple_frame() {

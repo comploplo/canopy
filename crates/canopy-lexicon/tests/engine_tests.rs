@@ -102,7 +102,7 @@ mod engine_tests {
     #[test]
     fn test_cache_operations() {
         let config = LexiconConfig::default();
-        let mut engine = LexiconEngine::with_config(config);
+        let engine = LexiconEngine::with_config(config);
 
         // Cache operations should work
         let cache_stats = engine.cache_stats();

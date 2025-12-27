@@ -7,48 +7,7 @@ use canopy_treebank::{DependencyPattern, DependencyRelation, PatternSource};
 use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
 use lru::LruCache;
 use std::collections::HashMap;
-use std::mem;
 use std::num::NonZeroUsize;
-
-/// Estimate memory usage of data structures
-fn estimate_memory_usage() -> MemoryReport {
-    // Estimate pattern memory usage
-    let sample_pattern = DependencyPattern {
-        verb_lemma: "example".to_string(),
-        dependencies: vec![
-            (DependencyRelation::from("nsubj"), "NOUN".to_string()),
-            (DependencyRelation::from("obj"), "NOUN".to_string()),
-        ],
-        confidence: 0.8,
-        frequency: 42,
-        source: PatternSource::Indexed,
-    };
-
-    let pattern_size = mem::size_of_val(&sample_pattern)
-        + sample_pattern.verb_lemma.capacity()
-        + sample_pattern
-            .dependencies
-            .iter()
-            .map(|(a, b)| 20 + b.capacity()) // Estimate for DependencyRelation + string
-            .sum::<usize>()
-        + 0; // Removed source_sentences field
-
-    // Estimate signature memory usage (simplified)
-    let signature_size = 100; // Estimated basic signature size
-
-    MemoryReport {
-        pattern_size_bytes: pattern_size,
-        signature_size_bytes: signature_size,
-        estimated_total_mb: 0.0, // Will be calculated
-    }
-}
-
-#[derive(Debug)]
-struct MemoryReport {
-    pattern_size_bytes: usize,
-    signature_size_bytes: usize,
-    estimated_total_mb: f64,
-}
 
 fn bench_memory_usage_patterns(c: &mut Criterion) {
     let mut group = c.benchmark_group("memory_patterns");
@@ -195,6 +154,7 @@ fn bench_total_memory_simulation(c: &mut Criterion) {
     });
 }
 
+#[allow(dead_code)]
 #[derive(Debug)]
 struct MemoryUsageReport {
     pattern_storage_mb: f64,

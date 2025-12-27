@@ -357,11 +357,14 @@ mod tests {
     #[derive(Debug)]
     struct TestXmlResource {
         id: String,
+        #[allow(dead_code)]
         value: String,
     }
 
     impl XmlResource for TestXmlResource {
-        fn parse_xml<R: std::io::BufRead>(reader: &mut quick_xml::Reader<R>) -> EngineResult<Self> {
+        fn parse_xml<R: std::io::BufRead>(
+            _reader: &mut quick_xml::Reader<R>,
+        ) -> EngineResult<Self> {
             // Simple test implementation
             Ok(TestXmlResource {
                 id: "test".to_string(),

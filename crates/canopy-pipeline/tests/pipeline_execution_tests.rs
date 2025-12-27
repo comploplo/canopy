@@ -40,15 +40,6 @@ mod tests {
                 delay_ms: 0,
             }
         }
-
-        fn with_delay(mut self, delay_ms: u64) -> Self {
-            self.delay_ms = delay_ms;
-            self
-        }
-
-        fn parse_calls(&self) -> usize {
-            *self.parse_count.lock().unwrap()
-        }
     }
 
     #[async_trait]
@@ -193,18 +184,12 @@ mod tests {
     }
 
     #[derive(Debug)]
-    struct MockModelLoader;
-
-    impl MockModelLoader {
-        fn new() -> Self {
-            Self
-        }
-    }
+    struct _MockModelLoader;
 
     #[async_trait]
-    impl ModelLoader for MockModelLoader {
+    impl ModelLoader for _MockModelLoader {
         async fn load_model(&self, _identifier: &str) -> Result<Box<dyn Model>, AnalysisError> {
-            Ok(Box::new(MockModel::new()))
+            Ok(Box::new(_MockModel))
         }
 
         async fn is_model_available(&self, _identifier: &str) -> bool {
@@ -220,15 +205,9 @@ mod tests {
         }
     }
 
-    struct MockModel;
+    struct _MockModel;
 
-    impl MockModel {
-        fn new() -> Self {
-            Self
-        }
-    }
-
-    impl Model for MockModel {
+    impl Model for _MockModel {
         fn metadata(&self) -> &ModelMetadata {
             static METADATA: std::sync::OnceLock<ModelMetadata> = std::sync::OnceLock::new();
             METADATA.get_or_init(|| ModelMetadata {
@@ -274,16 +253,16 @@ mod tests {
             }
         }
 
-        fn with_failure(mut self) -> Self {
+        fn _with_failure(mut self) -> Self {
             self.should_fail = true;
             self
         }
 
-        fn get_calls(&self) -> usize {
+        fn _get_calls(&self) -> usize {
             *self.get_count.lock().unwrap()
         }
 
-        fn set_calls(&self) -> usize {
+        fn _set_calls(&self) -> usize {
             *self.set_count.lock().unwrap()
         }
     }
@@ -340,7 +319,7 @@ mod tests {
             metrics
                 .timings
                 .entry(operation.to_string())
-                .or_insert_with(Vec::new)
+                .or_default()
                 .push(duration_ms);
         }
 
@@ -385,7 +364,7 @@ mod tests {
             self
         }
 
-        fn with_analyzer_not_ready(mut self) -> Self {
+        fn _with_analyzer_not_ready(mut self) -> Self {
             self.analyzer_ready = false;
             self
         }
@@ -549,11 +528,13 @@ mod tests {
 
     #[test]
     fn test_pipeline_metrics_calculations() {
-        let mut metrics = PipelineMetrics::default();
-        metrics.texts_processed = 5;
-        metrics.total_time = Duration::from_millis(1000);
-        metrics.cache_hits = 3;
-        metrics.cache_misses = 2;
+        let metrics = PipelineMetrics {
+            texts_processed: 5,
+            total_time: Duration::from_millis(1000),
+            cache_hits: 3,
+            cache_misses: 2,
+            ..PipelineMetrics::default()
+        };
 
         assert_eq!(metrics.avg_processing_time(), Duration::from_millis(200));
         assert_eq!(metrics.cache_hit_rate(), 0.6);
@@ -1040,8 +1021,7 @@ mod tests {
         let analysis = result.unwrap();
         assert!(!analysis.tokens.is_empty());
         // Note: Under coverage instrumentation, timing may be 0 due to instrumentation overhead
-        // We just verify the metric is non-negative (valid u64)
-        assert!(analysis.metrics.total_time_us >= 0);
+        // total_time_us is u64, always non-negative
     }
 
     #[test]

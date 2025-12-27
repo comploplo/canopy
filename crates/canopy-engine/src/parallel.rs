@@ -352,13 +352,14 @@ mod tests {
         assert_eq!(values, vec![2, 4, 6, 8, 10]);
     }
 
+    type EngineFn = Box<dyn Fn(&i32) -> EngineResult<i32> + Send + Sync>;
+
     #[test]
     fn test_multi_engine_coordinator() {
         let processor = ParallelProcessor::new(2, true);
         let coordinator = MultiEngineCoordinator::new(processor);
 
-        let engines: Vec<Box<dyn Fn(&i32) -> EngineResult<i32> + Send + Sync>> =
-            vec![Box::new(|&x| Ok(x + 1)), Box::new(|&x| Ok(x + 2))];
+        let engines: Vec<EngineFn> = vec![Box::new(|&x| Ok(x + 1)), Box::new(|&x| Ok(x + 2))];
 
         let results = coordinator.query_engines(5, engines).unwrap();
         assert_eq!(results.len(), 2);

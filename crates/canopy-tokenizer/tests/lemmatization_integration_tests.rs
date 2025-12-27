@@ -7,9 +7,11 @@ use canopy_tokenizer::lemmatizer::{Lemmatizer, SimpleLemmatizer};
 
 #[test]
 fn test_lemmatization_integration_basic() {
-    let mut config = CoordinatorConfig::default();
-    config.enable_lemmatization = true;
-    config.use_advanced_lemmatization = false;
+    let config = CoordinatorConfig {
+        enable_lemmatization: true,
+        use_advanced_lemmatization: false,
+        ..CoordinatorConfig::default()
+    };
 
     let coordinator = SemanticCoordinator::new(config).expect("Failed to create coordinator");
 
@@ -27,8 +29,10 @@ fn test_lemmatization_integration_basic() {
 
 #[test]
 fn test_lemmatization_with_irregular_verbs() {
-    let mut config = CoordinatorConfig::default();
-    config.enable_lemmatization = true;
+    let config = CoordinatorConfig {
+        enable_lemmatization: true,
+        ..CoordinatorConfig::default()
+    };
 
     let coordinator = SemanticCoordinator::new(config).expect("Failed to create coordinator");
 
@@ -63,8 +67,10 @@ fn test_lemmatization_with_irregular_verbs() {
 
 #[test]
 fn test_lemmatization_with_nouns() {
-    let mut config = CoordinatorConfig::default();
-    config.enable_lemmatization = true;
+    let config = CoordinatorConfig {
+        enable_lemmatization: true,
+        ..CoordinatorConfig::default()
+    };
 
     let coordinator = SemanticCoordinator::new(config).expect("Failed to create coordinator");
 
@@ -89,8 +95,10 @@ fn test_lemmatization_with_nouns() {
 
 #[test]
 fn test_lemmatization_caching() {
-    let mut config = CoordinatorConfig::default();
-    config.enable_lemmatization = true;
+    let config = CoordinatorConfig {
+        enable_lemmatization: true,
+        ..CoordinatorConfig::default()
+    };
 
     let coordinator = SemanticCoordinator::new(config).expect("Failed to create coordinator");
 
@@ -137,8 +145,10 @@ fn test_lemmatization_caching() {
 
 #[test]
 fn test_lemmatization_disabled() {
-    let mut config = CoordinatorConfig::default();
-    config.enable_lemmatization = false; // Disable lemmatization
+    let config = CoordinatorConfig {
+        enable_lemmatization: false, // Disable lemmatization
+        ..CoordinatorConfig::default()
+    };
 
     let coordinator = SemanticCoordinator::new(config).expect("Failed to create coordinator");
 
@@ -154,9 +164,11 @@ fn test_lemmatization_disabled() {
 
 #[test]
 fn test_lemmatization_batch_processing() {
-    let mut config = CoordinatorConfig::default();
-    config.enable_lemmatization = true;
-    // config.enable_query_batching = true; // Field not available in current config
+    let config = CoordinatorConfig {
+        enable_lemmatization: true,
+        // enable_query_batching: true, // Field not available in current config
+        ..CoordinatorConfig::default()
+    };
 
     let coordinator = SemanticCoordinator::new(config).expect("Failed to create coordinator");
 
@@ -222,8 +234,10 @@ fn test_lemmatization_confidence_scoring() {
 
 #[test]
 fn test_lemmatization_performance_integration() {
-    let mut config = CoordinatorConfig::default();
-    config.enable_lemmatization = true;
+    let config = CoordinatorConfig {
+        enable_lemmatization: true,
+        ..CoordinatorConfig::default()
+    };
 
     let coordinator = SemanticCoordinator::new(config).expect("Failed to create coordinator");
 
@@ -269,9 +283,11 @@ fn test_lemmatization_performance_integration() {
 
 #[test]
 fn test_advanced_lemmatization_fallback() {
-    let mut config = CoordinatorConfig::default();
-    config.enable_lemmatization = true;
-    config.use_advanced_lemmatization = true; // Request advanced but without feature enabled
+    let config = CoordinatorConfig {
+        enable_lemmatization: true,
+        use_advanced_lemmatization: true, // Request advanced but without feature enabled
+        ..CoordinatorConfig::default()
+    };
 
     // Should gracefully fall back to simple lemmatizer
     let coordinator = SemanticCoordinator::new(config).expect("Should fall back gracefully");
@@ -288,9 +304,11 @@ fn test_advanced_lemmatization_fallback() {
 #[cfg(feature = "lemmatization")]
 #[test]
 fn test_advanced_lemmatization_enabled() {
-    let mut config = CoordinatorConfig::default();
-    config.enable_lemmatization = true;
-    config.use_advanced_lemmatization = true;
+    let config = CoordinatorConfig {
+        enable_lemmatization: true,
+        use_advanced_lemmatization: true,
+        ..CoordinatorConfig::default()
+    };
 
     // With feature enabled, should use NLP Rule lemmatizer
     let coordinator = SemanticCoordinator::new(config);
@@ -312,8 +330,10 @@ fn test_advanced_lemmatization_enabled() {
 
 #[test]
 fn test_lemmatization_statistics() {
-    let mut config = CoordinatorConfig::default();
-    config.enable_lemmatization = true;
+    let config = CoordinatorConfig {
+        enable_lemmatization: true,
+        ..CoordinatorConfig::default()
+    };
 
     let coordinator = SemanticCoordinator::new(config).expect("Failed to create coordinator");
 
