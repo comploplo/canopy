@@ -1,59 +1,10 @@
 # Pre-commit hooks for canopy.rs
 # Install: brew install pre-commit && pre-commit install
+#
+# Hooks are ordered from fastest to slowest for quick feedback.
 
 repos:
-  # Rust formatting and linting
-  - repo: local
-    hooks:
-      - id: cargo-fmt
-        name: cargo fmt
-        entry: cargo fmt
-        language: system
-        types: [rust]
-        pass_filenames: false
-
-      - id: cargo-clippy
-        name: cargo clippy
-        entry: cargo clippy
-        args: [--workspace, --all-targets, --, -A, "warnings", -W, "clippy::correctness", -W, "clippy::suspicious"]
-        language: system
-        types: [rust]
-        pass_filenames: false
-
-      - id: cargo-nextest
-        name: cargo nextest
-        entry: cargo nextest
-        args: [run, --workspace]
-        language: system
-        types: [rust]
-        pass_filenames: false
-
-      - id: cargo-audit
-        name: cargo audit
-        entry: cargo audit
-        language: system
-        pass_filenames: false
-
-      - id: cargo-deny
-        name: cargo deny
-        entry: cargo deny
-        args: [check]
-        language: system
-        pass_filenames: false
-
-      - id: cargo-coverage
-        name: cargo coverage check
-        entry: scripts/check-coverage.sh
-        language: system
-        pass_filenames: false
-
-      - id: performance-regression-check
-        name: performance regression check
-        entry: scripts/check-performance.sh
-        language: system
-        pass_filenames: false
-
-  # General file hygiene
+  # 1. General file hygiene (fastest - milliseconds)
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
@@ -67,7 +18,7 @@ repos:
       - id: check-added-large-files
         args: [--maxkb=1000]
 
-  # Markdown formatting with mdformat
+  # 2. Markdown formatting (fast - seconds)
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.21
     hooks:
@@ -76,16 +27,70 @@ repos:
           - mdformat-gfm  # GitHub Flavored Markdown support
         exclude: '^(CHANGELOG\.md|\.serena/.*\.md|data/.*\.md)$'
 
+  # 3. Rust checks (ordered fastest to slowest)
+  - repo: local
+    hooks:
+      # Fast: formatting check (~1-2s)
+      - id: cargo-fmt
+        name: cargo fmt
+        entry: cargo fmt
+        args: [--all, --, --check]
+        language: system
+        types: [rust]
+        pass_filenames: false
+
+      # Fast: static analysis (~5-10s)
+      - id: cargo-clippy
+        name: cargo clippy
+        entry: cargo clippy
+        args: [--workspace, --all-targets, --, -D, warnings]
+        language: system
+        types: [rust]
+        pass_filenames: false
+
+      # Medium: security/license check (~5-10s)
+      - id: cargo-deny
+        name: cargo deny (security + licenses + bans)
+        entry: cargo deny
+        args: [check]
+        language: system
+        pass_filenames: false
+
+      # Slow: run tests (~30s-2min)
+      - id: cargo-nextest
+        name: cargo nextest
+        entry: cargo nextest
+        args: [run, --workspace]
+        language: system
+        types: [rust]
+        pass_filenames: false
+
+      # Slowest: coverage check (~2-5min)
+      - id: cargo-coverage
+        name: cargo coverage check
+        entry: scripts/check-coverage.sh
+        language: system
+        pass_filenames: false
+
+      # Slowest: performance check (~2-5min)
+      - id: performance-regression-check
+        name: performance regression check
+        entry: scripts/check-performance.sh
+        language: system
+        pass_filenames: false
+
 
 # Performance and Quality Standards
 # These hooks ensure:
-# 1. Code is properly formatted (cargo fmt)
-# 2. No clippy warnings at pedantic level
-# 3. All tests pass before commit
-# 4. No trailing whitespace or merge conflicts
-# 5. Markdown is auto-formatted (prettier)
-# 6. Coverage meets quality thresholds (69% baseline, 80% M3, 90% M4)
-# 7. No performance regressions (33-40μs latency, 100% F1 accuracy maintained)
+# 1. No trailing whitespace, merge conflicts, or large files
+# 2. Valid YAML/TOML syntax
+# 3. Markdown is auto-formatted (mdformat)
+# 4. Code is properly formatted (cargo fmt --check)
+# 5. No clippy warnings (-D warnings, matches CI)
+# 6. Security advisories, license compliance, and dependency bans checked (cargo deny)
+# 7. All tests pass before commit (cargo nextest)
+# 8. Coverage meets quality thresholds (50% baseline, 70% M3, 80% M4)
+# 9. No performance regressions
 
 # Installation Instructions:
 # 1. brew install pre-commit

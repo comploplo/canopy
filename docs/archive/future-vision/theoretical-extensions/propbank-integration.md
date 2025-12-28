@@ -4,13 +4,14 @@
 
 PropBank provides corpus-validated argument structure annotations that complement VerbNet's theoretical classifications. For canopy.rs M4, we integrate PropBank to enhance theta role confidence and provide empirical validation of our semantic analysis.
 
-**Core Innovation**: Real-time PropBank frame matching that operates in <75μs, providing corpus-validated argument structure to enhance VerbNet-based theta role assignment.
+**Core Innovation**: Real-time PropBank frame matching that operates in \<75μs, providing corpus-validated argument structure to enhance VerbNet-based theta role assignment.
 
 ## Theoretical Foundation
 
 ### PropBank Framework
 
 PropBank annotates predicate-argument structure with numbered arguments:
+
 - **Arg0**: Proto-agent (typically corresponds to Agent, Experiencer, Causer)
 - **Arg1**: Proto-patient (typically corresponds to Patient, Theme)
 - **Arg2**: Beneficiary, Instrument, Attribute, End state
@@ -497,7 +498,8 @@ impl MLPropBankEnhancer {
 
 PropBank integration in M4 provides corpus-validated argument structure that significantly enhances the confidence and accuracy of our theta role assignment. By combining VerbNet's theoretical framework with PropBank's empirical annotations, we create a robust semantic analysis system that leverages both formal linguistic theory and real-world usage patterns.
 
-The integration operates within our <75μs performance budget while providing:
+The integration operates within our \<75μs performance budget while providing:
+
 - **Cross-validation** between theoretical and corpus-based approaches
 - **Enhanced confidence** through multiple evidence sources
 - **Empirical grounding** for semantic role assignment

@@ -8,6 +8,7 @@ members = [
     "crates/canopy-treebank",       # UD Treebank dependency pattern analysis
     "crates/canopy-tokenizer",      # Semantic tokenization with consolidated engines
     "crates/canopy-events",         # Layer 2 event composition
+    "crates/canopy-discourse",      # Layer 3 DRT and discourse context
     "crates/canopy-pipeline",       # Pipeline with semantic coordinator integration
     "crates/canopy-cli",
     "crates/canopy-wordnet",

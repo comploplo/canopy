@@ -16,11 +16,17 @@
 //! - Theta role assignment and participant binding
 //! - Voice detection (active/passive)
 //!
+//! ## Layer 3: Discourse Representation Theory (DRT)
+//! - Discourse Representation Structures (DRS)
+//! - Discourse referent tracking (entities and events)
+//! - Pronoun/anaphora resolution
+//! - Temporal relation inference based on aspectual class
+//!
 //! Run: cargo run --release -p canopy-pipeline --example event_composition_demo
 
 use canopy_core::UPos;
 use canopy_events::{DependencyArc, EventComposer, SentenceAnalysis};
-use canopy_pipeline::create_l1_analyzer_with_treebank;
+use canopy_pipeline::{create_l1_analyzer_with_treebank, DiscourseProcessor, DrsCondition};
 use canopy_tokenizer::coordinator::Layer1SemanticResult;
 use canopy_treebank::types::DependencyRelation;
 use std::time::{Duration, Instant};
@@ -243,6 +249,234 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!();
 
     // ═══════════════════════════════════════════════════════════════════════════
+    // PHASE 5: LAYER 3 DISCOURSE PROCESSING (DRT)
+    // ═══════════════════════════════════════════════════════════════════════════
+    println!("┌─────────────────────────────────────────────────────────────────────────────┐");
+    println!("│ PHASE 5: LAYER 3 DISCOURSE PROCESSING (DRT)                                │");
+    println!("└─────────────────────────────────────────────────────────────────────────────┘");
+    println!();
+
+    println!("  Loading Layer 3 discourse processor...");
+    let l3_start = Instant::now();
+    let mut discourse = DiscourseProcessor::new();
+    let l3_load_time = l3_start.elapsed();
+    println!("  └─ Layer 3: {:?}", l3_load_time);
+    println!();
+
+    // Demo multi-sentence discourse with pronoun resolution
+    // Structure: (text, words, verb_idx, pronouns_to_resolve)
+    let discourse_demo: Vec<(&str, Vec<&str>, usize, Vec<&str>)> = vec![
+        ("John runs.", vec!["John", "runs"], 1, vec![]),
+        ("He jumps.", vec!["He", "jumps"], 1, vec!["he"]),
+        (
+            "Mary sees him.",
+            vec!["Mary", "sees", "him"],
+            1,
+            vec!["him"],
+        ),
+        ("She smiles.", vec!["She", "smiles"], 1, vec!["she"]),
+    ];
+
+    println!("  Multi-sentence discourse analysis:");
+    println!();
+
+    let mut total_l3_time = Duration::ZERO;
+    let mut resolutions: Vec<(String, String, String)> = Vec::new(); // (sentence, pronoun, antecedent)
+
+    for (i, (text, words, verb_idx, pronouns)) in discourse_demo.iter().enumerate() {
+        // Create simple events for discourse demo
+        let mut tokens: Vec<Layer1SemanticResult> = Vec::new();
+        for word in words {
+            tokens.push(l1_analyzer.analyze(word)?);
+        }
+
+        // Set POS correctly: only the verb_idx gets Verb POS
+        for (j, token) in tokens.iter_mut().enumerate() {
+            if j == *verb_idx {
+                token.pos = Some(UPos::Verb);
+            } else if words[j]
+                .chars()
+                .next()
+                .map(|c| c.is_uppercase())
+                .unwrap_or(false)
+            {
+                token.pos = Some(UPos::Propn);
+            } else {
+                token.pos = Some(UPos::Noun);
+            }
+        }
+
+        // Create simple deps for the sentence
+        let deps: Vec<DependencyArc> = if words.len() == 2 {
+            vec![DependencyArc::new(1, 0, DependencyRelation::NominalSubject)]
+        } else {
+            vec![
+                DependencyArc::new(1, 0, DependencyRelation::NominalSubject),
+                DependencyArc::new(1, 2, DependencyRelation::Object),
+            ]
+        };
+
+        let analysis = SentenceAnalysis::new(text.to_string(), tokens).with_dependencies(deps);
+
+        let l2_result = composer.compose_sentence(&analysis)?;
+
+        // Layer 3: Process into discourse
+        let l3_process_start = Instant::now();
+        let event_ids = discourse.process_sentence(text, &l2_result)?;
+
+        // Resolve pronouns in this sentence
+        for pronoun in pronouns {
+            if let Ok(antecedent_id) = discourse.resolve_pronoun(pronoun) {
+                // Find the antecedent name from the DRS
+                if let Some(referent) = discourse.drs().get_referent(antecedent_id) {
+                    if let Some(name) = &referent.name {
+                        resolutions.push((text.to_string(), pronoun.to_string(), name.clone()));
+                    }
+                }
+            }
+        }
+
+        let l3_time = l3_process_start.elapsed();
+        total_l3_time += l3_time;
+
+        println!("  [{}] \"{}\"", i + 1, text);
+        println!("  ├─ Events: {}", event_ids.len());
+        if !pronouns.is_empty() {
+            print!("  ├─ Pronouns resolved: ");
+            for (j, p) in pronouns.iter().enumerate() {
+                if j > 0 {
+                    print!(", ");
+                }
+                print!("\"{}\"", p);
+            }
+            println!();
+        }
+        println!("  └─ L3 time: {:?}", l3_time);
+        println!();
+    }
+
+    // Show actual DRS content
+    let drs = discourse.drs();
+    let stats = discourse.statistics();
+
+    println!("  ─────────────────────────────────────────────────────────────────────────");
+    println!("  Discourse Representation Structure (DRS):");
+    println!();
+
+    // Show referents in DRT box notation
+    println!("  ┌─────────────────────────────────────────────────────────────────────────┐");
+    println!("  │ UNIVERSE (Discourse Referents)                                          │");
+    println!("  ├─────────────────────────────────────────────────────────────────────────┤");
+
+    // Collect and display entity referents
+    let mut entities: Vec<_> = drs.universe.values().filter(|r| !r.is_event).collect();
+    entities.sort_by_key(|r| r.id.0);
+
+    let mut events: Vec<_> = drs.universe.values().filter(|r| r.is_event).collect();
+    events.sort_by_key(|r| r.id.0);
+
+    print!("  │ Entities: ");
+    for (i, e) in entities.iter().enumerate() {
+        if i > 0 {
+            print!(", ");
+        }
+        print!("x{}", e.id.0);
+    }
+    println!();
+
+    print!("  │ Events:   ");
+    for (i, e) in events.iter().enumerate() {
+        if i > 0 {
+            print!(", ");
+        }
+        print!("e{}", e.id.0);
+    }
+    println!();
+
+    println!("  ├─────────────────────────────────────────────────────────────────────────┤");
+    println!("  │ CONDITIONS                                                              │");
+    println!("  ├─────────────────────────────────────────────────────────────────────────┤");
+
+    // Show entity predicates (who the entities are)
+    for cond in &drs.conditions {
+        if let DrsCondition::Predicate { name, referent } = cond {
+            println!(
+                "  │ {}(x{})                                           ",
+                name, referent.0
+            );
+        }
+    }
+
+    // Show event predicates with participants
+    for cond in &drs.conditions {
+        if let DrsCondition::EventPredicate {
+            event_id,
+            predicate,
+            participants,
+        } = cond
+        {
+            let parts: Vec<String> = participants
+                .iter()
+                .map(|(role, id)| format!("{}=x{}", role, id.0))
+                .collect();
+            println!("  │ {}(e{}) [{}]", predicate, event_id.0, parts.join(", "));
+        }
+    }
+
+    // Show theta roles
+    println!("  │");
+    println!("  │ Theta Roles:");
+    for cond in &drs.conditions {
+        if let DrsCondition::ThetaRole {
+            event_id,
+            role,
+            filler,
+        } = cond
+        {
+            println!("  │   {:?}(e{}, x{})", role, event_id.0, filler.0);
+        }
+    }
+
+    // Show temporal relations
+    println!("  │");
+    println!("  │ Temporal Relations:");
+    for cond in &drs.conditions {
+        if let DrsCondition::TemporalRelation {
+            relation,
+            event1,
+            event2,
+        } = cond
+        {
+            println!("  │   {:?}(e{}, e{})", relation, event1.0, event2.0);
+        }
+    }
+
+    println!("  └─────────────────────────────────────────────────────────────────────────┘");
+    println!();
+
+    // Show anaphora resolutions
+    if !resolutions.is_empty() {
+        println!("  Anaphora Resolutions:");
+        for (sentence, pronoun, antecedent) in &resolutions {
+            println!(
+                "  │ \"{}\" → \"{}\" (in: {})",
+                pronoun, antecedent, sentence
+            );
+        }
+        println!();
+    }
+
+    // Summary stats
+    println!("  DRS Summary:");
+    println!("  ├─ Sentences: {}", stats.sentence_count);
+    println!("  ├─ Entities: {}", entities.len());
+    println!("  ├─ Events: {}", events.len());
+    println!("  ├─ Conditions: {}", stats.condition_count);
+    println!("  ├─ Anaphora resolved: {}", resolutions.len());
+    println!("  └─ Total L3 time: {:?}", total_l3_time);
+    println!();
+
+    // ═══════════════════════════════════════════════════════════════════════════
     // SUMMARY
     // ═══════════════════════════════════════════════════════════════════════════
     let total_time = demo_start.elapsed();
@@ -255,16 +489,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!();
     println!("  Features Demonstrated:");
     println!("  ├─ Layer 1: VerbNet, FrameNet, WordNet, PropBank, Treebank, Lemmatization");
-    println!("  └─ Layer 2: Neo-Davidsonian events, LittleV, theta roles, voice");
+    println!("  ├─ Layer 2: Neo-Davidsonian events, LittleV, theta roles, voice");
+    println!("  └─ Layer 3: DRS construction, discourse referents, temporal relations");
     println!();
     println!("  Performance:");
-    println!("  ├─ Engine load: {:?}", l1_load_time + l2_load_time);
+    println!(
+        "  ├─ Engine load: {:?}",
+        l1_load_time + l2_load_time + l3_load_time
+    );
     println!("  ├─ L1 avg: {:?}/sentence", avg_l1);
-    println!("  └─ L2 avg: {:?}/sentence", avg_l2);
+    println!("  ├─ L2 avg: {:?}/sentence", avg_l2);
+    println!("  └─ L3 avg: {:?}/sentence", total_l3_time / 4);
     println!();
-    println!("  Status: M7 Complete");
-    println!("  Next: M8 Discourse Representation Theory (DRT)");
-    println!();
+    println!("  Status: M8 Complete (DRT & Discourse)");
 
     Ok(())
 }

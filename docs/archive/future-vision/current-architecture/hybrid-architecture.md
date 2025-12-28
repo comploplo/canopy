@@ -52,9 +52,9 @@ impl CanopyCore {
 ### Benefits
 
 1. **Testability**: Easy to mock components for unit testing
-2. **Flexibility**: Can swap parsers (UDPipe, Stanza) without changing core logic
-3. **Performance**: Zero-cost abstractions through trait objects
-4. **Modularity**: Clear boundaries between linguistic layers
+1. **Flexibility**: Can swap parsers (UDPipe, Stanza) without changing core logic
+1. **Performance**: Zero-cost abstractions through trait objects
+1. **Modularity**: Clear boundaries between linguistic layers
 
 ## Semantic-Driven Tree Building
 
@@ -101,6 +101,7 @@ enum HybridTree {
 ### Layer 1: Morphosyntactic Foundation
 
 Current M3 implementation with UDPipe integration:
+
 - 7-76μs parsing performance
 - 12 morphological features extracted
 - Unified semantic feature system
@@ -109,6 +110,7 @@ Current M3 implementation with UDPipe integration:
 ### Layer 2: Event Structure (M3 Current)
 
 Neo-Davidsonian event representation:
+
 - Event, Participant, Predicate types implemented
 - 19 theta role inventory from Python V1
 - EventBuilder pattern for clean construction
@@ -117,6 +119,7 @@ Neo-Davidsonian event representation:
 ### Layer 3: Compositional Semantics (M4 Planned)
 
 DRT-based discourse representation:
+
 - Lambda calculus composition
 - Quantifier scope resolution
 - Presupposition projection
@@ -125,6 +128,7 @@ DRT-based discourse representation:
 ### Layer 4: Discourse & LSP (M4 Planned)
 
 Full discourse context tracking:
+
 - Entity resolution across sentences
 - Contradiction detection
 - Rich LSP diagnostics
@@ -174,11 +178,13 @@ struct MovementCache {
 ## M3 Achievement Summary
 
 ### Performance Excellence
+
 - **Parse Time**: 7-76μs per sentence (vs 10ms target = 16,000x better)
 - **Production Model**: UDPipe 1.2 validated at 1.56ms latency, 641 sent/sec, 0% error rate
 - **Test Coverage**: 69.46% achieved (gate: 69%, target: 80% for M3, 90% for M4)
 
 ### Architectural Completeness
+
 - ✅ Dependency injection framework complete
 - ✅ UDPipe integration with enhanced tokenization
 - ✅ Unified semantic feature extraction
@@ -188,18 +194,21 @@ struct MovementCache {
 ## Future Extensions
 
 ### M4: Multi-Resource Integration
+
 - Construction Grammar patterns
 - PropBank integration
 - Information Structure analysis
 - Advanced movement chain handling
 
 ### M5: GPU Acceleration
+
 - Hybrid CPU/GPU routing
 - RAPIDS integration for database operations
 - XLA compilation optimization
 - Batch processing enhancement
 
 ### M6: Neurosymbolic Integration
+
 - Linguistic tokenization replacing BPE/WordPiece
 - Transformer enhancement with structured attention
 - Real-time training pipeline integration
@@ -208,9 +217,9 @@ struct MovementCache {
 ## Key Design Principles
 
 1. **Backward Compatibility**: All enhancements are additive
-2. **Performance First**: Never degrade existing 7-76μs baseline
-3. **Theory-Driven**: Every feature grounded in formal linguistics
-4. **Type Safety**: Leverage Rust's type system for linguistic constraints
-5. **Incremental Complexity**: Build on solid M3 foundation
+1. **Performance First**: Never degrade existing 7-76μs baseline
+1. **Theory-Driven**: Every feature grounded in formal linguistics
+1. **Type Safety**: Leverage Rust's type system for linguistic constraints
+1. **Incremental Complexity**: Build on solid M3 foundation
 
 The hybrid architecture successfully balances theoretical sophistication with practical performance, providing a solid foundation for revolutionary advances in neurosymbolic AI.

@@ -1,0 +1,19 @@
+[package]
+name = "canopy-discourse"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Layer 3 Discourse Representation Theory for Canopy - DRT and context tracking"
+
+[dependencies]
+canopy-core = { path = "../canopy-core" }
+canopy-events = { path = "../canopy-events" }
+
+serde = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+indexmap = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

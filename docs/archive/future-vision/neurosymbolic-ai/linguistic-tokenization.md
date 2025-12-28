@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-canopy.rs M6 introduces revolutionary linguistic tokenization that replaces frequency-based algorithms (BPE, WordPiece) with full semantic analysis in <0.5μs per sentence. This breakthrough enables real-time ML training enhancement while providing richer linguistic structure than traditional tokenizers.
+canopy.rs M6 introduces revolutionary linguistic tokenization that replaces frequency-based algorithms (BPE, WordPiece) with full semantic analysis in \<0.5μs per sentence. This breakthrough enables real-time ML training enhancement while providing richer linguistic structure than traditional tokenizers.
 
 **Revolutionary Claim**: We achieve linguistic tokenization that's FASTER than BPE while providing infinitely richer semantic information—theta roles, event structure, movement chains, and compositional meaning.
 
@@ -23,6 +23,7 @@ Traditional tokenizers are pure string manipulation with no linguistic knowledge
 ```
 
 **Limitations**:
+
 - No understanding of syntax or semantics
 - Can't distinguish agent from patient
 - No compositional structure
@@ -62,28 +63,31 @@ Traditional tokenizers are pure string manipulation with no linguistic knowledge
 
 ### Speed Comparison
 
-| Tokenizer | Performance | Semantic Information |
-|-----------|------------|---------------------|
-| **BPE (HuggingFace)** | 10-50μs | None (just strings) |
-| **WordPiece** | 20-100μs | None (just strings) |
-| **SentencePiece** | 5-30μs | None (just subwords) |
-| **canopy.rs M6** | **<0.5μs** | **Complete semantic analysis** |
+| Tokenizer             | Performance | Semantic Information           |
+| --------------------- | ----------- | ------------------------------ |
+| **BPE (HuggingFace)** | 10-50μs     | None (just strings)            |
+| **WordPiece**         | 20-100μs    | None (just strings)            |
+| **SentencePiece**     | 5-30μs      | None (just subwords)           |
+| **canopy.rs M6**      | **\<0.5μs** | **Complete semantic analysis** |
 
 **Revolutionary Achievement**: We're 10-100x FASTER while doing infinitely more work!
 
 ### Why This Speed Is Possible
 
 1. **Massive Performance Headroom from M5**:
-   - GPU acceleration: <1.5μs per sentence in batches
+
+   - GPU acceleration: \<1.5μs per sentence in batches
    - Custom CUDA kernels for parallel processing
    - RAPIDS database acceleration
 
-2. **Intelligent Caching**:
+1. **Intelligent Caching**:
+
    - Pre-computed patterns for 80% of common sentence structures
    - LRU caches for VerbNet, constructions, frequent analyses
    - GPU-resident linguistic databases
 
-3. **Optimized Architecture**:
+1. **Optimized Architecture**:
+
    - Zero-copy processing
    - Vectorized operations
    - Parallel semantic analysis
@@ -664,13 +668,15 @@ class AdvancedNeurosymbolicModel(nn.Module):
 canopy.rs M6 represents a paradigm shift in how we approach language model training. By replacing frequency-based tokenization with rich linguistic analysis that's actually FASTER (0.5μs vs 10-50μs), we enable:
 
 **Revolutionary Achievements**:
+
 - **Faster tokenization** with infinitely richer semantic information
 - **Compositional generalization** through structured understanding
 - **Cross-linguistic transfer** via universal semantic representations
 - **Sample efficiency** through linguistic priors (10x less data needed)
-- **Real-time training enhancement** with <0.02% overhead
+- **Real-time training enhancement** with \<0.02% overhead
 
 **Research Impact**:
+
 - First system to solve the tokenization speed vs. richness trade-off
 - Breakthrough in compositional generalization for neural models
 - Foundation for next-generation neurosymbolic AI architectures

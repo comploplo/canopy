@@ -228,7 +228,7 @@ class NeurosymbolicLM:
 | Tokenization       | 100-500μs | canopy.rs is FASTER |
 | Forward Pass       | 5ms       | 0.01%               |
 | Backward Pass      | 10ms      | 0.005%              |
-| **Total Overhead** | -         | **<0.02%**          |
+| **Total Overhead** | -         | **\<0.02%**         |
 
 ### Scaling Analysis
 
@@ -242,23 +242,23 @@ class NeurosymbolicLM:
 ### Phase 1: Proof of Concept (3 months)
 
 1. Python bindings for canopy.rs via PyO3
-2. HuggingFace tokenizer integration
-3. Small transformer (125M params) with linguistic features
-4. Benchmark on compositional generalization tasks
+1. HuggingFace tokenizer integration
+1. Small transformer (125M params) with linguistic features
+1. Benchmark on compositional generalization tasks
 
 ### Phase 2: Architecture Development (6 months)
 
 1. Design linguistic token vocabulary
-2. Implement structured attention mechanisms
-3. Create fusion layers for symbolic-neural integration
-4. Scale to 1B+ parameter models
+1. Implement structured attention mechanisms
+1. Create fusion layers for symbolic-neural integration
+1. Scale to 1B+ parameter models
 
 ### Phase 3: Breakthrough Results (9 months)
 
 1. Train linguistically-informed GPT variant
-2. Achieve SOTA on systematic generalization benchmarks
-3. Demonstrate zero-shot cross-linguistic transfer
-4. Publish landmark paper
+1. Achieve SOTA on systematic generalization benchmarks
+1. Demonstrate zero-shot cross-linguistic transfer
+1. Publish landmark paper
 
 ## Expected Outcomes
 
@@ -306,17 +306,17 @@ class NeurosymbolicLM:
 ### Target Venues
 
 1. **ACL/NAACL/EMNLP**: "Linguistic Tokenization for Neural Language Models"
-2. **NeurIPS/ICML**: "Bridging Symbolic and Neural AI with Sub-Microsecond
+1. **NeurIPS/ICML**: "Bridging Symbolic and Neural AI with Sub-Microsecond
    Linguistic Analysis"
-3. **Nature/Science**: "Solving Compositional Generalization in AI Through
+1. **Nature/Science**: "Solving Compositional Generalization in AI Through
    Formal Linguistics"
 
 ### Key Claims
 
 1. **Speed**: 1000x faster linguistic analysis than existing systems
-2. **Integration**: First real-time linguistic analysis during ML training
-3. **Performance**: State-of-the-art on compositional generalization
-4. **Theory**: Successful bridge between symbolic and neural AI
+1. **Integration**: First real-time linguistic analysis during ML training
+1. **Performance**: State-of-the-art on compositional generalization
+1. **Theory**: Successful bridge between symbolic and neural AI
 
 ## Collaboration Opportunities
 

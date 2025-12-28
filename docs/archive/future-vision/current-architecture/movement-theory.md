@@ -9,11 +9,13 @@ canopy.rs implements movement theory sequentially through established theoretica
 ## Current M3 Foundation
 
 ### Performance Achievement
+
 - **Current baseline**: 7-76μs per sentence (production validated)
 - **UDPipe 1.2**: 1.56ms latency, 641 sent/sec, 0% error rate
 - **Massive headroom** for semantic analysis while maintaining sub-100μs target
 
 ### Event Structure Complete
+
 - ✅ Neo-Davidsonian Event, Participant, Predicate types
 - ✅ EventBuilder pattern for clean construction
 - ✅ 19 theta role inventory from Python V1 system
@@ -48,9 +50,9 @@ struct GBMovementChain {
 #### Implementation Priority
 
 1. **Passive voice detection** (high frequency, clear morphological signals)
-2. **Wh-movement** (clear syntactic patterns)
-3. **Raising constructions** (matrix vs. embedded subject properties)
-4. **Tough-constructions** (object-subject alternations)
+1. **Wh-movement** (clear syntactic patterns)
+1. **Raising constructions** (matrix vs. embedded subject properties)
+1. **Tough-constructions** (object-subject alternations)
 
 ### Phase 2: A/A-bar Movement (M4-M5)
 
@@ -331,6 +333,7 @@ impl Layer2Processor {
 ### M3 Current (VerbNet Integration)
 
 🎯 **IN PROGRESS**: VerbNet theta role assignment
+
 - Event structure foundation complete
 - VerbNet integration framework ready
 - UDPipe feature extraction providing clean input
@@ -339,39 +342,42 @@ impl Layer2Processor {
 ### M4 Extensions (Multi-Resource Integration)
 
 1. **Construction Grammar**: Ditransitive, resultative patterns
-2. **PropBank Integration**: Corpus-validated argument structure
-3. **Information Structure**: Topic/focus articulation
-4. **A/A-bar Movement**: Classification and chain building
+1. **PropBank Integration**: Corpus-validated argument structure
+1. **Information Structure**: Topic/focus articulation
+1. **A/A-bar Movement**: Classification and chain building
 
 ### M5 Advanced Features (GPU Acceleration)
 
 1. **Feature-driven Movement**: Minimalist triggers
-2. **Copy Theory**: Implementation with proper interpretation
-3. **GPU Database**: RAPIDS → Custom kernels for massive speedup
-4. **Modal Logic**: Possible worlds semantics
+1. **Copy Theory**: Implementation with proper interpretation
+1. **GPU Database**: RAPIDS → Custom kernels for massive speedup
+1. **Modal Logic**: Possible worlds semantics
 
 ### M6+ Research Applications (Neurosymbolic AI)
 
 1. **Multi-dominance**: Shared structure implementation
-2. **Linguistic Tokenization**: Replace BPE/WordPiece with semantic tokens
-3. **Transformer Enhancement**: Structured attention mechanisms
-4. **Training Integration**: Real-time linguistic analysis during ML training
+1. **Linguistic Tokenization**: Replace BPE/WordPiece with semantic tokens
+1. **Transformer Enhancement**: Structured attention mechanisms
+1. **Training Integration**: Real-time linguistic analysis during ML training
 
 ## Success Criteria
 
 ### M3 Targets (Current)
+
 - [🎯] Implement VerbNet theta role assignment
 - [🎯] Achieve 80% test coverage milestone
-- [✅] Maintain <100μs average processing time
+- [✅] Maintain \<100μs average processing time
 - [✅] Event structure foundation complete
 
 ### M4 Targets
+
 - [ ] Distinguish A vs A-bar movement correctly
 - [ ] Handle wh-questions and topicalization
 - [ ] Implement locality constraint checking
-- [ ] <120μs for movement-complex sentences
+- [ ] \<120μs for movement-complex sentences
 
 ### M5+ Targets
+
 - [ ] Feature-driven movement analysis
 - [ ] Copy theory with proper interpretation
 - [ ] Handle complex syntactic phenomena

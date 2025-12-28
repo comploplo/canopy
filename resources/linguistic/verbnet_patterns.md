@@ -53,11 +53,11 @@ struct VerbPattern {
 
 1. **No External XML**: Python V1 uses hardcoded patterns, not external VerbNet
    XML files
-2. **Pattern-Based**: Focus on syntactic patterns rather than exhaustive verb
+1. **Pattern-Based**: Focus on syntactic patterns rather than exhaustive verb
    lists
-3. **Confidence Scoring**: Each pattern has a confidence score for backoff
+1. **Confidence Scoring**: Each pattern has a confidence score for backoff
    strategies
-4. **Lexicon-Free**: Emphasizes patterns over memorized verb-role mappings
+1. **Lexicon-Free**: Emphasizes patterns over memorized verb-role mappings
 
 ## Rust Implementation Plan (M3)
 

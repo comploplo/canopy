@@ -4,7 +4,7 @@
 
 Information Structure (IS) analyzes how speakers package information as given/new, topic/focus, and foreground/background. For canopy.rs M4, we implement Information Structure analysis to enhance discourse modeling and provide deeper semantic insights into how meaning is structured across sentences.
 
-**Core Innovation**: Real-time topic/focus detection that operates in <20μs, enabling production-scale analysis of information packaging in discourse.
+**Core Innovation**: Real-time topic/focus detection that operates in \<20μs, enabling production-scale analysis of information packaging in discourse.
 
 ## Theoretical Foundation
 
@@ -696,7 +696,8 @@ impl ProsodicIntegration {
 
 Information Structure analysis in M4 provides essential discourse-level insights that complement our sentence-level semantic analysis. By tracking topic/focus structure, given/new information flow, and discourse accessibility, we enable more sophisticated text understanding and generation.
 
-The lightweight implementation operates within our <20μs performance budget while providing:
+The lightweight implementation operates within our \<20μs performance budget while providing:
+
 - **Topic continuity tracking** across discourse
 - **Focus detection** for information highlighting
 - **Given/new analysis** for information status

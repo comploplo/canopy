@@ -535,6 +535,24 @@ cargo fmt --all
 - Performance benchmarks must pass
 - Documentation must build without warnings
 
+### CI/CD Infrastructure (TODO)
+
+GitHub Actions for tests, coverage, and benchmarks are currently **disabled** because they require datasets that aren't checked into the repository.
+
+**Required scripts to implement:**
+
+- [ ] `scripts/ci-setup-datasets.sh` - Download and provision required datasets:
+  - VerbNet XML files (`data/verbnet/`)
+  - FrameNet archive (`data/framenet/`)
+  - WordNet dictionary (`data/wordnet/`)
+  - UD English-EWT treebank (`data/ud_english-ewt/`)
+  - Gender-by-name dataset (`data/canopy-lexicon/name_gender_dataset.csv`)
+- [ ] GitHub Actions workflow updates to call setup script before tests
+- [ ] Caching strategy for datasets to avoid re-downloading on every CI run
+- [ ] Documentation for local development dataset setup
+
+**See:** `.github/workflows/ci.yml` for disabled jobs
+
 ______________________________________________________________________
 
 **canopy.rs represents the convergence of theoretical linguistics and high-performance systems programming, creating a new category of linguistic analysis platform that bridges academic research and practical application.**

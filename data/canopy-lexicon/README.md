@@ -14,10 +14,24 @@ The lexicon uses XML format with a well-defined schema (`schema.xsd`) to ensure 
 
 ```
 data/canopy-lexicon/
-├── schema.xsd              # XML Schema definition
-├── english-lexicon.xml     # Main English lexicon data
-└── README.md              # This documentation
+├── schema.xsd                  # XML Schema definition
+├── english-lexicon.xml         # Main English lexicon data
+├── name_gender_dataset.csv     # Gender-by-name dataset (not in git, see below)
+└── README.md                   # This documentation
 ```
+
+### Gender-by-Name Dataset (Required for Anaphora Resolution)
+
+The `name_gender_dataset.csv` file provides gender inference for ~147,000 names, used by `canopy-discourse` for pronoun resolution (e.g., resolving "he" vs "she" based on antecedent names).
+
+**Download instructions:**
+1. Visit: https://archive.ics.uci.edu/dataset/591/gender+by+name
+2. Download the dataset
+3. Place the CSV file at: `data/canopy-lexicon/name_gender_dataset.csv`
+
+**Expected format:** `Name,Gender,Count,Probability` (e.g., `John,M,4510,0.99`)
+
+If the dataset is not present, anaphora resolution will still work but without name-based gender inference.
 
 ## Word Classes
 

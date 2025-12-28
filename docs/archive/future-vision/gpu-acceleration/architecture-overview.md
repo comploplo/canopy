@@ -2,18 +2,18 @@
 
 ## Executive Summary
 
-canopy.rs M5 introduces revolutionary GPU acceleration that achieves <1.5μs per sentence in large batches through hybrid CPU/GPU routing and custom CUDA kernels. This represents a 200x speedup over our already exceptional CPU performance, enabling web-scale linguistic analysis and real-time ML training integration.
+canopy.rs M5 introduces revolutionary GPU acceleration that achieves \<1.5μs per sentence in large batches through hybrid CPU/GPU routing and custom CUDA kernels. This represents a 200x speedup over our already exceptional CPU performance, enabling web-scale linguistic analysis and real-time ML training integration.
 
-**Core Innovation**: Smart routing architecture that automatically chooses CPU (<32 sentences) or GPU (≥32 sentences) based on batch size, with custom linguistic database operations optimized for massive parallelism.
+**Core Innovation**: Smart routing architecture that automatically chooses CPU (\<32 sentences) or GPU (≥32 sentences) based on batch size, with custom linguistic database operations optimized for massive parallelism.
 
 ## Revolutionary Performance Targets
 
-| Component | CPU Performance (M4) | GPU Target (M5) | Speedup |
-|-----------|---------------------|-----------------|---------|
-| **Single Sentence** | <120μs | <120μs | 1x (CPU optimal) |
-| **Small Batch (10)** | 1.2ms total | <500μs total | **2.4x** |
-| **Large Batch (1000)** | 120ms total | **<1.5ms total** | **80x** |
-| **Corpus (1M sent)** | 2 hours | **<2 minutes** | **60x** |
+| Component              | CPU Performance (M4) | GPU Target (M5)   | Speedup          |
+| ---------------------- | -------------------- | ----------------- | ---------------- |
+| **Single Sentence**    | \<120μs              | \<120μs           | 1x (CPU optimal) |
+| **Small Batch (10)**   | 1.2ms total          | \<500μs total     | **2.4x**         |
+| **Large Batch (1000)** | 120ms total          | **\<1.5ms total** | **80x**          |
+| **Corpus (1M sent)**   | 2 hours              | **\<2 minutes**   | **60x**          |
 
 ## Hybrid CPU/GPU Architecture
 
@@ -576,7 +576,8 @@ impl MultiGpuProcessor {
 GPU acceleration in M5 represents a fundamental leap in computational linguistics performance, achieving 80x speedup for large batches while maintaining seamless integration with our existing CPU-optimized architecture. The smart routing system ensures optimal performance across all workload sizes, from single sentences to web-scale corpora.
 
 Key achievements:
-- **<1.5μs per sentence** in large batches (80x speedup)
+
+- **\<1.5μs per sentence** in large batches (80x speedup)
 - **Seamless CPU/GPU transition** based on batch size
 - **RAPIDS integration** for parallel linguistic database operations
 - **Custom CUDA kernels** optimized for linguistic computations

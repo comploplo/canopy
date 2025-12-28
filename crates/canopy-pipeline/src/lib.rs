@@ -23,6 +23,7 @@
 
 pub mod config;
 pub mod container;
+pub mod discourse;
 pub mod error;
 pub mod models;
 pub mod pipeline;
@@ -67,6 +68,12 @@ pub use canopy_events::{
     ComposedEvent, ComposedEvents, DependencyArc, EventComposer, EventComposerConfig, LittleVType,
     SentenceAnalysis, SentenceAnalysisBuilder,
 };
+
+// Re-export Layer 3 discourse types
+pub use canopy_discourse::{
+    DiscourseConfig, DiscourseContext, DiscourseResult, Drs, DrsCondition, ReferentId,
+};
+pub use discourse::{DiscourseProcessor, DiscourseStatistics};
 
 /// Version information for the pipeline
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

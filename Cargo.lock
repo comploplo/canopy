@@ -253,6 +253,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "canopy-discourse"
+version = "0.1.0"
+dependencies = [
+ "canopy-core",
+ "canopy-events",
+ "indexmap",
+ "serde",
+ "tempfile",
+ "thiserror",
+ "tracing",
+]
+
+[[package]]
 name = "canopy-engine"
 version = "0.1.0"
 dependencies = [
@@ -330,6 +343,7 @@ version = "0.1.0"
 dependencies = [
  "async-trait",
  "canopy-core",
+ "canopy-discourse",
  "canopy-events",
  "canopy-tokenizer",
  "canopy-treebank",

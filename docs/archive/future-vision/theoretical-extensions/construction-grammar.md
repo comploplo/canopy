@@ -4,7 +4,7 @@
 
 Construction Grammar (CxG) represents a fundamental shift from rule-based syntax to pattern-based form-meaning pairings. For canopy.rs M4, we integrate Construction Grammar to capture systematic alternations and idiomatic patterns that complement our VerbNet-based theta role system.
 
-**Core Innovation**: Real-time construction pattern matching that operates in <100μs, enabling production-scale analysis of constructional meaning.
+**Core Innovation**: Real-time construction pattern matching that operates in \<100μs, enabling production-scale analysis of constructional meaning.
 
 ## Theoretical Foundation
 
@@ -165,6 +165,7 @@ struct ResultativeConstruction {
 #### 6. X's way Construction Variants
 
 **Patterns**: Various extensions of way-construction
+
 - "John worked his way up the ladder"
 - "The idea forced its way into consciousness"
 
@@ -426,19 +427,19 @@ impl VerbNetConstructionBridge {
 
 ### M4 Performance Goals
 
-| Component | Target Time | Strategy |
-|-----------|-------------|----------|
-| **Pattern Matching** | <50μs | Pre-compiled automata |
-| **Constraint Evaluation** | <30μs | Cached constraint checking |
-| **Semantic Composition** | <20μs | Pre-computed composition rules |
-| **Total Addition** | **<100μs** | **Fits within M4 budget** |
+| Component                 | Target Time | Strategy                       |
+| ------------------------- | ----------- | ------------------------------ |
+| **Pattern Matching**      | \<50μs      | Pre-compiled automata          |
+| **Constraint Evaluation** | \<30μs      | Cached constraint checking     |
+| **Semantic Composition**  | \<20μs      | Pre-computed composition rules |
+| **Total Addition**        | **\<100μs** | **Fits within M4 budget**      |
 
 ### Optimization Techniques
 
 1. **Pre-compiled Patterns**: Convert construction patterns to finite automata
-2. **Constraint Caching**: Memoize expensive constraint evaluations
-3. **Lazy Evaluation**: Only compute constructions when needed
-4. **Parallel Matching**: Evaluate multiple constructions concurrently
+1. **Constraint Caching**: Memoize expensive constraint evaluations
+1. **Lazy Evaluation**: Only compute constructions when needed
+1. **Parallel Matching**: Evaluate multiple constructions concurrently
 
 ```rust
 // Parallel construction matching
@@ -579,6 +580,6 @@ struct MLConstructionLearner {
 
 ## Conclusion
 
-Construction Grammar integration in M4 provides canopy.rs with systematic handling of form-meaning pairings that complement VerbNet's verb-centered analysis. By implementing high-frequency constructions with optimized pattern matching (<100μs addition), we enable real-time analysis of constructional meaning while maintaining our performance advantage.
+Construction Grammar integration in M4 provides canopy.rs with systematic handling of form-meaning pairings that complement VerbNet's verb-centered analysis. By implementing high-frequency constructions with optimized pattern matching (\<100μs addition), we enable real-time analysis of constructional meaning while maintaining our performance advantage.
 
 The construction system bridges the gap between lexical semantics (VerbNet) and syntactic productivity, providing a complete framework for analyzing how speakers create novel meanings through established form-meaning patterns. This positions canopy.rs as the first system to combine constructional analysis with production-scale performance.

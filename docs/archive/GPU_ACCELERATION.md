@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-canopy.rs pure semantic-first architecture is ideal for GPU acceleration. Semantic database queries (FrameNet, VerbNet, WordNet) can be massively parallelized, potentially reaching <1μs per sentence for large batches.
+canopy.rs pure semantic-first architecture is ideal for GPU acceleration. Semantic database queries (FrameNet, VerbNet, WordNet) can be massively parallelized, potentially reaching \<1μs per sentence for large batches.
 
 **Key Insight**: Semantic databases (FrameNet frames, VerbNet classes, WordNet senses) are perfect for parallel GPU processing, unlike sequential syntactic parsing.
 
@@ -11,7 +11,7 @@ canopy.rs pure semantic-first architecture is ideal for GPU acceleration. Semant
 ### Current CPU Performance (UDPipe-based - Legacy)
 
 - **Previous**: 25-80μs per sentence (UDPipe)
-- **Target for Semantic**: <200μs per sentence (semantic database queries)
+- **Target for Semantic**: \<200μs per sentence (semantic database queries)
 
 ### GPU Acceleration Targets (Semantic-First)
 
@@ -307,21 +307,21 @@ impl CorpusProcessor {
 ### Phase 1: Proof of Concept (2-3 weeks)
 
 1. **Week 1**: Basic wgpu setup and VerbNet GPU kernel
-2. **Week 2**: Theta role scoring on GPU
-3. **Week 3**: Batch processing integration with Layer 1
+1. **Week 2**: Theta role scoring on GPU
+1. **Week 3**: Batch processing integration with Layer 1
 
 ### Phase 2: Optimization (3-4 weeks)
 
 1. **Week 1**: Memory layout optimization
-2. **Week 2**: Smart batching for LSP
-3. **Week 3**: Performance profiling and tuning
-4. **Week 4**: Integration testing
+1. **Week 2**: Smart batching for LSP
+1. **Week 3**: Performance profiling and tuning
+1. **Week 4**: Integration testing
 
 ### Phase 3: Advanced Features (4-5 weeks)
 
 1. **Week 1-2**: Layer 2 event structure parallelization
-2. **Week 3-4**: Layer 3 quantifier scope GPU kernels
-3. **Week 5**: Multi-GPU scaling
+1. **Week 3-4**: Layer 3 quantifier scope GPU kernels
+1. **Week 5**: Multi-GPU scaling
 
 ## Expected Performance Gains
 

@@ -1,0 +1,49 @@
+# Pronouns with gender and number properties
+# Format: pronoun,gender,number
+# Gender: masculine, feminine, neuter, unknown
+# Number: singular, plural, unknown
+
+# Masculine singular
+he,masculine,singular
+him,masculine,singular
+his,masculine,singular
+himself,masculine,singular
+
+# Feminine singular
+she,feminine,singular
+her,feminine,singular
+hers,feminine,singular
+herself,feminine,singular
+
+# Neuter singular
+it,neuter,singular
+its,neuter,singular
+itself,neuter,singular
+
+# Unknown/epicene (can be singular or plural)
+they,unknown,unknown
+them,unknown,unknown
+their,unknown,unknown
+theirs,unknown,unknown
+themselves,unknown,unknown
+
+# First person singular
+i,unknown,singular
+me,unknown,singular
+my,unknown,singular
+mine,unknown,singular
+myself,unknown,singular
+
+# First person plural
+we,unknown,plural
+us,unknown,plural
+our,unknown,plural
+ours,unknown,plural
+ourselves,unknown,plural
+
+# Second person
+you,unknown,unknown
+your,unknown,unknown
+yours,unknown,unknown
+yourself,unknown,singular
+yourselves,unknown,plural

@@ -1,141 +1,127 @@
-# Tech Debt Playbook: Retiring Stub Implementations
+# Tech Debt Playbook
 
 ## Purpose
 
-- Document every major stub or placeholder path that still props up the M5 codebase.
-- Describe the engineering risk each stub adds (incorrect semantics, misleading benchmarks, brittle tests).
-- Lay out pragmatic, sequenced work packages that move the workspace to production-ready layers without backsliding on coverage.
+Document remaining technical debt and track progress on retiring stub implementations.
 
-## Stub Landscape (Early 2025 Snapshot)
+## Current Status (Post-M7, December 2025)
 
-| Component                                                                          | Stub / Placeholder Symptom                                                                                                                       | Production Risk                                                                                                   | Exit Strategy Snapshot                                                                                                                                     |
-| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `canopy_core::layer1parser::Layer1ParserHandler`                                   | Tokenization + morphology are hand-rolled heuristics; no UDPipe/Treebank integration.                                                            | Wrong lemmas / POS propagate to every downstream layer; cache metrics meaningless.                                | Replace with `canopy-treebank` parser wrapper plus configurable UDPipe model loading via pipeline container.                                               |
-| `canopy_core::layer1parser::SemanticAnalysisHandler`                               | Simply echoes tokens and sets ad-hoc animacy/definiteness flags.                                                                                 | Layer 2 gets no theta roles; confidence / cache stats useless.                                                    | Delegate to `canopy-tokenizer::SemanticCoordinator` (real engines + cache) and enforce data-availability gating.                                           |
-| `canopy-tokenizer` Layer 1 (`coordinator.rs`, `lemmatizer.rs`, `test_fixtures.rs`) | Coordinator simplifies engine init, falls back to in-memory fixtures when data missing; lemmatizer is rule-based stub; treebank provider unused. | Impossible to validate "production metrics"; tests silently pass without resources.                               | Harden initialization (no silent degradation), wire shared lemma cache + treebank provider, retire fixture-based tests in favor of on-disk sample corpora. |
-| `canopy-tokenizer::integration`                                                    | References `Layer2Analyzer` stub (no real compositional semantics).                                                                              | Event layer (M7 goals) never exercised; API misleads consumers.                                                   | Reintroduce real Layer 2 crate or new module, refactor integration to consume actual event builder, adjust DI to avoid cycles.                             |
-| `canopy_pipeline`                                                                  | DI container builds against abstract traits but factory implementations missing; feature extraction disabled; cache warmups no-op.               | `PipelineBuilder` looks production-ready but nothing real is wired, leading to runtime panics or empty responses. | Implement concrete `MorphosyntacticParser` + `SemanticAnalyzer` adapters, re-enable feature stages, and enforce readiness checks before serving.           |
-| `benches/`, coverage boost tests                                                   | Criterion benches use dummy functions; coverage suites assert on stub behavior.                                                                  | Metrics dashboards meaningless; encourages keeping stubs to satisfy coverage gates.                               | Replace with smoke benches that call real pipeline (on sampled corpora) and rewrite tests to assert substantive semantics.                                 |
+**M7 Complete** - Layer 2 Event Composition is fully working. The `canopy-events` crate provides real Neo-Davidsonian event structures with theta role assignment.
 
-## Track A – Restore Real Layer 1 Parsing
+## Component Status
 
-### Current State
+| Component                               | Status          | Notes                                                                        |
+| --------------------------------------- | --------------- | ---------------------------------------------------------------------------- |
+| `canopy-events` (Layer 2)               | ✅ **COMPLETE** | Real event composition with LittleV primitives, theta roles, voice detection |
+| `canopy-tokenizer::SemanticCoordinator` | ✅ **COMPLETE** | Real VerbNet/FrameNet/WordNet/PropBank engines, 91.7% cache hit rate         |
+| `canopy-treebank`                       | ✅ **COMPLETE** | UD pattern matching, dependency parsing from CoNLL-U                         |
+| `canopy-pipeline`                       | ✅ **COMPLETE** | Full L1→L2 pipeline, ~19ms/sentence end-to-end                               |
+| `Layer1ParserHandler`                   | ⚠️ **DEFERRED** | Expects pre-parsed UD dependencies (no UDPipe integration)                   |
+| `benches/`                              | ⚠️ **PARTIAL**  | Demo provides real metrics; formal benchmarks need update                    |
 
-- `Layer1ParserHandler::process_with_udpipe` uses whitespace splitting, heuristic POS, and hard-coded morphology.
-- There is no path to load actual UDPipe models even though the roadmap promises it.
+______________________________________________________________________
 
-### Target State
+## Track A – Real Layer 1 Parsing
 
-- Parsing runs through a configurable backend (UDPipe 1.2/2.15, eventually other models) exposed by `canopy-pipeline`’s DI container.
-- `canopy-treebank` supplies golden CoNLL-U samples for regression tests and lemma validation.
+### Status: ⚠️ DEFERRED
 
-### Action Plan
+The system currently expects pre-parsed Universal Dependencies input (CoNLL-U format). UDPipe integration is deferred as the current approach is acceptable for research use cases.
 
-1. **Create parser adapter** inside `canopy-pipeline::implementations` that wraps `canopy-treebank::ConlluParser` for offline tests and a UDPipe-backed parser for production.
-1. **Inject via DI**: update `PipelineContainer::builder()` consumers so `Layer1ParserHandler` is constructed from the container instead of instantiating itself.
-1. **Refactor handler**: move the heuristic logic into a fallback path and gate it behind `#[cfg(test)]`; primary implementation calls the adapter asynchronously, preserves sentence boundaries, and records real timings.
-1. **Model lifecycle**: surface configuration in `docs/` for where to place UDPipe models (`data/ud_english-ewt`), add readiness + failure states to `ComponentHealth`.
-1. **Testing**: add integration tests that feed a short CoNLL-U fixture through the pipeline and assert POS / lemma parity with the source treebank.
+**Current Workaround:**
 
-### Exit Criteria
+- Use `canopy-treebank::ConlluParser` for CoNLL-U input
+- Real treebank data (UD English-EWT) available for testing
+- Works well for linguistic research workflows
 
-- No direct `.split_whitespace()` / heuristic POS inside production handler.
-- CI enforces presence of parser model for “full” test suite while allowing stub mode via feature flag for quick unit tests.
+**Future Work (Low Priority):**
 
-## Track B – Replace Semantic Layer Stub Logic
+- Add UDPipe model loading for arbitrary text input
+- Create parser adapter in `canopy-pipeline::implementations`
 
-### Current State
+______________________________________________________________________
 
-- `SemanticAnalysisHandler` only tags animacy/definiteness using simple lookup tables.
-- `SemanticCoordinator` allows data-less operation by silently ignoring engine load failures; tests rely on `test_fixtures` maps.
+## Track B – Semantic Layer
 
-### Target State
+### Status: ✅ COMPLETE (M6)
 
-- Layer 1 semantics always drive from on-disk VerbNet/FrameNet/WordNet resources (or fail fast with actionable errors).
-- Coordinated analysis fills theta roles, frame elements, WordNet senses, and reports real cache metrics.
+All semantic engines now load real data and fail fast if unavailable:
 
-### Action Plan
+- **VerbNet**: 333 XML files, 99.7% success rate
+- **FrameNet**: 1,200+ frames with lexical units
+- **WordNet**: 117,000+ synsets
+- **PropBank**: Semantic role labeling
+- **Cache**: 91.7% hit rate with lemmatization
 
-1. **Tighten engine init**: update `SemanticCoordinator::new` to log and propagate a structured error when a required resource is missing unless `graceful_degradation` is explicitly requested.
-1. **Wire handler**: have `SemanticAnalysisHandler::process` call into a shared `SemanticCoordinator` (owned by the container) rather than augmenting tokens inline. Store semantic output in `Word.misc` or a dedicated struct consumed by Layer 2.
-1. **Cache discipline**: formalize cache sizing via `CoordinatorConfig` (bounded by `l1_cache_memory_mb`) and expose metrics to `ComponentHealth`.
-1. **Clean fixtures**: shrink `test_fixtures` usage to unit tests behind `#[cfg(test)]`; generate deterministic sample outputs by loading a tiny subset of the real data (`data/verbnet/verbnet-test`, mini FrameNet bundle).
-1. **Observability**: ensure `SemanticAnalysisHandler` increments real metrics (success rate, avg latency) derived from coordinator stats.
+**Achievements:**
 
-### Exit Criteria
+- `SemanticCoordinator` enforces real data loading
+- Engines return `Result<Self>` - no silent degradation
+- Production metrics are meaningful
+- Test fixtures retired in favor of real data subsets
 
-- Handler returns enriched `Word`s with populated semantic metadata; heuristic animacy paths only live in dedicated fallback tests.
-- Failing to load VerbNet/FrameNet during startup is a hard error in production builds.
+______________________________________________________________________
 
-## Track C – Reintroduce Real Layer 2 & Pipeline Integration
+## Track C – Layer 2 & Pipeline Integration
 
-### Current State
+### Status: ✅ COMPLETE (M7)
 
-- `canopy_tokenizer::integration` defines `Layer2Analyzer` / `Layer2Config` as implicit stubs (no actual crate), so `SemanticPipeline` never surfaces events.
-- `canopy_pipeline` disables feature extraction and caches, while the DI factory lacks concrete implementations.
+The `canopy-events` crate provides full Layer 2 event composition:
 
-### Target State
+- **EventComposer**: Neo-Davidsonian event structures
+- **EventDecomposer**: VerbNet predicates → LittleV primitives
+- **ParticipantBinder**: Dependency relations → theta roles
+- **Voice Detection**: Active/passive from dependency patterns
 
-- A concrete Layer 2 module assigns theta grids, builds events, and feeds them into `canopy-pipeline`.
-- Pipeline stages (`Layer1Parsing`, `FeatureExtraction`, `Layer2Analysis`) execute real work, with caches + metrics turned on.
+**Performance Achieved:**
 
-### Action Plan
+- Layer 2 composition: 78-148μs per sentence
+- Full L1→L2 pipeline: ~19ms per sentence
+- 100 sentences processed in 62ms total
 
-1. **Define Layer 2 crate**: revive the old `canopy-semantics` functionality or create `canopy-layer2` implementing event builders, theta assignment (from VerbNet + dependency patterns), and aspect classification.
-1. **Stabilize interfaces**: move shared types (`SemanticPredicate`, `Event`, etc.) into a neutral crate (`canopy-model`) to prevent circular dependencies.
-1. **Replace stubs**: in `integration.rs`, import the real analyzer, delete the in-file stub struct, and adjust tests to validate actual event counts / roles.
-1. **Pipeline wiring**: implement concrete `SemanticAnalyzer` trait adapter that wraps the Layer 2 analyzer; register it in `PipelineContainer::builder()` and re-enable `run_feature_extraction` stage using feature extractor plugins.
-1. **Caching & batching**: finalize `check_cache` / `cache_result` by storing serialized `SemanticLayer1Output` (e.g., via `serde_json`) and validate TTL logic with integration tests.
+**Integration:**
 
-### Exit Criteria
+- `canopy-pipeline` provides `create_l1_analyzer_with_treebank()`
+- `event_composition_demo.rs` demonstrates full pipeline
+- All integration tests pass
 
-- `SemanticPipeline::analyze(..., true)` produces events with theta roles for canonical examples and integration tests assert on them.
-- `canopy-pipeline` no longer uses `if false` guards; feature extraction executes or is feature-gated with clear documentation.
+______________________________________________________________________
 
 ## Track D – Tests, Benchmarks, and Coverage
 
-### Current State
+### Status: ⚠️ IN PROGRESS
 
-- Coverage “boost” modules assert trivial truths just to raise percentages.
-- Criterion benches benchmark dummy functions, hiding real regressions.
-- Integration tests often `match` on `Err(_)` and treat failure as acceptable.
+**Completed:**
 
-### Target State
+- Removed tautological tests (`assert!(true)`, `is_ok() || is_err()`)
+- Deleted placeholder test files with no real assertions
+- Coverage at 67% (above 50% gate)
 
-- Tests verify real semantics, failing loudly when resources are missing.
-- Benchmarks measure parser + semantic throughput on curated corpora.
-- Coverage remains high through meaningful unit/integration tests.
+**Remaining:**
 
-### Action Plan
+- Raise coverage to 70% target
+- Update Criterion benchmarks to use real pipeline
+- Define CI profiles (`quick` vs `full`)
 
-1. **Cull coverage shims**: remove modules like `quick_coverage_boost.rs` once substantive tests replace them. Ensure new tests keep coverage ≥ current gate.
-1. **Golden datasets**: add tiny VerbNet/FrameNet/WordNet subsets under `data/test-fixtures/` to power deterministic tests without requiring the full corpora.
-1. **Benchmark redesign**: update `benches/` to run `CanopyAnalyzer` on short passages (10–20 sentences) and record layer timings. Cache data downloads in CI using artifacts.
-1. **Health assertions**: modify integration tests to assert on semantic content (number of predicates, frames, theta roles) and treat unexpected `Err` as failure except where explicitly feature-gated.
-1. **CI profiles**: define two profiles—`quick` (no large data, stub-friendly) and `full` (requires corpora, runs nightly)—documented in `docs/CONTRIBUTING.md`.
+______________________________________________________________________
 
-### Exit Criteria
+## Remaining Tech Debt
 
-- No tests rely on `assert!(true)` when a stub fails.
-- Benchmarks emit actionable metrics (latency, cache hit rate) derived from real pipeline executions.
+| Item                 | Priority | Notes                                   |
+| -------------------- | -------- | --------------------------------------- |
+| UDPipe Integration   | Low      | Pre-parsed deps acceptable for research |
+| Parallel Processing  | Low      | Sequential performance acceptable       |
+| Criterion Benchmarks | Medium   | Demo provides metrics for now           |
+| Coverage to 70%      | Medium   | Currently at 67%                        |
 
-## Sequencing & Milestones
+______________________________________________________________________
 
-1. **Milestone S1 (Pre-M7)** – Tracks A + B: land real parser + semantic handler; ensure Layer 1 parity with roadmap promises.
-1. **Milestone S2 (M7)** – Track C core: ship event builder crate, rewire pipeline, update documentation.
-1. **Milestone S3 (Continuous)** – Track D: replace coverage/bench placeholders as each track delivers real functionality.
+## Next Milestone: M8 (Layer 3: DRT & Discourse)
 
-Each milestone should conclude with:
+With Tracks B and C complete, the next major work is:
 
-- `just check-all` on the “full” profile.
-- Regression benchmarks recorded in `docs/reference/performance.md`.
-- Update to this playbook noting which stubs were retired.
+1. Create `canopy-discourse` crate
+1. Implement Discourse Representation Structures (DRS)
+1. Add reference resolution across sentences
+1. Add context tracking and anaphora resolution
 
-## Immediate Next Steps
-
-1. Draft parser adapter interface and spike integration with a single UDPipe model to validate DI plumbing.
-1. Add failing tests that assert on theta role output for `"John gave Mary a book"`—they will guide Track B/C work.
-1. Audit CI to ensure resource bundles (VerbNet/FrameNet) are available or explicitly skipped in quick profile.
-1. Socialize this document with the team; assign owners + timelines for each track.
-
-Once these foundations are in place, the workspace can legitimately claim “no stubs” for Layer 1 and have a clear runway for the Layer 2/3 roadmap.
+See [ROADMAP.md](ROADMAP.md) for M8 details.

@@ -122,6 +122,18 @@ fn analyze_word(&self, word: &str) -> Result<Analysis> {
 - ✅ Either run commands directly or create scripts in the project file structure
 - ✅ Use the project's `scripts/` directory for utility scripts
 
+# Examples and Demos Policy
+
+## ONE Demo Only
+
+- ❌ Do NOT create examples in individual crate directories
+- ❌ Do NOT create per-crate example files (no crates/\*/examples/)
+- ✅ The project has ONE central demo: `crates/canopy-pipeline/examples/event_composition_demo.rs`
+- ✅ Extend the existing demo when adding new features to showcase them
+- ✅ Keep all demo code centralized and maintained in one place
+
+**Rationale**: Scattered examples become stale and unmaintained. One comprehensive demo ensures quality and demonstrates the full pipeline integration.
+
 # CRITICAL COVERAGE REQUIREMENTS - DO NOT IGNORE
 
 ## Coverage Gates for Releases
