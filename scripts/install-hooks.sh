@@ -40,13 +40,13 @@ else
     exit 1
 fi
 
-# Check if cargo-tarpaulin is installed (required for coverage)
-if ! command -v cargo-tarpaulin &> /dev/null; then
-    echo "📊 Installing cargo-tarpaulin for coverage analysis..."
-    if cargo install cargo-tarpaulin; then
-        echo "✅ cargo-tarpaulin installed"
+# Check if cargo-llvm-cov is installed (required for coverage)
+if ! command -v cargo-llvm-cov &> /dev/null; then
+    echo "📊 Installing cargo-llvm-cov for coverage analysis..."
+    if cargo install cargo-llvm-cov && rustup component add llvm-tools-preview; then
+        echo "✅ cargo-llvm-cov installed"
     else
-        echo "⚠️  Failed to install cargo-tarpaulin"
+        echo "⚠️  Failed to install cargo-llvm-cov"
         echo "   Coverage checks may not work properly"
     fi
 fi
@@ -62,18 +62,7 @@ if ! command -v cargo-nextest &> /dev/null; then
     fi
 fi
 
-# Check if cargo-audit is installed (security checks)
-if ! command -v cargo-audit &> /dev/null; then
-    echo "🔒 Installing cargo-audit for security checks..."
-    if cargo install cargo-audit; then
-        echo "✅ cargo-audit installed"
-    else
-        echo "⚠️  Failed to install cargo-audit"
-        echo "   Security checks may not work properly"
-    fi
-fi
-
-# Check if cargo-deny is installed (dependency policy)
+# Check if cargo-deny is installed (security + license + dependency policy)
 if ! command -v cargo-deny &> /dev/null; then
     echo "🚫 Installing cargo-deny for dependency policy..."
     if cargo install cargo-deny; then
@@ -124,12 +113,11 @@ echo "📋 Installed hooks:"
 echo "   ✅ Code formatting (cargo fmt)"
 echo "   ✅ Linting (cargo clippy)"
 echo "   ✅ Tests (cargo nextest)"
-echo "   ✅ Security audit (cargo audit)"
-echo "   ✅ Dependency policy (cargo deny)"
-echo "   ✅ Coverage check (69% baseline, 80% M3, 90% M4)"
-echo "   ✅ Performance regression check (33-40μs baseline)"
+echo "   ✅ Security + license audit (cargo deny)"
+echo "   ✅ Coverage check (cargo-llvm-cov, 50% gate)"
+echo "   ✅ Performance regression check"
 echo "   ✅ File hygiene (trailing whitespace, merge conflicts)"
-echo "   ✅ Markdown formatting (prettier)"
+echo "   ✅ Markdown formatting (mdformat)"
 echo ""
 echo "💡 Usage:"
 echo "   • Hooks run automatically on 'git commit'"

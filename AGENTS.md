@@ -14,7 +14,7 @@
 - just build / just build-release: Debug or optimized build.
 - just test / just test-verbose: Run workspace tests (uses `cargo nextest` or `cargo test`).
 - just check / just lint / just fmt: Type-check, clippy lints (pedantic), and formatting.
-- just coverage / just coverage-check: Generate and gate coverage (tarpaulin; threshold managed in `scripts/check-coverage.sh`).
+- just coverage / just coverage-check: Generate and gate coverage (cargo-llvm-cov; threshold managed in `scripts/check-coverage.sh`).
 - just bench: Run Criterion benchmarks; see `benches/`.
   (Without just: use the underlying `cargo …` commands in the recipes.)
 

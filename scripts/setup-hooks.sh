@@ -24,8 +24,8 @@ if ! command -v cargo-watch &> /dev/null; then
     tools_to_install+=("cargo-watch")
 fi
 
-if ! command -v cargo-tarpaulin &> /dev/null; then
-    tools_to_install+=("cargo-tarpaulin")
+if ! command -v cargo-llvm-cov &> /dev/null; then
+    tools_to_install+=("cargo-llvm-cov")
 fi
 
 if ! command -v cargo-insta &> /dev/null; then

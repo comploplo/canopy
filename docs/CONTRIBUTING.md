@@ -241,7 +241,8 @@ pub fn extract_semantic_features(
 
 ```bash
 # Install development tools
-cargo install just cargo-watch cargo-tarpaulin cargo-flamegraph
+cargo install just cargo-watch cargo-llvm-cov cargo-flamegraph cargo-nextest cargo-deny
+rustup component add llvm-tools-preview
 ```
 
 ### Recommended IDE Setup
