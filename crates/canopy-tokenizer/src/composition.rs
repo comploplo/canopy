@@ -15,8 +15,6 @@ use tracing::{debug, info};
 pub struct SemanticComposer {
     // Composition rules and patterns
     composition_rules: Vec<CompositionRule>,
-    #[allow(dead_code)]
-    type_checker: TypeChecker,
 }
 
 /// Composition rule for combining semantic elements
@@ -80,10 +78,7 @@ pub enum CompositionCondition {
 }
 
 /// Type checker for semantic composition
-pub struct TypeChecker {
-    #[allow(dead_code)]
-    type_assignments: HashMap<String, SemanticType>,
-}
+pub struct TypeChecker {}
 
 /// Semantic types for composition
 #[derive(Debug, Clone, PartialEq)]
@@ -106,12 +101,8 @@ impl SemanticComposer {
         info!("Initializing semantic composer");
 
         let composition_rules = Self::default_composition_rules();
-        let type_checker = TypeChecker::new();
 
-        Ok(Self {
-            composition_rules,
-            type_checker,
-        })
+        Ok(Self { composition_rules })
     }
 
     /// Compose semantic tokens into a logical form
@@ -355,9 +346,7 @@ impl Default for TypeChecker {
 impl TypeChecker {
     /// Create a new type checker
     pub fn new() -> Self {
-        Self {
-            type_assignments: HashMap::new(),
-        }
+        Self {}
     }
 
     /// Check if types are compatible for composition

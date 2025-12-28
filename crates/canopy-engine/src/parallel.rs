@@ -177,18 +177,14 @@ impl Default for ParallelProcessor {
 
 /// Utility for coordinating parallel queries across multiple engines
 pub struct MultiEngineCoordinator {
-    /// Parallel processor
-    #[allow(dead_code)]
-    processor: ParallelProcessor,
     /// Engine-specific timeout settings
     timeouts: std::collections::HashMap<String, std::time::Duration>,
 }
 
 impl MultiEngineCoordinator {
     /// Create a new coordinator
-    pub fn new(processor: ParallelProcessor) -> Self {
+    pub fn new(_processor: ParallelProcessor) -> Self {
         Self {
-            processor,
             timeouts: std::collections::HashMap::new(),
         }
     }

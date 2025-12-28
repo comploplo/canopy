@@ -51,11 +51,6 @@ pub mod morphology;
 pub mod tokenization;
 pub mod treebank_lemmatizer; // Treebank-trained lemmatizer
 pub mod wordnet;
-// pub mod integration; // Temporarily disabled to avoid circular dependency
-
-// Temporarily disabled test_fixtures due to migration issues
-// #[cfg(any(test, feature = "dev"))]
-// pub mod test_fixtures;
 
 // Shared test infrastructure for fast test execution
 #[cfg(test)]
@@ -71,7 +66,8 @@ pub use morphology::MorphologyDatabase;
 
 // Re-export coordinator and treebank integration
 pub use coordinator::{
-    guess_pos_from_suffix, SemanticCoordinator, TreebankAnalysis, TreebankProvider,
+    guess_pos_from_suffix, Layer1SemanticResult, SemanticCoordinator, TreebankAnalysis,
+    TreebankProvider,
 };
 
 // Re-export lemmatizer
@@ -701,44 +697,6 @@ impl SemanticAnalyzer {
             } else {
                 SemanticClass::Unknown
             }
-        }
-    }
-
-    /// Calculate overall confidence based on multiple resources
-    #[allow(dead_code)]
-    fn calculate_confidence(
-        &self,
-        frames: &[FrameUnit],
-        verbnet_classes: &[VerbNetClass],
-        wordnet_senses: &[WordNetSense],
-    ) -> f32 {
-        let mut confidence = 0.0;
-        let mut resource_count = 0.0;
-
-        if !frames.is_empty() {
-            confidence += 0.9; // FrameNet matches are typically high confidence
-            resource_count += 1.0;
-        }
-
-        if !verbnet_classes.is_empty() {
-            confidence += 0.95; // VerbNet matches are very high confidence
-            resource_count += 1.0;
-        }
-
-        if !wordnet_senses.is_empty() {
-            // WordNet confidence based on sense ranking
-            let sense_confidence = wordnet_senses
-                .first()
-                .map(|s| 1.0 - (s.sense_rank as f32 * 0.1))
-                .unwrap_or(0.5);
-            confidence += sense_confidence;
-            resource_count += 1.0;
-        }
-
-        if resource_count > 0.0 {
-            confidence / resource_count
-        } else {
-            0.0
         }
     }
 

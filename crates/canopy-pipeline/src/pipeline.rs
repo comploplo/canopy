@@ -9,7 +9,7 @@ use crate::traits::*;
 use canopy_core::Word;
 use canopy_events::{ComposedEvents, DependencyArc, EventComposer, SentenceAnalysis};
 use canopy_tokenizer::SemanticLayer1Output as SemanticL1Output;
-use canopy_tokenizer::{SemanticCoordinator, coordinator::CoordinatorConfig};
+use canopy_tokenizer::{coordinator::CoordinatorConfig, SemanticCoordinator};
 use canopy_treebank::types::DependencyRelation;
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
@@ -1067,52 +1067,3 @@ impl Default for PipelineBuilder {
         Self::new()
     }
 }
-
-// #[cfg(test)]
-// mod tests {  // Temporarily disabled due to deprecated dependencies
-//     use super::*;
-//     use crate::container::ContainerBuilder;
-//     use crate::implementations::test_doubles::*;
-//
-//     #[tokio::test]
-//     async fn test_pipeline_creation() {
-//         let factory = std::sync::Arc::new(MockComponentFactory::new());
-//
-//         let container = ContainerBuilder::new()
-//             .with_parser(ParserConfig {
-//                 model_path: Some("test".to_string()),
-//                 model_type: ModelType::UDPipe12,
-//                 performance_mode: PerformanceMode::Balanced,
-//                 enable_caching: false,
-//             })
-//             .with_analyzer(AnalyzerConfig::default())
-//             .with_factory(factory)
-//             .build()
-//             .await
-//             .unwrap();
-//
-//         let pipeline = PipelineBuilder::new()
-//             .with_container(container)
-//             .with_caching(false)
-//             .build()
-//             .unwrap();
-//
-//         assert!(pipeline.is_ready());
-//     }
-//
-//     #[test]
-//     fn test_pipeline_metrics() {
-//         // Test that metrics are properly tracked
-//         let metrics = PipelineMetrics {
-//             texts_processed: 10,
-//             total_time: Duration::from_secs(5),
-//             cache_hits: 3,
-//             cache_misses: 7,
-//             ..Default::default()
-//         };
-//
-//         assert_eq!(metrics.avg_processing_time(), Duration::from_millis(500));
-//         assert_eq!(metrics.cache_hit_rate(), 0.3);
-//         assert_eq!(metrics.throughput(), 2.0);
-//     }
-// }

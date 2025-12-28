@@ -243,31 +243,6 @@ impl Layer1ParserHandler {
 
         Ok(words)
     }
-
-    /// Update handler statistics
-    #[allow(dead_code)] // TODO: Use in M3 for performance monitoring
-    fn update_stats(
-        &mut self,
-        success: bool,
-        processing_time_us: u64,
-        word_count: usize,
-        error: Option<String>,
-    ) {
-        self.stats.requests += 1;
-        self.stats.total_time_us += processing_time_us;
-
-        if success {
-            self.stats.successes += 1;
-
-            // Update running average for words per request
-            let total_words = self.stats.avg_words_per_request * (self.stats.successes - 1) as f64
-                + word_count as f64;
-            self.stats.avg_words_per_request = total_words / self.stats.successes as f64;
-        } else {
-            self.stats.failures += 1;
-            self.stats.last_error = error;
-        }
-    }
 }
 
 impl Default for Layer1ParserHandler {

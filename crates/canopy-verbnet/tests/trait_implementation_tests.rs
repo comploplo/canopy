@@ -306,10 +306,8 @@ fn test_default_implementation() {
 fn test_engine_error_handling() {
     let mut engine = VerbNetEngine::new().unwrap();
 
-    // Test loading from non-existent directory
-    let result = engine.load_from_directory("/non/existent/path");
-    // Should handle gracefully - either succeed (empty load) or fail with proper error
-    assert!(result.is_ok() || result.is_err());
+    // Test loading from non-existent directory - should handle gracefully without panic
+    let _ = engine.load_from_directory("/non/existent/path");
 
     // Test analysis still works even with no data
     let result = engine.analyze("test");

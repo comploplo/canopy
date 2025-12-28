@@ -23,15 +23,11 @@ pub struct ParticipantBinder {
 
     /// Priority order for role selection
     role_priority: Vec<ThetaRole>,
-
-    /// Configuration
-    #[allow(dead_code)]
-    config: EventComposerConfig,
 }
 
 impl ParticipantBinder {
     /// Create a new binder with default mappings
-    pub fn new(config: &EventComposerConfig) -> EventResult<Self> {
+    pub fn new(_config: &EventComposerConfig) -> EventResult<Self> {
         let mut binder = Self {
             dep_to_theta: HashMap::new(),
             role_priority: vec![
@@ -48,7 +44,6 @@ impl ParticipantBinder {
                 ThetaRole::Manner,
                 ThetaRole::Temporal,
             ],
-            config: config.clone(),
         };
         binder.initialize_dep_mappings();
         Ok(binder)
@@ -403,19 +398,6 @@ impl ParticipantBinder {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::types::LittleVType;
-
-    #[allow(dead_code)]
-    fn make_decomposed(lv_type: LittleVType) -> DecomposedEvent {
-        DecomposedEvent {
-            primary_type: lv_type,
-            expected_roles: lv_type.default_roles(),
-            sub_event: None,
-            confidence: 0.9,
-            verbnet_confidence: Some(0.9),
-            sources: vec!["test".to_string()],
-        }
-    }
 
     #[test]
     fn test_role_priority() {

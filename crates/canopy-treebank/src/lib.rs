@@ -46,7 +46,7 @@ pub use conllu_types::{
     UniversalPos,
 };
 pub use engine::TreebankEngine;
-pub use indexer::{PatternIndexer as OldPatternIndexer, TreebankIndex};
+pub use indexer::TreebankIndex;
 pub use lemma_validator::{LemmaValidationResult, LemmaValidator};
 pub use parser::{ConlluParser, ParsedSentence, ParsedToken};
 pub use pattern_cache::{CacheStatistics, PatternCache, PatternCacheFactory};

@@ -1,4 +1,4 @@
-use criterion::{Criterion, black_box, criterion_group, criterion_main};
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use std::time::Duration;
 
 /// Baseline benchmarks for canopy semantic analysis performance
@@ -6,7 +6,7 @@ use std::time::Duration;
 /// These benchmarks measure real semantic analysis operations.
 /// Run with: `cargo bench` or `cargo bench --release`
 fn semantic_coordinator_benchmark(c: &mut Criterion) {
-    use canopy_tokenizer::{SemanticCoordinator, coordinator::CoordinatorConfig};
+    use canopy_tokenizer::{coordinator::CoordinatorConfig, SemanticCoordinator};
 
     let mut group = c.benchmark_group("semantic_analysis");
     group.sample_size(20);

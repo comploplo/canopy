@@ -28,68 +28,108 @@ cargo run --release -p canopy-pipeline --example event_composition_demo
 ## Architecture
 
 ```
-Input Sentence
-     │
-     ▼
-┌─────────────────────────────────────────────────────────┐
-│  Layer 1: Semantic Analysis                             │
-│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
-│  │ VerbNet │ │FrameNet │ │ WordNet │ │ Lexicon │       │
-│  └────┬────┘ └────┬────┘ └────┬────┘ └────┬────┘       │
-│       └──────────┬┴──────────┬┴───────────┘            │
-│                  ▼                                      │
-│           Unified Semantic Roles                        │
-└─────────────────────────────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────────────────┐
-│  Layer 2: Event Composition                             │
-│  Neo-Davidsonian events, theta binding, voice analysis  │
-└─────────────────────────────────────────────────────────┘
-                   │
-                   ▼
-            Event Structure
+                              Input Text
+                                  │
+                                  ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│                        canopy-pipeline                                   │
+│                     (orchestration layer)                                │
+└──────────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│  LAYER 1: Semantic Analysis                             canopy-tokenizer │
+│  ┌────────────────────────────────────────────────────────────────────┐  │
+│  │                    SemanticCoordinator                             │  │
+│  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐  │  │
+│  │  │ VerbNet  │ │ FrameNet │ │ WordNet  │ │ PropBank │ │ Treebank │  │  │
+│  │  │ 333 verb │ │ 1,200+   │ │ 117,000+ │ │ semantic │ │ UD deps  │  │  │
+│  │  │ classes  │ │ frames   │ │ synsets  │ │ roles    │ │ patterns │  │  │
+│  │  └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘  │  │
+│  │       │            │            │            │            │        │  │
+│  │       └────────────┴─────┬──────┴────────────┴────────────┘        │  │
+│  │                          ▼                                         │  │
+│  │              Layer1SemanticResult                                  │  │
+│  │    (lemma, verb classes, frames, synsets, theta roles, deps)       │  │
+│  └────────────────────────────────────────────────────────────────────┘  │
+└──────────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│  LAYER 2: Event Composition                                canopy-events │
+│  ┌────────────────────────────────────────────────────────────────────┐  │
+│  │                       EventComposer                                │  │
+│  │                                                                    │  │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     │  │
+│  │  │ Event Decomposer│  │ Participant     │  │ Voice & Aspect  │     │  │
+│  │  │ VerbNet → LittleV  │ Binder          │  │ Detection       │     │  │
+│  │  │ primitives      │  │ theta roles     │  │ active/passive  │     │  │
+│  │  └────────┬────────┘  └────────┬────────┘  └────────┬────────┘     │  │
+│  │           └───────────────┬────┴───────────────────┘               │  │
+│  │                           ▼                                        │  │
+│  │              Neo-Davidsonian Event Structure                       │  │
+│  │   ∃e[LittleV(e) ∧ Agent(e,x) ∧ Theme(e,y) ∧ Voice(e,active)]       │  │
+│  └────────────────────────────────────────────────────────────────────┘  │
+└──────────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+                         SentenceAnalysis
+              (events, participants, temporal structure)
+```
+
+**Crate Dependencies:**
+
+```
+canopy-pipeline ─┬─► canopy-events ─┬─► canopy-tokenizer ─┬─► canopy-verbnet
+                 │                  │                     ├─► canopy-framenet
+                 │                  │                     ├─► canopy-wordnet
+                 │                  │                     ├─► canopy-propbank
+                 │                  │                     └─► canopy-lexicon
+                 │                  │
+                 │                  └─► canopy-treebank
+                 │
+                 └─► canopy-core ◄── (shared types: Word, ThetaRole, Event, etc.)
+                          ▲
+                          │
+                     canopy-engine (shared infrastructure: caching, XML parsing)
 ```
 
 ## Crates
 
-| Crate | Description |
-|-------|-------------|
-| `canopy-pipeline` | High-level analysis pipeline |
-| `canopy-events` | Neo-Davidsonian event composition |
+| Crate              | Description                               |
+| ------------------ | ----------------------------------------- |
+| `canopy-pipeline`  | High-level analysis pipeline              |
+| `canopy-events`    | Neo-Davidsonian event composition         |
 | `canopy-tokenizer` | Tokenization, lemmatization, coordination |
-| `canopy-treebank` | UD treebank parsing and pattern matching |
-| `canopy-verbnet` | VerbNet verb class engine |
-| `canopy-framenet` | FrameNet frame engine |
-| `canopy-wordnet` | WordNet synset engine |
-| `canopy-propbank` | PropBank semantic role engine |
-| `canopy-lexicon` | Custom lexicon support |
-| `canopy-engine` | Shared engine infrastructure |
-| `canopy-core` | Core types and utilities |
-| `canopy-cli` | Command-line interface |
+| `canopy-treebank`  | UD treebank parsing and pattern matching  |
+| `canopy-verbnet`   | VerbNet verb class engine                 |
+| `canopy-framenet`  | FrameNet frame engine                     |
+| `canopy-wordnet`   | WordNet synset engine                     |
+| `canopy-propbank`  | PropBank semantic role engine             |
+| `canopy-lexicon`   | Custom lexicon support                    |
+| `canopy-engine`    | Shared engine infrastructure              |
+| `canopy-core`      | Core types and utilities                  |
+| `canopy-cli`       | Command-line interface                    |
 
-## Examples
+## Example
 
 ```bash
-# Full pipeline with event composition
+# Full semantic analysis pipeline with event composition
 cargo run --release -p canopy-pipeline --example event_composition_demo
-
-# Layer 1 semantic analysis
-cargo run --release -p canopy-tokenizer --example semantic_layer1_demo
-
-# Treebank pattern visualization
-cargo run --release -p canopy-treebank --example tree_visualization_demo
-
-# PropBank analysis
-cargo run --release -p canopy-propbank --example propbank_demo
 ```
+
+The demo showcases:
+
+- **Layer 1**: VerbNet, FrameNet, WordNet, Treebank, Lemmatization
+- **Layer 2**: Neo-Davidsonian events, LittleV primitives, theta roles, voice detection
+- **Performance**: Engine loading, per-sentence timing, cache statistics
 
 ## Performance
 
-| Operation | Time |
-|-----------|------|
-| Engine loading | ~900ms (one-time) |
-| Layer 1 analysis | 15-22ms per sentence |
+| Operation           | Time                  |
+| ------------------- | --------------------- |
+| Engine loading      | ~900ms (one-time)     |
+| Layer 1 analysis    | 15-22ms per sentence  |
 | Layer 2 composition | 78-148μs per sentence |
 
 Cache hit rates improve with lemmatization normalization.
@@ -111,7 +151,7 @@ Cache hit rates improve with lemmatization normalization.
 
 MIT — see [LICENSE](LICENSE) for details.
 
----
+______________________________________________________________________
 
 **Status**: M7 Complete — Layer 2 Event Composition
 **Next**: M8 Discourse Representation Theory (DRT)

@@ -6,8 +6,8 @@
 use crate::error::{AnalysisError, PipelineError};
 use crate::traits::*;
 use async_trait::async_trait;
-use canopy_core::Word;
 use canopy_core::treebank_loader::TreebankSentenceLoader;
+use canopy_core::Word;
 use std::sync::Arc;
 
 /// Real treebank-based morphosyntactic parser
@@ -251,9 +251,7 @@ mod tests {
             enable_caching: true,
         };
 
-        let result = factory.create_parser(&config);
-        // May succeed or fail depending on data availability
-        // Just verify it returns a result
-        assert!(result.is_ok() || result.is_err());
+        // May succeed or fail depending on data availability - reaching here without panic is the test
+        let _ = factory.create_parser(&config);
     }
 }

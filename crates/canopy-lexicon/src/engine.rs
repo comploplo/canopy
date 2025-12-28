@@ -7,9 +7,9 @@ use crate::parser::LexiconXmlResource;
 use crate::types::{LexiconAnalysis, LexiconDatabase, WordClassType};
 use canopy_core::paths::data_path_string;
 use canopy_engine::{
+    traits::{CachedEngine, DataInfo, DataLoader, SemanticEngine, StatisticsProvider},
     BaseEngine, CacheKeyFormat, EngineConfig, EngineCore, EngineResult, EngineStats,
     PerformanceMetrics, SemanticResult, XmlParser, XmlResource,
-    traits::{CachedEngine, DataInfo, DataLoader, SemanticEngine, StatisticsProvider},
 };
 use serde::{Deserialize, Serialize};
 use std::hash::{Hash, Hasher};

@@ -572,10 +572,8 @@ mod tests {
         <lexUnit ID="4321" name="give.v">"#;
 
         let mut reader = Reader::from_str(xml);
-        let result = LexicalUnit::parse_xml(&mut reader);
-
-        // Should handle EOF gracefully
-        assert!(result.is_ok() || result.is_err());
+        // Should handle EOF gracefully - reaching here without panic is the test
+        let _ = LexicalUnit::parse_xml(&mut reader);
     }
 
     #[test]
@@ -587,10 +585,8 @@ mod tests {
                 <FERealization total="25">"#;
 
         let mut reader = Reader::from_str(xml);
-        let result = LexicalUnit::parse_xml(&mut reader);
-
-        // Should handle EOF gracefully or return error
-        assert!(result.is_ok() || result.is_err());
+        // Should handle EOF gracefully - reaching here without panic is the test
+        let _ = LexicalUnit::parse_xml(&mut reader);
     }
 
     #[test]

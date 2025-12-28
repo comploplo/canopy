@@ -8,9 +8,9 @@ use crate::types::{
     WordClassType,
 };
 use canopy_engine::{EngineError, EngineResult, XmlResource};
-use quick_xml::Reader;
 use quick_xml::events::Event;
 use quick_xml::name::QName;
+use quick_xml::Reader;
 use std::io::BufRead;
 
 /// Lexicon XML resource for parsing

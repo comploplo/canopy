@@ -7,8 +7,8 @@
 //! - Error handling and graceful degradation
 
 use canopy_tokenizer::{
+    coordinator::{create_l1_analyzer, CoordinatorConfig},
     SemanticCoordinator,
-    coordinator::{CoordinatorConfig, create_l1_analyzer},
 };
 use std::time::Instant;
 

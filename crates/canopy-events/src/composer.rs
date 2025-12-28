@@ -3,7 +3,7 @@
 //! Orchestrates decomposition and binding to compose events from Layer 1 analysis.
 
 use crate::binding::ParticipantBinder;
-use crate::confidence::{ConfidenceCalculator, update_confidence};
+use crate::confidence::{update_confidence, ConfidenceCalculator};
 use crate::config::EventComposerConfig;
 use crate::decomposition::EventDecomposer;
 use crate::error::EventResult;
@@ -211,6 +211,7 @@ mod tests {
             framenet: None,
             wordnet: None,
             lexicon: None,
+            propbank: None,
             treebank: None,
             confidence: 0.8,
             sources: vec![],

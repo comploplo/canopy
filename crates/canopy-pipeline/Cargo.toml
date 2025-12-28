@@ -22,12 +22,9 @@ tracing-subscriber = { workspace = true }
 [features]
 default = []
 async = ["tokio"]
-python-bindings = []
-lsp-integration = []
 
 [dev-dependencies]
-criterion = { version = "0.5", features = ["html_reports"] }
-tokio-test = "0.4"
+criterion = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
 # Binary targets removed - deprecated benchmarks replaced by examples

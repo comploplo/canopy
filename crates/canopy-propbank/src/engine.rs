@@ -9,23 +9,36 @@ use crate::types::{PropBankAnalysis, PropBankPredicate, SemanticRole};
 use canopy_core::ThetaRole;
 use canopy_engine::traits::ParallelEngine;
 use canopy_engine::{
-    CacheStats, CachedEngine, EngineError, EngineResult, EngineStats, PerformanceMetrics,
-    SemanticEngine, SemanticResult, StatisticsProvider,
+    BaseEngine, CacheKeyFormat, CacheStats, CachedEngine, EngineConfig, EngineCore, EngineError,
+    EngineResult, EngineStats, PerformanceMetrics, SemanticEngine, SemanticResult,
+    StatisticsProvider,
 };
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
-use std::sync::{Arc, Mutex};
+use std::hash::{Hash, Hasher};
+use std::sync::Arc;
 use tracing::info;
+
+/// Input type for PropBank analysis
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PropBankInput {
+    pub word: String,
+}
+
+impl Hash for PropBankInput {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.word.hash(state);
+    }
+}
 
 /// PropBank semantic role labeling engine
 #[derive(Debug)]
 pub struct PropBankEngine {
+    /// Base engine handling cache, stats, and metrics
+    base_engine: BaseEngine<PropBankInput, PropBankAnalysis>,
+    /// PropBank data loaded from framesets
     data: Arc<PropBankData>,
+    /// PropBank-specific configuration
     config: PropBankConfig,
-    cache: Arc<Mutex<HashMap<String, PropBankAnalysis>>>,
-    cache_tracking: Arc<Mutex<CacheStats>>,
-    stats: Arc<Mutex<EngineStats>>,
-    performance_metrics: Arc<Mutex<PerformanceMetrics>>,
 }
 
 impl PropBankEngine {
@@ -52,147 +65,87 @@ impl PropBankEngine {
             data.stats.total_predicates, data.stats.total_framesets
         );
 
-        // Initialize components
-        let cache = Arc::new(Mutex::new(HashMap::new()));
-        let cache_tracking = Arc::new(Mutex::new(CacheStats::empty()));
-        let stats = Arc::new(Mutex::new(EngineStats::new("PropBank".to_string())));
-        let performance_metrics = Arc::new(Mutex::new(PerformanceMetrics::new()));
+        // Convert PropBankConfig to EngineConfig for BaseEngine
+        let engine_config = EngineConfig {
+            enable_cache: config.enable_cache,
+            cache_capacity: config.cache_capacity,
+            enable_metrics: true,
+            enable_parallel: false,
+            max_threads: 1,
+            confidence_threshold: config.min_confidence,
+        };
 
         Ok(Self {
+            base_engine: BaseEngine::new(engine_config, "PropBank".to_string()),
             data: Arc::new(data),
             config,
-            cache,
-            cache_tracking,
-            stats,
-            performance_metrics,
         })
     }
 
     /// Analyze a predicate with its arguments
+    ///
+    /// This is a specialized lookup by lemma+sense. For general word analysis, use `analyze_word`.
     pub fn analyze_predicate(
         &self,
         lemma: &str,
         sense: &str,
     ) -> EngineResult<SemanticResult<PropBankPredicate>> {
         let start_time = std::time::Instant::now();
-        let cache_key = format!("propbank:{}#{}", lemma.to_lowercase(), sense);
-
-        // Check cache first
-        if self.config.enable_cache {
-            if let Ok(cache) = self.cache.lock() {
-                if let Some(cached_analysis) = cache.get(&cache_key) {
-                    if let Some(ref predicate) = cached_analysis.predicate {
-                        return Ok(SemanticResult::cached(
-                            predicate.clone(),
-                            cached_analysis.confidence,
-                        ));
-                    }
-                }
-            }
-        }
-
-        // Look up predicate
         let roleset = format!("{lemma}.{sense}");
-        let result = if let Some(predicate) = self.data.predicates.get(&roleset) {
-            let confidence = self.calculate_predicate_confidence(predicate);
 
-            SemanticResult::new(
+        // Direct lookup
+        if let Some(predicate) = self.data.predicates.get(&roleset) {
+            let confidence = self.calculate_predicate_confidence(predicate);
+            return Ok(SemanticResult::new(
                 predicate.clone(),
                 confidence,
                 false,
                 start_time.elapsed().as_micros() as u64,
-            )
-        } else {
-            // Try fuzzy matching if enabled
-            if self.config.enable_fuzzy_matching {
-                let query_lower = lemma.to_lowercase();
-                let fuzzy_matches: Vec<&PropBankPredicate> = self
-                    .data
-                    .predicates
-                    .values()
-                    .filter(|predicate| {
-                        let lemma_lower = predicate.lemma.to_lowercase();
-                        lemma_lower.contains(&query_lower) || query_lower.contains(&lemma_lower)
-                    })
-                    .collect();
+            ));
+        }
 
-                if let Some(best_match) = fuzzy_matches.first() {
-                    let confidence = self.calculate_predicate_confidence(best_match) * 0.8; // Lower confidence for fuzzy match
+        // Try fuzzy matching if enabled
+        if self.config.enable_fuzzy_matching {
+            let query_lower = lemma.to_lowercase();
+            let fuzzy_matches: Vec<&PropBankPredicate> = self
+                .data
+                .predicates
+                .values()
+                .filter(|predicate| {
+                    let lemma_lower = predicate.lemma.to_lowercase();
+                    lemma_lower.contains(&query_lower) || query_lower.contains(&lemma_lower)
+                })
+                .collect();
 
-                    SemanticResult::new(
-                        (*best_match).clone(),
-                        confidence,
-                        false,
-                        start_time.elapsed().as_micros() as u64,
-                    )
-                } else {
-                    return Err(EngineError::analysis(
-                        format!("No PropBank predicate found for: {roleset}"),
-                        "fuzzy matching",
-                    ));
-                }
-            } else {
-                return Err(EngineError::analysis(
-                    format!("PropBank predicate not found: {roleset}"),
-                    "predicate lookup",
+            if let Some(best_match) = fuzzy_matches.first() {
+                let confidence = self.calculate_predicate_confidence(best_match) * 0.8;
+                return Ok(SemanticResult::new(
+                    (*best_match).clone(),
+                    confidence,
+                    false,
+                    start_time.elapsed().as_micros() as u64,
                 ));
             }
-        };
-
-        // Cache the analysis result
-        if self.config.enable_cache {
-            let analysis = PropBankAnalysis::with_predicate(
-                format!("{lemma}#{sense}"),
-                result.data.clone(),
-                result.confidence,
-            );
-            if let Ok(mut cache) = self.cache.lock() {
-                cache.insert(cache_key, analysis);
-            }
         }
 
-        // Update statistics
-        if let Ok(mut stats) = self.stats.lock() {
-            stats.performance.total_queries += 1;
-            // Would need more sophisticated metrics tracking for timing stats
-        }
-
-        Ok(result)
+        Err(EngineError::analysis(
+            format!("PropBank predicate not found: {roleset}"),
+            "predicate lookup",
+        ))
     }
 
     /// Analyze a word for all possible predicates
+    ///
+    /// Uses BaseEngine for caching and statistics tracking.
     pub fn analyze_word(&self, word: &str) -> EngineResult<SemanticResult<PropBankAnalysis>> {
-        let start_time = std::time::Instant::now();
-        let cache_key = format!("propbank:{}", word.to_lowercase());
+        let input = PropBankInput {
+            word: word.to_string(),
+        };
+        self.base_engine.analyze(&input, self)
+    }
 
-        // Check cache first
-        if self.config.enable_cache {
-            // Track lookup
-            if let Ok(mut tracking) = self.cache_tracking.lock() {
-                tracking.total_lookups += 1;
-            }
-
-            if let Ok(cache) = self.cache.lock() {
-                if let Some(cached_analysis) = cache.get(&cache_key) {
-                    // Track cache hit
-                    if let Ok(mut tracking) = self.cache_tracking.lock() {
-                        tracking.hits += 1;
-                        tracking.hit_rate = tracking.hits as f64 / tracking.total_lookups as f64;
-                    }
-                    return Ok(SemanticResult::cached(
-                        cached_analysis.clone(),
-                        cached_analysis.confidence,
-                    ));
-                } else {
-                    // Track cache miss
-                    if let Ok(mut tracking) = self.cache_tracking.lock() {
-                        tracking.misses += 1;
-                        tracking.hit_rate = tracking.hits as f64 / tracking.total_lookups as f64;
-                    }
-                }
-            }
-        }
-
+    /// Core analysis logic without caching (used by EngineCore trait)
+    fn perform_word_analysis(&self, word: &str) -> EngineResult<PropBankAnalysis> {
         // Find all predicates matching this lemma
         let matching_predicates: Vec<&PropBankPredicate> = self
             .data
@@ -256,27 +209,7 @@ impl PropBankEngine {
             ));
         }
 
-        let result = SemanticResult::new(
-            analysis.clone(),
-            analysis.confidence,
-            false,
-            start_time.elapsed().as_micros() as u64,
-        );
-
-        // Cache the result
-        if self.config.enable_cache {
-            if let Ok(mut cache) = self.cache.lock() {
-                cache.insert(cache_key, analysis.clone());
-            }
-        }
-
-        // Update statistics
-        if let Ok(mut stats) = self.stats.lock() {
-            stats.performance.total_queries += 1;
-            // Would need more sophisticated metrics tracking for timing stats
-        }
-
-        Ok(result)
+        Ok(analysis)
     }
 
     /// Get all predicates for a lemma
@@ -368,6 +301,33 @@ impl PropBankEngine {
     }
 }
 
+/// Implementation of EngineCore trait for BaseEngine integration
+impl EngineCore<PropBankInput, PropBankAnalysis> for PropBankEngine {
+    fn perform_analysis(&self, input: &PropBankInput) -> EngineResult<PropBankAnalysis> {
+        self.perform_word_analysis(&input.word)
+    }
+
+    fn calculate_confidence(&self, _input: &PropBankInput, output: &PropBankAnalysis) -> f32 {
+        output.confidence
+    }
+
+    fn generate_cache_key(&self, input: &PropBankInput) -> String {
+        CacheKeyFormat::Typed("propbank".to_string(), input.word.clone()).to_string()
+    }
+
+    fn engine_name(&self) -> &'static str {
+        "PropBank"
+    }
+
+    fn engine_version(&self) -> &'static str {
+        "1.0.0"
+    }
+
+    fn is_initialized(&self) -> bool {
+        !self.data.predicates.is_empty()
+    }
+}
+
 // Implement required traits
 impl SemanticEngine for PropBankEngine {
     type Input = String;
@@ -397,49 +357,25 @@ impl SemanticEngine for PropBankEngine {
 
 impl CachedEngine for PropBankEngine {
     fn clear_cache(&self) {
-        if let Ok(mut cache) = self.cache.lock() {
-            cache.clear();
-        }
+        self.base_engine.clear_cache();
     }
 
     fn cache_stats(&self) -> CacheStats {
-        let cache_size = self.cache.lock().map(|c| c.len()).unwrap_or(0);
-        if let Ok(tracking) = self.cache_tracking.lock() {
-            CacheStats {
-                hits: tracking.hits,
-                misses: tracking.misses,
-                total_lookups: tracking.total_lookups,
-                hit_rate: tracking.hit_rate,
-                evictions: 0,
-                current_size: cache_size,
-                has_ttl: false,
-            }
-        } else {
-            CacheStats::empty()
-        }
+        self.base_engine.cache_stats()
     }
 
     fn set_cache_capacity(&mut self, _capacity: usize) {
-        // Note: PropBank config is immutable after creation
-        // This would require a more complex design to support
+        // BaseEngine doesn't support runtime capacity changes
     }
 }
 
 impl StatisticsProvider for PropBankEngine {
     fn statistics(&self) -> EngineStats {
-        if let Ok(stats) = self.stats.lock() {
-            stats.clone()
-        } else {
-            EngineStats::new("PropBank".to_string())
-        }
+        self.base_engine.get_stats()
     }
 
     fn performance_metrics(&self) -> PerformanceMetrics {
-        if let Ok(metrics) = self.performance_metrics.lock() {
-            metrics.clone()
-        } else {
-            PerformanceMetrics::new()
-        }
+        self.base_engine.get_performance_metrics()
     }
 }
 

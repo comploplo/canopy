@@ -357,8 +357,7 @@ mod tests {
     #[derive(Debug)]
     struct TestXmlResource {
         id: String,
-        #[allow(dead_code)]
-        value: String,
+        _value: String,
     }
 
     impl XmlResource for TestXmlResource {
@@ -368,7 +367,7 @@ mod tests {
             // Simple test implementation
             Ok(TestXmlResource {
                 id: "test".to_string(),
-                value: "test_value".to_string(),
+                _value: "test_value".to_string(),
             })
         }
 
@@ -415,11 +414,11 @@ mod tests {
         let test_data = vec![
             TestXmlResource {
                 id: "1".to_string(),
-                value: "one".to_string(),
+                _value: "one".to_string(),
             },
             TestXmlResource {
                 id: "2".to_string(),
-                value: "two".to_string(),
+                _value: "two".to_string(),
             },
         ];
 

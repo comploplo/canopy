@@ -117,10 +117,8 @@ mod extended_coverage_tests {
             buf.clear();
         }
 
-        // This should trigger a text decode error
-        let result = Frame::parse_xml(&mut Reader::from_str(xml));
-        // The parser might handle this gracefully or error - either is acceptable
-        assert!(result.is_ok() || result.is_err());
+        // This should trigger a text decode error - reaching here without panic is the test
+        let _ = Frame::parse_xml(&mut Reader::from_str(xml));
     }
 
     #[test]

@@ -23,6 +23,7 @@ fn make_token(word: &str, lemma: &str, pos: Option<UPos>) -> Layer1SemanticResul
         framenet: None,
         wordnet: None,
         lexicon: None,
+        propbank: None,
         treebank: None,
         confidence: 0.8,
         sources: vec![],
@@ -314,21 +315,15 @@ fn test_batch_composition() {
 #[test]
 fn test_little_v_type_defaults() {
     // Test that LittleVType provides correct default roles
-    assert!(
-        LittleVType::Cause
-            .default_roles()
-            .contains(&ThetaRole::Agent)
-    );
-    assert!(
-        LittleVType::Cause
-            .default_roles()
-            .contains(&ThetaRole::Patient)
-    );
-    assert!(
-        LittleVType::Experience
-            .default_roles()
-            .contains(&ThetaRole::Experiencer)
-    );
+    assert!(LittleVType::Cause
+        .default_roles()
+        .contains(&ThetaRole::Agent));
+    assert!(LittleVType::Cause
+        .default_roles()
+        .contains(&ThetaRole::Patient));
+    assert!(LittleVType::Experience
+        .default_roles()
+        .contains(&ThetaRole::Experiencer));
     assert!(LittleVType::Go.default_roles().contains(&ThetaRole::Theme));
     assert!(LittleVType::Go.default_roles().contains(&ThetaRole::Goal));
 }
@@ -420,6 +415,7 @@ fn make_verb_with_verbnet(
         framenet: None,
         wordnet: None,
         lexicon: None,
+        propbank: None,
         treebank: None,
         confidence: 0.9,
         sources: vec!["VerbNet".to_string()],

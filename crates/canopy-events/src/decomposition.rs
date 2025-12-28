@@ -15,10 +15,6 @@ pub struct EventDecomposer {
 
     /// VerbNet class ID prefix -> default LittleV type
     class_defaults: HashMap<String, LittleVType>,
-
-    /// Configuration
-    #[allow(dead_code)]
-    config: EventComposerConfig,
 }
 
 /// Template for decomposing a predicate
@@ -39,11 +35,10 @@ pub struct LittleVTemplate {
 
 impl EventDecomposer {
     /// Create a new decomposer with default mappings
-    pub fn new(config: &EventComposerConfig) -> EventResult<Self> {
+    pub fn new(_config: &EventComposerConfig) -> EventResult<Self> {
         let mut decomposer = Self {
             predicate_map: HashMap::new(),
             class_defaults: HashMap::new(),
-            config: config.clone(),
         };
         decomposer.initialize_predicate_mappings();
         decomposer.initialize_class_defaults();

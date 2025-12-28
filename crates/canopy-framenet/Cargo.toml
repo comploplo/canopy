@@ -1,11 +1,11 @@
 [package]
 name = "canopy-framenet"
-version = "0.1.0"
-edition = "2021"
-authors = ["canopy.rs contributors"]
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
 description = "FrameNet integration for semantic analysis - FrameNet frame-based semantic parsing and analysis"
-license = "MIT OR Apache-2.0"
-repository = "https://github.com/canopy-rs/canopy"
 
 [dependencies]
 # Engine infrastructure
@@ -13,34 +13,32 @@ canopy-engine = { path = "../canopy-engine", features = ["parallel"] }
 canopy-core = { path = "../canopy-core" }
 
 # Serialization and data structures
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-bincode = "1.3"
+serde = { workspace = true }
+serde_json = { workspace = true }
+bincode = { workspace = true }
 
 # Lazy initialization
-once_cell = "1.19"
+once_cell = { workspace = true }
 
 # XML parsing
-quick-xml = "0.31"
+quick-xml = { workspace = true }
 
 # Error handling
-thiserror = "1.0"
+thiserror = { workspace = true }
 
 # Collections and utilities
-indexmap = { version = "2.0", features = ["serde"] }
-regex = "1.10"
+indexmap = { workspace = true }
+regex = { workspace = true }
 
 # Parallel processing
-rayon = { version = "1.7", optional = true }
+rayon = { workspace = true, optional = true }
 
 # Logging
-tracing = "0.1"
+tracing = { workspace = true }
 
 [dev-dependencies]
 # Testing infrastructure
-tokio-test = "0.4"
-tempfile = "3.0"
-once_cell = "1.19"
+tempfile = { workspace = true }
 
 [features]
 default = ["std", "parallel"]

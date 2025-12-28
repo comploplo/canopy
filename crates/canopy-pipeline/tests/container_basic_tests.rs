@@ -2,7 +2,7 @@
 //!
 //! Tests basic container creation and type structures
 
-use canopy_pipeline::{ContainerBuilder, traits::*};
+use canopy_pipeline::{traits::*, ContainerBuilder};
 
 #[cfg(test)]
 mod container_tests {

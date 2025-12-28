@@ -362,37 +362,3 @@ impl Model for DefaultModel {
         Ok(())
     }
 }
-
-// #[cfg(test)]
-// mod tests {  // Temporarily disabled due to deprecated dependencies
-//     use super::*;
-//     use crate::implementations::test_doubles::*;
-//
-//     #[tokio::test]
-//     async fn test_container_builder() {
-//         let factory = Arc::new(MockComponentFactory::new());
-//
-//         let container = ContainerBuilder::new()
-//             .with_parser(ParserConfig {
-//                 model_path: Some("test".to_string()),
-//                 model_type: ModelType::UDPipe12,
-//                 performance_mode: PerformanceMode::Balanced,
-//                 enable_caching: false,
-//             })
-//             .with_analyzer(AnalyzerConfig::default())
-//             .with_factory(factory)
-//             .build()
-//             .await;
-//
-//         assert!(container.is_ok());
-//         let container = container.unwrap();
-//         assert!(container.parser().is_ready());
-//     }
-//
-//     #[test]
-//     fn test_model_discovery() {
-//         let loader = DefaultModelLoader::new();
-//         // Should at least not crash
-//         assert!(loader.available_models.len() >= 0);
-//     }
-// }

@@ -5,6 +5,8 @@ use crate::lemmatizer::{Lemmatizer, SimpleLemmatizer};
 use canopy_core::UPos;
 use canopy_engine::EngineResult;
 use canopy_framenet::FrameNetEngine;
+use canopy_lexicon::LexiconEngine;
+use canopy_propbank::PropBankEngine;
 use canopy_verbnet::VerbNetEngine;
 use canopy_wordnet::{PartOfSpeech, WordNetEngine};
 #[cfg(feature = "parallel")]
@@ -213,6 +215,7 @@ pub struct CoordinatorConfig {
     pub enable_framenet: bool,
     pub enable_wordnet: bool,
     pub enable_lexicon: bool,
+    pub enable_propbank: bool,
     pub enable_treebank: bool,
     pub enable_lemmatization: bool,
     pub use_advanced_lemmatization: bool,
@@ -237,6 +240,7 @@ impl Default for CoordinatorConfig {
             enable_framenet: true,
             enable_wordnet: true,
             enable_lexicon: true,
+            enable_propbank: true,
             enable_treebank: true,
             enable_lemmatization: true,
             use_advanced_lemmatization: false,
@@ -263,6 +267,7 @@ pub struct Layer1SemanticResult {
     pub framenet: Option<canopy_framenet::FrameNetAnalysis>,
     pub wordnet: Option<canopy_wordnet::WordNetAnalysis>,
     pub lexicon: Option<canopy_lexicon::LexiconAnalysis>,
+    pub propbank: Option<canopy_propbank::PropBankAnalysis>,
     pub treebank: Option<TreebankAnalysis>,
     pub confidence: f32,
     pub sources: Vec<String>,
@@ -280,6 +285,7 @@ impl Layer1SemanticResult {
             framenet: None,
             wordnet: None,
             lexicon: None,
+            propbank: None,
             treebank: None,
             confidence: 0.0,
             sources: Vec::new(),
@@ -293,6 +299,7 @@ impl Layer1SemanticResult {
             || self.framenet.is_some()
             || self.wordnet.is_some()
             || self.lexicon.is_some()
+            || self.propbank.is_some()
             || self.treebank.is_some()
             || !self.sources.is_empty()
     }
@@ -304,6 +311,7 @@ impl Layer1SemanticResult {
             self.framenet.is_some(),
             self.wordnet.is_some(),
             self.lexicon.is_some(),
+            self.propbank.is_some(),
             self.treebank.is_some(),
         ]
         .iter()
@@ -466,6 +474,66 @@ pub trait TreebankProvider: Send + Sync {
     fn analyze_word(&self, word: &str) -> Result<TreebankAnalysis, canopy_engine::EngineError>;
 }
 
+/// Helper to spawn an engine loader in a new thread if enabled.
+fn spawn_engine<T, F>(enabled: bool, loader: F) -> Option<thread::JoinHandle<T>>
+where
+    T: Send + 'static,
+    F: FnOnce() -> T + Send + 'static,
+{
+    if enabled {
+        Some(thread::spawn(loader))
+    } else {
+        None
+    }
+}
+
+/// Helper to collect a required engine result from a thread handle.
+/// Returns an error if the engine fails to load or the thread panics.
+fn collect_required_engine<T: Send + 'static>(
+    handle: Option<thread::JoinHandle<Result<T, canopy_engine::EngineError>>>,
+    name: &str,
+) -> EngineResult<Option<T>> {
+    match handle {
+        Some(h) => match h.join() {
+            Ok(Ok(engine)) => {
+                println!("✅ {} engine loaded with real data", name);
+                Ok(Some(engine))
+            }
+            Ok(Err(e)) => Err(e),
+            Err(_) => Err(canopy_engine::EngineError::data_load(format!(
+                "{} thread panicked",
+                name
+            ))),
+        },
+        None => Ok(None),
+    }
+}
+
+/// Helper to collect an optional engine result from a thread handle.
+/// Logs a warning if the engine fails but doesn't return an error.
+fn collect_optional_engine<T: Send + 'static>(
+    handle: Option<thread::JoinHandle<Result<T, canopy_engine::EngineError>>>,
+    name: &str,
+) -> Option<T> {
+    match handle {
+        Some(h) => match h.join() {
+            Ok(Ok(engine)) => {
+                println!("✅ {} engine loaded with real data", name);
+                Some(engine)
+            }
+            Ok(Err(e)) => {
+                eprintln!("⚠️  {} initialization failed (optional): {}", name, e);
+                None
+            }
+            Err(_) => {
+                eprintln!("⚠️  {} thread panicked (optional)", name);
+                None
+            }
+        },
+        None => None,
+    }
+}
+
 /// Semantic coordinator for Layer 1 analysis
 pub struct SemanticCoordinator {
     config: CoordinatorConfig,
@@ -474,6 +542,8 @@ pub struct SemanticCoordinator {
     verbnet_engine: Option<VerbNetEngine>,
     framenet_engine: Option<FrameNetEngine>,
     wordnet_engine: Option<WordNetEngine>,
+    propbank_engine: Option<PropBankEngine>,
+    lexicon_engine: Option<LexiconEngine>,
     stats: Arc<Mutex<CoordinatorStatistics>>,
     cache: Arc<Mutex<SemanticCache>>,
 }
@@ -486,94 +556,36 @@ impl SemanticCoordinator {
         let enable_verbnet = config.enable_verbnet;
         let enable_framenet = config.enable_framenet;
         let enable_wordnet = config.enable_wordnet;
+        let enable_propbank = config.enable_propbank;
+        let enable_lexicon = config.enable_lexicon;
 
         // Launch parallel engine initialization
-        let verbnet_handle = if enable_verbnet {
-            Some(thread::spawn(
-                move || -> Result<VerbNetEngine, canopy_engine::EngineError> {
-                    VerbNetEngine::new()
-                },
-            ))
-        } else {
-            None
-        };
+        let verbnet_handle = spawn_engine(enable_verbnet, VerbNetEngine::new);
+        let framenet_handle = spawn_engine(enable_framenet, FrameNetEngine::new);
+        let wordnet_handle = spawn_engine(enable_wordnet, WordNetEngine::new);
+        let propbank_handle = spawn_engine(enable_propbank, PropBankEngine::new);
+        let lexicon_handle = spawn_engine(enable_lexicon, LexiconEngine::new);
 
-        let framenet_handle = if enable_framenet {
-            Some(thread::spawn(
-                move || -> Result<FrameNetEngine, canopy_engine::EngineError> {
-                    FrameNetEngine::new()
-                },
-            ))
-        } else {
-            None
-        };
+        // Collect results from parallel initialization
+        // Required engines fail fast, optional engines log warnings
+        let verbnet_engine = collect_required_engine(verbnet_handle, "VerbNet")?;
+        let framenet_engine = collect_required_engine(framenet_handle, "FrameNet")?;
+        let wordnet_engine = collect_required_engine(wordnet_handle, "WordNet")?;
+        let propbank_engine = collect_optional_engine(propbank_handle, "PropBank");
 
-        let wordnet_handle = if enable_wordnet {
-            Some(thread::spawn(
-                move || -> Result<WordNetEngine, canopy_engine::EngineError> {
-                    WordNetEngine::new()
-                },
-            ))
-        } else {
-            None
-        };
-
-        // Collect results from parallel initialization - fail fast if data unavailable
-        let verbnet_engine = if let Some(handle) = verbnet_handle {
-            match handle.join() {
-                Ok(Ok(engine)) => {
-                    println!("✅ VerbNet engine loaded with real data");
+        // Lexicon returns Self directly (not Result), handle separately
+        let lexicon_engine = match lexicon_handle {
+            Some(h) => match h.join() {
+                Ok(engine) => {
+                    println!("✅ Lexicon engine loaded");
                     Some(engine)
                 }
-                Ok(Err(e)) => {
-                    return Err(e);
-                }
                 Err(_) => {
-                    return Err(canopy_engine::EngineError::data_load(
-                        "VerbNet thread panicked",
-                    ));
+                    eprintln!("⚠️  Lexicon thread panicked (optional)");
+                    None
                 }
-            }
-        } else {
-            None
-        };
-
-        let framenet_engine = if let Some(handle) = framenet_handle {
-            match handle.join() {
-                Ok(Ok(engine)) => {
-                    println!("✅ FrameNet engine loaded with real data");
-                    Some(engine)
-                }
-                Ok(Err(e)) => {
-                    return Err(e);
-                }
-                Err(_) => {
-                    return Err(canopy_engine::EngineError::data_load(
-                        "FrameNet thread panicked",
-                    ));
-                }
-            }
-        } else {
-            None
-        };
-
-        let wordnet_engine = if let Some(handle) = wordnet_handle {
-            match handle.join() {
-                Ok(Ok(engine)) => {
-                    println!("✅ WordNet engine loaded with real data");
-                    Some(engine)
-                }
-                Ok(Err(e)) => {
-                    return Err(e);
-                }
-                Err(_) => {
-                    return Err(canopy_engine::EngineError::data_load(
-                        "WordNet thread panicked",
-                    ));
-                }
-            }
-        } else {
-            None
+            },
+            None => None,
         };
 
         let cache = Arc::new(Mutex::new(SemanticCache::new(config.cache_capacity)));
@@ -585,6 +597,8 @@ impl SemanticCoordinator {
             verbnet_engine,
             framenet_engine,
             wordnet_engine,
+            propbank_engine,
+            lexicon_engine,
             stats: Arc::new(Mutex::new(CoordinatorStatistics::default())),
             cache: cache.clone(),
         };
@@ -635,65 +649,78 @@ impl SemanticCoordinator {
         let mut result = Layer1SemanticResult::new(word.to_string(), lemma.clone());
         result.lemmatization_confidence = confidence;
 
-        // Perform parallel engine queries for VerbNet, FrameNet, and WordNet
+        // Perform parallel engine queries for VerbNet, FrameNet, WordNet, PropBank, and Lexicon
         let verbnet_engine = self.verbnet_engine.as_ref();
         let framenet_engine = self.framenet_engine.as_ref();
         let wordnet_engine = self.wordnet_engine.as_ref();
+        let propbank_engine = self.propbank_engine.as_ref();
+        let lexicon_engine = self.lexicon_engine.as_ref();
 
         // Use thread::scope to parallelize engine queries (~3x speedup for cache misses)
-        let (verbnet_result, framenet_result, wordnet_result) = thread::scope(|s| {
-            // VerbNet analysis
-            let verbnet_handle =
-                s.spawn(|| verbnet_engine.and_then(|engine| engine.analyze_verb(&lemma).ok()));
+        let (verbnet_result, framenet_result, wordnet_result, propbank_result, lexicon_result) =
+            thread::scope(|s| {
+                // VerbNet analysis
+                let verbnet_handle =
+                    s.spawn(|| verbnet_engine.and_then(|engine| engine.analyze_verb(&lemma).ok()));
 
-            // FrameNet analysis
-            let framenet_handle =
-                s.spawn(|| framenet_engine.and_then(|engine| engine.analyze_text(&lemma).ok()));
+                // FrameNet analysis
+                let framenet_handle =
+                    s.spawn(|| framenet_engine.and_then(|engine| engine.analyze_text(&lemma).ok()));
 
-            // WordNet analysis - optimized with suffix heuristics + early exit
-            let wordnet_handle = s.spawn(|| {
-                wordnet_engine.and_then(|engine| {
-                    // Strategy 1: Try suffix-based POS guess first (can skip all 4 queries)
-                    if let Some(guessed_pos) = guess_pos_from_suffix(&lemma) {
-                        if let Ok(result) = engine.analyze_word(&lemma, guessed_pos) {
-                            if result.confidence >= WORDNET_EARLY_EXIT_CONFIDENCE {
-                                return Some(result);
+                // WordNet analysis - optimized with suffix heuristics + early exit
+                let wordnet_handle = s.spawn(|| {
+                    wordnet_engine.and_then(|engine| {
+                        // Strategy 1: Try suffix-based POS guess first (can skip all 4 queries)
+                        if let Some(guessed_pos) = guess_pos_from_suffix(&lemma) {
+                            if let Ok(result) = engine.analyze_word(&lemma, guessed_pos) {
+                                if result.confidence >= WORDNET_EARLY_EXIT_CONFIDENCE {
+                                    return Some(result);
+                                }
                             }
                         }
-                    }
 
-                    // Strategy 2: Sequential queries with early exit on high confidence
-                    // Already parallel to VerbNet/FrameNet, so no nested threading needed
-                    let mut best_result: Option<
-                        canopy_engine::SemanticResult<canopy_wordnet::WordNetAnalysis>,
-                    > = None;
+                        // Strategy 2: Sequential queries with early exit on high confidence
+                        // Already parallel to VerbNet/FrameNet, so no nested threading needed
+                        let mut best_result: Option<
+                            canopy_engine::SemanticResult<canopy_wordnet::WordNetAnalysis>,
+                        > = None;
 
-                    for pos in WORDNET_ALL_POS {
-                        if let Ok(result) = engine.analyze_word(&lemma, pos) {
-                            // Early exit on high confidence
-                            if result.confidence >= WORDNET_EARLY_EXIT_CONFIDENCE {
-                                return Some(result);
-                            }
-                            // Track best result so far
-                            if best_result
-                                .as_ref()
-                                .is_none_or(|b| result.confidence > b.confidence)
-                            {
-                                best_result = Some(result);
+                        for pos in WORDNET_ALL_POS {
+                            if let Ok(result) = engine.analyze_word(&lemma, pos) {
+                                // Early exit on high confidence
+                                if result.confidence >= WORDNET_EARLY_EXIT_CONFIDENCE {
+                                    return Some(result);
+                                }
+                                // Track best result so far
+                                if best_result
+                                    .as_ref()
+                                    .is_none_or(|b| result.confidence > b.confidence)
+                                {
+                                    best_result = Some(result);
+                                }
                             }
                         }
-                    }
 
-                    best_result
-                })
+                        best_result
+                    })
+                });
+
+                // PropBank analysis
+                let propbank_handle =
+                    s.spawn(|| propbank_engine.and_then(|engine| engine.analyze_word(&lemma).ok()));
+
+                // Lexicon analysis
+                let lexicon_handle =
+                    s.spawn(|| lexicon_engine.and_then(|engine| engine.analyze_word(&lemma).ok()));
+
+                (
+                    verbnet_handle.join().unwrap_or(None),
+                    framenet_handle.join().unwrap_or(None),
+                    wordnet_handle.join().unwrap_or(None),
+                    propbank_handle.join().unwrap_or(None),
+                    lexicon_handle.join().unwrap_or(None),
+                )
             });
-
-            (
-                verbnet_handle.join().unwrap_or(None),
-                framenet_handle.join().unwrap_or(None),
-                wordnet_handle.join().unwrap_or(None),
-            )
-        });
 
         // Process VerbNet result
         if let Some(verbnet_res) = verbnet_result {
@@ -719,6 +746,24 @@ impl SemanticCoordinator {
             result.sources.push("WordNet".to_string());
             if wordnet_res.confidence > result.confidence {
                 result.confidence = wordnet_res.confidence;
+            }
+        }
+
+        // Process PropBank result
+        if let Some(propbank_res) = propbank_result {
+            result.propbank = Some(propbank_res.data);
+            result.sources.push("PropBank".to_string());
+            if propbank_res.confidence > result.confidence {
+                result.confidence = propbank_res.confidence;
+            }
+        }
+
+        // Process Lexicon result
+        if let Some(lexicon_res) = lexicon_result {
+            result.lexicon = Some(lexicon_res.data);
+            result.sources.push("Lexicon".to_string());
+            if lexicon_res.confidence > result.confidence {
+                result.confidence = lexicon_res.confidence;
             }
         }
 
@@ -811,75 +856,93 @@ impl SemanticCoordinator {
         let verbnet_engine = self.verbnet_engine.as_ref();
         let framenet_engine = self.framenet_engine.as_ref();
         let wordnet_engine = self.wordnet_engine.as_ref();
+        let propbank_engine = self.propbank_engine.as_ref();
+        let lexicon_engine = self.lexicon_engine.as_ref();
 
         // Parallel engine queries with POS filtering
-        let (verbnet_result, framenet_result, wordnet_result) = thread::scope(|s| {
-            // VerbNet: only for verbs/aux (skip for nouns, adjectives, etc.)
-            let verbnet_handle = s.spawn(|| {
-                if should_query_verbnet(pos) {
-                    verbnet_engine.and_then(|engine| engine.analyze_verb(&lemma).ok())
-                } else {
-                    None
-                }
-            });
-
-            // FrameNet: for content words only
-            let framenet_handle = s.spawn(|| {
-                if should_query_framenet(pos) {
-                    framenet_engine.and_then(|engine| engine.analyze_text(&lemma).ok())
-                } else {
-                    None
-                }
-            });
-
-            // WordNet: use specific POS if known, otherwise try all
-            let wordnet_handle = s.spawn(|| {
-                wordnet_engine.and_then(|engine| {
-                    if let Some(upos) = pos {
-                        // Known POS - query directly (1 query instead of 4)
-                        if let Some(wordnet_pos) = upos_to_wordnet_pos(upos) {
-                            engine.analyze_word(&lemma, wordnet_pos).ok()
-                        } else {
-                            None // Function words don't have WordNet entries
-                        }
+        let (verbnet_result, framenet_result, wordnet_result, propbank_result, lexicon_result) =
+            thread::scope(|s| {
+                // VerbNet: only for verbs/aux (skip for nouns, adjectives, etc.)
+                let verbnet_handle = s.spawn(|| {
+                    if should_query_verbnet(pos) {
+                        verbnet_engine.and_then(|engine| engine.analyze_verb(&lemma).ok())
                     } else {
-                        // Unknown POS - use suffix heuristics + early exit
-                        if let Some(guessed_pos) = guess_pos_from_suffix(&lemma) {
-                            if let Ok(result) = engine.analyze_word(&lemma, guessed_pos) {
-                                if result.confidence >= WORDNET_EARLY_EXIT_CONFIDENCE {
-                                    return Some(result);
-                                }
-                            }
-                        }
-
-                        // Sequential queries with early exit
-                        let mut best_result: Option<
-                            canopy_engine::SemanticResult<canopy_wordnet::WordNetAnalysis>,
-                        > = None;
-                        for pos in WORDNET_ALL_POS {
-                            if let Ok(result) = engine.analyze_word(&lemma, pos) {
-                                if result.confidence >= WORDNET_EARLY_EXIT_CONFIDENCE {
-                                    return Some(result);
-                                }
-                                if best_result
-                                    .as_ref()
-                                    .is_none_or(|b| result.confidence > b.confidence)
-                                {
-                                    best_result = Some(result);
-                                }
-                            }
-                        }
-                        best_result
+                        None
                     }
-                })
-            });
+                });
 
-            (
-                verbnet_handle.join().unwrap_or(None),
-                framenet_handle.join().unwrap_or(None),
-                wordnet_handle.join().unwrap_or(None),
-            )
-        });
+                // FrameNet: for content words only
+                let framenet_handle = s.spawn(|| {
+                    if should_query_framenet(pos) {
+                        framenet_engine.and_then(|engine| engine.analyze_text(&lemma).ok())
+                    } else {
+                        None
+                    }
+                });
+
+                // WordNet: use specific POS if known, otherwise try all
+                let wordnet_handle = s.spawn(|| {
+                    wordnet_engine.and_then(|engine| {
+                        if let Some(upos) = pos {
+                            // Known POS - query directly (1 query instead of 4)
+                            if let Some(wordnet_pos) = upos_to_wordnet_pos(upos) {
+                                engine.analyze_word(&lemma, wordnet_pos).ok()
+                            } else {
+                                None // Function words don't have WordNet entries
+                            }
+                        } else {
+                            // Unknown POS - use suffix heuristics + early exit
+                            if let Some(guessed_pos) = guess_pos_from_suffix(&lemma) {
+                                if let Ok(result) = engine.analyze_word(&lemma, guessed_pos) {
+                                    if result.confidence >= WORDNET_EARLY_EXIT_CONFIDENCE {
+                                        return Some(result);
+                                    }
+                                }
+                            }
+
+                            // Sequential queries with early exit
+                            let mut best_result: Option<
+                                canopy_engine::SemanticResult<canopy_wordnet::WordNetAnalysis>,
+                            > = None;
+                            for pos in WORDNET_ALL_POS {
+                                if let Ok(result) = engine.analyze_word(&lemma, pos) {
+                                    if result.confidence >= WORDNET_EARLY_EXIT_CONFIDENCE {
+                                        return Some(result);
+                                    }
+                                    if best_result
+                                        .as_ref()
+                                        .is_none_or(|b| result.confidence > b.confidence)
+                                    {
+                                        best_result = Some(result);
+                                    }
+                                }
+                            }
+                            best_result
+                        }
+                    })
+                });
+
+                // PropBank analysis (for verbs)
+                let propbank_handle = s.spawn(|| {
+                    if should_query_verbnet(pos) {
+                        propbank_engine.and_then(|engine| engine.analyze_word(&lemma).ok())
+                    } else {
+                        None
+                    }
+                });
+
+                // Lexicon analysis
+                let lexicon_handle =
+                    s.spawn(|| lexicon_engine.and_then(|engine| engine.analyze_word(&lemma).ok()));
+
+                (
+                    verbnet_handle.join().unwrap_or(None),
+                    framenet_handle.join().unwrap_or(None),
+                    wordnet_handle.join().unwrap_or(None),
+                    propbank_handle.join().unwrap_or(None),
+                    lexicon_handle.join().unwrap_or(None),
+                )
+            });
 
         // Process VerbNet result
         if let Some(verbnet_res) = verbnet_result {
@@ -905,6 +968,24 @@ impl SemanticCoordinator {
             result.sources.push("WordNet".to_string());
             if wordnet_res.confidence > result.confidence {
                 result.confidence = wordnet_res.confidence;
+            }
+        }
+
+        // Process PropBank result
+        if let Some(propbank_res) = propbank_result {
+            result.propbank = Some(propbank_res.data);
+            result.sources.push("PropBank".to_string());
+            if propbank_res.confidence > result.confidence {
+                result.confidence = propbank_res.confidence;
+            }
+        }
+
+        // Process Lexicon result
+        if let Some(lexicon_res) = lexicon_result {
+            result.lexicon = Some(lexicon_res.data);
+            result.sources.push("Lexicon".to_string());
+            if lexicon_res.confidence > result.confidence {
+                result.confidence = lexicon_res.confidence;
             }
         }
 
@@ -965,6 +1046,12 @@ impl SemanticCoordinator {
         }
         if self.wordnet_engine.is_some() {
             stats.active_engines.push("WordNet".to_string());
+        }
+        if self.propbank_engine.is_some() {
+            stats.active_engines.push("PropBank".to_string());
+        }
+        if self.lexicon_engine.is_some() {
+            stats.active_engines.push("Lexicon".to_string());
         }
         if self.treebank_provider.is_some() {
             stats.active_engines.push("Treebank".to_string());

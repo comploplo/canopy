@@ -338,9 +338,8 @@ mod edge_case_tests {
 
         for xml in malformed_xmls {
             let mut reader = Reader::from_str(xml);
-            let result = Frame::parse_xml(&mut reader);
-            // Should either parse gracefully or error appropriately
-            assert!(result.is_ok() || result.is_err());
+            // Should handle gracefully without panic
+            let _ = Frame::parse_xml(&mut reader);
         }
     }
 

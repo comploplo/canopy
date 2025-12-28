@@ -213,6 +213,7 @@ pub fn layer1_tokens_from_parsed(sentence: &ParsedSentence) -> Vec<Layer1Semanti
                 framenet: None,
                 wordnet: None,
                 lexicon: None,
+                propbank: None,
                 treebank: None,
                 confidence: 0.5, // Low confidence without semantic engines
                 sources: vec!["treebank".to_string()],

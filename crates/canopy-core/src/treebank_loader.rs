@@ -266,36 +266,36 @@ impl TreebankSentenceLoader {
             } else if !line.contains('-') && !line.contains('.') {
                 // Regular token line (skip multiword tokens and empty nodes)
                 let fields: Vec<&str> = line.split('\t').collect();
-                if fields.len() >= 10
-                    && let Ok(id) = fields[0].parse::<usize>()
-                {
-                    // Parse features
-                    let features = Self::parse_features(fields[5]);
+                if fields.len() >= 10 {
+                    if let Ok(id) = fields[0].parse::<usize>() {
+                        // Parse features
+                        let features = Self::parse_features(fields[5]);
 
-                    // Calculate character positions (approximate from tokens)
-                    let start = current_tokens
-                        .iter()
-                        .map(|t: &TreebankToken| t.form.len() + 1)
-                        .sum();
-                    let end = start + fields[1].len();
+                        // Calculate character positions (approximate from tokens)
+                        let start = current_tokens
+                            .iter()
+                            .map(|t: &TreebankToken| t.form.len() + 1)
+                            .sum();
+                        let end = start + fields[1].len();
 
-                    let token = TreebankToken {
-                        id,
-                        form: fields[1].to_string(),
-                        lemma: fields[2].to_string(),
-                        upos: fields[3].to_string(),
-                        xpos: if fields[4] == "_" {
-                            None
-                        } else {
-                            Some(fields[4].to_string())
-                        },
-                        features,
-                        head: fields[6].parse().unwrap_or(0),
-                        deprel: fields[7].to_string(),
-                        start,
-                        end,
-                    };
-                    current_tokens.push(token);
+                        let token = TreebankToken {
+                            id,
+                            form: fields[1].to_string(),
+                            lemma: fields[2].to_string(),
+                            upos: fields[3].to_string(),
+                            xpos: if fields[4] == "_" {
+                                None
+                            } else {
+                                Some(fields[4].to_string())
+                            },
+                            features,
+                            head: fields[6].parse().unwrap_or(0),
+                            deprel: fields[7].to_string(),
+                            start,
+                            end,
+                        };
+                        current_tokens.push(token);
+                    }
                 }
             }
         }

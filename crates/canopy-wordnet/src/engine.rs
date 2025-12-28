@@ -18,9 +18,9 @@ use crate::parser::WordNetParserConfig;
 use crate::types::{PartOfSpeech, WordNetAnalysis, WordNetDatabase};
 use canopy_core::paths::{cache_path, data_path_string};
 use canopy_engine::{
+    traits::{CachedEngine, DataInfo, DataLoader, SemanticEngine, StatisticsProvider},
     BaseEngine, CacheKeyFormat, EngineConfig, EngineCore, EngineResult, EngineStats,
     PerformanceMetrics, SemanticResult,
-    traits::{CachedEngine, DataInfo, DataLoader, SemanticEngine, StatisticsProvider},
 };
 use serde::{Deserialize, Serialize};
 use std::hash::{Hash, Hasher};
@@ -241,15 +241,15 @@ impl WordNetEngine {
         }
 
         // Parse synset_id as offset
-        if let Ok(offset) = synset_id.parse::<usize>()
-            && let Some(synset) = self.database.get_synset(offset)
-        {
-            return self
-                .database
-                .get_hypernyms(synset)
-                .into_iter()
-                .filter_map(|s| s.primary_word().map(|w| w.to_string()))
-                .collect();
+        if let Ok(offset) = synset_id.parse::<usize>() {
+            if let Some(synset) = self.database.get_synset(offset) {
+                return self
+                    .database
+                    .get_hypernyms(synset)
+                    .into_iter()
+                    .filter_map(|s| s.primary_word().map(|w| w.to_string()))
+                    .collect();
+            }
         }
 
         Vec::new()
@@ -262,15 +262,15 @@ impl WordNetEngine {
         }
 
         // Parse synset_id as offset
-        if let Ok(offset) = synset_id.parse::<usize>()
-            && let Some(synset) = self.database.get_synset(offset)
-        {
-            return self
-                .database
-                .get_hyponyms(synset)
-                .into_iter()
-                .filter_map(|s| s.primary_word().map(|w| w.to_string()))
-                .collect();
+        if let Ok(offset) = synset_id.parse::<usize>() {
+            if let Some(synset) = self.database.get_synset(offset) {
+                return self
+                    .database
+                    .get_hyponyms(synset)
+                    .into_iter()
+                    .filter_map(|s| s.primary_word().map(|w| w.to_string()))
+                    .collect();
+            }
         }
 
         Vec::new()
@@ -603,7 +603,7 @@ mod tests {
     }
 
     #[test]
-    fn test_empty_analysis() {
+    fn test_common_word_analysis() {
         // Use shared engine (loaded once, reused across tests)
         let Some(engine_ref) = shared_engine() else {
             eprintln!("Skipping test: WordNet data not available");
@@ -611,15 +611,30 @@ mod tests {
         };
 
         let engine = engine_ref.lock().unwrap();
-        // Test analysis with real data
-        if let Ok(result) = engine.analyze_word("test", PartOfSpeech::Noun) {
-            // With real data, we may or may not find synsets
-            assert!(result.confidence >= 0.0);
-        }
+        // Test analysis with common word that should definitely exist in WordNet
+        let result = engine
+            .analyze_word("dog", PartOfSpeech::Noun)
+            .expect("Should analyze common word 'dog'");
+
+        // Common words should have synsets and definitions
+        assert!(
+            !result.data.synsets.is_empty(),
+            "Word 'dog' should have synsets in WordNet"
+        );
+        assert!(
+            !result.data.definitions.is_empty(),
+            "Word 'dog' should have definitions in WordNet"
+        );
+        // Confidence should be meaningful for a found word
+        assert!(
+            result.confidence >= 0.5,
+            "Common word 'dog' should have reasonable confidence, got {}",
+            result.confidence
+        );
     }
 
     #[test]
-    fn test_confidence_calculation() {
+    fn test_confidence_varies_with_richness() {
         // Use shared engine (loaded once, reused across tests)
         let Some(engine_ref) = shared_engine() else {
             eprintln!("Skipping test: WordNet data not available");
@@ -628,11 +643,28 @@ mod tests {
 
         let engine = engine_ref.lock().unwrap();
 
-        let analysis = WordNetAnalysis::new("test".to_string(), PartOfSpeech::Noun);
-        let confidence = engine.calculate_wordnet_confidence(&analysis);
+        // Empty analysis should have low confidence
+        let empty_analysis = WordNetAnalysis::new("nonexistentxyz".to_string(), PartOfSpeech::Noun);
+        let empty_confidence = engine.calculate_wordnet_confidence(&empty_analysis);
 
-        // Test confidence bounds
-        assert!(confidence >= 0.0);
-        assert!(confidence <= 1.0);
+        // Get analysis for a rich word with multiple synsets
+        let result = engine
+            .analyze_word("run", PartOfSpeech::Verb)
+            .expect("Should analyze common verb 'run'");
+        let rich_confidence = engine.calculate_wordnet_confidence(&result.data);
+
+        // Rich analysis should have higher confidence than empty
+        assert!(
+            rich_confidence > empty_confidence,
+            "Word with synsets ({}) should have higher confidence than empty analysis ({})",
+            rich_confidence,
+            empty_confidence
+        );
+        // Rich analysis should have meaningful confidence
+        assert!(
+            rich_confidence >= 0.3,
+            "Common verb 'run' should have reasonable confidence, got {}",
+            rich_confidence
+        );
     }
 }

@@ -15,10 +15,10 @@ canopy-wordnet = { path = "../canopy-wordnet" }
 canopy-treebank = { path = "../canopy-treebank" }
 canopy-tokenizer = { path = "../canopy-tokenizer" }
 
-serde = { version = "1.0", features = ["derive"] }
-thiserror = "1.0"
-tracing = "0.1"
-indexmap = "2.0"
+serde = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+indexmap = { workspace = true }
 
 [dev-dependencies]
-tempfile = "3.0"
+tempfile = { workspace = true }

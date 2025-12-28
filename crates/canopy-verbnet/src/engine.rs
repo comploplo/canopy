@@ -12,8 +12,9 @@
 use crate::types::{VerbClass, VerbNetAnalysis, VerbNetConfig, VerbNetStats};
 use canopy_core::paths::cache_path;
 use canopy_engine::{
-    traits::DataInfo, BaseEngine, CacheKeyFormat, CommonDataLoader, EngineConfig, EngineCore,
-    EngineResult, SemanticResult,
+    traits::{DataInfo, DataLoader},
+    BaseEngine, CacheKeyFormat, CommonDataLoader, EngineConfig, EngineCore, EngineResult,
+    SemanticEngine, SemanticResult,
 };
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
@@ -427,6 +428,56 @@ impl EngineCore<VerbNetInput, VerbNetAnalysis> for VerbNetEngine {
 
     fn is_initialized(&self) -> bool {
         !self.verb_classes.is_empty()
+    }
+}
+
+/// SemanticEngine implementation for trait-based access
+impl SemanticEngine for VerbNetEngine {
+    type Input = VerbNetInput;
+    type Output = VerbNetAnalysis;
+    type Config = VerbNetConfig;
+
+    fn analyze(&self, input: &Self::Input) -> EngineResult<SemanticResult<Self::Output>> {
+        self.analyze_verb(&input.verb)
+    }
+
+    fn name(&self) -> &'static str {
+        "VerbNet"
+    }
+
+    fn version(&self) -> &'static str {
+        "3.4"
+    }
+
+    fn is_initialized(&self) -> bool {
+        !self.verb_classes.is_empty()
+    }
+
+    fn config(&self) -> &Self::Config {
+        &self.verbnet_config
+    }
+}
+
+/// DataLoader implementation for dynamic data loading
+impl DataLoader for VerbNetEngine {
+    fn load_from_directory<P: AsRef<Path>>(&mut self, path: P) -> EngineResult<()> {
+        // Delegate to inherent method
+        VerbNetEngine::load_from_directory(self, path)
+    }
+
+    fn load_test_data(&mut self) -> EngineResult<()> {
+        // Delegate to inherent method
+        VerbNetEngine::load_test_data(self)
+    }
+
+    fn reload(&mut self) -> EngineResult<()> {
+        // Delegate to inherent method
+        VerbNetEngine::reload(self)
+    }
+
+    fn data_info(&self) -> DataInfo {
+        // Delegate to inherent method
+        VerbNetEngine::data_info(self)
     }
 }
 

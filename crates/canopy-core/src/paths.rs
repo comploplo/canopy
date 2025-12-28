@@ -38,11 +38,12 @@ fn find_workspace_root_impl() -> Option<PathBuf> {
     loop {
         let cargo_toml = current.join("Cargo.toml");
 
-        if cargo_toml.exists()
-            && let Ok(contents) = std::fs::read_to_string(&cargo_toml)
-            && contents.contains("[workspace]")
-        {
-            return Some(current.to_path_buf());
+        if cargo_toml.exists() {
+            if let Ok(contents) = std::fs::read_to_string(&cargo_toml) {
+                if contents.contains("[workspace]") {
+                    return Some(current.to_path_buf());
+                }
+            }
         }
 
         // Move to parent directory
@@ -55,14 +56,15 @@ fn find_workspace_root_impl() -> Option<PathBuf> {
     // Fallback: check if we're in a "crates/xxx" subdirectory
     // and try going up two levels
     let start_str = start.to_string_lossy();
-    if (start_str.contains("/crates/") || start_str.contains("\\crates\\"))
-        && let Some(idx) = start_str
+    if start_str.contains("/crates/") || start_str.contains("\\crates\\") {
+        if let Some(idx) = start_str
             .find("/crates/")
             .or_else(|| start_str.find("\\crates\\"))
-    {
-        let workspace = PathBuf::from(&start_str[..idx]);
-        if workspace.join("Cargo.toml").exists() {
-            return Some(workspace);
+        {
+            let workspace = PathBuf::from(&start_str[..idx]);
+            if workspace.join("Cargo.toml").exists() {
+                return Some(workspace);
+            }
         }
     }
 

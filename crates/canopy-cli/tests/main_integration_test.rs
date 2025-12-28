@@ -76,9 +76,7 @@ fn test_cli_error_path_coverage() {
     for i in 0..3 {
         let result = run_cli();
         println!("Iteration {}: {:?}", i, result);
-
-        // Both success and error paths are valid for coverage
-        assert!(result.is_ok() || result.is_err());
+        // Exercises code path - reaching here without panic is the test
     }
 }
 

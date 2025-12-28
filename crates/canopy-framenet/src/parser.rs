@@ -451,28 +451,6 @@ fn parse_lexical_unit_ref<R: BufRead>(
     })
 }
 
-/// Parse a lexeme
-#[allow(dead_code)]
-fn parse_lexeme<R: BufRead>(
-    reader: &mut Reader<R>,
-    buf: &mut Vec<u8>,
-    start_tag: &quick_xml::events::BytesStart,
-) -> EngineResult<Lexeme> {
-    let pos = get_attribute(start_tag, "POS").unwrap_or_default();
-    let name = get_attribute(start_tag, "name").unwrap_or_default();
-    let break_before = get_attribute(start_tag, "breakBefore").map(|s| s == "true");
-    let headword = get_attribute(start_tag, "headword").map(|s| s == "true");
-
-    skip_element(reader, buf, b"lexeme")?;
-
-    Ok(Lexeme {
-        pos,
-        name,
-        break_before,
-        headword,
-    })
-}
-
 /// Parse valences section
 fn parse_valences<R: BufRead>(
     reader: &mut Reader<R>,
