@@ -17,11 +17,11 @@ Canopy builds rich meaning representations from text by combining formal linguis
 │  • WordNet synsets, dependency structure                │
 ├─────────────────────────────────────────────────────────┤
 │  Layer 2: Event Composition                             │
-│  • ∃e[Experience(e) ∧ Experiencer(e,John) ∧            │
+│  • ∃e[Experience(e) ∧ Experiencer(e,John) ∧             │
 │       Stimulus(e,Mary) ∧ Past(e)]                       │
 ├─────────────────────────────────────────────────────────┤
 │  Layer 3: Discourse & Anaphora                          │
-│  • DRS: [x,y | John(x), Mary(y), saw(x,y), waved(x,y)] │
+│  • DRS: [x,y | John(x), Mary(y), saw(x,y), waved(x,y)]  │
 │  • "He" → John (gender agreement, Condition B)          │
 │  • "her" → Mary (cross-clause binding)                  │
 └─────────────────────────────────────────────────────────┘
@@ -87,7 +87,7 @@ Canopy requires linguistic datasets (not included in repo):
 │  │  • Theta role binding: Agent, Patient, Theme, Experiencer, ...     │  │
 │  │  • Voice/aspect detection from dependency patterns                 │  │
 │  │                                                                    │  │
-│  │  Output: ∃e[LittleV(e) ∧ Agent(e,x) ∧ Theme(e,y) ∧ Aspect(e)]     │  │
+│  │  Output: ∃e[LittleV(e) ∧ Agent(e,x) ∧ Theme(e,y) ∧ Aspect(e)]      │  │
 │  └────────────────────────────────────────────────────────────────────┘  │
 └──────────────────────────────────────────────────────────────────────────┘
                                   │
