@@ -43,3 +43,7 @@ tempfile = { workspace = true }
 once_cell = { workspace = true }
 
 # Most examples disabled due to API changes during architectural transformation
+
+[package.metadata.cargo-machete]
+# indexmap for internal data, indicatif/lru/num_cpus for planned features, rayon/tokio optional
+ignored = ["indexmap", "indicatif", "lru", "num_cpus", "rayon", "tokio"]

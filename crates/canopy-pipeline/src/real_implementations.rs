@@ -209,9 +209,7 @@ mod tests {
         let parser = parser.unwrap();
 
         // Try to parse using a sentence ID
-        let result = parser.parse("canonical-001").await;
-        if result.is_ok() {
-            let words = result.unwrap();
+        if let Ok(words) = parser.parse("canonical-001").await {
             assert_eq!(words[0].text, "John");
             assert_eq!(words[0].lemma, "John");
             assert_eq!(words[1].text, "gave");

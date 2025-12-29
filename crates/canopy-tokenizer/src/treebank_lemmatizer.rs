@@ -47,12 +47,12 @@ impl TreebankLemmatizer {
             LemmatizerError::InitializationError(format!("Failed to read training file: {e}"))
         })?;
 
-        let mut line_count = 0;
+        let mut line_count: usize = 0;
         let mut word_lemma_pairs = Vec::new();
 
         for line in content.lines() {
             line_count += 1;
-            if line_count % 50000 == 0 {
+            if line_count.is_multiple_of(50000) {
                 info!("Processed {} lines", line_count);
             }
 

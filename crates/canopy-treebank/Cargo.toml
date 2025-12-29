@@ -28,9 +28,6 @@ indexmap = { workspace = true }
 lru = { workspace = true }
 regex = { workspace = true }
 
-# Error handling
-thiserror = { workspace = true }
-
 # Logging
 tracing = { workspace = true }
 
@@ -47,3 +44,7 @@ criterion = { workspace = true }
 [features]
 default = ["std"]
 std = []
+
+[package.metadata.cargo-machete]
+# conllu for CoNLL-U parsing, indexmap/regex/serde_json for future features, tracing via macros
+ignored = ["conllu", "indexmap", "regex", "serde_json", "tracing"]

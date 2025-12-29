@@ -185,7 +185,7 @@ impl DataLoader {
     {
         let progress_callback = if self.config.enable_progress {
             Some(Box::new(|current: usize, total: usize, message: &str| {
-                if current % 50 == 0 || current == total {
+                if current.is_multiple_of(50) || current == total {
                     info!("Progress: {}/{} - {}", current, total, message);
                 }
             }) as ProgressCallback)

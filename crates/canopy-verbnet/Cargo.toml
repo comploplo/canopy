@@ -20,9 +20,6 @@ bincode = { workspace = true }
 # XML parsing
 quick-xml = { workspace = true }
 
-# Error handling
-thiserror = { workspace = true }
-
 # Collections and utilities
 indexmap = { workspace = true }
 regex = { workspace = true }
@@ -38,3 +35,7 @@ tempfile = { workspace = true }
 [features]
 default = ["std"]
 std = []
+
+[package.metadata.cargo-machete]
+# regex for patterns, serde_json for serialization, tracing via macros (false positive)
+ignored = ["regex", "serde_json", "tracing"]

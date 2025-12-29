@@ -22,3 +22,7 @@ indexmap = { workspace = true }
 
 [dev-dependencies]
 tempfile = { workspace = true }
+
+[package.metadata.cargo-machete]
+# Crate deps for future L2 features, indexmap for internal data structures
+ignored = ["canopy-engine", "canopy-wordnet", "indexmap"]

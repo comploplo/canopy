@@ -31,3 +31,7 @@ tokio = { workspace = true, features = ["full"] }
 # Binary targets removed - deprecated benchmarks replaced by examples
 
 # Examples temporarily disabled during architectural transformation
+
+[package.metadata.cargo-machete]
+# tokio optional, tracing-subscriber for logging setup
+ignored = ["tokio", "tracing-subscriber"]

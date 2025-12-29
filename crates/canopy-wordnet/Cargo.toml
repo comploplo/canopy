@@ -15,7 +15,6 @@ canopy-engine = { path = "../canopy-engine" }
 serde = { workspace = true }
 bincode = { workspace = true }
 once_cell = { workspace = true }
-thiserror = { workspace = true }
 tracing = { workspace = true }
 rayon = { workspace = true, optional = true }
 
@@ -27,3 +26,7 @@ parallel = ["dep:rayon", "canopy-engine/parallel"]
 tokio = { workspace = true }
 tempfile = { workspace = true }
 serde_json = { workspace = true }
+
+[package.metadata.cargo-machete]
+# rayon optional, tracing via macros (false positive)
+ignored = ["rayon", "tracing"]

@@ -48,6 +48,14 @@ repos:
         types: [rust]
         pass_filenames: false
 
+      # Fast: detect unused dependencies (~2-5s)
+      - id: cargo-machete
+        name: cargo machete (unused deps)
+        entry: cargo machete
+        language: system
+        types: [rust]
+        pass_filenames: false
+
       # Medium: security/license check (~5-10s)
       - id: cargo-deny
         name: cargo deny (security + licenses + bans)

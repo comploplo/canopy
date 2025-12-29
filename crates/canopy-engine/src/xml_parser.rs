@@ -94,7 +94,7 @@ impl XmlParser {
         })?;
 
         // Configure reader
-        reader.expand_empty_elements(true);
+        reader.config_mut().expand_empty_elements = true;
 
         T::parse_xml(&mut reader).map_err(|e| {
             EngineError::data_load(format!(

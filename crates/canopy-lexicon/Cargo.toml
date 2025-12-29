@@ -13,7 +13,6 @@ categories = ["text-processing", "science"]
 canopy-core = { path = "../canopy-core" }
 canopy-engine = { path = "../canopy-engine" }
 serde = { workspace = true }
-thiserror = { workspace = true }
 tracing = { workspace = true }
 regex = { workspace = true }
 quick-xml = { workspace = true }
@@ -26,3 +25,7 @@ parallel = ["dep:rayon", "canopy-engine/parallel"]
 [dev-dependencies]
 tokio = { workspace = true }
 tempfile = { workspace = true }
+
+[package.metadata.cargo-machete]
+# rayon optional, tracing via macros (false positive)
+ignored = ["rayon", "tracing"]

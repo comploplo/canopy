@@ -34,3 +34,7 @@ tempfile = { workspace = true }
 # [[bench]]
 # name = "engine_performance"
 # harness = false
+
+[package.metadata.cargo-machete]
+# canopy-core for types, regex for pattern matching, rayon for parallel
+ignored = ["canopy-core", "regex", "rayon"]

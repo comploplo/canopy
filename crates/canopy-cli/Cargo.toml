@@ -17,3 +17,7 @@ tokio = { workspace = true }
 clap = { version = "4.4", features = ["derive"] }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
+
+[package.metadata.cargo-machete]
+# Placeholder deps for future CLI implementation, tracing via macros
+ignored = ["canopy-core", "canopy-tokenizer", "clap", "tokio", "tracing", "tracing-subscriber"]

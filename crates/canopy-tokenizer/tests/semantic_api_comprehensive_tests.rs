@@ -504,7 +504,7 @@ mod tests {
 
     #[test]
     fn test_semantic_error_variants() {
-        let errors = vec![
+        let errors = [
             SemanticError::TokenizationError {
                 context: "test".to_string(),
             },

@@ -4,8 +4,9 @@
 //! UD English-EWT data to optimize for M6 targets.
 
 use canopy_treebank::{ConlluParser, DependencyPattern, ParsedSentence, PatternSource};
-use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use std::collections::HashMap;
+use std::hint::black_box;
 use std::path::Path;
 use std::time::{Duration, Instant};
 
@@ -124,7 +125,7 @@ fn bench_pattern_frequency_analysis(c: &mut Criterion) {
                 cumulative_freq += pattern.frequency;
                 let coverage = cumulative_freq as f32 / total_freq as f32;
 
-                if i % 100 == 0 || coverage > 0.8 {
+                if i.is_multiple_of(100) || coverage > 0.8 {
                     coverage_points.push((i + 1, coverage));
                 }
 

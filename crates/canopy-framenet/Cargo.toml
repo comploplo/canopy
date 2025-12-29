@@ -23,9 +23,6 @@ once_cell = { workspace = true }
 # XML parsing
 quick-xml = { workspace = true }
 
-# Error handling
-thiserror = { workspace = true }
-
 # Collections and utilities
 indexmap = { workspace = true }
 regex = { workspace = true }
@@ -44,3 +41,7 @@ tempfile = { workspace = true }
 default = ["std", "parallel"]
 std = []
 parallel = ["rayon", "canopy-engine/parallel"]
+
+[package.metadata.cargo-machete]
+# rayon optional, regex for patterns, tracing via macros (false positive)
+ignored = ["rayon", "regex", "tracing"]
