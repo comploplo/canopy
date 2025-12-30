@@ -40,16 +40,25 @@ Text → Layer 1 → Layer 2 → Layer 3
 
 ## Architecture Components
 
-### Crate Structure
+### Crate Structure (11 crates)
 
 ```text
 canopy/
 ├── crates/
-│   ├── canopy-core/              # Fundamental types (Event, Entity, ThetaRole, Modality)
-│   ├── canopy-engine/            # Base engine traits & infrastructure
+│   ├── canopy-core/              # Fundamental types + unified CanopyError
+│   ├── canopy-engine/            # Base engine traits & caching infrastructure
+│   │
+│   ├── canopy-semantic-engines/  # All semantic engines (consolidated)
+│   │   ├── verbnet/              # VerbNet XML (333 classes)
+│   │   ├── framenet/             # FrameNet XML (1200+ frames)
+│   │   ├── wordnet/              # WordNet database (117k+ synsets)
+│   │   ├── propbank/             # PropBank semantic roles
+│   │   └── lexicon/              # Custom lexicon + 147k gender names
 │   │
 │   ├── canopy-tokenizer/         # LAYER 1: Lexical semantics
 │   │   └── SemanticCoordinator   # Parallel engine orchestration
+│   │
+│   ├── canopy-treebank/          # UD treebank patterns + POS
 │   │
 │   ├── canopy-events/            # LAYER 2: Event composition
 │   │   ├── composer.rs           # 7-stage EventComposer pipeline
@@ -60,24 +69,17 @@ canopy/
 │   │
 │   ├── canopy-discourse/         # LAYER 3: Discourse semantics
 │   │   ├── drs.rs                # Discourse Representation Structures
-│   │   ├── temporal.rs           # Allen's interval algebra
-│   │   ├── centering.rs          # Centering Theory (GJW 1995)
-│   │   ├── coherence.rs          # Coherence relations
-│   │   ├── reflexivity.rs        # Binding Theory (Reuland 2011)
-│   │   └── logophoricity.rs      # Exempt anaphors (Charnavel 2019)
+│   │   ├── coherence.rs          # Coherence relations + centering
+│   │   └── context.rs            # Discourse context tracking
 │   │
-│   ├── canopy-verbnet/           # VerbNet XML engine (333 classes)
-│   ├── canopy-framenet/          # FrameNet XML engine (1200+ frames)
-│   ├── canopy-wordnet/           # WordNet database (117k+ synsets)
-│   ├── canopy-propbank/          # PropBank semantic roles
-│   ├── canopy-treebank/          # UD treebank patterns
-│   ├── canopy-lexicon/           # Custom lexicon + 147k gender names
-│   │
-│   ├── canopy-pipeline/          # High-level API + demos
+│   ├── canopy-pipeline/          # High-level orchestration
 │   └── canopy-cli/               # Command-line interface
 │
-├── data/                         # Real linguistic resources
-│   ├── verbnet/                  # 333 XML verb classes
+├── examples/
+│   └── demo.rs                   # Main demo (cargo run --example demo)
+│
+├── data/                         # Linguistic resources
+│   ├── verbnet/                  # VerbNet 3.4 XML files
 │   ├── framenet/                 # FrameNet v15 frames + LUs
 │   ├── wordnet/                  # WordNet 3.1 database
 │   ├── propbank/                 # PropBank frames
@@ -90,10 +92,23 @@ canopy/
 ## Layer 1: Lexical Semantics (canopy-tokenizer)
 
 ```rust
-// Main analysis flow
-Text → Tokenizer → Lemmatizer → SemanticCoordinator → Layer1SemanticResult
-       [tokens]    [lemmas]     [parallel engines]    [raw engine data]
+use canopy_pipeline::create_l1_analyzer_with_treebank;
 
+// Create analyzer (loads all engines)
+let l1 = create_l1_analyzer_with_treebank()?;
+
+// Analyze a sentence
+let result = l1.analyze_sentence("The captain saw the whale.")?;
+
+// Access token data
+for token in &result.tokens {
+    println!("{}/{:?}", token.original_word, token.pos);
+    if let Some(vn) = &token.verbnet {
+        println!("  VerbNet: {:?}", vn.verb_classes);
+    }
+}
+
+// Token structure
 pub struct Layer1SemanticResult {
     original_word: String,
     lemma: String,
@@ -112,16 +127,22 @@ pub struct Layer1SemanticResult {
 ## Layer 2: Event Composition (canopy-events)
 
 ```rust
-// 7-stage EventComposer pipeline
-pub struct EventComposer {
-    decomposer: EventDecomposer,           // 1. VerbNet → LittleV
-    binder: ParticipantBinder,             // 2-3. Dependencies → Theta roles
-    modality_resolver: ModalityResolver,   // 4. Modal force + flavor
-    negation_handler: NegationHandler,     // 5. Polarity + neg-raising
-    presupposition_detector: PresuppositionDetector, // 6. Factive/aspectual
-    plurality_inferrer: PluralityInferrer, // 7. Number + distributivity
+use canopy_events::EventComposer;
+
+// Create composer
+let l2 = EventComposer::new()?;
+
+// Compose events from Layer 1 analysis
+let events = l2.compose_sentence(&sentence_analysis)?;
+
+for event in &events.events {
+    println!("{} : {}", event.event.little_v, event.event.predicate);
+    for (role, entity) in &event.event.participants {
+        println!("  {} = \"{}\"", role, entity.text);
+    }
 }
 
+// Event structure
 pub struct ComposedEvent {
     event: Event,                           // Core event structure
     presuppositions: Vec<Presupposition>,   // Triggered presuppositions
@@ -165,14 +186,22 @@ pub struct Event {
 ## Layer 3: Discourse Semantics (canopy-discourse)
 
 ```rust
-pub struct DiscourseContext {
-    drs: Drs,                             // Universe + conditions
-    registry: ReferentRegistry,           // All discourse referents
-    temporal: TemporalReasoner,           // Allen's interval algebra
-    centering: CenteringTracker,          // Topic continuity
-    coherence: CoherenceAnalyzer,         // Discourse relations
-    integrator: SemanticIntegrator,       // Multi-sentence integration
+use canopy_pipeline::DiscourseProcessor;
+
+// Create discourse processor
+let mut l3 = DiscourseProcessor::new();
+
+// Process sentences to build DRS
+for (sentence, events) in sentences {
+    l3.process_sentence(&sentence, &events)?;
 }
+
+// Access the Discourse Representation Structure
+let drs = l3.drs();
+println!("Entities: {:?}", drs.universe.iter()
+    .filter(|(_, r)| !r.is_event)
+    .map(|(id, r)| (id, &r.name))
+    .collect::<Vec<_>>());
 ```
 
 ### Layer 3 Features
