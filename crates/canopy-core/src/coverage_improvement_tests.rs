@@ -15,16 +15,14 @@ mod coverage_tests {
     #[test]
     fn test_error_display_implementations() {
         // Test Display implementations for error types that exist in canopy-core
-        let canopy_error = CanopyError::ParseError {
-            context: "test context".to_string(),
-        };
-        assert!(format!("{}", canopy_error).contains("parsing failed"));
+        let parse_error = CanopyError::parse("test context");
+        assert!(format!("{}", parse_error).contains("Parsing failed"));
 
-        let semantic_error = CanopyError::SemanticError("test error".to_string());
-        assert!(format!("{}", semantic_error).contains("semantic analysis failed"));
+        let analysis_error = CanopyError::analysis("input", "test error");
+        assert!(format!("{}", analysis_error).contains("Analysis failed"));
 
-        let lsp_error = CanopyError::LspError("test lsp error".to_string());
-        assert!(format!("{}", lsp_error).contains("LSP protocol error"));
+        let config_error = CanopyError::config("test config error");
+        assert!(format!("{}", config_error).contains("Configuration error"));
     }
 
     #[test]
@@ -165,6 +163,8 @@ mod coverage_tests {
             text: "John".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: Some(Definiteness::Definite),
+            number: None,
+            distributivity: None,
         };
 
         let event = Event {
@@ -181,6 +181,7 @@ mod coverage_tests {
             participants: HashMap::new(),
             aspect: AspectualClass::Activity,
             voice: Voice::Active,
+            modality: None,
         };
 
         let debug_str = format!("{:?}", event);
@@ -278,13 +279,18 @@ mod coverage_tests {
     #[test]
     fn test_error_source_implementations() {
         // Test error source chain for CanopyError
-        let canopy_error = CanopyError::ParseError {
-            context: "test context".to_string(),
-        };
+        let parse_error = CanopyError::parse("test context");
 
         // Just verify the error implements the Error trait properly
-        let error_msg = format!("{}", canopy_error);
-        assert!(error_msg.contains("parsing failed"));
+        let error_msg = format!("{}", parse_error);
+        assert!(error_msg.contains("Parsing failed"));
+
+        // Test error with source
+        use std::io::{Error as IoError, ErrorKind};
+        let io_error = IoError::new(ErrorKind::NotFound, "file not found");
+        let canopy_io_error = CanopyError::io("reading file", io_error);
+        let io_error_msg = format!("{}", canopy_io_error);
+        assert!(io_error_msg.contains("IO error"));
     }
 
     #[test]

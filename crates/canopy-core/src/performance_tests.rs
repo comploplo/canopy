@@ -232,6 +232,8 @@ mod performance_edge_case_tests {
                 text: format!("agent{i}"),
                 animacy: Some(Animacy::Human),
                 definiteness: Some(Definiteness::Definite),
+                number: None,
+                distributivity: None,
             };
 
             let theme = Entity {
@@ -239,6 +241,8 @@ mod performance_edge_case_tests {
                 text: format!("theme{i}"),
                 animacy: Some(Animacy::Inanimate),
                 definiteness: Some(Definiteness::Indefinite),
+                number: None,
+                distributivity: None,
             };
 
             let action = Action {
@@ -249,6 +253,8 @@ mod performance_edge_case_tests {
                     text: format!("instrument{i}"),
                     animacy: Some(Animacy::Inanimate),
                     definiteness: Some(Definiteness::Indefinite),
+                    number: None,
+                    distributivity: None,
                 }),
             };
 
@@ -268,6 +274,7 @@ mod performance_edge_case_tests {
                 participants,
                 aspect: AspectualClass::Activity,
                 voice: Voice::Active,
+                modality: None,
             };
 
             events.push(event);
@@ -594,6 +601,8 @@ mod performance_edge_case_tests {
                         } else {
                             Definiteness::Indefinite
                         }),
+                        number: None,
+                        distributivity: None,
                     },
                 );
             }
@@ -612,6 +621,7 @@ mod performance_edge_case_tests {
                 participants,
                 aspect: AspectualClass::Activity,
                 voice: Voice::Active,
+                modality: None,
             };
 
             events.push(event);

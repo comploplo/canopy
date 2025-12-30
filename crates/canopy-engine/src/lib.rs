@@ -15,29 +15,35 @@ use serde::{Deserialize, Serialize};
 
 pub mod base_engine;
 pub mod cache;
+pub mod cacheable;
 pub mod conllu;
 pub mod data_loader;
+pub mod engine_traits;
 pub mod error;
 pub mod lemma_cache;
 pub mod parallel;
 pub mod stats;
 pub mod traits;
 pub mod xml_parser;
+pub mod xml_utils;
 
 // Re-export main types for convenience
 pub use base_engine::{BaseEngine, CacheKeyFormat, ConfidenceCalculator, EngineCore};
 pub use cache::{CacheKey, CacheStats, EngineCache};
+pub use cacheable::CacheableData;
 pub use conllu::{ConlluParser, ConlluParserConfig, ConlluSentence, ConlluToken};
 pub use data_loader::{
     DataLoader as CommonDataLoader, DataLoaderBuilder, DataLoaderConfig, LoadingStats,
     ProgressCallback,
 };
+pub use engine_traits::EngineConfigurable;
 pub use error::{EngineError, EngineResult};
 pub use lemma_cache::{LemmaCache, LemmaCacheConfig, LemmaCacheStats, LemmaEntry, LemmaSource};
 pub use parallel::ParallelProcessor;
 pub use stats::{EngineStats, PerformanceMetrics};
 pub use traits::{CachedEngine, DataLoader, SemanticEngine, StatisticsProvider};
 pub use xml_parser::{XmlParser, XmlParserConfig, XmlResource};
+pub use xml_utils::{extract_text_content, get_attribute, skip_element};
 
 /// Common configuration for all engines
 #[derive(Debug, Clone, Serialize, Deserialize)]

@@ -387,6 +387,8 @@ mod serialization_round_trip_tests {
             text: "John".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: Some(Definiteness::Definite),
+            number: None,
+            distributivity: None,
         };
 
         let json = serde_json::to_string(&entity).expect("Failed to serialize Entity");
@@ -414,6 +416,8 @@ mod serialization_round_trip_tests {
             text: "hammer".to_string(),
             animacy: Some(Animacy::Inanimate),
             definiteness: Some(Definiteness::Indefinite),
+            number: None,
+            distributivity: None,
         };
 
         let action = Action {
@@ -435,6 +439,8 @@ mod serialization_round_trip_tests {
             text: "home".to_string(),
             animacy: Some(Animacy::Inanimate),
             definiteness: Some(Definiteness::Definite),
+            number: None,
+            distributivity: None,
         };
 
         let goal = Entity {
@@ -442,6 +448,8 @@ mod serialization_round_trip_tests {
             text: "store".to_string(),
             animacy: Some(Animacy::Inanimate),
             definiteness: Some(Definiteness::Definite),
+            number: None,
+            distributivity: None,
         };
 
         let path = Path {
@@ -477,6 +485,8 @@ mod serialization_round_trip_tests {
             text: "John".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: Some(Definiteness::Definite),
+            number: None,
+            distributivity: None,
         };
 
         let theme = Entity {
@@ -484,6 +494,8 @@ mod serialization_round_trip_tests {
             text: "vase".to_string(),
             animacy: Some(Animacy::Inanimate),
             definiteness: Some(Definiteness::Indefinite),
+            number: None,
+            distributivity: None,
         };
 
         // Test Cause variant
@@ -547,6 +559,8 @@ mod serialization_round_trip_tests {
             text: "John".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: Some(Definiteness::Definite),
+            number: None,
+            distributivity: None,
         };
 
         let theme = Entity {
@@ -554,6 +568,8 @@ mod serialization_round_trip_tests {
             text: "book".to_string(),
             animacy: Some(Animacy::Inanimate),
             definiteness: Some(Definiteness::Indefinite),
+            number: None,
+            distributivity: None,
         };
 
         let action = Action {
@@ -578,6 +594,7 @@ mod serialization_round_trip_tests {
             participants,
             aspect: AspectualClass::Activity,
             voice: Voice::Active,
+            modality: None,
         };
 
         let json = serde_json::to_string(&event).expect("Failed to serialize Event");
@@ -726,6 +743,8 @@ mod serialization_round_trip_tests {
             text: "🏃‍♂️".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: Some(Definiteness::Definite),
+            number: None,
+            distributivity: None,
         };
 
         let json = serde_json::to_string(&entity).expect("Failed to serialize Entity with emoji");
@@ -739,6 +758,8 @@ mod serialization_round_trip_tests {
             text: "\"quoted\" & 'apostrophe' <tag>".to_string(),
             animacy: Some(Animacy::Inanimate),
             definiteness: Some(Definiteness::Indefinite),
+            number: None,
+            distributivity: None,
         };
 
         let json = serde_json::to_string(&entity_special)
@@ -756,6 +777,8 @@ mod serialization_round_trip_tests {
             text: "Mary".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: Some(Definiteness::Definite),
+            number: None,
+            distributivity: None,
         };
 
         let addressee = Entity {
@@ -763,6 +786,8 @@ mod serialization_round_trip_tests {
             text: "John".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: Some(Definiteness::Definite),
+            number: None,
+            distributivity: None,
         };
 
         let proposition = Proposition {

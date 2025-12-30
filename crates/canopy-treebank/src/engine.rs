@@ -5,15 +5,17 @@
 
 use crate::cache::{AdaptiveCache, CacheConfig};
 use crate::indexer::{PatternIndexer, TreebankIndex};
+use crate::parser::ConlluParser;
 use crate::signature::SignatureBuilder;
 use crate::synthesizer::PatternSynthesizer;
 use crate::types::TreebankAnalysis;
+use crate::word_pos_index::WordPosIndex;
 use crate::TreebankResult;
 use canopy_core::paths::data_path;
 use canopy_engine::{
     traits::{CachedEngine, DataInfo, DataLoader, SemanticEngine, StatisticsProvider},
-    BaseEngine, CacheKeyFormat, CacheStats, EngineConfig, EngineCore, EngineError, EngineResult,
-    EngineStats, PerformanceMetrics, SemanticResult,
+    BaseEngine, CacheKeyFormat, CacheStats, EngineConfigurable, EngineCore, EngineError,
+    EngineResult, EngineStats, PerformanceMetrics, SemanticResult,
 };
 use canopy_tokenizer::TreebankProvider;
 use serde::{Deserialize, Serialize};
@@ -105,6 +107,13 @@ impl Default for TreebankConfig {
     }
 }
 
+// Implement EngineConfigurable trait via macro (custom field mapping)
+canopy_engine::impl_engine_configurable!(TreebankConfig {
+    enable_cache: enable_base_engine_cache,
+    cache_capacity: base_engine_cache_capacity,
+    confidence_threshold: 0.5
+});
+
 /// Statistics for the treebank engine
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TreebankStats {
@@ -150,6 +159,8 @@ pub struct TreebankEngine {
     signature_builder: SignatureBuilder,
     /// Extended treebank statistics
     treebank_stats: Arc<Mutex<TreebankStats>>,
+    /// Word→POS index built from treebank data
+    word_pos_index: Arc<WordPosIndex>,
     /// Is engine initialized flag
     is_initialized: bool,
 }
@@ -164,15 +175,8 @@ impl TreebankEngine {
     pub fn with_config(treebank_config: TreebankConfig) -> TreebankResult<Self> {
         info!("Initializing treebank engine");
 
-        // Convert TreebankConfig to EngineConfig for BaseEngine
-        let engine_config = EngineConfig {
-            enable_cache: treebank_config.enable_base_engine_cache,
-            cache_capacity: treebank_config.base_engine_cache_capacity,
-            enable_metrics: true,
-            enable_parallel: false,
-            max_threads: 4,
-            confidence_threshold: 0.5,
-        };
+        // Convert TreebankConfig to EngineConfig using trait
+        let engine_config = treebank_config.to_engine_config();
 
         let base_engine = BaseEngine::new(engine_config, "TreebankEngine".to_string());
         let mut adaptive_cache = AdaptiveCache::new(treebank_config.cache.clone());
@@ -182,6 +186,9 @@ impl TreebankEngine {
         // Load or build index
         let index = Self::load_or_build_index(&treebank_config)?;
         adaptive_cache.initialize_with_index(index)?;
+
+        // Load or build word→POS index
+        let word_pos_index = Self::load_or_build_word_pos_index(&treebank_config)?;
 
         let treebank_stats = TreebankStats {
             total_indexed_patterns: adaptive_cache.get_stats().estimated_memory_bytes / 1024,
@@ -197,6 +204,7 @@ impl TreebankEngine {
             synthesizer,
             signature_builder,
             treebank_stats: Arc::new(Mutex::new(treebank_stats)),
+            word_pos_index: Arc::new(word_pos_index),
             is_initialized: true,
         })
     }
@@ -276,6 +284,85 @@ impl TreebankEngine {
 
         files.sort(); // Ensure consistent ordering
         Ok(files)
+    }
+
+    /// Load existing word→POS index or build from treebank files
+    fn load_or_build_word_pos_index(config: &TreebankConfig) -> TreebankResult<WordPosIndex> {
+        // Check for cached index
+        let cache_path = data_path("data/cache/word_pos_index.bin");
+
+        if cache_path.exists() {
+            info!("Loading word→POS index from cache");
+            match WordPosIndex::load(&cache_path) {
+                Ok(index) => {
+                    let stats = index.stats();
+                    info!(
+                        "Loaded word→POS index: {} unique forms, {} tokens",
+                        stats.unique_forms, stats.total_tokens
+                    );
+                    return Ok(index);
+                }
+                Err(e) => {
+                    warn!("Failed to load word→POS index cache: {}, will rebuild", e);
+                }
+            }
+        }
+
+        // Build from treebank files
+        info!("Building word→POS index from treebank data");
+        let conllu_files = Self::find_conllu_files(&config.data_path)?;
+        if conllu_files.is_empty() {
+            warn!("No CoNLL-U files found, using empty word→POS index");
+            return Ok(WordPosIndex::new());
+        }
+
+        // Parse all files and collect sentences
+        let parser = ConlluParser::new(config.verbose);
+        let mut all_sentences = Vec::new();
+
+        for file in &conllu_files {
+            match parser.parse_file(file) {
+                Ok(sentences) => {
+                    all_sentences.extend(sentences);
+                }
+                Err(e) => {
+                    warn!("Failed to parse {}: {}", file.display(), e);
+                }
+            }
+        }
+
+        info!(
+            "Parsed {} sentences for word→POS index",
+            all_sentences.len()
+        );
+
+        // Build the index
+        let index = WordPosIndex::from_sentences(&all_sentences);
+
+        // Cache the index for next time
+        if let Some(parent) = cache_path.parent() {
+            if !parent.exists() {
+                let _ = std::fs::create_dir_all(parent);
+            }
+        }
+        if let Err(e) = index.save(&cache_path) {
+            warn!("Failed to cache word→POS index: {}", e);
+        }
+
+        Ok(index)
+    }
+
+    /// Get POS tag for a word from treebank statistics
+    ///
+    /// Returns the most frequent POS tag observed for this word form
+    /// in the UD English-EWT treebank.
+    pub fn get_pos_for_word(&self, word: &str) -> Option<crate::conllu_types::UniversalPos> {
+        self.word_pos_index.get_pos(word)
+    }
+
+    /// Get access to the word→POS index
+    pub fn word_pos_index(&self) -> &WordPosIndex {
+        &self.word_pos_index
     }
 
     /// Analyze a word using BaseEngine workflow
@@ -371,8 +458,8 @@ impl TreebankEngine {
     pub fn analyze_with_signature(
         &self,
         lemma: &str,
-        verbnet_analysis: Option<&canopy_verbnet::VerbNetAnalysis>,
-        framenet_analysis: Option<&canopy_framenet::FrameNetAnalysis>,
+        verbnet_analysis: Option<&canopy_semantic_engines::verbnet::VerbNetAnalysis>,
+        framenet_analysis: Option<&canopy_semantic_engines::framenet::FrameNetAnalysis>,
     ) -> EngineResult<SemanticResult<TreebankAnalysis>> {
         let verbnet_str = verbnet_analysis.map(|v| format!("{:?}", v)); // Simplified for now
         let framenet_str = framenet_analysis.map(|f| format!("{:?}", f)); // Simplified for now
@@ -386,8 +473,8 @@ impl TreebankEngine {
     pub fn analyze_with_signature_direct(
         &self,
         lemma: &str,
-        verbnet_analysis: Option<&canopy_verbnet::VerbNetAnalysis>,
-        framenet_analysis: Option<&canopy_framenet::FrameNetAnalysis>,
+        verbnet_analysis: Option<&canopy_semantic_engines::verbnet::VerbNetAnalysis>,
+        framenet_analysis: Option<&canopy_semantic_engines::framenet::FrameNetAnalysis>,
     ) -> TreebankResult<TreebankAnalysis> {
         let start_time = Instant::now();
 
@@ -993,6 +1080,36 @@ impl TreebankProvider for TreebankEngine {
             }
             Err(e) => Err(e),
         }
+    }
+
+    fn get_pos_for_word(&self, word: &str) -> Option<canopy_core::UPos> {
+        self.word_pos_index.get_pos(word).map(universal_pos_to_upos)
+    }
+}
+
+/// Convert from treebank UniversalPos to canopy_core UPos
+fn universal_pos_to_upos(pos: crate::conllu_types::UniversalPos) -> canopy_core::UPos {
+    use crate::conllu_types::UniversalPos;
+    use canopy_core::UPos;
+
+    match pos {
+        UniversalPos::ADJ => UPos::Adj,
+        UniversalPos::ADP => UPos::Adp,
+        UniversalPos::ADV => UPos::Adv,
+        UniversalPos::AUX => UPos::Aux,
+        UniversalPos::CCONJ => UPos::Cconj,
+        UniversalPos::DET => UPos::Det,
+        UniversalPos::INTJ => UPos::Intj,
+        UniversalPos::NOUN => UPos::Noun,
+        UniversalPos::NUM => UPos::Num,
+        UniversalPos::PART => UPos::Part,
+        UniversalPos::PRON => UPos::Pron,
+        UniversalPos::PROPN => UPos::Propn,
+        UniversalPos::PUNCT => UPos::Punct,
+        UniversalPos::SCONJ => UPos::Sconj,
+        UniversalPos::SYM => UPos::Sym,
+        UniversalPos::VERB => UPos::Verb,
+        UniversalPos::X => UPos::X,
     }
 }
 

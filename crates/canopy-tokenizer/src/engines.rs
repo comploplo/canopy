@@ -5,8 +5,8 @@
 
 use crate::wordnet::{WordNetEngine, WordNetStats};
 use crate::{FrameUnit, SemanticError, SemanticResult, WordNetSense};
-use canopy_framenet::{Frame, FrameNetEngine, FrameNetStats};
-use canopy_verbnet::{VerbClass, VerbNetEngine, VerbNetStats};
+use canopy_semantic_engines::framenet::{Frame, FrameNetEngine, FrameNetStats};
+use canopy_semantic_engines::verbnet::{VerbClass, VerbNetEngine, VerbNetStats};
 use serde::{Deserialize, Serialize};
 
 /// Unified statistics across all semantic engines

@@ -36,7 +36,7 @@
 //! ```
 
 use canopy_core::ThetaRole;
-use canopy_verbnet::{ThematicRole as VerbNetThetaRole, VerbClass};
+use canopy_semantic_engines::verbnet::{ThematicRole as VerbNetThetaRole, VerbClass};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use thiserror::Error;
@@ -57,17 +57,19 @@ pub mod wordnet;
 pub mod test_support;
 
 // Re-export engines from dedicated crates
-pub use canopy_framenet::FrameNetEngine;
-pub use canopy_lexicon::LexiconEngine;
-pub use canopy_verbnet::VerbNetEngine;
-pub use canopy_wordnet::WordNetEngine;
+pub use canopy_semantic_engines::framenet::FrameNetEngine;
+pub use canopy_semantic_engines::lexicon::LexiconEngine;
+pub use canopy_semantic_engines::verbnet::VerbNetEngine;
+pub use canopy_semantic_engines::wordnet::WordNetEngine;
 pub use lexicon::ClosedClassLexicon;
 pub use morphology::MorphologyDatabase;
 
 // Re-export coordinator and treebank integration
 pub use coordinator::{
-    guess_pos_from_suffix, Layer1SemanticResult, SemanticCoordinator, TreebankAnalysis,
-    TreebankProvider,
+    guess_pos_from_suffix, CoordinatorConfig, CoordinatorStatistics, DependencyArc,
+    DependencyRelation, Layer1SemanticResult, MemoryPressureAlert, MemoryUsage, SemanticCache,
+    SemanticCoordinator, SentenceAnalysisResult, SentenceMetadata, TextAnalysisResult,
+    TextAnalysisStats, TreebankAnalysis, TreebankProvider,
 };
 
 // Re-export lemmatizer
@@ -202,7 +204,7 @@ pub struct FrameElement {
 }
 
 // Re-export FrameNet types from consolidated implementation
-pub use canopy_framenet::{Frame, FrameNetAnalysis, FrameNetStats};
+pub use canopy_semantic_engines::framenet::{Frame, FrameNetAnalysis, FrameNetStats};
 
 /// FrameNet frame unit for compatibility
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -231,7 +233,9 @@ pub struct SemanticPredicate {
 }
 
 // Re-export VerbNet types from consolidated implementation
-pub use canopy_verbnet::{VerbClass as VerbNetClass, VerbNetAnalysis, VerbNetStats};
+pub use canopy_semantic_engines::verbnet::{
+    VerbClass as VerbNetClass, VerbNetAnalysis, VerbNetStats,
+};
 
 /// VerbNet syntactic frame for compatibility
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -430,6 +434,21 @@ impl From<canopy_engine::EngineError> for SemanticError {
     fn from(err: canopy_engine::EngineError) -> Self {
         SemanticError::ConfigError {
             context: err.to_string(),
+        }
+    }
+}
+
+/// Convert SemanticError to the unified CanopyError type
+impl From<SemanticError> for canopy_core::CanopyError {
+    fn from(error: SemanticError) -> Self {
+        match error {
+            SemanticError::TokenizationError { context } => Self::analysis("tokenization", context),
+            SemanticError::FrameNetError { context } => Self::analysis("FrameNet", context),
+            SemanticError::VerbNetError { context } => Self::analysis("VerbNet", context),
+            SemanticError::WordNetError { context } => Self::analysis("WordNet", context),
+            SemanticError::MorphologyError { context } => Self::analysis("morphology", context),
+            SemanticError::ConfigError { context } => Self::config(context),
+            SemanticError::GpuError { context } => Self::internal(format!("GPU: {context}")),
         }
     }
 }
@@ -740,25 +759,7 @@ impl SemanticAnalyzer {
 
     /// Convert VerbNet theta roles to canopy-core theta roles
     fn convert_theta_roles(&self, verbnet_roles: &[VerbNetThetaRole]) -> Vec<ThetaRole> {
-        verbnet_roles
-            .iter()
-            .map(|vn_role| {
-                // Map VerbNet theta role types to canopy-core types
-                match vn_role.role_type.as_str() {
-                    "Agent" => ThetaRole::Agent,
-                    "Patient" => ThetaRole::Patient,
-                    "Theme" => ThetaRole::Theme,
-                    "Goal" => ThetaRole::Goal,
-                    "Source" => ThetaRole::Source,
-                    "Location" => ThetaRole::Location,
-                    "Experiencer" => ThetaRole::Experiencer,
-                    "Stimulus" => ThetaRole::Stimulus,
-                    "Cause" => ThetaRole::Cause,
-                    "Beneficiary" => ThetaRole::Benefactive,
-                    _ => ThetaRole::Agent, // Default fallback
-                }
-            })
-            .collect()
+        verbnet_roles.iter().map(ThetaRole::from).collect()
     }
 
     /// Extract selectional restrictions from VerbNet class

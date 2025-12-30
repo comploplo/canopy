@@ -9,9 +9,7 @@ description = "Layer 2 Event Composition for Canopy - Neo-Davidsonian event sema
 [dependencies]
 canopy-core = { path = "../canopy-core" }
 canopy-engine = { path = "../canopy-engine" }
-canopy-verbnet = { path = "../canopy-verbnet" }
-canopy-framenet = { path = "../canopy-framenet" }
-canopy-wordnet = { path = "../canopy-wordnet" }
+canopy-semantic-engines = { path = "../canopy-semantic-engines" }
 canopy-treebank = { path = "../canopy-treebank" }
 canopy-tokenizer = { path = "../canopy-tokenizer" }
 
@@ -25,4 +23,4 @@ tempfile = { workspace = true }
 
 [package.metadata.cargo-machete]
 # Crate deps for future L2 features, indexmap for internal data structures
-ignored = ["canopy-engine", "canopy-wordnet", "indexmap"]
+ignored = ["canopy-engine", "canopy-semantic-engines", "indexmap"]

@@ -5,12 +5,12 @@ use canopy_events::{
     DependencyArc, EventComposer, EventComposerConfig, LittleVType, SentenceAnalysis,
     SentenceMetadata,
 };
-use canopy_tokenizer::coordinator::Layer1SemanticResult;
-use canopy_treebank::types::DependencyRelation;
-use canopy_verbnet::{
+use canopy_semantic_engines::verbnet::{
     Argument, Example, Frame, FrameDescription, Member, SelectionalRestrictions, SemanticPredicate,
     SyntaxPattern, ThematicRole, VerbClass, VerbNetAnalysis,
 };
+use canopy_tokenizer::coordinator::Layer1SemanticResult;
+use canopy_treebank::types::DependencyRelation;
 
 /// Helper to create a test token
 fn make_token(word: &str, lemma: &str, pos: Option<UPos>) -> Layer1SemanticResult {

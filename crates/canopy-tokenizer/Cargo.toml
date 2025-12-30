@@ -10,11 +10,7 @@ description = "Semantic tokenization for canopy.rs - FrameNet, VerbNet, WordNet 
 [dependencies]
 canopy-core = { path = "../canopy-core" }
 canopy-engine = { path = "../canopy-engine" }
-canopy-verbnet = { path = "../canopy-verbnet" }
-canopy-framenet = { path = "../canopy-framenet" }
-canopy-wordnet = { path = "../canopy-wordnet" }
-canopy-lexicon = { path = "../canopy-lexicon" }
-canopy-propbank = { path = "../canopy-propbank" }
+canopy-semantic-engines = { path = "../canopy-semantic-engines" }
 serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }

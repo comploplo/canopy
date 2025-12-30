@@ -207,6 +207,19 @@ pub struct ComposedEvent {
 
     /// Confidence from the binding step
     pub binding_confidence: f32,
+
+    /// Presuppositions triggered by this event
+    #[serde(default)]
+    pub presuppositions: Vec<Presupposition>,
+
+    /// Event polarity: true = affirmative, false = negated
+    #[serde(default = "default_polarity")]
+    pub polarity: bool,
+}
+
+/// Default polarity is affirmative
+fn default_polarity() -> bool {
+    true
 }
 
 impl ComposedEvent {
@@ -271,10 +284,10 @@ pub struct PredicateInfo {
     pub token_idx: usize,
 
     /// VerbNet analysis if available
-    pub verbnet_analysis: Option<canopy_verbnet::VerbNetAnalysis>,
+    pub verbnet_analysis: Option<canopy_semantic_engines::verbnet::VerbNetAnalysis>,
 
     /// FrameNet analysis if available
-    pub framenet_analysis: Option<canopy_framenet::FrameNetAnalysis>,
+    pub framenet_analysis: Option<canopy_semantic_engines::framenet::FrameNetAnalysis>,
 
     /// Confidence from Layer 1
     pub l1_confidence: f32,
@@ -336,6 +349,23 @@ pub enum LittleVType {
     Exist,
 }
 
+impl std::fmt::Display for LittleVType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let s = match self {
+            LittleVType::Cause => "CAUSE",
+            LittleVType::Become => "BECOME",
+            LittleVType::Be => "BE",
+            LittleVType::Do => "DO",
+            LittleVType::Experience => "EXPERIENCE",
+            LittleVType::Go => "GO",
+            LittleVType::Have => "HAVE",
+            LittleVType::Say => "SAY",
+            LittleVType::Exist => "EXIST",
+        };
+        write!(f, "{}", s)
+    }
+}
+
 impl LittleVType {
     /// Get default expected roles for this LittleV type
     pub fn default_roles(&self) -> Vec<ThetaRole> {
@@ -350,5 +380,100 @@ impl LittleVType {
             LittleVType::Say => vec![ThetaRole::Agent, ThetaRole::Recipient],
             LittleVType::Exist => vec![ThetaRole::Theme, ThetaRole::Location],
         }
+    }
+}
+
+// ============================================================================
+// Presupposition Types
+// ============================================================================
+
+/// A presupposition triggered by the event
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Presupposition {
+    /// Type of trigger that generated this presupposition
+    pub trigger_type: PresuppositionTrigger,
+
+    /// The presupposed content
+    pub content: PresupposedContent,
+
+    /// Whether this presupposition projects through negation/embedding
+    pub projectable: bool,
+}
+
+/// Types of presupposition triggers
+///
+/// Note: These are detected via VerbNet class patterns and FrameNet frames,
+/// NOT via hardcoded word lists. See presupposition.rs detector for details.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum PresuppositionTrigger {
+    /// Factive verbs: "know", "regret", "realize" - presuppose truth of complement
+    /// Detected via VerbNet classes: admire-31.2, marvel-31.3, etc.
+    /// And FrameNet frames: Awareness, Experiencer_focus
+    Factive,
+
+    /// Aspectual verbs: "stop", "continue", "start" - presuppose prior state
+    /// Detected via VerbNet classes: stop-55.4, continue-55.3, begin-55.1
+    Aspectual,
+
+    /// Cleft constructions: "It was X who..." - presuppose existence
+    Cleft,
+
+    /// Definite descriptions: "the X" - presuppose existence
+    /// Detected via Entity.definiteness == Definite
+    Definite,
+
+    /// Change-of-state expressions: "again", "still" - presuppose prior state
+    Change,
+}
+
+/// Content that is presupposed
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum PresupposedContent {
+    /// A presupposed event (e.g., "regrets leaving" → presupposes "left")
+    Event(Box<Event>),
+
+    /// A presupposed state (e.g., "stopped running" → was running)
+    State {
+        /// Description of the state
+        description: String,
+        /// Entity to which the state applies
+        entity_text: String,
+    },
+
+    /// Existence presupposition (e.g., "the book" → book exists)
+    Existence {
+        /// Text of the entity whose existence is presupposed
+        entity_text: String,
+    },
+}
+
+impl std::fmt::Display for PresuppositionTrigger {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            PresuppositionTrigger::Factive => write!(f, "factive"),
+            PresuppositionTrigger::Aspectual => write!(f, "aspectual"),
+            PresuppositionTrigger::Cleft => write!(f, "cleft"),
+            PresuppositionTrigger::Definite => write!(f, "definite"),
+            PresuppositionTrigger::Change => write!(f, "change"),
+        }
+    }
+}
+
+impl std::fmt::Display for PresupposedContent {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            PresupposedContent::Event(e) => write!(f, "event({})", e.predicate),
+            PresupposedContent::State { description, .. } => write!(f, "state({})", description),
+            PresupposedContent::Existence { entity_text } => {
+                write!(f, "∃ \"{}\"", entity_text)
+            }
+        }
+    }
+}
+
+impl std::fmt::Display for Presupposition {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let proj = if self.projectable { "↑" } else { "↓" };
+        write!(f, "[{} {} {}]", self.trigger_type, self.content, proj)
     }
 }

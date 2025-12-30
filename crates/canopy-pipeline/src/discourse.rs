@@ -145,6 +145,10 @@ pub struct DiscourseStatistics {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use canopy_core::{
+        Action, Animacy, AspectualClass, Definiteness, Entity, Event, LittleV, ThetaRole, Voice,
+    };
+    use std::collections::HashMap;
 
     #[test]
     fn test_discourse_processor_creation() {
@@ -162,5 +166,258 @@ mod tests {
 
         processor.reset();
         assert_eq!(processor.statistics().sentence_count, 0);
+    }
+
+    /// Helper to create a simple intransitive event
+    fn create_event(predicate: &str, agent_name: &str) -> ComposedEvent {
+        let agent = Entity {
+            id: 1,
+            text: agent_name.to_string(),
+            animacy: Some(Animacy::Human),
+            definiteness: Some(Definiteness::Definite),
+            number: None,
+            distributivity: None,
+        };
+
+        let mut participants = HashMap::new();
+        participants.insert(ThetaRole::Agent, agent.clone());
+
+        let event = Event {
+            id: 1,
+            predicate: predicate.to_string(),
+            little_v: LittleV::Do {
+                agent: agent.clone(),
+                action: Action {
+                    predicate: predicate.to_string(),
+                    manner: None,
+                    instrument: None,
+                },
+            },
+            participants,
+            aspect: AspectualClass::Activity,
+            voice: Voice::Active,
+            modality: None,
+        };
+
+        ComposedEvent {
+            id: 0,
+            event,
+            token_span: (0, 1),
+            verbnet_source: Some("run-51.3".to_string()),
+            framenet_source: None,
+            decomposition_confidence: 0.9,
+            binding_confidence: 0.85,
+            presuppositions: Vec::new(),
+            polarity: true,
+        }
+    }
+
+    /// Helper to create a transitive event with patient
+    fn create_transitive_event(
+        predicate: &str,
+        agent_name: &str,
+        patient_name: &str,
+    ) -> ComposedEvent {
+        let agent = Entity {
+            id: 1,
+            text: agent_name.to_string(),
+            animacy: Some(Animacy::Human),
+            definiteness: Some(Definiteness::Definite),
+            number: None,
+            distributivity: None,
+        };
+
+        let patient = Entity {
+            id: 2,
+            text: patient_name.to_string(),
+            animacy: Some(Animacy::Inanimate),
+            definiteness: Some(Definiteness::Indefinite),
+            number: None,
+            distributivity: None,
+        };
+
+        let mut participants = HashMap::new();
+        participants.insert(ThetaRole::Agent, agent.clone());
+        participants.insert(ThetaRole::Patient, patient.clone());
+
+        let event = Event {
+            id: 1,
+            predicate: predicate.to_string(),
+            little_v: LittleV::Do {
+                agent: agent.clone(),
+                action: Action {
+                    predicate: predicate.to_string(),
+                    manner: None,
+                    instrument: None,
+                },
+            },
+            participants,
+            aspect: AspectualClass::Activity,
+            voice: Voice::Active,
+            modality: None,
+        };
+
+        ComposedEvent {
+            id: 0,
+            event,
+            token_span: (0, 2),
+            verbnet_source: Some("get-13.5".to_string()),
+            framenet_source: None,
+            decomposition_confidence: 0.9,
+            binding_confidence: 0.85,
+            presuppositions: Vec::new(),
+            polarity: true,
+        }
+    }
+
+    /// Helper to create a ComposedEvents with extra fields
+    fn make_events(events: Vec<ComposedEvent>) -> ComposedEvents {
+        ComposedEvents {
+            events,
+            unbound_entities: Vec::new(),
+            confidence: 0.9,
+            processing_time_us: 100,
+            sources: vec!["test".to_string()],
+        }
+    }
+
+    #[test]
+    fn test_process_document_multiple_sentences() {
+        let mut processor = DiscourseProcessor::new();
+
+        // Create a 3-sentence document
+        let sentences = vec![
+            (
+                "John entered the room.".to_string(),
+                make_events(vec![create_transitive_event("enter", "John", "room")]),
+            ),
+            (
+                "He sat down.".to_string(),
+                make_events(vec![create_event("sit", "John")]),
+            ),
+            (
+                "Then he read a book.".to_string(),
+                make_events(vec![create_transitive_event("read", "John", "book")]),
+            ),
+        ];
+
+        let drs = processor.process_document(&sentences);
+        assert!(drs.is_ok(), "process_document should succeed");
+
+        // Verify statistics
+        let stats = processor.statistics();
+        assert_eq!(stats.sentence_count, 3, "Should process 3 sentences");
+        assert!(
+            stats.referent_count >= 3,
+            "Should have at least 3 referents"
+        );
+    }
+
+    #[test]
+    fn test_process_sentence_returns_event_ids() {
+        let mut processor = DiscourseProcessor::new();
+
+        let events = make_events(vec![
+            create_event("run", "Mary"),
+            create_event("jump", "Mary"),
+        ]);
+
+        let result = processor.process_sentence("Mary ran and jumped.", &events);
+        assert!(result.is_ok());
+
+        let event_ids = result.unwrap();
+        assert_eq!(event_ids.len(), 2, "Should return 2 event IDs");
+        // Event IDs should be distinct
+        assert_ne!(event_ids[0], event_ids[1]);
+    }
+
+    #[test]
+    fn test_multi_sentence_anaphora_through_pipeline() {
+        let mut processor = DiscourseProcessor::new();
+
+        // Sentence 1: Introduce Mary
+        let events1 = make_events(vec![create_event("run", "Mary")]);
+        processor
+            .process_sentence("Mary runs.", &events1)
+            .expect("Should process first sentence");
+
+        // Sentence 2: Process another event for Mary
+        let events2 = make_events(vec![create_event("smile", "Mary")]);
+        processor
+            .process_sentence("She smiles.", &events2)
+            .expect("Should process second sentence");
+
+        // Try to resolve "she" - Mary should be the antecedent
+        let resolved = processor.resolve_pronoun("she");
+        assert!(
+            resolved.is_ok(),
+            "Should resolve 'she' to Mary: {:?}",
+            resolved
+        );
+    }
+
+    #[test]
+    fn test_drs_grows_with_document() {
+        let mut processor = DiscourseProcessor::new();
+
+        // Check initial DRS is empty
+        let initial_refs =
+            processor.drs().entity_referents().len() + processor.drs().event_referents().len();
+        assert_eq!(initial_refs, 0);
+
+        // Process first sentence
+        let events1 = make_events(vec![create_event("walk", "John")]);
+        processor.process_sentence("John walks.", &events1).unwrap();
+
+        let after_first =
+            processor.drs().entity_referents().len() + processor.drs().event_referents().len();
+        assert!(
+            after_first > initial_refs,
+            "DRS should have more referents after first sentence"
+        );
+
+        // Process second sentence
+        let events2 = make_events(vec![create_transitive_event("talk", "John", "Mary")]);
+        processor
+            .process_sentence("He talks to Mary.", &events2)
+            .unwrap();
+
+        let after_second =
+            processor.drs().entity_referents().len() + processor.drs().event_referents().len();
+        assert!(
+            after_second > after_first,
+            "DRS should grow with each sentence"
+        );
+    }
+
+    #[test]
+    fn test_discourse_processor_with_custom_config() {
+        let config = DiscourseConfig::default();
+        let processor = DiscourseProcessor::with_config(config);
+        assert_eq!(processor.statistics().sentence_count, 0);
+    }
+
+    #[test]
+    fn test_process_event_directly() {
+        let mut processor = DiscourseProcessor::new();
+
+        // Begin a sentence context manually
+        processor
+            .context_mut()
+            .begin_sentence("Test sentence.".to_string());
+
+        let event = create_event("dance", "Alice");
+        let result = processor.process_event(&event);
+
+        assert!(result.is_ok(), "Direct event processing should succeed");
+        let event_id = result.unwrap();
+
+        // Verify the event was registered (it's in event_referents)
+        assert!(
+            processor.drs().event_referents().contains(&event_id),
+            "Event should be in DRS event referents"
+        );
+
+        processor.context_mut().end_sentence();
     }
 }

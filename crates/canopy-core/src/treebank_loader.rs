@@ -229,7 +229,7 @@ impl TreebankSentenceLoader {
 
     /// Load sentences from a CoNLL-U file
     fn load_conllu_file(path: &Path) -> AnalysisResult<Vec<TreebankSentence>> {
-        let file = File::open(path).map_err(|e| CanopyError::ParseError {
+        let file = File::open(path).map_err(|e| CanopyError::Parse {
             context: format!("Failed to open treebank file {}: {}", path.display(), e),
         })?;
 
@@ -240,7 +240,7 @@ impl TreebankSentenceLoader {
         let mut current_text = None;
 
         for line in reader.lines() {
-            let line = line.map_err(|e| CanopyError::ParseError {
+            let line = line.map_err(|e| CanopyError::Parse {
                 context: format!("Failed to read line: {}", e),
             })?;
 
@@ -400,7 +400,7 @@ impl TreebankSentenceLoader {
             "SYM" => Ok(UPos::Sym),
             "VERB" => Ok(UPos::Verb),
             "X" => Ok(UPos::X),
-            _ => Err(CanopyError::ParseError {
+            _ => Err(CanopyError::Parse {
                 context: format!("Unknown UPos tag: {}", upos_str),
             }),
         }

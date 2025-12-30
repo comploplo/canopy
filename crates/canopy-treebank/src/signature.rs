@@ -181,8 +181,8 @@ impl SignatureBuilder {
     pub fn build_from_layer1(
         &self,
         lemma: &str,
-        verbnet_analysis: Option<&canopy_verbnet::VerbNetAnalysis>,
-        framenet_analysis: Option<&canopy_framenet::FrameNetAnalysis>,
+        verbnet_analysis: Option<&canopy_semantic_engines::verbnet::VerbNetAnalysis>,
+        framenet_analysis: Option<&canopy_semantic_engines::framenet::FrameNetAnalysis>,
         pos_hint: Option<&str>,
         lemma_source: LemmaSource,
         lemma_confidence: f32,

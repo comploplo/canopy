@@ -543,4 +543,186 @@ mod tests {
         assert!(CoherenceRelation::Result.strength() > CoherenceRelation::Continuation.strength());
         assert!(CoherenceRelation::Contrast.strength() > CoherenceRelation::Narration.strength());
     }
+
+    #[test]
+    fn test_analyze_discourse_multi_segment() {
+        let analyzer = CoherenceAnalyzer::new();
+
+        // Create a 4-segment discourse: John enters, sits, reads, then leaves
+        let mut seg1 = DrsSegment::new(0);
+        seg1.predicate = Some("enter".to_string());
+        seg1.add_entity(ReferentId(1)); // John
+
+        let mut seg2 = DrsSegment::new(1);
+        seg2.predicate = Some("sit".to_string());
+        seg2.discourse_marker = Some("then".to_string());
+        seg2.add_entity(ReferentId(1));
+
+        let mut seg3 = DrsSegment::new(2);
+        seg3.predicate = Some("read".to_string());
+        seg3.add_entity(ReferentId(1));
+        seg3.add_entity(ReferentId(2)); // book
+
+        let mut seg4 = DrsSegment::new(3);
+        seg4.predicate = Some("leave".to_string());
+        seg4.discourse_marker = Some("then".to_string());
+        seg4.add_entity(ReferentId(1));
+
+        let relations = analyzer.analyze_discourse(&[seg1, seg2, seg3, seg4]);
+
+        // Should have 3 relations (windows of 2 over 4 segments)
+        assert_eq!(relations.len(), 3);
+
+        // Check structure: (from_id, to_id, relation, confidence)
+        assert_eq!(relations[0].0, 0);
+        assert_eq!(relations[0].1, 1);
+        assert_eq!(relations[0].2, CoherenceRelation::Narration); // "then"
+
+        assert_eq!(relations[1].0, 1);
+        assert_eq!(relations[1].1, 2);
+
+        assert_eq!(relations[2].0, 2);
+        assert_eq!(relations[2].1, 3);
+        assert_eq!(relations[2].2, CoherenceRelation::Narration); // "then"
+    }
+
+    #[test]
+    fn test_analyze_discourse_relation_chain_result_explanation() {
+        let analyzer = CoherenceAnalyzer::new();
+
+        // Chain: push (causative) -> fall (result) -> because explanation
+        let mut seg1 = DrsSegment::new(0);
+        seg1.predicate = Some("push".to_string());
+        seg1.add_entity(ReferentId(1)); // John
+        seg1.add_entity(ReferentId(2)); // Bill
+
+        let mut seg2 = DrsSegment::new(1);
+        seg2.predicate = Some("fall".to_string());
+        seg2.add_entity(ReferentId(2)); // Bill
+
+        let mut seg3 = DrsSegment::new(2);
+        seg3.predicate = Some("slip".to_string());
+        seg3.discourse_marker = Some("because".to_string());
+        seg3.add_entity(ReferentId(2)); // Bill
+
+        let relations = analyzer.analyze_discourse(&[seg1, seg2, seg3]);
+
+        assert_eq!(relations.len(), 2);
+        // First: push -> fall = Result (causative verb)
+        assert_eq!(relations[0].2, CoherenceRelation::Result);
+        // Second: fall -> slip = Explanation ("because")
+        assert_eq!(relations[1].2, CoherenceRelation::Explanation);
+    }
+
+    #[test]
+    fn test_discourse_marker_because() {
+        let analyzer = CoherenceAnalyzer::new();
+
+        assert!(analyzer.is_discourse_marker("because"));
+        assert_eq!(
+            analyzer.marker_relation("because"),
+            Some(CoherenceRelation::Explanation)
+        );
+
+        // Test in segment context
+        let seg1 = DrsSegment::new(0);
+        let mut seg2 = DrsSegment::new(1);
+        seg2.discourse_marker = Some("because".to_string());
+
+        let (relation, confidence) = analyzer.infer_relation(&seg1, &seg2, None);
+        assert_eq!(relation, CoherenceRelation::Explanation);
+        assert!(confidence > 0.9);
+    }
+
+    #[test]
+    fn test_discourse_markers_comprehensive() {
+        let analyzer = CoherenceAnalyzer::new();
+
+        // Test all major discourse marker categories
+        let test_cases = [
+            ("therefore", CoherenceRelation::Result),
+            ("thus", CoherenceRelation::Result),
+            ("so", CoherenceRelation::Result),
+            ("because", CoherenceRelation::Explanation),
+            ("since", CoherenceRelation::Explanation),
+            ("however", CoherenceRelation::Contrast),
+            ("but", CoherenceRelation::Contrast),
+            ("nevertheless", CoherenceRelation::Contrast),
+            ("then", CoherenceRelation::Narration),
+            ("next", CoherenceRelation::Narration),
+            ("afterward", CoherenceRelation::Narration),
+            ("meanwhile", CoherenceRelation::Background),
+            ("specifically", CoherenceRelation::Elaboration),
+            ("for example", CoherenceRelation::Exemplification),
+        ];
+
+        for (marker, expected_relation) in test_cases {
+            assert!(
+                analyzer.is_discourse_marker(marker),
+                "Should recognize '{marker}' as discourse marker"
+            );
+            assert_eq!(
+                analyzer.marker_relation(marker),
+                Some(expected_relation),
+                "Marker '{marker}' should map to {expected_relation:?}"
+            );
+        }
+    }
+
+    #[test]
+    fn test_analyze_discourse_empty_and_single() {
+        let analyzer = CoherenceAnalyzer::new();
+
+        // Empty discourse
+        let empty_relations = analyzer.analyze_discourse(&[]);
+        assert!(empty_relations.is_empty());
+
+        // Single segment
+        let seg1 = DrsSegment::new(0);
+        let single_relations = analyzer.analyze_discourse(&[seg1]);
+        assert!(single_relations.is_empty());
+
+        // Coherence scores
+        assert_eq!(analyzer.discourse_coherence_score(&[]), 1.0);
+        let seg2 = DrsSegment::new(0);
+        assert_eq!(analyzer.discourse_coherence_score(&[seg2]), 1.0);
+    }
+
+    #[test]
+    fn test_parallel_structure_shared_referents() {
+        let analyzer = CoherenceAnalyzer::new();
+
+        // "John likes Mary. Bill likes Sue." - parallel structure
+        let mut seg1 = DrsSegment::new(0);
+        seg1.predicate = Some("like".to_string());
+        seg1.add_entity(ReferentId(1)); // John
+        seg1.add_entity(ReferentId(2)); // Mary
+
+        let mut seg2 = DrsSegment::new(1);
+        seg2.predicate = Some("like".to_string());
+        seg2.add_entity(ReferentId(1)); // John (shared)
+        seg2.add_entity(ReferentId(2)); // Mary (shared)
+
+        let (relation, _) = analyzer.infer_relation(&seg1, &seg2, None);
+        // Two shared referents -> Parallel
+        assert_eq!(relation, CoherenceRelation::Parallel);
+    }
+
+    #[test]
+    fn test_continuation_single_shared_referent() {
+        let analyzer = CoherenceAnalyzer::new();
+
+        // Single shared referent -> Continuation
+        let mut seg1 = DrsSegment::new(0);
+        seg1.predicate = Some("walk".to_string());
+        seg1.add_entity(ReferentId(1)); // John
+
+        let mut seg2 = DrsSegment::new(1);
+        seg2.predicate = Some("smile".to_string());
+        seg2.add_entity(ReferentId(1)); // John (shared)
+
+        let (relation, confidence) = analyzer.infer_relation(&seg1, &seg2, None);
+        assert_eq!(relation, CoherenceRelation::Continuation);
+        assert!(confidence >= 0.5);
+    }
 }

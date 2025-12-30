@@ -442,7 +442,7 @@ mod tests {
         let composer = SemanticComposer::new().unwrap();
 
         // Create test tokens with VerbNet classes
-        use canopy_verbnet::{SelectionalRestrictions, ThematicRole, VerbClass};
+        use canopy_semantic_engines::verbnet::{SelectionalRestrictions, ThematicRole, VerbClass};
 
         let give_verbnet_class = VerbClass {
             id: "give-13.1".to_string(),

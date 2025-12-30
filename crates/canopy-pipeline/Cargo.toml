@@ -27,6 +27,7 @@ async = ["tokio"]
 [dev-dependencies]
 criterion = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
+rand = "0.8"
 
 # Binary targets removed - deprecated benchmarks replaced by examples
 

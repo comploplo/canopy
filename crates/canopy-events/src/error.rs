@@ -39,3 +39,20 @@ pub enum EventError {
 
 /// Result type for event composition operations
 pub type EventResult<T> = Result<T, EventError>;
+
+/// Convert EventError to the unified CanopyError type
+impl From<EventError> for canopy_core::CanopyError {
+    fn from(error: EventError) -> Self {
+        match error {
+            EventError::NoPredicateFound => Self::NoPredicateFound,
+            EventError::DecompositionFailed { predicate, reason } => {
+                Self::DecompositionFailed { predicate, reason }
+            }
+            EventError::BindingFailed { token, reason } => Self::BindingFailed { token, reason },
+            EventError::MissingRole { role, predicate } => Self::MissingRole { role, predicate },
+            EventError::NoVerbNetData => Self::resource_not_found("VerbNet", "predicate analysis"),
+            EventError::ConfigError(msg) => Self::config(msg),
+            EventError::Internal(msg) => Self::internal(msg),
+        }
+    }
+}

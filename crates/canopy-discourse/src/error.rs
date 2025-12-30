@@ -28,3 +28,20 @@ pub enum DiscourseError {
 
 /// Result type for discourse operations
 pub type DiscourseResult<T> = Result<T, DiscourseError>;
+
+/// Convert DiscourseError to the unified CanopyError type
+impl From<DiscourseError> for canopy_core::CanopyError {
+    fn from(error: DiscourseError) -> Self {
+        match error {
+            DiscourseError::DrsConstructionError(msg) => Self::DrsConstruction(msg),
+            DiscourseError::ReferentNotFound(msg) => Self::ReferentNotFound(msg),
+            DiscourseError::AnaphoraResolutionFailed { pronoun, reason } => {
+                Self::AnaphoraResolutionFailed { pronoun, reason }
+            }
+            DiscourseError::ContextCapacityExceeded { max, current } => {
+                Self::ContextCapacityExceeded { max, current }
+            }
+            DiscourseError::InvalidOperation(msg) => Self::internal(msg),
+        }
+    }
+}

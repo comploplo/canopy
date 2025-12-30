@@ -509,6 +509,11 @@ impl DiscourseContext {
         &self.referents
     }
 
+    /// Get mutable referent registry (for testing and direct manipulation)
+    pub fn referents_mut(&mut self) -> &mut ReferentRegistry {
+        &mut self.referents
+    }
+
     /// Get current sentence index
     #[must_use]
     pub fn current_sentence_index(&self) -> usize {

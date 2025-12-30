@@ -368,6 +368,39 @@ impl From<serde_json::Error> for EngineError {
     }
 }
 
+/// Convert EngineError to the unified CanopyError type
+impl From<EngineError> for canopy_core::CanopyError {
+    fn from(error: EngineError) -> Self {
+        match error {
+            EngineError::DataLoadError { context, .. } => Self::data_load(context),
+            EngineError::AnalysisError { input, reason, .. } => Self::analysis(input, reason),
+            EngineError::CacheError { operation, .. } => Self::cache(operation),
+            EngineError::ConfigError { message } => Self::config(message),
+            EngineError::ResourceNotFound {
+                resource_type,
+                identifier,
+            } => Self::resource_not_found(resource_type, identifier),
+            EngineError::InvalidInput { expected, actual } => Self::invalid_input(expected, actual),
+            EngineError::NotInitialized { engine_name } => Self::not_initialized(engine_name),
+            EngineError::Timeout {
+                operation,
+                timeout_ms,
+            } => Self::timeout(operation, timeout_ms),
+            EngineError::ParallelError { message, .. } => Self::parallel(message),
+            EngineError::DataCorruption { details } => Self::data_corruption(details),
+            EngineError::VersionMismatch { expected, found } => {
+                Self::version_mismatch(expected, found)
+            }
+            EngineError::IoError { operation, source } => Self::io(operation, source),
+            EngineError::SerializationError { context, .. } => Self::Serialization {
+                context,
+                source: None,
+            },
+            EngineError::Internal { message, .. } => Self::internal(message),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

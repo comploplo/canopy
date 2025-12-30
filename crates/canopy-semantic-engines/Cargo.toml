@@ -1,0 +1,53 @@
+[package]
+name = "canopy-semantic-engines"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Consolidated semantic analysis engines for Canopy - VerbNet, FrameNet, WordNet, Lexicon, PropBank"
+keywords = ["nlp", "semantics", "verbnet", "framenet", "wordnet"]
+categories = ["text-processing", "science"]
+
+[dependencies]
+# Engine infrastructure
+canopy-engine = { path = "../canopy-engine" }
+canopy-core = { path = "../canopy-core" }
+
+# Serialization and data structures
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# XML parsing
+quick-xml = { workspace = true }
+
+# Collections and utilities
+indexmap = { workspace = true }
+regex = { workspace = true }
+once_cell = { workspace = true }
+
+# Parallel processing
+rayon = { workspace = true, optional = true }
+
+# Logging
+tracing = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+tokio = { workspace = true }
+
+[features]
+default = ["verbnet", "framenet", "wordnet", "lexicon", "propbank"]
+# Individual engine features
+verbnet = []
+framenet = []
+wordnet = []
+lexicon = []
+propbank = []
+# Enable all engines
+all = ["verbnet", "framenet", "wordnet", "lexicon", "propbank"]
+# Parallel processing support
+parallel = ["dep:rayon", "canopy-engine/parallel"]
+
+[package.metadata.cargo-machete]
+ignored = ["rayon", "serde_json"]

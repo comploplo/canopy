@@ -831,6 +831,8 @@ mod tests {
             text: agent_name.to_string(),
             animacy: Some(Animacy::Human),
             definiteness: None,
+            number: None,
+            distributivity: None,
         };
 
         let mut participants = std::collections::HashMap::new();
@@ -850,6 +852,7 @@ mod tests {
             participants,
             aspect: AspectualClass::Activity,
             voice: Voice::Active,
+            modality: None,
         };
 
         ComposedEvent {
@@ -860,6 +863,8 @@ mod tests {
             framenet_source: None,
             decomposition_confidence: 1.0,
             binding_confidence: 1.0,
+            presuppositions: Vec::new(),
+            polarity: true,
         }
     }
 

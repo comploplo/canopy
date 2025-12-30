@@ -13,9 +13,9 @@
 //! VerbNet/FrameNet/WordNet data. Run with `cargo test -- --ignored` to execute.
 
 use canopy_core::UPos;
+use canopy_semantic_engines::wordnet::PartOfSpeech;
 use canopy_tokenizer::coordinator::{CoordinatorConfig, SemanticCoordinator};
 use canopy_tokenizer::guess_pos_from_suffix;
-use canopy_wordnet::PartOfSpeech;
 
 #[cfg(test)]
 mod pos_aware_caching_tests {

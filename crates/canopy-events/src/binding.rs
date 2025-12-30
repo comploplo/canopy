@@ -159,6 +159,7 @@ impl ParticipantBinder {
             participants: participants.clone(),
             aspect,
             voice,
+            modality: None, // Populated later by modality resolver
         };
 
         let composed = ComposedEvent {
@@ -173,6 +174,8 @@ impl ParticipantBinder {
                 .map(|f| f.name.clone()),
             decomposition_confidence: decomposed.confidence,
             binding_confidence,
+            presuppositions: Vec::new(), // Populated later by presupposition detector
+            polarity: true,              // Populated later by negation handler
         };
 
         Ok((composed, unbound))
@@ -243,6 +246,8 @@ impl ParticipantBinder {
             text: token.original_word.clone(),
             animacy: self.infer_animacy(token),
             definiteness: self.infer_definiteness(token),
+            number: None,         // Populated later by plurality module
+            distributivity: None, // Populated later by plurality module
         }
     }
 
@@ -287,6 +292,8 @@ impl ParticipantBinder {
                 text: format!("[{}]", format!("{:?}", role).to_lowercase()),
                 animacy: None,
                 definiteness: None,
+                number: None,
+                distributivity: None,
             })
         };
 

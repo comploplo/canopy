@@ -478,7 +478,7 @@ impl EventDecomposer {
     fn decompose_from_framenet(
         &self,
         predicate: &PredicateInfo,
-        framenet: &canopy_framenet::FrameNetAnalysis,
+        framenet: &canopy_semantic_engines::framenet::FrameNetAnalysis,
     ) -> EventResult<DecomposedEvent> {
         // Simple heuristic based on frame name patterns
         let frame_name = framenet

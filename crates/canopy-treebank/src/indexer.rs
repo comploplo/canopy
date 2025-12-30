@@ -7,7 +7,7 @@ use crate::parser::{ConlluParser, ParsedSentence};
 use crate::signature::{SemanticSignature, SignatureBuilder};
 use crate::types::{DependencyPattern, DependencyRelation, PatternSource};
 use crate::TreebankResult;
-use canopy_engine::EngineError;
+use canopy_engine::{CacheableData, EngineError};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fs::File;
@@ -150,6 +150,16 @@ impl TreebankIndex {
 impl Default for TreebankIndex {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+impl CacheableData for TreebankIndex {
+    fn cache_filename() -> &'static str {
+        "treebank_index.bin"
+    }
+
+    fn engine_name() -> &'static str {
+        "TreebankIndex"
     }
 }
 

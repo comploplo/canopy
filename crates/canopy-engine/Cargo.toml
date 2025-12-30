@@ -17,6 +17,7 @@ lru = { workspace = true }
 regex = { workspace = true }
 rayon = { workspace = true, optional = true }
 quick-xml = { workspace = true }
+bincode = { workspace = true }
 
 # Core types from canopy-core
 canopy-core = { path = "../canopy-core" }

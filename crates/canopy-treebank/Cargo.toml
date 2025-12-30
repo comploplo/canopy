@@ -11,8 +11,7 @@ description = "UD Treebank integration for dependency pattern analysis - CoNLL-U
 # Engine infrastructure
 canopy-engine = { path = "../canopy-engine" }
 canopy-core = { path = "../canopy-core" }
-canopy-verbnet = { path = "../canopy-verbnet" }
-canopy-framenet = { path = "../canopy-framenet" }
+canopy-semantic-engines = { path = "../canopy-semantic-engines" }
 canopy-tokenizer = { path = "../canopy-tokenizer" }
 
 # Serialization and data structures

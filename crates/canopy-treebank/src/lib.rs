@@ -38,6 +38,7 @@ pub mod semantic_integration;
 pub mod signature;
 pub mod synthesizer;
 pub mod types;
+pub mod word_pos_index;
 
 // Re-export main types for convenience
 pub use cache::AdaptiveCache;
@@ -61,6 +62,7 @@ pub use types::{
     PatternSource, SemanticRoleFeature, SyntacticFeature, TemporalFeature, TreebankAnalysis,
     VoiceFeature,
 };
+pub use word_pos_index::{WordPosIndex, WordPosIndexStats};
 
 /// Result type for treebank operations
 pub type TreebankResult<T> = Result<T, canopy_engine::EngineError>;

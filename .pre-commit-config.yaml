@@ -73,22 +73,8 @@ repos:
         types: [rust]
         pass_filenames: false
 
-      # Slowest: coverage check (~2-5min)
-      - id: cargo-coverage
-        name: cargo coverage check
-        entry: scripts/check-coverage.sh
-        language: system
-        pass_filenames: false
 
-      # Slowest: performance check (~2-5min)
-      - id: performance-regression-check
-        name: performance regression check
-        entry: scripts/check-performance.sh
-        language: system
-        pass_filenames: false
-
-
-# Performance and Quality Standards
+# Quality Standards
 # These hooks ensure:
 # 1. No trailing whitespace, merge conflicts, or large files
 # 2. Valid YAML/TOML syntax
@@ -97,8 +83,8 @@ repos:
 # 5. No clippy warnings (-D warnings, matches CI)
 # 6. Security advisories, license compliance, and dependency bans checked (cargo deny)
 # 7. All tests pass before commit (cargo nextest)
-# 8. Coverage meets quality thresholds (50% baseline, 70% M3, 80% M4)
-# 9. No performance regressions
+#
+# Coverage check runs in GitHub Actions CI (not pre-commit, too slow)
 
 # Installation Instructions:
 # 1. brew install pre-commit

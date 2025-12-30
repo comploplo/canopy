@@ -1,65 +1,69 @@
-- **Current Status**: Test coverage gate temporarily lowered to 50% while rebuilding test suite with real assertions. Removed canopy-lsp crate (was entirely stubs), deleting tautological tests that always pass. Goal: honest, meaningful tests over inflated coverage numbers.
+- **Current Status**: Codebase simplified - 5 semantic engine crates consolidated into `canopy-semantic-engines`, unified error handling via `CanopyError`. All tests pass. Test coverage gate at 50% while rebuilding with real assertions.
 
-# 🧹 CLEANUP COMPLETED - 2025-10-01
+# 🧹 CRATE CONSOLIDATION COMPLETED - 2025-12-30
 
-## Cleanup Summary
+## Simplification Summary
 
-**Goal**: Streamline, simplify, and modernize the codebase for M7 progression.
+### Crate Consolidation ✅ COMPLETE
 
-### Phase 1: Critical Fixes ✅ COMPLETE
+Merged 5 separate semantic engine crates into one:
 
-- [x] **1.1**: Removed GPU code from canopy-tokenizer (deferred to M10+)
-  - Deleted gpu.rs, removed wgpu/bytemuck dependencies
-  - Removed GPU feature flag
-- [x] **1.2**: Fixed 5 clippy collapsible_if violations
-  - canopy-wordnet: 2 fixes (engine.rs lines 127, 148)
-  - canopy-wordnet: 1 fix (loader.rs line 216)
-  - canopy-lexicon: 2 fixes (types.rs lines 543, 577)
-- [x] **1.3**: Removed 4 unused imports in canopy-treebank
-  - indexer.rs, pattern_cache.rs, pattern_indexer.rs, synthesizer.rs
-- [x] **1.4**: Fixed cargo-tarpaulin libgit2 dependency
-  - Installed libgit2 1.9.1 via Homebrew
+- `canopy-verbnet` → `canopy-semantic-engines::verbnet`
+- `canopy-framenet` → `canopy-semantic-engines::framenet`
+- `canopy-wordnet` → `canopy-semantic-engines::wordnet`
+- `canopy-lexicon` → `canopy-semantic-engines::lexicon`
+- `canopy-propbank` → `canopy-semantic-engines::propbank`
 
-### Phase 2: Code Cleanup ✅ COMPLETE
+**Import changes**: Use `canopy_semantic_engines::verbnet::VerbNetEngine` instead of `canopy_verbnet::VerbNetEngine`
 
-- [x] **2.1**: Deleted 26 disabled/backup files
-  - 13 disabled examples in canopy-tokenizer
-  - 7 disabled examples in canopy-pipeline
-  - 1 disabled example in canopy-wordnet
-  - 1 disabled benchmark in canopy-tokenizer
-  - 2 .bak files in canopy-treebank
-  - 2 .original files in canopy-tokenizer
+### Error Unification ✅ COMPLETE
 
-### Phase 3: Documentation Updates ✅ COMPLETE
+- Expanded `CanopyError` in `canopy-core` to be the unified error type (24 variants)
+- Added `From` implementations for all crate-specific errors
+- All errors now convert to `CanopyError` for consistent handling
 
-- [x] Updated README.md example paths
-- [x] Removed references to disabled examples
-- [x] Fixed package name references
+### Current Workspace (11 crates)
 
-### Phase 4: Data Cleanup ✅ COMPLETE
+- `canopy` - Main crate
+- `canopy-core` - Core types, unified `CanopyError`
+- `canopy-engine` - Shared infrastructure
+- `canopy-semantic-engines` - VerbNet, FrameNet, WordNet, PropBank, Lexicon
+- `canopy-tokenizer` - Layer 1 semantic coordination
+- `canopy-treebank` - UD treebank patterns
+- `canopy-events` - Layer 2 event composition
+- `canopy-discourse` - Layer 3 DRT and anaphora
+- `canopy-pipeline` - High-level orchestration
+- `canopy-cli` - CLI tool
 
-- [x] Deleted data/Ollama.dmg (saved 46MB)
+# 🚨 CRITICAL: NO SKIPPING PLAN STEPS WITHOUT ASKING 🚨
 
-### Verification Status
+## Never Skip or Reorder Plan Steps Unilaterally
 
-- [x] cargo build --workspace (SUCCESS - clean build)
-- [ ] cargo clippy (PARTIAL - 16 remaining lint warnings in canopy-treebank/canopy-pipeline)
-- [ ] cargo test --workspace (pending)
+**When working on a plan, you MUST follow the agreed-upon order. If a step seems complex or you want to change the order:**
 
-### Remaining Tech Debt (Low Priority)
+1. **STOP** - Do not make the decision yourself
+1. **EXPLAIN** - Present the facts about why the step is complex
+1. **ASK** - Request guidance on how to proceed
+1. **WAIT** - Do not proceed until the user responds
 
-**canopy-treebank** (14 clippy lints):
+### What NOT to do:
 
-- Derive Default implementations instead of manual impl
-- Simplify map_or patterns
-- Use Option::map correctly
-- Add Default traits where appropriate
+- ❌ "Phase 4 seems complex, so I'll skip to Phase 6" - WRONG
+- ❌ "Given your recent request, I'll prioritize X over Y" - WRONG (unless explicitly asked)
+- ❌ Reordering tasks based on your own assessment of complexity - WRONG
+- ❌ Assuming the user wants certain things prioritized - WRONG
 
-**canopy-pipeline** (2 clippy lints):
+### What TO do:
 
-- Remove unused variables
+- ✅ "Phase 4 requires changes to 6 files. Here's what's involved: [details]. Should I proceed, or would you like to discuss the approach first?"
+- ✅ "I notice Phase 4 has more scope than I initially thought. Here are the options: [A, B, C]. Which would you prefer?"
+- ✅ Follow the plan in order unless the user explicitly approves a change
 
-These are non-critical lints that don't affect functionality.
+**Rationale**: The user created the plan with intent. Skipping steps without asking wastes their time and creates confusion about project state.
+
+# 🧹 PREVIOUS CLEANUP (2025-10-01)
+
+Previous cleanup removed GPU code, deleted disabled examples, fixed clippy lints. See git history for details.
 
 # 🚨 CRITICAL: NO STUB IMPLEMENTATIONS - EXTREMELY IMPORTANT 🚨
 

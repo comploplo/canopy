@@ -13,6 +13,8 @@ mod lib_coverage_tests {
             text: "book".to_string(),
             animacy: None,
             definiteness: None,
+            number: None,
+            distributivity: None,
         };
 
         let path = Path {
@@ -39,6 +41,8 @@ mod lib_coverage_tests {
             text: "John".to_string(),
             animacy: None,
             definiteness: None,
+            number: None,
+            distributivity: None,
         };
 
         let possessee = Entity {
@@ -46,6 +50,8 @@ mod lib_coverage_tests {
             text: "car".to_string(),
             animacy: None,
             definiteness: None,
+            number: None,
+            distributivity: None,
         };
 
         let little_v = LittleV::Have {

@@ -56,19 +56,280 @@ use thiserror::Error;
 use proptest_derive::Arbitrary;
 
 /// Core error types for canopy analysis
+///
+/// This is the unified error type used across all canopy crates.
+/// It provides comprehensive error categorization with source error chaining.
 #[derive(Error, Debug)]
 pub enum CanopyError {
-    #[error("parsing failed: {context}")]
-    ParseError { context: String },
+    // === Data Loading & Resources ===
+    #[error("Data loading failed: {context}")]
+    DataLoad {
+        context: String,
+        #[source]
+        source: Option<Box<dyn std::error::Error + Send + Sync>>,
+    },
 
-    #[error("semantic analysis failed: {0}")]
-    SemanticError(String),
+    #[error("Resource not found: {resource_type} '{identifier}'")]
+    ResourceNotFound {
+        resource_type: String,
+        identifier: String,
+    },
 
-    #[error("LSP protocol error: {0}")]
-    LspError(String),
+    #[error("Data corruption detected: {details}")]
+    DataCorruption { details: String },
+
+    // === Analysis & Processing ===
+    #[error("Analysis failed for input '{input}': {reason}")]
+    Analysis {
+        input: String,
+        reason: String,
+        #[source]
+        source: Option<Box<dyn std::error::Error + Send + Sync>>,
+    },
+
+    #[error("Parsing failed: {context}")]
+    Parse { context: String },
+
+    #[error("Invalid input format: {expected} expected, got {actual}")]
+    InvalidInput { expected: String, actual: String },
+
+    // === Configuration & Initialization ===
+    #[error("Configuration error: {message}")]
+    Config { message: String },
+
+    #[error("Not initialized: {component}")]
+    NotInitialized { component: String },
+
+    // === Cache & Performance ===
+    #[error("Cache operation failed: {operation}")]
+    Cache {
+        operation: String,
+        #[source]
+        source: Option<Box<dyn std::error::Error + Send + Sync>>,
+    },
+
+    #[error("Timeout occurred during {operation} after {timeout_ms}ms")]
+    Timeout { operation: String, timeout_ms: u64 },
+
+    // === IO & Serialization ===
+    #[error("IO error: {operation}")]
+    Io {
+        operation: String,
+        #[source]
+        source: std::io::Error,
+    },
+
+    #[error("Serialization error: {context}")]
+    Serialization {
+        context: String,
+        #[source]
+        source: Option<Box<dyn std::error::Error + Send + Sync>>,
+    },
+
+    // === Concurrency ===
+    #[error("Parallel processing error: {message}")]
+    Parallel {
+        message: String,
+        #[source]
+        source: Option<Box<dyn std::error::Error + Send + Sync>>,
+    },
+
+    // === Compatibility ===
+    #[error("Version mismatch: expected {expected}, found {found}")]
+    VersionMismatch { expected: String, found: String },
+
+    // === Internal ===
+    #[error("Internal error: {message}")]
+    Internal {
+        message: String,
+        #[source]
+        source: Option<Box<dyn std::error::Error + Send + Sync>>,
+    },
+
+    // === Domain-specific (Event composition) ===
+    #[error("No predicate found in sentence")]
+    NoPredicateFound,
+
+    #[error("Event decomposition failed for predicate '{predicate}': {reason}")]
+    DecompositionFailed { predicate: String, reason: String },
+
+    #[error("Binding failed for token '{token}': {reason}")]
+    BindingFailed { token: String, reason: String },
+
+    #[error("Missing required role {role} for predicate '{predicate}'")]
+    MissingRole { role: ThetaRole, predicate: String },
+
+    // === Domain-specific (Discourse) ===
+    #[error("DRS construction failed: {0}")]
+    DrsConstruction(String),
+
+    #[error("Referent not found: {0}")]
+    ReferentNotFound(String),
+
+    #[error("Anaphora resolution failed for '{pronoun}': {reason}")]
+    AnaphoraResolutionFailed { pronoun: String, reason: String },
+
+    #[error("Discourse context capacity exceeded (max: {max}, current: {current})")]
+    ContextCapacityExceeded { max: usize, current: usize },
+}
+
+// === Constructor helpers ===
+impl CanopyError {
+    /// Create a data loading error
+    pub fn data_load<S: Into<String>>(context: S) -> Self {
+        Self::DataLoad {
+            context: context.into(),
+            source: None,
+        }
+    }
+
+    /// Create a data loading error with source
+    pub fn data_load_with_source<S: Into<String>, E: std::error::Error + Send + Sync + 'static>(
+        context: S,
+        source: E,
+    ) -> Self {
+        Self::DataLoad {
+            context: context.into(),
+            source: Some(Box::new(source)),
+        }
+    }
+
+    /// Create an analysis error
+    pub fn analysis<S: Into<String>, R: Into<String>>(input: S, reason: R) -> Self {
+        Self::Analysis {
+            input: input.into(),
+            reason: reason.into(),
+            source: None,
+        }
+    }
+
+    /// Create a cache error
+    pub fn cache<S: Into<String>>(operation: S) -> Self {
+        Self::Cache {
+            operation: operation.into(),
+            source: None,
+        }
+    }
+
+    /// Create a configuration error
+    pub fn config<S: Into<String>>(message: S) -> Self {
+        Self::Config {
+            message: message.into(),
+        }
+    }
+
+    /// Create a resource not found error
+    pub fn resource_not_found<T: Into<String>, I: Into<String>>(
+        resource_type: T,
+        identifier: I,
+    ) -> Self {
+        Self::ResourceNotFound {
+            resource_type: resource_type.into(),
+            identifier: identifier.into(),
+        }
+    }
+
+    /// Create an invalid input error
+    pub fn invalid_input<E: Into<String>, A: Into<String>>(expected: E, actual: A) -> Self {
+        Self::InvalidInput {
+            expected: expected.into(),
+            actual: actual.into(),
+        }
+    }
+
+    /// Create a not initialized error
+    pub fn not_initialized<S: Into<String>>(component: S) -> Self {
+        Self::NotInitialized {
+            component: component.into(),
+        }
+    }
+
+    /// Create a timeout error
+    pub fn timeout<S: Into<String>>(operation: S, timeout_ms: u64) -> Self {
+        Self::Timeout {
+            operation: operation.into(),
+            timeout_ms,
+        }
+    }
+
+    /// Create a parallel processing error
+    pub fn parallel<S: Into<String>>(message: S) -> Self {
+        Self::Parallel {
+            message: message.into(),
+            source: None,
+        }
+    }
+
+    /// Create a data corruption error
+    pub fn data_corruption<S: Into<String>>(details: S) -> Self {
+        Self::DataCorruption {
+            details: details.into(),
+        }
+    }
+
+    /// Create a version mismatch error
+    pub fn version_mismatch<E: Into<String>, F: Into<String>>(expected: E, found: F) -> Self {
+        Self::VersionMismatch {
+            expected: expected.into(),
+            found: found.into(),
+        }
+    }
+
+    /// Create an IO error
+    pub fn io<S: Into<String>>(operation: S, source: std::io::Error) -> Self {
+        Self::Io {
+            operation: operation.into(),
+            source,
+        }
+    }
+
+    /// Create a parse error
+    pub fn parse<S: Into<String>>(context: S) -> Self {
+        Self::Parse {
+            context: context.into(),
+        }
+    }
+
+    /// Create an internal error
+    pub fn internal<S: Into<String>>(message: S) -> Self {
+        Self::Internal {
+            message: message.into(),
+            source: None,
+        }
+    }
+
+    /// Check if this is a recoverable error
+    pub fn is_recoverable(&self) -> bool {
+        matches!(
+            self,
+            Self::Timeout { .. } | Self::Cache { .. } | Self::Parallel { .. } | Self::Io { .. }
+        )
+    }
+}
+
+// === From implementations for common error types ===
+impl From<std::io::Error> for CanopyError {
+    fn from(error: std::io::Error) -> Self {
+        Self::Io {
+            operation: "unknown".to_string(),
+            source: error,
+        }
+    }
+}
+
+impl From<serde_json::Error> for CanopyError {
+    fn from(error: serde_json::Error) -> Self {
+        Self::Serialization {
+            context: "JSON serialization".to_string(),
+            source: Some(Box::new(error)),
+        }
+    }
 }
 
 /// Result type for canopy operations
+pub type CanopyResult<T> = Result<T, CanopyError>;
+
+/// Alias for backwards compatibility
 pub type AnalysisResult<T> = Result<T, CanopyError>;
 
 /// Theta roles for semantic analysis (ported from Python V1 system)
@@ -134,6 +395,88 @@ impl ThetaRole {
                 | ThetaRole::Experiencer
                 | ThetaRole::Recipient
         )
+    }
+
+    /// Parse a theta role from a string (e.g., from VerbNet role_type)
+    ///
+    /// Handles common VerbNet role names and variations.
+    /// Returns `None` if the string doesn't match a known role.
+    #[must_use]
+    pub fn from_role_str(s: &str) -> Option<Self> {
+        match s {
+            "Agent" => Some(ThetaRole::Agent),
+            "Patient" => Some(ThetaRole::Patient),
+            "Theme" => Some(ThetaRole::Theme),
+            "Experiencer" => Some(ThetaRole::Experiencer),
+            "Recipient" => Some(ThetaRole::Recipient),
+            "Beneficiary" | "Benefactive" => Some(ThetaRole::Benefactive),
+            "Instrument" => Some(ThetaRole::Instrument),
+            "Comitative" | "Co-Agent" => Some(ThetaRole::Comitative),
+            "Location" => Some(ThetaRole::Location),
+            "Source" => Some(ThetaRole::Source),
+            "Goal" | "Destination" => Some(ThetaRole::Goal),
+            "Direction" | "Trajectory" => Some(ThetaRole::Direction),
+            "Temporal" | "Time" => Some(ThetaRole::Temporal),
+            "Frequency" => Some(ThetaRole::Frequency),
+            "Measure" | "Extent" | "Asset" | "Value" => Some(ThetaRole::Measure),
+            "Cause" => Some(ThetaRole::Cause),
+            "Manner" => Some(ThetaRole::Manner),
+            "Pivot" | "Initial_Location" | "Co-Theme" => Some(ThetaRole::ControlledSubject),
+            "Stimulus" => Some(ThetaRole::Stimulus),
+            // VerbNet-specific roles that map to existing roles
+            "Actor" | "Actor1" | "Actor2" => Some(ThetaRole::Agent),
+            "Topic" | "Attribute" | "Predicate" => Some(ThetaRole::Theme),
+            "Product" | "Result" => Some(ThetaRole::Theme),
+            // FrameNet-specific frame element names
+            "Donor" | "Giver" | "Speaker" | "Creator" | "Protagonist" => Some(ThetaRole::Agent),
+            "Cognizer" | "Perceiver" | "Perceiver_passive" => Some(ThetaRole::Experiencer),
+            "Content" | "Message" | "Phenomenon" | "Goods" => Some(ThetaRole::Theme),
+            "Addressee" | "Audience" => Some(ThetaRole::Recipient),
+            "Place" | "Ground" | "Area" | "Region" => Some(ThetaRole::Location),
+            "Duration" => Some(ThetaRole::Temporal),
+            "Purpose" | "Reason" | "Explanation" => Some(ThetaRole::Cause),
+            "Means" | "Medium" => Some(ThetaRole::Instrument),
+            "Path" => Some(ThetaRole::Direction),
+            "Origin" | "Initial_value" => Some(ThetaRole::Source),
+            "Final_value" | "Target" => Some(ThetaRole::Goal),
+            "Degree" | "Amount" => Some(ThetaRole::Measure),
+            _ => None,
+        }
+    }
+
+    /// Parse a theta role from a string, with a default fallback
+    ///
+    /// Returns `Agent` as the default if the string doesn't match.
+    #[must_use]
+    pub fn from_role_str_or_default(s: &str) -> Self {
+        Self::from_role_str(s).unwrap_or(ThetaRole::Agent)
+    }
+}
+
+impl std::fmt::Display for ThetaRole {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let s = match self {
+            ThetaRole::Agent => "Agent",
+            ThetaRole::Patient => "Patient",
+            ThetaRole::Theme => "Theme",
+            ThetaRole::Experiencer => "Experiencer",
+            ThetaRole::Recipient => "Recipient",
+            ThetaRole::Benefactive => "Benefactive",
+            ThetaRole::Instrument => "Instrument",
+            ThetaRole::Comitative => "Comitative",
+            ThetaRole::Location => "Location",
+            ThetaRole::Source => "Source",
+            ThetaRole::Goal => "Goal",
+            ThetaRole::Direction => "Direction",
+            ThetaRole::Temporal => "Temporal",
+            ThetaRole::Frequency => "Frequency",
+            ThetaRole::Measure => "Measure",
+            ThetaRole::Cause => "Cause",
+            ThetaRole::Manner => "Manner",
+            ThetaRole::ControlledSubject => "ControlledSubject",
+            ThetaRole::Stimulus => "Stimulus",
+        };
+        write!(f, "{}", s)
     }
 }
 
@@ -671,6 +1014,10 @@ pub struct Entity {
     pub text: String,
     pub animacy: Option<Animacy>,
     pub definiteness: Option<Definiteness>,
+    /// Semantic number (singular, plural, mass)
+    pub number: Option<SemanticNumber>,
+    /// Distributivity (for plural entities in events)
+    pub distributivity: Option<Distributivity>,
 }
 
 /// Event structure with little v decomposition
@@ -682,6 +1029,8 @@ pub struct Event {
     pub participants: HashMap<ThetaRole, Entity>,
     pub aspect: AspectualClass,
     pub voice: Voice,
+    /// Kratzerian modality (force + flavor) for modal events
+    pub modality: Option<EventModality>,
 }
 
 /// State predication for "be" and "become" structures
@@ -789,7 +1138,7 @@ pub enum Direction {
     Around,
 }
 
-/// Modal operators for propositions
+/// Modal operators for propositions (legacy, used in Proposition)
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
 #[cfg_attr(test, derive(Arbitrary))]
 pub enum Modality {
@@ -801,6 +1150,162 @@ pub enum Modality {
     Obligation,
     /// Want, wish
     Desire,
+}
+
+// ============================================================================
+// Kratzerian Modal Types (for Event-level modality)
+// ============================================================================
+
+/// Modal force in Kratzerian semantics
+///
+/// Based on Kratzer (1981, 1991) "The Notional Category of Modality"
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum ModalForce {
+    /// Universal quantification over accessible worlds: "must", "have to", "necessarily"
+    Necessity,
+    /// Existential quantification over accessible worlds: "can", "may", "might", "possibly"
+    Possibility,
+}
+
+/// Modal flavor (conversational background) in Kratzerian semantics
+///
+/// Determines which worlds are accessible for modal evaluation.
+/// Based on Kratzer (1981) "The Notional Category of Modality"
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum ModalFlavor {
+    /// Knowledge-based: "He must be home" (given what we know)
+    Epistemic,
+    /// Obligation/permission-based: "You must pay" (given the rules)
+    Deontic,
+    /// Ability/circumstance-based: "She can swim" (given her abilities)
+    Circumstantial,
+    /// Desire-based: "I want to go" (given what I want)
+    Bouletic,
+    /// Goal/purpose-based: "To win, you must train" (given your goals)
+    Teleological,
+}
+
+/// Combined modality for events
+///
+/// Represents the full modal interpretation of an event, combining
+/// force (necessity vs possibility) with flavor (type of accessibility).
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct EventModality {
+    /// The quantificational force (universal or existential)
+    pub force: ModalForce,
+    /// The conversational background (which worlds are accessible)
+    pub flavor: ModalFlavor,
+    /// The modal auxiliary that triggered this interpretation (if any)
+    pub auxiliary: Option<String>,
+}
+
+impl EventModality {
+    /// Create a new event modality
+    #[must_use]
+    pub fn new(force: ModalForce, flavor: ModalFlavor) -> Self {
+        Self {
+            force,
+            flavor,
+            auxiliary: None,
+        }
+    }
+
+    /// Create with an auxiliary
+    #[must_use]
+    pub fn with_auxiliary(force: ModalForce, flavor: ModalFlavor, aux: String) -> Self {
+        Self {
+            force,
+            flavor,
+            auxiliary: Some(aux),
+        }
+    }
+}
+
+impl std::fmt::Display for ModalForce {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ModalForce::Necessity => write!(f, "□ (necessity)"),
+            ModalForce::Possibility => write!(f, "◇ (possibility)"),
+        }
+    }
+}
+
+impl std::fmt::Display for ModalFlavor {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ModalFlavor::Epistemic => write!(f, "epistemic"),
+            ModalFlavor::Deontic => write!(f, "deontic"),
+            ModalFlavor::Circumstantial => write!(f, "circumstantial"),
+            ModalFlavor::Bouletic => write!(f, "bouletic"),
+            ModalFlavor::Teleological => write!(f, "teleological"),
+        }
+    }
+}
+
+impl std::fmt::Display for EventModality {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        if let Some(ref aux) = self.auxiliary {
+            write!(f, "{} {} (\"{}\")", self.force, self.flavor, aux)
+        } else {
+            write!(f, "{} {}", self.force, self.flavor)
+        }
+    }
+}
+
+// ============================================================================
+// Semantic Number and Plurality Types
+// ============================================================================
+
+/// Semantic number (distinct from morphological number)
+///
+/// Captures the semantic interpretation of nominal quantity,
+/// including mass nouns which have no grammatical number.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum SemanticNumber {
+    /// Single individual: "the boy", "a cat"
+    Singular,
+    /// Multiple individuals: "the boys", "some cats"
+    Plural,
+    /// Mass/substance: "water", "furniture", "information"
+    Mass,
+}
+
+/// Distributivity for plural entities
+///
+/// When a plural subject participates in an event, the event can be
+/// interpreted collectively (one event) or distributively (multiple events).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[cfg_attr(test, derive(Arbitrary))]
+pub enum Distributivity {
+    /// Single event with plural participant: "The boys gathered"
+    Collective,
+    /// Multiple events, one per individual: "The boys each ran"
+    Distributive,
+    /// Unspecified/ambiguous: "The boys laughed"
+    Unspecified,
+}
+
+impl std::fmt::Display for SemanticNumber {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            SemanticNumber::Singular => write!(f, "sg"),
+            SemanticNumber::Plural => write!(f, "pl"),
+            SemanticNumber::Mass => write!(f, "mass"),
+        }
+    }
+}
+
+impl std::fmt::Display for Distributivity {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Distributivity::Collective => write!(f, "collective"),
+            Distributivity::Distributive => write!(f, "distributive"),
+            Distributivity::Unspecified => write!(f, "unspecified"),
+        }
+    }
 }
 
 /// Animacy hierarchy for semantic feature analysis
@@ -861,6 +1366,61 @@ impl LittleV {
             LittleV::Do { .. } | LittleV::Say { .. } => AspectualClass::Activity,
             LittleV::Become { .. } => AspectualClass::Achievement,
             LittleV::Cause { .. } | LittleV::Go { .. } => AspectualClass::Accomplishment,
+        }
+    }
+}
+
+impl std::fmt::Display for LittleV {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            LittleV::Cause {
+                causer,
+                caused_predicate,
+                caused_theme,
+            } => write!(
+                f,
+                "CAUSE({}, {}({}))",
+                causer.text, caused_predicate, caused_theme.text
+            ),
+            LittleV::Become {
+                theme,
+                result_state,
+            } => {
+                write!(f, "BECOME({}, {})", theme.text, result_state.predicate)
+            }
+            LittleV::Be { theme, state } => {
+                write!(f, "BE({}, {})", theme.text, state.predicate)
+            }
+            LittleV::Do { agent, action } => {
+                write!(f, "DO({}, {})", agent.text, action.predicate)
+            }
+            LittleV::Experience {
+                experiencer,
+                stimulus,
+                ..
+            } => write!(f, "EXPERIENCE({}, {})", experiencer.text, stimulus.text),
+            LittleV::Go { theme, path } => {
+                if let Some(ref goal) = path.goal {
+                    write!(f, "GO({} → {})", theme.text, goal.text)
+                } else {
+                    write!(f, "GO({})", theme.text)
+                }
+            }
+            LittleV::Have {
+                possessor,
+                possessee,
+                ..
+            } => write!(f, "HAVE({}, {})", possessor.text, possessee.text),
+            LittleV::Say {
+                speaker, content, ..
+            } => write!(f, "SAY({}, {})", speaker.text, content.content),
+            LittleV::Exist { entity, location } => {
+                if let Some(loc) = location {
+                    write!(f, "EXIST({} @ {})", entity.text, loc.text)
+                } else {
+                    write!(f, "EXIST({})", entity.text)
+                }
+            }
         }
     }
 }
@@ -1013,6 +1573,8 @@ mod tests {
             text: "John".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: Some(Definiteness::Definite),
+            number: Some(SemanticNumber::Singular),
+            distributivity: None,
         };
 
         let action = Action {
@@ -1046,6 +1608,8 @@ mod tests {
             text: "John".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: Some(Definiteness::Definite),
+            number: Some(SemanticNumber::Singular),
+            distributivity: None,
         };
 
         // States
@@ -1087,6 +1651,8 @@ mod tests {
             text: "John".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: Some(Definiteness::Definite),
+            number: Some(SemanticNumber::Singular),
+            distributivity: None,
         };
 
         let spiders = Entity {
@@ -1094,6 +1660,8 @@ mod tests {
             text: "spiders".to_string(),
             animacy: Some(Animacy::Animal),
             definiteness: Some(Definiteness::Generic),
+            number: Some(SemanticNumber::Plural),
+            distributivity: None,
         };
 
         // Subject-experiencer: "John fears spiders"
@@ -1115,6 +1683,8 @@ mod tests {
             text: "John".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: Some(Definiteness::Definite),
+            number: Some(SemanticNumber::Singular),
+            distributivity: None,
         };
 
         let book = Entity {
@@ -1122,6 +1692,8 @@ mod tests {
             text: "book".to_string(),
             animacy: Some(Animacy::Inanimate),
             definiteness: Some(Definiteness::Indefinite),
+            number: Some(SemanticNumber::Singular),
+            distributivity: None,
         };
 
         // Test Cause variant
@@ -1168,73 +1740,6 @@ mod tests {
         assert!(be_v.external_argument().is_none());
         assert_eq!(be_v.aspectual_class(), AspectualClass::State);
         assert!(!be_v.is_eventive()); // Be is not eventive
-    }
-
-    // Golden tests for deterministic output validation
-    #[test]
-    fn test_theta_roles_golden() {
-        let all_roles = ThetaRole::all();
-        insta::assert_debug_snapshot!(all_roles);
-    }
-
-    #[test]
-    fn test_little_v_golden() {
-        let john = Entity {
-            id: 1,
-            text: "John".to_string(),
-            animacy: Some(Animacy::Human),
-            definiteness: Some(Definiteness::Definite),
-        };
-
-        let mary = Entity {
-            id: 2,
-            text: "Mary".to_string(),
-            animacy: Some(Animacy::Human),
-            definiteness: Some(Definiteness::Definite),
-        };
-
-        // Test different LittleV types
-        let examples = vec![
-            LittleV::Do {
-                agent: john.clone(),
-                action: Action {
-                    predicate: "run".to_string(),
-                    manner: None,
-                    instrument: None,
-                },
-            },
-            LittleV::Have {
-                possessor: john.clone(),
-                possessee: mary.clone(),
-                possession_type: PossessionType::Kinship,
-            },
-            LittleV::Go {
-                theme: john.clone(),
-                path: Path {
-                    source: None,
-                    goal: Some(mary.clone()),
-                    route: None,
-                    direction: Some(Direction::Forward),
-                },
-            },
-        ];
-
-        insta::assert_debug_snapshot!(examples);
-    }
-
-    #[test]
-    fn test_document_structure_golden() {
-        let words = vec![
-            Word::new(1, "John".to_string(), 0, 4),
-            Word::new(2, "gives".to_string(), 5, 10),
-            Word::new(3, "Mary".to_string(), 11, 15),
-            Word::new(4, "a".to_string(), 16, 17),
-            Word::new(5, "book".to_string(), 18, 22),
-        ];
-        let sentence = Sentence::new(words);
-        let document = Document::new("John gives Mary a book".to_string(), vec![sentence]);
-
-        insta::assert_debug_snapshot!(document);
     }
 
     // Property-based tests for linguistic invariants

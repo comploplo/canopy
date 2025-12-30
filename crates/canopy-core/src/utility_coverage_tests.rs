@@ -154,20 +154,23 @@ mod tests {
     #[test]
     fn test_error_variants() {
         // Test CanopyError variants for coverage
-        let parser_error = CanopyError::ParseError {
-            context: "test error".to_string(),
-        };
-        let semantic_error = CanopyError::SemanticError("semantic issue".to_string());
-        let lsp_error = CanopyError::LspError("lsp problem".to_string());
+        let parse_error = CanopyError::parse("test error");
+        let analysis_error = CanopyError::analysis("input", "semantic issue");
+        let config_error = CanopyError::config("config problem");
 
         // Test debug formatting
-        let parser_debug = format!("{parser_error:?}");
-        let semantic_debug = format!("{semantic_error:?}");
-        let lsp_debug = format!("{lsp_error:?}");
+        let parse_debug = format!("{parse_error:?}");
+        let analysis_debug = format!("{analysis_error:?}");
+        let config_debug = format!("{config_error:?}");
 
-        assert!(parser_debug.contains("ParseError"));
-        assert!(semantic_debug.contains("SemanticError"));
-        assert!(lsp_debug.contains("LspError"));
+        assert!(parse_debug.contains("Parse"));
+        assert!(analysis_debug.contains("Analysis"));
+        assert!(config_debug.contains("Config"));
+
+        // Test is_recoverable
+        let timeout_error = CanopyError::timeout("test", 5000);
+        assert!(timeout_error.is_recoverable());
+        assert!(!config_error.is_recoverable());
     }
 
     #[test]
@@ -211,6 +214,8 @@ mod tests {
             text: "test".to_string(),
             animacy: Some(Animacy::Human),
             definiteness: None,
+            number: None,
+            distributivity: None,
         };
         let state = State {
             predicate: "happy".to_string(),
@@ -263,6 +268,8 @@ mod tests {
             text: "location".to_string(),
             animacy: None,
             definiteness: None,
+            number: None,
+            distributivity: None,
         };
 
         let path = Path {

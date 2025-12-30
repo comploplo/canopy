@@ -62,3 +62,53 @@ pub enum ModelLoadError {
     #[error("Download failed: {0}")]
     DownloadFailed(String),
 }
+
+/// Convert PipelineError to the unified CanopyError type
+impl From<PipelineError> for canopy_core::CanopyError {
+    fn from(error: PipelineError) -> Self {
+        match error {
+            PipelineError::ConfigurationError(msg) => Self::config(msg),
+            PipelineError::AnalysisError(e) => e.into(),
+            PipelineError::ModelLoadError(e) => e.into(),
+            PipelineError::NotReady(msg) => Self::not_initialized(msg),
+            PipelineError::InvalidInput(msg) => Self::invalid_input("valid input", msg),
+            PipelineError::Timeout(duration) => {
+                Self::timeout("pipeline", duration.as_millis() as u64)
+            }
+            PipelineError::IoError(e) => Self::from(e),
+        }
+    }
+}
+
+/// Convert AnalysisError to the unified CanopyError type
+impl From<AnalysisError> for canopy_core::CanopyError {
+    fn from(error: AnalysisError) -> Self {
+        match error {
+            AnalysisError::ParseFailed(msg) => Self::parse(msg),
+            AnalysisError::ModelNotFound(msg) => Self::resource_not_found("model", msg),
+            AnalysisError::FeatureExtractionFailed(msg) => {
+                Self::analysis("feature extraction", msg)
+            }
+            AnalysisError::SemanticAnalysisFailed(msg) => Self::analysis("semantic", msg),
+            AnalysisError::CacheError(msg) => Self::cache(msg),
+        }
+    }
+}
+
+/// Convert ModelLoadError to the unified CanopyError type
+impl From<ModelLoadError> for canopy_core::CanopyError {
+    fn from(error: ModelLoadError) -> Self {
+        match error {
+            ModelLoadError::FileNotFound(path) => Self::resource_not_found("model file", path),
+            ModelLoadError::InvalidFormat(msg) => {
+                Self::data_load(format!("invalid model format: {msg}"))
+            }
+            ModelLoadError::ValidationFailed(msg) => {
+                Self::data_load(format!("model validation failed: {msg}"))
+            }
+            ModelLoadError::DownloadFailed(msg) => {
+                Self::data_load(format!("model download failed: {msg}"))
+            }
+        }
+    }
+}

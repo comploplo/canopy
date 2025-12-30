@@ -2,9 +2,9 @@
 //!
 //! These tests verify the core semantic engines work independently
 
-use canopy_framenet::FrameNetEngine;
+use canopy_semantic_engines::framenet::FrameNetEngine;
+use canopy_semantic_engines::verbnet::VerbNetEngine;
 use canopy_tokenizer::*;
-use canopy_verbnet::VerbNetEngine;
 
 #[test]
 fn test_verbnet_engine_creation() {
@@ -26,7 +26,7 @@ fn test_framenet_engine_creation() {
 
 #[test]
 fn test_wordnet_engine_creation() {
-    use canopy_wordnet::{WordNetConfig, WordNetEngine};
+    use canopy_semantic_engines::wordnet::{WordNetConfig, WordNetEngine};
     let config = WordNetConfig::default();
     if let Ok(engine) = WordNetEngine::with_config(config) {
         // Engine creation should succeed

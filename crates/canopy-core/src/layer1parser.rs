@@ -201,19 +201,19 @@ impl Layer1ParserHandler {
 
         // Validate input
         if text.trim().is_empty() {
-            return Err(CanopyError::ParseError {
+            return Err(CanopyError::Parse {
                 context: "Empty text input".to_string(),
             });
         }
 
         // Load treebank and lookup sentence
-        let loader = TreebankSentenceLoader::new().map_err(|e| CanopyError::ParseError {
+        let loader = TreebankSentenceLoader::new().map_err(|e| CanopyError::Parse {
             context: format!("Failed to load treebank: {}", e),
         })?;
 
         let sentence = loader
             .get_sentence(text)
-            .ok_or_else(|| CanopyError::ParseError {
+            .ok_or_else(|| CanopyError::Parse {
                 context: format!(
                     "Sentence '{}' not found in treebank.\n\n\
                      Canopy currently supports UD treebank sentences only.\n\
@@ -230,7 +230,7 @@ impl Layer1ParserHandler {
 
         let words = loader
             .convert_to_words(sentence)
-            .map_err(|e| CanopyError::ParseError {
+            .map_err(|e| CanopyError::Parse {
                 context: format!("Failed to convert treebank sentence: {}", e),
             })?;
 

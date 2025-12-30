@@ -73,6 +73,10 @@ pub mod confidence;
 pub mod config;
 pub mod decomposition;
 pub mod error;
+pub mod modality;
+pub mod negation;
+pub mod plurality;
+pub mod presupposition;
 pub mod sentence_builder;
 pub mod types;
 
@@ -80,16 +84,22 @@ pub mod types;
 pub use composer::EventComposer;
 pub use config::EventComposerConfig;
 pub use error::{EventError, EventResult};
+pub use modality::ModalityResolver;
+pub use negation::{NegationHandler, NegationResult};
+pub use plurality::PluralityInferrer;
+pub use presupposition::PresuppositionDetector;
 pub use sentence_builder::{
     extract_dependency_arcs, extract_metadata, layer1_tokens_from_parsed, SentenceAnalysisBuilder,
 };
 pub use types::{
     ComposedEvent, ComposedEvents, DecomposedEvent, DependencyArc, LittleVType, PredicateInfo,
-    SentenceAnalysis, SentenceMetadata, UnbindingReason, UnboundEntity,
+    PresupposedContent, Presupposition, PresuppositionTrigger, SentenceAnalysis, SentenceMetadata,
+    UnbindingReason, UnboundEntity,
 };
 
 // Re-export core types for convenience
 pub use canopy_core::{
-    Action, Animacy, AspectualClass, Definiteness, Entity, Event, LittleV, Path, PossessionType,
-    Proposition, PsychType, State, ThetaRole, Voice,
+    Action, Animacy, AspectualClass, Definiteness, Distributivity, Entity, Event, EventModality,
+    LittleV, ModalFlavor, ModalForce, Path, PossessionType, Proposition, PsychType, SemanticNumber,
+    State, ThetaRole, Voice,
 };

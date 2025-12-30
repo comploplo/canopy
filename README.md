@@ -7,34 +7,58 @@ Canopy builds rich meaning representations from text by combining formal linguis
 ## What Canopy Does
 
 ```
-"John saw Mary. He waved to her."
+"John must have seen Mary. He waved to her."
          │
          ▼
-┌─────────────────────────────────────────────────────────┐
-│  Layer 1: Semantic Analysis                             │
-│  • "saw" → VerbNet see-30.1, FrameNet Perception        │
-│  • Theta roles: Agent(John), Theme(Mary)                │
-│  • WordNet synsets, dependency structure                │
-├─────────────────────────────────────────────────────────┤
-│  Layer 2: Event Composition                             │
-│  • ∃e[Experience(e) ∧ Experiencer(e,John) ∧             │
-│       Stimulus(e,Mary) ∧ Past(e)]                       │
-├─────────────────────────────────────────────────────────┤
-│  Layer 3: Discourse & Anaphora                          │
-│  • DRS: [x,y | John(x), Mary(y), saw(x,y), waved(x,y)]  │
-│  • "He" → John (gender agreement, Condition B)          │
-│  • "her" → Mary (cross-clause binding)                  │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│  Layer 1: Lexical Semantics                    canopy-tokenizer│
+│  • "seen" → VerbNet see-30.1, FrameNet Perception           │
+│  • "must" → Modal auxiliary (epistemic necessity)           │
+│  • WordNet synsets, UD dependency structure, PropBank       │
+├─────────────────────────────────────────────────────────────┤
+│  Layer 2: Event Composition                     canopy-events│
+│  • ∃e[Experience(e) ∧ Experiencer(e,John) ∧ Stimulus(e,Mary)]│
+│  • Modality: force=Necessity, flavor=Epistemic              │
+│  • Polarity: affirmative, Presuppositions: []               │
+│  • Plurality: John=Singular, Mary=Singular                  │
+├─────────────────────────────────────────────────────────────┤
+│  Layer 3: Discourse & Binding                canopy-discourse│
+│  • DRS: [x,y,e1,e2 | John(x), Mary(y), see(e1), wave(e2)]   │
+│  • Temporal: e1 Before e2 (Allen's interval algebra)        │
+│  • "He" → John (Binding Theory, gender agreement)           │
+│  • "her" → Mary (cross-clause, Centering Theory)            │
+│  • Coherence: Narration relation between sentences          │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ## Features
 
-- **Three-layer semantic pipeline** — lexical analysis → event composition → discourse representation
+### Semantic Pipeline
+
+- **Three-layer architecture** — lexical → event composition → discourse
+- **Neo-Davidsonian events** — LittleV primitives (Cause, Become, Do, Experience, Go, Have, ...)
+- **Multi-engine coordination** — VerbNet, FrameNet, WordNet, PropBank, UD treebanks
+
+### Event Semantics (Layer 2)
+
+- **Kratzerian modality** — modal force (necessity/possibility) + 5 flavors (epistemic, deontic, circumstantial, bouletic, teleological)
+- **Presupposition detection** — factive, aspectual, definite triggers via VerbNet class patterns
+- **Negation scope** — neg-raising detection for believe/want/think class verbs
+- **Plurality inference** — semantic number + distributivity (collective vs distributive)
+
+### Discourse Semantics (Layer 3)
+
+- **DRT** — Discourse Representation Theory (Kamp & Reyle)
+- **Temporal reasoning** — Allen's 13 interval relations with aspectual inference
+- **Centering Theory** — topic continuity tracking (Grosz, Joshi & Weinstein)
+- **Coherence relations** — narration, result, contrast, elaboration (Hobbs, Asher & Lascarides)
 - **Modern binding theory** — Reinhart & Reuland's reflexivity, Charnavel's logophoricity
 - **Anaphora resolution** — pronoun binding with gender agreement (147k name dataset)
-- **Neo-Davidsonian events** — LittleV primitives (Cause, Become, Do, Experience, ...)
-- **Multi-engine coordination** — VerbNet, FrameNet, WordNet, PropBank, UD treebanks
-- **Production performance** — ~19ms per sentence, intelligent caching
+
+### Performance & Quality
+
+- **Production performance** — ~19ms per sentence end-to-end
+- **Real linguistic data** — no stubs, 333 VerbNet classes, 117k+ WordNet synsets
 - **Pure Rust** — no runtime dependencies, memory-safe, concurrent
 
 ## Quick Start
@@ -44,8 +68,8 @@ git clone https://github.com/yourusername/canopy
 cd canopy
 cargo build --release
 
-# Run the event composition demo
-cargo run --release -p canopy-pipeline --example event_composition_demo
+# Run the demo (analyzes 100 sentences from Moby Dick)
+cargo run --release --example demo
 ```
 
 ### Data Setup
@@ -82,12 +106,16 @@ Canopy requires linguistic datasets (not included in repo):
 ┌──────────────────────────────────────────────────────────────────────────┐
 │  LAYER 2: Event Composition                              canopy-events   │
 │  ┌────────────────────────────────────────────────────────────────────┐  │
-│  │  EventComposer: VerbNet → Neo-Davidsonian event structures         │  │
-│  │  • LittleV primitives: Cause, Become, Do, Experience, Go, ...      │  │
-│  │  • Theta role binding: Agent, Patient, Theme, Experiencer, ...     │  │
-│  │  • Voice/aspect detection from dependency patterns                 │  │
+│  │  EventComposer Pipeline (7 stages):                                │  │
+│  │  1. Predicate identification (verbs from L1)                       │  │
+│  │  2. LittleV decomposition: Cause, Become, Do, Experience, Go, ...  │  │
+│  │  3. Theta role binding: Agent, Patient, Theme, Experiencer, ...    │  │
+│  │  4. Modality resolution: force (necessity/possibility) + flavor    │  │
+│  │  5. Negation scope: polarity + neg-raising                         │  │
+│  │  6. Presupposition detection: factive, aspectual, definite         │  │
+│  │  7. Plurality inference: semantic number + distributivity          │  │
 │  │                                                                    │  │
-│  │  Output: ∃e[LittleV(e) ∧ Agent(e,x) ∧ Theme(e,y) ∧ Aspect(e)]      │  │
+│  │  Output: ComposedEvent with modality, presuppositions, polarity    │  │
 │  └────────────────────────────────────────────────────────────────────┘  │
 └──────────────────────────────────────────────────────────────────────────┘
                                   │
@@ -95,45 +123,48 @@ Canopy requires linguistic datasets (not included in repo):
 ┌──────────────────────────────────────────────────────────────────────────┐
 │  LAYER 3: Discourse & Binding                          canopy-discourse  │
 │  ┌────────────────────────────────────────────────────────────────────┐  │
-│  │  Discourse Representation Theory (Kamp & Reyle)                    │  │
-│  │  • DRS construction: referents, conditions, subordination          │  │
-│  │  • Cross-sentence context tracking                                 │  │
+│  │  Discourse Representation Theory (Kamp & Reyle 1993)               │  │
+│  │  • DRS: universe of referents + conditions                         │  │
+│  │  • Cross-sentence context and subordination                        │  │
 │  │                                                                    │  │
-│  │  Modern Binding Theory (Reuland 2011, Charnavel 2019)              │  │
-│  │  • Condition B: reflexive predicates must be reflexive-marked      │  │
-│  │  • Logophoric contexts: attitude holders, empathy loci             │  │
-│  │  • Gender agreement via 147k name-gender dataset                   │  │
+│  │  Temporal Reasoning (Allen 1983, Dowty 1986)                       │  │
+│  │  • 13 Allen interval relations (before, meets, overlaps, ...)      │  │
+│  │  • Aspectual class inference from tense/aspect                     │  │
 │  │                                                                    │  │
-│  │  Output: DRS with resolved anaphora and temporal relations         │  │
+│  │  Centering Theory (Grosz, Joshi & Weinstein 1995)                  │  │
+│  │  • Forward/backward-looking centers for topic tracking             │  │
+│  │  • Transition types: Continue, Retain, Shift                       │  │
+│  │                                                                    │  │
+│  │  Coherence Relations (Hobbs 1979, Asher & Lascarides 2003)         │  │
+│  │  • Result, Narration, Background, Contrast, Elaboration            │  │
+│  │                                                                    │  │
+│  │  Binding Theory (Reuland 2011, Charnavel 2019)                     │  │
+│  │  • Condition B, logophoric contexts, gender agreement (147k names) │  │
 │  └────────────────────────────────────────────────────────────────────┘  │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Crates
 
-| Crate              | Description                                           |
-| ------------------ | ----------------------------------------------------- |
-| `canopy-pipeline`  | High-level analysis orchestration                     |
-| `canopy-discourse` | **Layer 3**: DRT, anaphora resolution, binding theory |
-| `canopy-events`    | **Layer 2**: Neo-Davidsonian event composition        |
-| `canopy-tokenizer` | **Layer 1**: Semantic coordination, lemmatization     |
-| `canopy-treebank`  | UD treebank parsing and pattern matching              |
-| `canopy-verbnet`   | VerbNet verb class engine (333 classes)               |
-| `canopy-framenet`  | FrameNet frame engine (1,200+ frames)                 |
-| `canopy-wordnet`   | WordNet synset engine (117k+ synsets)                 |
-| `canopy-propbank`  | PropBank semantic role engine                         |
-| `canopy-lexicon`   | Custom lexicon support                                |
-| `canopy-engine`    | Shared infrastructure (caching, XML)                  |
-| `canopy-core`      | Core types (Word, Event, ThetaRole)                   |
+| Crate                     | Description                                                                   |
+| ------------------------- | ----------------------------------------------------------------------------- |
+| `canopy-pipeline`         | High-level analysis orchestration                                             |
+| `canopy-discourse`        | **Layer 3**: DRT, anaphora resolution, binding theory                         |
+| `canopy-events`           | **Layer 2**: Neo-Davidsonian event composition                                |
+| `canopy-tokenizer`        | **Layer 1**: Semantic coordination, lemmatization                             |
+| `canopy-treebank`         | UD treebank parsing and pattern matching                                      |
+| `canopy-semantic-engines` | Consolidated semantic engines (VerbNet, FrameNet, WordNet, PropBank, Lexicon) |
+| `canopy-engine`           | Shared infrastructure (caching, traits, errors)                               |
+| `canopy-core`             | Core types (Word, Event, ThetaRole, CanopyError)                              |
 
 ## Performance
 
-| Operation           | Time              |
-| ------------------- | ----------------- |
-| Engine loading      | ~900ms (one-time) |
-| Layer 1 analysis    | 15-22ms/sentence  |
-| Layer 2 composition | 78-148μs/sentence |
-| Layer 3 discourse   | \<1ms/sentence    |
+| Operation      | Time              |
+| -------------- | ----------------- |
+| Engine loading | ~900ms (one-time) |
+| Full analysis  | ~40ms/sentence    |
+| Cache hit rate | ~60%+ (improves)  |
+| Memory usage   | \<100MB typical   |
 
 ## Theoretical Foundations
 
@@ -145,6 +176,12 @@ Canopy implements insights from formal semantics and theoretical linguistics:
 - LittleV decomposition (Hale & Keyser, Ramchand 2008)
 - VerbNet-to-primitive mapping
 
+**Modality & Presupposition**
+
+- Kratzerian modal semantics — force/flavor distinction (Kratzer 1981, 1991)
+- Presupposition triggers — factive, aspectual, definite (Beaver & Geurts 2014)
+- Neg-raising predicates — want/believe/think class verbs
+
 **Binding Theory**
 
 - Reinhart & Reuland (1993) "Reflexivity" — predicates, not anaphors, are reflexive-marked
@@ -154,7 +191,9 @@ Canopy implements insights from formal semantics and theoretical linguistics:
 **Discourse Semantics**
 
 - Kamp & Reyle (1993) *From Discourse to Logic* — DRT foundations
-- Temporal relations from aspectual class (Vendler, Dowty)
+- Allen (1983) — temporal interval algebra
+- Grosz, Joshi & Weinstein (1995) — Centering Theory
+- Hobbs (1979), Asher & Lascarides (2003) — coherence relations
 
 ## Requirements
 
@@ -174,4 +213,4 @@ MIT — see [LICENSE](LICENSE) for details.
 
 ______________________________________________________________________
 
-**Status**: Layer 3 (DRT & Binding) implemented • Layer 1-2-3 pipeline operational
+**Status**: All three layers complete • M7 semantic enrichment (modality, presupposition, plurality) • M8 discourse features (DRT, temporal, centering, coherence)

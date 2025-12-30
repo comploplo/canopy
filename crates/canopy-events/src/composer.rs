@@ -1,12 +1,26 @@
 //! Event composition engine
 //!
 //! Orchestrates decomposition and binding to compose events from Layer 1 analysis.
+//!
+//! ## Pipeline Steps
+//!
+//! 1. Identify predicates (verbs)
+//! 2. Decompose predicates to LittleV structures
+//! 3. Bind syntactic dependents to theta roles
+//! 4. Resolve modality (force + flavor)
+//! 5. Apply negation scope
+//! 6. Detect presuppositions
+//! 7. Infer plurality/distributivity
 
 use crate::binding::ParticipantBinder;
 use crate::confidence::{update_confidence, ConfidenceCalculator};
 use crate::config::EventComposerConfig;
 use crate::decomposition::EventDecomposer;
 use crate::error::EventResult;
+use crate::modality::ModalityResolver;
+use crate::negation::NegationHandler;
+use crate::plurality::PluralityInferrer;
+use crate::presupposition::PresuppositionDetector;
 use crate::types::{
     ComposedEvents, PredicateInfo, SentenceAnalysis, UnbindingReason, UnboundEntity,
 };
@@ -17,6 +31,10 @@ use std::time::Instant;
 pub struct EventComposer {
     decomposer: EventDecomposer,
     binder: ParticipantBinder,
+    modality_resolver: ModalityResolver,
+    negation_handler: NegationHandler,
+    presupposition_detector: PresuppositionDetector,
+    plurality_inferrer: PluralityInferrer,
     confidence_calc: ConfidenceCalculator,
     config: EventComposerConfig,
 }
@@ -32,6 +50,10 @@ impl EventComposer {
         Ok(Self {
             decomposer: EventDecomposer::new(&config)?,
             binder: ParticipantBinder::new(&config)?,
+            modality_resolver: ModalityResolver::new(&config)?,
+            negation_handler: NegationHandler::new(&config)?,
+            presupposition_detector: PresuppositionDetector::new(&config)?,
+            plurality_inferrer: PluralityInferrer::new(&config)?,
             confidence_calc: ConfidenceCalculator::new(),
             config,
         })
@@ -79,6 +101,25 @@ impl EventComposer {
 
             // Set event ID
             composed.id = idx;
+
+            // Step 4: Resolve modality (force + flavor)
+            if let Some(modality) = self.modality_resolver.resolve(predicate, analysis) {
+                composed.event.modality = Some(modality);
+            }
+
+            // Step 5: Apply negation scope
+            let (polarity, _neg_result) = self
+                .negation_handler
+                .apply_scope(predicate, &analysis.metadata);
+            composed.polarity = polarity;
+
+            // Step 6: Detect presuppositions
+            composed.presuppositions = self
+                .presupposition_detector
+                .detect(predicate, &composed.event.participants);
+
+            // Step 7: Infer plurality/distributivity for participants
+            self.infer_participant_plurality(&mut composed, analysis, predicate);
 
             // Calculate confidence
             let conf = self.confidence_calc.calculate_event_confidence(
@@ -155,6 +196,45 @@ impl EventComposer {
             .collect();
 
         Ok(predicates)
+    }
+
+    /// Infer plurality and distributivity for participants in an event
+    fn infer_participant_plurality(
+        &self,
+        composed: &mut crate::types::ComposedEvent,
+        analysis: &SentenceAnalysis,
+        predicate: &PredicateInfo,
+    ) {
+        // Check for "each" adverb in the sentence
+        let has_each_adverb = analysis.tokens.iter().any(|t| {
+            t.lemma.to_lowercase() == "each" && matches!(t.pos, Some(UPos::Adv) | Some(UPos::Det))
+        });
+
+        // Iterate over participants and infer number/distributivity
+        for entity in composed.event.participants.values_mut() {
+            // Try to find the corresponding token by matching entity text
+            if let Some(token) = analysis
+                .tokens
+                .iter()
+                .find(|t| t.original_word == entity.text || t.lemma == entity.text)
+            {
+                // Infer semantic number
+                if entity.number.is_none() {
+                    entity.number = self.plurality_inferrer.infer_number(token);
+                }
+
+                // Infer distributivity for plural entities
+                if entity.distributivity.is_none() {
+                    if let Some(number) = entity.number {
+                        entity.distributivity = self.plurality_inferrer.infer_distributivity(
+                            number,
+                            predicate,
+                            has_each_adverb,
+                        );
+                    }
+                }
+            }
+        }
     }
 
     /// Find all tokens that weren't assigned to any event

@@ -3,10 +3,10 @@
 //! Tests the SemanticEngine trait implementations, MultiResourceAnalyzer,
 //! statistics aggregation, parallel processing, and coverage analysis with 95%+ coverage target.
 
-use canopy_framenet::FrameNetEngine;
+use canopy_semantic_engines::framenet::FrameNetEngine;
+use canopy_semantic_engines::verbnet::VerbNetEngine;
 use canopy_tokenizer::engines::*;
 use canopy_tokenizer::wordnet::WordNetEngine;
-use canopy_verbnet::VerbNetEngine;
 
 mod tests {
     use super::*;

@@ -1,18 +1,14 @@
 [workspace]
 members = [
     "crates/canopy-core",
-    "crates/canopy-engine",         # Base engine infrastructure
-    "crates/canopy-verbnet",        # VerbNet semantic analysis
-    "crates/canopy-framenet",       # FrameNet semantic analysis
-    "crates/canopy-propbank",       # PropBank semantic role labeling
-    "crates/canopy-treebank",       # UD Treebank dependency pattern analysis
-    "crates/canopy-tokenizer",      # Semantic tokenization with consolidated engines
-    "crates/canopy-events",         # Layer 2 event composition
-    "crates/canopy-discourse",      # Layer 3 DRT and discourse context
-    "crates/canopy-pipeline",       # Pipeline with semantic coordinator integration
+    "crates/canopy-engine",           # Base engine infrastructure
+    "crates/canopy-semantic-engines", # Consolidated semantic engines (VerbNet, FrameNet, WordNet, Lexicon, PropBank)
+    "crates/canopy-treebank",         # UD Treebank dependency pattern analysis
+    "crates/canopy-tokenizer",        # Semantic tokenization with consolidated engines
+    "crates/canopy-events",           # Layer 2 event composition
+    "crates/canopy-discourse",        # Layer 3 DRT and discourse context
+    "crates/canopy-pipeline",         # Pipeline with semantic coordinator integration
     "crates/canopy-cli",
-    "crates/canopy-wordnet",
-    "crates/canopy-lexicon",
 ]
 resolver = "2"
 
@@ -63,14 +59,12 @@ description.workspace = true
 [dependencies]
 canopy-core = { path = "crates/canopy-core" }
 canopy-engine = { path = "crates/canopy-engine" }
+canopy-semantic-engines = { path = "crates/canopy-semantic-engines" }
 canopy-tokenizer = { path = "crates/canopy-tokenizer" }
 canopy-treebank = { path = "crates/canopy-treebank" }
-canopy-verbnet = { path = "crates/canopy-verbnet" }
-canopy-framenet = { path = "crates/canopy-framenet" }
-canopy-propbank = { path = "crates/canopy-propbank" }
-canopy-wordnet = { path = "crates/canopy-wordnet" }
-canopy-lexicon = { path = "crates/canopy-lexicon" }
 canopy-events = { path = "crates/canopy-events" }
+canopy-pipeline = { path = "crates/canopy-pipeline" }
+canopy-discourse = { path = "crates/canopy-discourse" }
 tokio = { workspace = true }
 rayon = { version = "1.10", optional = true }
 
@@ -80,13 +74,12 @@ parallel = [
     "rayon",
     "canopy-engine/parallel",
     "canopy-tokenizer/parallel",
-    "canopy-wordnet/parallel",
-    "canopy-framenet/parallel",
-    "canopy-lexicon/parallel",
+    "canopy-semantic-engines/parallel",
 ]
 
 [dev-dependencies]
 criterion = { workspace = true }
+rand = "0.8"
 
 [[bench]]
 name = "baseline"
@@ -94,4 +87,4 @@ harness = false
 
 [package.metadata.cargo-machete]
 # These are re-exported or used indirectly
-ignored = ["canopy-engine", "canopy-events", "canopy-framenet", "canopy-lexicon", "canopy-propbank", "canopy-treebank", "rayon", "tokio"]
+ignored = ["canopy-engine", "canopy-events", "canopy-semantic-engines", "canopy-treebank", "canopy-discourse", "canopy-pipeline", "rayon", "tokio"]

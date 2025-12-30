@@ -41,8 +41,7 @@ fn semantic_coordinator_benchmark(c: &mut Criterion) {
 }
 
 fn engine_lookup_benchmark(c: &mut Criterion) {
-    use canopy_verbnet::VerbNetEngine;
-    use canopy_wordnet::WordNetEngine;
+    use canopy_semantic_engines::{PartOfSpeech, VerbNetEngine, WordNetEngine};
 
     let mut group = c.benchmark_group("engine_lookups");
     group.sample_size(50);
@@ -57,7 +56,6 @@ fn engine_lookup_benchmark(c: &mut Criterion) {
 
     // WordNet lookup benchmark
     if let Ok(wordnet) = WordNetEngine::new() {
-        use canopy_wordnet::types::PartOfSpeech;
         group.bench_function("wordnet_analyze", |b| {
             b.iter(|| {
                 wordnet

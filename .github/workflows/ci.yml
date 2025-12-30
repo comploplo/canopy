@@ -66,22 +66,19 @@ jobs:
   #   - name: Run benchmarks
   #     run: cargo bench --workspace
 
-  # TODO: Re-enable after implementing dataset provisioning scripts
-  # coverage:
-  #   name: Code Coverage
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v4
-  #   - uses: dtolnay/rust-toolchain@stable
-  #     with:
-  #       components: llvm-tools-preview
-  #   - uses: Swatinem/rust-cache@v2
-  #   - uses: taiki-e/install-action@cargo-llvm-cov
-  #   - name: Generate coverage
-  #     run: cargo llvm-cov --workspace --codecov --output-path codecov.json
-  #   - name: Upload to codecov
-  #     uses: codecov/codecov-action@v4
-  #     with:
-  #       files: codecov.json
-  #       token: ${{ secrets.CODECOV_TOKEN }}
-  #       fail_ci_if_error: false
+  coverage:
+    name: Code Coverage
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+      with:
+        components: llvm-tools-preview
+    - uses: Swatinem/rust-cache@v2
+    - uses: taiki-e/install-action@cargo-llvm-cov
+    - name: Check coverage threshold (50%)
+      run: |
+        cargo llvm-cov \
+          --workspace \
+          --fail-under-lines 50 \
+          --ignore-filename-regex 'tests?\.rs$|/tests/|/benches/'

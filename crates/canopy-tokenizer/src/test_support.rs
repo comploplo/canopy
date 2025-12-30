@@ -26,8 +26,8 @@ use crate::wordnet::WordNetEngine;
 use crate::{SemanticAnalyzer, SemanticConfig};
 
 // Use engine types that match what engines.rs expects
-type VerbNetEngine = canopy_verbnet::VerbNetEngine;
-type FrameNetEngine = canopy_framenet::FrameNetEngine;
+type VerbNetEngine = canopy_semantic_engines::verbnet::VerbNetEngine;
+type FrameNetEngine = canopy_semantic_engines::framenet::FrameNetEngine;
 
 // Shared engine singletons - initialized once per test binary
 // Note: Engines that require &mut self are wrapped in Mutex for thread-safe access
