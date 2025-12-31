@@ -537,11 +537,7 @@ ______________________________________________________________________
 ### Quick Start
 
 ```bash
-# Clone and setup
-git clone https://github.com/your-org/canopy.git
-cd canopy
-
-# Install dependencies
+# Build
 cargo build --workspace
 
 # Run tests

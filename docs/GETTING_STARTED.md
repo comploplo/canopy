@@ -10,12 +10,9 @@ Canopy is a semantic-first linguistic analysis platform for Rust. This guide wil
 
 ## Installation
 
-### 1. Clone the Repository
+### 1. Get the Source
 
-```bash
-git clone https://github.com/your-org/canopy.git
-cd canopy
-```
+Clone or download the repository to your local machine.
 
 ### 2. Build the Project
 

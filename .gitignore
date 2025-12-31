@@ -6,7 +6,10 @@ models/
 *.tar.gz
 *.zip
 
-# External data with embedded git repos
+# External linguistic data (download via scripts/setup-data.sh)
+data/verbnet/
+data/wordnet/
+data/framenet/
 data/propbank/
 data/ud_english-ewt/
 data/cache/

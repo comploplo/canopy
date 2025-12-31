@@ -66,7 +66,7 @@ impl WordClassType {
             "discourse-markers" => Some(WordClassType::DiscourseMarkers),
             "quantifiers" => Some(WordClassType::Quantifiers),
             "temporal" => Some(WordClassType::Temporal),
-            "modal" => Some(WordClassType::Modal),
+            "modal" | "modal-verbs" => Some(WordClassType::Modal),
             "pronouns" => Some(WordClassType::Pronouns),
             "prepositions" => Some(WordClassType::Prepositions),
             "conjunctions" => Some(WordClassType::Conjunctions),

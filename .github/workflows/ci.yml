@@ -13,20 +13,19 @@ env:
   RUST_BACKTRACE: 1
 
 jobs:
-  # TODO: Re-enable test job after implementing dataset provisioning scripts
-  # See docs/ROADMAP.md for tracking
-  # test:
-  #   name: Test Suite
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v4
-  #   - uses: dtolnay/rust-toolchain@stable
-  #   - uses: Swatinem/rust-cache@v2
-  #   - uses: taiki-e/install-action@nextest
-  #   - name: Run tests
-  #     run: cargo nextest run --workspace
-  #   - name: Run doctests
-  #     run: cargo test --doc --workspace
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - uses: Swatinem/rust-cache@v2
+    - uses: taiki-e/install-action@nextest
+    - name: Run tests
+      # Note: Tests requiring semantic data (VerbNet, WordNet, etc.) will skip gracefully
+      run: cargo nextest run --workspace
+    - name: Run doctests
+      run: cargo test --doc --workspace
 
   lint:
     name: Lint and Format
@@ -76,9 +75,9 @@ jobs:
         components: llvm-tools-preview
     - uses: Swatinem/rust-cache@v2
     - uses: taiki-e/install-action@cargo-llvm-cov
-    - name: Check coverage threshold (50%)
+    - name: Check coverage threshold (70%)
       run: |
         cargo llvm-cov \
           --workspace \
-          --fail-under-lines 50 \
+          --fail-under-lines 70 \
           --ignore-filename-regex 'tests?\.rs$|/tests/|/benches/'

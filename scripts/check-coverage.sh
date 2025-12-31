@@ -8,12 +8,9 @@
 set -e
 
 # Coverage threshold for release milestones
-# Current gate: 50% (temporarily lowered while removing fake tests)
-# REASON: Deleting tautological tests that always pass (assert!(true), is_ok() || is_err())
-# GOAL: Rebuild with meaningful tests that verify real behavior
-# M3 REQUIREMENT: 70% minimum with honest tests only
+# Current gate: 70% (M9 milestone achieved)
 # M4 REQUIREMENT: 80% minimum + clippy tech debt resolution
-COVERAGE_THRESHOLD=50
+COVERAGE_THRESHOLD=70
 
 echo "🔬 Running coverage analysis with cargo-llvm-cov..."
 echo "📊 Coverage threshold: ${COVERAGE_THRESHOLD}%"
@@ -58,7 +55,7 @@ else
     echo "   3. Focus on files with low coverage first"
     echo ""
     echo "⚠️  REMINDER: DO NOT lower the coverage threshold for releases!"
-    echo "   The threshold must reach 70% for M3 and 80% for M4."
+    echo "   The threshold must reach 80% for M4."
     echo "   Write more tests instead of lowering standards."
     exit $exit_code
 fi

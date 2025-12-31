@@ -1,4 +1,4 @@
-- **Current Status**: Codebase simplified - 5 semantic engine crates consolidated into `canopy-semantic-engines`, unified error handling via `CanopyError`. All tests pass. Test coverage gate at 50% while rebuilding with real assertions.
+- **Current Status**: Codebase simplified - 5 semantic engine crates consolidated into `canopy-semantic-engines`, unified error handling via `CanopyError`. All tests pass. Test coverage gate at 70%.
 
 # 🧹 CRATE CONSOLIDATION COMPLETED - 2025-12-30
 
@@ -142,10 +142,7 @@ fn analyze_word(&self, word: &str) -> Result<Analysis> {
 
 ## Coverage Gates for Releases
 
-- **CURRENT GATE**: 50% (temporarily lowered while rebuilding test suite)
-- **REASON**: Removing tautological tests (assert!(true), is_ok() || is_err()) that inflate coverage but test nothing
-- **GOAL**: Rebuild with meaningful tests that actually verify behavior
-- **M3 REQUIREMENT**: 70% minimum with real assertions only
+- **CURRENT GATE**: 70% (M9 milestone achieved)
 - **M4 REQUIREMENT**: 80% minimum + clippy tech debt resolution
 
 ## What Makes a Good Test (NOT these)

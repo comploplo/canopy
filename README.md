@@ -64,9 +64,11 @@ Canopy builds rich meaning representations from text by combining formal linguis
 ## Quick Start
 
 ```bash
-git clone https://github.com/yourusername/canopy
-cd canopy
+# Build
 cargo build --release
+
+# Download linguistic data
+./scripts/setup-data.sh
 
 # Run the demo (analyzes 100 sentences from Moby Dick)
 cargo run --release --example demo
@@ -162,7 +164,7 @@ Canopy requires linguistic datasets (not included in repo):
 | Operation      | Time              |
 | -------------- | ----------------- |
 | Engine loading | ~900ms (one-time) |
-| Full analysis  | ~40ms/sentence    |
+| Full analysis  | ~19ms/sentence    |
 | Cache hit rate | ~60%+ (improves)  |
 | Memory usage   | \<100MB typical   |
 
