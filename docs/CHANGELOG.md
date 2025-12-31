@@ -106,7 +106,7 @@ ______________________________________________________________________
 | **Throughput**       | 930 words/sec (full corpus) | 2,000+ words/sec           |
 | **Memory Usage**     | \<0.5MB cache               | \<1MB event structures     |
 | **Cache Hit Rate**   | 54.4% with lemmatization    | Maintained                 |
-| **Test Coverage**    | ~67% (50% gate)             | 70% target                 |
+| **Test Coverage**    | 80.26% (80% gate) ✅        | Maintain 80%+              |
 
 ______________________________________________________________________
 

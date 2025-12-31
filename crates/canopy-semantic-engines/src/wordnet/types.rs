@@ -592,3 +592,457 @@ impl WordNetAnalysis {
         self.definitions.first()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // === PartOfSpeech Tests ===
+
+    #[test]
+    fn test_part_of_speech_code() {
+        assert_eq!(PartOfSpeech::Noun.code(), 'n');
+        assert_eq!(PartOfSpeech::Verb.code(), 'v');
+        assert_eq!(PartOfSpeech::Adjective.code(), 'a');
+        assert_eq!(PartOfSpeech::AdjectiveSatellite.code(), 's');
+        assert_eq!(PartOfSpeech::Adverb.code(), 'r');
+    }
+
+    #[test]
+    fn test_part_of_speech_name() {
+        assert_eq!(PartOfSpeech::Noun.name(), "noun");
+        assert_eq!(PartOfSpeech::Verb.name(), "verb");
+        assert_eq!(PartOfSpeech::Adjective.name(), "adjective");
+        assert_eq!(
+            PartOfSpeech::AdjectiveSatellite.name(),
+            "adjective satellite"
+        );
+        assert_eq!(PartOfSpeech::Adverb.name(), "adverb");
+    }
+
+    // === SemanticRelation Tests ===
+
+    #[test]
+    fn test_semantic_relation_symbol() {
+        assert_eq!(SemanticRelation::Antonym.symbol(), "!");
+        assert_eq!(SemanticRelation::Hypernym.symbol(), "@");
+        assert_eq!(SemanticRelation::Hyponym.symbol(), "~");
+        assert_eq!(SemanticRelation::InstanceHypernym.symbol(), "@i");
+        assert_eq!(SemanticRelation::InstanceHyponym.symbol(), "~i");
+        assert_eq!(SemanticRelation::MemberHolonym.symbol(), "#m");
+        assert_eq!(SemanticRelation::SubstanceHolonym.symbol(), "#s");
+        assert_eq!(SemanticRelation::PartHolonym.symbol(), "#p");
+        assert_eq!(SemanticRelation::MemberMeronym.symbol(), "%m");
+        assert_eq!(SemanticRelation::SubstanceMeronym.symbol(), "%s");
+        assert_eq!(SemanticRelation::PartMeronym.symbol(), "%p");
+        assert_eq!(SemanticRelation::Attribute.symbol(), "=");
+        assert_eq!(SemanticRelation::Derivation.symbol(), "+");
+        assert_eq!(SemanticRelation::Entailment.symbol(), "*");
+        assert_eq!(SemanticRelation::Cause.symbol(), ">");
+        assert_eq!(SemanticRelation::AlsoSee.symbol(), "^");
+        assert_eq!(SemanticRelation::VerbGroup.symbol(), "$");
+        assert_eq!(SemanticRelation::SimilarTo.symbol(), "&");
+        assert_eq!(SemanticRelation::Participle.symbol(), "<");
+        assert_eq!(SemanticRelation::Pertainym.symbol(), "\\");
+    }
+
+    #[test]
+    fn test_semantic_relation_description() {
+        assert_eq!(SemanticRelation::Antonym.description(), "opposite meaning");
+        assert_eq!(
+            SemanticRelation::Hypernym.description(),
+            "more general term"
+        );
+        assert_eq!(
+            SemanticRelation::Hyponym.description(),
+            "more specific term"
+        );
+        assert_eq!(
+            SemanticRelation::InstanceHypernym.description(),
+            "class of this instance"
+        );
+        assert_eq!(
+            SemanticRelation::InstanceHyponym.description(),
+            "instance of this class"
+        );
+        assert!(!SemanticRelation::MemberHolonym.description().is_empty());
+        assert!(!SemanticRelation::Derivation.description().is_empty());
+        assert!(!SemanticRelation::Entailment.description().is_empty());
+        assert!(!SemanticRelation::Cause.description().is_empty());
+    }
+
+    // === Synset Tests ===
+
+    fn create_test_synset() -> Synset {
+        Synset {
+            offset: 100001,
+            lex_filenum: 3,
+            pos: PartOfSpeech::Noun,
+            words: vec![
+                SynsetWord {
+                    word: "dog".to_string(),
+                    lex_id: 0,
+                    tag_count: Some(100),
+                },
+                SynsetWord {
+                    word: "canine".to_string(),
+                    lex_id: 1,
+                    tag_count: Some(50),
+                },
+            ],
+            pointers: vec![SemanticPointer {
+                relation: SemanticRelation::Hypernym,
+                target_offset: 200001,
+                target_pos: PartOfSpeech::Noun,
+                source_word: 0,
+                target_word: 0,
+            }],
+            frames: vec![],
+            gloss: "a domesticated carnivorous mammal; \"the dog barked all night\"".to_string(),
+        }
+    }
+
+    #[test]
+    fn test_synset_primary_word() {
+        let synset = create_test_synset();
+        assert_eq!(synset.primary_word(), Some("dog"));
+
+        let empty_synset = Synset {
+            offset: 0,
+            lex_filenum: 0,
+            pos: PartOfSpeech::Noun,
+            words: vec![],
+            pointers: vec![],
+            frames: vec![],
+            gloss: String::new(),
+        };
+        assert_eq!(empty_synset.primary_word(), None);
+    }
+
+    #[test]
+    fn test_synset_contains_word() {
+        let synset = create_test_synset();
+        assert!(synset.contains_word("dog"));
+        assert!(synset.contains_word("canine"));
+        assert!(!synset.contains_word("cat"));
+    }
+
+    #[test]
+    fn test_synset_word_list() {
+        let synset = create_test_synset();
+        let words = synset.word_list();
+        assert_eq!(words.len(), 2);
+        assert!(words.contains(&"dog".to_string()));
+        assert!(words.contains(&"canine".to_string()));
+    }
+
+    #[test]
+    fn test_synset_get_relations() {
+        let synset = create_test_synset();
+        let hypernyms = synset.get_relations(&SemanticRelation::Hypernym);
+        assert_eq!(hypernyms.len(), 1);
+        assert_eq!(hypernyms[0].target_offset, 200001);
+
+        let antonyms = synset.get_relations(&SemanticRelation::Antonym);
+        assert!(antonyms.is_empty());
+    }
+
+    #[test]
+    fn test_synset_definition() {
+        let synset = create_test_synset();
+        let def = synset.definition();
+        assert_eq!(def, "a domesticated carnivorous mammal");
+
+        // Test with semicolon separator
+        let synset_semi = Synset {
+            offset: 0,
+            lex_filenum: 0,
+            pos: PartOfSpeech::Noun,
+            words: vec![],
+            pointers: vec![],
+            frames: vec![],
+            gloss: "definition text; example sentence".to_string(),
+        };
+        assert_eq!(synset_semi.definition(), "definition text");
+
+        // Test with no separator
+        let synset_plain = Synset {
+            offset: 0,
+            lex_filenum: 0,
+            pos: PartOfSpeech::Noun,
+            words: vec![],
+            pointers: vec![],
+            frames: vec![],
+            gloss: "just a definition".to_string(),
+        };
+        assert_eq!(synset_plain.definition(), "just a definition");
+    }
+
+    #[test]
+    fn test_synset_examples() {
+        let synset = create_test_synset();
+        let examples = synset.examples();
+        assert_eq!(examples.len(), 1);
+        assert_eq!(examples[0], "the dog barked all night");
+
+        // Test with multiple examples
+        let synset_multi = Synset {
+            offset: 0,
+            lex_filenum: 0,
+            pos: PartOfSpeech::Noun,
+            words: vec![],
+            pointers: vec![],
+            frames: vec![],
+            gloss: "definition; \"first example\" \"second example\"".to_string(),
+        };
+        let examples = synset_multi.examples();
+        assert_eq!(examples.len(), 2);
+
+        // Test with no examples
+        let synset_no_ex = Synset {
+            offset: 0,
+            lex_filenum: 0,
+            pos: PartOfSpeech::Noun,
+            words: vec![],
+            pointers: vec![],
+            frames: vec![],
+            gloss: "just a definition".to_string(),
+        };
+        assert!(synset_no_ex.examples().is_empty());
+    }
+
+    // === IndexEntry Tests ===
+
+    #[test]
+    fn test_index_entry_primary_synset_offset() {
+        let entry = IndexEntry {
+            lemma: "dog".to_string(),
+            pos: PartOfSpeech::Noun,
+            synset_count: 2,
+            pointer_count: 5,
+            relations: vec![SemanticRelation::Hypernym, SemanticRelation::Hyponym],
+            tag_sense_count: 10,
+            synset_offsets: vec![100001, 100002],
+        };
+        assert_eq!(entry.primary_synset_offset(), Some(100001));
+
+        let empty_entry = IndexEntry {
+            lemma: "test".to_string(),
+            pos: PartOfSpeech::Noun,
+            synset_count: 0,
+            pointer_count: 0,
+            relations: vec![],
+            tag_sense_count: 0,
+            synset_offsets: vec![],
+        };
+        assert_eq!(empty_entry.primary_synset_offset(), None);
+    }
+
+    #[test]
+    fn test_index_entry_has_relation() {
+        let entry = IndexEntry {
+            lemma: "dog".to_string(),
+            pos: PartOfSpeech::Noun,
+            synset_count: 1,
+            pointer_count: 2,
+            relations: vec![SemanticRelation::Hypernym, SemanticRelation::Hyponym],
+            tag_sense_count: 5,
+            synset_offsets: vec![100001],
+        };
+        assert!(entry.has_relation(&SemanticRelation::Hypernym));
+        assert!(entry.has_relation(&SemanticRelation::Hyponym));
+        assert!(!entry.has_relation(&SemanticRelation::Antonym));
+    }
+
+    // === ExceptionEntry Tests ===
+
+    #[test]
+    fn test_exception_entry() {
+        let entry = ExceptionEntry {
+            inflected: "dogs".to_string(),
+            base_forms: vec!["dog".to_string()],
+        };
+        assert_eq!(entry.inflected, "dogs");
+        assert_eq!(entry.base_forms.len(), 1);
+        assert_eq!(entry.base_forms[0], "dog");
+    }
+
+    // === WordNetDatabase Tests ===
+
+    #[test]
+    fn test_wordnet_database_new() {
+        let db = WordNetDatabase::new();
+        assert!(db.synsets.is_empty());
+        assert!(db.index.is_empty());
+        assert!(db.exceptions.is_empty());
+        assert!(db.synset_words.is_empty());
+    }
+
+    #[test]
+    fn test_wordnet_database_default() {
+        let db = WordNetDatabase::default();
+        assert!(db.synsets.is_empty());
+    }
+
+    #[test]
+    fn test_wordnet_database_lookup_word() {
+        let mut db = WordNetDatabase::new();
+        let entry = IndexEntry {
+            lemma: "dog".to_string(),
+            pos: PartOfSpeech::Noun,
+            synset_count: 1,
+            pointer_count: 1,
+            relations: vec![SemanticRelation::Hypernym],
+            tag_sense_count: 5,
+            synset_offsets: vec![100001],
+        };
+        db.index
+            .insert(("dog".to_string(), PartOfSpeech::Noun), entry);
+
+        assert!(db.lookup_word("dog", PartOfSpeech::Noun).is_some());
+        assert!(db.lookup_word("DOG", PartOfSpeech::Noun).is_some()); // case insensitive
+        assert!(db.lookup_word("cat", PartOfSpeech::Noun).is_none());
+        assert!(db.lookup_word("dog", PartOfSpeech::Verb).is_none());
+    }
+
+    #[test]
+    fn test_wordnet_database_get_synset() {
+        let mut db = WordNetDatabase::new();
+        let synset = create_test_synset();
+        db.synsets.insert(100001, synset);
+
+        assert!(db.get_synset(100001).is_some());
+        assert_eq!(db.get_synset(100001).unwrap().offset, 100001);
+        assert!(db.get_synset(999999).is_none());
+    }
+
+    #[test]
+    fn test_wordnet_database_get_synsets_for_word() {
+        let mut db = WordNetDatabase::new();
+        let synset = create_test_synset();
+        db.synsets.insert(100001, synset);
+        db.index.insert(
+            ("dog".to_string(), PartOfSpeech::Noun),
+            IndexEntry {
+                lemma: "dog".to_string(),
+                pos: PartOfSpeech::Noun,
+                synset_count: 1,
+                pointer_count: 1,
+                relations: vec![],
+                tag_sense_count: 0,
+                synset_offsets: vec![100001],
+            },
+        );
+
+        let synsets = db.get_synsets_for_word("dog", PartOfSpeech::Noun);
+        assert_eq!(synsets.len(), 1);
+        assert_eq!(synsets[0].offset, 100001);
+
+        let no_synsets = db.get_synsets_for_word("cat", PartOfSpeech::Noun);
+        assert!(no_synsets.is_empty());
+    }
+
+    #[test]
+    fn test_wordnet_database_stats() {
+        let mut db = WordNetDatabase::new();
+        let synset = create_test_synset();
+        db.synsets.insert(100001, synset);
+
+        let verb_synset = Synset {
+            offset: 200001,
+            lex_filenum: 1,
+            pos: PartOfSpeech::Verb,
+            words: vec![SynsetWord {
+                word: "run".to_string(),
+                lex_id: 0,
+                tag_count: None,
+            }],
+            pointers: vec![],
+            frames: vec![],
+            gloss: "move fast".to_string(),
+        };
+        db.synsets.insert(200001, verb_synset);
+
+        let stats = db.stats();
+        assert_eq!(stats.total_synsets, 2);
+        assert_eq!(stats.noun_synsets, 1);
+        assert_eq!(stats.verb_synsets, 1);
+        assert_eq!(stats.adjective_synsets, 0);
+        assert_eq!(stats.adverb_synsets, 0);
+        assert_eq!(stats.total_words, 3); // dog, canine, run
+        assert_eq!(stats.total_relations, 1); // one hypernym pointer
+    }
+
+    #[test]
+    fn test_wordnet_database_path_similarity_same_synset() {
+        let db = WordNetDatabase::new();
+        let synset = create_test_synset();
+        let similarity = db.path_similarity(&synset, &synset);
+        assert_eq!(similarity, 1.0);
+    }
+
+    // === WordNetAnalysis Tests ===
+
+    #[test]
+    fn test_wordnet_analysis_new() {
+        let analysis = WordNetAnalysis::new("dog".to_string(), PartOfSpeech::Noun);
+        assert_eq!(analysis.word, "dog");
+        assert_eq!(analysis.pos, PartOfSpeech::Noun);
+        assert!(analysis.synsets.is_empty());
+        assert!(analysis.relations.is_empty());
+        assert!(analysis.definitions.is_empty());
+        assert!(analysis.examples.is_empty());
+        assert_eq!(analysis.confidence, 0.0);
+    }
+
+    #[test]
+    fn test_wordnet_analysis_has_results() {
+        let empty_analysis = WordNetAnalysis::new("test".to_string(), PartOfSpeech::Noun);
+        assert!(!empty_analysis.has_results());
+
+        let mut with_synset = WordNetAnalysis::new("dog".to_string(), PartOfSpeech::Noun);
+        with_synset.synsets.push(create_test_synset());
+        assert!(with_synset.has_results());
+    }
+
+    #[test]
+    fn test_wordnet_analysis_primary_definition() {
+        let empty_analysis = WordNetAnalysis::new("test".to_string(), PartOfSpeech::Noun);
+        assert!(empty_analysis.primary_definition().is_none());
+
+        let mut with_defs = WordNetAnalysis::new("dog".to_string(), PartOfSpeech::Noun);
+        with_defs.definitions.push("definition one".to_string());
+        with_defs.definitions.push("definition two".to_string());
+        assert_eq!(
+            with_defs.primary_definition(),
+            Some(&"definition one".to_string())
+        );
+    }
+
+    // === Serialization Tests ===
+
+    #[test]
+    fn test_part_of_speech_serialization() {
+        let pos = PartOfSpeech::Verb;
+        let json = serde_json::to_string(&pos).unwrap();
+        let deserialized: PartOfSpeech = serde_json::from_str(&json).unwrap();
+        assert_eq!(pos, deserialized);
+    }
+
+    #[test]
+    fn test_semantic_relation_serialization() {
+        let rel = SemanticRelation::Hypernym;
+        let json = serde_json::to_string(&rel).unwrap();
+        let deserialized: SemanticRelation = serde_json::from_str(&json).unwrap();
+        assert_eq!(rel, deserialized);
+    }
+
+    #[test]
+    fn test_synset_serialization() {
+        let synset = create_test_synset();
+        let json = serde_json::to_string(&synset).unwrap();
+        let deserialized: Synset = serde_json::from_str(&json).unwrap();
+        assert_eq!(synset.offset, deserialized.offset);
+        assert_eq!(synset.words.len(), deserialized.words.len());
+    }
+}

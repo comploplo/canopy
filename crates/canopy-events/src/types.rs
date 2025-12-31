@@ -477,3 +477,574 @@ impl std::fmt::Display for Presupposition {
         write!(f, "[{} {} {}]", self.trigger_type, self.content, proj)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use canopy_core::{Action, AspectualClass, LittleV, UPos, Voice};
+    use std::collections::HashMap;
+
+    /// Helper to create a minimal Entity for testing
+    fn make_entity(text: &str) -> canopy_core::Entity {
+        canopy_core::Entity {
+            id: 0,
+            text: text.to_string(),
+            animacy: None,
+            definiteness: None,
+            number: None,
+            distributivity: None,
+        }
+    }
+
+    /// Helper to create a minimal Event for testing
+    fn make_event(predicate: &str) -> canopy_core::Event {
+        let agent = make_entity("agent");
+        let action = Action {
+            predicate: predicate.to_string(),
+            manner: None,
+            instrument: None,
+        };
+        canopy_core::Event {
+            id: 0,
+            predicate: predicate.to_string(),
+            little_v: LittleV::Do { agent, action },
+            participants: HashMap::new(),
+            aspect: AspectualClass::Activity,
+            voice: Voice::Active,
+            modality: None,
+        }
+    }
+
+    // ========== DependencyArc Tests ==========
+
+    #[test]
+    fn test_dependency_arc_new() {
+        let arc = DependencyArc::new(0, 1, DependencyRelation::NominalSubject);
+        assert_eq!(arc.head_idx, 0);
+        assert_eq!(arc.dependent_idx, 1);
+        assert_eq!(arc.relation, DependencyRelation::NominalSubject);
+        assert_eq!(arc.confidence, 1.0);
+    }
+
+    #[test]
+    fn test_dependency_arc_with_confidence() {
+        let arc = DependencyArc::with_confidence(2, 3, DependencyRelation::Object, 0.8);
+        assert_eq!(arc.head_idx, 2);
+        assert_eq!(arc.dependent_idx, 3);
+        assert_eq!(arc.relation, DependencyRelation::Object);
+        assert_eq!(arc.confidence, 0.8);
+    }
+
+    #[test]
+    fn test_dependency_arc_clone_debug() {
+        let arc = DependencyArc::new(0, 1, DependencyRelation::Root);
+        let cloned = arc.clone();
+        assert_eq!(cloned.head_idx, 0);
+        let debug = format!("{:?}", arc);
+        assert!(debug.contains("Root"));
+    }
+
+    // ========== SentenceMetadata Tests ==========
+
+    #[test]
+    fn test_sentence_metadata_default() {
+        let meta = SentenceMetadata::default();
+        assert!(meta.sentence_id.is_none());
+        assert!(!meta.is_passive);
+        assert!(!meta.is_interrogative);
+        assert!(!meta.is_negated);
+        assert!(!meta.is_imperative);
+    }
+
+    #[test]
+    fn test_sentence_metadata_clone_debug() {
+        let meta = SentenceMetadata {
+            sentence_id: Some("s1".to_string()),
+            is_passive: true,
+            is_interrogative: false,
+            is_negated: true,
+            is_imperative: false,
+        };
+        let cloned = meta.clone();
+        assert_eq!(cloned.sentence_id, Some("s1".to_string()));
+        let debug = format!("{:?}", meta);
+        assert!(debug.contains("passive"));
+    }
+
+    #[test]
+    fn test_sentence_metadata_serializable() {
+        // Test that types derive Serialize/Deserialize (compile-time check)
+        fn _assert_serializable<T: serde::Serialize + serde::de::DeserializeOwned>() {}
+        _assert_serializable::<SentenceMetadata>();
+    }
+
+    // ========== SentenceAnalysis Tests ==========
+
+    #[test]
+    fn test_sentence_analysis_new() {
+        let tokens = vec![Layer1SemanticResult::new(
+            "runs".to_string(),
+            "run".to_string(),
+        )];
+        let analysis = SentenceAnalysis::new("He runs".to_string(), tokens);
+        assert_eq!(analysis.text, "He runs");
+        assert_eq!(analysis.tokens.len(), 1);
+        assert!(analysis.dependencies.is_empty());
+    }
+
+    #[test]
+    fn test_sentence_analysis_with_dependencies() {
+        let tokens = vec![Layer1SemanticResult::new(
+            "runs".to_string(),
+            "run".to_string(),
+        )];
+        let deps = vec![DependencyArc::new(1, 0, DependencyRelation::NominalSubject)];
+        let analysis = SentenceAnalysis::new("He runs".to_string(), tokens).with_dependencies(deps);
+        assert_eq!(analysis.dependencies.len(), 1);
+    }
+
+    #[test]
+    fn test_sentence_analysis_with_metadata() {
+        let tokens = vec![];
+        let meta = SentenceMetadata {
+            sentence_id: Some("s1".to_string()),
+            is_passive: true,
+            ..Default::default()
+        };
+        let analysis = SentenceAnalysis::new("test".to_string(), tokens).with_metadata(meta);
+        assert!(analysis.metadata.is_passive);
+        assert_eq!(analysis.metadata.sentence_id, Some("s1".to_string()));
+    }
+
+    #[test]
+    fn test_sentence_analysis_get_token() {
+        let tokens = vec![
+            Layer1SemanticResult::new("John".to_string(), "john".to_string()),
+            Layer1SemanticResult::new("runs".to_string(), "run".to_string()),
+        ];
+        let analysis = SentenceAnalysis::new("John runs".to_string(), tokens);
+        assert_eq!(analysis.get_token(0).unwrap().original_word, "John");
+        assert!(analysis.get_token(5).is_none());
+    }
+
+    #[test]
+    fn test_sentence_analysis_find_predicates() {
+        let mut tokens = vec![
+            Layer1SemanticResult::new("John".to_string(), "john".to_string()),
+            Layer1SemanticResult::new("runs".to_string(), "run".to_string()),
+        ];
+        tokens[1].pos = Some(UPos::Verb);
+        let analysis = SentenceAnalysis::new("John runs".to_string(), tokens);
+        let predicates = analysis.find_predicates();
+        assert_eq!(predicates, vec![1]);
+    }
+
+    #[test]
+    fn test_sentence_analysis_find_predicates_with_aux() {
+        let mut tokens = vec![
+            Layer1SemanticResult::new("is".to_string(), "be".to_string()),
+            Layer1SemanticResult::new("running".to_string(), "run".to_string()),
+        ];
+        tokens[0].pos = Some(UPos::Aux);
+        tokens[1].pos = Some(UPos::Verb);
+        let analysis = SentenceAnalysis::new("is running".to_string(), tokens);
+        let predicates = analysis.find_predicates();
+        assert_eq!(predicates.len(), 2);
+        assert!(predicates.contains(&0));
+        assert!(predicates.contains(&1));
+    }
+
+    #[test]
+    fn test_sentence_analysis_get_dependents() {
+        let tokens = vec![
+            Layer1SemanticResult::new("John".to_string(), "john".to_string()),
+            Layer1SemanticResult::new("runs".to_string(), "run".to_string()),
+        ];
+        let deps = vec![DependencyArc::new(1, 0, DependencyRelation::NominalSubject)];
+        let analysis =
+            SentenceAnalysis::new("John runs".to_string(), tokens).with_dependencies(deps);
+        let head_deps = analysis.get_dependents(1);
+        assert_eq!(head_deps.len(), 1);
+        assert_eq!(head_deps[0].dependent_idx, 0);
+        let no_deps = analysis.get_dependents(0);
+        assert!(no_deps.is_empty());
+    }
+
+    // ========== ComposedEvents Tests ==========
+
+    #[test]
+    fn test_composed_events_empty() {
+        let events = ComposedEvents::empty();
+        assert!(events.events.is_empty());
+        assert!(events.unbound_entities.is_empty());
+        assert_eq!(events.confidence, 0.0);
+        assert_eq!(events.processing_time_us, 0);
+        assert!(events.sources.is_empty());
+    }
+
+    #[test]
+    fn test_composed_events_has_events() {
+        let empty = ComposedEvents::empty();
+        assert!(!empty.has_events());
+
+        let mut with_events = ComposedEvents::empty();
+        with_events.events.push(ComposedEvent {
+            id: 0,
+            event: make_event("run"),
+            token_span: (0, 0),
+            verbnet_source: None,
+            framenet_source: None,
+            decomposition_confidence: 0.8,
+            binding_confidence: 0.9,
+            presuppositions: Vec::new(),
+            polarity: true,
+        });
+        assert!(with_events.has_events());
+    }
+
+    #[test]
+    fn test_composed_events_primary_event() {
+        let empty = ComposedEvents::empty();
+        assert!(empty.primary_event().is_none());
+
+        let mut with_events = ComposedEvents::empty();
+        with_events.events.push(ComposedEvent {
+            id: 0,
+            event: make_event("run"),
+            token_span: (0, 1),
+            verbnet_source: Some("run-51.3.2".to_string()),
+            framenet_source: None,
+            decomposition_confidence: 0.8,
+            binding_confidence: 0.9,
+            presuppositions: Vec::new(),
+            polarity: true,
+        });
+        let primary = with_events.primary_event().unwrap();
+        assert_eq!(primary.id, 0);
+        assert_eq!(primary.event.predicate, "run");
+    }
+
+    #[test]
+    fn test_composed_events_total_participants() {
+        let mut events = ComposedEvents::empty();
+        let mut event1 = make_event("give");
+        event1
+            .participants
+            .insert(ThetaRole::Agent, make_entity("John"));
+        event1
+            .participants
+            .insert(ThetaRole::Theme, make_entity("book"));
+        events.events.push(ComposedEvent {
+            id: 0,
+            event: event1,
+            token_span: (0, 3),
+            verbnet_source: None,
+            framenet_source: None,
+            decomposition_confidence: 0.8,
+            binding_confidence: 0.9,
+            presuppositions: Vec::new(),
+            polarity: true,
+        });
+        assert_eq!(events.total_participants(), 2);
+    }
+
+    // ========== ComposedEvent Tests ==========
+
+    #[test]
+    fn test_composed_event_overall_confidence() {
+        let composed = ComposedEvent {
+            id: 0,
+            event: make_event("run"),
+            token_span: (0, 0),
+            verbnet_source: None,
+            framenet_source: None,
+            decomposition_confidence: 0.8,
+            binding_confidence: 0.6,
+            presuppositions: Vec::new(),
+            polarity: true,
+        };
+        // Use approximate comparison for floating point
+        let conf = composed.overall_confidence();
+        assert!((conf - 0.7).abs() < 0.001, "Expected ~0.7, got {}", conf);
+    }
+
+    #[test]
+    fn test_composed_event_has_role() {
+        let mut event = make_event("give");
+        event
+            .participants
+            .insert(ThetaRole::Agent, make_entity("John"));
+        let composed = ComposedEvent {
+            id: 0,
+            event,
+            token_span: (0, 0),
+            verbnet_source: None,
+            framenet_source: None,
+            decomposition_confidence: 0.8,
+            binding_confidence: 0.9,
+            presuppositions: Vec::new(),
+            polarity: true,
+        };
+        assert!(composed.has_role(ThetaRole::Agent));
+        assert!(!composed.has_role(ThetaRole::Theme));
+    }
+
+    #[test]
+    fn test_composed_event_get_participant() {
+        let mut event = make_event("give");
+        event
+            .participants
+            .insert(ThetaRole::Agent, make_entity("John"));
+        let composed = ComposedEvent {
+            id: 0,
+            event,
+            token_span: (0, 0),
+            verbnet_source: None,
+            framenet_source: None,
+            decomposition_confidence: 0.8,
+            binding_confidence: 0.9,
+            presuppositions: Vec::new(),
+            polarity: true,
+        };
+        let agent = composed.get_participant(ThetaRole::Agent).unwrap();
+        assert_eq!(agent.text, "John");
+        assert!(composed.get_participant(ThetaRole::Theme).is_none());
+    }
+
+    // ========== UnboundEntity Tests ==========
+
+    #[test]
+    fn test_unbound_entity_clone_debug() {
+        let unbound = UnboundEntity {
+            token_idx: 0,
+            text: "something".to_string(),
+            suggested_role: Some(ThetaRole::Theme),
+            reason: UnbindingReason::AmbiguousRole,
+        };
+        let cloned = unbound.clone();
+        assert_eq!(cloned.text, "something");
+        let debug = format!("{:?}", unbound);
+        assert!(debug.contains("AmbiguousRole"));
+    }
+
+    // ========== UnbindingReason Tests ==========
+
+    #[test]
+    fn test_unbinding_reason_variants() {
+        let reasons = [
+            UnbindingReason::NoPredicateFound,
+            UnbindingReason::AmbiguousRole,
+            UnbindingReason::ExtraCoreArgument,
+            UnbindingReason::MissingDependency,
+            UnbindingReason::SemanticMismatch,
+        ];
+        for reason in &reasons {
+            let cloned = reason.clone();
+            let debug = format!("{:?}", cloned);
+            assert!(!debug.is_empty());
+        }
+    }
+
+    // ========== PredicateInfo Tests ==========
+
+    #[test]
+    fn test_predicate_info_has_verbnet() {
+        let info = PredicateInfo {
+            lemma: "run".to_string(),
+            token_idx: 0,
+            verbnet_analysis: None,
+            framenet_analysis: None,
+            l1_confidence: 0.8,
+        };
+        assert!(!info.has_verbnet());
+        assert!(!info.has_framenet());
+    }
+
+    #[test]
+    fn test_predicate_info_verbnet_class_id() {
+        let info = PredicateInfo {
+            lemma: "run".to_string(),
+            token_idx: 0,
+            verbnet_analysis: None,
+            framenet_analysis: None,
+            l1_confidence: 0.8,
+        };
+        assert!(info.verbnet_class_id().is_none());
+    }
+
+    // ========== LittleVType Tests ==========
+
+    #[test]
+    fn test_little_v_type_display() {
+        assert_eq!(LittleVType::Cause.to_string(), "CAUSE");
+        assert_eq!(LittleVType::Become.to_string(), "BECOME");
+        assert_eq!(LittleVType::Be.to_string(), "BE");
+        assert_eq!(LittleVType::Do.to_string(), "DO");
+        assert_eq!(LittleVType::Experience.to_string(), "EXPERIENCE");
+        assert_eq!(LittleVType::Go.to_string(), "GO");
+        assert_eq!(LittleVType::Have.to_string(), "HAVE");
+        assert_eq!(LittleVType::Say.to_string(), "SAY");
+        assert_eq!(LittleVType::Exist.to_string(), "EXIST");
+    }
+
+    #[test]
+    fn test_little_v_type_default_roles() {
+        let cause_roles = LittleVType::Cause.default_roles();
+        assert!(cause_roles.contains(&ThetaRole::Agent));
+        assert!(cause_roles.contains(&ThetaRole::Patient));
+
+        let become_roles = LittleVType::Become.default_roles();
+        assert!(become_roles.contains(&ThetaRole::Theme));
+
+        let experience_roles = LittleVType::Experience.default_roles();
+        assert!(experience_roles.contains(&ThetaRole::Experiencer));
+        assert!(experience_roles.contains(&ThetaRole::Stimulus));
+    }
+
+    #[test]
+    fn test_little_v_type_equality_hash() {
+        use std::collections::HashSet;
+        let mut set = HashSet::new();
+        set.insert(LittleVType::Cause);
+        set.insert(LittleVType::Become);
+        assert!(set.contains(&LittleVType::Cause));
+        assert!(!set.contains(&LittleVType::Do));
+    }
+
+    // ========== PresuppositionTrigger Tests ==========
+
+    #[test]
+    fn test_presupposition_trigger_display() {
+        assert_eq!(PresuppositionTrigger::Factive.to_string(), "factive");
+        assert_eq!(PresuppositionTrigger::Aspectual.to_string(), "aspectual");
+        assert_eq!(PresuppositionTrigger::Cleft.to_string(), "cleft");
+        assert_eq!(PresuppositionTrigger::Definite.to_string(), "definite");
+        assert_eq!(PresuppositionTrigger::Change.to_string(), "change");
+    }
+
+    #[test]
+    fn test_presupposition_trigger_equality_hash() {
+        use std::collections::HashSet;
+        let mut set = HashSet::new();
+        set.insert(PresuppositionTrigger::Factive);
+        set.insert(PresuppositionTrigger::Aspectual);
+        assert!(set.contains(&PresuppositionTrigger::Factive));
+        assert!(!set.contains(&PresuppositionTrigger::Cleft));
+    }
+
+    // ========== PresupposedContent Tests ==========
+
+    #[test]
+    fn test_presupposed_content_existence_display() {
+        let content = PresupposedContent::Existence {
+            entity_text: "the book".to_string(),
+        };
+        let display = format!("{}", content);
+        assert!(display.contains("the book"));
+    }
+
+    #[test]
+    fn test_presupposed_content_state_display() {
+        let content = PresupposedContent::State {
+            description: "was running".to_string(),
+            entity_text: "John".to_string(),
+        };
+        let display = format!("{}", content);
+        assert!(display.contains("was running"));
+    }
+
+    #[test]
+    fn test_presupposed_content_event_display() {
+        let event = make_event("leave");
+        let content = PresupposedContent::Event(Box::new(event));
+        let display = format!("{}", content);
+        assert!(display.contains("leave"));
+    }
+
+    // ========== Presupposition Tests ==========
+
+    #[test]
+    fn test_presupposition_display_projectable() {
+        let presup = Presupposition {
+            trigger_type: PresuppositionTrigger::Factive,
+            content: PresupposedContent::Existence {
+                entity_text: "x".to_string(),
+            },
+            projectable: true,
+        };
+        let display = format!("{}", presup);
+        assert!(display.contains("↑"));
+        assert!(display.contains("factive"));
+    }
+
+    #[test]
+    fn test_presupposition_display_not_projectable() {
+        let presup = Presupposition {
+            trigger_type: PresuppositionTrigger::Definite,
+            content: PresupposedContent::Existence {
+                entity_text: "y".to_string(),
+            },
+            projectable: false,
+        };
+        let display = format!("{}", presup);
+        assert!(display.contains("↓"));
+        assert!(display.contains("definite"));
+    }
+
+    #[test]
+    fn test_presupposition_clone_debug() {
+        let presup = Presupposition {
+            trigger_type: PresuppositionTrigger::Aspectual,
+            content: PresupposedContent::State {
+                description: "was running".to_string(),
+                entity_text: "John".to_string(),
+            },
+            projectable: true,
+        };
+        let cloned = presup.clone();
+        assert_eq!(cloned.trigger_type, PresuppositionTrigger::Aspectual);
+        let debug = format!("{:?}", presup);
+        assert!(debug.contains("Aspectual"));
+    }
+
+    // ========== DecomposedEvent Tests ==========
+
+    #[test]
+    fn test_decomposed_event_clone_debug() {
+        let decomposed = DecomposedEvent {
+            primary_type: LittleVType::Cause,
+            expected_roles: vec![ThetaRole::Agent, ThetaRole::Patient],
+            sub_event: None,
+            confidence: 0.9,
+            verbnet_confidence: Some(0.85),
+            sources: vec!["verbnet".to_string()],
+        };
+        let cloned = decomposed.clone();
+        assert_eq!(cloned.primary_type, LittleVType::Cause);
+        let debug = format!("{:?}", decomposed);
+        assert!(debug.contains("Cause"));
+    }
+
+    #[test]
+    fn test_decomposed_event_with_sub_event() {
+        let sub = DecomposedEvent {
+            primary_type: LittleVType::Become,
+            expected_roles: vec![ThetaRole::Theme],
+            sub_event: None,
+            confidence: 0.8,
+            verbnet_confidence: None,
+            sources: vec![],
+        };
+        let parent = DecomposedEvent {
+            primary_type: LittleVType::Cause,
+            expected_roles: vec![ThetaRole::Agent, ThetaRole::Patient],
+            sub_event: Some(Box::new(sub)),
+            confidence: 0.9,
+            verbnet_confidence: Some(0.85),
+            sources: vec!["verbnet".to_string()],
+        };
+        assert!(parent.sub_event.is_some());
+        let sub = parent.sub_event.as_ref().unwrap();
+        assert_eq!(sub.primary_type, LittleVType::Become);
+    }
+}

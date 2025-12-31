@@ -514,4 +514,131 @@ mod tests {
         let final_memory = cache.estimate_memory_usage();
         assert!(final_memory > initial_memory);
     }
+
+    #[test]
+    fn test_cache_statistics_default() {
+        let stats = CacheStatistics::default();
+        assert_eq!(stats.core_hits, 0);
+        assert_eq!(stats.lru_hits, 0);
+        assert_eq!(stats.disk_hits, 0);
+        assert_eq!(stats.misses, 0);
+        assert_eq!(stats.total_requests, 0);
+        assert_eq!(stats.synthesis_attempts, 0);
+        assert_eq!(stats.synthesis_successes, 0);
+    }
+
+    #[test]
+    fn test_cache_statistics_core_hit_rate() {
+        let stats = CacheStatistics {
+            core_hits: 80,
+            lru_hits: 10,
+            disk_hits: 5,
+            misses: 5,
+            total_requests: 100,
+            synthesis_attempts: 0,
+            synthesis_successes: 0,
+        };
+        assert_eq!(stats.core_hit_rate(), 0.8);
+    }
+
+    #[test]
+    fn test_cache_statistics_total_hit_rate() {
+        let stats = CacheStatistics {
+            core_hits: 40,
+            lru_hits: 30,
+            disk_hits: 10,
+            misses: 20,
+            total_requests: 100,
+            synthesis_attempts: 0,
+            synthesis_successes: 0,
+        };
+        assert_eq!(stats.total_hit_rate(), 0.8);
+    }
+
+    #[test]
+    fn test_cache_statistics_synthesis_success_rate() {
+        let stats = CacheStatistics {
+            core_hits: 0,
+            lru_hits: 0,
+            disk_hits: 0,
+            misses: 0,
+            total_requests: 0,
+            synthesis_attempts: 10,
+            synthesis_successes: 7,
+        };
+        assert_eq!(stats.synthesis_success_rate(), 0.7);
+    }
+
+    #[test]
+    fn test_cache_statistics_zero_requests() {
+        let stats = CacheStatistics::default();
+        assert_eq!(stats.core_hit_rate(), 0.0);
+        assert_eq!(stats.total_hit_rate(), 0.0);
+    }
+
+    #[test]
+    fn test_cache_statistics_zero_synthesis() {
+        let stats = CacheStatistics::default();
+        assert_eq!(stats.synthesis_success_rate(), 0.0);
+    }
+
+    #[test]
+    fn test_pattern_cache_config_default() {
+        let config = PatternCacheConfig::default();
+        assert_eq!(config.core_cache_size, 2000);
+        assert_eq!(config.lru_cache_size, 3000);
+        assert!(config.index_path.is_none());
+        assert!(config.enable_usage_tracking);
+    }
+
+    #[test]
+    fn test_pattern_cache_config_clone_debug() {
+        let config = PatternCacheConfig::default();
+        let cloned = config.clone();
+        assert_eq!(cloned.core_cache_size, 2000);
+        let debug = format!("{:?}", config);
+        assert!(debug.contains("PatternCacheConfig"));
+    }
+
+    #[test]
+    fn test_cache_statistics_clone_debug() {
+        let stats = CacheStatistics {
+            core_hits: 10,
+            ..Default::default()
+        };
+        let cloned = stats.clone();
+        assert_eq!(cloned.core_hits, 10);
+        let debug = format!("{:?}", stats);
+        assert!(debug.contains("CacheStatistics"));
+    }
+
+    #[test]
+    fn test_lru_cache_with_small_size() {
+        // Test LRU cache behavior with minimal size
+        let config = PatternCacheConfig {
+            core_cache_size: 5,
+            lru_cache_size: 2, // Very small LRU cache
+            index_path: None,
+            enable_usage_tracking: false,
+        };
+        let cache = PatternCache::new(config).unwrap();
+
+        // Verify the small cache was created successfully
+        assert_eq!(cache.lru_cache.cap().get(), 2);
+        assert!(cache.core_patterns.is_empty());
+    }
+
+    #[test]
+    fn test_pattern_cache_with_index_path() {
+        // Test with an index path configured (even if file doesn't exist)
+        let config = PatternCacheConfig {
+            core_cache_size: 100,
+            lru_cache_size: 100,
+            index_path: Some(PathBuf::from("/nonexistent/path")),
+            enable_usage_tracking: true,
+        };
+        // This should still succeed (just won't load anything)
+        let cache = PatternCache::new(config);
+        assert!(cache.is_ok());
+    }
 }

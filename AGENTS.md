@@ -30,7 +30,7 @@
 - Locations: Unit tests inline with `#[cfg(test)]`; integration tests in `tests/`.
 - Running: `just test` (fast via nextest). Verbose/debug: `just test-verbose`.
 - Property tests: `just test-property` (proptest). Snapshots/golden: `just test-golden` and update via `just test-golden-update`.
-- Coverage: Current gate 50% (rebuilding test suite), M7 target 70%. Enforced by `just coverage-check`.
+- Coverage: 80% gate enforced (80.26% achieved). Check via `just coverage-check`.
 
 ## Commit & Pull Request Guidelines
 

@@ -98,7 +98,7 @@ ______________________________________________________________________
 
 **Remaining:**
 
-- Raise coverage to 70% target
+- ✅ Coverage at 80% (achieved)
 - Update Criterion benchmarks to use real pipeline
 - Define CI profiles (`quick` vs `full`)
 
@@ -111,7 +111,7 @@ ______________________________________________________________________
 | UDPipe Integration   | Low      | Pre-parsed deps acceptable for research |
 | Parallel Processing  | Low      | Sequential performance acceptable       |
 | Criterion Benchmarks | Medium   | Demo provides metrics for now           |
-| Coverage to 70%      | Medium   | Currently at 67%                        |
+| ~~Coverage to 70%~~  | ~~Done~~ | ✅ Coverage at 80.26% achieved          |
 
 ______________________________________________________________________
 

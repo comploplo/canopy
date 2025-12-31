@@ -1,4 +1,4 @@
-- **Current Status**: Codebase simplified - 5 semantic engine crates consolidated into `canopy-semantic-engines`, unified error handling via `CanopyError`. All tests pass. Test coverage gate at 70%.
+- **Current Status**: Codebase simplified - 5 semantic engine crates consolidated into `canopy-semantic-engines`, unified error handling via `CanopyError`. All tests pass. Test coverage gate at 80%.
 
 # 🧹 CRATE CONSOLIDATION COMPLETED - 2025-12-30
 
@@ -142,8 +142,8 @@ fn analyze_word(&self, word: &str) -> Result<Analysis> {
 
 ## Coverage Gates for Releases
 
-- **CURRENT GATE**: 70% (M9 milestone achieved)
-- **M4 REQUIREMENT**: 80% minimum + clippy tech debt resolution
+- **CURRENT GATE**: 80% (achieved 2025-12-31)
+- Previous: 70% (M9 milestone)
 
 ## What Makes a Good Test (NOT these)
 

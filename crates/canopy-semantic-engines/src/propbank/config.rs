@@ -175,3 +175,169 @@ impl PropBankConfig {
         Ok(())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_propbank_config_default() {
+        let config = PropBankConfig::default();
+        assert!(config.enable_prop_files);
+        assert!(!config.enable_gold_skel_files);
+        assert_eq!(config.max_files_to_process, Some(1000));
+        assert_eq!(config.min_confidence, 0.1);
+        assert!(config.enable_cache);
+        assert_eq!(config.cache_capacity, 10000);
+        assert!(config.enable_fuzzy_matching);
+        assert!(config.include_modifiers);
+        assert!(!config.verbose);
+        assert!(!config.data_sources.is_empty());
+    }
+
+    #[test]
+    fn test_propbank_config_new() {
+        let config = PropBankConfig::new();
+        assert_eq!(config.min_confidence, 0.1);
+    }
+
+    #[test]
+    fn test_propbank_config_with_data_path() {
+        let config = PropBankConfig::new().with_data_path("/custom/path");
+        assert_eq!(config.data_path, PathBuf::from("/custom/path"));
+    }
+
+    #[test]
+    fn test_propbank_config_with_prop_files() {
+        let config = PropBankConfig::new().with_prop_files(false);
+        assert!(!config.enable_prop_files);
+    }
+
+    #[test]
+    fn test_propbank_config_with_gold_skel_files() {
+        let config = PropBankConfig::new().with_gold_skel_files(true);
+        assert!(config.enable_gold_skel_files);
+    }
+
+    #[test]
+    fn test_propbank_config_with_max_files() {
+        let config = PropBankConfig::new().with_max_files(Some(50));
+        assert_eq!(config.max_files_to_process, Some(50));
+
+        let config2 = PropBankConfig::new().with_max_files(None);
+        assert!(config2.max_files_to_process.is_none());
+    }
+
+    #[test]
+    fn test_propbank_config_with_min_confidence() {
+        let config = PropBankConfig::new().with_min_confidence(0.5);
+        assert_eq!(config.min_confidence, 0.5);
+    }
+
+    #[test]
+    fn test_propbank_config_with_cache() {
+        let config = PropBankConfig::new().with_cache(false, 5000);
+        assert!(!config.enable_cache);
+        assert_eq!(config.cache_capacity, 5000);
+    }
+
+    #[test]
+    fn test_propbank_config_with_fuzzy_matching() {
+        let config = PropBankConfig::new().with_fuzzy_matching(false);
+        assert!(!config.enable_fuzzy_matching);
+    }
+
+    #[test]
+    fn test_propbank_config_with_data_sources() {
+        let sources = vec!["source1".to_string(), "source2".to_string()];
+        let config = PropBankConfig::new().with_data_sources(sources.clone());
+        assert_eq!(config.data_sources, sources);
+    }
+
+    #[test]
+    fn test_propbank_config_with_verbose() {
+        let config = PropBankConfig::new().with_verbose(true);
+        assert!(config.verbose);
+    }
+
+    #[test]
+    fn test_propbank_config_minimal() {
+        let config = PropBankConfig::minimal();
+        assert_eq!(config.max_files_to_process, Some(10));
+        assert!(config.verbose);
+    }
+
+    #[test]
+    fn test_propbank_config_fast() {
+        let config = PropBankConfig::fast();
+        assert!(!config.enable_gold_skel_files);
+        assert!(!config.enable_fuzzy_matching);
+        assert!(!config.include_modifiers);
+        assert!(!config.verbose);
+    }
+
+    #[test]
+    fn test_propbank_config_get_data_source_path() {
+        let config = PropBankConfig::new().with_data_path("/base");
+        let path = config.get_data_source_path("subdir");
+        assert_eq!(path, PathBuf::from("/base/subdir"));
+    }
+
+    #[test]
+    fn test_propbank_config_validate_no_formats_enabled() {
+        // Test that validation catches when no formats are enabled
+        // Note: validation also checks data path exists, so this might fail on path check first
+        let config = PropBankConfig::new()
+            .with_prop_files(false)
+            .with_gold_skel_files(false);
+        let result = config.validate();
+        // Should fail validation (either path doesn't exist or formats disabled)
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_propbank_config_validate_invalid_confidence() {
+        // Test that validation catches invalid confidence values
+        let config = PropBankConfig::new().with_min_confidence(-0.1);
+        let result = config.validate();
+        // Should fail validation (either path doesn't exist or invalid confidence)
+        assert!(result.is_err());
+
+        let config2 = PropBankConfig::new().with_min_confidence(1.5);
+        let result2 = config2.validate();
+        assert!(result2.is_err());
+    }
+
+    #[test]
+    fn test_propbank_config_validate_empty_data_sources() {
+        // Test that validation catches when no data sources are specified
+        let config = PropBankConfig::new().with_data_sources(vec![]);
+        let result = config.validate();
+        // Should fail validation (either path doesn't exist or no sources)
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_propbank_config_clone_debug() {
+        let config = PropBankConfig::default();
+        let cloned = config.clone();
+        assert_eq!(cloned.min_confidence, 0.1);
+        let debug = format!("{:?}", config);
+        assert!(debug.contains("PropBankConfig"));
+    }
+
+    #[test]
+    fn test_propbank_config_builder_chain() {
+        let config = PropBankConfig::new()
+            .with_data_path("/custom")
+            .with_min_confidence(0.3)
+            .with_cache(true, 5000)
+            .with_verbose(true);
+
+        assert_eq!(config.data_path, PathBuf::from("/custom"));
+        assert_eq!(config.min_confidence, 0.3);
+        assert!(config.enable_cache);
+        assert_eq!(config.cache_capacity, 5000);
+        assert!(config.verbose);
+    }
+}

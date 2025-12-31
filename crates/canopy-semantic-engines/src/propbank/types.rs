@@ -438,3 +438,611 @@ impl PropBankAnalysis {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // === SemanticRole Tests ===
+
+    #[test]
+    fn test_semantic_role_from_propbank_label() {
+        assert_eq!(
+            SemanticRole::from_propbank_label("ARG0"),
+            SemanticRole::Agent
+        );
+        assert_eq!(
+            SemanticRole::from_propbank_label("ARG1"),
+            SemanticRole::Patient
+        );
+        assert_eq!(
+            SemanticRole::from_propbank_label("ARG2"),
+            SemanticRole::IndirectObject
+        );
+        assert_eq!(
+            SemanticRole::from_propbank_label("ARG3"),
+            SemanticRole::StartingPoint
+        );
+        assert_eq!(
+            SemanticRole::from_propbank_label("ARG4"),
+            SemanticRole::EndingPoint
+        );
+        assert_eq!(
+            SemanticRole::from_propbank_label("ARG5"),
+            SemanticRole::Additional
+        );
+    }
+
+    #[test]
+    fn test_semantic_role_from_propbank_label_modifiers() {
+        assert_eq!(
+            SemanticRole::from_propbank_label("ARGM-LOC"),
+            SemanticRole::Modifier(ArgumentModifier::Location)
+        );
+        assert_eq!(
+            SemanticRole::from_propbank_label("ARGM-TMP"),
+            SemanticRole::Modifier(ArgumentModifier::Time)
+        );
+        assert_eq!(
+            SemanticRole::from_propbank_label("ARGM-NEG"),
+            SemanticRole::Modifier(ArgumentModifier::Negation)
+        );
+    }
+
+    #[test]
+    fn test_semantic_role_from_propbank_label_continuation() {
+        let role = SemanticRole::from_propbank_label("C-ARG0");
+        assert!(matches!(role, SemanticRole::Continuation(_)));
+        if let SemanticRole::Continuation(inner) = role {
+            assert_eq!(*inner, SemanticRole::Agent);
+        }
+    }
+
+    #[test]
+    fn test_semantic_role_from_propbank_label_reference() {
+        let role = SemanticRole::from_propbank_label("R-ARG1");
+        assert!(matches!(role, SemanticRole::Reference(_)));
+        if let SemanticRole::Reference(inner) = role {
+            assert_eq!(*inner, SemanticRole::Patient);
+        }
+    }
+
+    #[test]
+    fn test_semantic_role_to_propbank_label() {
+        assert_eq!(SemanticRole::Agent.to_propbank_label(), "ARG0");
+        assert_eq!(SemanticRole::Patient.to_propbank_label(), "ARG1");
+        assert_eq!(SemanticRole::IndirectObject.to_propbank_label(), "ARG2");
+        assert_eq!(SemanticRole::StartingPoint.to_propbank_label(), "ARG3");
+        assert_eq!(SemanticRole::EndingPoint.to_propbank_label(), "ARG4");
+        assert_eq!(SemanticRole::Additional.to_propbank_label(), "ARG5");
+    }
+
+    #[test]
+    fn test_semantic_role_to_propbank_label_modifiers() {
+        assert_eq!(
+            SemanticRole::Modifier(ArgumentModifier::Location).to_propbank_label(),
+            "ARGM-LOC"
+        );
+        assert_eq!(
+            SemanticRole::Modifier(ArgumentModifier::Time).to_propbank_label(),
+            "ARGM-TMP"
+        );
+    }
+
+    #[test]
+    fn test_semantic_role_to_propbank_label_continuation() {
+        let role = SemanticRole::Continuation(Box::new(SemanticRole::Agent));
+        assert_eq!(role.to_propbank_label(), "C-ARG0");
+    }
+
+    #[test]
+    fn test_semantic_role_to_theta_role() {
+        assert_eq!(SemanticRole::Agent.to_theta_role(), Some(ThetaRole::Agent));
+        assert_eq!(
+            SemanticRole::Patient.to_theta_role(),
+            Some(ThetaRole::Patient)
+        );
+        assert_eq!(
+            SemanticRole::IndirectObject.to_theta_role(),
+            Some(ThetaRole::Recipient)
+        );
+        assert_eq!(
+            SemanticRole::StartingPoint.to_theta_role(),
+            Some(ThetaRole::Source)
+        );
+        assert_eq!(
+            SemanticRole::EndingPoint.to_theta_role(),
+            Some(ThetaRole::Goal)
+        );
+
+        // Modifier to theta role
+        assert_eq!(
+            SemanticRole::Modifier(ArgumentModifier::Location).to_theta_role(),
+            Some(ThetaRole::Location)
+        );
+        assert_eq!(
+            SemanticRole::Modifier(ArgumentModifier::Time).to_theta_role(),
+            Some(ThetaRole::Temporal)
+        );
+        assert_eq!(
+            SemanticRole::Modifier(ArgumentModifier::Manner).to_theta_role(),
+            Some(ThetaRole::Manner)
+        );
+        assert_eq!(
+            SemanticRole::Modifier(ArgumentModifier::Cause).to_theta_role(),
+            Some(ThetaRole::Cause)
+        );
+
+        // Some modifiers have no theta role mapping
+        assert_eq!(
+            SemanticRole::Modifier(ArgumentModifier::Negation).to_theta_role(),
+            None
+        );
+    }
+
+    // === ArgumentModifier Tests ===
+
+    #[test]
+    fn test_argument_modifier_from_propbank_label() {
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("LOC"),
+            ArgumentModifier::Location
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("TMP"),
+            ArgumentModifier::Time
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("MNR"),
+            ArgumentModifier::Manner
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("CAU"),
+            ArgumentModifier::Cause
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("PRP"),
+            ArgumentModifier::Purpose
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("DIR"),
+            ArgumentModifier::Direction
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("EXT"),
+            ArgumentModifier::Extent
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("REC"),
+            ArgumentModifier::Reciprocal
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("PRD"),
+            ArgumentModifier::Predicate
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("MOD"),
+            ArgumentModifier::Modal
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("NEG"),
+            ArgumentModifier::Negation
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("DIS"),
+            ArgumentModifier::Discourse
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("ADV"),
+            ArgumentModifier::Adverbial
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("LVB"),
+            ArgumentModifier::LightVerb
+        );
+        assert_eq!(
+            ArgumentModifier::from_propbank_label("UNKNOWN"),
+            ArgumentModifier::Other("UNKNOWN".to_string())
+        );
+    }
+
+    #[test]
+    fn test_argument_modifier_display() {
+        assert_eq!(format!("{}", ArgumentModifier::Location), "LOC");
+        assert_eq!(format!("{}", ArgumentModifier::Time), "TMP");
+        assert_eq!(format!("{}", ArgumentModifier::Manner), "MNR");
+        assert_eq!(format!("{}", ArgumentModifier::Cause), "CAU");
+        assert_eq!(format!("{}", ArgumentModifier::Negation), "NEG");
+        assert_eq!(
+            format!("{}", ArgumentModifier::Other("CUSTOM".to_string())),
+            "CUSTOM"
+        );
+    }
+
+    #[test]
+    fn test_argument_modifier_from_str() {
+        let loc: ArgumentModifier = "LOC".parse().unwrap();
+        assert_eq!(loc, ArgumentModifier::Location);
+
+        let tmp: ArgumentModifier = "TMP".parse().unwrap();
+        assert_eq!(tmp, ArgumentModifier::Time);
+
+        let other: ArgumentModifier = "XYZ".parse().unwrap();
+        assert_eq!(other, ArgumentModifier::Other("XYZ".to_string()));
+    }
+
+    // === PropBankArgument Tests ===
+
+    #[test]
+    fn test_propbank_argument_new() {
+        let arg = PropBankArgument::new(SemanticRole::Agent, "the giver".to_string(), 0.9);
+        assert_eq!(arg.role, SemanticRole::Agent);
+        assert_eq!(arg.description, "the giver");
+        assert!(arg.token_span.is_none());
+        assert_eq!(arg.confidence, 0.9);
+    }
+
+    #[test]
+    fn test_propbank_argument_with_span() {
+        let arg = PropBankArgument::with_span(
+            SemanticRole::Patient,
+            "the gift".to_string(),
+            (2, 4),
+            0.85,
+        );
+        assert_eq!(arg.role, SemanticRole::Patient);
+        assert_eq!(arg.description, "the gift");
+        assert_eq!(arg.token_span, Some((2, 4)));
+        assert_eq!(arg.confidence, 0.85);
+    }
+
+    #[test]
+    fn test_propbank_argument_is_core_argument() {
+        let agent = PropBankArgument::new(SemanticRole::Agent, "test".to_string(), 1.0);
+        assert!(agent.is_core_argument());
+
+        let patient = PropBankArgument::new(SemanticRole::Patient, "test".to_string(), 1.0);
+        assert!(patient.is_core_argument());
+
+        let modifier = PropBankArgument::new(
+            SemanticRole::Modifier(ArgumentModifier::Location),
+            "test".to_string(),
+            1.0,
+        );
+        assert!(!modifier.is_core_argument());
+    }
+
+    #[test]
+    fn test_propbank_argument_is_modifier() {
+        let modifier = PropBankArgument::new(
+            SemanticRole::Modifier(ArgumentModifier::Time),
+            "yesterday".to_string(),
+            0.9,
+        );
+        assert!(modifier.is_modifier());
+        assert!(!modifier.is_core_argument());
+
+        let agent = PropBankArgument::new(SemanticRole::Agent, "John".to_string(), 1.0);
+        assert!(!agent.is_modifier());
+    }
+
+    // === PropBankPredicate Tests ===
+
+    #[test]
+    fn test_propbank_predicate_new() {
+        let pred = PropBankPredicate::new(
+            "give".to_string(),
+            "01".to_string(),
+            "transfer possession".to_string(),
+        );
+        assert_eq!(pred.lemma, "give");
+        assert_eq!(pred.sense, "01");
+        assert_eq!(pred.roleset, "give.01");
+        assert_eq!(pred.definition, "transfer possession");
+        assert!(pred.arguments.is_empty());
+        assert!(pred.predicate_span.is_none());
+    }
+
+    #[test]
+    fn test_propbank_predicate_add_argument() {
+        let mut pred =
+            PropBankPredicate::new("give".to_string(), "01".to_string(), "transfer".to_string());
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Agent,
+            "giver".to_string(),
+            1.0,
+        ));
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Patient,
+            "gift".to_string(),
+            1.0,
+        ));
+
+        assert_eq!(pred.arguments.len(), 2);
+    }
+
+    #[test]
+    fn test_propbank_predicate_get_arguments_by_role() {
+        let mut pred =
+            PropBankPredicate::new("give".to_string(), "01".to_string(), "transfer".to_string());
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Agent,
+            "giver".to_string(),
+            1.0,
+        ));
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Patient,
+            "gift".to_string(),
+            1.0,
+        ));
+
+        let agents = pred.get_arguments_by_role(&SemanticRole::Agent);
+        assert_eq!(agents.len(), 1);
+        assert_eq!(agents[0].description, "giver");
+
+        let themes = pred.get_arguments_by_role(&SemanticRole::Patient);
+        assert_eq!(themes.len(), 1);
+
+        let goals = pred.get_arguments_by_role(&SemanticRole::EndingPoint);
+        assert!(goals.is_empty());
+    }
+
+    #[test]
+    fn test_propbank_predicate_get_core_arguments() {
+        let mut pred =
+            PropBankPredicate::new("give".to_string(), "01".to_string(), "transfer".to_string());
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Agent,
+            "giver".to_string(),
+            1.0,
+        ));
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Modifier(ArgumentModifier::Time),
+            "yesterday".to_string(),
+            0.9,
+        ));
+
+        let core = pred.get_core_arguments();
+        assert_eq!(core.len(), 1);
+        assert_eq!(core[0].description, "giver");
+    }
+
+    #[test]
+    fn test_propbank_predicate_get_modifiers() {
+        let mut pred =
+            PropBankPredicate::new("give".to_string(), "01".to_string(), "transfer".to_string());
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Agent,
+            "giver".to_string(),
+            1.0,
+        ));
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Modifier(ArgumentModifier::Time),
+            "yesterday".to_string(),
+            0.9,
+        ));
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Modifier(ArgumentModifier::Location),
+            "at home".to_string(),
+            0.8,
+        ));
+
+        let modifiers = pred.get_modifiers();
+        assert_eq!(modifiers.len(), 2);
+    }
+
+    #[test]
+    fn test_propbank_predicate_has_role() {
+        let mut pred =
+            PropBankPredicate::new("give".to_string(), "01".to_string(), "transfer".to_string());
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Agent,
+            "giver".to_string(),
+            1.0,
+        ));
+
+        assert!(pred.has_role(&SemanticRole::Agent));
+        assert!(!pred.has_role(&SemanticRole::Patient));
+    }
+
+    // === PropBankFrameset Tests ===
+
+    #[test]
+    fn test_propbank_frameset_new() {
+        let frameset =
+            PropBankFrameset::new("give".to_string(), "transfer possession verb".to_string());
+        assert_eq!(frameset.lemma, "give");
+        assert_eq!(frameset.notes, "transfer possession verb");
+        assert!(frameset.rolesets.is_empty());
+    }
+
+    #[test]
+    fn test_propbank_frameset_add_and_get_roleset() {
+        let mut frameset = PropBankFrameset::new("give".to_string(), String::new());
+
+        let pred1 =
+            PropBankPredicate::new("give".to_string(), "01".to_string(), "transfer".to_string());
+        let pred2 =
+            PropBankPredicate::new("give".to_string(), "02".to_string(), "yield".to_string());
+
+        frameset.add_roleset(pred1);
+        frameset.add_roleset(pred2);
+
+        assert_eq!(frameset.rolesets.len(), 2);
+
+        let rs01 = frameset.get_roleset("01");
+        assert!(rs01.is_some());
+        assert_eq!(rs01.unwrap().definition, "transfer");
+
+        let rs02 = frameset.get_roleset("02");
+        assert!(rs02.is_some());
+        assert_eq!(rs02.unwrap().definition, "yield");
+
+        assert!(frameset.get_roleset("99").is_none());
+    }
+
+    #[test]
+    fn test_propbank_frameset_get_all_rolesets() {
+        let mut frameset = PropBankFrameset::new("give".to_string(), String::new());
+        frameset.add_roleset(PropBankPredicate::new(
+            "give".to_string(),
+            "01".to_string(),
+            "def1".to_string(),
+        ));
+        frameset.add_roleset(PropBankPredicate::new(
+            "give".to_string(),
+            "02".to_string(),
+            "def2".to_string(),
+        ));
+
+        let all = frameset.get_all_rolesets();
+        assert_eq!(all.len(), 2);
+    }
+
+    // === PropBankAnalysis Tests ===
+
+    #[test]
+    fn test_propbank_analysis_new() {
+        let analysis = PropBankAnalysis::new("give".to_string());
+        assert_eq!(analysis.input, "give");
+        assert!(analysis.predicate.is_none());
+        assert!(analysis.alternative_rolesets.is_empty());
+        assert_eq!(analysis.confidence, 0.0);
+        assert_eq!(analysis.argument_count, 0);
+        assert!(analysis.theta_roles.is_empty());
+    }
+
+    #[test]
+    fn test_propbank_analysis_with_predicate() {
+        let mut pred =
+            PropBankPredicate::new("give".to_string(), "01".to_string(), "transfer".to_string());
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Agent,
+            "giver".to_string(),
+            1.0,
+        ));
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Patient,
+            "gift".to_string(),
+            1.0,
+        ));
+
+        let analysis = PropBankAnalysis::with_predicate("give".to_string(), pred, 0.9);
+        assert!(analysis.predicate.is_some());
+        assert_eq!(analysis.confidence, 0.9);
+        assert_eq!(analysis.argument_count, 2);
+        assert_eq!(analysis.theta_roles.len(), 2);
+        assert!(analysis.theta_roles.contains(&ThetaRole::Agent));
+        assert!(analysis.theta_roles.contains(&ThetaRole::Patient));
+    }
+
+    #[test]
+    fn test_propbank_analysis_add_alternative() {
+        let mut analysis = PropBankAnalysis::new("give".to_string());
+        let alt = PropBankPredicate::new("give".to_string(), "02".to_string(), "yield".to_string());
+        analysis.add_alternative(alt);
+
+        assert_eq!(analysis.alternative_rolesets.len(), 1);
+    }
+
+    #[test]
+    fn test_propbank_analysis_has_match() {
+        let mut analysis = PropBankAnalysis::new("give".to_string());
+        assert!(!analysis.has_match());
+
+        analysis.add_alternative(PropBankPredicate::new(
+            "give".to_string(),
+            "01".to_string(),
+            "test".to_string(),
+        ));
+        assert!(analysis.has_match());
+    }
+
+    #[test]
+    fn test_propbank_analysis_all_predicates() {
+        let mut analysis = PropBankAnalysis::new("give".to_string());
+        let primary =
+            PropBankPredicate::new("give".to_string(), "01".to_string(), "primary".to_string());
+        let alt = PropBankPredicate::new("give".to_string(), "02".to_string(), "alt".to_string());
+
+        analysis.predicate = Some(primary);
+        analysis.add_alternative(alt);
+
+        let all = analysis.all_predicates();
+        assert_eq!(all.len(), 2);
+    }
+
+    #[test]
+    fn test_propbank_analysis_best_predicate() {
+        let analysis = PropBankAnalysis::new("give".to_string());
+        assert!(analysis.best_predicate().is_none());
+
+        let pred = PropBankPredicate::new("give".to_string(), "01".to_string(), "test".to_string());
+        let analysis = PropBankAnalysis::with_predicate("give".to_string(), pred, 0.9);
+        assert!(analysis.best_predicate().is_some());
+    }
+
+    #[test]
+    fn test_propbank_analysis_calculate_confidence() {
+        // Empty analysis
+        let mut empty = PropBankAnalysis::new("test".to_string());
+        empty.calculate_confidence();
+        assert_eq!(empty.confidence, 0.0);
+
+        // Analysis with only alternatives
+        let mut with_alt = PropBankAnalysis::new("give".to_string());
+        with_alt.add_alternative(PropBankPredicate::new(
+            "give".to_string(),
+            "01".to_string(),
+            "test".to_string(),
+        ));
+        with_alt.calculate_confidence();
+        assert_eq!(with_alt.confidence, 0.4);
+
+        // Analysis with predicate and arguments
+        let mut pred =
+            PropBankPredicate::new("give".to_string(), "01".to_string(), "transfer".to_string());
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Agent,
+            "giver".to_string(),
+            1.0,
+        ));
+        pred.add_argument(PropBankArgument::new(
+            SemanticRole::Patient,
+            "gift".to_string(),
+            1.0,
+        ));
+        let mut analysis = PropBankAnalysis::with_predicate("give".to_string(), pred, 0.5);
+        analysis.calculate_confidence();
+        // 2 core args * 0.3 = 0.6
+        assert!(analysis.confidence > 0.5);
+    }
+
+    // === Serialization Tests ===
+
+    #[test]
+    fn test_semantic_role_serialization() {
+        let role = SemanticRole::Agent;
+        let json = serde_json::to_string(&role).unwrap();
+        let deserialized: SemanticRole = serde_json::from_str(&json).unwrap();
+        assert_eq!(role, deserialized);
+    }
+
+    #[test]
+    fn test_argument_modifier_serialization() {
+        let modifier = ArgumentModifier::Location;
+        let json = serde_json::to_string(&modifier).unwrap();
+        let deserialized: ArgumentModifier = serde_json::from_str(&json).unwrap();
+        assert_eq!(modifier, deserialized);
+    }
+
+    #[test]
+    fn test_propbank_predicate_serialization() {
+        let pred =
+            PropBankPredicate::new("give".to_string(), "01".to_string(), "transfer".to_string());
+        let json = serde_json::to_string(&pred).unwrap();
+        let deserialized: PropBankPredicate = serde_json::from_str(&json).unwrap();
+        assert_eq!(pred.lemma, deserialized.lemma);
+        assert_eq!(pred.sense, deserialized.sense);
+    }
+}

@@ -811,3 +811,652 @@ pub struct LexiconStats {
     pub total_patterns: usize,
     pub words_by_type: HashMap<WordClassType, usize>,
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // === WordClassType Tests ===
+
+    #[test]
+    fn test_word_class_type_as_str() {
+        assert_eq!(WordClassType::StopWords.as_str(), "stop-words");
+        assert_eq!(WordClassType::Negation.as_str(), "negation");
+        assert_eq!(
+            WordClassType::DiscourseMarkers.as_str(),
+            "discourse-markers"
+        );
+        assert_eq!(WordClassType::Quantifiers.as_str(), "quantifiers");
+        assert_eq!(WordClassType::Temporal.as_str(), "temporal");
+        assert_eq!(WordClassType::Modal.as_str(), "modal");
+        assert_eq!(WordClassType::Pronouns.as_str(), "pronouns");
+        assert_eq!(WordClassType::Prepositions.as_str(), "prepositions");
+        assert_eq!(WordClassType::Conjunctions.as_str(), "conjunctions");
+        assert_eq!(WordClassType::Intensifiers.as_str(), "intensifiers");
+        assert_eq!(WordClassType::HedgeWords.as_str(), "hedge-words");
+        assert_eq!(WordClassType::Sentiment.as_str(), "sentiment");
+        assert_eq!(WordClassType::Functional.as_str(), "functional");
+    }
+
+    #[test]
+    fn test_word_class_type_parse_str() {
+        assert_eq!(
+            WordClassType::parse_str("stop-words"),
+            Some(WordClassType::StopWords)
+        );
+        assert_eq!(
+            WordClassType::parse_str("negation"),
+            Some(WordClassType::Negation)
+        );
+        assert_eq!(
+            WordClassType::parse_str("modal"),
+            Some(WordClassType::Modal)
+        );
+        // Test alias
+        assert_eq!(
+            WordClassType::parse_str("modal-verbs"),
+            Some(WordClassType::Modal)
+        );
+        // Test invalid
+        assert_eq!(WordClassType::parse_str("invalid"), None);
+        assert_eq!(WordClassType::parse_str(""), None);
+    }
+
+    // === PatternType Tests ===
+
+    #[test]
+    fn test_pattern_type_as_str() {
+        assert_eq!(PatternType::Prefix.as_str(), "prefix");
+        assert_eq!(PatternType::Suffix.as_str(), "suffix");
+        assert_eq!(PatternType::Infix.as_str(), "infix");
+        assert_eq!(PatternType::WholeWord.as_str(), "whole-word");
+        assert_eq!(PatternType::Phrase.as_str(), "phrase");
+    }
+
+    #[test]
+    fn test_pattern_type_parse_str() {
+        assert_eq!(PatternType::parse_str("prefix"), Some(PatternType::Prefix));
+        assert_eq!(PatternType::parse_str("suffix"), Some(PatternType::Suffix));
+        assert_eq!(PatternType::parse_str("infix"), Some(PatternType::Infix));
+        assert_eq!(
+            PatternType::parse_str("whole-word"),
+            Some(PatternType::WholeWord)
+        );
+        assert_eq!(PatternType::parse_str("phrase"), Some(PatternType::Phrase));
+        assert_eq!(PatternType::parse_str("invalid"), None);
+    }
+
+    // === PropertyValue Tests ===
+
+    #[test]
+    fn test_property_value_as_string() {
+        let pv = PropertyValue::String("test".to_string());
+        assert_eq!(pv.as_string(), Some("test"));
+
+        let pv = PropertyValue::Boolean(true);
+        assert_eq!(pv.as_string(), None);
+    }
+
+    #[test]
+    fn test_property_value_as_bool() {
+        let pv = PropertyValue::Boolean(true);
+        assert_eq!(pv.as_bool(), Some(true));
+
+        let pv = PropertyValue::Boolean(false);
+        assert_eq!(pv.as_bool(), Some(false));
+
+        let pv = PropertyValue::String("true".to_string());
+        assert_eq!(pv.as_bool(), None);
+    }
+
+    #[test]
+    fn test_property_value_as_int() {
+        let pv = PropertyValue::Integer(42);
+        assert_eq!(pv.as_int(), Some(42));
+
+        let pv = PropertyValue::Integer(-100);
+        assert_eq!(pv.as_int(), Some(-100));
+
+        let pv = PropertyValue::Float(42.0);
+        assert_eq!(pv.as_int(), None);
+    }
+
+    #[test]
+    fn test_property_value_as_float() {
+        let pv = PropertyValue::Float(2.5);
+        assert_eq!(pv.as_float(), Some(2.5));
+
+        let pv = PropertyValue::Integer(42);
+        assert_eq!(pv.as_float(), None);
+    }
+
+    // === LexiconWord Tests ===
+
+    #[test]
+    fn test_lexicon_word_new() {
+        let word = LexiconWord::new("test".to_string());
+        assert_eq!(word.word, "test");
+        assert!(word.variants.is_empty());
+        assert!(word.pos.is_none());
+        assert_eq!(word.confidence, 1.0);
+        assert!(word.frequency.is_none());
+        assert!(word.context.is_none());
+    }
+
+    #[test]
+    fn test_lexicon_word_matches() {
+        let mut word = LexiconWord::new("run".to_string());
+        word.variants = vec!["running".to_string(), "runs".to_string()];
+
+        // Exact match
+        assert!(word.matches("run"));
+        // Case insensitive
+        assert!(word.matches("RUN"));
+        // Variant match
+        assert!(word.matches("running"));
+        assert!(word.matches("RUNS"));
+        // No match
+        assert!(!word.matches("ran"));
+    }
+
+    // === LexiconPattern Tests ===
+
+    #[test]
+    fn test_lexicon_pattern_new() {
+        let pattern = LexiconPattern::new(
+            "neg-prefix".to_string(),
+            PatternType::Prefix,
+            "^un".to_string(),
+            "Negative prefix un-".to_string(),
+        )
+        .unwrap();
+
+        assert_eq!(pattern.id, "neg-prefix");
+        assert_eq!(pattern.pattern_type, PatternType::Prefix);
+        assert_eq!(pattern.regex_str, "^un");
+        assert_eq!(pattern.description, "Negative prefix un-");
+        assert_eq!(pattern.confidence, 0.8);
+        assert!(pattern.examples.is_empty());
+    }
+
+    #[test]
+    fn test_lexicon_pattern_new_invalid_regex() {
+        let result = LexiconPattern::new(
+            "bad".to_string(),
+            PatternType::Prefix,
+            "[invalid".to_string(),
+            "Bad regex".to_string(),
+        );
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_lexicon_pattern_matches() {
+        let pattern = LexiconPattern::new(
+            "ing-suffix".to_string(),
+            PatternType::Suffix,
+            "ing$".to_string(),
+            "Gerund suffix".to_string(),
+        )
+        .unwrap();
+
+        assert!(pattern.matches("running"));
+        assert!(pattern.matches("walking"));
+        assert!(!pattern.matches("run"));
+        assert!(!pattern.matches("ingredient")); // ing not at end
+    }
+
+    #[test]
+    fn test_lexicon_pattern_extract_match() {
+        let pattern = LexiconPattern::new(
+            "un-prefix".to_string(),
+            PatternType::Prefix,
+            "^un".to_string(),
+            "Un- prefix".to_string(),
+        )
+        .unwrap();
+
+        assert_eq!(pattern.extract_match("unhappy"), Some("un".to_string()));
+        assert_eq!(pattern.extract_match("happy"), None);
+    }
+
+    // === WordClass Tests ===
+
+    #[test]
+    fn test_word_class_new() {
+        let wc = WordClass::new(
+            "neg-001".to_string(),
+            "Negation Words".to_string(),
+            WordClassType::Negation,
+            "Words that negate".to_string(),
+        );
+
+        assert_eq!(wc.id, "neg-001");
+        assert_eq!(wc.name, "Negation Words");
+        assert_eq!(wc.word_class_type, WordClassType::Negation);
+        assert_eq!(wc.description, "Words that negate");
+        assert_eq!(wc.priority, 1);
+        assert!(wc.properties.is_empty());
+        assert!(wc.words.is_empty());
+        assert!(wc.patterns.is_empty());
+    }
+
+    #[test]
+    fn test_word_class_contains_word() {
+        let mut wc = WordClass::new(
+            "test".to_string(),
+            "Test".to_string(),
+            WordClassType::Negation,
+            "Test class".to_string(),
+        );
+        wc.words.push(LexiconWord::new("not".to_string()));
+        wc.words.push(LexiconWord::new("never".to_string()));
+
+        assert!(wc.contains_word("not").is_some());
+        assert!(wc.contains_word("NOT").is_some()); // case insensitive
+        assert!(wc.contains_word("always").is_none());
+    }
+
+    #[test]
+    fn test_word_class_is_stop_words() {
+        let stop_class = WordClass::new(
+            "stop".to_string(),
+            "Stop Words".to_string(),
+            WordClassType::StopWords,
+            "Stop words".to_string(),
+        );
+        assert!(stop_class.is_stop_words());
+
+        let neg_class = WordClass::new(
+            "neg".to_string(),
+            "Negation".to_string(),
+            WordClassType::Negation,
+            "Negation".to_string(),
+        );
+        assert!(!neg_class.is_stop_words());
+    }
+
+    #[test]
+    fn test_word_class_modifies_polarity() {
+        let neg_class = WordClass::new(
+            "neg".to_string(),
+            "Negation".to_string(),
+            WordClassType::Negation,
+            "Negation".to_string(),
+        );
+        assert!(neg_class.modifies_polarity());
+
+        let stop_class = WordClass::new(
+            "stop".to_string(),
+            "Stop Words".to_string(),
+            WordClassType::StopWords,
+            "Stop words".to_string(),
+        );
+        assert!(!stop_class.modifies_polarity());
+    }
+
+    #[test]
+    fn test_word_class_provides_discourse_structure() {
+        let dm_class = WordClass::new(
+            "dm".to_string(),
+            "Discourse Markers".to_string(),
+            WordClassType::DiscourseMarkers,
+            "Markers".to_string(),
+        );
+        assert!(dm_class.provides_discourse_structure());
+
+        let neg_class = WordClass::new(
+            "neg".to_string(),
+            "Negation".to_string(),
+            WordClassType::Negation,
+            "Negation".to_string(),
+        );
+        assert!(!neg_class.provides_discourse_structure());
+    }
+
+    // === LexiconDatabase Tests ===
+
+    #[test]
+    fn test_lexicon_database_new() {
+        let db = LexiconDatabase::new();
+        assert!(db.title.is_empty());
+        assert_eq!(db.version, "1.0");
+        assert_eq!(db.language, "en");
+        assert!(db.word_classes.is_empty());
+        assert!(db.type_index.is_empty());
+        assert!(db.word_index.is_empty());
+    }
+
+    #[test]
+    fn test_lexicon_database_default() {
+        let db = LexiconDatabase::default();
+        assert!(db.title.is_empty());
+        assert_eq!(db.version, "1.0");
+    }
+
+    #[test]
+    fn test_lexicon_database_build_indices() {
+        let mut db = LexiconDatabase::new();
+
+        let mut wc = WordClass::new(
+            "neg".to_string(),
+            "Negation".to_string(),
+            WordClassType::Negation,
+            "Negation words".to_string(),
+        );
+        wc.words.push(LexiconWord::new("not".to_string()));
+        wc.words.push(LexiconWord::new("never".to_string()));
+        db.word_classes.push(wc);
+
+        db.build_indices();
+
+        // Check type index
+        assert!(db.type_index.contains_key(&WordClassType::Negation));
+        assert_eq!(
+            db.type_index.get(&WordClassType::Negation).unwrap().len(),
+            1
+        );
+
+        // Check word index
+        assert!(db.word_index.contains_key("not"));
+        assert!(db.word_index.contains_key("never"));
+    }
+
+    #[test]
+    fn test_lexicon_database_classify_word() {
+        let mut db = LexiconDatabase::new();
+
+        let mut wc = WordClass::new(
+            "neg".to_string(),
+            "Negation".to_string(),
+            WordClassType::Negation,
+            "Negation words".to_string(),
+        );
+        wc.words.push(LexiconWord::new("not".to_string()));
+        db.word_classes.push(wc);
+        db.build_indices();
+
+        let classifications = db.classify_word("not");
+        assert_eq!(classifications.len(), 1);
+        assert_eq!(classifications[0].word_class_type, WordClassType::Negation);
+        assert_eq!(classifications[0].matched_word, "not");
+
+        let no_match = db.classify_word("happy");
+        assert!(no_match.is_empty());
+    }
+
+    #[test]
+    fn test_lexicon_database_stats() {
+        let mut db = LexiconDatabase::new();
+
+        let mut wc1 = WordClass::new(
+            "neg".to_string(),
+            "Negation".to_string(),
+            WordClassType::Negation,
+            "Negation".to_string(),
+        );
+        wc1.words.push(LexiconWord::new("not".to_string()));
+        wc1.words.push(LexiconWord::new("never".to_string()));
+
+        let mut wc2 = WordClass::new(
+            "stop".to_string(),
+            "Stop Words".to_string(),
+            WordClassType::StopWords,
+            "Stop words".to_string(),
+        );
+        wc2.words.push(LexiconWord::new("the".to_string()));
+
+        db.word_classes.push(wc1);
+        db.word_classes.push(wc2);
+
+        let stats = db.stats();
+        assert_eq!(stats.total_word_classes, 2);
+        assert_eq!(stats.total_words, 3);
+        assert_eq!(stats.total_patterns, 0);
+        assert_eq!(stats.words_by_type.get(&WordClassType::Negation), Some(&2));
+        assert_eq!(stats.words_by_type.get(&WordClassType::StopWords), Some(&1));
+    }
+
+    // === ClassificationType Tests ===
+
+    #[test]
+    fn test_classification_type_equality() {
+        assert_eq!(
+            ClassificationType::ExactMatch,
+            ClassificationType::ExactMatch
+        );
+        assert_ne!(
+            ClassificationType::ExactMatch,
+            ClassificationType::PatternMatch
+        );
+        assert_ne!(
+            ClassificationType::PatternMatch,
+            ClassificationType::FuzzyMatch
+        );
+    }
+
+    // === WordClassification Tests ===
+
+    #[test]
+    fn test_word_classification_is_negation() {
+        let wc = WordClassification {
+            word_class_type: WordClassType::Negation,
+            word_class_id: "neg".to_string(),
+            word_class_name: "Negation".to_string(),
+            matched_word: "not".to_string(),
+            input_word: "not".to_string(),
+            confidence: 1.0,
+            classification_type: ClassificationType::ExactMatch,
+            context: None,
+            properties: HashMap::new(),
+        };
+        assert!(wc.is_negation());
+        assert!(!wc.is_stop_word());
+    }
+
+    #[test]
+    fn test_word_classification_is_stop_word() {
+        let wc = WordClassification {
+            word_class_type: WordClassType::StopWords,
+            word_class_id: "stop".to_string(),
+            word_class_name: "Stop Words".to_string(),
+            matched_word: "the".to_string(),
+            input_word: "the".to_string(),
+            confidence: 1.0,
+            classification_type: ClassificationType::ExactMatch,
+            context: None,
+            properties: HashMap::new(),
+        };
+        assert!(wc.is_stop_word());
+        assert!(!wc.is_negation());
+    }
+
+    #[test]
+    fn test_word_classification_is_discourse_marker() {
+        let wc = WordClassification {
+            word_class_type: WordClassType::DiscourseMarkers,
+            word_class_id: "dm".to_string(),
+            word_class_name: "Discourse Markers".to_string(),
+            matched_word: "however".to_string(),
+            input_word: "however".to_string(),
+            confidence: 1.0,
+            classification_type: ClassificationType::ExactMatch,
+            context: None,
+            properties: HashMap::new(),
+        };
+        assert!(wc.is_discourse_marker());
+    }
+
+    #[test]
+    fn test_word_classification_is_quantifier() {
+        let wc = WordClassification {
+            word_class_type: WordClassType::Quantifiers,
+            word_class_id: "quant".to_string(),
+            word_class_name: "Quantifiers".to_string(),
+            matched_word: "all".to_string(),
+            input_word: "all".to_string(),
+            confidence: 1.0,
+            classification_type: ClassificationType::ExactMatch,
+            context: None,
+            properties: HashMap::new(),
+        };
+        assert!(wc.is_quantifier());
+    }
+
+    #[test]
+    fn test_word_classification_semantic_weight() {
+        let mut properties = HashMap::new();
+        properties.insert("semantic-weight".to_string(), PropertyValue::Float(0.5));
+
+        let wc = WordClassification {
+            word_class_type: WordClassType::StopWords,
+            word_class_id: "stop".to_string(),
+            word_class_name: "Stop Words".to_string(),
+            matched_word: "the".to_string(),
+            input_word: "the".to_string(),
+            confidence: 1.0,
+            classification_type: ClassificationType::ExactMatch,
+            context: None,
+            properties,
+        };
+        assert_eq!(wc.semantic_weight(), 0.5);
+
+        // Default weight
+        let wc_default = WordClassification {
+            word_class_type: WordClassType::StopWords,
+            word_class_id: "stop".to_string(),
+            word_class_name: "Stop Words".to_string(),
+            matched_word: "the".to_string(),
+            input_word: "the".to_string(),
+            confidence: 1.0,
+            classification_type: ClassificationType::ExactMatch,
+            context: None,
+            properties: HashMap::new(),
+        };
+        assert_eq!(wc_default.semantic_weight(), 1.0);
+    }
+
+    // === LexiconAnalysis Tests ===
+
+    #[test]
+    fn test_lexicon_analysis_new() {
+        let analysis = LexiconAnalysis::new("test input".to_string());
+        assert_eq!(analysis.input, "test input");
+        assert!(analysis.classifications.is_empty());
+        assert!(analysis.pattern_matches.is_empty());
+        assert_eq!(analysis.confidence, 0.0);
+    }
+
+    #[test]
+    fn test_lexicon_analysis_has_results() {
+        let empty = LexiconAnalysis::new("test".to_string());
+        assert!(!empty.has_results());
+
+        let mut with_classification = LexiconAnalysis::new("not".to_string());
+        with_classification
+            .classifications
+            .push(WordClassification {
+                word_class_type: WordClassType::Negation,
+                word_class_id: "neg".to_string(),
+                word_class_name: "Negation".to_string(),
+                matched_word: "not".to_string(),
+                input_word: "not".to_string(),
+                confidence: 1.0,
+                classification_type: ClassificationType::ExactMatch,
+                context: None,
+                properties: HashMap::new(),
+            });
+        assert!(with_classification.has_results());
+    }
+
+    #[test]
+    fn test_lexicon_analysis_get_negations() {
+        let mut analysis = LexiconAnalysis::new("not good".to_string());
+        analysis.classifications.push(WordClassification {
+            word_class_type: WordClassType::Negation,
+            word_class_id: "neg".to_string(),
+            word_class_name: "Negation".to_string(),
+            matched_word: "not".to_string(),
+            input_word: "not".to_string(),
+            confidence: 1.0,
+            classification_type: ClassificationType::ExactMatch,
+            context: None,
+            properties: HashMap::new(),
+        });
+        analysis.classifications.push(WordClassification {
+            word_class_type: WordClassType::Sentiment,
+            word_class_id: "sent".to_string(),
+            word_class_name: "Sentiment".to_string(),
+            matched_word: "good".to_string(),
+            input_word: "good".to_string(),
+            confidence: 1.0,
+            classification_type: ClassificationType::ExactMatch,
+            context: None,
+            properties: HashMap::new(),
+        });
+
+        let negations = analysis.get_negations();
+        assert_eq!(negations.len(), 1);
+        assert_eq!(negations[0].matched_word, "not");
+    }
+
+    #[test]
+    fn test_lexicon_analysis_calculate_confidence() {
+        let mut analysis = LexiconAnalysis::new("test".to_string());
+        analysis.calculate_confidence();
+        assert_eq!(analysis.confidence, 0.0);
+
+        analysis.classifications.push(WordClassification {
+            word_class_type: WordClassType::Negation,
+            word_class_id: "neg".to_string(),
+            word_class_name: "Negation".to_string(),
+            matched_word: "not".to_string(),
+            input_word: "not".to_string(),
+            confidence: 0.8,
+            classification_type: ClassificationType::ExactMatch,
+            context: None,
+            properties: HashMap::new(),
+        });
+        analysis.classifications.push(WordClassification {
+            word_class_type: WordClassType::StopWords,
+            word_class_id: "stop".to_string(),
+            word_class_name: "Stop".to_string(),
+            matched_word: "the".to_string(),
+            input_word: "the".to_string(),
+            confidence: 1.0,
+            classification_type: ClassificationType::ExactMatch,
+            context: None,
+            properties: HashMap::new(),
+        });
+
+        analysis.calculate_confidence();
+        // (0.8 + 1.0) / 2 = 0.9
+        assert!((analysis.confidence - 0.9).abs() < 0.001);
+    }
+
+    // === Serialization Tests ===
+
+    #[test]
+    fn test_word_class_type_serialization() {
+        let wct = WordClassType::Modal;
+        let json = serde_json::to_string(&wct).unwrap();
+        let deserialized: WordClassType = serde_json::from_str(&json).unwrap();
+        assert_eq!(wct, deserialized);
+    }
+
+    #[test]
+    fn test_pattern_type_serialization() {
+        let pt = PatternType::Suffix;
+        let json = serde_json::to_string(&pt).unwrap();
+        let deserialized: PatternType = serde_json::from_str(&json).unwrap();
+        assert_eq!(pt, deserialized);
+    }
+
+    #[test]
+    fn test_lexicon_word_serialization() {
+        let word = LexiconWord::new("test".to_string());
+        let json = serde_json::to_string(&word).unwrap();
+        let deserialized: LexiconWord = serde_json::from_str(&json).unwrap();
+        assert_eq!(word.word, deserialized.word);
+    }
+}

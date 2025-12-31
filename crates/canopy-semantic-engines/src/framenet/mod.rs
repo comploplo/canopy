@@ -93,3 +93,228 @@ pub mod utils {
                 .any(|rel| rel.related_frame_id == frame1.id)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_framenet_version() {
+        assert_eq!(FRAMENET_VERSION, "1.7");
+    }
+
+    #[test]
+    fn test_default_dirs() {
+        assert!(DEFAULT_FRAMES_DIR.contains("framenet"));
+        assert!(DEFAULT_LU_DIR.contains("framenet"));
+    }
+
+    #[test]
+    fn test_extract_base_word() {
+        assert_eq!(utils::extract_base_word("give.v"), "give");
+        assert_eq!(utils::extract_base_word("run.v"), "run");
+        assert_eq!(utils::extract_base_word("happy.a"), "happy");
+        assert_eq!(utils::extract_base_word("quickly.adv"), "quickly");
+        assert_eq!(utils::extract_base_word("noperiod"), "noperiod");
+    }
+
+    #[test]
+    fn test_lu_matches_word() {
+        assert!(utils::lu_matches_word("give.v", "give"));
+        assert!(utils::lu_matches_word("give.v", "Give"));
+        assert!(utils::lu_matches_word("GIVE.v", "give"));
+        assert!(!utils::lu_matches_word("give.v", "take"));
+    }
+
+    #[test]
+    fn test_parse_fe_color_valid() {
+        assert_eq!(utils::parse_fe_color("FF0000"), Some((255, 0, 0))); // Red
+        assert_eq!(utils::parse_fe_color("00FF00"), Some((0, 255, 0))); // Green
+        assert_eq!(utils::parse_fe_color("0000FF"), Some((0, 0, 255))); // Blue
+        assert_eq!(utils::parse_fe_color("FFFFFF"), Some((255, 255, 255))); // White
+        assert_eq!(utils::parse_fe_color("000000"), Some((0, 0, 0))); // Black
+    }
+
+    #[test]
+    fn test_parse_fe_color_invalid() {
+        assert_eq!(utils::parse_fe_color(""), None);
+        assert_eq!(utils::parse_fe_color("FFF"), None); // Too short
+        assert_eq!(utils::parse_fe_color("FFFFFFF"), None); // Too long
+        assert_eq!(utils::parse_fe_color("GGGGGG"), None); // Invalid hex
+    }
+
+    #[test]
+    fn test_frame_has_element() {
+        let frame = Frame {
+            id: "1".to_string(),
+            name: "Giving".to_string(),
+            created_by: None,
+            created_date: None,
+            definition: "Transfer of possession".to_string(),
+            frame_elements: vec![
+                FrameElement {
+                    id: "1".to_string(),
+                    name: "Donor".to_string(),
+                    abbrev: "Donor".to_string(),
+                    definition: "The person giving".to_string(),
+                    core_type: CoreType::Core,
+                    semantic_types: vec![],
+                    fg_color: None,
+                    bg_color: None,
+                    created_by: None,
+                    created_date: None,
+                    fe_relations: vec![],
+                },
+                FrameElement {
+                    id: "2".to_string(),
+                    name: "Theme".to_string(),
+                    abbrev: "Theme".to_string(),
+                    definition: "The thing given".to_string(),
+                    core_type: CoreType::Core,
+                    semantic_types: vec![],
+                    fg_color: None,
+                    bg_color: None,
+                    created_by: None,
+                    created_date: None,
+                    fe_relations: vec![],
+                },
+            ],
+            lexical_units: vec![],
+            frame_relations: vec![],
+        };
+
+        assert!(utils::frame_has_element(&frame, "Donor"));
+        assert!(utils::frame_has_element(&frame, "Theme"));
+        assert!(!utils::frame_has_element(&frame, "Agent"));
+    }
+
+    #[test]
+    fn test_get_core_elements() {
+        let frame = Frame {
+            id: "1".to_string(),
+            name: "Test".to_string(),
+            created_by: None,
+            created_date: None,
+            definition: "Test frame".to_string(),
+            frame_elements: vec![
+                FrameElement {
+                    id: "1".to_string(),
+                    name: "CoreElement".to_string(),
+                    abbrev: "Core".to_string(),
+                    definition: "Core".to_string(),
+                    core_type: CoreType::Core,
+                    semantic_types: vec![],
+                    fg_color: None,
+                    bg_color: None,
+                    created_by: None,
+                    created_date: None,
+                    fe_relations: vec![],
+                },
+                FrameElement {
+                    id: "2".to_string(),
+                    name: "PeripheralElement".to_string(),
+                    abbrev: "Periph".to_string(),
+                    definition: "Peripheral".to_string(),
+                    core_type: CoreType::Peripheral,
+                    semantic_types: vec![],
+                    fg_color: None,
+                    bg_color: None,
+                    created_by: None,
+                    created_date: None,
+                    fe_relations: vec![],
+                },
+            ],
+            lexical_units: vec![],
+            frame_relations: vec![],
+        };
+
+        let core = utils::get_core_elements(&frame);
+        assert_eq!(core.len(), 1);
+        assert_eq!(core[0].name, "CoreElement");
+    }
+
+    #[test]
+    fn test_filter_lus_by_frame() {
+        let lus = vec![
+            LexicalUnit {
+                id: "1".to_string(),
+                name: "give.v".to_string(),
+                pos: "V".to_string(),
+                frame_id: "1".to_string(),
+                frame_name: "Giving".to_string(),
+                definition: String::new(),
+                lexemes: vec![],
+                status: String::new(),
+                total_annotated: 100,
+                valences: vec![],
+                subcategorization: vec![],
+            },
+            LexicalUnit {
+                id: "2".to_string(),
+                name: "take.v".to_string(),
+                pos: "V".to_string(),
+                frame_id: "2".to_string(),
+                frame_name: "Taking".to_string(),
+                definition: String::new(),
+                lexemes: vec![],
+                status: String::new(),
+                total_annotated: 50,
+                valences: vec![],
+                subcategorization: vec![],
+            },
+        ];
+
+        let giving_lus = utils::filter_lus_by_frame(&lus, "Giving");
+        assert_eq!(giving_lus.len(), 1);
+        assert_eq!(giving_lus[0].name, "give.v");
+
+        let taking_lus = utils::filter_lus_by_frame(&lus, "Taking");
+        assert_eq!(taking_lus.len(), 1);
+        assert_eq!(taking_lus[0].name, "take.v");
+
+        let empty = utils::filter_lus_by_frame(&lus, "NonExistent");
+        assert!(empty.is_empty());
+    }
+
+    #[test]
+    fn test_most_annotated_lu() {
+        let lus = vec![
+            LexicalUnit {
+                id: "1".to_string(),
+                name: "give.v".to_string(),
+                pos: "V".to_string(),
+                frame_id: "1".to_string(),
+                frame_name: "Giving".to_string(),
+                definition: String::new(),
+                lexemes: vec![],
+                status: String::new(),
+                total_annotated: 100,
+                valences: vec![],
+                subcategorization: vec![],
+            },
+            LexicalUnit {
+                id: "2".to_string(),
+                name: "donate.v".to_string(),
+                pos: "V".to_string(),
+                frame_id: "1".to_string(),
+                frame_name: "Giving".to_string(),
+                definition: String::new(),
+                lexemes: vec![],
+                status: String::new(),
+                total_annotated: 200,
+                valences: vec![],
+                subcategorization: vec![],
+            },
+        ];
+
+        let best = utils::most_annotated_lu(&lus);
+        assert!(best.is_some());
+        assert_eq!(best.unwrap().name, "donate.v");
+    }
+
+    #[test]
+    fn test_most_annotated_lu_empty() {
+        let lus: Vec<LexicalUnit> = vec![];
+        assert!(utils::most_annotated_lu(&lus).is_none());
+    }
+}

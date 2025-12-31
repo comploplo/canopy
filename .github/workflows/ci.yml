@@ -75,9 +75,9 @@ jobs:
         components: llvm-tools-preview
     - uses: Swatinem/rust-cache@v2
     - uses: taiki-e/install-action@cargo-llvm-cov
-    - name: Check coverage threshold (70%)
+    - name: Check coverage threshold (80%)
       run: |
         cargo llvm-cov \
           --workspace \
-          --fail-under-lines 70 \
+          --fail-under-lines 80 \
           --ignore-filename-regex 'tests?\.rs$|/tests/|/benches/'

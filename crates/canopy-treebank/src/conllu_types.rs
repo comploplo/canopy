@@ -479,6 +479,639 @@ mod tests {
     use crate::types::{DependencyFeatures, DependencyRelation};
     use std::collections::HashMap;
 
+    // ======== UniversalPos Tests ========
+
+    #[test]
+    fn test_universal_pos_from_str_all_variants() {
+        assert_eq!(UniversalPos::from("ADJ"), UniversalPos::ADJ);
+        assert_eq!(UniversalPos::from("ADP"), UniversalPos::ADP);
+        assert_eq!(UniversalPos::from("ADV"), UniversalPos::ADV);
+        assert_eq!(UniversalPos::from("AUX"), UniversalPos::AUX);
+        assert_eq!(UniversalPos::from("CCONJ"), UniversalPos::CCONJ);
+        assert_eq!(UniversalPos::from("DET"), UniversalPos::DET);
+        assert_eq!(UniversalPos::from("INTJ"), UniversalPos::INTJ);
+        assert_eq!(UniversalPos::from("NOUN"), UniversalPos::NOUN);
+        assert_eq!(UniversalPos::from("NUM"), UniversalPos::NUM);
+        assert_eq!(UniversalPos::from("PART"), UniversalPos::PART);
+        assert_eq!(UniversalPos::from("PRON"), UniversalPos::PRON);
+        assert_eq!(UniversalPos::from("PROPN"), UniversalPos::PROPN);
+        assert_eq!(UniversalPos::from("PUNCT"), UniversalPos::PUNCT);
+        assert_eq!(UniversalPos::from("SCONJ"), UniversalPos::SCONJ);
+        assert_eq!(UniversalPos::from("SYM"), UniversalPos::SYM);
+        assert_eq!(UniversalPos::from("VERB"), UniversalPos::VERB);
+        assert_eq!(UniversalPos::from("X"), UniversalPos::X);
+    }
+
+    #[test]
+    fn test_universal_pos_unknown_falls_back_to_x() {
+        assert_eq!(UniversalPos::from("UNKNOWN"), UniversalPos::X);
+        assert_eq!(UniversalPos::from(""), UniversalPos::X);
+        assert_eq!(UniversalPos::from("adj"), UniversalPos::X); // lowercase
+    }
+
+    #[test]
+    fn test_universal_pos_clone_copy_hash() {
+        let pos = UniversalPos::VERB;
+        let cloned = pos; // Copy (implements Copy trait)
+        let copied = pos;
+        assert_eq!(cloned, copied);
+        assert_eq!(pos, UniversalPos::VERB);
+        // Test Hash by using in HashMap
+        let mut map = HashMap::new();
+        map.insert(UniversalPos::NOUN, "noun");
+        assert_eq!(map.get(&UniversalPos::NOUN), Some(&"noun"));
+    }
+
+    // ======== MorphologicalFeatures Tests ========
+
+    #[test]
+    fn test_morphological_features_parse_empty() {
+        let feats = MorphologicalFeatures::parse("_");
+        assert!(feats.animacy.is_none());
+        assert!(feats.other.is_empty());
+
+        let feats2 = MorphologicalFeatures::parse("");
+        assert!(feats2.tense.is_none());
+    }
+
+    #[test]
+    fn test_morphological_features_parse_all_known_features() {
+        let feats = MorphologicalFeatures::parse(
+            "Animacy=Anim|Aspect=Perf|Case=Nom|Definite=Def|Degree=Pos|Gender=Masc|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|PronType=Prs|Tense=Past|VerbForm=Fin|Voice=Act",
+        );
+        assert_eq!(feats.animacy, Some("Anim".to_string()));
+        assert_eq!(feats.aspect, Some("Perf".to_string()));
+        assert_eq!(feats.case, Some("Nom".to_string()));
+        assert_eq!(feats.definite, Some("Def".to_string()));
+        assert_eq!(feats.degree, Some("Pos".to_string()));
+        assert_eq!(feats.gender, Some("Masc".to_string()));
+        assert_eq!(feats.mood, Some("Ind".to_string()));
+        assert_eq!(feats.number, Some("Sing".to_string()));
+        assert_eq!(feats.person, Some("3".to_string()));
+        assert_eq!(feats.polarity, Some("Pos".to_string()));
+        assert_eq!(feats.pron_type, Some("Prs".to_string()));
+        assert_eq!(feats.tense, Some("Past".to_string()));
+        assert_eq!(feats.verb_form, Some("Fin".to_string()));
+        assert_eq!(feats.voice, Some("Act".to_string()));
+    }
+
+    #[test]
+    fn test_morphological_features_parse_with_other() {
+        let feats = MorphologicalFeatures::parse("Number=Plur|CustomFeat=Val");
+        assert_eq!(feats.number, Some("Plur".to_string()));
+        assert_eq!(feats.other.get("CustomFeat"), Some(&"Val".to_string()));
+    }
+
+    #[test]
+    fn test_morphological_features_from_hashmap() {
+        let mut map = HashMap::new();
+        map.insert("Animacy".to_string(), "Inan".to_string());
+        map.insert("Tense".to_string(), "Pres".to_string());
+        map.insert("Unknown".to_string(), "Value".to_string());
+
+        let feats = MorphologicalFeatures::from_hashmap(&map);
+        assert_eq!(feats.animacy, Some("Inan".to_string()));
+        assert_eq!(feats.tense, Some("Pres".to_string()));
+        assert_eq!(feats.other.get("Unknown"), Some(&"Value".to_string()));
+    }
+
+    #[test]
+    fn test_morphological_features_from_hashmap_all_known() {
+        let mut map = HashMap::new();
+        map.insert("Aspect".to_string(), "Imp".to_string());
+        map.insert("Case".to_string(), "Acc".to_string());
+        map.insert("Definite".to_string(), "Ind".to_string());
+        map.insert("Degree".to_string(), "Cmp".to_string());
+        map.insert("Gender".to_string(), "Fem".to_string());
+        map.insert("Mood".to_string(), "Sub".to_string());
+        map.insert("Person".to_string(), "1".to_string());
+        map.insert("Polarity".to_string(), "Neg".to_string());
+        map.insert("PronType".to_string(), "Dem".to_string());
+        map.insert("VerbForm".to_string(), "Inf".to_string());
+        map.insert("Voice".to_string(), "Pass".to_string());
+
+        let feats = MorphologicalFeatures::from_hashmap(&map);
+        assert_eq!(feats.aspect, Some("Imp".to_string()));
+        assert_eq!(feats.case, Some("Acc".to_string()));
+        assert_eq!(feats.definite, Some("Ind".to_string()));
+        assert_eq!(feats.degree, Some("Cmp".to_string()));
+        assert_eq!(feats.gender, Some("Fem".to_string()));
+        assert_eq!(feats.mood, Some("Sub".to_string()));
+        assert_eq!(feats.person, Some("1".to_string()));
+        assert_eq!(feats.polarity, Some("Neg".to_string()));
+        assert_eq!(feats.pron_type, Some("Dem".to_string()));
+        assert_eq!(feats.verb_form, Some("Inf".to_string()));
+        assert_eq!(feats.voice, Some("Pass".to_string()));
+    }
+
+    #[test]
+    fn test_morphological_features_default() {
+        let feats = MorphologicalFeatures::default();
+        assert!(feats.animacy.is_none());
+        assert!(feats.tense.is_none());
+        assert!(feats.other.is_empty());
+    }
+
+    // ======== MiscAttributes Tests ========
+
+    #[test]
+    fn test_misc_attributes_parse_empty() {
+        let misc = MiscAttributes::parse("_");
+        assert!(misc.space_after.is_none());
+        assert!(misc.other.is_empty());
+
+        let misc2 = MiscAttributes::parse("");
+        assert!(misc2.start_char.is_none());
+    }
+
+    #[test]
+    fn test_misc_attributes_parse_space_after() {
+        let misc = MiscAttributes::parse("SpaceAfter=No");
+        assert_eq!(misc.space_after, Some(true)); // No space after = true
+
+        let misc2 = MiscAttributes::parse("SpaceAfter=Yes");
+        assert_eq!(misc2.space_after, Some(false)); // space_after tracks No
+    }
+
+    #[test]
+    fn test_misc_attributes_parse_char_positions() {
+        let misc = MiscAttributes::parse("StartChar=10|EndChar=15");
+        assert_eq!(misc.start_char, Some(10));
+        assert_eq!(misc.end_char, Some(15));
+    }
+
+    #[test]
+    fn test_misc_attributes_parse_token_id() {
+        let misc = MiscAttributes::parse("TokenId=1-2");
+        assert_eq!(misc.token_id, Some("1-2".to_string()));
+    }
+
+    #[test]
+    fn test_misc_attributes_parse_other() {
+        let misc = MiscAttributes::parse("CustomAttr=Value|AnotherAttr=X");
+        assert_eq!(misc.other.get("CustomAttr"), Some(&"Value".to_string()));
+        assert_eq!(misc.other.get("AnotherAttr"), Some(&"X".to_string()));
+    }
+
+    #[test]
+    fn test_misc_attributes_parse_key_only() {
+        let misc = MiscAttributes::parse("SomeFlag");
+        assert_eq!(misc.other.get("SomeFlag"), Some(&"true".to_string()));
+    }
+
+    // ======== EnhancedDependency Tests ========
+
+    #[test]
+    fn test_enhanced_dependency_construction() {
+        let dep = EnhancedDependency {
+            head: 3,
+            relation: DependencyRelation::NominalSubject,
+        };
+        assert_eq!(dep.head, 3);
+        assert_eq!(dep.relation, DependencyRelation::NominalSubject);
+    }
+
+    #[test]
+    fn test_enhanced_dependency_clone_eq() {
+        let dep = EnhancedDependency {
+            head: 2,
+            relation: DependencyRelation::Object,
+        };
+        let cloned = dep.clone();
+        assert_eq!(dep, cloned);
+    }
+
+    // ======== ConlluCorpusStats Tests ========
+
+    #[test]
+    fn test_conllu_corpus_stats_default() {
+        let stats = ConlluCorpusStats::default();
+        assert_eq!(stats.sentences, 0);
+        assert_eq!(stats.tokens, 0);
+        assert!(stats.upos_freq.is_empty());
+        assert!(stats.deprel_freq.is_empty());
+        assert!(stats.lemma_freq.is_empty());
+        assert!(stats.pattern_freq.is_empty());
+    }
+
+    #[test]
+    fn test_conllu_corpus_stats_add_sentence() {
+        let mut stats = ConlluCorpusStats::default();
+        let sentence = ConlluSentence {
+            sent_id: "test".to_string(),
+            newdoc_id: None,
+            newpar_id: None,
+            text: "John runs.".to_string(),
+            tokens: vec![
+                create_test_token(
+                    1,
+                    "John",
+                    "John",
+                    UniversalPos::PROPN,
+                    2,
+                    DependencyRelation::NominalSubject,
+                ),
+                create_test_token(
+                    2,
+                    "runs",
+                    "run",
+                    UniversalPos::VERB,
+                    0,
+                    DependencyRelation::Root,
+                ),
+            ],
+            metadata: HashMap::new(),
+        };
+
+        stats.add_sentence(&sentence);
+
+        assert_eq!(stats.sentences, 1);
+        assert_eq!(stats.tokens, 2);
+        assert_eq!(stats.upos_freq.get("PROPN"), Some(&1));
+        assert_eq!(stats.upos_freq.get("VERB"), Some(&1));
+        assert_eq!(stats.deprel_freq.get("NominalSubject"), Some(&1));
+        assert_eq!(stats.deprel_freq.get("Root"), Some(&1));
+        assert_eq!(stats.lemma_freq.get("John"), Some(&1));
+        assert_eq!(stats.lemma_freq.get("run"), Some(&1));
+    }
+
+    #[test]
+    fn test_conllu_corpus_stats_top_patterns() {
+        let mut stats = ConlluCorpusStats::default();
+        stats.pattern_freq.insert("pattern1".to_string(), 10);
+        stats.pattern_freq.insert("pattern2".to_string(), 5);
+        stats.pattern_freq.insert("pattern3".to_string(), 15);
+
+        let top2 = stats.top_patterns(2);
+        assert_eq!(top2.len(), 2);
+        assert_eq!(top2[0].0, "pattern3");
+        assert_eq!(top2[0].1, 15);
+        assert_eq!(top2[1].0, "pattern1");
+        assert_eq!(top2[1].1, 10);
+    }
+
+    // ======== ConlluSentence Tests ========
+
+    #[test]
+    fn test_conllu_sentence_root_token() {
+        let sentence = ConlluSentence {
+            sent_id: "test".to_string(),
+            newdoc_id: None,
+            newpar_id: None,
+            text: "He runs.".to_string(),
+            tokens: vec![
+                create_test_token(
+                    1,
+                    "He",
+                    "he",
+                    UniversalPos::PRON,
+                    2,
+                    DependencyRelation::NominalSubject,
+                ),
+                create_test_token(
+                    2,
+                    "runs",
+                    "run",
+                    UniversalPos::VERB,
+                    0,
+                    DependencyRelation::Root,
+                ),
+            ],
+            metadata: HashMap::new(),
+        };
+
+        let root = sentence.root_token().unwrap();
+        assert_eq!(root.lemma, "run");
+        assert_eq!(root.head, 0);
+    }
+
+    #[test]
+    fn test_conllu_sentence_tokens_with_relation() {
+        let sentence = ConlluSentence {
+            sent_id: "test".to_string(),
+            newdoc_id: None,
+            newpar_id: None,
+            text: "John and Mary run.".to_string(),
+            tokens: vec![
+                create_test_token(
+                    1,
+                    "John",
+                    "John",
+                    UniversalPos::PROPN,
+                    4,
+                    DependencyRelation::NominalSubject,
+                ),
+                create_test_token(
+                    2,
+                    "and",
+                    "and",
+                    UniversalPos::CCONJ,
+                    3,
+                    DependencyRelation::CoordinatingConjunction,
+                ),
+                create_test_token(
+                    3,
+                    "Mary",
+                    "Mary",
+                    UniversalPos::PROPN,
+                    1,
+                    DependencyRelation::Conjunction,
+                ),
+                create_test_token(
+                    4,
+                    "run",
+                    "run",
+                    UniversalPos::VERB,
+                    0,
+                    DependencyRelation::Root,
+                ),
+            ],
+            metadata: HashMap::new(),
+        };
+
+        let nsubj = sentence.tokens_with_relation(&DependencyRelation::NominalSubject);
+        assert_eq!(nsubj.len(), 1);
+        assert_eq!(nsubj[0].lemma, "John");
+    }
+
+    #[test]
+    fn test_conllu_sentence_main_verb() {
+        let sentence = ConlluSentence {
+            sent_id: "test".to_string(),
+            newdoc_id: None,
+            newpar_id: None,
+            text: "He is running.".to_string(),
+            tokens: vec![
+                create_test_token(
+                    1,
+                    "He",
+                    "he",
+                    UniversalPos::PRON,
+                    3,
+                    DependencyRelation::NominalSubject,
+                ),
+                create_test_token(
+                    2,
+                    "is",
+                    "be",
+                    UniversalPos::AUX,
+                    0,
+                    DependencyRelation::Root,
+                ),
+                create_test_token(
+                    3,
+                    "running",
+                    "run",
+                    UniversalPos::VERB,
+                    2,
+                    DependencyRelation::XClausalComplement,
+                ),
+            ],
+            metadata: HashMap::new(),
+        };
+
+        let verb = sentence.main_verb().unwrap();
+        assert_eq!(verb.lemma, "be"); // AUX at root
+        assert_eq!(verb.upos, UniversalPos::AUX);
+    }
+
+    #[test]
+    fn test_conllu_sentence_verbs() {
+        let sentence = ConlluSentence {
+            sent_id: "test".to_string(),
+            newdoc_id: None,
+            newpar_id: None,
+            text: "He wants to run.".to_string(),
+            tokens: vec![
+                create_test_token(
+                    1,
+                    "He",
+                    "he",
+                    UniversalPos::PRON,
+                    2,
+                    DependencyRelation::NominalSubject,
+                ),
+                create_test_token(
+                    2,
+                    "wants",
+                    "want",
+                    UniversalPos::VERB,
+                    0,
+                    DependencyRelation::Root,
+                ),
+                create_test_token(
+                    3,
+                    "to",
+                    "to",
+                    UniversalPos::PART,
+                    4,
+                    DependencyRelation::Mark,
+                ),
+                create_test_token(
+                    4,
+                    "run",
+                    "run",
+                    UniversalPos::VERB,
+                    2,
+                    DependencyRelation::XClausalComplement,
+                ),
+            ],
+            metadata: HashMap::new(),
+        };
+
+        let verbs = sentence.verbs();
+        assert_eq!(verbs.len(), 2);
+        let lemmas: Vec<&str> = verbs.iter().map(|v| v.lemma.as_str()).collect();
+        assert!(lemmas.contains(&"want"));
+        assert!(lemmas.contains(&"run"));
+    }
+
+    #[test]
+    fn test_conllu_sentence_get_dependents() {
+        let sentence = ConlluSentence {
+            sent_id: "test".to_string(),
+            newdoc_id: None,
+            newpar_id: None,
+            text: "The cat runs.".to_string(),
+            tokens: vec![
+                create_test_token(
+                    1,
+                    "The",
+                    "the",
+                    UniversalPos::DET,
+                    2,
+                    DependencyRelation::Determiner,
+                ),
+                create_test_token(
+                    2,
+                    "cat",
+                    "cat",
+                    UniversalPos::NOUN,
+                    3,
+                    DependencyRelation::NominalSubject,
+                ),
+                create_test_token(
+                    3,
+                    "runs",
+                    "run",
+                    UniversalPos::VERB,
+                    0,
+                    DependencyRelation::Root,
+                ),
+            ],
+            metadata: HashMap::new(),
+        };
+
+        let dependents_of_cat = sentence.get_dependents(2);
+        assert_eq!(dependents_of_cat.len(), 1);
+        assert_eq!(dependents_of_cat[0].lemma, "the");
+
+        let dependents_of_runs = sentence.get_dependents(3);
+        assert_eq!(dependents_of_runs.len(), 1);
+        assert_eq!(dependents_of_runs[0].lemma, "cat");
+    }
+
+    #[test]
+    fn test_conllu_sentence_create_pattern_key_no_verb() {
+        let sentence = ConlluSentence {
+            sent_id: "test".to_string(),
+            newdoc_id: None,
+            newpar_id: None,
+            text: "Hello!".to_string(),
+            tokens: vec![create_test_token(
+                1,
+                "Hello",
+                "hello",
+                UniversalPos::INTJ,
+                0,
+                DependencyRelation::Root,
+            )],
+            metadata: HashMap::new(),
+        };
+
+        // No main verb, so pattern key should be None
+        assert!(sentence.create_pattern_key().is_none());
+    }
+
+    // ======== DependencyTree Tests ========
+
+    #[test]
+    fn test_dependency_tree_depth_single_node() {
+        let tree = DependencyTree {
+            token: create_test_token(
+                1,
+                "Hello",
+                "hello",
+                UniversalPos::INTJ,
+                0,
+                DependencyRelation::Root,
+            ),
+            children: vec![],
+        };
+        assert_eq!(tree.depth(), 1);
+    }
+
+    #[test]
+    fn test_dependency_tree_node_count() {
+        let tree = DependencyTree {
+            token: create_test_token(
+                1,
+                "runs",
+                "run",
+                UniversalPos::VERB,
+                0,
+                DependencyRelation::Root,
+            ),
+            children: vec![
+                DependencyTree {
+                    token: create_test_token(
+                        2,
+                        "John",
+                        "John",
+                        UniversalPos::PROPN,
+                        1,
+                        DependencyRelation::NominalSubject,
+                    ),
+                    children: vec![],
+                },
+                DependencyTree {
+                    token: create_test_token(
+                        3,
+                        "fast",
+                        "fast",
+                        UniversalPos::ADV,
+                        1,
+                        DependencyRelation::AdverbialModifier,
+                    ),
+                    children: vec![],
+                },
+            ],
+        };
+        assert_eq!(tree.node_count(), 3);
+        assert_eq!(tree.depth(), 2);
+    }
+
+    #[test]
+    fn test_dependency_tree_find_by_pos_none() {
+        let tree = DependencyTree {
+            token: create_test_token(
+                1,
+                "runs",
+                "run",
+                UniversalPos::VERB,
+                0,
+                DependencyRelation::Root,
+            ),
+            children: vec![],
+        };
+        let nouns = tree.find_by_pos(&UniversalPos::NOUN);
+        assert!(nouns.is_empty());
+    }
+
+    #[test]
+    fn test_dependency_tree_find_by_relation_none() {
+        let tree = DependencyTree {
+            token: create_test_token(
+                1,
+                "runs",
+                "run",
+                UniversalPos::VERB,
+                0,
+                DependencyRelation::Root,
+            ),
+            children: vec![],
+        };
+        let objects = tree.find_by_relation(&DependencyRelation::Object);
+        assert!(objects.is_empty());
+    }
+
+    // ======== ConlluToken Tests ========
+
+    #[test]
+    fn test_conllu_token_construction() {
+        let token = ConlluToken {
+            id: 1,
+            form: "running".to_string(),
+            lemma: "run".to_string(),
+            upos: UniversalPos::VERB,
+            xpos: Some("VBG".to_string()),
+            features: MorphologicalFeatures::default(),
+            head: 0,
+            deprel: DependencyRelation::Root,
+            enhanced_deps: vec![EnhancedDependency {
+                head: 0,
+                relation: DependencyRelation::Root,
+            }],
+            misc: MiscAttributes::default(),
+            dependency_features: DependencyFeatures::default(),
+        };
+        assert_eq!(token.id, 1);
+        assert_eq!(token.form, "running");
+        assert_eq!(token.lemma, "run");
+        assert_eq!(token.upos, UniversalPos::VERB);
+        assert_eq!(token.xpos, Some("VBG".to_string()));
+    }
+
     fn create_test_token(
         id: u32,
         form: &str,

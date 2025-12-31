@@ -8,9 +8,9 @@
 set -e
 
 # Coverage threshold for release milestones
-# Current gate: 70% (M9 milestone achieved)
-# M4 REQUIREMENT: 80% minimum + clippy tech debt resolution
-COVERAGE_THRESHOLD=70
+# Current gate: 80% (achieved 2025-12-31)
+# Previous: 70% (M9 milestone)
+COVERAGE_THRESHOLD=80
 
 echo "🔬 Running coverage analysis with cargo-llvm-cov..."
 echo "📊 Coverage threshold: ${COVERAGE_THRESHOLD}%"
@@ -55,7 +55,7 @@ else
     echo "   3. Focus on files with low coverage first"
     echo ""
     echo "⚠️  REMINDER: DO NOT lower the coverage threshold for releases!"
-    echo "   The threshold must reach 80% for M4."
+    echo "   Maintain 80% minimum coverage."
     echo "   Write more tests instead of lowering standards."
     exit $exit_code
 fi

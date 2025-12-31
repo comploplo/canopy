@@ -73,9 +73,9 @@ memprof:
 
 # === Testing & Coverage ===
 
-# Run tests with coverage report (requires cargo-tarpaulin)
+# Run tests with coverage report (requires cargo-llvm-cov)
 coverage:
-    cargo tarpaulin --workspace --out Html --output-dir coverage
+    cargo llvm-cov --workspace --html --output-dir coverage
 
 # Check coverage against threshold (for CI/presubmit)
 coverage-check:
@@ -87,7 +87,7 @@ coverage-check-long:
 
 # Run coverage without timeout (for troubleshooting)
 coverage-raw:
-    cargo tarpaulin --workspace --skip-clean
+    cargo llvm-cov --workspace
 
 # Set coverage threshold for presubmit hooks
 coverage-threshold THRESHOLD:
@@ -97,7 +97,7 @@ coverage-threshold THRESHOLD:
 # Progressive coverage improvement commands
 coverage-current:
     @echo "📊 Current coverage status:"
-    @cargo tarpaulin --workspace --skip-clean | grep "coverage"
+    @cargo llvm-cov --workspace | grep "TOTAL"
 
 coverage-increase-to THRESHOLD:
     @echo "🎯 Increasing coverage threshold to {{THRESHOLD}}%"
@@ -167,7 +167,7 @@ docs-check:
 
 # Install development tools
 install-tools:
-    cargo install cargo-watch cargo-tarpaulin cargo-outdated cargo-audit cargo-deny cargo-nextest cargo-flamegraph just
+    cargo install cargo-watch cargo-llvm-cov cargo-outdated cargo-audit cargo-deny cargo-nextest cargo-flamegraph just
 
 # Setup development environment
 setup: install-tools

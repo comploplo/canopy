@@ -491,4 +491,337 @@ mod tests {
         assert_eq!(sig1.hash_code, sig2.hash_code);
         assert_eq!(sig1, sig2);
     }
+
+    #[test]
+    fn test_with_lemma_info() {
+        let sig = SemanticSignature::with_lemma_info(
+            "walk".to_string(),
+            PosCategory::Verb,
+            LemmaSource::UDGold,
+            0.95,
+        );
+        assert_eq!(sig.lemma, "walk");
+        assert_eq!(sig.lemma_source, LemmaSource::UDGold);
+        assert_eq!(sig.lemma_confidence, 0.95);
+        assert!(sig.verbnet_class.is_none());
+        assert!(sig.framenet_frame.is_none());
+    }
+
+    #[test]
+    fn test_compatibility_verbnet_match() {
+        let sig1 = SemanticSignature::new(
+            "run".to_string(),
+            Some("motion-51.3".to_string()),
+            None,
+            PosCategory::Verb,
+            LemmaSource::SimpleLemmatizer,
+            0.5,
+        );
+
+        let sig2 = SemanticSignature::new(
+            "sprint".to_string(),            // Different lemma
+            Some("motion-51.3".to_string()), // Same VerbNet class
+            None,
+            PosCategory::Verb,
+            LemmaSource::SimpleLemmatizer,
+            0.5,
+        );
+
+        // Same VerbNet class = compatible
+        assert!(sig1.is_compatible(&sig2));
+    }
+
+    #[test]
+    fn test_compatibility_framenet_match() {
+        let sig1 = SemanticSignature::new(
+            "give".to_string(),
+            None,
+            Some("Giving".to_string()),
+            PosCategory::Verb,
+            LemmaSource::SimpleLemmatizer,
+            0.5,
+        );
+
+        let sig2 = SemanticSignature::new(
+            "donate".to_string(), // Different lemma
+            None,
+            Some("Giving".to_string()), // Same FrameNet frame
+            PosCategory::Verb,
+            LemmaSource::SimpleLemmatizer,
+            0.5,
+        );
+
+        // Same FrameNet frame = compatible
+        assert!(sig1.is_compatible(&sig2));
+    }
+
+    #[test]
+    fn test_compatibility_no_match() {
+        let sig1 = SemanticSignature::new(
+            "run".to_string(),
+            Some("motion-51.3".to_string()),
+            Some("Motion".to_string()),
+            PosCategory::Verb,
+            LemmaSource::SimpleLemmatizer,
+            0.5,
+        );
+
+        let sig2 = SemanticSignature::new(
+            "eat".to_string(),
+            Some("consume-39.1".to_string()),
+            Some("Ingestion".to_string()),
+            PosCategory::Verb,
+            LemmaSource::SimpleLemmatizer,
+            0.5,
+        );
+
+        // Nothing matches
+        assert!(!sig1.is_compatible(&sig2));
+    }
+
+    #[test]
+    fn test_pos_category_all_variants() {
+        assert_eq!(format!("{:?}", PosCategory::Verb), "Verb");
+        assert_eq!(format!("{:?}", PosCategory::Noun), "Noun");
+        assert_eq!(format!("{:?}", PosCategory::Adjective), "Adjective");
+        assert_eq!(format!("{:?}", PosCategory::Adverb), "Adverb");
+        assert_eq!(format!("{:?}", PosCategory::Other), "Other");
+    }
+
+    #[test]
+    fn test_pos_category_clone_eq_hash() {
+        let pos = PosCategory::Verb;
+        let cloned = pos.clone();
+        assert_eq!(pos, cloned);
+        // Test Hash
+        let mut map = std::collections::HashMap::new();
+        map.insert(PosCategory::Noun, "noun");
+        assert_eq!(map.get(&PosCategory::Noun), Some(&"noun"));
+    }
+
+    #[test]
+    fn test_infer_pos_from_all_pos_hints() {
+        let builder = SignatureBuilder::new(false);
+
+        // All verb POS tags
+        assert_eq!(
+            builder.infer_pos_category("run", Some("VERB"), &None, &None),
+            PosCategory::Verb
+        );
+        assert_eq!(
+            builder.infer_pos_category("run", Some("VBZ"), &None, &None),
+            PosCategory::Verb
+        );
+        assert_eq!(
+            builder.infer_pos_category("run", Some("VBP"), &None, &None),
+            PosCategory::Verb
+        );
+        assert_eq!(
+            builder.infer_pos_category("run", Some("VBD"), &None, &None),
+            PosCategory::Verb
+        );
+        assert_eq!(
+            builder.infer_pos_category("run", Some("VBG"), &None, &None),
+            PosCategory::Verb
+        );
+        assert_eq!(
+            builder.infer_pos_category("run", Some("VBN"), &None, &None),
+            PosCategory::Verb
+        );
+        assert_eq!(
+            builder.infer_pos_category("run", Some("VB"), &None, &None),
+            PosCategory::Verb
+        );
+
+        // All noun POS tags
+        assert_eq!(
+            builder.infer_pos_category("cat", Some("NOUN"), &None, &None),
+            PosCategory::Noun
+        );
+        assert_eq!(
+            builder.infer_pos_category("cat", Some("NN"), &None, &None),
+            PosCategory::Noun
+        );
+        assert_eq!(
+            builder.infer_pos_category("cat", Some("NNS"), &None, &None),
+            PosCategory::Noun
+        );
+        assert_eq!(
+            builder.infer_pos_category("cat", Some("NNP"), &None, &None),
+            PosCategory::Noun
+        );
+        assert_eq!(
+            builder.infer_pos_category("cat", Some("NNPS"), &None, &None),
+            PosCategory::Noun
+        );
+
+        // All adjective POS tags
+        assert_eq!(
+            builder.infer_pos_category("big", Some("ADJ"), &None, &None),
+            PosCategory::Adjective
+        );
+        assert_eq!(
+            builder.infer_pos_category("big", Some("JJ"), &None, &None),
+            PosCategory::Adjective
+        );
+        assert_eq!(
+            builder.infer_pos_category("big", Some("JJR"), &None, &None),
+            PosCategory::Adjective
+        );
+        assert_eq!(
+            builder.infer_pos_category("big", Some("JJS"), &None, &None),
+            PosCategory::Adjective
+        );
+
+        // All adverb POS tags
+        assert_eq!(
+            builder.infer_pos_category("fast", Some("ADV"), &None, &None),
+            PosCategory::Adverb
+        );
+        assert_eq!(
+            builder.infer_pos_category("fast", Some("RB"), &None, &None),
+            PosCategory::Adverb
+        );
+        assert_eq!(
+            builder.infer_pos_category("fast", Some("RBR"), &None, &None),
+            PosCategory::Adverb
+        );
+        assert_eq!(
+            builder.infer_pos_category("fast", Some("RBS"), &None, &None),
+            PosCategory::Adverb
+        );
+    }
+
+    #[test]
+    fn test_infer_pos_from_verbnet() {
+        let builder = SignatureBuilder::new(false);
+        let vn_class = Some("give-13.1".to_string());
+        assert_eq!(
+            builder.infer_pos_category("give", None, &vn_class, &None),
+            PosCategory::Verb
+        );
+    }
+
+    #[test]
+    fn test_infer_pos_from_framenet_motion() {
+        let builder = SignatureBuilder::new(false);
+        let frame = Some("Motion".to_string());
+        assert_eq!(
+            builder.infer_pos_category("move", None, &None, &frame),
+            PosCategory::Verb
+        );
+    }
+
+    #[test]
+    fn test_infer_pos_from_framenet_action() {
+        let builder = SignatureBuilder::new(false);
+        let _frame = Some("Intentionally_act".to_string());
+        // "Action" is a substring
+        let frame2 = Some("Action_Motion".to_string());
+        assert_eq!(
+            builder.infer_pos_category("act", None, &None, &frame2),
+            PosCategory::Verb
+        );
+    }
+
+    #[test]
+    fn test_infer_pos_from_framenet_change() {
+        let builder = SignatureBuilder::new(false);
+        let frame = Some("Change_position".to_string());
+        assert_eq!(
+            builder.infer_pos_category("shift", None, &None, &frame),
+            PosCategory::Verb
+        );
+    }
+
+    #[test]
+    fn test_is_likely_verb_common_verbs() {
+        let builder = SignatureBuilder::new(false);
+        assert!(builder.is_likely_verb("run"));
+        assert!(builder.is_likely_verb("walk"));
+        assert!(builder.is_likely_verb("give"));
+        assert!(builder.is_likely_verb("take"));
+        assert!(builder.is_likely_verb("have"));
+    }
+
+    #[test]
+    fn test_is_likely_verb_endings() {
+        let builder = SignatureBuilder::new(false);
+        assert!(builder.is_likely_verb("running")); // ends with "ing"
+        assert!(builder.is_likely_verb("walked")); // ends with "ed"
+        assert!(builder.is_likely_verb("organize")); // ends with "ize"
+        assert!(builder.is_likely_verb("harmonise")); // ends with "ise"
+        assert!(builder.is_likely_verb("activate")); // ends with "ate"
+        assert!(builder.is_likely_verb("simplify")); // ends with "fy"
+    }
+
+    #[test]
+    fn test_infer_pos_noun_suffixes() {
+        let builder = SignatureBuilder::new(false);
+        assert_eq!(
+            builder.infer_pos_category("information", None, &None, &None),
+            PosCategory::Noun
+        );
+        assert_eq!(
+            builder.infer_pos_category("happiness", None, &None, &None),
+            PosCategory::Noun
+        );
+        assert_eq!(
+            builder.infer_pos_category("movement", None, &None, &None),
+            PosCategory::Noun
+        );
+    }
+
+    #[test]
+    fn test_signature_builder_debug() {
+        let builder = SignatureBuilder::new(true);
+        let debug = format!("{:?}", builder);
+        assert!(debug.contains("SignatureBuilder"));
+        assert!(debug.contains("verbose"));
+    }
+
+    #[test]
+    fn test_semantic_signature_debug() {
+        let sig = SemanticSignature::simple("test".to_string(), PosCategory::Verb);
+        let debug = format!("{:?}", sig);
+        assert!(debug.contains("SemanticSignature"));
+        assert!(debug.contains("test"));
+    }
+
+    #[test]
+    fn test_priority_verbnet_only() {
+        let sig = SemanticSignature::new(
+            "run".to_string(),
+            Some("motion-51.3".to_string()),
+            None,
+            PosCategory::Verb,
+            LemmaSource::SimpleLemmatizer,
+            0.5,
+        );
+        // 1 (base) + 10 (VerbNet) = 11
+        assert_eq!(sig.priority(), 11);
+    }
+
+    #[test]
+    fn test_priority_framenet_only() {
+        let sig = SemanticSignature::new(
+            "run".to_string(),
+            None,
+            Some("Motion".to_string()),
+            PosCategory::Verb,
+            LemmaSource::SimpleLemmatizer,
+            0.5,
+        );
+        // 1 (base) + 5 (FrameNet) = 6
+        assert_eq!(sig.priority(), 6);
+    }
+
+    #[test]
+    fn test_build_variants_no_extra() {
+        let builder = SignatureBuilder::new(false);
+        let base = SemanticSignature::simple("walk".to_string(), PosCategory::Verb);
+        let variants = builder.build_variants(&base);
+        // Should have original + minimal variant
+        assert!(!variants.is_empty());
+    }
 }

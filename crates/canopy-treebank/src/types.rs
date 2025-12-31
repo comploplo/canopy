@@ -481,3 +481,516 @@ impl TreebankAnalysis {
             .unwrap_or_default()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // === DependencyRelation From<&str> Tests ===
+
+    #[test]
+    fn test_dependency_relation_from_str() {
+        assert_eq!(
+            DependencyRelation::from("nsubj"),
+            DependencyRelation::NominalSubject
+        );
+        assert_eq!(DependencyRelation::from("obj"), DependencyRelation::Object);
+        assert_eq!(
+            DependencyRelation::from("iobj"),
+            DependencyRelation::IndirectObject
+        );
+        assert_eq!(DependencyRelation::from("obl"), DependencyRelation::Oblique);
+        assert_eq!(
+            DependencyRelation::from("advmod"),
+            DependencyRelation::AdverbialModifier
+        );
+        assert_eq!(
+            DependencyRelation::from("amod"),
+            DependencyRelation::AdjectivalModifier
+        );
+        assert_eq!(
+            DependencyRelation::from("compound"),
+            DependencyRelation::Compound
+        );
+        assert_eq!(
+            DependencyRelation::from("conj"),
+            DependencyRelation::Conjunction
+        );
+        assert_eq!(
+            DependencyRelation::from("cc"),
+            DependencyRelation::CoordinatingConjunction
+        );
+        assert_eq!(
+            DependencyRelation::from("det"),
+            DependencyRelation::Determiner
+        );
+        assert_eq!(DependencyRelation::from("case"), DependencyRelation::Case);
+        assert_eq!(
+            DependencyRelation::from("aux"),
+            DependencyRelation::Auxiliary
+        );
+        assert_eq!(DependencyRelation::from("cop"), DependencyRelation::Copula);
+        assert_eq!(DependencyRelation::from("mark"), DependencyRelation::Mark);
+        assert_eq!(
+            DependencyRelation::from("ccomp"),
+            DependencyRelation::ClausalComplement
+        );
+        assert_eq!(
+            DependencyRelation::from("xcomp"),
+            DependencyRelation::XClausalComplement
+        );
+        assert_eq!(
+            DependencyRelation::from("advcl"),
+            DependencyRelation::AdverbialClause
+        );
+        assert_eq!(
+            DependencyRelation::from("nmod"),
+            DependencyRelation::NominalModifier
+        );
+        assert_eq!(
+            DependencyRelation::from("punct"),
+            DependencyRelation::Punctuation
+        );
+        assert_eq!(DependencyRelation::from("root"), DependencyRelation::Root);
+        assert_eq!(DependencyRelation::from("flat"), DependencyRelation::Flat);
+        assert_eq!(
+            DependencyRelation::from("nummod"),
+            DependencyRelation::NumericModifier
+        );
+        assert_eq!(
+            DependencyRelation::from("parataxis"),
+            DependencyRelation::Parataxis
+        );
+        assert_eq!(
+            DependencyRelation::from("expl"),
+            DependencyRelation::Expletive
+        );
+        assert_eq!(
+            DependencyRelation::from("csubj"),
+            DependencyRelation::ClausalSubject
+        );
+        assert_eq!(DependencyRelation::from("fixed"), DependencyRelation::Fixed);
+    }
+
+    #[test]
+    fn test_dependency_relation_from_str_acl() {
+        assert_eq!(
+            DependencyRelation::from("acl:relcl"),
+            DependencyRelation::RelativeClause
+        );
+        assert_eq!(
+            DependencyRelation::from("acl"),
+            DependencyRelation::AdjectivalClause
+        );
+    }
+
+    #[test]
+    fn test_dependency_relation_from_str_other() {
+        let rel = DependencyRelation::from("unknown_rel");
+        assert!(matches!(rel, DependencyRelation::Other(_)));
+        if let DependencyRelation::Other(s) = rel {
+            assert_eq!(s, "unknown_rel");
+        }
+    }
+
+    #[test]
+    fn test_dependency_relation_from_str_with_subtype() {
+        // Should extract base relation
+        assert_eq!(
+            DependencyRelation::from("nsubj:pass"),
+            DependencyRelation::NominalSubject
+        );
+        assert_eq!(
+            DependencyRelation::from("obl:agent"),
+            DependencyRelation::Oblique
+        );
+    }
+
+    // === DependencyRelation to_theta_role Tests ===
+
+    #[test]
+    fn test_dependency_relation_to_theta_role() {
+        assert_eq!(
+            DependencyRelation::NominalSubject.to_theta_role(),
+            Some(ThetaRole::Agent)
+        );
+        assert_eq!(
+            DependencyRelation::Object.to_theta_role(),
+            Some(ThetaRole::Patient)
+        );
+        assert_eq!(
+            DependencyRelation::IndirectObject.to_theta_role(),
+            Some(ThetaRole::Recipient)
+        );
+        assert_eq!(
+            DependencyRelation::Oblique.to_theta_role(),
+            Some(ThetaRole::Location)
+        );
+        assert_eq!(DependencyRelation::Auxiliary.to_theta_role(), None);
+        assert_eq!(DependencyRelation::Determiner.to_theta_role(), None);
+    }
+
+    // === DependencyFeatures Tests ===
+
+    #[test]
+    fn test_dependency_features_parse_subtypes_simple() {
+        let (rel, features) = DependencyFeatures::parse_subtypes("nsubj");
+        assert_eq!(rel, DependencyRelation::NominalSubject);
+        assert!(features.features.is_empty());
+    }
+
+    #[test]
+    fn test_dependency_features_parse_subtypes_passive() {
+        let (rel, features) = DependencyFeatures::parse_subtypes("nsubj:pass");
+        assert_eq!(rel, DependencyRelation::NominalSubject);
+        assert_eq!(features.features.len(), 1);
+        assert!(features.is_passive());
+        assert!(!features.is_agent());
+    }
+
+    #[test]
+    fn test_dependency_features_parse_subtypes_agent() {
+        let (rel, features) = DependencyFeatures::parse_subtypes("obl:agent");
+        assert_eq!(rel, DependencyRelation::Oblique);
+        assert!(features.is_agent());
+        assert!(!features.is_passive());
+    }
+
+    #[test]
+    fn test_dependency_features_parse_subtypes_tmod() {
+        let (_, features) = DependencyFeatures::parse_subtypes("obl:tmod");
+        assert!(matches!(
+            features.features[0],
+            DependencyFeatureType::Temporal(TemporalFeature::Tmod)
+        ));
+    }
+
+    #[test]
+    fn test_dependency_features_parse_subtypes_syntactic() {
+        let (_, features) = DependencyFeatures::parse_subtypes("nmod:poss");
+        assert!(matches!(
+            features.features[0],
+            DependencyFeatureType::Syntactic(SyntacticFeature::Poss)
+        ));
+
+        let (_, features) = DependencyFeatures::parse_subtypes("det:predet");
+        assert!(matches!(
+            features.features[0],
+            DependencyFeatureType::Syntactic(SyntacticFeature::Predet)
+        ));
+
+        let (_, features) = DependencyFeatures::parse_subtypes("compound:prt");
+        assert!(matches!(
+            features.features[0],
+            DependencyFeatureType::Syntactic(SyntacticFeature::Prt)
+        ));
+    }
+
+    #[test]
+    fn test_dependency_features_parse_subtypes_unknown() {
+        let (_, features) = DependencyFeatures::parse_subtypes("nmod:xyz");
+        assert!(matches!(
+            features.features[0],
+            DependencyFeatureType::Other(_)
+        ));
+    }
+
+    #[test]
+    fn test_dependency_features_voice_features() {
+        let (_, features) = DependencyFeatures::parse_subtypes("nsubj:pass");
+        let voice = features.voice_features();
+        assert_eq!(voice.len(), 1);
+        assert!(matches!(voice[0], VoiceFeature::Pass));
+    }
+
+    #[test]
+    fn test_dependency_features_semantic_role_features() {
+        let (_, features) = DependencyFeatures::parse_subtypes("obl:agent");
+        let roles = features.semantic_role_features();
+        assert_eq!(roles.len(), 1);
+        assert!(matches!(roles[0], SemanticRoleFeature::Agent));
+    }
+
+    // === DependencyPattern Tests ===
+
+    #[test]
+    fn test_dependency_pattern_new() {
+        let pattern = DependencyPattern::new(
+            "give".to_string(),
+            vec![
+                (DependencyRelation::NominalSubject, "agent".to_string()),
+                (DependencyRelation::Object, "theme".to_string()),
+            ],
+            0.9,
+            100,
+            PatternSource::Indexed,
+        );
+        assert_eq!(pattern.verb_lemma, "give");
+        assert_eq!(pattern.dependencies.len(), 2);
+        assert_eq!(pattern.confidence, 0.9);
+        assert_eq!(pattern.frequency, 100);
+        assert!(matches!(pattern.source, PatternSource::Indexed));
+    }
+
+    #[test]
+    fn test_dependency_pattern_has_relation() {
+        let pattern = DependencyPattern::new(
+            "run".to_string(),
+            vec![(DependencyRelation::NominalSubject, "runner".to_string())],
+            0.8,
+            50,
+            PatternSource::Default,
+        );
+        assert!(pattern.has_relation(&DependencyRelation::NominalSubject));
+        assert!(!pattern.has_relation(&DependencyRelation::Object));
+    }
+
+    #[test]
+    fn test_dependency_pattern_get_argument() {
+        let pattern = DependencyPattern::new(
+            "give".to_string(),
+            vec![
+                (DependencyRelation::NominalSubject, "giver".to_string()),
+                (DependencyRelation::Object, "gift".to_string()),
+            ],
+            0.9,
+            100,
+            PatternSource::Indexed,
+        );
+        assert_eq!(
+            pattern.get_argument(&DependencyRelation::NominalSubject),
+            Some("giver")
+        );
+        assert_eq!(
+            pattern.get_argument(&DependencyRelation::Object),
+            Some("gift")
+        );
+        assert_eq!(
+            pattern.get_argument(&DependencyRelation::IndirectObject),
+            None
+        );
+    }
+
+    #[test]
+    fn test_dependency_pattern_get_theta_roles() {
+        let pattern = DependencyPattern::new(
+            "give".to_string(),
+            vec![
+                (DependencyRelation::NominalSubject, "agent".to_string()),
+                (DependencyRelation::Object, "theme".to_string()),
+                (DependencyRelation::IndirectObject, "recipient".to_string()),
+            ],
+            0.9,
+            100,
+            PatternSource::Indexed,
+        );
+        let roles = pattern.get_theta_roles();
+        assert_eq!(roles.len(), 3);
+        assert!(roles.contains(&ThetaRole::Agent));
+        assert!(roles.contains(&ThetaRole::Patient));
+        assert!(roles.contains(&ThetaRole::Recipient));
+    }
+
+    // === PatternSource Tests ===
+
+    #[test]
+    fn test_pattern_source_variants() {
+        let indexed = PatternSource::Indexed;
+        assert!(matches!(indexed, PatternSource::Indexed));
+
+        let verbnet = PatternSource::VerbNet("give-13.1".to_string());
+        if let PatternSource::VerbNet(class) = verbnet {
+            assert_eq!(class, "give-13.1");
+        }
+
+        let framenet = PatternSource::FrameNet("Giving".to_string());
+        if let PatternSource::FrameNet(frame) = framenet {
+            assert_eq!(frame, "Giving");
+        }
+
+        let default = PatternSource::Default;
+        assert!(matches!(default, PatternSource::Default));
+    }
+
+    // === TreebankAnalysis Tests ===
+
+    #[test]
+    fn test_treebank_analysis_new() {
+        let pattern = DependencyPattern::new(
+            "run".to_string(),
+            vec![(DependencyRelation::NominalSubject, "runner".to_string())],
+            0.8,
+            50,
+            PatternSource::Indexed,
+        );
+        let analysis = TreebankAnalysis::new("running".to_string(), Some(pattern), 0.8, 100, true);
+        assert_eq!(analysis.word, "running");
+        assert!(analysis.pattern.is_some());
+        assert!(analysis.alternative_patterns.is_empty());
+        assert_eq!(analysis.confidence, 0.8);
+        assert_eq!(analysis.processing_time_us, 100);
+        assert!(analysis.from_cache);
+    }
+
+    #[test]
+    fn test_treebank_analysis_no_pattern() {
+        let analysis = TreebankAnalysis::no_pattern("xyz".to_string(), 50);
+        assert_eq!(analysis.word, "xyz");
+        assert!(analysis.pattern.is_none());
+        assert_eq!(analysis.confidence, 0.0);
+        assert_eq!(analysis.processing_time_us, 50);
+        assert!(!analysis.from_cache);
+    }
+
+    #[test]
+    fn test_treebank_analysis_with_alternatives() {
+        let patterns = vec![
+            DependencyPattern::new(
+                "run".to_string(),
+                vec![(DependencyRelation::NominalSubject, "runner".to_string())],
+                0.6,
+                30,
+                PatternSource::Default,
+            ),
+            DependencyPattern::new(
+                "run".to_string(),
+                vec![
+                    (DependencyRelation::NominalSubject, "runner".to_string()),
+                    (DependencyRelation::Oblique, "location".to_string()),
+                ],
+                0.9,
+                80,
+                PatternSource::Indexed,
+            ),
+        ];
+
+        let analysis = TreebankAnalysis::with_alternatives("run".to_string(), patterns, 100, false);
+
+        // Primary should be the highest confidence (0.9)
+        assert!(analysis.pattern.is_some());
+        assert_eq!(analysis.pattern.as_ref().unwrap().confidence, 0.9);
+        assert_eq!(analysis.alternative_patterns.len(), 1);
+        assert_eq!(analysis.alternative_patterns[0].confidence, 0.6);
+        assert_eq!(analysis.confidence, 0.9);
+    }
+
+    #[test]
+    fn test_treebank_analysis_with_alternatives_empty() {
+        let analysis = TreebankAnalysis::with_alternatives("empty".to_string(), vec![], 50, false);
+        assert!(analysis.pattern.is_none());
+        assert!(analysis.alternative_patterns.is_empty());
+        assert_eq!(analysis.confidence, 0.0);
+    }
+
+    #[test]
+    fn test_treebank_analysis_total_patterns() {
+        let analysis = TreebankAnalysis::no_pattern("test".to_string(), 0);
+        assert_eq!(analysis.total_patterns(), 0);
+
+        let pattern =
+            DependencyPattern::new("run".to_string(), vec![], 0.8, 10, PatternSource::Default);
+        let analysis = TreebankAnalysis::new("run".to_string(), Some(pattern), 0.8, 0, false);
+        assert_eq!(analysis.total_patterns(), 1);
+
+        let patterns = vec![
+            DependencyPattern::new("a".to_string(), vec![], 0.9, 10, PatternSource::Indexed),
+            DependencyPattern::new("b".to_string(), vec![], 0.8, 10, PatternSource::Default),
+            DependencyPattern::new("c".to_string(), vec![], 0.7, 10, PatternSource::Default),
+        ];
+        let analysis = TreebankAnalysis::with_alternatives("test".to_string(), patterns, 0, false);
+        assert_eq!(analysis.total_patterns(), 3);
+    }
+
+    #[test]
+    fn test_treebank_analysis_all_patterns() {
+        let patterns = vec![
+            DependencyPattern::new("a".to_string(), vec![], 0.7, 10, PatternSource::Default),
+            DependencyPattern::new("b".to_string(), vec![], 0.9, 10, PatternSource::Indexed),
+            DependencyPattern::new("c".to_string(), vec![], 0.8, 10, PatternSource::Default),
+        ];
+        let analysis = TreebankAnalysis::with_alternatives("test".to_string(), patterns, 0, false);
+        let all = analysis.all_patterns();
+        assert_eq!(all.len(), 3);
+        // Should be sorted by confidence descending
+        assert_eq!(all[0].confidence, 0.9);
+        assert_eq!(all[1].confidence, 0.8);
+        assert_eq!(all[2].confidence, 0.7);
+    }
+
+    #[test]
+    fn test_treebank_analysis_has_pattern() {
+        let analysis = TreebankAnalysis::no_pattern("test".to_string(), 0);
+        assert!(!analysis.has_pattern());
+
+        let pattern =
+            DependencyPattern::new("run".to_string(), vec![], 0.8, 10, PatternSource::Default);
+        let analysis = TreebankAnalysis::new("run".to_string(), Some(pattern), 0.8, 0, false);
+        assert!(analysis.has_pattern());
+    }
+
+    #[test]
+    fn test_treebank_analysis_get_theta_roles() {
+        let analysis = TreebankAnalysis::no_pattern("test".to_string(), 0);
+        assert!(analysis.get_theta_roles().is_empty());
+
+        let pattern = DependencyPattern::new(
+            "give".to_string(),
+            vec![
+                (DependencyRelation::NominalSubject, "agent".to_string()),
+                (DependencyRelation::Object, "theme".to_string()),
+            ],
+            0.9,
+            100,
+            PatternSource::Indexed,
+        );
+        let analysis = TreebankAnalysis::new("give".to_string(), Some(pattern), 0.9, 0, false);
+        let roles = analysis.get_theta_roles();
+        assert_eq!(roles.len(), 2);
+        assert!(roles.contains(&ThetaRole::Agent));
+        assert!(roles.contains(&ThetaRole::Patient));
+    }
+
+    // === Serialization Tests ===
+
+    #[test]
+    fn test_dependency_relation_serialization() {
+        let rel = DependencyRelation::NominalSubject;
+        let json = serde_json::to_string(&rel).unwrap();
+        let deserialized: DependencyRelation = serde_json::from_str(&json).unwrap();
+        assert_eq!(rel, deserialized);
+    }
+
+    #[test]
+    fn test_dependency_pattern_serialization() {
+        let pattern = DependencyPattern::new(
+            "run".to_string(),
+            vec![(DependencyRelation::NominalSubject, "runner".to_string())],
+            0.8,
+            50,
+            PatternSource::Indexed,
+        );
+        let json = serde_json::to_string(&pattern).unwrap();
+        let deserialized: DependencyPattern = serde_json::from_str(&json).unwrap();
+        assert_eq!(pattern.verb_lemma, deserialized.verb_lemma);
+        assert_eq!(pattern.confidence, deserialized.confidence);
+    }
+
+    #[test]
+    fn test_treebank_analysis_serialization() {
+        let analysis = TreebankAnalysis::no_pattern("test".to_string(), 100);
+        let json = serde_json::to_string(&analysis).unwrap();
+        let deserialized: TreebankAnalysis = serde_json::from_str(&json).unwrap();
+        assert_eq!(analysis.word, deserialized.word);
+        assert_eq!(analysis.confidence, deserialized.confidence);
+    }
+
+    // === Default Tests ===
+
+    #[test]
+    fn test_dependency_features_default() {
+        let features = DependencyFeatures::default();
+        assert!(features.features.is_empty());
+        assert!(!features.is_passive());
+        assert!(!features.is_agent());
+    }
+}

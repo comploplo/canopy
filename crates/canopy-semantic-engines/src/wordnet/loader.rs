@@ -406,3 +406,66 @@ impl WordNetLoader {
         Ok((inflected, entry))
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_wordnet_loader_new() {
+        let config = WordNetParserConfig::default();
+        let loader = WordNetLoader::new(config);
+        // Just verify it constructs without panic
+        let debug = format!("{:?}", loader);
+        assert!(debug.contains("WordNetLoader"));
+    }
+
+    #[test]
+    fn test_wordnet_loader_load_nonexistent_dir() {
+        let config = WordNetParserConfig::default();
+        let loader = WordNetLoader::new(config);
+        let result = loader.load_database("/nonexistent/path/to/wordnet");
+        assert!(result.is_err());
+        let err = result.unwrap_err();
+        assert!(err.to_string().contains("not found"));
+    }
+
+    #[test]
+    fn test_parse_exception_line_valid() {
+        let config = WordNetParserConfig::default();
+        let loader = WordNetLoader::new(config);
+        let result = loader.parse_exception_line("ran run");
+        assert!(result.is_ok());
+        let (key, entry) = result.unwrap();
+        assert_eq!(key, "ran");
+        assert_eq!(entry.inflected, "ran");
+        assert_eq!(entry.base_forms, vec!["run"]);
+    }
+
+    #[test]
+    fn test_parse_exception_line_multiple_bases() {
+        let config = WordNetParserConfig::default();
+        let loader = WordNetLoader::new(config);
+        let result = loader.parse_exception_line("better good well");
+        assert!(result.is_ok());
+        let (key, entry) = result.unwrap();
+        assert_eq!(key, "better");
+        assert_eq!(entry.base_forms, vec!["good", "well"]);
+    }
+
+    #[test]
+    fn test_parse_exception_line_invalid() {
+        let config = WordNetParserConfig::default();
+        let loader = WordNetLoader::new(config);
+        let result = loader.parse_exception_line("single");
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_part_of_speech_name() {
+        assert_eq!(PartOfSpeech::Noun.name(), "noun");
+        assert_eq!(PartOfSpeech::Verb.name(), "verb");
+        assert_eq!(PartOfSpeech::Adjective.name(), "adjective");
+        assert_eq!(PartOfSpeech::Adverb.name(), "adverb");
+    }
+}

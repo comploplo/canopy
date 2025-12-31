@@ -286,6 +286,184 @@ impl TreebankSemanticCoordinator {
 mod tests {
     use super::*;
 
+    // ======== ExtendedSemanticResult Tests ========
+
+    #[test]
+    fn test_extended_semantic_result_construction() {
+        let result = ExtendedSemanticResult {
+            semantic_result: canopy_tokenizer::coordinator::Layer1SemanticResult::new(
+                "test".to_string(),
+                "test".to_string(),
+            ),
+            dependency_pattern: None,
+            pattern_confidence: 0.0,
+            pattern_lookup_time_us: 0,
+            pattern_from_cache: false,
+        };
+        assert_eq!(result.semantic_result.original_word, "test");
+        assert!(result.dependency_pattern.is_none());
+        assert_eq!(result.pattern_confidence, 0.0);
+        assert!(!result.pattern_from_cache);
+    }
+
+    #[test]
+    fn test_extended_semantic_result_with_pattern() {
+        let pattern = DependencyPattern::new(
+            "run".to_string(),
+            vec![],
+            0.8,
+            10,
+            crate::types::PatternSource::Indexed,
+        );
+        let result = ExtendedSemanticResult {
+            semantic_result: canopy_tokenizer::coordinator::Layer1SemanticResult::new(
+                "run".to_string(),
+                "run".to_string(),
+            ),
+            dependency_pattern: Some(pattern),
+            pattern_confidence: 0.85,
+            pattern_lookup_time_us: 50,
+            pattern_from_cache: true,
+        };
+        assert!(result.dependency_pattern.is_some());
+        assert_eq!(result.pattern_confidence, 0.85);
+        assert_eq!(result.pattern_lookup_time_us, 50);
+        assert!(result.pattern_from_cache);
+    }
+
+    #[test]
+    fn test_extended_semantic_result_clone() {
+        let result = ExtendedSemanticResult {
+            semantic_result: canopy_tokenizer::coordinator::Layer1SemanticResult::new(
+                "walk".to_string(),
+                "walk".to_string(),
+            ),
+            dependency_pattern: None,
+            pattern_confidence: 0.5,
+            pattern_lookup_time_us: 10,
+            pattern_from_cache: false,
+        };
+        let cloned = result.clone();
+        assert_eq!(cloned.semantic_result.lemma, result.semantic_result.lemma);
+        assert_eq!(cloned.pattern_confidence, result.pattern_confidence);
+    }
+
+    #[test]
+    fn test_extended_semantic_result_debug() {
+        let result = ExtendedSemanticResult {
+            semantic_result: canopy_tokenizer::coordinator::Layer1SemanticResult::new(
+                "test".to_string(),
+                "test".to_string(),
+            ),
+            dependency_pattern: None,
+            pattern_confidence: 0.0,
+            pattern_lookup_time_us: 0,
+            pattern_from_cache: false,
+        };
+        let debug = format!("{:?}", result);
+        assert!(debug.contains("ExtendedSemanticResult"));
+    }
+
+    // ======== TreebankSemanticConfig Tests ========
+
+    #[test]
+    fn test_treebank_semantic_config_default() {
+        let config = TreebankSemanticConfig::default();
+        assert!(config.enable_dependency_patterns);
+        assert!(config.corpus_path.is_none());
+        assert_eq!(config.min_pattern_confidence, 0.5);
+    }
+
+    #[test]
+    fn test_treebank_semantic_config_clone() {
+        let config = TreebankSemanticConfig {
+            coordinator_config: CoordinatorConfig::default(),
+            enable_dependency_patterns: false,
+            corpus_path: Some(std::path::PathBuf::from("/test/path")),
+            min_pattern_confidence: 0.7,
+        };
+        let cloned = config.clone();
+        assert!(!cloned.enable_dependency_patterns);
+        assert_eq!(
+            cloned.corpus_path,
+            Some(std::path::PathBuf::from("/test/path"))
+        );
+        assert_eq!(cloned.min_pattern_confidence, 0.7);
+    }
+
+    #[test]
+    fn test_treebank_semantic_config_debug() {
+        let config = TreebankSemanticConfig::default();
+        let debug = format!("{:?}", config);
+        assert!(debug.contains("TreebankSemanticConfig"));
+        assert!(debug.contains("enable_dependency_patterns"));
+    }
+
+    // ======== TreebankSemanticStats Tests ========
+
+    #[test]
+    fn test_treebank_semantic_stats_default() {
+        let stats = TreebankSemanticStats::default();
+        assert_eq!(stats.total_analyses, 0);
+        assert_eq!(stats.pattern_matches, 0);
+        assert_eq!(stats.cache_hits, 0);
+        assert_eq!(stats.pattern_synthesis_attempts, 0);
+        assert_eq!(stats.avg_lookup_time_us, 0.0);
+    }
+
+    #[test]
+    fn test_treebank_semantic_stats_clone() {
+        let stats = TreebankSemanticStats {
+            total_analyses: 100,
+            pattern_matches: 80,
+            cache_hits: 60,
+            pattern_synthesis_attempts: 20,
+            avg_lookup_time_us: 15.5,
+        };
+        let cloned = stats.clone();
+        assert_eq!(cloned.total_analyses, 100);
+        assert_eq!(cloned.pattern_matches, 80);
+        assert_eq!(cloned.cache_hits, 60);
+        assert_eq!(cloned.pattern_synthesis_attempts, 20);
+        assert_eq!(cloned.avg_lookup_time_us, 15.5);
+    }
+
+    #[test]
+    fn test_treebank_semantic_stats_debug() {
+        let stats = TreebankSemanticStats::default();
+        let debug = format!("{:?}", stats);
+        assert!(debug.contains("TreebankSemanticStats"));
+        assert!(debug.contains("total_analyses"));
+    }
+
+    #[test]
+    fn test_treebank_semantic_stats_pattern_match_rate() {
+        let stats = TreebankSemanticStats {
+            total_analyses: 100,
+            pattern_matches: 75,
+            cache_hits: 50,
+            pattern_synthesis_attempts: 25,
+            avg_lookup_time_us: 10.0,
+        };
+        // Pattern match rate: 75/100 = 75%
+        let match_rate = if stats.total_analyses > 0 {
+            stats.pattern_matches as f64 / stats.total_analyses as f64
+        } else {
+            0.0
+        };
+        assert_eq!(match_rate, 0.75);
+
+        // Cache hit rate within matches: 50/75 = 66.7%
+        let cache_hit_rate = if stats.pattern_matches > 0 {
+            stats.cache_hits as f64 / stats.pattern_matches as f64
+        } else {
+            0.0
+        };
+        assert!((cache_hit_rate - 0.667).abs() < 0.01);
+    }
+
+    // ======== Original Tests ========
+
     #[test]
     fn test_treebank_coordinator_creation() {
         let config = TreebankSemanticConfig::default();

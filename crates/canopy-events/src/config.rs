@@ -56,3 +56,59 @@ impl EventComposerConfig {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_event_composer_config_default() {
+        let config = EventComposerConfig::default();
+        assert_eq!(config.confidence_threshold, 0.3);
+        assert!(!config.require_agent_for_transitives);
+        assert!(config.use_framenet_fallback);
+        assert!(config.use_wordnet_animacy);
+        assert_eq!(config.max_events_per_sentence, 10);
+        assert!(config.include_sub_events);
+    }
+
+    #[test]
+    fn test_event_composer_config_strict() {
+        let config = EventComposerConfig::strict();
+        assert_eq!(config.confidence_threshold, 0.6);
+        assert!(config.require_agent_for_transitives);
+        // Inherits other defaults
+        assert!(config.use_framenet_fallback);
+        assert!(config.use_wordnet_animacy);
+        assert_eq!(config.max_events_per_sentence, 10);
+        assert!(config.include_sub_events);
+    }
+
+    #[test]
+    fn test_event_composer_config_lenient() {
+        let config = EventComposerConfig::lenient();
+        assert_eq!(config.confidence_threshold, 0.1);
+        assert!(!config.require_agent_for_transitives);
+        // Inherits other defaults
+        assert!(config.use_framenet_fallback);
+        assert!(config.use_wordnet_animacy);
+        assert_eq!(config.max_events_per_sentence, 10);
+        assert!(config.include_sub_events);
+    }
+
+    #[test]
+    fn test_event_composer_config_clone_debug() {
+        let config = EventComposerConfig::default();
+        let cloned = config.clone();
+        assert_eq!(cloned.confidence_threshold, 0.3);
+        let debug = format!("{:?}", config);
+        assert!(debug.contains("confidence_threshold"));
+    }
+
+    #[test]
+    fn test_event_composer_config_serializable() {
+        // Test that types derive Serialize/Deserialize (compile-time check)
+        fn _assert_serializable<T: serde::Serialize + serde::de::DeserializeOwned>() {}
+        _assert_serializable::<EventComposerConfig>();
+    }
+}
