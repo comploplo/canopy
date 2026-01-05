@@ -373,6 +373,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore = "requires data files - run with --ignored"]
     fn test_run_cli_with_text() {
         // Test run_cli_with_args with explicit text argument
         let args = vec!["canopy".to_string(), "John runs.".to_string()];
@@ -381,6 +382,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore = "requires data files - run with --ignored"]
     fn test_run_cli_multiple_times_with_args() {
         for i in 0..3 {
             let args = vec!["canopy".to_string(), format!("Sentence {}.", i)];
