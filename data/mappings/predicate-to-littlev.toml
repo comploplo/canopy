@@ -1,0 +1,61 @@
+# VerbNet Semantic Predicate to LittleVType Mapping
+#
+# Maps VerbNet semantic predicates (from <PRED> elements in VerbNet XML)
+# to Neo-Davidsonian event structure primitives (LittleVType).
+#
+# Sources:
+# - VerbNet 3.4 semantic predicates: https://verbs.colorado.edu/~mpalmer/projects/verbnet.html
+# - LittleV primitives: Ramchand (2008), Rappaport Hovav & Levin (1998)
+
+[metadata]
+source = "VerbNet 3.4 semantic predicates"
+theory = "Neo-Davidsonian event semantics with LittleV decomposition"
+references = [
+    "Ramchand, G. (2008). Verb Meaning and the Lexicon",
+    "Rappaport Hovav, M. & Levin, B. (1998). Building Verb Meanings",
+    "Kipper-Schuler, K. (2005). VerbNet: A broad-coverage, comprehensive verb lexicon"
+]
+
+[defaults]
+# Default LittleV type when no predicate matches
+default = "Do"
+
+# Causative predicates -> LittleVType::Cause
+# Agent initiates/causes an event
+[mappings.Cause]
+predicates = ["cause"]
+
+# Change of state predicates -> LittleVType::Become
+# Transition from one state to another
+[mappings.Become]
+predicates = ["become", "start", "begin", "result"]
+
+# Stative predicates -> LittleVType::Be
+# Static state without change
+[mappings.Be]
+predicates = ["state", "has_state"]
+
+# Motion predicates -> LittleVType::Go
+# Physical or abstract movement
+[mappings.Go]
+predicates = ["motion", "path", "location", "direction"]
+
+# Experiencer predicates -> LittleVType::Experience
+# Mental states, perception, cognition
+[mappings.Experience]
+predicates = ["emotional_state", "perceive", "believe", "consider"]
+
+# Communication predicates -> LittleVType::Say
+# Speech and information transfer
+[mappings.Say]
+predicates = ["transfer_info", "communicate", "tell", "say"]
+
+# Possession predicates -> LittleVType::Have
+# Ownership and possession
+[mappings.Have]
+predicates = ["has_possession", "possess"]
+
+# Existence predicates -> LittleVType::Exist
+# Being and existing
+[mappings.Exist]
+predicates = ["exist", "exist_state"]

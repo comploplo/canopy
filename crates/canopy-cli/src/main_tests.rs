@@ -28,12 +28,12 @@ mod cli_main_tests {
 
         // Should succeed with basic functionality
         match result {
-            Ok(_) => {
+            Ok(()) => {
                 // Success path covered - reaching here is the test
             }
             Err(e) => {
                 // Error path covered - ensure error is reasonable
-                let error_msg = format!("{}", e);
+                let error_msg = format!("{e}");
                 assert!(
                     !error_msg.is_empty(),
                     "Error should have meaningful message"

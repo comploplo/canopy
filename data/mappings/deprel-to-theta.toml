@@ -1,0 +1,37 @@
+# UD Dependency Relation to Theta Role Mapping
+#
+# Maps Universal Dependencies relation types to thematic roles
+# based on Baker's Uniformity of Theta Assignment Hypothesis (UTAH).
+#
+# Source: Universal Dependencies (UD) relation inventory
+# Reference: Baker, M. (1988). Incorporation: A Theory of Grammatical Function Changing
+
+[metadata]
+source = "Universal Dependencies"
+theory = "UTAH - Uniformity of Theta Assignment Hypothesis"
+reference = "Baker, M. (1988). Incorporation: A Theory of Grammatical Function Changing"
+
+# Core argument mappings
+[mappings]
+# Subject relations
+nsubj = "Agent"           # Active voice subject
+"nsubj:pass" = "Patient"  # Passive voice subject (promoted patient)
+"nsubj:caus" = "Causer"   # Causative subject
+
+# Object relations
+obj = "Patient"           # Direct object / Theme
+dobj = "Patient"          # Direct object (older UD annotation)
+iobj = "Recipient"        # Indirect object (dative)
+
+# Oblique relations (adjuncts and peripheral arguments)
+obl = "Location"          # General oblique (default to location)
+"obl:loc" = "Location"    # Locative oblique
+"obl:agent" = "Agent"     # By-phrase agent in passive
+"obl:tmod" = "Temporal"   # Temporal modifier
+"obl:goal" = "Goal"       # Goal of motion
+"obl:source" = "Source"   # Source of motion
+"obl:instr" = "Instrument" # Instrumental oblique
+
+# Other core relations
+ccomp = "Theme"           # Clausal complement (propositional theme)
+xcomp = "Theme"           # Open clausal complement

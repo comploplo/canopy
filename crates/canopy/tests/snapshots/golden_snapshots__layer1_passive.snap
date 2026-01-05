@@ -1,0 +1,74 @@
+---
+source: crates/canopy/tests/golden_snapshots.rs
+expression: analysis
+---
+{
+  "input": "The cat was chased by the dog",
+  "layer1": [
+    {
+      "word": "The",
+      "lemma": "the",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    },
+    {
+      "word": "cat",
+      "lemma": "cat",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    },
+    {
+      "word": "was",
+      "lemma": "be",
+      "pos": null,
+      "has_verbnet": true,
+      "has_framenet": true,
+      "has_wordnet": true,
+      "confidence": 0.95
+    },
+    {
+      "word": "chased",
+      "lemma": "chase",
+      "pos": null,
+      "has_verbnet": true,
+      "has_framenet": true,
+      "has_wordnet": true,
+      "confidence": 0.95
+    },
+    {
+      "word": "by",
+      "lemma": "by",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    },
+    {
+      "word": "the",
+      "lemma": "the",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    },
+    {
+      "word": "dog",
+      "lemma": "dog",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    }
+  ],
+  "layer2": null,
+  "layer3": null
+}

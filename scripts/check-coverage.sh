@@ -8,8 +8,7 @@
 set -e
 
 # Coverage threshold for release milestones
-# Current gate: 80% (achieved 2025-12-31)
-# Previous: 70% (M9 milestone)
+# Restored to 80% after refactor completion (2026-01-02)
 COVERAGE_THRESHOLD=80
 
 echo "🔬 Running coverage analysis with cargo-llvm-cov..."
@@ -28,7 +27,7 @@ fi
 echo "🔍 Analyzing test coverage..."
 
 # Run llvm-cov with workspace coverage
-# Uses LLVM instrumentation which is faster and more accurate than tarpaulin
+# Uses LLVM instrumentation for accurate coverage measurement
 if cargo llvm-cov \
     --workspace \
     --fail-under-lines "${COVERAGE_THRESHOLD}" \

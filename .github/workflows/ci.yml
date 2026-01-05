@@ -65,6 +65,23 @@ jobs:
   #   - name: Run benchmarks
   #     run: cargo bench --workspace
 
+  boundary:
+    name: Dependency Boundary Check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - uses: Swatinem/rust-cache@v2
+    - name: Check canopy has no resource deps
+      run: |
+        if cargo tree -p canopy --edges normal | grep -q canopy-resources; then
+          echo "ERROR: canopy depends on canopy-resources!"
+          echo "The kernel (canopy) must not depend on heavy resources."
+          cargo tree -p canopy --edges normal | grep canopy-resources
+          exit 1
+        fi
+        echo "Boundary check passed: canopy does not depend on canopy-resources"
+
   coverage:
     name: Code Coverage
     runs-on: ubuntu-latest

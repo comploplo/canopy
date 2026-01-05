@@ -16,16 +16,17 @@ data/cache/
 
 # Gender-by-name dataset (147k names, ~3.6MB)
 # Download from: https://archive.ics.uci.edu/dataset/591/gender+by+name
-# Place CSV at: data/canopy-lexicon/name_gender_dataset.csv
+data/name_gender_dataset/
 data/canopy-lexicon/name_gender_dataset.csv
 
 # Cache files
 .serena/
 .DS_Store
 
-# Coverage reports (we'll add specific ones we want)
+# Coverage reports (cargo-llvm-cov output)
 cobertura.xml
-tarpaulin-report.html
+lcov.info
+target/llvm-cov-target/
 
 # Temporary files
 delete-me.md
@@ -34,6 +35,8 @@ debug_*.rs
 # Agent/Claude files
 .claude/
 *.claude
+CLAUDE.md
+AGENTS.md
 
 # Generated reports
 coverage.json

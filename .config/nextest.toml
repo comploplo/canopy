@@ -2,37 +2,13 @@
 # https://nexte.st/docs/configuration/
 
 [profile.default]
-# Default profile excludes slow integration tests that load real semantic data
-# These tests take 30+ seconds each as they initialize VerbNet/FrameNet/WordNet
-default-filter = """
-not binary(~integration) & \
-not binary(~comprehensive) & \
-not test(~full_pipeline) & \
-not test(~semantic_integration) & \
-not test(~dev_data_integration)
-"""
-
-[profile.ci]
-# CI profile - same as default for fast feedback
-default-filter = """
-not binary(~integration) & \
-not binary(~comprehensive) & \
-not test(~full_pipeline) & \
-not test(~semantic_integration) & \
-not test(~dev_data_integration)
-"""
-
-[profile.full]
-# Full profile runs everything including slow integration tests
-# Use: cargo nextest run --profile full
+# Run all tests by default
 default-filter = "all()"
 
-[profile.integration]
-# Only run slow integration tests
-# Use: cargo nextest run --profile integration
-default-filter = """
-binary(~integration) | \
-binary(~comprehensive) | \
-test(~full_pipeline) | \
-test(~semantic_integration)
-"""
+[profile.ci]
+# CI profile - same as default
+default-filter = "all()"
+
+[profile.full]
+# Full profile runs everything
+default-filter = "all()"

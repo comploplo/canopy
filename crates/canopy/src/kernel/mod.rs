@@ -1,0 +1,22 @@
+//! Canopy kernel: event composition and discourse processing.
+//!
+//! The kernel contains pure linguistic processing logic with no
+//! dependencies on heavy resources. External data (`VerbNet`, `FrameNet`, etc.)
+//! is accessed through provider traits defined in `runtime`.
+//!
+//! # Architecture
+//!
+//! ```text
+//! Layer 1 (Syntax)          Layer 2 (Events)          Layer 3 (Discourse)
+//! AnnotatedSyntax  ──────►  ComposedEvents  ──────►  DRS
+//!        │                         │                     │
+//!        ▼                         ▼                     ▼
+//!   SyntaxProvider          SenseProvider          ReferentRegistry
+//!   RoleProvider                                   DiscourseContext
+//! ```
+//!
+//! The kernel is **pure** - it contains NO word-level knowledge.
+//! All lexical information comes through provider traits.
+
+pub mod discourse;
+pub mod events;

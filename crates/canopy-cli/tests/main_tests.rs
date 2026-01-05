@@ -23,8 +23,8 @@ fn test_main_function_execution() {
     let stderr = String::from_utf8_lossy(&output.stderr);
 
     println!("Exit status: {}", output.status);
-    println!("Stdout: {}", stdout);
-    println!("Stderr: {}", stderr);
+    println!("Stdout: {stdout}");
+    println!("Stderr: {stderr}");
 
     // Main function should complete (success or controlled error)
     assert!(
@@ -48,16 +48,16 @@ fn test_main_error_path() {
     let result = canopy_cli::run_cli();
 
     match result {
-        Ok(_) => {
+        Ok(()) => {
             // Success path - main would not call exit(1)
             println!("Success: run_cli returned Ok");
         }
         Err(e) => {
             // Error path - main would call exit(1)
-            println!("Error: run_cli failed with: {}", e);
+            println!("Error: run_cli failed with: {e}");
 
             // Verify error is meaningful
-            let error_string = format!("{}", e);
+            let error_string = format!("{e}");
             assert!(!error_string.is_empty(), "Error should have message");
         }
     }
@@ -76,13 +76,10 @@ fn test_main_uses_run_cli() {
     let result = canopy_cli::run_cli();
 
     // Test both success and error paths - reaching either branch means no panic
-    match result {
-        Ok(_) => {
-            // This exercises the Ok(_) => {} branch in main
-        }
-        Err(_) => {
-            // This exercises the Err(e) => { eprintln!(...); exit(1) } branch in main
-        }
+    if let Ok(()) = result {
+        // This exercises the Ok(_) => {} branch in main
+    } else {
+        // This exercises the Err(e) => { eprintln!(...); exit(1) } branch in main
     }
     // Test passed if we reached here without panic
 }

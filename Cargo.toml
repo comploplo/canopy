@@ -1,14 +1,8 @@
 [workspace]
 members = [
-    "crates/canopy-core",
-    "crates/canopy-engine",           # Base engine infrastructure
-    "crates/canopy-semantic-engines", # Consolidated semantic engines (VerbNet, FrameNet, WordNet, Lexicon, PropBank)
-    "crates/canopy-treebank",         # UD Treebank dependency pattern analysis
-    "crates/canopy-tokenizer",        # Semantic tokenization with consolidated engines
-    "crates/canopy-events",           # Layer 2 event composition
-    "crates/canopy-discourse",        # Layer 3 DRT and discourse context
-    "crates/canopy-pipeline",         # Pipeline with semantic coordinator integration
-    "crates/canopy-cli",
+    "crates/canopy",                  # Kernel crate: core types, event composition, discourse
+    "crates/canopy-resources",        # Heavy loaders: VerbNet, FrameNet, WordNet, etc.
+    "crates/canopy-cli",              # Command-line interface
 ]
 resolver = "2"
 
@@ -42,49 +36,16 @@ rayon = { version = "1.10" }
 # Testing and benchmarking
 criterion = { version = "0.6", features = ["html_reports"] }
 proptest = "1.7"
-insta = "1.42"
+insta = { version = "1.42", features = ["json", "redactions"] }
 
 # Linguistic processing
 # TODO: UDPipe bindings (will be added in M2)
 
-[package]
-name = "canopy"
-version.workspace = true
-edition.workspace = true
-authors.workspace = true
-license.workspace = true
-repository.workspace = true
-description.workspace = true
+# Note: This is a virtual workspace. The main `canopy` crate is at crates/canopy/
+# For benchmarks and integration tests, they now live in the workspace crates.
 
-[dependencies]
-canopy-core = { path = "crates/canopy-core" }
-canopy-engine = { path = "crates/canopy-engine" }
-canopy-semantic-engines = { path = "crates/canopy-semantic-engines" }
-canopy-tokenizer = { path = "crates/canopy-tokenizer" }
-canopy-treebank = { path = "crates/canopy-treebank" }
-canopy-events = { path = "crates/canopy-events" }
-canopy-pipeline = { path = "crates/canopy-pipeline" }
-canopy-discourse = { path = "crates/canopy-discourse" }
-tokio = { workspace = true }
-rayon = { version = "1.10", optional = true }
+[workspace.lints.rust]
+unsafe_code = "forbid"
 
-[features]
-default = ["parallel"]
-parallel = [
-    "rayon",
-    "canopy-engine/parallel",
-    "canopy-tokenizer/parallel",
-    "canopy-semantic-engines/parallel",
-]
-
-[dev-dependencies]
-criterion = { workspace = true }
-rand = "0.8"
-
-[[bench]]
-name = "baseline"
-harness = false
-
-[package.metadata.cargo-machete]
-# These are re-exported or used indirectly
-ignored = ["canopy-engine", "canopy-events", "canopy-semantic-engines", "canopy-treebank", "canopy-discourse", "canopy-pipeline", "rayon", "tokio"]
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }

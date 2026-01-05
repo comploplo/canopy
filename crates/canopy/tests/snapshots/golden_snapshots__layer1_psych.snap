@@ -1,0 +1,38 @@
+---
+source: crates/canopy/tests/golden_snapshots.rs
+expression: analysis
+---
+{
+  "input": "John fears spiders",
+  "layer1": [
+    {
+      "word": "John",
+      "lemma": "john",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    },
+    {
+      "word": "fears",
+      "lemma": "fear",
+      "pos": null,
+      "has_verbnet": true,
+      "has_framenet": true,
+      "has_wordnet": true,
+      "confidence": 0.95
+    },
+    {
+      "word": "spiders",
+      "lemma": "spider",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    }
+  ],
+  "layer2": null,
+  "layer3": null
+}

@@ -1,0 +1,47 @@
+---
+source: crates/canopy/tests/golden_snapshots.rs
+expression: analysis
+---
+{
+  "input": "Running is good exercise",
+  "layer1": [
+    {
+      "word": "Running",
+      "lemma": "run",
+      "pos": null,
+      "has_verbnet": true,
+      "has_framenet": true,
+      "has_wordnet": true,
+      "confidence": 0.92
+    },
+    {
+      "word": "is",
+      "lemma": "be",
+      "pos": null,
+      "has_verbnet": true,
+      "has_framenet": true,
+      "has_wordnet": true,
+      "confidence": 0.95
+    },
+    {
+      "word": "good",
+      "lemma": "good",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    },
+    {
+      "word": "exercise",
+      "lemma": "exercise",
+      "pos": null,
+      "has_verbnet": true,
+      "has_framenet": true,
+      "has_wordnet": true,
+      "confidence": 0.95
+    }
+  ],
+  "layer2": null,
+  "layer3": null
+}

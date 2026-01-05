@@ -1,0 +1,24 @@
+---
+source: crates/canopy/tests/golden_snapshots.rs
+expression: analysis
+---
+{
+  "input": "John gives Mary a book",
+  "layer1": [],
+  "layer2": {
+    "event_count": 1,
+    "events": [
+      {
+        "predicate": "give",
+        "little_v": "Do",
+        "roles": [
+          "Agent",
+          "Patient",
+          "Recipient"
+        ]
+      }
+    ],
+    "unbound_count": 0
+  },
+  "layer3": null
+}

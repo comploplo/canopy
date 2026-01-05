@@ -1,320 +1,81 @@
-# Contributing to canopy.rs
+# Contributing
 
-## Philosophy
-
-canopy.rs follows **infrastructure-first development** with rigorous performance
-monitoring and quality gates. We prioritize:
-
-1. **Performance-First Mindset**: Establish baselines before building features
-1. **Type Safety**: Use Rust's type system to enforce linguistic constraints
-1. **Theory-Driven Design**: Every architectural decision grounded in linguistic
-   theory
-1. **Comprehensive Testing**: Property-based tests, golden tests, benchmarks
-1. **Developer Experience**: Fast feedback loops and excellent tooling
-
-## Development Workflow
-
-### Quick Start
+## Quick Start
 
 ```bash
-# Setup development environment
-just setup
+# Build
+cargo build --release
 
-# Start development mode (watch + fast feedback)
-just dev
+# Test
+cargo test --workspace
 
-# Run full quality checks
-just check-all
-```
+# Coverage (80% gate)
+./scripts/check-coverage.sh
 
-### Core Commands
-
-```bash
-just test         # Run all tests
-just bench        # Run benchmarks with regression detection
-just lint         # Run clippy lints (pedantic level)
-just fmt          # Format all code
-just smoke        # Quick verification everything works
+# Lint
+cargo clippy --workspace -- -D warnings
+cargo fmt --all --check
 ```
 
 ## Code Standards
 
-### Rust-Specific Standards
+- **Format**: `rustfmt` (Rust 2024 edition)
+- **Lint**: Clippy pedantic, zero warnings
+- **Naming**: snake_case functions, CamelCase types
+- **Errors**: Use `Result` + `thiserror`, avoid `unwrap()` in library code
+- **Logging**: Use `tracing`
 
-- **Formatting**: Use `rustfmt` defaults (run `just fmt`)
-- **Linting**: Pass `clippy::pedantic` level (run `just lint`)
-- **Documentation**: `///` doc comments for all public items
-- **Error Handling**: Use `Result<T, E>` pattern, avoid panics in library code
-- **Performance**: Zero-copy where possible, avoid unnecessary allocations
+## Testing
 
-### Naming Conventions (Standard Rust)
+- Unit tests inline with `#[cfg(test)]`
+- Integration tests in `tests/`
+- Coverage gate: 80%
 
-- **Types**: `PascalCase` (Word, ThetaRole, SemanticType)
-- **Functions**: `snake_case` (parse_sentence, extract_features, beta_reduce)
-- **Constants**: `SCREAMING_SNAKE_CASE` (ROLE_SPECS, DEFAULT_TIMEOUT)
-- **Variables**: `snake_case`
-- **Files**: `snake_case.rs`
-- **Modules**: lowercase
+## Quality Gates
 
-### Architecture Patterns
+All must pass before PR:
 
-- **Enum-Heavy Design**: Use enums for type safety (ThetaRole, PartOfSpeech,
-  SemanticType)
-- **Trait-Based Interfaces**: Define traits for swappable components
-- **Builder Patterns**: For complex type construction
-- **Strategy Pattern**: Multiple implementations with shared interfaces
-- **Pipeline Pattern**: Sequential processing through analysis stages
+- ✅ `cargo test --workspace` - all tests pass
+- ✅ `cargo clippy --workspace -- -D warnings` - zero warnings
+- ✅ `cargo fmt --all --check` - properly formatted
+- ✅ `./scripts/check-coverage.sh` - ≥80% coverage
 
-### Linguistic Standards (Ported from Python V1)
+## Commits
 
-- **Theory-Driven**: Every feature grounded in established linguistic theory
-- **Explicit Over Implicit**: No hidden features or black-box processing
-- **Compositionality**: Each layer's output is next layer's well-typed input
-- **Word-Centric Design**: Core data structures built around Word concept
-
-## Testing Requirements
-
-### Test Types Required
-
-1. **Unit Tests**: Component-level with high coverage
-1. **Property Tests**: Linguistic invariants with `proptest`
-1. **Golden Tests**: Deterministic output validation with `insta`
-1. **Benchmarks**: Performance regression detection with `criterion`
-1. **Integration Tests**: End-to-end LSP scenarios
-
-### Quality Gates (ALL MUST PASS)
-
-- ✅ **Tests**: 100% pass rate (`just test`)
-- ✅ **Lints**: Zero clippy warnings (`just lint`)
-- ✅ **Format**: Code properly formatted (`just fmt-check`)
-- ✅ **Performance**: \<5% regression (`just perf-check`)
-- ✅ **Coverage**: 80% gate enforced (80.26% achieved)
-
-### Golden Test Philosophy
-
-From Python V1 system: Use deterministic output validation for:
-
-- Parsing results (sentence → word structures)
-- Semantic analysis (theta role assignments)
-- Lambda calculus operations (term construction, β-reduction)
-- LSP responses (hover content, diagnostics)
-
-## Performance Standards
-
-### Benchmarking Requirements
-
-- **Every major component** must have benchmarks
-- **Baseline establishment** before feature development
-- **Regression detection** in CI (5% threshold)
-- **Memory profiling** for complex operations
-
-### Performance Targets (from ROADMAP.md)
-
-- Parse Latency: \<10ms (vs 100ms Python)
-- LSP Response: \<50ms (vs 200ms Python)
-- Throughput: >100 sent/sec (vs 10 Python)
-- Memory/Sentence: \<25KB (vs 250KB Python)
-
-### Performance Workflow
-
-```bash
-# Establish baseline
-just bench-baseline
-
-# During development
-just bench-compare    # Compare against baseline
-just flamegraph      # Profile performance hotspots
-just memprof         # Check memory usage
-```
-
-## Code Review Standards
-
-### Before Submitting PR
-
-1. **Run quality checks**: `just check-all`
-1. **Update benchmarks**: `just bench` if performance-critical changes
-1. **Update documentation**: README, architecture docs if needed
-1. **Add tests**: Unit, property, golden tests as appropriate
-1. **Check coverage**: Maintain high coverage standards
-
-### PR Requirements
-
-- **Clear description** of changes and motivation
-- **Performance impact** analysis for significant changes
-- **Breaking changes** clearly documented
-- **Test coverage** for new functionality
-- **Benchmark results** if performance-related
-
-### Review Criteria
-
-- **Correctness**: Code works as intended
-- **Performance**: Meets performance standards
-- **Maintainability**: Clear, well-documented code
-- **Testing**: Comprehensive test coverage
-- **Architecture**: Follows established patterns
-
-## Error Handling Standards
-
-### Error Types
-
-Define custom error enums with context:
-
-```rust
-#[derive(Error, Debug)]
-pub enum CanopyError {
-    #[error("parsing failed: {context}")]
-    ParseError { context: String },
-    #[error("semantic analysis failed: {0}")]
-    SemanticError(String),
-    #[error("LSP protocol error: {0}")]
-    LspError(String),
-}
-```
-
-### Error Handling Principles
-
-- **Fail fast**: Return errors immediately, don't continue with invalid state
-- **Rich context**: Provide detailed error information for debugging
-- **Recovery**: Allow graceful degradation where possible
-- **No panics**: Library code should never panic on user input
-
-## Documentation Standards
-
-### Required Documentation
-
-- **Public APIs**: All public functions, types, and modules
-- **Architecture**: High-level design decisions
-- **Examples**: Usage examples for complex APIs
-- **Performance**: Benchmark results and analysis
-
-### Documentation Style
-
-````rust
-/// Extracts semantic features from a parsed sentence.
-///
-/// This function implements rule-based feature extraction following
-/// the strategy pattern. Features include animacy, definiteness, and
-/// quantifier detection.
-///
-/// # Arguments
-/// * `sentence` - A parsed sentence with dependency information
-/// * `strategy` - The feature extraction strategy to use
-///
-/// # Returns
-/// A vector of enhanced words with semantic features attached.
-///
-/// # Performance
-/// Typical extraction takes ~1ms per sentence of 20 words.
-///
-/// # Examples
-/// ```rust
-/// let features = extract_semantic_features(&sentence, &strategy)?;
-/// assert!(features.iter().any(|w| w.animacy.is_some()));
-/// ```
-pub fn extract_semantic_features(
-    sentence: &Sentence,
-    strategy: &dyn FeatureStrategy,
-) -> Result<Vec<EnhancedWord>, CanopyError> {
-    // Implementation...
-}
-````
-
-## Linguistic Theory Standards
-
-### Theory Implementation Requirements
-
-- **Cite sources**: Reference linguistic papers for theoretical decisions
-- **Explicit assumptions**: Document theoretical assumptions clearly
-- **Testable predictions**: Theory should make testable predictions
-- **Cross-validation**: Compare with established implementations
-
-### Key Theoretical Frameworks
-
-- **Universal Dependencies**: For syntactic representation
-- **Neo-Davidsonian Semantics**: For event structures
-- **Discourse Representation Theory**: For discourse semantics
-- **Optimality Theory**: For constraint-based analysis (M6+)
-
-## Development Tools
-
-### Required Tools
-
-```bash
-# Install development tools
-cargo install just cargo-watch cargo-llvm-cov cargo-flamegraph cargo-nextest cargo-deny
-rustup component add llvm-tools-preview
-```
-
-### Recommended IDE Setup
-
-- **VS Code** with rust-analyzer extension
-- **Vim/Neovim** with rust-analyzer LSP
-- **IntelliJ** with Rust plugin
-
-### Pre-commit Hooks
-
-Will be configured to run:
-
-- `cargo fmt --check`
-- `cargo clippy -- -D warnings`
-- `cargo test --quiet`
-
-## Communication Standards
-
-### Issue Reporting
-
-- **Clear description** of problem or feature request
-- **Reproduction steps** for bugs
-- **Performance impact** if relevant
-- **Theoretical motivation** for linguistic features
-
-### Commit Messages
-
-Follow conventional commits:
+Follow Conventional Commits:
 
 ```
-feat(parser): add UDPipe integration with error recovery
-perf(semantics): optimize theta role assignment by 15%
-fix(lsp): resolve hover timeout on large documents
-docs(architecture): update layer design documentation
-test(golden): add lambda calculus β-reduction test cases
+feat(syntax): add improved POS tagging
+fix(verbnet): resolve class lookup issue
+refactor(pipeline): consolidate engine sharing
+docs: update architecture documentation
+test: add integration tests for discourse
+chore: update dependencies
 ```
+
+## Project Structure
+
+```
+canopy/
+├── crates/
+│   ├── canopy/           # Core types, kernel (events, discourse)
+│   ├── canopy-resources/ # 5 semantic engines + pipeline
+│   └── canopy-cli/       # CLI + demos
+├── data/                 # Linguistic resources (gitignored)
+├── docs/                 # Documentation
+├── scripts/              # Development tools
+└── tests/                # Integration tests
+```
+
+## PR Requirements
+
+1. Clear description of changes
+1. Tests for new functionality
+1. All quality gates passing
+1. Documentation updated if needed
 
 ## Getting Help
 
-### Resources
-
-- **Documentation**: [ARCHITECTURE.md](ARCHITECTURE.md),
-  [ROADMAP.md](ROADMAP.md)
-- **Code Examples**: See `crates/canopy-tokenizer/examples/` and `examples/`
-- **Benchmarks**: Check `target/criterion/` for performance analysis
-
-### Questions
-
-- **Development**: Focus on development workflow and tooling
-- **Performance**: Benchmarking, optimization, profiling
-- **Linguistics**: Theoretical questions about implementation
-- **Architecture**: Design decisions and patterns
-
-## Release Process
-
-### Version Bumping
-
-- **Patch**: Bug fixes, minor improvements
-- **Minor**: New features, significant improvements
-- **Major**: Breaking changes, architectural changes
-
-### Quality Requirements
-
-All releases must pass:
-
-- 100% test success rate
-- Zero clippy warnings
-- Performance benchmarks within 5% of baseline
-- Documentation builds without errors
-
-______________________________________________________________________
-
-**Remember**: Infrastructure-first development means we build the tools and
-processes that enable rapid, high-quality feature development. Quality gates are
-not obstacles—they're the foundation that enables confident iteration.
+- **Documentation**: [ARCHITECTURE.md](ARCHITECTURE.md), [GETTING_STARTED.md](GETTING_STARTED.md)
+- **Demo**: `cargo run -p canopy-resources --example demo --release`
+- **API docs**: `cargo doc --open`

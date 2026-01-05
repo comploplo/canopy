@@ -1,0 +1,38 @@
+---
+source: crates/canopy/tests/golden_snapshots.rs
+expression: analysis
+---
+{
+  "input": "The door opened",
+  "layer1": [
+    {
+      "word": "The",
+      "lemma": "the",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    },
+    {
+      "word": "door",
+      "lemma": "door",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    },
+    {
+      "word": "opened",
+      "lemma": "open",
+      "pos": null,
+      "has_verbnet": true,
+      "has_framenet": true,
+      "has_wordnet": true,
+      "confidence": 0.95
+    }
+  ],
+  "layer2": null,
+  "layer3": null
+}

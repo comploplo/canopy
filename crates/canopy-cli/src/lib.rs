@@ -3,12 +3,19 @@
 //! This module exposes testable functions for the CLI to achieve test coverage.
 
 /// Main CLI entry point (testable version)
+///
+/// # Errors
+/// Returns an error if CLI execution fails.
 pub fn run_cli() -> Result<(), Box<dyn std::error::Error>> {
-    run_cli_with_args(std::env::args().collect())
+    let args: Vec<String> = std::env::args().collect();
+    run_cli_with_args(&args)
 }
 
 /// CLI implementation with injectable arguments for testing
-pub fn run_cli_with_args(args: Vec<String>) -> Result<(), Box<dyn std::error::Error>> {
+///
+/// # Errors
+/// Returns an error if CLI execution fails or `--test-error` flag is passed.
+pub fn run_cli_with_args(args: &[String]) -> Result<(), Box<dyn std::error::Error>> {
     // Check for test error flag
     if args.iter().any(|arg| arg == "--test-error") {
         return Err("Test error condition".into());
@@ -38,13 +45,10 @@ mod tests {
 
     #[test]
     fn test_run_cli_return_type() {
-        match run_cli() {
-            Ok(()) => {
-                // Expected return type
-            }
-            Err(_) => {
-                // Also valid for testing
-            }
+        if let Ok(()) = run_cli() {
+            // Expected return type
+        } else {
+            // Also valid for testing
         }
     }
 }

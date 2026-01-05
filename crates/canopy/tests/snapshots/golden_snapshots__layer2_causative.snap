@@ -1,0 +1,23 @@
+---
+source: crates/canopy/tests/golden_snapshots.rs
+expression: analysis
+---
+{
+  "input": "Mary broke the vase",
+  "layer1": [],
+  "layer2": {
+    "event_count": 1,
+    "events": [
+      {
+        "predicate": "break",
+        "little_v": "Cause",
+        "roles": [
+          "Agent",
+          "Patient"
+        ]
+      }
+    ],
+    "unbound_count": 0
+  },
+  "layer3": null
+}

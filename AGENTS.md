@@ -1,45 +1,66 @@
 # Repository Guidelines
 
-## Project Structure & Module Organization
+## Project Structure
 
-- crates: Rust workspace crates (e.g., `canopy-core`, `canopy-engine`, `canopy-tokenizer`). Source lives in `crates/<crate>/src`.
-- src: Minimal top-level library glue for the workspace.
-- tests: Integration tests (`tests/*.rs`).
-- benches: Criterion benchmarks.
-- docs, examples, scripts, data: Documentation, runnable examples, CI scripts, and linguistic resources.
+```
+canopy/
+├── crates/
+│   ├── canopy/           # Core types, kernel (events, discourse)
+│   ├── canopy-resources/ # 5 semantic engines + pipeline
+│   └── canopy-cli/       # CLI + demos
+├── data/                 # Linguistic resources (gitignored)
+├── docs/                 # Documentation
+├── scripts/              # Development tools
+└── tests/                # Integration tests
+```
 
-## Build, Test, and Development Commands
+## Build & Test
 
-- just setup: Install dev tools and build once.
-- just build / just build-release: Debug or optimized build.
-- just test / just test-verbose: Run workspace tests (uses `cargo nextest` or `cargo test`).
-- just check / just lint / just fmt: Type-check, clippy lints (pedantic), and formatting.
-- just coverage / just coverage-check: Generate and gate coverage (cargo-llvm-cov; threshold managed in `scripts/check-coverage.sh`).
-- just bench: Run Criterion benchmarks; see `benches/`.
-  (Without just: use the underlying `cargo …` commands in the recipes.)
+```bash
+# Build
+cargo build --release
 
-## Coding Style & Naming Conventions
+# Test
+cargo test --workspace
 
-- Formatting: `rustfmt` (Rust 2024 edition). Run `just fmt` or `cargo fmt --all`.
-- Linting: `clippy` with `-D warnings` and pedantic in local workflows (`just lint`). Avoid `unwrap()` in library code; prefer `Result` + `thiserror`.
-- Naming: snake_case for functions/modules, CamelCase for types, SCREAMING_SNAKE_CASE for consts. Keep crate names kebab-case (`canopy-tokenizer`).
-- Logging: Use `tracing` and `tracing-subscriber` with env filters.
+# Coverage (80% gate)
+./scripts/check-coverage.sh
 
-## Testing Guidelines
+# Lint
+cargo clippy --workspace -- -D warnings
+cargo fmt --all --check
+```
 
-- Locations: Unit tests inline with `#[cfg(test)]`; integration tests in `tests/`.
-- Running: `just test` (fast via nextest). Verbose/debug: `just test-verbose`.
-- Property tests: `just test-property` (proptest). Snapshots/golden: `just test-golden` and update via `just test-golden-update`.
-- Coverage: 80% gate enforced (80.26% achieved). Check via `just coverage-check`.
+## Coding Style
 
-## Commit & Pull Request Guidelines
+- **Format**: `rustfmt` (Rust 2024 edition)
+- **Lint**: Clippy pedantic, zero warnings
+- **Naming**: snake_case functions, CamelCase types, kebab-case crates
+- **Errors**: Use `Result` + `thiserror`, avoid `unwrap()` in library code
+- **Logging**: Use `tracing`
 
-- Commits: Follow Conventional Commits (e.g., `feat: …`, `fix: …`, `chore: …`, `checkpoint: …`). Keep changes scoped and descriptive.
-- Before PR: Run `just check-all` (fmt, clippy, tests, audit, deny, coverage). Include performance notes if benchmarks change.
-- PR Content: Clear description, linked issues, reproduction steps, and example commands. For CLI changes, add sample input/output; attach benchmarks if performance-sensitive.
+## Testing
 
-## Security & Configuration
+- Unit tests inline with `#[cfg(test)]`
+- Integration tests in `tests/`
+- Coverage gate: 80%
 
-- Dependencies: `just audit` and `just deny` before merging.
-- Pre-commit: Install and enable hooks (`pre-commit install`).
-- Data: Do not commit large or proprietary corpora; prefer pointers in `data/`.
+## Commits
+
+Follow Conventional Commits:
+
+- `feat:` new feature
+- `fix:` bug fix
+- `refactor:` code restructure
+- `docs:` documentation
+- `test:` tests
+- `chore:` maintenance
+
+## Before PR
+
+```bash
+cargo fmt --all
+cargo clippy --workspace -- -D warnings
+cargo test --workspace
+./scripts/check-coverage.sh
+```

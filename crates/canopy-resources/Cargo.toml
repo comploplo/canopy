@@ -1,0 +1,66 @@
+[package]
+name = "canopy-resources"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Heavy resource loaders for Canopy - VerbNet, FrameNet, WordNet, Lexicon, PropBank datasets"
+keywords = ["nlp", "semantics", "verbnet", "framenet", "wordnet"]
+categories = ["text-processing", "science"]
+
+[dependencies]
+# Kernel types and provider traits
+canopy = { path = "../canopy" }
+
+# Serialization and data structures
+serde = { workspace = true }
+serde_json = { workspace = true }
+bincode = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+
+# Caching
+lru = { workspace = true }
+
+# XML parsing
+quick-xml = { workspace = true }
+
+# Collections and utilities
+indexmap = { workspace = true }
+regex = { workspace = true }
+once_cell = { workspace = true }
+
+# Unicode text segmentation (UAX #29)
+unicode-segmentation = "1.12"
+
+# Parallel processing
+rayon = { workspace = true, optional = true }
+
+# Logging
+tracing = { workspace = true }
+toml = "0.9.10"
+
+[dev-dependencies]
+tempfile = { workspace = true }
+tokio = { workspace = true }
+
+[features]
+default = ["verbnet", "framenet", "wordnet", "lexicon", "propbank"]
+# Individual engine features
+verbnet = []
+framenet = []
+wordnet = []
+lexicon = []
+propbank = []
+# Enable all engines
+all = ["verbnet", "framenet", "wordnet", "lexicon", "propbank"]
+# Parallel processing support
+parallel = ["dep:rayon"]
+
+[package.metadata.cargo-machete]
+ignored = ["rayon", "serde_json"]
+
+[lints]
+workspace = true

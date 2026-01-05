@@ -17,7 +17,7 @@ where
     F: FnOnce() -> Result<(), Box<dyn std::error::Error>>,
 {
     match cli_fn() {
-        Ok(_) => Ok(()),
+        Ok(()) => Ok(()),
         Err(e) => {
             eprintln!("Error: {e}");
             Err(1)
@@ -36,14 +36,14 @@ mod tests {
 
         // This exercises both success and error paths from main
         match result {
-            Ok(_) => {
+            Ok(()) => {
                 // Success path - main would exit with 0 (implicit)
                 println!("Main success path tested");
             }
             Err(code) => {
                 // Error path - main would exit with error code
                 assert_eq!(code, 1, "Error exit code should be 1");
-                println!("Main error path tested with exit code: {}", code);
+                println!("Main error path tested with exit code: {code}");
             }
         }
     }
@@ -55,11 +55,11 @@ mod tests {
 
         // Verify that errors are handled appropriately
         match result {
-            Ok(_) => {
+            Ok(()) => {
                 println!("CLI succeeded - main would exit normally");
             }
             Err(exit_code) => {
-                println!("CLI failed - main would exit with code: {}", exit_code);
+                println!("CLI failed - main would exit with code: {exit_code}");
                 assert_eq!(exit_code, 1, "Should exit with code 1 on error");
             }
         }
@@ -81,13 +81,13 @@ mod tests {
 
         // Test the Result<(), i32> conversion that main() does
         let main_result = match cli_result {
-            Ok(_) => Ok(()),
+            Ok(()) => Ok(()),
             Err(_) => Err(1),
         };
 
         match main_result {
-            Ok(_) => println!("Main structure test: success path"),
-            Err(code) => println!("Main structure test: error path with code {}", code),
+            Ok(()) => println!("Main structure test: success path"),
+            Err(code) => println!("Main structure test: error path with code {code}"),
         }
     }
 
@@ -129,9 +129,9 @@ mod tests {
 
         // This exercises the actual main_impl function
         match result {
-            Ok(_) => println!("Actual CLI succeeded"),
+            Ok(()) => println!("Actual CLI succeeded"),
             Err(code) => {
-                println!("Actual CLI failed with exit code: {}", code);
+                println!("Actual CLI failed with exit code: {code}");
                 assert_eq!(code, 1, "Should return exit code 1 on error");
             }
         }

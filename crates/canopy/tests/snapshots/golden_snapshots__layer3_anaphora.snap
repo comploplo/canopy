@@ -1,0 +1,17 @@
+---
+source: tests/golden_snapshots.rs
+expression: analysis
+---
+{
+  "input": "John saw Mary. He waved to her.",
+  "layer1": [],
+  "layer2": null,
+  "layer3": {
+    "referent_count": 2,
+    "condition_count": 0,
+    "referent_types": {
+      "Individual": 2
+    },
+    "condition_types": {}
+  }
+}

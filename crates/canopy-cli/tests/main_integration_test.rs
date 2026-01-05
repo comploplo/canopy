@@ -56,11 +56,11 @@ fn test_cli_lib_function_coverage() {
     let result = canopy_cli::run_cli();
 
     match result {
-        Ok(_) => {
+        Ok(()) => {
             println!("CLI lib function succeeded");
         }
         Err(e) => {
-            println!("CLI lib function failed with: {}", e);
+            println!("CLI lib function failed with: {e}");
             // Error is also acceptable, we just need to exercise the path
         }
     }
@@ -75,15 +75,15 @@ fn test_cli_error_path_coverage() {
     // Try multiple executions to potentially hit different paths
     for i in 0..3 {
         let result = run_cli();
-        println!("Iteration {}: {:?}", i, result);
+        println!("Iteration {i}: {result:?}");
         // Exercises code path - reaching here without panic is the test
     }
 }
 
 #[test]
 fn test_run_cli_with_args_error() {
-    let result =
-        canopy_cli::run_cli_with_args(vec!["test".to_string(), "--test-error".to_string()]);
+    let args = vec!["test".to_string(), "--test-error".to_string()];
+    let result = canopy_cli::run_cli_with_args(&args);
     assert!(
         result.is_err(),
         "Should return error with --test-error flag"

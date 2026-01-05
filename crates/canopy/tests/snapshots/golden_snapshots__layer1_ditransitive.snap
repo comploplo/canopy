@@ -1,0 +1,56 @@
+---
+source: crates/canopy/tests/golden_snapshots.rs
+expression: analysis
+---
+{
+  "input": "John gives Mary a book",
+  "layer1": [
+    {
+      "word": "John",
+      "lemma": "john",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    },
+    {
+      "word": "gives",
+      "lemma": "give",
+      "pos": null,
+      "has_verbnet": true,
+      "has_framenet": true,
+      "has_wordnet": true,
+      "confidence": 0.95
+    },
+    {
+      "word": "Mary",
+      "lemma": "mary",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    },
+    {
+      "word": "a",
+      "lemma": "a",
+      "pos": null,
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
+    },
+    {
+      "word": "book",
+      "lemma": "book",
+      "pos": null,
+      "has_verbnet": true,
+      "has_framenet": true,
+      "has_wordnet": true,
+      "confidence": 0.95
+    }
+  ],
+  "layer2": null,
+  "layer3": null
+}
