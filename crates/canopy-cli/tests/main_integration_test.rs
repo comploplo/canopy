@@ -7,9 +7,9 @@ use std::process::{Command, Stdio};
 
 #[test]
 fn test_cli_binary_execution() {
-    // Build the binary and test its execution
+    // Build the binary and test its execution with explicit text input
     let mut cmd = Command::new("cargo");
-    cmd.args(["run", "--bin", "canopy-cli"])
+    cmd.args(["run", "--bin", "canopy-cli", "--", "John runs."])
         .current_dir(env!("CARGO_MANIFEST_DIR"))
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
@@ -52,8 +52,9 @@ fn test_cli_binary_help() {
 
 #[test]
 fn test_cli_lib_function_coverage() {
-    // Test the lib function that main() calls
-    let result = canopy_cli::run_cli();
+    // Test the lib function with explicit text argument (run_cli() blocks on stdin)
+    let args = vec!["canopy".to_string(), "John runs.".to_string()];
+    let result = canopy_cli::run_cli_with_args(&args);
 
     match result {
         Ok(()) => {
@@ -69,12 +70,14 @@ fn test_cli_lib_function_coverage() {
 
 #[test]
 fn test_cli_error_path_coverage() {
-    // Test error handling in main by potentially causing an error
-    use canopy_cli::run_cli;
+    // Test error handling with explicit text arguments (run_cli() blocks on stdin)
+    use canopy_cli::run_cli_with_args;
 
     // Try multiple executions to potentially hit different paths
-    for i in 0..3 {
-        let result = run_cli();
+    let sentences = ["John runs.", "Mary walks.", "The cat sleeps."];
+    for (i, sentence) in sentences.iter().enumerate() {
+        let args = vec!["canopy".to_string(), (*sentence).to_string()];
+        let result = run_cli_with_args(&args);
         println!("Iteration {i}: {result:?}");
         // Exercises code path - reaching here without panic is the test
     }

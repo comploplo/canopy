@@ -11,17 +11,18 @@ name = "canopy"
 path = "src/main.rs"
 
 [dependencies]
-canopy = { path = "../canopy" }
 canopy-resources = { path = "../canopy-resources" }
 tokio = { workspace = true }
 clap = { version = "4.4", features = ["derive"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 rand = "0.8"
 
 [package.metadata.cargo-machete]
-# Placeholder deps for future CLI implementation
-ignored = ["canopy", "canopy-resources", "clap", "rand", "tokio", "tracing", "tracing-subscriber"]
+# These deps are used indirectly or for future features
+ignored = ["rand", "tokio", "tracing", "tracing-subscriber"]
 
 [lints]
 workspace = true

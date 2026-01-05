@@ -6,7 +6,7 @@
 use crate::runtime::TokenId;
 
 use super::beam::{BeamEntry, BeamSearch, BeamSearchConfig, ChoiceId};
-use super::lm::LanguageModel;
+use super::lm::SurprisalModel;
 use super::surprisal::{GardenPathDetector, GardenPathEvent, Surprisal};
 
 /// State of incremental processing after each word.
@@ -173,7 +173,7 @@ impl IncrementalProcessor {
     /// Process the next word, updating state and computing surprisal.
     ///
     /// Returns the surprisal at this word position.
-    pub fn process_word<LM: LanguageModel>(
+    pub fn process_word<LM: SurprisalModel>(
         &self,
         state: &mut IncrementalState,
         token_id: TokenId,
@@ -252,7 +252,7 @@ impl Default for IncrementalProcessor {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::kernel::incremental::lm::UniformLanguageModel;
+    use crate::kernel::incremental::lm::UniformSurprisalModel;
 
     #[test]
     fn test_incremental_state_creation() {
@@ -266,7 +266,7 @@ mod tests {
     fn test_process_word() {
         let processor = IncrementalProcessor::new();
         let mut state = processor.new_state();
-        let lm = UniformLanguageModel::default();
+        let lm = UniformSurprisalModel::default();
 
         let surprisal = processor.process_word(&mut state, TokenId::new(0), "hello", &lm);
 
@@ -279,7 +279,7 @@ mod tests {
     fn test_process_multiple_words() {
         let processor = IncrementalProcessor::new();
         let mut state = processor.new_state();
-        let lm = UniformLanguageModel::default();
+        let lm = UniformSurprisalModel::default();
 
         processor.process_word(&mut state, TokenId::new(0), "the", &lm);
         processor.process_word(&mut state, TokenId::new(1), "cat", &lm);
@@ -293,7 +293,7 @@ mod tests {
     fn test_add_sense_choice() {
         let processor = IncrementalProcessor::new();
         let mut state = processor.new_state();
-        let lm = UniformLanguageModel::default();
+        let lm = UniformSurprisalModel::default();
 
         processor.process_word(&mut state, TokenId::new(0), "bank", &lm);
 
@@ -308,7 +308,7 @@ mod tests {
     fn test_entropy_computation() {
         let processor = IncrementalProcessor::new();
         let mut state = processor.new_state();
-        let lm = UniformLanguageModel::default();
+        let lm = UniformSurprisalModel::default();
 
         processor.process_word(&mut state, TokenId::new(0), "every", &lm);
         let entropy_before = state.entropy();

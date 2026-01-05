@@ -15,7 +15,7 @@
 //! Token Stream ──► IncrementalProcessor ──► IncrementalState
 //!                        │                        │
 //!                        ▼                        ▼
-//!                  LanguageModel            Surprisal Trace
+//!                  SurprisalModel           Surprisal Trace
 //!                        │                   Beam of Readings
 //!                        ▼                   Entropy
 //!                  P(word|context)
@@ -27,6 +27,6 @@ mod state;
 mod surprisal;
 
 pub use beam::{BeamSearch, BeamSearchConfig};
-pub use lm::{LanguageModel, UniformLanguageModel};
+pub use lm::{SurprisalModel, UniformSurprisalModel};
 pub use state::{IncrementalProcessor, IncrementalState, ReadingPrefix};
 pub use surprisal::{GardenPathDetector, GardenPathEvent, Surprisal};

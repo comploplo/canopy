@@ -11,14 +11,22 @@
 //! - `WordPosIndex`: Fast word→POS lookup from treebank statistics
 //! - `shared`: Common utilities for POS parsing, lemmatization, dependency guessing
 
+mod pattern_matcher;
+mod pattern_types;
 mod resource_tagger;
 mod shared;
 mod treebank_provider;
+mod verbnet_patterns;
 mod word_pos_index;
 
+pub use pattern_matcher::{extract_patterns_from_syntax, MatcherStats, PatternMatcher};
+pub use pattern_types::{ArgumentPattern, ArgumentPosition, DependencyPattern, SemanticSignature};
 pub use resource_tagger::ResourceBackedTagger;
 pub use shared::{parse_deprel, parse_upos};
 pub use treebank_provider::{TreebankConfig, TreebankSyntaxProvider};
+pub use verbnet_patterns::{
+    pattern_count as verbnet_pattern_count, synthesize_pattern, VERBNET_PATTERNS,
+};
 pub use word_pos_index::WordPosIndex;
 
 use canopy::CanopyError;

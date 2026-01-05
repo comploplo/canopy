@@ -19,7 +19,10 @@ All core milestones complete. The system provides end-to-end semantic analysis.
 
 - **5 semantic engines**: VerbNet (333 classes), FrameNet (1200+ frames), WordNet (117k synsets), PropBank, Lexicon
 - **Full pipeline**: Text → Tokenization → POS tagging → Syntax → Event composition → Discourse
-- **Performance**: ~730ms init, 30-200μs per sentence, 81%+ test coverage
+- **Discourse analysis**: Coherence relations, QUD tracking, presupposition detection, anaphora resolution
+- **Underspecification**: Packed semantics, 5 disambiguation strategies, MRS-style scope
+- **Documentation**: Formal semantics appendix, API guides, theoretical foundations
+- **Performance**: ~730ms init, 30-200μs per sentence, 80%+ test coverage
 
 ## Architecture
 

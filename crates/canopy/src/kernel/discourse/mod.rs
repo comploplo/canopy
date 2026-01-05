@@ -48,18 +48,39 @@
 //! Word-level knowledge (gender lookup, animacy, etc.) comes from providers.
 
 mod binding;
+mod coherence;
 mod context;
 mod drs;
+mod moves;
+mod presupposition;
+mod qud;
 mod referent;
+mod relevance;
+mod validation;
 
 pub use binding::{
     AnaphorType, BindingConstraint, BindingResult, PronounResolver, UnderspecBinding,
+};
+pub use coherence::{
+    CoherenceClassification, CoherenceClassifier, CoherenceEdge, CoherenceGraph, CoherenceRelation,
+    CoherenceSignal, SentenceData, SentenceReferents,
 };
 pub use context::{DiscourseConfig, DiscourseContext};
 pub use drs::{
     Drs, DrsCondition, DrsId, Label, SubordinateDrs, SubordinationConstraint,
     SubordinationConstraintType, SubordinationRelation, UdrsBuilder, UnderspecDrs,
 };
+pub use moves::{DiscourseMove, MoveClassification, MoveClassifier, QuestionType};
+pub use presupposition::{
+    Presupposition, PresuppositionDetector, PresuppositionManager, PresuppositionStatus,
+    PriorState, TrackedPresupposition,
+};
+pub use qud::{
+    PartialAnswer, QudIssue, QudOrigin, QudReport, QudReportEntry, QudStack, QudStatus, QudTree,
+    QudTreeInfo, QudTreeNode, QudUpdate, QudUpdateAction,
+};
 pub use referent::{
     DiscourseReferent, Gender, NumberFeature, Person, ReferentId, ReferentRegistry, ReferentType,
 };
+pub use relevance::{RelevanceAlignment, RelevanceLevel, RelevanceReport};
+pub use validation::{ValidationEngine, ValidationReport, ValidationStatus};

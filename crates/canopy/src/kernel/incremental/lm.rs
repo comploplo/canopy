@@ -1,15 +1,15 @@
-//! Language model trait for surprisal computation.
+//! Surprisal model trait for probabilistic language modeling.
 //!
-//! The language model provides probability estimates P(word|context) needed
+//! The surprisal model provides probability estimates P(word|context) needed
 //! for surprisal-based disambiguation and garden-path detection.
 
 use super::Surprisal;
 
-/// Language model trait for computing word/sense probabilities.
+/// Surprisal model trait for computing word/sense probabilities.
 ///
 /// Implementations provide P(word|context) for surprisal computation
 /// and P(sense|word, context) for sense disambiguation.
-pub trait LanguageModel: Send + Sync {
+pub trait SurprisalModel: Send + Sync {
     /// Compute P(token | prefix).
     ///
     /// Returns probability of the token given the preceding context.
@@ -71,19 +71,19 @@ pub trait LanguageModel: Send + Sync {
     }
 }
 
-/// Uniform language model - assigns equal probability to all words.
+/// Uniform surprisal model - assigns equal probability to all words.
 ///
 /// Useful as a baseline or when no better model is available.
 /// All words have P = `1/vocabulary_size`.
 #[derive(Debug, Clone)]
-pub struct UniformLanguageModel {
+pub struct UniformSurprisalModel {
     /// Size of the vocabulary (determines probability).
-    pub vocabulary_size: usize,
+    pub vocabulary_size: u32,
     /// Number of word senses (for sense probability).
-    pub sense_count: usize,
+    pub sense_count: u32,
 }
 
-impl Default for UniformLanguageModel {
+impl Default for UniformSurprisalModel {
     fn default() -> Self {
         Self {
             vocabulary_size: 50_000, // Typical English vocabulary
@@ -92,15 +92,13 @@ impl Default for UniformLanguageModel {
     }
 }
 
-impl LanguageModel for UniformLanguageModel {
-    #[allow(clippy::cast_precision_loss)]
+impl SurprisalModel for UniformSurprisalModel {
     fn word_probability(&self, _token: &str, _prefix: &[&str]) -> f64 {
-        1.0 / self.vocabulary_size as f64
+        1.0 / f64::from(self.vocabulary_size)
     }
 
-    #[allow(clippy::cast_precision_loss)]
     fn sense_probability(&self, _sense_id: &str, _word: &str, _context: &[&str]) -> f64 {
-        1.0 / self.sense_count as f64
+        1.0 / f64::from(self.sense_count)
     }
 }
 
@@ -110,7 +108,7 @@ mod tests {
 
     #[test]
     fn test_uniform_word_probability() {
-        let lm = UniformLanguageModel {
+        let lm = UniformSurprisalModel {
             vocabulary_size: 1000,
             sense_count: 5,
         };
@@ -121,7 +119,7 @@ mod tests {
 
     #[test]
     fn test_uniform_surprisal() {
-        let lm = UniformLanguageModel {
+        let lm = UniformSurprisalModel {
             vocabulary_size: 1024, // 2^10
             sense_count: 5,
         };
@@ -133,7 +131,7 @@ mod tests {
 
     #[test]
     fn test_sentence_surprisal() {
-        let lm = UniformLanguageModel {
+        let lm = UniformSurprisalModel {
             vocabulary_size: 1024,
             sense_count: 5,
         };
@@ -146,7 +144,7 @@ mod tests {
 
     #[test]
     fn test_reading_probability() {
-        let lm = UniformLanguageModel {
+        let lm = UniformSurprisalModel {
             vocabulary_size: 100,
             sense_count: 5,
         };

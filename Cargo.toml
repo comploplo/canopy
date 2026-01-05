@@ -37,6 +37,7 @@ rayon = { version = "1.10" }
 criterion = { version = "0.6", features = ["html_reports"] }
 proptest = "1.7"
 insta = { version = "1.42", features = ["json", "redactions"] }
+sysinfo = "0.33"
 
 # Linguistic processing
 # TODO: UDPipe bindings (will be added in M2)

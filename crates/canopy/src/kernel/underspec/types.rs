@@ -265,6 +265,9 @@ impl PackedSemantics {
     ///
     /// # Returns
     /// The choice ID for the newly created choice point, or None if no ambiguity.
+    ///
+    /// # Panics
+    /// Panics if the number of choices exceeds `u32::MAX`.
     pub fn add_referential_ambiguity(
         &mut self,
         anaphor_id: ReferentId,
@@ -275,8 +278,9 @@ impl PackedSemantics {
             return None;
         }
 
-        #[allow(clippy::cast_possible_truncation)]
-        let choice_id = ChoiceId::new(self.choices.len() as u32);
+        let choice_id = ChoiceId::new(
+            u32::try_from(self.choices.len()).expect("choice count exceeds u32::MAX"),
+        );
 
         // Create alternatives from candidates
         let alternatives: Vec<Alternative> = binding

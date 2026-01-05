@@ -8,7 +8,6 @@
 set -e
 
 # Coverage threshold for release milestones
-# Restored to 80% after refactor completion (2026-01-02)
 COVERAGE_THRESHOLD=80
 
 echo "🔬 Running coverage analysis with cargo-llvm-cov..."

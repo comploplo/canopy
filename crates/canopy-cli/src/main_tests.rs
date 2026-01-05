@@ -1,45 +1,33 @@
-//! Tests for CLI main function to achieve 0% coverage target
+//! Tests for CLI main function to achieve coverage target
 //!
-//! These tests focus on the main.rs file which currently has 0/4 coverage
+//! These tests focus on the main.rs file
 
 #[cfg(test)]
 mod cli_main_tests {
-    use crate::run_cli;
-    use std::env;
+    use crate::run_cli_with_args;
 
     #[test]
     fn test_cli_main_success_case() {
-        // Test that main function runs without panicking
-        // We'll test the run_cli function directly since main() is hard to test
-        let result = run_cli();
-        assert!(result.is_ok(), "CLI should run successfully");
+        // Test that CLI runs successfully with explicit args
+        // Using run_cli_with_args to avoid picking up test harness arguments
+        let args = vec!["canopy".to_string(), "John runs.".to_string()];
+        let result = run_cli_with_args(&args);
+        assert!(result.is_ok(), "CLI should run successfully: {result:?}");
     }
 
     #[test]
     fn test_cli_main_error_handling() {
-        // Test error handling paths in main
-        // Since main calls run_cli(), we test different scenarios
+        // Test error handling paths - test-error flag triggers error
+        let args = vec![
+            "canopy".to_string(),
+            "--test-error".to_string(),
+            "text".to_string(),
+        ];
+        let result = run_cli_with_args(&args);
+        assert!(result.is_err(), "Should fail with --test-error");
 
-        // Test with empty environment to potentially trigger different code paths
-        let _original_args = env::args().collect::<Vec<_>>();
-
-        // Test basic execution path
-        let result = run_cli();
-
-        // Should succeed with basic functionality
-        match result {
-            Ok(()) => {
-                // Success path covered - reaching here is the test
-            }
-            Err(e) => {
-                // Error path covered - ensure error is reasonable
-                let error_msg = format!("{e}");
-                assert!(
-                    !error_msg.is_empty(),
-                    "Error should have meaningful message"
-                );
-            }
-        }
+        // Note: Empty text case (no args) would try to read stdin which blocks in tests.
+        // The error handling path is covered by the --test-error flag above.
     }
 
     #[test]
@@ -70,11 +58,12 @@ mod cli_main_tests {
         // Test successful exit code path
         // We can't easily test std::process::exit(1), but we can test the success path
 
-        // This tests the successful branch of main()
-        let _result = run_cli();
+        // This tests the successful branch of main() using explicit args
+        let args = vec!["canopy".to_string(), "Mary walks.".to_string()];
+        let result = run_cli_with_args(&args);
 
-        // If run_cli succeeds, main should not call exit(1)
-        // result.is_ok() or result.is_err() - either path covers main behavior
+        // Success means main should not call exit(1)
+        assert!(result.is_ok(), "CLI should succeed: {result:?}");
     }
 
     #[test]

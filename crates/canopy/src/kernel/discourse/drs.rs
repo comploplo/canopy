@@ -182,20 +182,32 @@ impl Drs {
     }
 
     /// Check if a referent is accessible from this DRS.
+    ///
+    /// In DRT, accessibility is asymmetric:
+    /// - Referents in the main DRS are accessible to subordinate DRSs
+    /// - Referents in subordinate DRSs are NOT accessible from the main DRS
+    ///
+    /// This method only checks the current DRS's universe. To check if a
+    /// referent from a superordinate DRS is accessible, use the
+    /// `is_accessible_from` method with the superordinate DRS.
     #[must_use]
     pub fn is_accessible(&self, id: ReferentId) -> bool {
+        // Only check local universe - subordinate referents are NOT accessible
+        self.universe.contains_key(&id)
+    }
+
+    /// Check if a referent is accessible from this DRS, given a superordinate context.
+    ///
+    /// Accessibility in DRT flows downward: referents from superordinate DRSs
+    /// are accessible in subordinate contexts, but not vice versa.
+    #[must_use]
+    pub fn is_accessible_from(&self, id: ReferentId, superordinate: &Drs) -> bool {
+        // Check local universe first
         if self.universe.contains_key(&id) {
             return true;
         }
-
-        // Check subordinates (simplified accessibility)
-        for sub in &self.subordinates {
-            if sub.drs.is_accessible(id) {
-                return true;
-            }
-        }
-
-        false
+        // Check superordinate context
+        superordinate.universe.contains_key(&id)
     }
 
     /// Merge another DRS into this one.
@@ -904,11 +916,29 @@ mod tests {
         let mut sub_drs = Drs::new(DrsId::new(2));
         sub_drs.add_referent(DiscourseReferent::entity(ReferentId::new(2), "Mary", 0));
 
-        main_drs.add_subordinate(SubordinationRelation::ComplementClause, sub_drs);
+        main_drs.add_subordinate(SubordinationRelation::ComplementClause, sub_drs.clone());
 
+        // Main DRS referent is accessible
         assert!(main_drs.is_accessible(ReferentId::new(1)));
-        assert!(main_drs.is_accessible(ReferentId::new(2)));
+
+        // Subordinate referent is NOT accessible from main (DRT asymmetry)
+        assert!(
+            !main_drs.is_accessible(ReferentId::new(2)),
+            "Subordinate referents should not be accessible from main DRS"
+        );
+
+        // Non-existent referent is not accessible
         assert!(!main_drs.is_accessible(ReferentId::new(99)));
+
+        // Test is_accessible_from: subordinate can access main's referents
+        assert!(
+            sub_drs.is_accessible_from(ReferentId::new(1), &main_drs),
+            "Main DRS referents should be accessible from subordinate"
+        );
+        assert!(
+            sub_drs.is_accessible_from(ReferentId::new(2), &main_drs),
+            "Local referents should be accessible"
+        );
     }
 
     #[test]

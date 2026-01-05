@@ -131,10 +131,14 @@ cargo test --workspace
 | ----------------- | ----------------- |
 | Pipeline init     | ~730ms (one-time) |
 | Sentence analysis | 30-200μs          |
-| Memory usage      | ~100MB            |
+| Memory usage      | ~350 MB           |
 
 ## Next Steps
 
 - [ARCHITECTURE.md](ARCHITECTURE.md) — System design
-- [PERFORMANCE.md](PERFORMANCE.md) — Optimization guide
+- [DISCOURSE.md](DISCOURSE.md) — Discourse analysis features
+- [UNDERSPECIFICATION.md](UNDERSPECIFICATION.md) — Ambiguity handling
+- [SURPRISAL.md](SURPRISAL.md) — Custom language model integration
+- [FORMAL_SEMANTICS.md](FORMAL_SEMANTICS.md) — Theoretical foundations
+- [reference/performance.md](reference/performance.md) — Performance details
 - `cargo doc --open` — API documentation

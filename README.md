@@ -13,10 +13,10 @@ Input: "John gave Mary a book"
 ┌─────────────────────────────────────────────────────────────────────┐
 │  SEMANTIC ANALYSIS                                                  │
 │                                                                     │
-│  VerbNet:   give-13.1 → frames with Agent, Theme, Recipient roles   │
-│  FrameNet:  Giving frame → frame elements (Donor, Theme, Recipient) │
+│  VerbNet:   give-13.1 → Agent, Theme, Recipient roles               │
+│  FrameNet:  Giving frame → Donor, Theme, Recipient elements         │
 │  WordNet:   give.v.01 → synset with hypernyms, definitions          │
-│  PropBank:  give.01 → predicate-argument structure (ARG0, ARG1...)  │
+│  PropBank:  give.01 → ARG0, ARG1, ARG2 structure                    │
 │                                                                     │
 │  Event:     ∃e[Cause(e) ∧ Agent(e,John) ∧ Theme(e,book)             │
 │                        ∧ Recipient(e,Mary)]                         │
@@ -25,44 +25,84 @@ Input: "John gave Mary a book"
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-## Features
-
-- **5 semantic engines** — VerbNet, FrameNet, WordNet, PropBank, Lexicon
-- **Neo-Davidsonian events** — LittleV primitives (Cause, Become, Do, Experience, Go, Have)
-- **Theta role binding** — Agent, Patient, Theme, Experiencer, Recipient, etc.
-- **Surprisal-based disambiguation** — Probability-weighted reading selection using information theory
-- **High performance** — 50,000-2,000,000+ words/sec depending on engine
-- **Pure Rust** — No C/C++ dependencies; requires linguistic data files at runtime
-
 ## Quick Start
 
 ```bash
 # Build
 cargo build --release
 
-# Download linguistic data (see Data Setup for licensing)
+# Download linguistic data (see Data Setup below)
 ./scripts/setup-data.sh
 
 # Run the demo
-cargo run -p canopy-resources --example demo --release
+cargo run --example demo --release
 ```
 
-### Data Setup
+## Features
 
-Canopy requires linguistic datasets (not included in repo). **Note**: Each dataset has its own license. VerbNet, WordNet, and UD treebanks are freely available. FrameNet requires registration. Check each source for terms before commercial use.
+### Semantic Engines
 
-| Dataset        | Location                    | Source                                                           |
-| -------------- | --------------------------- | ---------------------------------------------------------------- |
-| VerbNet 3.4    | `data/verbnet/`             | [GitHub](https://github.com/cu-clear/verbnet)                    |
-| FrameNet 1.7   | `data/framenet/`            | [FrameNet](https://framenet.icsi.berkeley.edu/)                  |
-| WordNet 3.1    | `data/wordnet/`             | [WordNet](https://wordnet.princeton.edu/)                        |
-| PropBank       | `data/propbank/`            | [PropBank](https://propbank.github.io/)                          |
-| UD English-EWT | `data/ud_english-ewt/`      | [UniversalDependencies](https://universaldependencies.org/)      |
-| Gender names   | `data/name_gender_dataset/` | [UCI ML](https://archive.ics.uci.edu/dataset/591/gender+by+name) |
+Five integrated linguistic resources working together:
+
+| Engine   | Coverage         | Purpose                           |
+| -------- | ---------------- | --------------------------------- |
+| VerbNet  | 333 verb classes | Syntactic frames and theta roles  |
+| FrameNet | 1,200+ frames    | Semantic frame structures         |
+| WordNet  | 117,000+ synsets | Lexical relations and definitions |
+| PropBank | Full coverage    | Predicate-argument structures     |
+| Lexicon  | Patterns + lists | Negation, discourse markers       |
+
+### Event Semantics
+
+Neo-Davidsonian event structures with LittleV decomposition:
+
+- **LittleV Primitives**: Cause, Become, Do, Experience, Go, Have
+- **Theta Roles**: Agent, Patient, Theme, Experiencer, Recipient, Goal, Location
+- **Voice Detection**: Active, passive, and middle voice recognition
+- **Event Composition**: Combines syntactic dependencies with semantic frames
+
+### Discourse Processing
+
+Formal discourse semantics following linguistic theory:
+
+- **DRS Construction** — Discourse Representation Structures (Kamp 1981)
+- **Anaphora Resolution** — Salience-based ranking with Binding Theory constraints
+- **QUD Tracking** — Question Under Discussion stack and tree (Roberts 1996)
+- **Coherence Relations** — SDRT-inspired classification (Narration, Elaboration, Contrast, Explanation)
+- **Discourse Moves** — Speech act classification (Assertion, Question, Correction, Acknowledgment)
+- **Presupposition Detection** — Trigger identification with accommodation tracking
+- **Validation** — Entity state tracking and contradiction detection
+
+### Underspecification
+
+Efficient ambiguity handling without exponential blowup:
+
+- **Packed Semantics** — Share structure across readings (O(n) not O(2^n))
+- **Scope Underspecification** — UDRT and MRS-style representations
+- **Referential Ambiguity** — Ranked pronoun-antecedent candidates
+- **Multiple Disambiguators** — Surprisal, confidence, entropy-based selection
+
+### Surprisal Processing
+
+Information-theoretic analysis following psycholinguistics research:
+
+- **Incremental Processing** — Left-to-right with beam search
+- **Garden-Path Detection** — Via surprisal spikes (Hale 2001, Levy 2008)
+- **Entropy Reduction** — Track uncertainty reduction across words
+- **SurprisalModel Trait** — Pluggable probability models for P(word|context)
+
+### UD Treebank Pattern Matching
+
+VerbNet-aware dependency pattern matching using Universal Dependencies:
+
+- **Semantic Signatures** — Hash-based lookup from lemma + VerbNet class
+- **Adaptive Caching** — Core patterns + LRU cache for efficiency
+- **UTAH Heuristics** — Dependency-to-role mapping fallback
+- **Pattern Statistics** — Cache hit rates, coverage metrics
 
 ## Architecture
 
-The core `canopy` crate defines abstract **provider traits** (`SenseProvider`, `RoleProvider`, etc.) with no knowledge of specific data formats. The `canopy-resources` crate implements these traits using VerbNet XML, FrameNet XML, WordNet database, etc. This dependency inversion means the core semantic types are independent of any particular linguistic resource format.
+The `canopy` crate defines abstract provider traits with no knowledge of data formats. The `canopy-resources` crate implements these traits using VerbNet XML, FrameNet XML, WordNet database, etc. This dependency inversion keeps core semantic types independent of resource formats.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -71,7 +111,7 @@ The core `canopy` crate defines abstract **provider traits** (`SenseProvider`, `
 │                                                                             │
 │   ┌─────────────────────────────────────────────────────────────────────┐   │
 │   │                         canopy-cli                                  │   │
-│   │                   Command-line interface & demos                    │   │
+│   │                   Command-line interface                            │   │
 │   └─────────────────────────────────────────────────────────────────────┘   │
 │                                    │                                        │
 │                                    ▼                                        │
@@ -80,28 +120,26 @@ The core `canopy` crate defines abstract **provider traits** (`SenseProvider`, `
 │   │                                                                     │   │
 │   │   ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌──────────┐ ┌───────┐  │   │
 │   │   │  VerbNet  │ │ FrameNet  │ │  WordNet  │ │ PropBank │ │Lexicon│  │   │
-│   │   │           │ │           │ │           │ │          │ │       │  │   │
-│   │   │ 333 verb  │ │  1,200+   │ │  117,000+ │ │ semantic │ │ word  │  │   │
-│   │   │ classes   │ │  frames   │ │  synsets  │ │  roles   │ │ lists │  │   │
+│   │   │ 333 class │ │ 1200 frm  │ │ 117k syn  │ │   roles  │ │pattern│  │   │
 │   │   └───────────┘ └───────────┘ └───────────┘ └──────────┘ └───────┘  │   │
 │   │                                                                     │   │
-│   │   ┌─────────────────────────────────────────────────────────────┐   │   │
-│   │   │                    Engine Infrastructure                    │   │   │
-│   │   │  • Binary caching (50ms load vs 10-50s parse)               │   │   │
-│   │   │  • O(1) indexed lookups                                     │   │   │
-│   │   │  • LRU query caching                                        │   │   │
-│   │   └─────────────────────────────────────────────────────────────┘   │   │
+│   │   ┌─────────────────────┐  ┌────────────────────────────────────┐   │   │
+│   │   │   Pattern Matcher   │  │       Engine Infrastructure        │   │
+│   │   │  UD treebank-aware  │  │  Binary cache · O(1) lookup · LRU  │   │
+│   │   └─────────────────────┘  └────────────────────────────────────┘   │   │
 │   └─────────────────────────────────────────────────────────────────────┘   │
 │                                    │ implements traits                      │
 │                                    ▼                                        │
 │   ┌─────────────────────────────────────────────────────────────────────┐   │
 │   │                            canopy                                   │   │
 │   │                                                                     │   │
-│   │   Core Types           Provider Traits         Event Semantics      │   │
-│   │   • ThetaRole          • SenseProvider         • LittleVType        │   │
-│   │   • DepRel             • RoleProvider          • PredicateDecomp    │   │
-│   │   • UPos               • DiscourseCueProvider  • EventStructure     │   │
-│   │   • CanopyError                                                     │   │
+│   │   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌───────────┐  │   │
+│   │   │  Discourse  │  │   Events    │  │ Incremental │  │ Underspec │  │   │
+│   │   │ DRS · QUD   │  │  LittleV    │  │  Surprisal  │  │  Packed   │  │   │
+│   │   │  Anaphora   │  │ Composition │  │ Beam search │  │ Semantics │  │   │
+│   │   └─────────────┘  └─────────────┘  └─────────────┘  └───────────┘  │   │
+│   │                                                                     │   │
+│   │   Core: ThetaRole · DepRel · UPos · CanopyError · Provider traits   │   │
 │   └─────────────────────────────────────────────────────────────────────┘   │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -109,104 +147,90 @@ The core `canopy` crate defines abstract **provider traits** (`SenseProvider`, `
 
 ## Crates
 
-| Crate              | Description                             | Lines   |
-| ------------------ | --------------------------------------- | ------- |
-| `canopy`           | Core types, traits, and event semantics | ~3,500  |
-| `canopy-resources` | 5 semantic engines + infrastructure     | ~21,000 |
-| `canopy-cli`       | Command-line interface and demos        | ~2,000  |
+| Crate              | Description                        | Purpose                  |
+| ------------------ | ---------------------------------- | ------------------------ |
+| `canopy`           | Core types, traits, kernel modules | Abstract semantic layer  |
+| `canopy-resources` | 5 engines + pattern matcher        | Concrete implementations |
+| `canopy-cli`       | Command-line interface             | User interaction         |
 
-**Total: ~26,500 lines of Rust** (consolidated from 78,000+ lines / 11 crates)
+**~45,000 lines of Rust** across 3 crates
 
 ## Performance
 
-Benchmarked on Moby Dick (215,000 words, 3,716 sentences):
+Benchmarks on Apple Silicon (M-series), release mode:
 
-| Engine      | Throughput              | Notes                      |
-| ----------- | ----------------------- | -------------------------- |
-| VerbNet     | 51,000 words/sec        | 333 verb classes           |
-| WordNet     | 77,000 words/sec        | 117,000+ synsets           |
-| FrameNet    | 87,000 words/sec        | 1,200+ frames, 13,000+ LUs |
-| PropBank    | 2.4M words/sec          | Indexed lemma lookup       |
-| **Overall** | **84,000 analyses/sec** |                            |
+### Sentence Analysis
 
-| Operation      | Time/Size |
-| -------------- | --------- |
-| Engine loading | ~300ms    |
-| Binary cache   | ~50ms     |
-| Peak memory    | ~1.5-2GB  |
+| Operation               | Time   | Notes                            |
+| ----------------------- | ------ | -------------------------------- |
+| Pipeline initialization | ~750ms | Binary cache (vs 10-15s cold)    |
+| Simple sentence         | ~225µs | "John runs quickly."             |
+| Ditransitive            | ~25µs  | "Mary gave John a book."         |
+| Complex event           | ~65µs  | With modifiers and decomposition |
+| 3-sentence document     | ~190µs | Full discourse analysis + DRS    |
 
-## Semantic Resources
+### Throughput (Moby Dick, 11,386 lines)
 
-### VerbNet
+| Metric            | Value           |
+| ----------------- | --------------- |
+| Per-line analysis | ~440µs          |
+| Throughput        | 2,280 lines/sec |
+| Total time        | ~5 seconds      |
 
-- 333 verb classes with syntactic frames
-- Theta roles: Agent, Patient, Theme, Experiencer, etc.
-- Maps to LittleV event primitives
+### Engine Performance
 
-### FrameNet
+| Engine   | Throughput       | Notes                      |
+| -------- | ---------------- | -------------------------- |
+| VerbNet  | 51,000 words/sec | 333 verb classes           |
+| WordNet  | 77,000 words/sec | 117,000+ synsets           |
+| FrameNet | 87,000 words/sec | 1,200+ frames, 13,000+ LUs |
+| PropBank | 2.4M words/sec   | Indexed lemma lookup       |
 
-- 1,200+ semantic frames
-- 13,000+ lexical units
-- Frame elements and relations
+### Resources
 
-### WordNet
+| Resource     | Value   |
+| ------------ | ------- |
+| Binary cache | ~50ms   |
+| Peak memory  | ~350 MB |
 
-- 117,000+ synsets
-- Hypernym/hyponym hierarchies
-- Definitions and examples
+## Data Setup
 
-### PropBank
+Canopy requires linguistic datasets (not included). Each has its own license—check terms before commercial use.
 
-- Predicate-argument structures
-- Semantic role labels (ARG0, ARG1, etc.)
-- Sense disambiguation
-
-### Lexicon
-
-- Negation words and patterns (un-, dis-, in-)
-- Discourse markers
-- Stop words, quantifiers, modals
-
-## Surprisal and Underspecification
-
-Canopy implements information-theoretic disambiguation following academic psycholinguistics:
-
-**Surprisal Theory** (Hale 2001, Levy 2008)
-
-- Processing difficulty = -log₂ P(word | context)
-- Incremental left-to-right processing with beam search
-- Garden-path detection via surprisal spikes
-- Entropy reduction tracking
-
-**Underspecified Representations**
-
-- Packed semantics share structure across readings (O(n) memory, not O(2^n))
-- UDRT-style underspecified DRS with scope constraints (Reyle 1993)
-- MRS-style handle-based scope underspecification (Copestake et al. 2005)
-- Referential ambiguity with ranked candidates (Centering Theory, Grosz et al. 1995)
-
-**Disambiguators**
-
-- `MinSurprisalDisambiguator` — Select lowest surprisal (highest probability) reading
-- `ConfidenceDisambiguator` — Use provider confidence scores (legacy)
-- `HybridDisambiguator` — Weighted combination of surprisal + confidence
-- `EntropyReductionDisambiguator` — Prefer readings that reduce uncertainty
-- `InteractiveDisambiguator` — Return all readings for downstream selection
+| Dataset        | Location                    | Source                                                           |
+| -------------- | --------------------------- | ---------------------------------------------------------------- |
+| VerbNet 3.4    | `data/verbnet/`             | [GitHub](https://github.com/cu-clear/verbnet)                    |
+| FrameNet 1.7   | `data/framenet/`            | [FrameNet](https://framenet.icsi.berkeley.edu/) (registration)   |
+| WordNet 3.1    | `data/wordnet/`             | [WordNet](https://wordnet.princeton.edu/)                        |
+| PropBank       | `data/propbank/`            | [PropBank](https://propbank.github.io/)                          |
+| UD English-EWT | `data/ud_english-ewt/`      | [UniversalDependencies](https://universaldependencies.org/)      |
+| Gender names   | `data/name_gender_dataset/` | [UCI ML](https://archive.ics.uci.edu/dataset/591/gender+by+name) |
 
 ## Theoretical Foundations
 
-**Event Semantics**
+### Event Semantics
 
 - Neo-Davidsonian event structures (Parsons 1990)
 - LittleV decomposition (Hale & Keyser, Ramchand 2008)
 - VerbNet-to-primitive mapping
 
-**Thematic Roles**
+### Thematic Roles
 
-- UTAH: Universal Theta Assignment Hypothesis (Baker 1988)
+- UTAH: Uniformity of Theta Assignment Hypothesis (Baker 1988)
 - Role hierarchy: Agent > Experiencer > Theme > Goal > Location
 
-**Lexical Resources**
+### Discourse
+
+- DRS: Discourse Representation Theory (Kamp 1981)
+- QUD: Question Under Discussion (Roberts 1996)
+- Centering Theory (Grosz, Joshi, Weinstein 1995)
+
+### Information Theory
+
+- Surprisal: S(word) = -log₂ P(word|context) (Hale 2001, Levy 2008)
+- Entropy reduction for disambiguation
+
+### Lexical Resources
 
 - VerbNet 3.4 (Kipper-Schuler 2005)
 - FrameNet 1.7 (Fillmore & Baker 2010)
@@ -216,19 +240,23 @@ Canopy implements information-theoretic disambiguation following academic psycho
 ## Requirements
 
 - Rust 1.75+
-- ~2GB RAM for full semantic data loading (all engines loaded simultaneously)
-- Linguistic datasets with their own licenses (see Data Setup)
+- ~350 MB RAM (all engines loaded)
+- Linguistic datasets (see Data Setup)
 
 ## Documentation
 
-- [Architecture](docs/ARCHITECTURE.md) — System design details
 - [Getting Started](docs/GETTING_STARTED.md) — Setup guide
+- [Architecture](docs/ARCHITECTURE.md) — System design
+- [Discourse Analysis](docs/DISCOURSE.md) — Coherence, QUD, presuppositions
+- [Underspecification](docs/UNDERSPECIFICATION.md) — Packed semantics, disambiguation
+- [Surprisal Models](docs/SURPRISAL.md) — Custom language model integration
+- [Formal Semantics](docs/FORMAL_SEMANTICS.md) — Theoretical foundations
 - [Roadmap](docs/ROADMAP.md) — Development milestones
 
 ## License
 
-MIT — see [LICENSE](LICENSE) for details.
+MIT — see [LICENSE](LICENSE)
 
 ______________________________________________________________________
 
-**Status**: Research-grade • 3 crates • 80%+ test coverage • All 5 engines operational
+**Status**: Research-grade · 3 crates · 80%+ test coverage · 5 semantic engines · Full discourse analysis

@@ -4,7 +4,7 @@
 
 use canopy::{
     ConfidenceDisambiguator, Disambiguator, GardenPathDetector, IncrementalProcessor,
-    IncrementalState, MinSurprisalDisambiguator, Surprisal, UniformLanguageModel,
+    IncrementalState, MinSurprisalDisambiguator, Surprisal, UniformSurprisalModel,
 };
 use canopy_resources::{CanopyPipeline, Tokenizer, UnicodeTokenizer};
 use std::time::Instant;
@@ -125,6 +125,83 @@ fn demo_analysis(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Er
     Ok(())
 }
 
+/// Section 3.5: Pattern matching demonstration
+fn demo_pattern_matching(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
+    println!("┌─────────────────────────────────────────────────────────────────┐");
+    println!("│ 3.5 UD TREEBANK PATTERN MATCHING (VerbNet-Aware)                │");
+    println!("└─────────────────────────────────────────────────────────────────┘\n");
+
+    let examples = [
+        "Mary gave John a book.",
+        "The chef prepared the meal.",
+        "John runs quickly.",
+        "She broke the window.",
+    ];
+
+    println!("  Dependency Pattern Matching:");
+    println!("  ────────────────────────────\n");
+
+    for sentence in examples {
+        println!("  \"{sentence}\"");
+        let analysis = pipeline.analyze(sentence)?;
+
+        // Get patterns for all verbs in the syntax
+        let patterns = pipeline
+            .syntax_provider()
+            .get_patterns_for_syntax(&analysis.syntax);
+
+        for token in &analysis.syntax.tokens {
+            if let Some(pattern) = patterns.get(&token.id) {
+                let vn_class = pattern.verbnet_class.as_deref().unwrap_or("(default SVO)");
+                println!(
+                    "    {} → VerbNet: {} ({:.0}% confidence)",
+                    token.lemma,
+                    vn_class,
+                    pattern.confidence * 100.0
+                );
+                println!(
+                    "      Expected args: {} (required: {})",
+                    pattern.arguments.len(),
+                    pattern.required_arguments().count()
+                );
+
+                // Show theta role hints
+                let hints: Vec<_> = pattern
+                    .arguments
+                    .iter()
+                    .filter_map(|arg| {
+                        arg.role_hint
+                            .as_ref()
+                            .map(|r| format!("{:?}→{:?}", arg.dep_rel, r))
+                    })
+                    .collect();
+                if !hints.is_empty() {
+                    println!("      Role hints: {}", hints.join(", "));
+                }
+            }
+        }
+        println!();
+    }
+
+    // Show pattern matcher statistics
+    if let Some(stats) = pipeline.syntax_provider().pattern_stats() {
+        println!("  Pattern Matcher Statistics:");
+        println!("  ───────────────────────────");
+        println!(
+            "    Cache hit rate:   {:.1}%",
+            stats.cache_hit_rate() * 100.0
+        );
+        println!("    Cache hits:       {}", stats.cache_hits);
+        println!("    Cache misses:     {}", stats.cache_misses);
+        println!("    Lemma hits:       {}", stats.lemma_hits);
+        println!("    VerbNet synth:    {}", stats.verbnet_synth);
+        println!("    Default fallback: {}", stats.default_fallbacks);
+    }
+
+    println!();
+    Ok(())
+}
+
 /// Section 4: Document analysis with discourse
 fn demo_document(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
     println!("┌─────────────────────────────────────────────────────────────────┐");
@@ -147,6 +224,21 @@ fn demo_document(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Er
             sent.syntax.tokens.len(),
             sent.event_count()
         );
+        if let Some(relevance) = &sent.relevance {
+            let question = relevance.question.as_deref().unwrap_or("(no active QUD)");
+            println!("      Relevance: {:?} (QUD: {})", relevance.level, question);
+        }
+        if sent.validations.is_empty() {
+            println!("      Validation: accepted");
+        } else {
+            for report in &sent.validations {
+                if let Some(message) = &report.message {
+                    println!("      Validation: {:?} ({})", report.status, message);
+                } else {
+                    println!("      Validation: {:?}", report.status);
+                }
+            }
+        }
     }
 
     if let Some(drs) = &doc.drs {
@@ -169,9 +261,141 @@ fn demo_document(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Er
 }
 
 /// Section 5: Underspecified semantic analysis
+fn demo_qud_validation(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
+    println!("\n┌─────────────────────────────────────────────────────────────────┐");
+    println!("│ 5. QUD + VALIDATION DIALOGUE                                   │");
+    println!("└─────────────────────────────────────────────────────────────────┘\n");
+
+    let dialogue = [
+        ("Analyst", "Why did the pump fail?"),
+        ("Engineer", "The spare filters arrived today."),
+        (
+            "Engineer",
+            "The pump failed because the coolant overheated.",
+        ),
+        ("Engineer", "Actually, the pump did not fail."),
+    ];
+
+    let transcript = dialogue
+        .iter()
+        .map(|(_, utt)| *utt)
+        .collect::<Vec<_>>()
+        .join(" ");
+    let doc = pipeline.analyze_document(&transcript)?;
+
+    println!("  Dialogue diagnostics:\n");
+    for ((speaker, utterance), sent) in dialogue.iter().zip(doc.sentences.iter()) {
+        println!("    {speaker}: \"{utterance}\"");
+        if let Some(relevance) = &sent.relevance {
+            let qud = relevance.question.as_deref().unwrap_or("(no active QUD)");
+            println!("      Relevance: {:?} (QUD: {qud})", relevance.level);
+        } else {
+            println!("      Relevance: (discourse disabled)");
+        }
+
+        if sent.validations.is_empty() {
+            println!("      Validation: accepted");
+        } else {
+            for report in &sent.validations {
+                if let Some(message) = &report.message {
+                    println!("      Validation: {:?} ({})", report.status, message);
+                } else {
+                    println!("      Validation: {:?}", report.status);
+                }
+            }
+        }
+        println!();
+    }
+
+    Ok(())
+}
+
+/// Section 6: Discourse structure analysis
+fn demo_discourse_structure(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
+    use canopy::Presupposition;
+
+    println!("\n┌─────────────────────────────────────────────────────────────────┐");
+    println!("│ 6. DISCOURSE STRUCTURE (Moves, Coherence, Presuppositions)      │");
+    println!("└─────────────────────────────────────────────────────────────────┘\n");
+
+    // A narrative with clear discourse structure
+    let text = "The old house stood on a hill. It had been empty for years. \
+                Then one day a stranger arrived. He opened the creaky door carefully. \
+                But the key didn't fit.";
+
+    println!("  Narrative: \"{text}\"\n");
+
+    let doc = pipeline.analyze_document(text)?;
+
+    println!("  Discourse Move Analysis:");
+    println!("  ─────────────────────────\n");
+
+    for (i, sent) in doc.sentences.iter().enumerate() {
+        print!("    [{}] \"{}\"", i + 1, sent.text);
+        if let Some(ref dm) = sent.discourse_move {
+            println!(" → {:?} ({:.0}% conf)", dm.move_type, dm.confidence * 100.0);
+        } else {
+            println!();
+        }
+    }
+
+    println!("\n  Coherence Relations:");
+    println!("  ─────────────────────\n");
+
+    for (i, sent) in doc.sentences.iter().enumerate().skip(1) {
+        if let Some(ref coh) = sent.coherence {
+            println!(
+                "    [{} → {}] {:?} ({:.0}% conf, signal: {:?})",
+                i,
+                i + 1,
+                coh.relation,
+                coh.confidence * 100.0,
+                coh.primary_signal
+            );
+        }
+    }
+
+    println!("\n  Presuppositions Detected:");
+    println!("  ──────────────────────────\n");
+
+    let mut any_presuppositions = false;
+    for (i, sent) in doc.sentences.iter().enumerate() {
+        for presup in &sent.presuppositions {
+            any_presuppositions = true;
+            let desc = match &presup.presupposition {
+                Presupposition::Existential { description, .. } => {
+                    format!("Existential: \"{description}\"")
+                }
+                Presupposition::Factive { verb, proposition } => {
+                    format!("Factive: {verb} → \"{proposition}\"")
+                }
+                Presupposition::Iterative { trigger, .. } => {
+                    format!("Iterative: \"{trigger}\"")
+                }
+                Presupposition::Change {
+                    verb, prior_state, ..
+                } => {
+                    format!("Change: {verb} (prior: {prior_state:?})")
+                }
+                Presupposition::Cleft { focus, .. } => {
+                    format!("Cleft: \"{focus}\"")
+                }
+            };
+            println!("    [{}] {} ({:?})", i + 1, desc, presup.status);
+        }
+    }
+    if !any_presuppositions {
+        println!("    (No explicit presupposition triggers detected)");
+    }
+
+    println!();
+    Ok(())
+}
+
+/// Section 7: Underspecified semantic analysis
 fn demo_underspecified(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
     println!("\n┌─────────────────────────────────────────────────────────────────┐");
-    println!("│ 5. UNDERSPECIFIED ANALYSIS (Preserving Ambiguity)               │");
+    println!("│ 7. UNDERSPECIFIED ANALYSIS (Preserving Ambiguity)               │");
     println!("└─────────────────────────────────────────────────────────────────┘\n");
 
     let examples = [
@@ -214,10 +438,10 @@ fn demo_underspecified(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::err
     Ok(())
 }
 
-/// Section 6: Surprisal trace demonstration
+/// Section 8: Surprisal trace demonstration
 fn demo_surprisal() {
     println!("┌─────────────────────────────────────────────────────────────────┐");
-    println!("│ 6. SURPRISAL TRACE (Information-Theoretic Processing)           │");
+    println!("│ 8. SURPRISAL TRACE (Information-Theoretic Processing)           │");
     println!("└─────────────────────────────────────────────────────────────────┘\n");
 
     let examples = [
@@ -231,7 +455,7 @@ fn demo_surprisal() {
         ),
     ];
 
-    let lm = UniformLanguageModel::default();
+    let lm = UniformSurprisalModel::default();
     let processor = IncrementalProcessor::new();
     let detector = GardenPathDetector::with_threshold(10.0); // 10 bits threshold
 
@@ -272,10 +496,10 @@ fn demo_surprisal() {
     }
 }
 
-/// Section 7: Disambiguator comparison
+/// Section 9: Disambiguator comparison
 fn demo_disambiguators(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
     println!("┌─────────────────────────────────────────────────────────────────┐");
-    println!("│ 7. DISAMBIGUATOR COMPARISON                                     │");
+    println!("│ 9. DISAMBIGUATOR COMPARISON                                     │");
     println!("└─────────────────────────────────────────────────────────────────┘\n");
 
     let sentence = "The bank collapsed.";
@@ -313,10 +537,10 @@ fn demo_disambiguators(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::err
     Ok(())
 }
 
-/// Section 8: Moby Dick benchmark
+/// Section 10: Moby Dick benchmark
 fn demo_moby_dick(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
     println!("\n┌─────────────────────────────────────────────────────────────────┐");
-    println!("│ 8. MOBY DICK BENCHMARK (Full Novel Analysis)                    │");
+    println!("│ 10. MOBY DICK BENCHMARK (Full Novel Analysis)                   │");
     println!("└─────────────────────────────────────────────────────────────────┘\n");
 
     let moby_path = std::path::Path::new("data/test-corpus/mobydick.txt");
@@ -380,6 +604,29 @@ fn demo_moby_dick(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::E
     Ok(())
 }
 
+/// Section 11: Derivation Trace - Explainable Semantics
+fn demo_derivation_trace(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
+    println!("\n┌─────────────────────────────────────────────────────────────────┐");
+    println!("│ 11. DERIVATION TRACE (Explainable Semantics)                    │");
+    println!("└─────────────────────────────────────────────────────────────────┘\n");
+
+    println!("  Single sentence with trace:");
+    println!("  ─────────────────────────────\n");
+
+    let (_, trace) =
+        pipeline.analyze_with_trace("The chef carefully prepared the elegant meal.")?;
+    println!("{}", trace.to_text());
+
+    println!("\n  Document analysis with discourse trace:");
+    println!("  ────────────────────────────────────────\n");
+
+    let (_, doc_trace) = pipeline
+        .analyze_document_with_trace("A man entered the room. He looked around nervously.")?;
+    println!("{}", doc_trace.to_text());
+
+    Ok(())
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n╔══════════════════════════════════════════════════════════════════╗");
     println!("║           CANOPY - Semantic Analysis Pipeline                    ║");
@@ -389,11 +636,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     demo_tokenization();
     let pipeline = init_pipeline()?;
     demo_analysis(&pipeline)?;
+    demo_pattern_matching(&pipeline)?;
     demo_document(&pipeline)?;
+    demo_qud_validation(&pipeline)?;
+    demo_discourse_structure(&pipeline)?;
     demo_underspecified(&pipeline)?;
     demo_surprisal();
     demo_disambiguators(&pipeline)?;
     demo_moby_dick(&pipeline)?;
+    demo_derivation_trace(&pipeline)?;
 
     println!("\n╔══════════════════════════════════════════════════════════════════╗");
     println!("║                        Demo Complete                             ║");

@@ -9,12 +9,12 @@
 
 use super::types::{PackedSemantics, Reading};
 use crate::kernel::discourse::Drs;
-use crate::kernel::incremental::{IncrementalState, LanguageModel};
+use crate::kernel::incremental::{IncrementalState, SurprisalModel};
 
 /// Context for disambiguation decisions.
 pub struct DisambiguationContext<'a> {
-    /// Language model for probability estimates.
-    pub language_model: Option<&'a dyn LanguageModel>,
+    /// Surprisal model for probability estimates.
+    pub surprisal_model: Option<&'a dyn SurprisalModel>,
     /// Incremental processing state (if available).
     pub incremental_state: Option<&'a IncrementalState>,
     /// Discourse history for context-based disambiguation.
@@ -26,17 +26,17 @@ impl<'a> DisambiguationContext<'a> {
     #[must_use]
     pub fn minimal() -> Self {
         Self {
-            language_model: None,
+            surprisal_model: None,
             incremental_state: None,
             discourse_history: &[],
         }
     }
 
-    /// Create context with a language model.
+    /// Create context with a surprisal model.
     #[must_use]
-    pub fn with_lm(lm: &'a dyn LanguageModel) -> Self {
+    pub fn with_surprisal_model(lm: &'a dyn SurprisalModel) -> Self {
         Self {
-            language_model: Some(lm),
+            surprisal_model: Some(lm),
             incremental_state: None,
             discourse_history: &[],
         }
@@ -403,5 +403,67 @@ mod tests {
         assert_eq!(HybridDisambiguator::default().name(), "hybrid");
         assert_eq!(EntropyReductionDisambiguator.name(), "entropy-reduction");
         assert_eq!(InteractiveDisambiguator.name(), "interactive");
+    }
+
+    #[test]
+    fn test_entropy_reduction_disambiguator() {
+        let packed = create_test_packed();
+        let ctx = DisambiguationContext::minimal();
+        let disamb = EntropyReductionDisambiguator;
+
+        let best = disamb.select_reading(&packed, &ctx);
+        assert!(best.is_some());
+
+        let ranked = disamb.rank_readings(&packed, &ctx);
+        assert_eq!(ranked.len(), 2);
+    }
+
+    #[test]
+    fn test_min_surprisal_rank_readings() {
+        let packed = create_test_packed();
+        let ctx = DisambiguationContext::minimal();
+        let disamb = MinSurprisalDisambiguator;
+
+        let ranked = disamb.rank_readings(&packed, &ctx);
+        assert_eq!(ranked.len(), 2);
+        // Scores should be non-negative
+        assert!(ranked.iter().all(|(_, score)| *score >= 0.0));
+    }
+
+    #[test]
+    fn test_confidence_rank_readings() {
+        let packed = create_test_packed();
+        let ctx = DisambiguationContext::minimal();
+        let disamb = ConfidenceDisambiguator;
+
+        let ranked = disamb.rank_readings(&packed, &ctx);
+        assert_eq!(ranked.len(), 2);
+    }
+
+    #[test]
+    fn test_context_with_history() {
+        let history = vec![Drs::default()];
+        let ctx = DisambiguationContext::minimal().with_history(&history);
+        assert_eq!(ctx.discourse_history.len(), 1);
+    }
+
+    #[test]
+    fn test_hybrid_select_reading() {
+        let packed = create_test_packed();
+        let ctx = DisambiguationContext::minimal();
+        let disamb = HybridDisambiguator::new(0.7, 0.3);
+
+        let best = disamb.select_reading(&packed, &ctx);
+        assert!(best.is_some());
+    }
+
+    #[test]
+    fn test_interactive_select_reading() {
+        let packed = create_test_packed();
+        let ctx = DisambiguationContext::minimal();
+        let disamb = InteractiveDisambiguator;
+
+        let best = disamb.select_reading(&packed, &ctx);
+        assert!(best.is_some());
     }
 }

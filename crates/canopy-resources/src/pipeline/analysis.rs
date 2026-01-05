@@ -1,6 +1,9 @@
 //! Analysis result types for the pipeline.
 
-use canopy::kernel::discourse::{Drs, UnderspecDrs};
+use canopy::kernel::discourse::{
+    CoherenceClassification, Drs, MoveClassification, RelevanceReport, TrackedPresupposition,
+    UnderspecDrs, ValidationReport,
+};
 use canopy::kernel::events::{ComposedEvents, PackedEvents};
 use canopy::kernel::underspec::AmbiguitySummary;
 use canopy::runtime::{AnnotatedSyntax, PredicateDecomposition, RoleBinding};
@@ -19,6 +22,16 @@ pub struct SemanticAnalysis {
     pub role_bindings: Vec<RoleBinding>,
     /// Composed events for this sentence.
     pub events: Option<ComposedEvents>,
+    /// Optional discourse relevance report.
+    pub relevance: Option<RelevanceReport>,
+    /// Validation reports for events within this sentence.
+    pub validations: Vec<ValidationReport>,
+    /// Discourse move classification (assertion, question, etc.).
+    pub discourse_move: Option<MoveClassification>,
+    /// Coherence relation to the previous sentence.
+    pub coherence: Option<CoherenceClassification>,
+    /// Presuppositions triggered by this sentence.
+    pub presuppositions: Vec<TrackedPresupposition>,
 }
 
 impl SemanticAnalysis {
@@ -31,6 +44,11 @@ impl SemanticAnalysis {
             decompositions: Vec::new(),
             role_bindings: Vec::new(),
             events: None,
+            relevance: None,
+            validations: Vec::new(),
+            discourse_move: None,
+            coherence: None,
+            presuppositions: Vec::new(),
         }
     }
 
@@ -52,6 +70,41 @@ impl SemanticAnalysis {
     #[must_use]
     pub fn with_events(mut self, events: ComposedEvents) -> Self {
         self.events = Some(events);
+        self
+    }
+
+    /// Add relevance report.
+    #[must_use]
+    pub fn with_relevance(mut self, relevance: RelevanceReport) -> Self {
+        self.relevance = Some(relevance);
+        self
+    }
+
+    /// Add validation reports.
+    #[must_use]
+    pub fn with_validations(mut self, validations: Vec<ValidationReport>) -> Self {
+        self.validations = validations;
+        self
+    }
+
+    /// Add discourse move classification.
+    #[must_use]
+    pub fn with_discourse_move(mut self, move_class: MoveClassification) -> Self {
+        self.discourse_move = Some(move_class);
+        self
+    }
+
+    /// Add coherence classification.
+    #[must_use]
+    pub fn with_coherence(mut self, coherence: CoherenceClassification) -> Self {
+        self.coherence = Some(coherence);
+        self
+    }
+
+    /// Add presuppositions.
+    #[must_use]
+    pub fn with_presuppositions(mut self, presuppositions: Vec<TrackedPresupposition>) -> Self {
+        self.presuppositions = presuppositions;
         self
     }
 

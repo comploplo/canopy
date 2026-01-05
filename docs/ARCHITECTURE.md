@@ -186,4 +186,4 @@ let sense = VerbNetSenseProvider::with_engine(engines.verbnet.clone());
 | Pipeline init     | ~730ms (one-time)   |
 | Sentence analysis | 30-200μs            |
 | Engine loading    | ~300ms (from cache) |
-| Memory            | ~100MB              |
+| Memory            | ~350 MB             |

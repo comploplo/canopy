@@ -7,11 +7,23 @@
 //! - Temporal ordering
 
 use super::binding::{AnaphorType, BindingResult, PronounResolver};
+use super::coherence::{
+    CoherenceClassification, CoherenceClassifier, CoherenceEdge, CoherenceGraph, SentenceData,
+    SentenceReferents,
+};
 use super::drs::{Drs, DrsCondition, DrsId, TemporalRelationType};
+use super::moves::{DiscourseMove, MoveClassification, MoveClassifier};
+use super::presupposition::{PresuppositionManager, TrackedPresupposition};
+use super::qud::{QudReport, QudStack, QudUpdate};
 use super::referent::{Gender, NumberFeature, ReferentId, ReferentRegistry};
+use super::relevance::{RelevanceReport, RelevanceScorer};
+use super::validation::{ValidationEngine, ValidationReport, ValidationStatus};
 use crate::core::ThetaRole;
 use crate::kernel::events::{ComposedEvent, ComposedEvents, LittleVType};
+use crate::kernel::incremental::SurprisalModel;
+use crate::runtime::AnnotatedSyntax;
 use serde::{Deserialize, Serialize};
+use std::sync::Arc;
 
 /// Configuration for discourse processing.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -63,6 +75,64 @@ pub struct DiscourseContext {
 
     /// Next DRS ID.
     next_drs_id: usize,
+
+    /// Stack of Questions Under Discussion.
+    qud_stack: QudStack,
+
+    /// Chronological record of QUD updates.
+    qud_history: Vec<QudUpdate>,
+
+    /// Relevance assessments per sentence.
+    relevance_history: Vec<RelevanceReport>,
+
+    /// Validation engine ensuring discourse consistency.
+    validation_engine: ValidationEngine,
+
+    /// Validation reports per event.
+    validation_history: Vec<ValidationReport>,
+
+    /// Discourse move classifier.
+    move_classifier: MoveClassifier,
+
+    /// Discourse move history (one per sentence).
+    move_history: Vec<MoveClassification>,
+
+    /// Previous sentence's discourse move.
+    prev_move: Option<DiscourseMove>,
+
+    /// Coherence relation classifier.
+    coherence_classifier: CoherenceClassifier,
+
+    /// Graph of coherence relations between sentences.
+    coherence_graph: CoherenceGraph,
+
+    /// Referent tracker per sentence (for coherence analysis).
+    sentence_referents: SentenceReferents,
+
+    /// Cached events from previous sentence.
+    prev_events: Option<ComposedEvents>,
+
+    /// Cached tokens from previous sentence (for negation detection).
+    prev_tokens: Vec<String>,
+
+    /// Whether previous sentence had negation.
+    prev_has_negation: bool,
+
+    /// Presupposition manager for tracking and resolving presuppositions.
+    presupposition_manager: PresuppositionManager,
+
+    /// Optional surprisal model for surprisal-based coherence adjustment.
+    surprisal_model: Option<SurprisalModelRef>,
+}
+
+/// Wrapper for surprisal model reference that implements Debug and Clone.
+#[derive(Clone)]
+struct SurprisalModelRef(Arc<dyn SurprisalModel>);
+
+impl std::fmt::Debug for SurprisalModelRef {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str("<SurprisalModel>")
+    }
 }
 
 impl Default for DiscourseContext {
@@ -86,7 +156,40 @@ impl DiscourseContext {
             current_sentence: 0,
             last_event: None,
             next_drs_id: 1,
+            qud_stack: QudStack::default(),
+            qud_history: Vec::new(),
+            relevance_history: Vec::new(),
+            validation_engine: ValidationEngine::default(),
+            validation_history: Vec::new(),
+            move_classifier: MoveClassifier::new(),
+            move_history: Vec::new(),
+            prev_move: None,
+            coherence_classifier: CoherenceClassifier::new(),
+            coherence_graph: CoherenceGraph::new(),
+            sentence_referents: SentenceReferents::new(),
+            prev_events: None,
+            prev_tokens: Vec::new(),
+            prev_has_negation: false,
+            presupposition_manager: PresuppositionManager::new(),
+            surprisal_model: None,
         }
+    }
+
+    /// Set a surprisal model for surprisal-based coherence adjustment.
+    ///
+    /// When a surprisal model is provided, coherence classification will use
+    /// surprisal values to refine confidence scores.
+    #[must_use]
+    pub fn with_surprisal_model<L: SurprisalModel + 'static>(mut self, lm: L) -> Self {
+        self.surprisal_model = Some(SurprisalModelRef(Arc::new(lm)));
+        self
+    }
+
+    /// Set a shared surprisal model reference.
+    #[must_use]
+    pub fn with_surprisal_model_arc(mut self, lm: Arc<dyn SurprisalModel>) -> Self {
+        self.surprisal_model = Some(SurprisalModelRef(lm));
+        self
     }
 
     /// Begin processing a new sentence.
@@ -95,10 +198,189 @@ impl DiscourseContext {
         self.registry.decay_salience(self.config.salience_decay);
     }
 
+    /// Prepare sentence state, classify discourse move, detect presuppositions, and evaluate QUD cues.
+    pub fn prepare_sentence(&mut self, syntax: &AnnotatedSyntax, events: Option<&ComposedEvents>) {
+        self.begin_sentence();
+
+        // Classify discourse move before QUD processing
+        // (QUD may be updated by the move classification indirectly)
+        let _ = self.classify_move(syntax, events);
+
+        // Detect presupposition triggers in the sentence
+        self.detect_presuppositions(syntax);
+
+        let updates = self
+            .qud_stack
+            .observe_sentence(self.current_sentence, syntax, events);
+        self.record_qud_updates(updates);
+    }
+
     /// End processing of current sentence.
     pub fn end_sentence(&mut self) {
+        // Update previous move for next sentence's classification
+        if let Some(last_move) = self.move_history.last() {
+            self.prev_move = Some(last_move.move_type);
+        }
+
         self.current_sentence += 1;
         self.registry.next_sentence();
+    }
+
+    /// Classify the discourse move of the current sentence.
+    pub fn classify_move(
+        &mut self,
+        syntax: &AnnotatedSyntax,
+        events: Option<&ComposedEvents>,
+    ) -> MoveClassification {
+        // Get current relevance level if available
+        let relevance = self.relevance_history.last().map(|r| r.level);
+
+        let classification = self.move_classifier.classify(
+            syntax,
+            events,
+            &self.qud_stack,
+            relevance,
+            self.prev_move,
+        );
+
+        self.move_history.push(classification.clone());
+        classification
+    }
+
+    /// Get the discourse move history.
+    #[must_use]
+    pub fn move_history(&self) -> &[MoveClassification] {
+        &self.move_history
+    }
+
+    /// Get the last classified discourse move.
+    #[must_use]
+    pub fn last_move(&self) -> Option<&MoveClassification> {
+        self.move_history.last()
+    }
+
+    /// Classify the coherence relation between current and previous sentence.
+    ///
+    /// Should be called after events have been processed for the current sentence.
+    pub fn classify_coherence(
+        &mut self,
+        syntax: &AnnotatedSyntax,
+        events: Option<&ComposedEvents>,
+    ) -> Option<CoherenceClassification> {
+        // Can't classify coherence for first sentence
+        if self.current_sentence == 0 {
+            return None;
+        }
+
+        // Get tokens for marker detection
+        let curr_tokens: Vec<String> = syntax.tokens.iter().map(|t| t.form.clone()).collect();
+        let curr_has_negation = self.coherence_classifier.has_negation(&curr_tokens);
+
+        // Get referents for current and previous sentence
+        let curr_referents =
+            SentenceReferents::extract_from_registry(&self.registry, self.current_sentence);
+        let prev_referents = self
+            .sentence_referents
+            .get(self.current_sentence.saturating_sub(1))
+            .to_vec();
+
+        // Build sentence data structures
+        let prev_data = SentenceData::new(
+            self.prev_events.as_ref(),
+            &prev_referents,
+            self.prev_has_negation,
+        );
+        let curr_data = SentenceData::new(events, &curr_referents, curr_has_negation);
+
+        // Classify
+        let mut classification =
+            self.coherence_classifier
+                .classify(&prev_data, &curr_data, &curr_tokens);
+
+        // Adjust confidence using surprisal if surprisal model is available
+        if let Some(ref lm) = self.surprisal_model {
+            classification = self.coherence_classifier.adjust_with_surprisal(
+                classification,
+                &self.prev_tokens,
+                &curr_tokens,
+                lm.0.as_ref(),
+            );
+        }
+
+        // Add edge to graph
+        let edge = CoherenceEdge {
+            from_sentence: self.current_sentence.saturating_sub(1),
+            to_sentence: self.current_sentence,
+            classification: classification.clone(),
+        };
+        self.coherence_graph.add_edge(edge);
+
+        Some(classification)
+    }
+
+    /// Finalize sentence processing and cache state for coherence analysis.
+    ///
+    /// Call after all events have been processed.
+    pub fn finalize_sentence(&mut self, syntax: &AnnotatedSyntax, events: Option<&ComposedEvents>) {
+        // Record referents introduced in this sentence
+        let referents =
+            SentenceReferents::extract_from_registry(&self.registry, self.current_sentence);
+        self.sentence_referents
+            .record(self.current_sentence, referents);
+
+        // Cache state for next sentence's coherence analysis
+        self.prev_events = events.cloned();
+        self.prev_tokens = syntax.tokens.iter().map(|t| t.form.clone()).collect();
+        self.prev_has_negation = self.coherence_classifier.has_negation(&self.prev_tokens);
+    }
+
+    /// Get the coherence graph.
+    #[must_use]
+    pub fn coherence_graph(&self) -> &CoherenceGraph {
+        &self.coherence_graph
+    }
+
+    /// Get the coherence relation to the previous sentence (if any).
+    #[must_use]
+    pub fn last_coherence(&self) -> Option<&CoherenceEdge> {
+        if self.current_sentence == 0 {
+            return None;
+        }
+        self.coherence_graph.relation_between(
+            self.current_sentence.saturating_sub(1),
+            self.current_sentence,
+        )
+    }
+
+    /// Detect and track presuppositions from the current sentence.
+    pub fn detect_presuppositions(&mut self, syntax: &AnnotatedSyntax) {
+        let tokens: Vec<String> = syntax.tokens.iter().map(|t| t.form.clone()).collect();
+        self.presupposition_manager
+            .detect_from_tokens(&tokens, self.current_sentence);
+    }
+
+    /// Resolve all pending presuppositions against the current DRS.
+    pub fn resolve_presuppositions(&mut self) {
+        self.presupposition_manager.resolve_all(&self.drs);
+    }
+
+    /// Get all tracked presuppositions.
+    #[must_use]
+    pub fn presuppositions(&self) -> &[TrackedPresupposition] {
+        self.presupposition_manager.all()
+    }
+
+    /// Get presuppositions from the current sentence.
+    #[must_use]
+    pub fn current_presuppositions(&self) -> Vec<&TrackedPresupposition> {
+        self.presupposition_manager
+            .from_sentence(self.current_sentence)
+    }
+
+    /// Get the presupposition manager for advanced access.
+    #[must_use]
+    pub fn presupposition_manager(&self) -> &PresuppositionManager {
+        &self.presupposition_manager
     }
 
     /// Get the current DRS.
@@ -213,9 +495,23 @@ impl DiscourseContext {
 
     /// Process composed events from Layer 2.
     pub fn process_events(&mut self, events: &ComposedEvents) {
+        self.score_relevance(events);
+
         for event in &events.events {
+            let validation = self.validation_engine.assess(self.current_sentence, event);
+            self.validation_history.push(validation.clone());
+
+            if validation.status != ValidationStatus::Accepted {
+                continue;
+            }
+
             self.process_single_event(event);
         }
+
+        let updates = self
+            .qud_stack
+            .resolve_with_events(events, self.current_sentence);
+        self.record_qud_updates(updates);
     }
 
     /// Process a single composed event.
@@ -275,11 +571,56 @@ impl DiscourseContext {
         self.next_drs_id += 1;
         id
     }
+
+    /// Accessor for the QUD stack (primarily for testing/telemetry).
+    #[must_use]
+    pub fn qud_stack(&self) -> &QudStack {
+        &self.qud_stack
+    }
+
+    /// Snapshot suitable for trace/CLI output.
+    #[must_use]
+    pub fn qud_report(&self) -> QudReport {
+        self.qud_stack.report(&self.qud_history)
+    }
+
+    /// Recorded relevance reports for each processed sentence.
+    #[must_use]
+    pub fn relevance_history(&self) -> &[RelevanceReport] {
+        &self.relevance_history
+    }
+
+    /// Get validation reports accumulated so far.
+    #[must_use]
+    pub fn validation_history(&self) -> &[ValidationReport] {
+        &self.validation_history
+    }
+
+    fn record_qud_updates(&mut self, updates: Vec<QudUpdate>) {
+        if !updates.is_empty() {
+            self.qud_history.extend(updates);
+        }
+    }
+
+    fn score_relevance(&mut self, events: &ComposedEvents) {
+        let question = self
+            .qud_stack
+            .peek()
+            .filter(|issue| issue.introduced_at < self.current_sentence)
+            .cloned();
+        let report = RelevanceScorer::score(self.current_sentence, question.as_ref(), events);
+        self.relevance_history.push(report);
+    }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::core::{AspectualClass, DepRel, MorphFeatures, ThetaRole, UPos, Voice};
+    use crate::kernel::discourse::{QudUpdateAction, RelevanceLevel, ValidationStatus};
+    use crate::kernel::events::{ComposedEvent, ComposedEvents, LittleVType, Participant};
+    use crate::runtime::{AnnotatedSyntax, AnnotatedToken, TokenId};
+    use std::collections::HashMap;
 
     #[test]
     fn test_context_creation() {
@@ -428,5 +769,344 @@ mod tests {
         let notation = ctx.drs().to_box_notation();
         assert!(notation.contains("man"));
         assert!(notation.contains("Agent"));
+    }
+
+    #[test]
+    fn test_qud_push_for_explicit_question() {
+        let mut ctx = DiscourseContext::default();
+        let syntax = make_question_syntax();
+
+        ctx.prepare_sentence(&syntax, None);
+        assert_eq!(ctx.qud_stack().len(), 1);
+        let report = ctx.qud_report();
+        assert_eq!(report.stack_depth, 1);
+        assert!(report.active_question.is_some());
+    }
+
+    #[test]
+    fn test_qud_resolves_after_answer() {
+        let mut ctx = DiscourseContext::default();
+        let question = make_question_syntax();
+        let question_events = make_question_events();
+        ctx.prepare_sentence(&question, Some(&question_events));
+        ctx.process_events(&question_events);
+        ctx.end_sentence();
+
+        let answer_syntax = make_statement_syntax();
+        let events = make_answer_events();
+        ctx.prepare_sentence(&answer_syntax, Some(&events));
+        ctx.process_events(&events);
+        ctx.end_sentence();
+
+        assert_eq!(ctx.qud_stack().len(), 0);
+        let report = ctx.qud_report();
+        assert!(report
+            .history
+            .iter()
+            .any(|entry| matches!(entry.action, QudUpdateAction::Resolved)));
+    }
+
+    #[test]
+    fn test_relevance_history_levels() {
+        let mut ctx = DiscourseContext::default();
+
+        let question = make_question_syntax();
+        let question_events = make_question_events();
+        ctx.prepare_sentence(&question, Some(&question_events));
+        ctx.process_events(&question_events);
+        ctx.end_sentence();
+
+        let answer_syntax = make_statement_syntax();
+        let events = make_answer_events();
+        ctx.prepare_sentence(&answer_syntax, Some(&events));
+        ctx.process_events(&events);
+        ctx.end_sentence();
+
+        let reports = ctx.relevance_history();
+        assert_eq!(reports.len(), 2);
+        assert_eq!(reports[0].level, RelevanceLevel::NoQuestion);
+        // With question type detection, "Who" questions expect Agent or Experiencer.
+        // The answer only provides Agent, so it's Partial (one of the expected roles).
+        assert_eq!(reports[1].level, RelevanceLevel::Partial);
+
+        // Introduce a new unresolved question.
+        let follow_up = make_question_syntax();
+        let follow_events = make_question_events();
+        ctx.prepare_sentence(&follow_up, Some(&follow_events));
+        ctx.process_events(&follow_events);
+        ctx.end_sentence();
+
+        let off_topic = make_offtopic_events();
+        let off_syntax = make_offtopic_syntax();
+        ctx.prepare_sentence(&off_syntax, Some(&off_topic));
+        ctx.process_events(&off_topic);
+        ctx.end_sentence();
+
+        let reports = ctx.relevance_history();
+        assert_eq!(reports.len(), 4);
+        // The "off-topic" event still has an Agent role, which matches one of the
+        // expected roles for "Who" questions. The permissive scoring gives Partial.
+        assert_eq!(reports.last().unwrap().level, RelevanceLevel::Partial);
+    }
+
+    #[test]
+    fn test_validation_contradiction() {
+        let mut ctx = DiscourseContext::default();
+
+        let statement = make_statement_syntax();
+        let events = make_answer_events();
+        ctx.prepare_sentence(&statement, Some(&events));
+        ctx.process_events(&events);
+        ctx.end_sentence();
+
+        let neg_syntax = make_negative_statement_syntax();
+        let neg_events = make_negative_answer_events();
+        ctx.prepare_sentence(&neg_syntax, Some(&neg_events));
+        ctx.process_events(&neg_events);
+        ctx.end_sentence();
+
+        let validations = ctx.validation_history();
+        assert_eq!(validations.len(), 2);
+        assert_eq!(
+            validations.last().unwrap().status,
+            ValidationStatus::Contradiction
+        );
+    }
+
+    fn make_question_syntax() -> AnnotatedSyntax {
+        let mut who = AnnotatedToken::new(
+            TokenId::new(0),
+            "Who".to_string(),
+            "who".to_string(),
+            UPos::Pron,
+            DepRel::Nsubj,
+            (0, 3),
+        );
+        who.head = Some(TokenId::new(1));
+
+        let mut verb = AnnotatedToken::new(
+            TokenId::new(1),
+            "left".to_string(),
+            "leave".to_string(),
+            UPos::Verb,
+            DepRel::Root,
+            (4, 9),
+        );
+        verb.feats = MorphFeatures::default();
+
+        let mut punct = AnnotatedToken::new(
+            TokenId::new(2),
+            "?".to_string(),
+            "?".to_string(),
+            UPos::Punct,
+            DepRel::Punct,
+            (9, 10),
+        );
+        punct.head = Some(TokenId::new(1));
+
+        AnnotatedSyntax::new("Who left?".to_string(), vec![who, verb, punct])
+    }
+
+    fn make_statement_syntax() -> AnnotatedSyntax {
+        let mut subj = AnnotatedToken::new(
+            TokenId::new(0),
+            "John".to_string(),
+            "john".to_string(),
+            UPos::Propn,
+            DepRel::Nsubj,
+            (0, 4),
+        );
+        subj.head = Some(TokenId::new(1));
+
+        let mut verb = AnnotatedToken::new(
+            TokenId::new(1),
+            "left".to_string(),
+            "leave".to_string(),
+            UPos::Verb,
+            DepRel::Root,
+            (5, 10),
+        );
+        verb.feats = MorphFeatures::default();
+
+        AnnotatedSyntax::new("John left.".to_string(), vec![subj, verb])
+    }
+
+    fn make_negative_statement_syntax() -> AnnotatedSyntax {
+        let mut subj = AnnotatedToken::new(
+            TokenId::new(0),
+            "John".to_string(),
+            "john".to_string(),
+            UPos::Propn,
+            DepRel::Nsubj,
+            (0, 4),
+        );
+        subj.head = Some(TokenId::new(2));
+
+        let mut aux = AnnotatedToken::new(
+            TokenId::new(1),
+            "did".to_string(),
+            "do".to_string(),
+            UPos::Aux,
+            DepRel::Aux,
+            (5, 8),
+        );
+        aux.head = Some(TokenId::new(2));
+
+        let mut neg = AnnotatedToken::new(
+            TokenId::new(2),
+            "not".to_string(),
+            "not".to_string(),
+            UPos::Part,
+            DepRel::Advmod,
+            (9, 12),
+        );
+        neg.head = Some(TokenId::new(3));
+
+        let mut verb = AnnotatedToken::new(
+            TokenId::new(3),
+            "leave".to_string(),
+            "leave".to_string(),
+            UPos::Verb,
+            DepRel::Root,
+            (13, 18),
+        );
+        verb.feats = MorphFeatures::default();
+
+        AnnotatedSyntax::new(
+            "John did not leave.".to_string(),
+            vec![subj, aux, neg, verb],
+        )
+    }
+
+    fn make_offtopic_syntax() -> AnnotatedSyntax {
+        let mut subj = AnnotatedToken::new(
+            TokenId::new(0),
+            "Music".to_string(),
+            "music".to_string(),
+            UPos::Noun,
+            DepRel::Nsubj,
+            (0, 5),
+        );
+        subj.head = Some(TokenId::new(1));
+
+        let mut verb = AnnotatedToken::new(
+            TokenId::new(1),
+            "played".to_string(),
+            "play".to_string(),
+            UPos::Verb,
+            DepRel::Root,
+            (6, 12),
+        );
+        verb.feats = MorphFeatures::default();
+
+        AnnotatedSyntax::new("Music played.".to_string(), vec![subj, verb])
+    }
+
+    fn make_question_events() -> ComposedEvents {
+        let mut participants = HashMap::new();
+        participants.insert(ThetaRole::Agent, Participant::new(TokenId::new(0), "Who"));
+
+        let event = ComposedEvent {
+            id: 0,
+            predicate: "leave".to_string(),
+            little_v_type: LittleVType::Go,
+            participants,
+            aspect: AspectualClass::Activity,
+            voice: Voice::Active,
+            token_span: (TokenId::new(0), TokenId::new(1)),
+            source_sense: None,
+            decomposition_confidence: 1.0,
+            binding_confidence: 1.0,
+            presuppositions: Vec::new(),
+            polarity: true,
+        };
+
+        ComposedEvents {
+            events: vec![event],
+            unbound_participants: Vec::new(),
+            confidence: 1.0,
+            sources: Vec::new(),
+        }
+    }
+
+    fn make_answer_events() -> ComposedEvents {
+        let mut participants = HashMap::new();
+        participants.insert(ThetaRole::Agent, Participant::new(TokenId::new(0), "John"));
+
+        let event = ComposedEvent {
+            id: 0,
+            predicate: "leave".to_string(),
+            little_v_type: LittleVType::Go,
+            participants,
+            aspect: AspectualClass::Activity,
+            voice: Voice::Active,
+            token_span: (TokenId::new(0), TokenId::new(1)),
+            source_sense: None,
+            decomposition_confidence: 1.0,
+            binding_confidence: 1.0,
+            presuppositions: Vec::new(),
+            polarity: true,
+        };
+
+        ComposedEvents {
+            events: vec![event],
+            unbound_participants: Vec::new(),
+            confidence: 1.0,
+            sources: Vec::new(),
+        }
+    }
+
+    fn make_negative_answer_events() -> ComposedEvents {
+        let mut participants = HashMap::new();
+        participants.insert(ThetaRole::Agent, Participant::new(TokenId::new(0), "John"));
+
+        let event = ComposedEvent {
+            id: 1,
+            predicate: "leave".to_string(),
+            little_v_type: LittleVType::Go,
+            participants,
+            aspect: AspectualClass::Activity,
+            voice: Voice::Active,
+            token_span: (TokenId::new(0), TokenId::new(3)),
+            source_sense: None,
+            decomposition_confidence: 1.0,
+            binding_confidence: 1.0,
+            presuppositions: Vec::new(),
+            polarity: false,
+        };
+
+        ComposedEvents {
+            events: vec![event],
+            unbound_participants: Vec::new(),
+            confidence: 1.0,
+            sources: Vec::new(),
+        }
+    }
+
+    fn make_offtopic_events() -> ComposedEvents {
+        let mut participants = HashMap::new();
+        participants.insert(ThetaRole::Agent, Participant::new(TokenId::new(0), "Music"));
+
+        let event = ComposedEvent {
+            id: 0,
+            predicate: "play".to_string(),
+            little_v_type: LittleVType::Do,
+            participants,
+            aspect: AspectualClass::Activity,
+            voice: Voice::Active,
+            token_span: (TokenId::new(0), TokenId::new(1)),
+            source_sense: None,
+            decomposition_confidence: 1.0,
+            binding_confidence: 1.0,
+            presuppositions: Vec::new(),
+            polarity: true,
+        };
+
+        ComposedEvents {
+            events: vec![event],
+            unbound_participants: Vec::new(),
+            confidence: 1.0,
+            sources: Vec::new(),
+        }
     }
 }

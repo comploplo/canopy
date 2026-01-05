@@ -23,9 +23,11 @@
 //! - [`discourse`]: DRS construction and anaphora resolution (Layer 3)
 //! - [`events`]: Event composition from predicates and roles (Layer 2)
 //! - [`incremental`]: Surprisal-based incremental processing
+//! - [`trace`]: Derivation trace types for explanation/debugging
 //! - [`underspec`]: Underspecified semantic representations (packed readings)
 
 pub mod discourse;
 pub mod events;
 pub mod incremental;
+pub mod trace;
 pub mod underspec;

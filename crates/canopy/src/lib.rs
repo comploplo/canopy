@@ -51,8 +51,59 @@ pub use core::{CanopyError, DepRel, MorphFeatures, ThetaRole, UPos};
 
 // Re-export kernel types
 pub use kernel::discourse::{
-    AnaphorType, BindingResult, DiscourseConfig, DiscourseContext, DiscourseReferent, Drs,
-    DrsCondition, DrsId, Gender, NumberFeature, PronounResolver, ReferentId, ReferentRegistry,
+    // Core discourse types
+    AnaphorType,
+    BindingResult,
+    // Coherence relations
+    CoherenceClassification,
+    CoherenceClassifier,
+    CoherenceEdge,
+    CoherenceGraph,
+    CoherenceRelation,
+    CoherenceSignal,
+    DiscourseConfig,
+    DiscourseContext,
+    // Discourse moves
+    DiscourseMove,
+    DiscourseReferent,
+    Drs,
+    DrsCondition,
+    DrsId,
+    Gender,
+    MoveClassification,
+    MoveClassifier,
+    NumberFeature,
+    // QUD structures
+    PartialAnswer,
+    // Presuppositions
+    Presupposition,
+    PresuppositionDetector,
+    PresuppositionManager,
+    PresuppositionStatus,
+    PriorState,
+    PronounResolver,
+    QudIssue,
+    QudOrigin,
+    QudReport,
+    QudReportEntry,
+    QudStack,
+    QudStatus,
+    QudTree,
+    QudTreeInfo,
+    QudTreeNode,
+    QudUpdate,
+    QudUpdateAction,
+    QuestionType,
+    ReferentId,
+    ReferentRegistry,
+    RelevanceAlignment,
+    RelevanceLevel,
+    RelevanceReport,
+    SentenceData,
+    SentenceReferents,
+    TrackedPresupposition,
+    ValidationReport,
+    ValidationStatus,
 };
 pub use kernel::events::{
     ComposedEvent, ComposedEvents, DependencyArc, EventComposer, EventComposerConfig, LittleVType,
@@ -60,7 +111,11 @@ pub use kernel::events::{
 };
 pub use kernel::incremental::{
     BeamSearch, BeamSearchConfig, GardenPathDetector, GardenPathEvent, IncrementalProcessor,
-    IncrementalState, LanguageModel, ReadingPrefix, Surprisal, UniformLanguageModel,
+    IncrementalState, ReadingPrefix, Surprisal, SurprisalModel, UniformSurprisalModel,
+};
+pub use kernel::trace::{
+    DerivationTrace, DiscourseSummary, EventSummary, EventTrace, ParticipantTrace, SelectionReason,
+    SenseReading, SenseSelectionTrace, SyntaxSummary, TraceMetadata,
 };
 pub use kernel::underspec::{
     AmbiguitySummary, ChoiceId, ChoicePoint, ChoiceType, ConfidenceDisambiguator,

@@ -2,17 +2,22 @@
 //!
 //! A `SyntaxProvider` that uses patterns from UD English-EWT treebank
 //! with resource-backed fallback for unknown patterns.
+//!
+//! Pattern matching is always-on: verbs are automatically matched against
+//! VerbNet-derived dependency patterns for enhanced theta role hints.
 
+use super::pattern_matcher::{extract_patterns_from_syntax, PatternMatcher};
+use super::pattern_types::SemanticSignature;
 use super::resource_tagger::ResourceBackedTagger;
 use super::shared::{parse_deprel, parse_upos};
 use crate::engine::{ConlluParser, ConlluSentence, SharedEngines};
 use crate::tokenizer::{SimpleTokenizer, Tokenizer};
 use canopy::runtime::{AnnotatedSyntax, AnnotatedToken, SyntaxProvider, TokenId};
-use canopy::{CanopyError, MorphFeatures};
+use canopy::{CanopyError, MorphFeatures, UPos};
 use std::collections::HashMap;
+use std::sync::Mutex;
 
 /// A `SyntaxProvider` that matches patterns from UD treebank.
-#[derive(Debug)]
 pub struct TreebankSyntaxProvider {
     /// Tokenizer for splitting text.
     tokenizer: SimpleTokenizer,
@@ -20,9 +25,22 @@ pub struct TreebankSyntaxProvider {
     tagger: ResourceBackedTagger,
     /// Pattern index: normalized text → `AnnotatedSyntax`.
     pattern_index: HashMap<String, AnnotatedSyntax>,
+    /// Pattern matcher for semantic-aware dependency matching (always-on).
+    pattern_matcher: Mutex<PatternMatcher>,
     /// Configuration (for future use in more sophisticated matching).
     #[allow(dead_code)]
     config: TreebankConfig,
+}
+
+impl std::fmt::Debug for TreebankSyntaxProvider {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("TreebankSyntaxProvider")
+            .field("tokenizer", &self.tokenizer)
+            .field("tagger", &self.tagger)
+            .field("pattern_count", &self.pattern_index.len())
+            .field("config", &self.config)
+            .finish_non_exhaustive()
+    }
 }
 
 /// Configuration for the treebank provider.
@@ -32,6 +50,8 @@ pub struct TreebankConfig {
     pub max_patterns: usize,
     /// Whether to use exact matching only.
     pub exact_match_only: bool,
+    /// Cache size for pattern matcher.
+    pub pattern_cache_size: usize,
 }
 
 impl Default for TreebankConfig {
@@ -39,6 +59,7 @@ impl Default for TreebankConfig {
         Self {
             max_patterns: 20000,
             exact_match_only: false,
+            pattern_cache_size: 1000,
         }
     }
 }
@@ -64,10 +85,14 @@ impl TreebankSyntaxProvider {
 
         let pattern_index = Self::load_treebank_patterns(&config);
 
+        // Create pattern matcher with configured cache size
+        let pattern_matcher = PatternMatcher::with_cache_size(config.pattern_cache_size);
+
         Ok(Self {
             tokenizer,
             tagger,
             pattern_index,
+            pattern_matcher: Mutex::new(pattern_matcher),
             config,
         })
     }
@@ -86,11 +111,13 @@ impl TreebankSyntaxProvider {
         let tokenizer = SimpleTokenizer::from_ewt().unwrap_or_else(|_| SimpleTokenizer::new());
         let tagger = ResourceBackedTagger::with_shared_engines(engines)?;
         let pattern_index = Self::load_treebank_patterns(&config);
+        let pattern_matcher = PatternMatcher::with_cache_size(config.pattern_cache_size);
 
         Ok(Self {
             tokenizer,
             tagger,
             pattern_index,
+            pattern_matcher: Mutex::new(pattern_matcher),
             config,
         })
     }
@@ -151,6 +178,80 @@ impl TreebankSyntaxProvider {
         }
 
         tracing::info!("Loaded {} treebank patterns", patterns.len());
+        patterns
+    }
+
+    /// Enhance syntax with pattern-based theta role hints.
+    ///
+    /// For each verb in the syntax, looks up expected argument patterns
+    /// and attaches them as metadata for downstream semantic processing.
+    fn enhance_with_patterns(&self, syntax: &mut AnnotatedSyntax) {
+        let mut matcher = match self.pattern_matcher.lock() {
+            Ok(guard) => guard,
+            Err(e) => {
+                tracing::warn!(
+                    "Pattern matcher mutex poisoned, skipping enhancement: {}",
+                    e
+                );
+                return;
+            }
+        };
+
+        // Extract patterns from this syntax and add to matcher for future use
+        let extracted = extract_patterns_from_syntax(syntax);
+        matcher.add_treebank_patterns(extracted);
+
+        // For each verb, get the matching pattern
+        for token in &syntax.tokens {
+            if token.upos == UPos::Verb {
+                let signature = SemanticSignature::from_lemma(&token.lemma);
+                // Match pattern - this caches for future lookups
+                let _pattern = matcher.match_pattern(&signature);
+                // Pattern information is stored in the matcher cache;
+                // downstream semantic processing can query it via get_pattern()
+            }
+        }
+    }
+
+    /// Get pattern matcher statistics.
+    #[must_use]
+    pub fn pattern_stats(&self) -> Option<super::pattern_matcher::MatcherStats> {
+        self.pattern_matcher.lock().ok().map(|m| m.stats().clone())
+    }
+
+    /// Get a pattern for a semantic signature (read-only).
+    #[must_use]
+    pub fn get_pattern(
+        &self,
+        signature: &SemanticSignature,
+    ) -> Option<super::pattern_types::DependencyPattern> {
+        self.pattern_matcher.lock().ok()?.get_pattern(signature)
+    }
+
+    /// Get patterns for all verbs in the given syntax.
+    ///
+    /// Returns a map from token ID to matched dependency pattern.
+    /// Only includes tokens that are verbs and have a matched pattern.
+    #[must_use]
+    pub fn get_patterns_for_syntax(
+        &self,
+        syntax: &AnnotatedSyntax,
+    ) -> HashMap<TokenId, super::pattern_types::DependencyPattern> {
+        let mut patterns = HashMap::new();
+
+        let Ok(matcher) = self.pattern_matcher.lock() else {
+            return patterns;
+        };
+
+        for token in &syntax.tokens {
+            if token.upos == UPos::Verb {
+                let signature = SemanticSignature::from_lemma(&token.lemma);
+                if let Some(pattern) = matcher.get_pattern(&signature) {
+                    patterns.insert(token.id, pattern);
+                }
+            }
+        }
+
         patterns
     }
 
@@ -307,16 +408,21 @@ impl SyntaxProvider for TreebankSyntaxProvider {
     fn parse(&self, text: &str) -> Result<AnnotatedSyntax, CanopyError> {
         // Try exact match first
         let normalized = Self::normalize_text(text);
-        if let Some(syntax) = self.pattern_index.get(&normalized) {
+        let mut syntax = if let Some(cached) = self.pattern_index.get(&normalized) {
             // Clone and update spans for the actual text
-            let mut syntax = syntax.clone();
+            let mut syntax = cached.clone();
             syntax.text = text.to_string();
-            return Ok(syntax);
-        }
+            syntax
+        } else {
+            // Fall back to resource-backed tagging (queries treebank, VerbNet, WordNet)
+            let tokens = self.tokenizer.tokenize(text);
+            self.tagger.parse(text, &tokens)
+        };
 
-        // Fall back to resource-backed tagging (queries treebank, VerbNet, WordNet)
-        let tokens = self.tokenizer.tokenize(text);
-        Ok(self.tagger.parse(text, &tokens))
+        // Always enhance with pattern matching for verbs
+        self.enhance_with_patterns(&mut syntax);
+
+        Ok(syntax)
     }
 }
 

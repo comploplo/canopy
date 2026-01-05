@@ -45,6 +45,7 @@ toml = "0.9.10"
 [dev-dependencies]
 tempfile = { workspace = true }
 tokio = { workspace = true }
+sysinfo = { workspace = true }
 
 [features]
 default = ["verbnet", "framenet", "wordnet", "lexicon", "propbank"]

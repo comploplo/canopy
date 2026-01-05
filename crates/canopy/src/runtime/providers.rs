@@ -59,6 +59,10 @@ pub struct PredicateDecomposition {
 
     /// Source of this decomposition.
     pub source: DecompositionSource,
+
+    /// The predicate token this decomposition applies to.
+    /// Used to associate decompositions with their source predicate in multi-predicate sentences.
+    pub token_id: Option<TokenId>,
 }
 
 impl PredicateDecomposition {
@@ -76,7 +80,15 @@ impl PredicateDecomposition {
             sub_event: None,
             confidence: 1.0,
             source: DecompositionSource::VerbNet,
+            token_id: None,
         }
+    }
+
+    /// Set the predicate token ID this decomposition applies to.
+    #[must_use]
+    pub fn with_token_id(mut self, token_id: TokenId) -> Self {
+        self.token_id = Some(token_id);
+        self
     }
 
     /// Add a sub-event.
@@ -281,6 +293,10 @@ pub struct RoleBinding {
 
     /// Source of the role assignment.
     pub source: RoleSource,
+
+    /// The predicate token this binding is associated with.
+    /// Used to associate role bindings with their predicate in multi-predicate sentences.
+    pub predicate_token_id: Option<TokenId>,
 }
 
 impl RoleBinding {
@@ -292,6 +308,7 @@ impl RoleBinding {
             role,
             confidence,
             source: RoleSource::Syntactic,
+            predicate_token_id: None,
         }
     }
 
@@ -299,6 +316,13 @@ impl RoleBinding {
     #[must_use]
     pub fn with_source(mut self, source: RoleSource) -> Self {
         self.source = source;
+        self
+    }
+
+    /// Set the predicate token this binding is associated with.
+    #[must_use]
+    pub fn with_predicate(mut self, predicate_token_id: TokenId) -> Self {
+        self.predicate_token_id = Some(predicate_token_id);
         self
     }
 }

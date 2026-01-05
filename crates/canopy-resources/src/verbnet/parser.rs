@@ -686,8 +686,8 @@ mod tests {
         let mut reader = Reader::from_str(malformed_xml);
         let result = VerbClass::parse_xml(&mut reader);
 
-        // Should handle XML parsing error gracefully
-        assert!(result.is_err() || result.is_ok()); // Either error or graceful handling
+        // Should handle XML parsing error gracefully - malformed XML produces error
+        assert!(result.is_err(), "Malformed XML should produce parse error");
     }
 
     #[test]
@@ -698,8 +698,8 @@ mod tests {
         let mut reader = Reader::from_str(empty_xml);
         let result = VerbClass::parse_xml(&mut reader);
 
-        // Should create empty class or handle gracefully
-        assert!(result.is_err() || result.is_ok());
+        // Empty XML should produce parse error (no VNCLASS element)
+        assert!(result.is_err(), "Empty XML should produce parse error");
     }
 
     #[test]
@@ -901,7 +901,7 @@ mod tests {
         let mut reader = Reader::from_str(truncated_xml);
         let result = VerbClass::parse_xml(&mut reader);
 
-        // Should handle truncated XML gracefully (either error or partial parsing)
-        assert!(result.is_err() || result.is_ok());
+        // Truncated XML should produce parse error
+        assert!(result.is_err(), "Truncated XML should produce parse error");
     }
 }

@@ -6,7 +6,9 @@
 mod analysis;
 mod config;
 mod orchestrator;
+mod trace_builder;
 
 pub use analysis::{DocumentAnalysis, SemanticAnalysis, UnderspecifiedAnalysis};
 pub use config::PipelineConfig;
 pub use orchestrator::CanopyPipeline;
+pub use trace_builder::TraceBuilder;

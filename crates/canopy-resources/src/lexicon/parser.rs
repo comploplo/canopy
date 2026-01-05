@@ -137,6 +137,15 @@ struct ParserState {
     pattern: PatternLocation,
 }
 
+/// Mutable parsing context to reduce function arguments.
+struct ParseContext<'a> {
+    db: &'a mut LexiconDatabase,
+    current_wc: &'a mut Option<WordClass>,
+    current_pattern: &'a mut Option<(String, PatternType, String, String)>,
+    examples: &'a mut Vec<String>,
+    state: &'a mut ParserState,
+}
+
 /// Lexicon XML resource for parsing
 #[derive(Debug, Clone)]
 pub struct LexiconXmlResource {
@@ -155,33 +164,26 @@ impl XmlResource for LexiconXmlResource {
         loop {
             buf.clear();
             let event = reader.read_event_into(&mut buf);
+
+            let mut ctx = ParseContext {
+                db: &mut database,
+                current_wc: &mut current_word_class,
+                current_pattern: &mut current_pattern_data,
+                examples: &mut current_examples,
+                state: &mut state,
+            };
+
             match event {
                 Ok(Event::Start(ref e)) => {
                     let name = e.name();
-                    Self::handle_start_event(
-                        name,
-                        e,
-                        reader,
-                        &mut database,
-                        &mut current_word_class,
-                        &mut current_pattern_data,
-                        &mut current_examples,
-                        &mut state,
-                    )?;
+                    Self::handle_start_event(name, e, reader, &mut ctx)?;
                 }
                 Ok(Event::End(ref e)) => {
-                    Self::handle_end_event(
-                        e,
-                        &mut database,
-                        &mut current_word_class,
-                        &mut current_pattern_data,
-                        &current_examples,
-                        &mut state,
-                    );
+                    Self::handle_end_event(e, &mut ctx);
                 }
-                Ok(Event::Empty(ref e)) if state.doc.in_word_class => {
+                Ok(Event::Empty(ref e)) if ctx.state.doc.in_word_class => {
                     if e.name() == QName(b"property") {
-                        if let Some(ref mut wc) = current_word_class {
+                        if let Some(ref mut wc) = ctx.current_wc {
                             parse_property(e, wc)?;
                         }
                     }
@@ -221,118 +223,109 @@ impl XmlResource for LexiconXmlResource {
 }
 
 impl LexiconXmlResource {
-    #[allow(clippy::too_many_arguments)]
     fn handle_start_event<R: BufRead>(
         name: QName,
         e: &quick_xml::events::BytesStart,
         reader: &mut Reader<R>,
-        db: &mut LexiconDatabase,
-        current_wc: &mut Option<WordClass>,
-        current_pattern: &mut Option<(String, PatternType, String, String)>,
-        examples: &mut Vec<String>,
-        state: &mut ParserState,
+        ctx: &mut ParseContext<'_>,
     ) -> EngineResult<()> {
         let mut buf = Vec::new();
         match name {
-            QName(b"lexicon") => parse_lexicon_attrs(e, db)?,
-            QName(b"metadata") => state.doc.in_metadata = true,
-            QName(b"title") if state.doc.in_metadata => {
-                db.title = parse_text_content(reader, &mut buf, b"title")?;
+            QName(b"lexicon") => parse_lexicon_attrs(e, ctx.db)?,
+            QName(b"metadata") => ctx.state.doc.in_metadata = true,
+            QName(b"title") if ctx.state.doc.in_metadata => {
+                ctx.db.title = parse_text_content(reader, &mut buf, b"title")?;
             }
-            QName(b"description") if state.doc.in_metadata => {
-                db.description = parse_text_content(reader, &mut buf, b"description")?;
+            QName(b"description") if ctx.state.doc.in_metadata => {
+                ctx.db.description = parse_text_content(reader, &mut buf, b"description")?;
             }
-            QName(b"created") if state.doc.in_metadata => {
-                db.created = parse_text_content(reader, &mut buf, b"created")?;
+            QName(b"created") if ctx.state.doc.in_metadata => {
+                ctx.db.created = parse_text_content(reader, &mut buf, b"created")?;
             }
-            QName(b"author") if state.doc.in_metadata => {
-                db.author = parse_text_content(reader, &mut buf, b"author")?;
+            QName(b"author") if ctx.state.doc.in_metadata => {
+                ctx.db.author = parse_text_content(reader, &mut buf, b"author")?;
             }
-            QName(b"license") if state.doc.in_metadata => {
-                db.license = parse_text_content(reader, &mut buf, b"license")?;
+            QName(b"license") if ctx.state.doc.in_metadata => {
+                ctx.db.license = parse_text_content(reader, &mut buf, b"license")?;
             }
-            QName(b"word-classes") => state.doc.in_word_classes = true,
-            QName(b"word-class") if state.doc.in_word_classes => {
-                state.doc.in_word_class = true;
-                *current_wc = Some(parse_word_class_start(e)?);
+            QName(b"word-classes") => ctx.state.doc.in_word_classes = true,
+            QName(b"word-class") if ctx.state.doc.in_word_classes => {
+                ctx.state.doc.in_word_class = true;
+                *ctx.current_wc = Some(parse_word_class_start(e)?);
             }
-            QName(b"description") if state.doc.in_word_class => {
-                if let Some(wc) = current_wc {
+            QName(b"description") if ctx.state.doc.in_word_class => {
+                if let Some(wc) = ctx.current_wc {
                     wc.description = parse_text_content(reader, &mut buf, b"description")?;
                 }
             }
-            QName(b"properties") if state.doc.in_word_class => {}
-            QName(b"property") if state.doc.in_word_class => {
-                if let Some(wc) = current_wc {
+            QName(b"properties") if ctx.state.doc.in_word_class => {}
+            QName(b"property") if ctx.state.doc.in_word_class => {
+                if let Some(wc) = ctx.current_wc {
                     parse_property(e, wc)?;
                 }
             }
-            QName(b"words") if state.doc.in_word_class => state.section = WordClassSection::Words,
-            QName(b"word") if state.section == WordClassSection::Words => {
-                if let Some(wc) = current_wc {
+            QName(b"words") if ctx.state.doc.in_word_class => {
+                ctx.state.section = WordClassSection::Words;
+            }
+            QName(b"word") if ctx.state.section == WordClassSection::Words => {
+                if let Some(wc) = ctx.current_wc {
                     wc.words.push(parse_word_element(e, reader, &mut buf)?);
                 }
             }
-            QName(b"patterns") if state.doc.in_word_class => {
-                state.section = WordClassSection::Patterns;
+            QName(b"patterns") if ctx.state.doc.in_word_class => {
+                ctx.state.section = WordClassSection::Patterns;
             }
-            QName(b"pattern") if state.section == WordClassSection::Patterns => {
-                state.pattern.in_pattern = true;
-                *current_pattern = Some(parse_pattern_start(e)?);
+            QName(b"pattern") if ctx.state.section == WordClassSection::Patterns => {
+                ctx.state.pattern.in_pattern = true;
+                *ctx.current_pattern = Some(parse_pattern_start(e)?);
             }
-            QName(b"regex") if state.pattern.in_pattern => {
-                if let Some((_, _, _, ref mut regex)) = current_pattern {
+            QName(b"regex") if ctx.state.pattern.in_pattern => {
+                if let Some((_, _, _, ref mut regex)) = ctx.current_pattern {
                     *regex = parse_text_content(reader, &mut buf, b"regex")?;
                 }
             }
-            QName(b"description") if state.pattern.in_pattern => {
-                if let Some((_, _, ref mut desc, _)) = current_pattern {
+            QName(b"description") if ctx.state.pattern.in_pattern => {
+                if let Some((_, _, ref mut desc, _)) = ctx.current_pattern {
                     *desc = parse_text_content(reader, &mut buf, b"description")?;
                 }
             }
-            QName(b"examples") if state.pattern.in_pattern => {
-                state.pattern.in_examples = true;
-                examples.clear();
+            QName(b"examples") if ctx.state.pattern.in_pattern => {
+                ctx.state.pattern.in_examples = true;
+                ctx.examples.clear();
             }
-            QName(b"example") if state.pattern.in_examples => {
-                examples.push(parse_text_content(reader, &mut buf, b"example")?);
+            QName(b"example") if ctx.state.pattern.in_examples => {
+                ctx.examples
+                    .push(parse_text_content(reader, &mut buf, b"example")?);
             }
             _ => {}
         }
         Ok(())
     }
 
-    fn handle_end_event(
-        e: &quick_xml::events::BytesEnd,
-        db: &mut LexiconDatabase,
-        current_wc: &mut Option<WordClass>,
-        current_pattern: &mut Option<(String, PatternType, String, String)>,
-        examples: &[String],
-        state: &mut ParserState,
-    ) {
+    fn handle_end_event(e: &quick_xml::events::BytesEnd, ctx: &mut ParseContext<'_>) {
         match e.name() {
-            QName(b"metadata") => state.doc.in_metadata = false,
-            QName(b"word-classes") => state.doc.in_word_classes = false,
+            QName(b"metadata") => ctx.state.doc.in_metadata = false,
+            QName(b"word-classes") => ctx.state.doc.in_word_classes = false,
             QName(b"word-class") => {
-                if let Some(wc) = current_wc.take() {
-                    db.word_classes.push(wc);
+                if let Some(wc) = ctx.current_wc.take() {
+                    ctx.db.word_classes.push(wc);
                 }
-                state.doc.in_word_class = false;
-                state.section = WordClassSection::None;
+                ctx.state.doc.in_word_class = false;
+                ctx.state.section = WordClassSection::None;
             }
-            QName(b"words" | b"patterns") => state.section = WordClassSection::None,
+            QName(b"words" | b"patterns") => ctx.state.section = WordClassSection::None,
             QName(b"pattern") => {
                 if let (Some((id, ptype, desc, regex)), Some(wc)) =
-                    (current_pattern.take(), current_wc.as_mut())
+                    (ctx.current_pattern.take(), ctx.current_wc.as_mut())
                 {
                     if let Ok(mut pat) = LexiconPattern::new(id, ptype, regex, desc) {
-                        pat.examples.clone_from(&examples.to_vec());
+                        pat.examples.clone_from(ctx.examples);
                         wc.patterns.push(pat);
                     }
                 }
-                state.pattern.in_pattern = false;
+                ctx.state.pattern.in_pattern = false;
             }
-            QName(b"examples") => state.pattern.in_examples = false,
+            QName(b"examples") => ctx.state.pattern.in_examples = false,
             _ => {}
         }
     }

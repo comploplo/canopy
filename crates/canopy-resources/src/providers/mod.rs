@@ -73,10 +73,14 @@ mod combined {
     }
 
     impl SyntaxProvider for DefaultProvider {
-        fn parse(&self, text: &str) -> Result<AnnotatedSyntax, CanopyError> {
+        fn parse(&self, _text: &str) -> Result<AnnotatedSyntax, CanopyError> {
             // SyntaxProvider requires an actual parser (UDPipe, spaCy, etc.)
-            // This is a stub - real implementation needs parser integration
-            Ok(AnnotatedSyntax::new(text.to_string(), vec![]))
+            // DefaultProvider delegates parsing to external tools (orchestrator uses
+            // pre-parsed syntax from the pipeline). Direct calls should fail explicitly.
+            Err(CanopyError::config(
+                "DefaultProvider does not include a parser. Use the orchestrator pipeline \
+                 with pre-parsed syntax, or provide an AnnotatedSyntax directly.",
+            ))
         }
     }
 
@@ -161,17 +165,25 @@ mod combined {
         }
 
         #[test]
-        fn test_syntax_provider_parse() {
+        fn test_syntax_provider_parse_returns_error() {
             if !verbnet_available() {
                 eprintln!("Skipping: VerbNet data not available");
                 return;
             }
 
             let provider = DefaultProvider::new().unwrap();
-            let syntax = provider.parse("Hello world").unwrap();
-            assert_eq!(syntax.text, "Hello world");
-            // Stub returns empty tokens
-            assert!(syntax.tokens.is_empty());
+            let result = provider.parse("Hello world");
+
+            // DefaultProvider does not include a parser - should return error
+            assert!(
+                result.is_err(),
+                "DefaultProvider.parse() should return configuration error"
+            );
+            let err = result.unwrap_err();
+            assert!(
+                err.to_string().contains("does not include a parser"),
+                "Error message should explain parser is not available"
+            );
         }
 
         #[test]

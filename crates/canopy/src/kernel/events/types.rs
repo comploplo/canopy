@@ -125,8 +125,19 @@ impl DependencyArc {
     }
 }
 
+/// Grammatical mood of a sentence.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub enum SentenceMood {
+    /// Statement (default mood).
+    #[default]
+    Declarative,
+    /// Question.
+    Interrogative,
+    /// Command.
+    Imperative,
+}
+
 /// Sentence-level metadata affecting event composition.
-#[allow(clippy::struct_excessive_bools)] // Sentence properties are naturally boolean
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct SentenceMetadata {
     /// Optional sentence ID for tracking.
@@ -135,14 +146,25 @@ pub struct SentenceMetadata {
     /// Whether the sentence is in passive voice.
     pub is_passive: bool,
 
-    /// Whether the sentence is interrogative.
-    pub is_interrogative: bool,
+    /// Grammatical mood (declarative, interrogative, imperative).
+    pub mood: SentenceMood,
 
     /// Whether the sentence is negated.
     pub is_negated: bool,
+}
 
-    /// Whether the sentence is imperative.
-    pub is_imperative: bool,
+impl SentenceMetadata {
+    /// Returns true if the sentence is interrogative.
+    #[must_use]
+    pub fn is_interrogative(&self) -> bool {
+        self.mood == SentenceMood::Interrogative
+    }
+
+    /// Returns true if the sentence is imperative.
+    #[must_use]
+    pub fn is_imperative(&self) -> bool {
+        self.mood == SentenceMood::Imperative
+    }
 }
 
 // ============================================================================
@@ -585,15 +607,15 @@ impl PackedEvents {
         sources.sort();
         sources.dedup();
 
-        #[allow(clippy::cast_precision_loss)]
         let confidence = if events.is_empty() {
             0.0
         } else {
+            let count = u16::try_from(events.len()).unwrap_or(u16::MAX);
             events
                 .iter()
                 .map(ComposedEvent::overall_confidence)
                 .sum::<f32>()
-                / events.len() as f32
+                / f32::from(count)
         };
 
         ComposedEvents {
@@ -680,15 +702,15 @@ impl PackedEvents {
         sources.sort();
         sources.dedup();
 
-        #[allow(clippy::cast_precision_loss)]
         let confidence = if events.is_empty() {
             0.0
         } else {
+            let count = u16::try_from(events.len()).unwrap_or(u16::MAX);
             events
                 .iter()
                 .map(ComposedEvent::overall_confidence)
                 .sum::<f32>()
-                / events.len() as f32
+                / f32::from(count)
         };
 
         Some(ComposedEvents {

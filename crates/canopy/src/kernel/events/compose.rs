@@ -122,15 +122,15 @@ impl EventComposer {
         sources.dedup();
 
         // Calculate overall confidence
-        #[allow(clippy::cast_precision_loss)] // Event count is small enough
         let confidence = if events.is_empty() {
             0.0
         } else {
+            let count = u16::try_from(events.len()).unwrap_or(u16::MAX);
             events
                 .iter()
                 .map(super::types::ComposedEvent::overall_confidence)
                 .sum::<f32>()
-                / events.len() as f32
+                / f32::from(count)
         };
 
         Ok(ComposedEvents {
@@ -225,7 +225,7 @@ impl EventComposer {
         let mut choice = SenseChoicePoint::new(choice_id, pred_id, lemma.clone());
 
         // Compute voice once (shared across alternatives)
-        let voice = self.detect_voice(analysis, pred_id);
+        let voice = Self::detect_voice(analysis, pred_id);
 
         // Compute span once (shared)
         let span_start = pred_id;
@@ -239,18 +239,15 @@ impl EventComposer {
 
         for decomp in valid_decomps {
             // Bind participants for this decomposition
-            let Ok((participants, _unbound)) =
-                self.bind_participants(analysis, pred_id, bindings, &decomp.expected_roles)
-            else {
-                continue;
-            };
+            let (participants, _unbound) =
+                self.bind_participants(analysis, pred_id, bindings, &decomp.expected_roles);
 
             // Calculate binding confidence
-            #[allow(clippy::cast_precision_loss)]
             let binding_confidence = if participants.is_empty() {
                 0.0
             } else {
-                participants.values().map(|p| p.confidence).sum::<f32>() / participants.len() as f32
+                let count = u16::try_from(participants.len()).unwrap_or(u16::MAX);
+                participants.values().map(|p| p.confidence).sum::<f32>() / f32::from(count)
             };
 
             let alt = SenseAlternative::new(decomp.clone())
@@ -309,18 +306,18 @@ impl EventComposer {
 
         // Bind participants - prefer provider bindings, fallback to UTAH heuristics
         let (participants, unbound) =
-            self.bind_participants(analysis, pred_id, bindings, &decomp.expected_roles)?;
+            self.bind_participants(analysis, pred_id, bindings, &decomp.expected_roles);
 
         // Calculate binding confidence
-        #[allow(clippy::cast_precision_loss)] // Participant count is small
         let binding_confidence = if participants.is_empty() {
             0.0
         } else {
-            participants.values().map(|p| p.confidence).sum::<f32>() / participants.len() as f32
+            let count = u16::try_from(participants.len()).unwrap_or(u16::MAX);
+            participants.values().map(|p| p.confidence).sum::<f32>() / f32::from(count)
         };
 
         // Detect voice
-        let voice = self.detect_voice(analysis, pred_id);
+        let voice = Self::detect_voice(analysis, pred_id);
 
         // Find token span
         let span_start = pred_id;
@@ -363,7 +360,7 @@ impl EventComposer {
         pred_id: TokenId,
         bindings: &[RoleBinding],
         expected_roles: &[ThetaRole],
-    ) -> Result<(HashMap<ThetaRole, Participant>, Vec<UnboundParticipant>), CanopyError> {
+    ) -> (HashMap<ThetaRole, Participant>, Vec<UnboundParticipant>) {
         let mut participants: HashMap<ThetaRole, Participant> = HashMap::new();
         let mut unbound = Vec::new();
 
@@ -388,25 +385,23 @@ impl EventComposer {
         // If no bindings from provider, fall back to UTAH heuristics
         if participants.is_empty() {
             let (dep_participants, dep_unbound) =
-                self.bind_by_utah(analysis, pred_id, expected_roles)?;
+                Self::bind_by_utah(analysis, pred_id, expected_roles);
             participants = dep_participants;
             unbound = dep_unbound;
         }
 
-        Ok((participants, unbound))
+        (participants, unbound)
     }
 
     /// Bind participants using UTAH (Uniformity of Theta Assignment Hypothesis).
     ///
     /// This is a linguistic universal: certain syntactic positions consistently
     /// map to certain thematic roles across languages.
-    #[allow(clippy::unnecessary_wraps)] // Consistent with other binding methods
     fn bind_by_utah(
-        &self,
         analysis: &SentenceAnalysis,
         pred_id: TokenId,
         expected_roles: &[ThetaRole],
-    ) -> Result<(HashMap<ThetaRole, Participant>, Vec<UnboundParticipant>), CanopyError> {
+    ) -> (HashMap<ThetaRole, Participant>, Vec<UnboundParticipant>) {
         let mut participants: HashMap<ThetaRole, Participant> = HashMap::new();
         let mut unbound = Vec::new();
 
@@ -414,7 +409,7 @@ impl EventComposer {
 
         for arc in dependents {
             if let Some(token) = analysis.syntax.get_token(arc.dependent_id) {
-                let role = self.dep_to_role(&arc.relation, analysis.metadata.is_passive);
+                let role = Self::dep_to_role(&arc.relation, analysis.metadata.is_passive);
 
                 if let Some(role) = role {
                     if expected_roles.contains(&role) && !participants.contains_key(&role) {
@@ -444,7 +439,7 @@ impl EventComposer {
             }
         }
 
-        Ok((participants, unbound))
+        (participants, unbound)
     }
 
     /// Map dependency relation to theta role using UTAH.
@@ -452,8 +447,7 @@ impl EventComposer {
     /// These are linguistic universals based on Baker's Uniformity of Theta
     /// Assignment Hypothesis - they hold across languages and don't require
     /// word-level knowledge.
-    #[allow(clippy::unused_self)] // May use config in future
-    fn dep_to_role(&self, dep: &DepRel, is_passive: bool) -> Option<ThetaRole> {
+    fn dep_to_role(dep: &DepRel, is_passive: bool) -> Option<ThetaRole> {
         match (dep, is_passive) {
             (DepRel::NsubjPass | DepRel::Nmod, _) | (DepRel::Nsubj, true) => Some(ThetaRole::Theme),
             (DepRel::Nsubj, false) => Some(ThetaRole::Agent),
@@ -466,8 +460,7 @@ impl EventComposer {
     }
 
     /// Detect voice from dependencies.
-    #[allow(clippy::unused_self)] // May use config in future
-    fn detect_voice(&self, analysis: &SentenceAnalysis, pred_id: TokenId) -> Voice {
+    fn detect_voice(analysis: &SentenceAnalysis, pred_id: TokenId) -> Voice {
         if analysis.metadata.is_passive {
             return Voice::Passive;
         }
@@ -783,30 +776,28 @@ mod tests {
 
     #[test]
     fn test_dep_to_role_active() {
-        let composer = EventComposer::default();
         assert_eq!(
-            composer.dep_to_role(&DepRel::Nsubj, false),
+            EventComposer::dep_to_role(&DepRel::Nsubj, false),
             Some(ThetaRole::Agent)
         );
         assert_eq!(
-            composer.dep_to_role(&DepRel::Obj, false),
+            EventComposer::dep_to_role(&DepRel::Obj, false),
             Some(ThetaRole::Patient)
         );
         assert_eq!(
-            composer.dep_to_role(&DepRel::Iobj, false),
+            EventComposer::dep_to_role(&DepRel::Iobj, false),
             Some(ThetaRole::Recipient)
         );
     }
 
     #[test]
     fn test_dep_to_role_passive() {
-        let composer = EventComposer::default();
         assert_eq!(
-            composer.dep_to_role(&DepRel::Nsubj, true),
+            EventComposer::dep_to_role(&DepRel::Nsubj, true),
             Some(ThetaRole::Theme)
         );
         assert_eq!(
-            composer.dep_to_role(&DepRel::NsubjPass, false),
+            EventComposer::dep_to_role(&DepRel::NsubjPass, false),
             Some(ThetaRole::Theme)
         );
     }
