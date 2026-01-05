@@ -7,28 +7,31 @@ mod cli_main_tests {
     use crate::run_cli_with_args;
 
     #[test]
-    #[ignore = "requires data files - run with --ignored"]
     fn test_cli_main_success_case() {
-        // Test that CLI runs successfully with explicit args
+        // Test that CLI runs successfully with explicit args (parse-only mode for CI)
         // Using run_cli_with_args to avoid picking up test harness arguments
-        let args = vec!["canopy".to_string(), "John runs.".to_string()];
+        let args = vec![
+            "canopy".to_string(),
+            "--test-mode=parse-only".to_string(),
+            "John runs.".to_string(),
+        ];
         let result = run_cli_with_args(&args);
         assert!(result.is_ok(), "CLI should run successfully: {result:?}");
     }
 
     #[test]
     fn test_cli_main_error_handling() {
-        // Test error handling paths - test-error flag triggers error
+        // Test error handling paths - test-mode=error triggers error
         let args = vec![
             "canopy".to_string(),
-            "--test-error".to_string(),
+            "--test-mode=error".to_string(),
             "text".to_string(),
         ];
         let result = run_cli_with_args(&args);
-        assert!(result.is_err(), "Should fail with --test-error");
+        assert!(result.is_err(), "Should fail with --test-mode=error");
 
         // Note: Empty text case (no args) would try to read stdin which blocks in tests.
-        // The error handling path is covered by the --test-error flag above.
+        // The error handling path is covered by the --test-mode=error flag above.
     }
 
     #[test]
@@ -55,13 +58,16 @@ mod cli_main_tests {
     }
 
     #[test]
-    #[ignore = "requires data files - run with --ignored"]
     fn test_cli_main_exit_code_success() {
-        // Test successful exit code path
+        // Test successful exit code path (parse-only mode for CI)
         // We can't easily test std::process::exit(1), but we can test the success path
 
         // This tests the successful branch of main() using explicit args
-        let args = vec!["canopy".to_string(), "Mary walks.".to_string()];
+        let args = vec![
+            "canopy".to_string(),
+            "--test-mode=parse-only".to_string(),
+            "Mary walks.".to_string(),
+        ];
         let result = run_cli_with_args(&args);
 
         // Success means main should not call exit(1)

@@ -6,9 +6,16 @@ use std::process::{Command, Stdio};
 
 #[test]
 fn test_main_binary_with_text() {
-    // Test the actual main function by running the binary with text input
+    // Test the actual main function by running the binary with text input (parse-only for CI)
     let output = Command::new("cargo")
-        .args(["run", "--bin", "canopy", "--", "John runs."])
+        .args([
+            "run",
+            "--bin",
+            "canopy",
+            "--",
+            "--test-mode=parse-only",
+            "John runs.",
+        ])
         .current_dir(env!("CARGO_MANIFEST_DIR"))
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
@@ -25,30 +32,34 @@ fn test_main_binary_with_text() {
 
     // Main function should complete successfully with valid input
     assert!(
-        output.status.success() || output.status.code().is_some(),
-        "Main function should complete with a defined exit code"
+        output.status.success(),
+        "Main function should succeed in parse-only mode"
     );
 }
 
 #[test]
 fn test_main_error_path() {
-    // Test error handling in main by using --test-error flag
+    // Test error handling in main by using --test-mode=error
     let args = vec![
         "canopy".to_string(),
-        "--test-error".to_string(),
+        "--test-mode=error".to_string(),
         "text".to_string(),
     ];
     let result = canopy_cli::run_cli_with_args(&args);
 
-    assert!(result.is_err(), "Should fail with --test-error flag");
+    assert!(result.is_err(), "Should fail with --test-mode=error");
     let error_string = format!("{}", result.unwrap_err());
     assert!(!error_string.is_empty(), "Error should have message");
 }
 
 #[test]
 fn test_main_uses_run_cli() {
-    // This test verifies that run_cli_with_args() is accessible and functional
-    let args = vec!["canopy".to_string(), "Mary walks.".to_string()];
+    // This test verifies that run_cli_with_args() is accessible and functional (parse-only for CI)
+    let args = vec![
+        "canopy".to_string(),
+        "--test-mode=parse-only".to_string(),
+        "Mary walks.".to_string(),
+    ];
     let result = canopy_cli::run_cli_with_args(&args);
 
     // Test that CLI runs successfully with valid input

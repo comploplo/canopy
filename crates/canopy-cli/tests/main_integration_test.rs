@@ -85,10 +85,10 @@ fn test_cli_error_path_coverage() {
 
 #[test]
 fn test_run_cli_with_args_error() {
-    let args = vec!["test".to_string(), "--test-error".to_string()];
+    let args = vec!["test".to_string(), "--test-mode=error".to_string()];
     let result = canopy_cli::run_cli_with_args(&args);
     assert!(
         result.is_err(),
-        "Should return error with --test-error flag"
+        "Should return error with --test-mode=error"
     );
 }
