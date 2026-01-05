@@ -1,0 +1,16 @@
+---
+source: crates/canopy/tests/golden_snapshots.rs
+expression: result
+---
+{
+  "input": "John runs",
+  "reading_count": 1,
+  "is_ambiguous": false,
+  "ambiguity_summary": {
+    "lexical": 0,
+    "structural": 0,
+    "scope": 0,
+    "referential": 0,
+    "total": 1
+  }
+}

@@ -1,7 +1,8 @@
 //! Analysis result types for the pipeline.
 
-use canopy::kernel::discourse::Drs;
-use canopy::kernel::events::ComposedEvents;
+use canopy::kernel::discourse::{Drs, UnderspecDrs};
+use canopy::kernel::events::{ComposedEvents, PackedEvents};
+use canopy::kernel::underspec::AmbiguitySummary;
 use canopy::runtime::{AnnotatedSyntax, PredicateDecomposition, RoleBinding};
 use serde::{Deserialize, Serialize};
 
@@ -105,6 +106,86 @@ impl DocumentAnalysis {
     #[must_use]
     pub fn sentence_count(&self) -> usize {
         self.sentences.len()
+    }
+}
+
+/// Result of underspecified semantic analysis.
+///
+/// Preserves all readings rather than committing to a single interpretation.
+/// Useful for:
+/// - Interactive disambiguation (present options to users)
+/// - Downstream processing that can handle ambiguity
+/// - Research on ambiguity resolution
+#[derive(Debug, Clone)]
+pub struct UnderspecifiedAnalysis {
+    /// The original sentence text.
+    pub text: String,
+    /// Annotated syntax (tokens with POS, dependencies).
+    pub syntax: AnnotatedSyntax,
+    /// Packed events preserving all sense readings.
+    pub packed_events: Option<PackedEvents>,
+    /// Underspecified DRS with scope ambiguity.
+    pub underspec_drs: Option<UnderspecDrs>,
+    /// Summary of ambiguity types present.
+    pub ambiguity: AmbiguitySummary,
+}
+
+impl UnderspecifiedAnalysis {
+    /// Create a new underspecified analysis.
+    #[must_use]
+    pub fn new(text: String, syntax: AnnotatedSyntax) -> Self {
+        Self {
+            text,
+            syntax,
+            packed_events: None,
+            underspec_drs: None,
+            ambiguity: AmbiguitySummary::default(),
+        }
+    }
+
+    /// Add packed events.
+    #[must_use]
+    pub fn with_packed_events(mut self, events: PackedEvents) -> Self {
+        // Update ambiguity summary from packed events
+        self.ambiguity = events.ambiguity_summary();
+        self.packed_events = Some(events);
+        self
+    }
+
+    /// Add underspecified DRS.
+    #[must_use]
+    pub fn with_underspec_drs(mut self, drs: UnderspecDrs) -> Self {
+        self.underspec_drs = Some(drs);
+        self
+    }
+
+    /// Check if the analysis is ambiguous.
+    #[must_use]
+    pub fn is_ambiguous(&self) -> bool {
+        self.ambiguity.is_ambiguous()
+    }
+
+    /// Get the total number of readings.
+    #[must_use]
+    pub fn reading_count(&self) -> usize {
+        self.ambiguity.total_readings.max(1)
+    }
+
+    /// Convert to a resolved `SemanticAnalysis` by selecting the best reading.
+    ///
+    /// Uses the default reading from packed events.
+    #[must_use]
+    pub fn to_resolved(&self) -> SemanticAnalysis {
+        let mut analysis = SemanticAnalysis::new(self.text.clone(), self.syntax.clone());
+
+        if let Some(ref packed) = self.packed_events {
+            let composed = packed.best_reading();
+            if !composed.events.is_empty() {
+                analysis = analysis.with_events(composed);
+            }
+        }
+
+        analysis
     }
 }
 

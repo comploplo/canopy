@@ -1,0 +1,16 @@
+---
+source: crates/canopy/tests/golden_snapshots.rs
+expression: result
+---
+{
+  "input": "John told Bill he was tired",
+  "reading_count": 2,
+  "is_ambiguous": true,
+  "ambiguity_summary": {
+    "lexical": 0,
+    "structural": 0,
+    "scope": 0,
+    "referential": 1,
+    "total": 2
+  }
+}

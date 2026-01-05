@@ -56,7 +56,17 @@ pub use kernel::discourse::{
 };
 pub use kernel::events::{
     ComposedEvent, ComposedEvents, DependencyArc, EventComposer, EventComposerConfig, LittleVType,
-    Participant, SentenceAnalysis,
+    PackedEvents, Participant, SentenceAnalysis,
+};
+pub use kernel::incremental::{
+    BeamSearch, BeamSearchConfig, GardenPathDetector, GardenPathEvent, IncrementalProcessor,
+    IncrementalState, LanguageModel, ReadingPrefix, Surprisal, UniformLanguageModel,
+};
+pub use kernel::underspec::{
+    AmbiguitySummary, ChoiceId, ChoicePoint, ChoiceType, ConfidenceDisambiguator,
+    DisambiguationContext, Disambiguator, EntropyReductionDisambiguator, HybridDisambiguator,
+    InteractiveDisambiguator, MinSurprisalDisambiguator, PackedSemantics, Reading, ReadingId,
+    ReadingsAccess,
 };
 
 /// Version information for the library

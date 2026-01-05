@@ -7,6 +7,6 @@ mod analysis;
 mod config;
 mod orchestrator;
 
-pub use analysis::{DocumentAnalysis, SemanticAnalysis};
+pub use analysis::{DocumentAnalysis, SemanticAnalysis, UnderspecifiedAnalysis};
 pub use config::PipelineConfig;
 pub use orchestrator::CanopyPipeline;

@@ -17,6 +17,15 @@
 //!
 //! The kernel is **pure** - it contains NO word-level knowledge.
 //! All lexical information comes through provider traits.
+//!
+//! # Modules
+//!
+//! - [`discourse`]: DRS construction and anaphora resolution (Layer 3)
+//! - [`events`]: Event composition from predicates and roles (Layer 2)
+//! - [`incremental`]: Surprisal-based incremental processing
+//! - [`underspec`]: Underspecified semantic representations (packed readings)
 
 pub mod discourse;
 pub mod events;
+pub mod incremental;
+pub mod underspec;

@@ -267,7 +267,13 @@ mod tests {
     use crate::tokenizer::{SimpleTokenizer, Tokenizer};
 
     fn data_available() -> bool {
-        crate::paths::data_path("data/lexicon").exists()
+        // Need both lexicon and treebank for full tagger functionality
+        let lexicon = crate::paths::data_path("data/lexicon").exists();
+        let treebank = crate::paths::data_path("data/ud_english-ewt/UD_English-EWT").exists()
+            || crate::paths::data_path("data/ud_english-ewt")
+                .join("en_ewt-ud-train.conllu")
+                .exists();
+        lexicon && treebank
     }
 
     #[test]

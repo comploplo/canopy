@@ -2,6 +2,10 @@
 //!
 //! Run with: cargo run -p canopy-resources --example demo --release
 
+use canopy::{
+    ConfidenceDisambiguator, Disambiguator, GardenPathDetector, IncrementalProcessor,
+    IncrementalState, MinSurprisalDisambiguator, Surprisal, UniformLanguageModel,
+};
 use canopy_resources::{CanopyPipeline, Tokenizer, UnicodeTokenizer};
 use std::time::Instant;
 
@@ -164,10 +168,155 @@ fn demo_document(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Er
     Ok(())
 }
 
-/// Section 5: Moby Dick benchmark
+/// Section 5: Underspecified semantic analysis
+fn demo_underspecified(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
+    println!("\n┌─────────────────────────────────────────────────────────────────┐");
+    println!("│ 5. UNDERSPECIFIED ANALYSIS (Preserving Ambiguity)               │");
+    println!("└─────────────────────────────────────────────────────────────────┘\n");
+
+    let examples = [
+        ("Lexical ambiguity", "The bank collapsed."),
+        ("Scope ambiguity", "Every student read a book."),
+        ("Pronoun ambiguity", "John told Bill he was tired."),
+    ];
+
+    for (label, sentence) in examples {
+        println!("  {label}: \"{sentence}\"");
+        let start = Instant::now();
+        let underspec = pipeline.analyze_underspecified(sentence)?;
+        let elapsed = start.elapsed();
+
+        let summary = &underspec.ambiguity;
+        println!("    Ambiguous: {}", underspec.is_ambiguous());
+        println!("    Reading count: {}", underspec.reading_count());
+        println!(
+            "    Breakdown: lexical={}, structural={}, scope={}, referential={}",
+            summary.lexical, summary.structural, summary.scope, summary.referential
+        );
+
+        if let Some(ref packed) = underspec.packed_events {
+            println!(
+                "    Packed events: {} choice points",
+                packed.sense_choices.len()
+            );
+        }
+
+        // Show resolved version
+        let resolved = underspec.to_resolved();
+        println!(
+            "    Resolved: {} events, {} tokens",
+            resolved.event_count(),
+            resolved.syntax.tokens.len()
+        );
+        println!("    Time: {elapsed:?}\n");
+    }
+
+    Ok(())
+}
+
+/// Section 6: Surprisal trace demonstration
+fn demo_surprisal() {
+    println!("┌─────────────────────────────────────────────────────────────────┐");
+    println!("│ 6. SURPRISAL TRACE (Information-Theoretic Processing)           │");
+    println!("└─────────────────────────────────────────────────────────────────┘\n");
+
+    let examples = [
+        (
+            "Normal sentence",
+            vec!["The", "dog", "chased", "the", "cat"],
+        ),
+        (
+            "Garden-path",
+            vec!["The", "horse", "raced", "past", "the", "barn", "fell"],
+        ),
+    ];
+
+    let lm = UniformLanguageModel::default();
+    let processor = IncrementalProcessor::new();
+    let detector = GardenPathDetector::with_threshold(10.0); // 10 bits threshold
+
+    for (label, words) in examples {
+        println!("  {label}: \"{}\"", words.join(" "));
+
+        let mut state = IncrementalState::new();
+        let mut surprisals = Vec::new();
+
+        for (i, word) in words.iter().enumerate() {
+            let token_id = canopy::TokenId::new(i);
+            let surprisal = processor.process_word(&mut state, token_id, word, &lm);
+            surprisals.push((word.to_string(), surprisal));
+        }
+
+        // Show surprisal trace
+        print!("    Surprisal: ");
+        for (word, surp) in &surprisals {
+            print!("{}:{:.1}b ", word, surp.bits());
+        }
+        println!();
+
+        // Check for garden-path
+        let trace: Vec<Surprisal> = surprisals.iter().map(|(_, s)| *s).collect();
+        if let Some(event) = detector.detect(&trace) {
+            println!(
+                "    Garden-path detected at word {} (surprisal: {:.1} bits)",
+                event.word_index,
+                event.surprisal.bits()
+            );
+        } else {
+            println!("    No garden-path detected");
+        }
+
+        // Show entropy
+        println!("    Final entropy: {:.2} bits", state.entropy());
+        println!();
+    }
+}
+
+/// Section 7: Disambiguator comparison
+fn demo_disambiguators(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
+    println!("┌─────────────────────────────────────────────────────────────────┐");
+    println!("│ 7. DISAMBIGUATOR COMPARISON                                     │");
+    println!("└─────────────────────────────────────────────────────────────────┘\n");
+
+    let sentence = "The bank collapsed.";
+    println!("  Sentence: \"{sentence}\"\n");
+
+    // Get underspecified analysis first
+    let underspec = pipeline.analyze_underspecified(sentence)?;
+    println!("  Underspecified: {} readings\n", underspec.reading_count());
+
+    // Compare disambiguators
+    let disambiguators: Vec<(&str, Box<dyn Disambiguator>)> = vec![
+        ("MinSurprisal", Box::new(MinSurprisalDisambiguator)),
+        ("Confidence", Box::new(ConfidenceDisambiguator)),
+    ];
+
+    for (name, disambiguator) in &disambiguators {
+        let start = Instant::now();
+        let result = pipeline.analyze_with_disambiguator(sentence, disambiguator.as_ref())?;
+        let elapsed = start.elapsed();
+
+        println!("  {name} disambiguator:");
+        println!("    Events: {}", result.event_count());
+        if !result.decompositions.is_empty() {
+            for decomp in &result.decompositions {
+                println!(
+                    "      Sense: {} ({:.0}%)",
+                    decomp.sense_id,
+                    decomp.confidence * 100.0
+                );
+            }
+        }
+        println!("    Time: {elapsed:?}\n");
+    }
+
+    Ok(())
+}
+
+/// Section 8: Moby Dick benchmark
 fn demo_moby_dick(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
     println!("\n┌─────────────────────────────────────────────────────────────────┐");
-    println!("│ 5. MOBY DICK BENCHMARK (Full Novel Analysis)                    │");
+    println!("│ 8. MOBY DICK BENCHMARK (Full Novel Analysis)                    │");
     println!("└─────────────────────────────────────────────────────────────────┘\n");
 
     let moby_path = std::path::Path::new("data/test-corpus/mobydick.txt");
@@ -241,6 +390,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pipeline = init_pipeline()?;
     demo_analysis(&pipeline)?;
     demo_document(&pipeline)?;
+    demo_underspecified(&pipeline)?;
+    demo_surprisal();
+    demo_disambiguators(&pipeline)?;
     demo_moby_dick(&pipeline)?;
 
     println!("\n╔══════════════════════════════════════════════════════════════════╗");

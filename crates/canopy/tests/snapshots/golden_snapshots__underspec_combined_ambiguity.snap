@@ -1,0 +1,16 @@
+---
+source: crates/canopy/tests/golden_snapshots.rs
+expression: result
+---
+{
+  "input": "Every student saw the bank",
+  "reading_count": 2,
+  "is_ambiguous": true,
+  "ambiguity_summary": {
+    "lexical": 1,
+    "structural": 0,
+    "scope": 0,
+    "referential": 0,
+    "total": 2
+  }
+}

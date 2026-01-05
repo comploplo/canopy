@@ -2,14 +2,15 @@
 //!
 //! `CanopyPipeline` coordinates all components for end-to-end analysis.
 
-use super::analysis::{DocumentAnalysis, SemanticAnalysis};
+use super::analysis::{DocumentAnalysis, SemanticAnalysis, UnderspecifiedAnalysis};
 use super::config::PipelineConfig;
 use crate::engine::SharedEngines;
 use crate::providers::{VerbNetRoleProvider, VerbNetSenseProvider};
 use crate::syntax::{TreebankConfig, TreebankSyntaxProvider};
 use crate::tokenizer::{SimpleTokenizer, Tokenizer};
-use canopy::kernel::discourse::{DiscourseConfig, DiscourseContext};
+use canopy::kernel::discourse::{DiscourseConfig, DiscourseContext, UnderspecDrs};
 use canopy::kernel::events::{EventComposer, EventComposerConfig, SentenceAnalysis};
+use canopy::kernel::underspec::{DisambiguationContext, Disambiguator};
 use canopy::runtime::{
     AnnotatedSyntax, PredicateDecomposition, RoleBinding, RoleProvider, SenseProvider,
     SyntaxProvider, TokenId,
@@ -166,6 +167,93 @@ impl CanopyPipeline {
         }
 
         Ok(doc)
+    }
+
+    /// Analyze a sentence preserving all readings (underspecified).
+    ///
+    /// Unlike `analyze()`, this method does not select a single reading,
+    /// but instead preserves all possible interpretations.
+    ///
+    /// # Errors
+    /// Returns an error if syntax parsing fails.
+    pub fn analyze_underspecified(
+        &self,
+        text: &str,
+    ) -> Result<UnderspecifiedAnalysis, CanopyError> {
+        // 1. Parse syntax
+        let syntax = self.syntax_provider.parse(text)?;
+
+        // 2. Find predicates and decompose them (keeping all senses)
+        let decompositions = self.decompose_predicates(&syntax)?;
+
+        // 3. Bind theta roles
+        let role_bindings = self.bind_roles(&syntax, &decompositions)?;
+
+        // 4. Compose packed events (preserving all readings)
+        let packed_events = if decompositions.is_empty() {
+            None
+        } else {
+            let sentence_analysis = SentenceAnalysis::new(text.to_string(), syntax.clone());
+            let decomp_map = Self::decomps_to_map(&syntax, &decompositions);
+            let binding_map = Self::bindings_to_map(&syntax, &role_bindings);
+
+            self.event_composer
+                .compose_packed(&sentence_analysis, &decomp_map, &binding_map)
+                .ok()
+        };
+
+        // 5. Build underspecified DRS
+        let underspec_drs = packed_events.as_ref().map(|packed| {
+            UnderspecDrs::from_packed(
+                &packed.to_underspec(),
+                canopy::kernel::discourse::Drs::default(),
+            )
+        });
+
+        let mut analysis = UnderspecifiedAnalysis::new(text.to_string(), syntax);
+
+        if let Some(packed) = packed_events {
+            analysis = analysis.with_packed_events(packed);
+        }
+
+        if let Some(drs) = underspec_drs {
+            analysis = analysis.with_underspec_drs(drs);
+        }
+
+        Ok(analysis)
+    }
+
+    /// Analyze a sentence with explicit disambiguation.
+    ///
+    /// First performs underspecified analysis, then applies the disambiguator
+    /// to select a single reading.
+    ///
+    /// # Errors
+    /// Returns an error if syntax parsing fails.
+    pub fn analyze_with_disambiguator(
+        &self,
+        text: &str,
+        disambiguator: &dyn Disambiguator,
+    ) -> Result<SemanticAnalysis, CanopyError> {
+        let underspec = self.analyze_underspecified(text)?;
+
+        // If we have packed events, use disambiguator to select best reading
+        if let Some(ref packed) = underspec.packed_events {
+            let packed_semantics = packed.to_underspec();
+            let ctx = DisambiguationContext::minimal();
+
+            if let Some(reading) = disambiguator.select_reading(&packed_semantics, &ctx) {
+                // Convert reading to composed events
+                if let Some(composed) = packed.reading_to_composed(reading.id) {
+                    let mut analysis = SemanticAnalysis::new(text.to_string(), underspec.syntax);
+                    analysis = analysis.with_events(composed);
+                    return Ok(analysis);
+                }
+            }
+        }
+
+        // Fall back to the default resolved analysis
+        Ok(underspec.to_resolved())
     }
 
     /// Decompose predicates in the syntax.

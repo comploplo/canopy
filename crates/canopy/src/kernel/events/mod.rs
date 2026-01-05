@@ -33,7 +33,7 @@ mod types;
 
 pub use compose::{EventComposer, EventComposerConfig};
 pub use types::{
-    ComposedEvent, ComposedEvents, DependencyArc, LittleVType, Participant, PresupposedContent,
-    Presupposition, PresuppositionTrigger, SentenceAnalysis, SentenceMetadata, UnbindingReason,
-    UnboundParticipant,
+    ComposedEvent, ComposedEvents, DependencyArc, LittleVType, PackedEvents, Participant,
+    PresupposedContent, Presupposition, PresuppositionTrigger, SenseAlternative, SenseChoicePoint,
+    SentenceAnalysis, SentenceMetadata, SharedEventStructure, UnbindingReason, UnboundParticipant,
 };

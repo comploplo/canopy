@@ -14,10 +14,11 @@
 //! - How to bind participants from `RoleProvider` bindings
 
 use super::types::{
-    ComposedEvent, ComposedEvents, Participant, SentenceAnalysis, UnbindingReason,
-    UnboundParticipant,
+    ComposedEvent, ComposedEvents, PackedEvents, Participant, SenseAlternative, SenseChoicePoint,
+    SentenceAnalysis, SharedEventStructure, UnbindingReason, UnboundParticipant,
 };
 use crate::core::{CanopyError, DepRel, ThetaRole, Voice};
+use crate::kernel::underspec::ChoiceId;
 use crate::runtime::{PredicateDecomposition, RoleBinding, TokenId};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -138,6 +139,134 @@ impl EventComposer {
             confidence,
             sources,
         })
+    }
+
+    /// Compose events preserving all readings (sense ambiguity).
+    ///
+    /// Unlike `compose()` which selects the best reading, this method
+    /// returns a packed representation with all alternatives preserved.
+    ///
+    /// # Arguments
+    /// * `analysis` - The sentence analysis containing syntax and dependencies
+    /// * `decompositions` - All pre-decomposed predicates from `SenseProvider` (indexed by predicate token ID)
+    /// * `role_bindings` - Role bindings from `RoleProvider` (indexed by predicate token ID)
+    ///
+    /// # Returns
+    /// Packed events with all sense alternatives preserved.
+    ///
+    /// # Errors
+    /// Returns an error if composition fails for all predicates.
+    pub fn compose_packed(
+        &self,
+        analysis: &SentenceAnalysis,
+        decompositions: &HashMap<TokenId, Vec<PredicateDecomposition>>,
+        role_bindings: &HashMap<TokenId, Vec<RoleBinding>>,
+    ) -> Result<PackedEvents, CanopyError> {
+        let predicates = analysis.find_predicates();
+
+        let shared = SharedEventStructure::from_analysis(analysis);
+        let mut packed = PackedEvents::new(shared);
+
+        if predicates.is_empty() {
+            return Ok(packed);
+        }
+
+        for (choice_idx, pred_id) in predicates.into_iter().enumerate() {
+            let pred_decomps = decompositions.get(&pred_id).cloned().unwrap_or_default();
+            let pred_bindings = role_bindings.get(&pred_id).cloned().unwrap_or_default();
+
+            if let Some(choice) = self.build_sense_choice(
+                analysis,
+                pred_id,
+                choice_idx,
+                &pred_decomps,
+                &pred_bindings,
+            ) {
+                // Collect sources
+                for alt in &choice.alternatives {
+                    packed
+                        .sources
+                        .push(format!("{:?}", alt.decomposition.source));
+                }
+                packed.add_sense_choice(choice);
+            }
+        }
+
+        // Deduplicate sources
+        packed.sources.sort();
+        packed.sources.dedup();
+
+        Ok(packed)
+    }
+
+    /// Build a sense choice point for a predicate.
+    fn build_sense_choice(
+        &self,
+        analysis: &SentenceAnalysis,
+        pred_id: TokenId,
+        choice_idx: usize,
+        decompositions: &[PredicateDecomposition],
+        bindings: &[RoleBinding],
+    ) -> Option<SenseChoicePoint> {
+        let token = analysis.syntax.get_token(pred_id)?;
+        let lemma = &token.lemma;
+
+        // Filter decompositions by confidence threshold
+        let valid_decomps: Vec<_> = decompositions
+            .iter()
+            .filter(|d| d.confidence >= self.config.min_decomposition_confidence)
+            .collect();
+
+        if valid_decomps.is_empty() {
+            return None;
+        }
+
+        let choice_id = ChoiceId::new(choice_idx.try_into().unwrap_or(0));
+        let mut choice = SenseChoicePoint::new(choice_id, pred_id, lemma.clone());
+
+        // Compute voice once (shared across alternatives)
+        let voice = self.detect_voice(analysis, pred_id);
+
+        // Compute span once (shared)
+        let span_start = pred_id;
+        let span_end = analysis
+            .get_dependents(pred_id)
+            .iter()
+            .map(|arc| arc.dependent_id)
+            .max()
+            .unwrap_or(pred_id);
+        let span = (span_start, span_end);
+
+        for decomp in valid_decomps {
+            // Bind participants for this decomposition
+            let Ok((participants, _unbound)) =
+                self.bind_participants(analysis, pred_id, bindings, &decomp.expected_roles)
+            else {
+                continue;
+            };
+
+            // Calculate binding confidence
+            #[allow(clippy::cast_precision_loss)]
+            let binding_confidence = if participants.is_empty() {
+                0.0
+            } else {
+                participants.values().map(|p| p.confidence).sum::<f32>() / participants.len() as f32
+            };
+
+            let alt = SenseAlternative::new(decomp.clone())
+                .with_participants(participants)
+                .with_voice(voice)
+                .with_span(span)
+                .with_binding_confidence(binding_confidence);
+
+            choice.add_alternative(alt);
+        }
+
+        if choice.alternatives.is_empty() {
+            None
+        } else {
+            Some(choice)
+        }
     }
 
     /// Compose a single event for a predicate.

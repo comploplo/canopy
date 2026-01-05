@@ -13,10 +13,10 @@ Input: "John gave Mary a book"
 ┌─────────────────────────────────────────────────────────────────────┐
 │  SEMANTIC ANALYSIS                                                  │
 │                                                                     │
-│  VerbNet:   give-13.1 (Agent, Theme, Recipient)                     │
-│  FrameNet:  Giving [Donor→John, Theme→book, Recipient→Mary]         │
-│  WordNet:   give.v.01 "transfer possession"                         │
-│  PropBank:  give.01 (ARG0=giver, ARG1=thing, ARG2=entity)           │
+│  VerbNet:   give-13.1 → frames with Agent, Theme, Recipient roles   │
+│  FrameNet:  Giving frame → frame elements (Donor, Theme, Recipient) │
+│  WordNet:   give.v.01 → synset with hypernyms, definitions          │
+│  PropBank:  give.01 → predicate-argument structure (ARG0, ARG1...)  │
 │                                                                     │
 │  Event:     ∃e[Cause(e) ∧ Agent(e,John) ∧ Theme(e,book)             │
 │                        ∧ Recipient(e,Mary)]                         │
@@ -30,8 +30,9 @@ Input: "John gave Mary a book"
 - **5 semantic engines** — VerbNet, FrameNet, WordNet, PropBank, Lexicon
 - **Neo-Davidsonian events** — LittleV primitives (Cause, Become, Do, Experience, Go, Have)
 - **Theta role binding** — Agent, Patient, Theme, Experiencer, Recipient, etc.
+- **Surprisal-based disambiguation** — Probability-weighted reading selection using information theory
 - **High performance** — 50,000-2,000,000+ words/sec depending on engine
-- **Pure Rust** — No runtime dependencies, memory-safe, concurrent
+- **Pure Rust** — No C/C++ dependencies; requires linguistic data files at runtime
 
 ## Quick Start
 
@@ -39,16 +40,16 @@ Input: "John gave Mary a book"
 # Build
 cargo build --release
 
-# Download linguistic data
+# Download linguistic data (see Data Setup for licensing)
 ./scripts/setup-data.sh
 
-# Run demo
+# Run the demo
 cargo run -p canopy-resources --example demo --release
 ```
 
 ### Data Setup
 
-Canopy requires linguistic datasets (not included in repo):
+Canopy requires linguistic datasets (not included in repo). **Note**: Each dataset has its own license. VerbNet, WordNet, and UD treebanks are freely available. FrameNet requires registration. Check each source for terms before commercial use.
 
 | Dataset        | Location                    | Source                                                           |
 | -------------- | --------------------------- | ---------------------------------------------------------------- |
@@ -60,6 +61,8 @@ Canopy requires linguistic datasets (not included in repo):
 | Gender names   | `data/name_gender_dataset/` | [UCI ML](https://archive.ics.uci.edu/dataset/591/gender+by+name) |
 
 ## Architecture
+
+The core `canopy` crate defines abstract **provider traits** (`SenseProvider`, `RoleProvider`, etc.) with no knowledge of specific data formats. The `canopy-resources` crate implements these traits using VerbNet XML, FrameNet XML, WordNet database, etc. This dependency inversion means the core semantic types are independent of any particular linguistic resource format.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -89,7 +92,7 @@ Canopy requires linguistic datasets (not included in repo):
 │   │   │  • LRU query caching                                        │   │   │
 │   │   └─────────────────────────────────────────────────────────────┘   │   │
 │   └─────────────────────────────────────────────────────────────────────┘   │
-│                                    │                                        │
+│                                    │ implements traits                      │
 │                                    ▼                                        │
 │   ┌─────────────────────────────────────────────────────────────────────┐   │
 │   │                            canopy                                   │   │
@@ -126,11 +129,11 @@ Benchmarked on Moby Dick (215,000 words, 3,716 sentences):
 | PropBank    | 2.4M words/sec          | Indexed lemma lookup       |
 | **Overall** | **84,000 analyses/sec** |                            |
 
-| Operation      | Time    |
-| -------------- | ------- |
-| Engine loading | ~300ms  |
-| Binary cache   | ~50ms   |
-| Memory usage   | \<100MB |
+| Operation      | Time/Size |
+| -------------- | --------- |
+| Engine loading | ~300ms    |
+| Binary cache   | ~50ms     |
+| Peak memory    | ~1.5-2GB  |
 
 ## Semantic Resources
 
@@ -164,6 +167,32 @@ Benchmarked on Moby Dick (215,000 words, 3,716 sentences):
 - Discourse markers
 - Stop words, quantifiers, modals
 
+## Surprisal and Underspecification
+
+Canopy implements information-theoretic disambiguation following academic psycholinguistics:
+
+**Surprisal Theory** (Hale 2001, Levy 2008)
+
+- Processing difficulty = -log₂ P(word | context)
+- Incremental left-to-right processing with beam search
+- Garden-path detection via surprisal spikes
+- Entropy reduction tracking
+
+**Underspecified Representations**
+
+- Packed semantics share structure across readings (O(n) memory, not O(2^n))
+- UDRT-style underspecified DRS with scope constraints (Reyle 1993)
+- MRS-style handle-based scope underspecification (Copestake et al. 2005)
+- Referential ambiguity with ranked candidates (Centering Theory, Grosz et al. 1995)
+
+**Disambiguators**
+
+- `MinSurprisalDisambiguator` — Select lowest surprisal (highest probability) reading
+- `ConfidenceDisambiguator` — Use provider confidence scores (legacy)
+- `HybridDisambiguator` — Weighted combination of surprisal + confidence
+- `EntropyReductionDisambiguator` — Prefer readings that reduce uncertainty
+- `InteractiveDisambiguator` — Return all readings for downstream selection
+
 ## Theoretical Foundations
 
 **Event Semantics**
@@ -187,8 +216,8 @@ Benchmarked on Moby Dick (215,000 words, 3,716 sentences):
 ## Requirements
 
 - Rust 1.75+
-- ~2GB RAM for full semantic data loading
-- Linguistic datasets (see Data Setup above)
+- ~2GB RAM for full semantic data loading (all engines loaded simultaneously)
+- Linguistic datasets with their own licenses (see Data Setup)
 
 ## Documentation
 
@@ -202,4 +231,4 @@ MIT — see [LICENSE](LICENSE) for details.
 
 ______________________________________________________________________
 
-**Status**: Production-ready • 3 crates • 80%+ test coverage • All 5 engines operational
+**Status**: Research-grade • 3 crates • 80%+ test coverage • All 5 engines operational

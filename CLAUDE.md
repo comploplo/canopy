@@ -41,7 +41,14 @@ lexicon.is_auxiliary(word)?
 - Run tests before claiming they pass
 - Run the demo before claiming it works
 
-### 4. Follow Plans
+### 4. Never Commit
+
+- Never run `git commit` directly
+- DO run `pre-commit run --all-files` to validate changes
+- DO provide a suggested commit message to the user
+- Let the user make the commit themselves
+
+### 5. Follow Plans
 
 When working on a plan, don't skip steps. If a step seems complex, explain and ask before reordering.
 

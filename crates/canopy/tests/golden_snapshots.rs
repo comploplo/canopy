@@ -674,3 +674,231 @@ fn layer3_conditional() {
 
     insta::assert_json_snapshot!(analysis);
 }
+
+// ============================================================================
+// Underspecification / Ambiguity Tests
+// ============================================================================
+
+use canopy::kernel::discourse::{AnaphorType, Gender, PronounResolver, ReferentRegistry};
+use canopy::kernel::underspec::{
+    Alternative, AmbiguitySummary, ChoiceId, ChoicePoint, ChoiceType, PackedSemantics,
+    SharedStructure,
+};
+
+/// Result structure for ambiguity tests.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct AmbiguityResult {
+    input: String,
+    reading_count: usize,
+    is_ambiguous: bool,
+    ambiguity_summary: AmbiguitySummarySerialized,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct AmbiguitySummarySerialized {
+    lexical: usize,
+    structural: usize,
+    scope: usize,
+    referential: usize,
+    total: usize,
+}
+
+impl From<AmbiguitySummary> for AmbiguitySummarySerialized {
+    fn from(s: AmbiguitySummary) -> Self {
+        Self {
+            lexical: s.lexical,
+            structural: s.structural,
+            scope: s.scope,
+            referential: s.referential,
+            total: s.total_readings,
+        }
+    }
+}
+
+#[test]
+fn underspec_lexical_ambiguity() {
+    // "The bank collapsed" - bank can be financial or river
+    let mut packed = PackedSemantics::new(SharedStructure {
+        text: "The bank collapsed".to_string(),
+        token_count: 3,
+        predicate_positions: vec![canopy::runtime::TokenId::new(2)],
+    });
+
+    packed.add_choice(ChoicePoint::new(
+        ChoiceId::new(0),
+        ChoiceType::LexicalSense {
+            token_id: canopy::runtime::TokenId::new(1),
+            senses: vec![
+                canopy::runtime::SenseId::new("bank.01"),
+                canopy::runtime::SenseId::new("bank.02"),
+            ],
+        },
+        vec![
+            Alternative::new(0, 0.6, "financial"),
+            Alternative::new(1, 0.4, "river"),
+        ],
+    ));
+
+    let result = AmbiguityResult {
+        input: "The bank collapsed".to_string(),
+        reading_count: packed.reading_count(),
+        is_ambiguous: packed.is_ambiguous(),
+        ambiguity_summary: packed.ambiguity_summary().into(),
+    };
+
+    insta::assert_json_snapshot!(result);
+}
+
+#[test]
+fn underspec_pronoun_ambiguity() {
+    // "John told Bill he was tired" - he can refer to John or Bill
+    let mut registry = ReferentRegistry::new();
+
+    // Introduce John (masculine)
+    let john_id = registry.introduce_entity("John");
+    if let Some(r) = registry.get_mut(john_id) {
+        r.gender = Gender::Masculine;
+        r.salience = 0.9;
+    }
+
+    // Introduce Bill (masculine)
+    let bill_id = registry.introduce_entity("Bill");
+    if let Some(r) = registry.get_mut(bill_id) {
+        r.gender = Gender::Masculine;
+        r.salience = 0.85;
+    }
+
+    let resolver = PronounResolver::new();
+    let binding = resolver.resolve_underspec(
+        &registry,
+        AnaphorType::Personal,
+        Some(Gender::Masculine),
+        None,
+        0,
+    );
+
+    let result = AmbiguityResult {
+        input: "John told Bill he was tired".to_string(),
+        reading_count: binding.candidate_count(),
+        is_ambiguous: binding.is_ambiguous(),
+        ambiguity_summary: AmbiguitySummarySerialized {
+            lexical: 0,
+            structural: 0,
+            scope: 0,
+            referential: usize::from(binding.is_ambiguous()),
+            total: binding.candidate_count(),
+        },
+    };
+
+    insta::assert_json_snapshot!(result);
+}
+
+#[test]
+fn underspec_scope_ambiguity() {
+    // "Every student read a book" - ∀∃ vs ∃∀
+    use canopy::kernel::underspec::{ElementaryPredication, ScopeUnderspec, Variable};
+
+    // Build MRS-style scope representation
+    let mut scope = ScopeUnderspec::new();
+
+    // Allocate handles
+    let h_every = scope.new_handle(); // every
+    let h_a = scope.new_handle(); // a
+    let h_read = scope.new_handle(); // read
+
+    // every(x, h4, h5)
+    scope.add_ep(ElementaryPredication::new(
+        h_every,
+        "every".to_string(),
+        vec![Variable::entity(0)],
+    ));
+
+    // a(y, h6, h7)
+    scope.add_ep(ElementaryPredication::new(
+        h_a,
+        "a".to_string(),
+        vec![Variable::entity(1)],
+    ));
+
+    // read(e, x, y)
+    scope.add_ep(ElementaryPredication::new(
+        h_read,
+        "read".to_string(),
+        vec![Variable::event(0), Variable::entity(0), Variable::entity(1)],
+    ));
+
+    // No qeq constraints = multiple scope orderings possible
+    let orderings = scope.enumerate_orderings();
+
+    let result = AmbiguityResult {
+        input: "Every student read a book".to_string(),
+        reading_count: orderings.len(),
+        is_ambiguous: orderings.len() > 1,
+        ambiguity_summary: AmbiguitySummarySerialized {
+            lexical: 0,
+            structural: 0,
+            scope: usize::from(orderings.len() > 1),
+            referential: 0,
+            total: orderings.len(),
+        },
+    };
+
+    insta::assert_json_snapshot!(result);
+}
+
+#[test]
+fn underspec_combined_ambiguity() {
+    // Multiple ambiguity types combined
+    let mut packed = PackedSemantics::new(SharedStructure {
+        text: "Every student saw the bank".to_string(),
+        token_count: 5,
+        predicate_positions: vec![canopy::runtime::TokenId::new(2)],
+    });
+
+    // Lexical ambiguity: bank
+    packed.add_choice(ChoicePoint::new(
+        ChoiceId::new(0),
+        ChoiceType::LexicalSense {
+            token_id: canopy::runtime::TokenId::new(4),
+            senses: vec![
+                canopy::runtime::SenseId::new("bank.01"),
+                canopy::runtime::SenseId::new("bank.02"),
+            ],
+        },
+        vec![
+            Alternative::new(0, 0.6, "financial"),
+            Alternative::new(1, 0.4, "river"),
+        ],
+    ));
+
+    // Referential ambiguity would be added if there was a pronoun
+    // For now, just lexical ambiguity
+
+    let result = AmbiguityResult {
+        input: "Every student saw the bank".to_string(),
+        reading_count: packed.reading_count(),
+        is_ambiguous: packed.is_ambiguous(),
+        ambiguity_summary: packed.ambiguity_summary().into(),
+    };
+
+    insta::assert_json_snapshot!(result);
+}
+
+#[test]
+fn underspec_no_ambiguity() {
+    // "John runs" - unambiguous sentence
+    let packed = PackedSemantics::new(SharedStructure {
+        text: "John runs".to_string(),
+        token_count: 2,
+        predicate_positions: vec![canopy::runtime::TokenId::new(1)],
+    });
+
+    let result = AmbiguityResult {
+        input: "John runs".to_string(),
+        reading_count: packed.reading_count(),
+        is_ambiguous: packed.is_ambiguous(),
+        ambiguity_summary: packed.ambiguity_summary().into(),
+    };
+
+    insta::assert_json_snapshot!(result);
+}

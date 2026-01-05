@@ -97,4 +97,6 @@ pub use tokenizer::{RawToken, SentenceBoundary, SimpleTokenizer, Tokenizer, Unic
 pub use syntax::{ResourceBackedTagger, TreebankSyntaxProvider, WordPosIndex};
 
 // Pipeline re-exports
-pub use pipeline::{CanopyPipeline, DocumentAnalysis, PipelineConfig, SemanticAnalysis};
+pub use pipeline::{
+    CanopyPipeline, DocumentAnalysis, PipelineConfig, SemanticAnalysis, UnderspecifiedAnalysis,
+};

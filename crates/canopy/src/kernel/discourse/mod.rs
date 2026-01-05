@@ -52,9 +52,14 @@ mod context;
 mod drs;
 mod referent;
 
-pub use binding::{AnaphorType, BindingConstraint, BindingResult, PronounResolver};
+pub use binding::{
+    AnaphorType, BindingConstraint, BindingResult, PronounResolver, UnderspecBinding,
+};
 pub use context::{DiscourseConfig, DiscourseContext};
-pub use drs::{Drs, DrsCondition, DrsId, SubordinateDrs, SubordinationRelation};
+pub use drs::{
+    Drs, DrsCondition, DrsId, Label, SubordinateDrs, SubordinationConstraint,
+    SubordinationConstraintType, SubordinationRelation, UdrsBuilder, UnderspecDrs,
+};
 pub use referent::{
     DiscourseReferent, Gender, NumberFeature, Person, ReferentId, ReferentRegistry, ReferentType,
 };
