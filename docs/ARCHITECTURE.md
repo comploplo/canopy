@@ -2,36 +2,147 @@
 
 ## Overview
 
-Canopy is a semantic linguistic analysis library in Rust. It uses a provider-based architecture separating the kernel (pure semantic operations) from heavy resources (VerbNet, FrameNet, WordNet, etc.).
+Canopy is a semantic linguistic analysis library implementing a 4-layer pipeline from morphosyntax to logical reasoning. It uses a provider-based architecture separating the kernel (pure semantic operations) from heavy resources (VerbNet, FrameNet, WordNet, etc.).
+
+## 4-Layer Semantic Pipeline
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              INPUT TEXT                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 1: MORPHOSYNTAX                                                       │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
+│  │  Tokenizer   │→ │  POS Tagger  │→ │ Dep Parser   │→ │ TAM Analyzer │     │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘     │
+│                                                                              │
+│  Output: AnnotatedSyntax (tokens, UPOS, DepRel, MorphFeatures)              │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 2: EVENT COMPOSITION                                                  │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
+│  │SenseProvider │→ │ RoleProvider │→ │EventComposer │→ │ TAM Builder  │     │
+│  │(VerbNet etc) │  │(theta roles) │  │(little v)    │  │(tense/aspect)│     │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘     │
+│                                                                              │
+│  Output: ComposedEvents (predicate, participants, temporal_frame, aspect)   │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 3: DISCOURSE                                                          │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
+│  │DiscourseCtx  │→ │   Anaphora   │→ │  Coherence   │→ │     QUD      │     │
+│  │(DRS builder) │  │  Resolution  │  │  Relations   │  │   Stack      │     │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘     │
+│                                                                              │
+│  Output: DRS (referents, conditions, TAM conditions, temporal relations)    │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 4: LOGIC & REASONING                                                  │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
+│  │  Compiler    │→ │  Temporal    │→ │    Modal     │→ │   Query      │     │
+│  │(DRS→Facts)   │  │  Reasoner    │  │   Reasoner   │  │  Answering   │     │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘     │
+│                                                                              │
+│  Output: ConsistencyResult, EntailmentResult, QueryResult, Explanations     │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
 ## Crate Structure
 
 ```
 canopy/
 ├── crates/
-│   ├── canopy/                 # KERNEL: Core types + semantic operations
-│   │   ├── core/               # ThetaRole, CanopyError, DepRel, UPos
-│   │   ├── kernel/             # EventComposer, DiscourseContext, DRS
-│   │   │   ├── discourse/      # DRS, QUD, anaphora, coherence
-│   │   │   ├── events/         # Event composition, LittleV
-│   │   │   └── logic/          # Reasoner, Query, Entailment, Explanations
-│   │   └── runtime/            # Provider traits, AnnotatedSyntax, IR
+│   ├── canopy/                     # KERNEL: Core types + semantic operations
+│   │   ├── src/
+│   │   │   ├── core/               # Foundation types
+│   │   │   │   ├── error.rs        # CanopyError
+│   │   │   │   ├── event.rs        # AspectualClass, ModalForce, ModalFlavor
+│   │   │   │   ├── syntax.rs       # DepRel, UPos, MorphFeatures
+│   │   │   │   └── theta.rs        # ThetaRole (28 roles)
+│   │   │   │
+│   │   │   ├── kernel/
+│   │   │   │   ├── discourse/      # Layer 3: DRS & discourse
+│   │   │   │   │   ├── binding.rs      # Anaphora resolution
+│   │   │   │   │   ├── coherence.rs    # Discourse relations (SDRT)
+│   │   │   │   │   ├── context.rs      # DiscourseContext orchestrator
+│   │   │   │   │   ├── drs.rs          # DRS data structures
+│   │   │   │   │   ├── modal.rs        # WorldId, ModalFrame, Counterfactual
+│   │   │   │   │   ├── moves.rs        # Discourse move classification
+│   │   │   │   │   ├── presupposition.rs # Presupposition tracking
+│   │   │   │   │   ├── qud.rs          # Question Under Discussion
+│   │   │   │   │   ├── referent.rs     # Discourse referents
+│   │   │   │   │   ├── relevance.rs    # QUD relevance scoring
+│   │   │   │   │   ├── tam_builder.rs  # TAM → DRS conditions
+│   │   │   │   │   ├── temporal.rs     # TemporalFrame, TimePoint, Aspect
+│   │   │   │   │   └── validation.rs   # Real-time contradiction detection
+│   │   │   │   │
+│   │   │   │   ├── events/         # Layer 2: Event composition
+│   │   │   │   │   ├── compose.rs      # EventComposer
+│   │   │   │   │   ├── tam.rs          # Morphology → TAM features
+│   │   │   │   │   └── types.rs        # ComposedEvent, LittleVType
+│   │   │   │   │
+│   │   │   │   ├── logic/          # Layer 4: Reasoning
+│   │   │   │   │   ├── answer.rs       # QueryResult, AnswerBinding
+│   │   │   │   │   ├── compiler.rs     # DRS → CompiledDrs (facts)
+│   │   │   │   │   ├── modal_reasoner.rs   # Kripke semantics
+│   │   │   │   │   ├── proof.rs        # Explanations with provenance
+│   │   │   │   │   ├── query.rs        # Query types (yes/no, wh-)
+│   │   │   │   │   ├── reasoner.rs     # Reasoner trait, Conflict types
+│   │   │   │   │   ├── solver.rs       # ClosedWorldReasoner
+│   │   │   │   │   └── temporal_reasoner.rs # Allen interval algebra
+│   │   │   │   │
+│   │   │   │   ├── incremental/    # Incremental processing
+│   │   │   │   │   ├── beam.rs         # Beam search
+│   │   │   │   │   ├── lm.rs           # Language model interface
+│   │   │   │   │   ├── state.rs        # Incremental state
+│   │   │   │   │   └── surprisal.rs    # Surprisal computation
+│   │   │   │   │
+│   │   │   │   ├── underspec/      # Underspecification
+│   │   │   │   │   ├── disambiguation.rs # Reading selection
+│   │   │   │   │   ├── scope.rs        # Scope underspecification
+│   │   │   │   │   └── types.rs        # PackedSemantics, ChoicePoint
+│   │   │   │   │
+│   │   │   │   └── trace/          # Debugging traces
+│   │   │   │
+│   │   │   └── runtime/            # Provider traits & IR
+│   │   │       ├── ids.rs              # TokenId, SenseId, FrameId
+│   │   │       ├── ir.rs               # AnnotatedSyntax, AnnotatedToken
+│   │   │       └── providers.rs        # SenseProvider, RoleProvider traits
+│   │   │
+│   │   └── tests/
+│   │       ├── golden_snapshots.rs     # Regression tests
+│   │       └── tam_integration_tests.rs # TAM pipeline tests
 │   │
-│   ├── canopy-resources/       # RESOURCES: Engines + pipeline
-│   │   ├── engine/             # Caching, XML parsing, SharedEngines
-│   │   ├── verbnet/            # VerbNet (333 classes)
-│   │   ├── framenet/           # FrameNet (1200+ frames)
-│   │   ├── wordnet/            # WordNet (117k synsets)
-│   │   ├── propbank/           # PropBank
-│   │   ├── lexicon/            # Closed-class words
-│   │   ├── syntax/             # TreebankSyntaxProvider, ResourceBackedTagger
-│   │   ├── tokenizer/          # SimpleTokenizer, UnicodeTokenizer
-│   │   ├── providers/          # DefaultProvider implementations
-│   │   └── pipeline/           # CanopyPipeline orchestrator
+│   ├── canopy-resources/           # RESOURCES: Engines + pipeline
+│   │   ├── src/
+│   │   │   ├── engine/             # Shared infrastructure
+│   │   │   │   ├── cacheable.rs        # LRU caching
+│   │   │   │   └── shared.rs           # SharedEngines
+│   │   │   ├── verbnet/            # VerbNet engine (333 classes)
+│   │   │   ├── framenet/           # FrameNet engine (1200+ frames)
+│   │   │   ├── wordnet/            # WordNet engine (117k synsets)
+│   │   │   ├── propbank/           # PropBank engine
+│   │   │   ├── lexicon/            # Closed-class words
+│   │   │   ├── syntax/             # TreebankSyntaxProvider
+│   │   │   ├── tokenizer/          # Tokenizers
+│   │   │   ├── providers/          # DefaultProvider implementations
+│   │   │   └── pipeline/           # CanopyPipeline orchestrator
 │   │
-│   └── canopy-cli/             # CLI + demos
+│   └── canopy-cli/                 # CLI + demos
 │
-└── data/                       # Linguistic resources (gitignored)
+└── data/                           # Linguistic resources (gitignored)
+    ├── verbnet3.4/
+    ├── framenet/
+    ├── wordnet/
+    └── UD_English-EWT/
 ```
 
 ## Dependency Graph
@@ -48,9 +159,121 @@ canopy/
 
 **Key property**: The `canopy` kernel has NO dependencies on `canopy-resources`. This enables testing the kernel in isolation.
 
+## TAM (Tense, Aspect, Modality) Data Flow
+
+```
+Layer 2: EventComposer
+    │
+    ├── temporal_frame: Some(TemporalFrame::past())
+    ├── aspectual_viewpoint: Some(AspectualViewpoint::Progressive)
+    └── predicate, participants, ...
+            │
+            ▼
+Layer 3: DiscourseContext.process_single_event()
+    │
+    ├── Creates event referent
+    ├── Adds predicate to DRS
+    ├── Adds theta roles
+    ├── ┌─────────────────────────────────────────┐
+    │   │ TamBuilder.build_tam_conditions()       │
+    │   │   → DrsCondition::TemporalFrameAssignment│
+    │   │   → DrsCondition::AspectualOp           │
+    │   └─────────────────────────────────────────┘
+    └── Handles polarity
+            │
+            ▼
+        DRS (with TAM conditions)
+            │
+            ▼
+Layer 4: ClosedWorldReasoner.check_consistent()
+    │
+    ├── ┌─────────────────────────────────────────┐
+    │   │ validate_temporal_consistency()         │
+    │   │   → TemporalReasoner (Allen algebra)    │
+    │   │   → Detects temporal cycles             │
+    │   │   → Infers transitive constraints       │
+    │   └─────────────────────────────────────────┘
+    ├── ┌─────────────────────────────────────────┐
+    │   │ validate_modal_consistency()            │
+    │   │   → ModalReasoner (Kripke semantics)    │
+    │   │   → Evaluates necessity/possibility     │
+    │   │   → Checks accessible worlds            │
+    │   └─────────────────────────────────────────┘
+    └── find_polarity_conflicts()
+            │
+            ▼
+    ConsistencyResult { conflicts, explanation }
+```
+
+## Key Components
+
+### Temporal Reasoning (Allen Interval Algebra)
+
+13 basic relations between intervals:
+
+- `Before (<)`, `After (>)`
+- `Meets (m)`, `Met-by (mi)`
+- `Overlaps (o)`, `Overlapped-by (oi)`
+- `Starts (s)`, `Started-by (si)`
+- `During (d)`, `Contains (di)`
+- `Finishes (f)`, `Finished-by (fi)`
+- `Equals (=)`
+
+```rust
+let mut reasoner = TemporalReasoner::new();
+reasoner.add_constraint(TemporalConstraint::new(e1, e2, AllenRelation::Before, "narration"));
+reasoner.add_constraint(TemporalConstraint::new(e2, e3, AllenRelation::Before, "narration"));
+let result = reasoner.check_consistency();
+// Infers: e1 Before e3 (transitive closure)
+```
+
+### Modal Reasoning (Kripke Semantics)
+
+```rust
+let mut reasoner = ModalReasoner::new();
+let w1 = reasoner.create_world();
+reasoner.make_accessible(WorldId::ACTUAL, w1, AccessibilityType::Epistemic);
+reasoner.get_world_mut(&w1).unwrap().add_fact("raining");
+
+// "It might be raining" (epistemic possibility)
+let eval = reasoner.evaluate_modal_fact(
+    ModalForce::Possibility,
+    ModalFlavor::Epistemic,
+    "raining",
+);
+assert!(eval.holds);
+```
+
+### DRS Conditions
+
+```rust
+pub enum DrsCondition {
+    // Basic conditions
+    Predicate { name, referent },
+    Relation { name, arg1, arg2 },
+    ThetaRole { event_id, role, filler },
+
+    // Temporal conditions
+    TemporalRelation { relation, event1, event2 },
+    TemporalFrameAssignment { event, frame },
+    AspectualOp { operator, event, scope },
+    TemporalAnchor { event, anchor_type, reference },
+
+    // Modal conditions
+    ModalOp { force, flavor, scope, world_var },
+    Accessible { from_world, to_world, relation },
+    Counterfactual { antecedent, consequent, modal_force, closest_worlds },
+
+    // Logical operators
+    Negation(Box<Drs>),
+    Disjunction(Box<Drs>, Box<Drs>),
+    Implication { antecedent, consequent },
+}
+```
+
 ## Core Types
 
-### ThetaRole
+### ThetaRole (28 semantic roles)
 
 ```rust
 pub enum ThetaRole {
@@ -59,18 +282,22 @@ pub enum ThetaRole {
     Theme,       // Moved/transferred: "John gave Mary a book"
     Experiencer, // Mental state: "John fears spiders"
     Recipient,   // Receiving: "John gave Mary a book"
-    // ... more roles
+    Goal,        // Endpoint: "John went to the store"
+    Source,      // Origin: "John came from Paris"
+    Location,    // Place: "John lives in Paris"
+    Instrument,  // Tool: "John cut with a knife"
+    // ... 19 more roles
 }
 ```
 
-### LittleVType
+### LittleVType (Event decomposition)
 
 ```rust
 pub enum LittleVType {
-    Cause,      // Causative: "break", "kill"
-    Become,     // Change of state: "open", "melt"
-    Be,         // State: "know", "love"
-    Do,         // Activity: "run", "swim"
+    Cause,      // Causative: "break", "kill" → [CAUSE [BECOME [STATE]]]
+    Become,     // Change: "open", "melt" → [BECOME [STATE]]
+    Be,         // State: "know", "love" → [BE [STATE]]
+    Do,         // Activity: "run", "swim" → [DO [ACT]]
     Experience, // Psych: "fear", "admire"
     Go,         // Motion: "go", "run"
     Have,       // Possession: "have", "own"
@@ -79,10 +306,25 @@ pub enum LittleVType {
 }
 ```
 
-### Provider Traits
+### TemporalFrame (Reichenbachian tense)
 
 ```rust
-// Predicate decomposition
+pub struct TemporalFrame {
+    pub speech_time: TimePoint,      // S: utterance time
+    pub reference_time: TimePoint,   // R: perspective time
+    pub event_time: TimeInterval,    // E: event duration
+}
+
+// E < R < S: Past perfect ("had left")
+// E,R < S:   Simple past ("left")
+// S,R,E:     Simple present ("leaves")
+// S < R,E:   Simple future ("will leave")
+```
+
+## Provider Traits
+
+```rust
+// Predicate decomposition (VerbNet, FrameNet)
 pub trait SenseProvider: Send + Sync {
     fn decompose_predicate(
         &self,
@@ -107,7 +349,7 @@ pub trait SyntaxProvider: Send + Sync {
 }
 ```
 
-## Usage
+## Usage Examples
 
 ### Full Pipeline
 
@@ -117,70 +359,61 @@ use canopy_resources::CanopyPipeline;
 let pipeline = CanopyPipeline::new()?;
 let analysis = pipeline.analyze("John gave Mary a book.")?;
 
-// Access results
-println!("Tokens: {}", analysis.syntax.tokens.len());
-println!("Decompositions: {}", analysis.decompositions.len());
-println!("Role bindings: {}", analysis.role_bindings.len());
+println!("Events: {}", analysis.events.len());
+println!("Consistent: {}", analysis.consistency.consistent);
 ```
 
-### Syntax Only
+### Discourse Context with TAM
 
 ```rust
-use canopy_resources::TreebankSyntaxProvider;
-use canopy::runtime::SyntaxProvider;
+use canopy::kernel::discourse::{DiscourseContext, DiscourseConfig};
+use canopy::kernel::events::{ComposedEvent, TemporalFrame, AspectualViewpoint};
 
-let provider = TreebankSyntaxProvider::new()?;
-let syntax = provider.parse("The cat runs.")?;
+let mut ctx = DiscourseContext::new(DiscourseConfig::default());
 
-for token in &syntax.tokens {
-    println!("{}: {:?} -> {:?}", token.form, token.upos, token.deprel);
+// Process event with TAM features
+let event = ComposedEvent {
+    predicate: "run".to_string(),
+    temporal_frame: Some(TemporalFrame::past_progressive()),
+    aspectual_viewpoint: Some(AspectualViewpoint::Progressive),
+    // ...
+};
+
+ctx.begin_sentence();
+ctx.process_events(&events);
+ctx.end_sentence();
+
+// DRS now contains TemporalFrameAssignment and AspectualOp conditions
+```
+
+### Consistency Checking
+
+```rust
+use canopy::kernel::logic::{ClosedWorldReasoner, Reasoner};
+
+let reasoner = ClosedWorldReasoner::new();
+let result = reasoner.check_consistent(&drs);
+
+if !result.consistent {
+    for conflict in &result.conflicts {
+        println!("Conflict: {:?} - {}", conflict.conflict_type, conflict.description);
+    }
 }
 ```
 
-### Individual Engines
+### Query Answering
 
 ```rust
-use canopy_resources::{VerbNetEngine, WordNetEngine, PartOfSpeech};
+use canopy::kernel::logic::{Query, Proposition};
 
-let verbnet = VerbNetEngine::new()?;
-let result = verbnet.analyze_verb("give")?;
+let query = Query::yes_no(Proposition::predicate("leave", "John", ThetaRole::Agent));
+let result = reasoner.answer(&drs, &query);
 
-let wordnet = WordNetEngine::new()?;
-let result = wordnet.analyze_word("book", PartOfSpeech::Noun)?;
-```
-
-## Design Principles
-
-### 1. Clean Kernel Boundary
-
-The `canopy` kernel contains:
-
-- Core types (ThetaRole, LittleV, CanopyError)
-- Provider trait definitions
-- Event composition logic
-- Discourse processing logic (DRS, QUD, anaphora)
-- Logic layer (query answering, entailment, consistency)
-
-It has NO knowledge of VerbNet XML parsing, FrameNet loading, etc.
-
-### 2. Provider-Based Injection
-
-Heavy resources are injected via provider traits:
-
-- Tests can use mock providers
-- Different resources can be swapped
-- Kernel remains testable in isolation
-
-### 3. Shared Engines
-
-`SharedEngines` enables efficient resource sharing:
-
-```rust
-let engines = SharedEngines::new()?;  // Load once
-
-// Share across components
-let syntax = TreebankSyntaxProvider::with_shared_engines(config, &engines)?;
-let sense = VerbNetSenseProvider::with_engine(engines.verbnet.clone());
+match result.answer {
+    Answer::Yes => println!("John left."),
+    Answer::No => println!("John didn't leave."),
+    Answer::Unknown => println!("Cannot determine."),
+}
 ```
 
 ## Performance
@@ -191,3 +424,9 @@ let sense = VerbNetSenseProvider::with_engine(engines.verbnet.clone());
 | Sentence analysis | 30-200μs            |
 | Engine loading    | ~300ms (from cache) |
 | Memory            | ~350 MB             |
+
+## Test Coverage
+
+- **Threshold**: 80%
+- **Current**: ~81%
+- Integration tests cover TAM flow through all 4 layers

@@ -300,35 +300,18 @@ fn compile_condition(
             compiled.equalities.push((*ref1, *ref2));
         }
         DrsCondition::Negation(inner) => {
-            let sub_path = extend_path(path, idx);
-            let inner_compiled = compile_with_path(inner, &sub_path, sentence);
-            compiled.negations.push(NegatedFormula {
-                inner: inner_compiled,
-                source,
-            });
+            compile_negation(compiled, inner, idx, path, sentence, source);
         }
         DrsCondition::Disjunction(left, right) => {
-            let sub_path = extend_path(path, idx);
-            let left_compiled = compile_with_path(left, &sub_path, sentence);
-            let right_compiled = compile_with_path(right, &sub_path, sentence);
-            compiled.disjunctions.push(CompiledDisjunction {
-                left: left_compiled,
-                right: right_compiled,
-                source,
-            });
+            compile_disjunction(compiled, left, right, idx, path, sentence, source);
         }
         DrsCondition::Implication {
             antecedent,
             consequent,
         } => {
-            let sub_path = extend_path(path, idx);
-            let ant_compiled = compile_with_path(antecedent, &sub_path, sentence);
-            let cons_compiled = compile_with_path(consequent, &sub_path, sentence);
-            compiled.implications.push(CompiledImplication {
-                antecedent: ant_compiled,
-                consequent: cons_compiled,
-                source,
-            });
+            compile_implication(
+                compiled, antecedent, consequent, idx, path, sentence, source,
+            );
         }
         DrsCondition::TemporalRelation {
             relation,
@@ -342,7 +325,175 @@ fn compile_condition(
                 source,
             });
         }
+        // TAM conditions
+        DrsCondition::TemporalFrameAssignment { event, frame } => {
+            compile_temporal_frame(compiled, *event, frame, source);
+        }
+        DrsCondition::AspectualOp {
+            operator,
+            event,
+            scope,
+        } => {
+            let ctx = CompileContext {
+                idx,
+                path,
+                sentence,
+            };
+            compile_aspectual_op(compiled, *operator, *event, scope, ctx, source);
+        }
+        DrsCondition::TemporalAnchor {
+            event, anchor_type, ..
+        } => {
+            compile_temporal_anchor(compiled, *event, *anchor_type, source);
+        }
+        // Modal conditions - tracked for modal_reasoner.rs
+        DrsCondition::ModalOp { scope, .. } => {
+            let sub_path = extend_path(path, idx);
+            let _scope_compiled = compile_with_path(scope, &sub_path, sentence);
+        }
+        DrsCondition::InWorld { condition, .. } => {
+            compile_condition(compiled, condition, idx, path, sentence, source);
+        }
+        DrsCondition::Accessible { .. } => {}
+        DrsCondition::Counterfactual {
+            antecedent,
+            consequent,
+            ..
+        } => {
+            let sub_path = extend_path(path, idx);
+            let _ant_compiled = compile_with_path(antecedent, &sub_path, sentence);
+            let _cons_compiled = compile_with_path(consequent, &sub_path, sentence);
+        }
     }
+}
+
+/// Compile a negation condition.
+fn compile_negation(
+    compiled: &mut CompiledDrs,
+    inner: &Drs,
+    idx: usize,
+    path: &[usize],
+    sentence: usize,
+    source: ConditionRef,
+) {
+    let sub_path = extend_path(path, idx);
+    let inner_compiled = compile_with_path(inner, &sub_path, sentence);
+    compiled.negations.push(NegatedFormula {
+        inner: inner_compiled,
+        source,
+    });
+}
+
+/// Compile a disjunction condition.
+fn compile_disjunction(
+    compiled: &mut CompiledDrs,
+    left: &Drs,
+    right: &Drs,
+    idx: usize,
+    path: &[usize],
+    sentence: usize,
+    source: ConditionRef,
+) {
+    let sub_path = extend_path(path, idx);
+    let left_compiled = compile_with_path(left, &sub_path, sentence);
+    let right_compiled = compile_with_path(right, &sub_path, sentence);
+    compiled.disjunctions.push(CompiledDisjunction {
+        left: left_compiled,
+        right: right_compiled,
+        source,
+    });
+}
+
+/// Compile an implication condition.
+fn compile_implication(
+    compiled: &mut CompiledDrs,
+    antecedent: &Drs,
+    consequent: &Drs,
+    idx: usize,
+    path: &[usize],
+    sentence: usize,
+    source: ConditionRef,
+) {
+    let sub_path = extend_path(path, idx);
+    let ant_compiled = compile_with_path(antecedent, &sub_path, sentence);
+    let cons_compiled = compile_with_path(consequent, &sub_path, sentence);
+    compiled.implications.push(CompiledImplication {
+        antecedent: ant_compiled,
+        consequent: cons_compiled,
+        source,
+    });
+}
+
+/// Compile a temporal frame assignment to facts.
+fn compile_temporal_frame(
+    compiled: &mut CompiledDrs,
+    event: ReferentId,
+    frame: &crate::kernel::discourse::TemporalFrame,
+    source: ConditionRef,
+) {
+    if frame.is_simple_past() {
+        compiled
+            .facts
+            .push(Fact::unary("past_tense", event, source.clone()));
+    } else if frame.is_past_perfect() {
+        compiled
+            .facts
+            .push(Fact::unary("past_perfect_tense", event, source.clone()));
+    }
+    if frame.is_progressive() {
+        compiled
+            .facts
+            .push(Fact::unary("progressive", event, source.clone()));
+    }
+    compiled
+        .facts
+        .push(Fact::unary("has_temporal_frame", event, source));
+}
+
+/// Context for compiling subordinate DRS structures.
+#[derive(Clone, Copy)]
+struct CompileContext<'a> {
+    idx: usize,
+    path: &'a [usize],
+    sentence: usize,
+}
+
+/// Compile an aspectual operator to facts.
+fn compile_aspectual_op(
+    compiled: &mut CompiledDrs,
+    operator: crate::kernel::discourse::AspectualOperator,
+    event: ReferentId,
+    scope: &Drs,
+    ctx: CompileContext<'_>,
+    source: ConditionRef,
+) {
+    let aspect_name = format!("{operator:?}").to_lowercase();
+    compiled
+        .facts
+        .push(Fact::unary(&aspect_name, event, source.clone()));
+    compiled
+        .facts
+        .push(Fact::unary("has_aspectual_op", event, source));
+
+    let sub_path = extend_path(ctx.path, ctx.idx);
+    let scope_compiled = compile_with_path(scope, &sub_path, ctx.sentence);
+    merge_subordinate(compiled, scope_compiled);
+}
+
+/// Compile a temporal anchor to facts.
+fn compile_temporal_anchor(
+    compiled: &mut CompiledDrs,
+    event: ReferentId,
+    anchor_type: crate::kernel::discourse::TemporalAnchorType,
+    source: ConditionRef,
+) {
+    let anchor_name = format!("anchor_{anchor_type:?}").to_lowercase();
+    compiled
+        .facts
+        .push(Fact::unary(&anchor_name, event, source.clone()));
+    compiled
+        .facts
+        .push(Fact::unary("has_temporal_anchor", event, source));
 }
 
 #[cfg(test)]
@@ -468,5 +619,47 @@ mod tests {
 
         let filler = compiled.filler_for_role(ReferentId::new(0), ThetaRole::Agent);
         assert_eq!(filler, Some(ReferentId::new(1)));
+    }
+
+    #[test]
+    fn test_compile_temporal_frame() {
+        use crate::kernel::discourse::TemporalFrame;
+
+        let mut drs = Drs::new(DrsId::new(0));
+        let event_id = ReferentId::new(0);
+        drs.add_condition(DrsCondition::TemporalFrameAssignment {
+            event: event_id,
+            frame: TemporalFrame::past(),
+        });
+
+        let compiled = compile(&drs);
+        // Should have past_tense and has_temporal_frame facts
+        assert!(compiled.facts.iter().any(|f| f.predicate == "past_tense"));
+        assert!(compiled
+            .facts
+            .iter()
+            .any(|f| f.predicate == "has_temporal_frame"));
+    }
+
+    #[test]
+    fn test_compile_aspectual_op() {
+        use crate::kernel::discourse::AspectualOperator;
+
+        let mut drs = Drs::new(DrsId::new(0));
+        let event_id = ReferentId::new(0);
+        let scope = Drs::new(DrsId::new(1));
+        drs.add_condition(DrsCondition::AspectualOp {
+            operator: AspectualOperator::Progressive,
+            event: event_id,
+            scope: Box::new(scope),
+        });
+
+        let compiled = compile(&drs);
+        // Should have progressive and has_aspectual_op facts
+        assert!(compiled.facts.iter().any(|f| f.predicate == "progressive"));
+        assert!(compiled
+            .facts
+            .iter()
+            .any(|f| f.predicate == "has_aspectual_op"));
     }
 }

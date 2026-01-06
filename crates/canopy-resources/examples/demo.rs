@@ -721,6 +721,157 @@ fn demo_derivation_trace(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::e
     Ok(())
 }
 
+/// Section 13: TAM - Tense, Aspect, Modality and Temporal Reasoning
+fn demo_tam() {
+    println!("\n┌─────────────────────────────────────────────────────────────────┐");
+    println!("│ 13. TAM - Tense, Aspect, Modality & Temporal Reasoning          │");
+    println!("└─────────────────────────────────────────────────────────────────┘\n");
+
+    demo_tam_temporal_frames();
+    demo_tam_allen_algebra();
+    demo_tam_modal_reasoning();
+    demo_tam_counterfactuals();
+    println!();
+}
+
+fn demo_tam_temporal_frames() {
+    use canopy::kernel::discourse::AspectualViewpoint;
+
+    println!("  Reichenbachian Temporal Frames:");
+    println!("  ────────────────────────────────\n");
+
+    let examples = [
+        (
+            "John ran.",
+            "Past",
+            "E < R = S",
+            AspectualViewpoint::Perfective,
+        ),
+        (
+            "John was running.",
+            "Past Progressive",
+            "E ○ R < S",
+            AspectualViewpoint::Progressive,
+        ),
+        (
+            "John has left.",
+            "Present Perfect",
+            "E < R = S",
+            AspectualViewpoint::Perfect,
+        ),
+    ];
+
+    for (sentence, tense_label, formula, viewpoint) in &examples {
+        println!("    \"{sentence}\"");
+        println!("      Tense: {tense_label}");
+        println!("      Temporal: {formula}");
+        println!("      Aspect: {viewpoint:?}\n");
+    }
+}
+
+fn demo_tam_allen_algebra() {
+    use canopy::kernel::logic::{AllenRelation, TemporalConstraint, TemporalReasoner};
+    use canopy::ReferentId;
+
+    println!("  Temporal Reasoning (Allen Interval Algebra):");
+    println!("  ──────────────────────────────────────────────\n");
+
+    let mut temporal = TemporalReasoner::new();
+    let e1 = ReferentId::new(0);
+    let e2 = ReferentId::new(1);
+    let e3 = ReferentId::new(2);
+
+    temporal.add_constraint(TemporalConstraint::new(
+        e1,
+        e2,
+        AllenRelation::Before,
+        "narration",
+    ));
+    temporal.add_constraint(TemporalConstraint::new(
+        e2,
+        e3,
+        AllenRelation::Before,
+        "narration",
+    ));
+
+    println!("    Narrative: \"John entered. Mary stood up. They shook hands.\"");
+    println!("    Constraints:");
+    println!("      e1(enter) < e2(stand-up)  [narration]");
+    println!("      e2(stand-up) < e3(shake)  [narration]");
+
+    let result = temporal.check_consistency();
+    println!("\n    Consistency: {}", result.is_consistent);
+    println!("    Inferred: {} new constraints", result.inferred.len());
+    for inf in &result.inferred {
+        println!(
+            "      {:?} {:?} {:?} [{}]",
+            inf.from, inf.relation, inf.to, inf.source
+        );
+    }
+}
+
+fn demo_tam_modal_reasoning() {
+    use canopy::core::{ModalFlavor, ModalForce};
+    use canopy::kernel::discourse::{AccessibilityType, WorldId};
+    use canopy::kernel::logic::ModalReasoner;
+
+    println!("\n  Modal Reasoning (Kripke Semantics):");
+    println!("  ─────────────────────────────────────\n");
+
+    let mut modal = ModalReasoner::new();
+    let w0 = WorldId::ACTUAL;
+    let w1 = modal.create_world();
+    modal.make_accessible(w0, w1, AccessibilityType::Epistemic);
+    modal.get_world_mut(&w1).unwrap().add_fact("raining");
+
+    println!("    World Model:");
+    println!("      w0 (actual): {{}}");
+    println!("      w1 (epistemic): {{raining}}");
+    println!("      w0 --[epistemic]--> w1");
+
+    let eval =
+        modal.evaluate_modal_fact(ModalForce::Possibility, ModalFlavor::Epistemic, "raining");
+    println!("\n    \"It might be raining\" (◇_epistemic raining)");
+    println!("      Holds: {}", eval.holds);
+    println!("      Witness worlds: {:?}", eval.witness_worlds);
+}
+
+fn demo_tam_counterfactuals() {
+    use canopy::kernel::discourse::{AccessibilityType, WorldId};
+    use canopy::kernel::logic::{CounterfactualModal, ModalReasoner};
+
+    println!("\n  Counterfactual Reasoning (Lewis Semantics):");
+    println!("  ─────────────────────────────────────────────\n");
+
+    let mut modal = ModalReasoner::new();
+    let actual = WorldId::ACTUAL;
+
+    modal
+        .get_world_mut(&actual)
+        .unwrap()
+        .add_fact("john_stayed");
+    modal.get_world_mut(&actual).unwrap().add_fact("mary_happy");
+
+    let cf_world = modal.create_world();
+    modal.make_accessible(actual, cf_world, AccessibilityType::Similarity);
+    modal
+        .get_world_mut(&cf_world)
+        .unwrap()
+        .add_fact("john_left");
+    modal.get_world_mut(&cf_world).unwrap().add_fact("mary_sad");
+
+    println!("    \"If John had left, Mary would be sad\"");
+    println!("    Actual: {{john_stayed, mary_happy}}");
+    println!("    Closest where antecedent holds: {{john_left, mary_sad}}\n");
+
+    let cf_eval =
+        modal.evaluate_counterfactual_facts("john_left", "mary_sad", CounterfactualModal::Would);
+
+    println!("    Antecedent: john_left");
+    println!("    Consequent: mary_sad");
+    println!("    Result: {} ({})", cf_eval.holds, cf_eval.explanation);
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n╔══════════════════════════════════════════════════════════════════╗");
     println!("║           CANOPY - Semantic Analysis Pipeline                    ║");
@@ -740,6 +891,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     demo_moby_dick(&pipeline)?;
     demo_logic_layer(&pipeline)?;
     demo_derivation_trace(&pipeline)?;
+    demo_tam();
 
     println!("\n╔══════════════════════════════════════════════════════════════════╗");
     println!("║                        Demo Complete                             ║");

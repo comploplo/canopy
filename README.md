@@ -25,6 +25,23 @@ Input: "John gave Mary a book"
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
+## Query & Reasoning Output
+
+```
+Document: "John gave Mary a book. She read it carefully."
+
+Query: Who gave Mary something?
+Answer: John
+  Proof: S1 give(e1) with Agent(e1,John), Recipient(e1,Mary), Theme(e1,book)
+
+Query: What did Mary do?
+Answer: read
+  Proof: S2 read(e2) with Agent(e2,Mary), Theme(e2,book)
+         Resolved: "She" → Mary, "it" → book
+
+Consistency: ✓ No conflicts detected
+```
+
 ## Quick Start
 
 ```bash
@@ -49,7 +66,7 @@ Five integrated linguistic resources working together:
 | VerbNet  | 333 verb classes | Syntactic frames and theta roles  |
 | FrameNet | 1,200+ frames    | Semantic frame structures         |
 | WordNet  | 117,000+ synsets | Lexical relations and definitions |
-| PropBank | Full coverage    | Predicate-argument structures     |
+| PropBank | Indexed rolesets | Predicate-argument structures     |
 | Lexicon  | Patterns + lists | Negation, discourse markers       |
 
 ### Event Semantics
@@ -81,7 +98,7 @@ Executable logic layer for inference over DRS:
 - **Entailment Checking** — Does the discourse entail a proposition?
 - **Consistency Checking** — Detect polarity conflicts and temporal cycles
 - **Explanations** — Sentence-level provenance for all answers
-- **Closed-World Reasoning** — Standard DRS assumption (absence = false)
+- **Reasoning Modes** — Open-world (Unknown) and closed-world (absence → false) for QA
 
 ### Underspecification
 
@@ -134,8 +151,8 @@ The `canopy` crate defines abstract provider traits with no knowledge of data fo
 │   │   └───────────┘ └───────────┘ └───────────┘ └──────────┘ └───────┘  │   │
 │   │                                                                     │   │
 │   │   ┌─────────────────────┐  ┌────────────────────────────────────┐   │   │
-│   │   │   Pattern Matcher   │  │       Engine Infrastructure        │   │
-│   │   │  UD treebank-aware  │  │  Binary cache · O(1) lookup · LRU  │   │
+│   │   │   Pattern Matcher   │  │       Engine Infrastructure        │   │   │
+│   │   │  UD treebank-aware  │  │  Binary cache · O(1) lookup · LRU  │   │   │
 │   │   └─────────────────────┘  └────────────────────────────────────┘   │   │
 │   └─────────────────────────────────────────────────────────────────────┘   │
 │                                    │ implements traits                      │
@@ -171,13 +188,15 @@ Benchmarks on Apple Silicon (M-series), release mode:
 
 ### Sentence Analysis
 
-| Operation               | Time   | Notes                            |
-| ----------------------- | ------ | -------------------------------- |
-| Pipeline initialization | ~750ms | Binary cache (vs 10-15s cold)    |
-| Simple sentence         | ~225µs | "John runs quickly."             |
-| Ditransitive            | ~25µs  | "Mary gave John a book."         |
-| Complex event           | ~65µs  | With modifiers and decomposition |
-| 3-sentence document     | ~190µs | Full discourse analysis + DRS    |
+| Operation               | Time   | Notes                                 |
+| ----------------------- | ------ | ------------------------------------- |
+| Pipeline initialization | ~750ms | Cache deserialization + engine wiring |
+| First sentence          | ~225µs | Cold caches, full analysis path       |
+| Subsequent sentences    | ~25µs  | Warm caches, cached patterns          |
+| Complex event           | ~65µs  | With modifiers and decomposition      |
+| 3-sentence document     | ~190µs | Full discourse analysis + DRS         |
+
+*Times vary based on cache state. First analysis is slower due to pattern matching warmup.*
 
 ### Throughput (Moby Dick, 11,386 lines)
 
@@ -207,15 +226,17 @@ Benchmarks on Apple Silicon (M-series), release mode:
 
 Canopy requires linguistic datasets (not included). Each has its own license—check terms before commercial use.
 
-| Dataset        | Location                    | Source                                                           |
-| -------------- | --------------------------- | ---------------------------------------------------------------- |
-| VerbNet 3.4    | `data/verbnet/`             | [GitHub](https://github.com/cu-clear/verbnet)                    |
-| FrameNet 1.7   | `data/framenet/`            | [FrameNet](https://framenet.icsi.berkeley.edu/) (registration)   |
-| WordNet 3.1    | `data/wordnet/`             | [WordNet](https://wordnet.princeton.edu/)                        |
-| PropBank       | `data/propbank/`            | [PropBank](https://propbank.github.io/)                          |
-| UD English-EWT | `data/ud_english-ewt/`      | [UniversalDependencies](https://universaldependencies.org/)      |
-| Gender names   | `data/name_gender_dataset/` | [UCI ML](https://archive.ics.uci.edu/dataset/591/gender+by+name) |
-| SemLink 2      | `data/semlink/`             | [GitHub](https://github.com/cu-clear/semlink) (git submodule)    |
+| Dataset        | Location                    | Source                                                             |
+| -------------- | --------------------------- | ------------------------------------------------------------------ |
+| VerbNet 3.4    | `data/verbnet/`             | [GitHub](https://github.com/cu-clear/verbnet)                      |
+| FrameNet 1.7   | `data/framenet/`            | [FrameNet](https://framenet.icsi.berkeley.edu/) (registration)     |
+| WordNet 3.1    | `data/wordnet/`             | [WordNet](https://wordnet.princeton.edu/)                          |
+| PropBank       | `data/propbank/`            | [PropBank](https://propbank.github.io/)                            |
+| UD English-EWT | `data/ud_english-ewt/`      | [UniversalDependencies](https://universaldependencies.org/)        |
+| Gender names   | `data/name_gender_dataset/` | [UCI ML](https://archive.ics.uci.edu/dataset/591/gender+by+name) ¹ |
+| SemLink 2      | `data/semlink/`             | [GitHub](https://github.com/cu-clear/semlink) (git submodule)      |
+
+¹ *Gender names: weak heuristic for pronoun resolution only; can be disabled; not a model of identity; expect errors/bias.*
 
 After cloning, initialize submodules:
 
@@ -225,34 +246,26 @@ git submodule update --init --recursive
 
 ## Theoretical Foundations
 
-### Event Semantics
+- **Events** — Neo-Davidsonian structures + LittleV decomposition (Parsons, Ramchand)
+- **Roles** — UTAH theta assignment (Baker 1988)
+- **Discourse** — DRT (Kamp), QUD (Roberts), Centering (Grosz et al.)
+- **Information** — Surprisal theory (Hale, Levy)
+- **Resources** — VerbNet, FrameNet, WordNet, PropBank
 
-- Neo-Davidsonian event structures (Parsons 1990)
-- LittleV decomposition (Hale & Keyser, Ramchand 2008)
-- VerbNet-to-primitive mapping
+See [Formal Semantics](docs/FORMAL_SEMANTICS.md) for full theoretical background.
 
-### Thematic Roles
+## Limitations
 
-- UTAH: Uniformity of Theta Assignment Hypothesis (Baker 1988)
-- Role hierarchy: Agent > Experiencer > Theme > Goal > Location
+- **Not a parser** — Relies on UD parses or external syntax; does not parse raw text
+- **Not a world model** — Symbolic reasoning only; no grounded perception or commonsense KB
+- **Quantifiers improving** — Event/argument structure is strongest; generalized quantifiers in progress
+- **No hallucinated inferences** — Discourse reasoning is symbolic; won't bridge beyond explicit content
+- **Research-grade** — Not production-hardened; expect rough edges
 
-### Discourse
+## Why Rust?
 
-- DRS: Discourse Representation Theory (Kamp 1981)
-- QUD: Question Under Discussion (Roberts 1996)
-- Centering Theory (Grosz, Joshi, Weinstein 1995)
-
-### Information Theory
-
-- Surprisal: S(word) = -log₂ P(word|context) (Hale 2001, Levy 2008)
-- Entropy reduction for disambiguation
-
-### Lexical Resources
-
-- VerbNet 3.4 (Kipper-Schuler 2005)
-- FrameNet 1.7 (Fillmore & Baker 2010)
-- WordNet 3.1 (Fellbaum 1998)
-- PropBank (Palmer et al. 2005)
+- **Type system** — Rust's enums and traits model linguistic categories (theta roles, dependency relations, semantic frames) with compile-time guarantees that catch category errors early
+- **Performance** — Zero-cost abstractions, deterministic execution, parallel pipeline stages without GC pauses
 
 ## Requirements
 

@@ -791,6 +791,8 @@ mod tests {
                 binding_confidence: 1.0,
                 presuppositions: vec![],
                 polarity: true,
+                temporal_frame: None,
+                aspectual_viewpoint: None,
             }],
             unbound_participants: vec![],
             confidence: 1.0,

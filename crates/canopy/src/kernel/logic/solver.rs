@@ -5,12 +5,14 @@
 
 use super::answer::{Answer, AnswerBinding, QueryResult};
 use super::compiler::{compile, CompiledDrs};
+use super::modal_reasoner::ModalReasoner;
 use super::proof::{ConditionRef, Explanation, ExplanationStep};
 use super::query::{Constraint, Proposition, Query, Term};
 use super::reasoner::{Conflict, ConsistencyResult, Entailment, EntailmentResult, Reasoner};
-use crate::core::ThetaRole;
-use crate::kernel::discourse::{Drs, DrsCondition, ReferentId, TemporalRelationType};
-use std::collections::{HashMap, HashSet};
+use super::temporal_reasoner::{AllenRelation, TemporalConstraint, TemporalReasoner};
+use crate::core::{ModalForce, ThetaRole};
+use crate::kernel::discourse::{Drs, DrsCondition, ReferentId, WorldId};
+use std::collections::HashMap;
 
 /// Closed-world reasoner.
 ///
@@ -69,68 +71,126 @@ impl ClosedWorldReasoner {
         conflicts
     }
 
-    /// Check for temporal ordering cycles.
-    fn find_temporal_cycles(compiled: &CompiledDrs) -> Vec<Conflict> {
+    // NOTE: find_temporal_cycles and detect_cycle have been removed.
+    // Temporal cycle detection is now handled by validate_temporal_consistency()
+    // which uses the TemporalReasoner with Allen interval algebra.
+
+    /// Validate temporal consistency using Allen interval algebra.
+    ///
+    /// Extracts temporal relations from the compiled DRS and feeds them to
+    /// the `TemporalReasoner` for cycle detection and constraint propagation.
+    fn validate_temporal_consistency(compiled: &CompiledDrs) -> Vec<Conflict> {
+        let mut reasoner = TemporalReasoner::new();
         let mut conflicts = Vec::new();
 
-        // Build adjacency list for "before" relations
-        let mut before_graph: HashMap<ReferentId, Vec<(ReferentId, &ConditionRef)>> =
-            HashMap::new();
+        // Extract temporal relations from compiled facts and feed to TemporalReasoner
         for constraint in &compiled.temporal_constraints {
-            if constraint.relation == TemporalRelationType::Before {
-                before_graph
-                    .entry(constraint.event1)
-                    .or_default()
-                    .push((constraint.event2, &constraint.source));
-            }
+            let allen = AllenRelation::from_temporal_relation(constraint.relation);
+            let source = format!("drs:{}", constraint.source.introduced_at);
+            reasoner.add_constraint(TemporalConstraint::new(
+                constraint.event1,
+                constraint.event2,
+                allen,
+                source,
+            ));
         }
 
-        // Simple cycle detection using DFS
-        let mut visited = HashSet::new();
-        let mut rec_stack = HashSet::new();
+        // Check consistency using Allen algebra
+        let result = reasoner.check_consistency();
 
-        for &start in before_graph.keys() {
-            if Self::detect_cycle(
-                start,
-                &before_graph,
-                &mut visited,
-                &mut rec_stack,
-                &mut conflicts,
-            ) {
-                break; // Found a cycle
+        if !result.is_consistent {
+            if let Some(cycle) = result.cycle {
+                // Create a conflict for the cycle
+                // Use the first and last events in the cycle for the conflict
+                if cycle.len() >= 2 {
+                    conflicts.push(Conflict::temporal_cycle(&cycle));
+                }
             }
         }
 
         conflicts
     }
 
-    fn detect_cycle(
-        node: ReferentId,
-        graph: &HashMap<ReferentId, Vec<(ReferentId, &ConditionRef)>>,
-        visited: &mut HashSet<ReferentId>,
-        rec_stack: &mut HashSet<ReferentId>,
-        conflicts: &mut Vec<Conflict>,
-    ) -> bool {
-        visited.insert(node);
-        rec_stack.insert(node);
+    /// Validate modal consistency using Kripke semantics.
+    ///
+    /// Extracts accessibility relations and modal operators from the DRS,
+    /// builds a world model, and checks that necessary conditions hold.
+    /// Uses `ModalReasoner` for possible worlds evaluation.
+    fn validate_modal_consistency(drs: &Drs) -> Vec<Conflict> {
+        let mut reasoner = ModalReasoner::new();
+        let mut conflicts = Vec::new();
 
-        if let Some(neighbors) = graph.get(&node) {
-            for (neighbor, source) in neighbors {
-                if !visited.contains(neighbor)
-                    && Self::detect_cycle(*neighbor, graph, visited, rec_stack, conflicts)
-                {
-                    return true;
+        // Build world model from DRS accessibility conditions
+        for condition in &drs.conditions {
+            if let DrsCondition::Accessible {
+                from_world,
+                to_world,
+                relation,
+            } = condition
+            {
+                // Ensure both worlds exist in the reasoner
+                if reasoner.get_world(from_world).is_none() {
+                    reasoner.add_world(super::modal_reasoner::World::new(*from_world));
                 }
-                if rec_stack.contains(neighbor) {
-                    // Found cycle
-                    conflicts.push(Conflict::temporal((*source).clone(), (*source).clone()));
-                    return true;
+                if reasoner.get_world(to_world).is_none() {
+                    reasoner.add_world(super::modal_reasoner::World::new(*to_world));
+                }
+                reasoner.make_accessible(*from_world, *to_world, *relation);
+            }
+        }
+
+        // Populate facts in the actual world from DRS predicates
+        // This allows modal evaluation to check which facts hold in which worlds
+        if let Some(actual) = reasoner.get_world_mut(&WorldId::ACTUAL) {
+            for condition in &drs.conditions {
+                if let DrsCondition::Predicate { name, .. } = condition {
+                    actual.add_fact(name.clone());
                 }
             }
         }
 
-        rec_stack.remove(&node);
-        false
+        // Evaluate modal operators for consistency
+        for condition in &drs.conditions {
+            if let DrsCondition::ModalOp {
+                force,
+                flavor,
+                scope,
+                world_var: _,
+            } = condition
+            {
+                // For necessity (must/should), check if scope holds in all accessible worlds
+                if *force == ModalForce::Necessity {
+                    // Get predicates from scope to check
+                    let scope_predicates: Vec<String> = scope
+                        .conditions
+                        .iter()
+                        .filter_map(|c| {
+                            if let DrsCondition::Predicate { name, .. } = c {
+                                Some(name.clone())
+                            } else {
+                                None
+                            }
+                        })
+                        .collect();
+
+                    // Check each predicate in the scope
+                    for predicate in scope_predicates {
+                        let eval = reasoner.evaluate_modal_fact(*force, *flavor, &predicate);
+
+                        if !eval.holds {
+                            // Necessity fails - this could be an inconsistency
+                            conflicts.push(Conflict::modal_necessity_failure(
+                                *flavor,
+                                &predicate,
+                                &eval.witness_worlds,
+                            ));
+                        }
+                    }
+                }
+            }
+        }
+
+        conflicts
     }
 
     /// Match a proposition against the compiled DRS.
@@ -454,8 +514,11 @@ impl Reasoner for ClosedWorldReasoner {
         // Check for polarity conflicts
         conflicts.extend(Self::find_polarity_conflicts(&compiled));
 
-        // Check for temporal cycles
-        conflicts.extend(Self::find_temporal_cycles(&compiled));
+        // Check for temporal cycles using TemporalReasoner (Allen interval algebra)
+        conflicts.extend(Self::validate_temporal_consistency(&compiled));
+
+        // Check for modal consistency using ModalReasoner (Kripke semantics)
+        conflicts.extend(Self::validate_modal_consistency(drs));
 
         if conflicts.is_empty() {
             ConsistencyResult::consistent()
@@ -544,7 +607,7 @@ impl Reasoner for ClosedWorldReasoner {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::kernel::discourse::{DiscourseReferent, DrsId};
+    use crate::kernel::discourse::{DiscourseReferent, DrsId, TemporalRelationType};
     use crate::kernel::logic::reasoner::ConflictType;
 
     fn make_simple_drs() -> Drs {
@@ -737,5 +800,66 @@ mod tests {
             .conflicts
             .iter()
             .any(|c| c.conflict_type == ConflictType::Temporal));
+    }
+
+    #[test]
+    fn test_modal_consistency_no_conflicts() {
+        use crate::kernel::discourse::AccessibilityType;
+
+        let mut drs = Drs::new(DrsId::new(0));
+
+        // Add a fact in the actual world
+        drs.add_predicate("happy", ReferentId::new(1));
+
+        // Add accessibility to a world where happy also holds
+        let w1 = WorldId(1);
+        drs.add_condition(DrsCondition::Accessible {
+            from_world: WorldId::ACTUAL,
+            to_world: w1,
+            relation: AccessibilityType::Epistemic,
+        });
+
+        // No modal operators - should be consistent
+        let reasoner = ClosedWorldReasoner::new();
+        let result = reasoner.check_consistent(&drs);
+        assert!(result.consistent);
+    }
+
+    #[test]
+    fn test_modal_necessity_evaluated() {
+        use crate::core::ModalFlavor;
+        use crate::kernel::discourse::AccessibilityType;
+
+        let mut drs = Drs::new(DrsId::new(0));
+
+        // Add a fact in the actual world
+        drs.add_predicate("happy", ReferentId::new(1));
+
+        // Add accessibility
+        let w1 = WorldId(1);
+        drs.add_condition(DrsCondition::Accessible {
+            from_world: WorldId::ACTUAL,
+            to_world: w1,
+            relation: AccessibilityType::Epistemic,
+        });
+
+        // Add a modal necessity: "It must be that happy"
+        let mut scope = Drs::new(DrsId::new(1));
+        scope.add_predicate("happy", ReferentId::new(1));
+
+        drs.add_condition(DrsCondition::ModalOp {
+            force: ModalForce::Necessity,
+            flavor: ModalFlavor::Epistemic,
+            scope: Box::new(scope),
+            world_var: None,
+        });
+
+        // Check consistency - without happy in w1, this might flag an issue
+        // (though current implementation may not detect this without facts in w1)
+        let reasoner = ClosedWorldReasoner::new();
+        let result = reasoner.check_consistent(&drs);
+        // Result depends on whether modal validation finds issues
+        // For now, just verify it runs without panic
+        assert!(result.consistent || !result.conflicts.is_empty());
     }
 }

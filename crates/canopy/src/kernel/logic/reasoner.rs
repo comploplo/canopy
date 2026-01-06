@@ -126,6 +126,48 @@ impl Conflict {
             "Temporal ordering cycle detected",
         )
     }
+
+    /// Create a temporal cycle conflict from Allen interval algebra.
+    ///
+    /// Used when the `TemporalReasoner` detects a cycle in temporal constraints.
+    #[must_use]
+    pub fn temporal_cycle(cycle: &[crate::kernel::discourse::ReferentId]) -> Self {
+        let cycle_str: Vec<String> = cycle.iter().map(|r| format!("e{}", r.0)).collect();
+        Self::new(
+            ConditionRef::main(0, 0), // Placeholder - cycle spans multiple conditions
+            ConditionRef::main(0, 0),
+            ConflictType::Temporal,
+            format!(
+                "Temporal cycle detected: {} → {}",
+                cycle_str.join(" → "),
+                cycle_str.first().unwrap_or(&"?".to_string())
+            ),
+        )
+    }
+
+    /// Create a modal necessity failure conflict.
+    ///
+    /// Used when the `ModalReasoner` finds that a necessity (must/should) doesn't
+    /// hold in all accessible worlds.
+    #[must_use]
+    pub fn modal_necessity_failure(
+        flavor: crate::core::ModalFlavor,
+        predicate: &str,
+        failing_worlds: &[crate::kernel::discourse::WorldId],
+    ) -> Self {
+        let worlds_str: Vec<String> = failing_worlds.iter().map(|w| format!("w{}", w.0)).collect();
+        Self::new(
+            ConditionRef::main(0, 0), // Placeholder
+            ConditionRef::main(0, 0),
+            ConflictType::Modal,
+            format!(
+                "{:?} necessity fails for '{}': not true in worlds [{}]",
+                flavor,
+                predicate,
+                worlds_str.join(", ")
+            ),
+        )
+    }
 }
 
 /// Type of conflict between conditions.
@@ -139,6 +181,8 @@ pub enum ConflictType {
     Equality,
     /// Type conflict: incompatible predicates.
     Type,
+    /// Modal conflict: necessity fails to hold in some accessible world.
+    Modal,
 }
 
 /// Result of entailment checking.

@@ -458,6 +458,40 @@ fn format_condition(condition: &canopy::kernel::discourse::DrsCondition) -> Stri
         } => {
             format!("{:?}(e{}, e{})", relation, event1.0, event2.0)
         }
+        // TAM conditions
+        DrsCondition::TemporalFrameAssignment { event, .. } => {
+            format!("TFRAME(e{})", event.0)
+        }
+        DrsCondition::AspectualOp {
+            operator, event, ..
+        } => {
+            format!("{}(e{})", operator, event.0)
+        }
+        DrsCondition::TemporalAnchor {
+            event, anchor_type, ..
+        } => {
+            format!("ANCHOR(e{}, {:?})", event.0, anchor_type)
+        }
+        DrsCondition::ModalOp { force, flavor, .. } => {
+            let op = match force {
+                canopy::core::ModalForce::Necessity => "□",
+                canopy::core::ModalForce::Possibility => "◇",
+            };
+            format!("{op}_{flavor:?}(...)")
+        }
+        DrsCondition::InWorld { world, .. } => {
+            format!("IN({world}, ...)")
+        }
+        DrsCondition::Accessible {
+            from_world,
+            to_world,
+            relation,
+        } => {
+            format!("ACC_{relation:?}({from_world}, {to_world})")
+        }
+        DrsCondition::Counterfactual { modal_force, .. } => {
+            format!("CF_{modal_force}(...)")
+        }
     }
 }
 

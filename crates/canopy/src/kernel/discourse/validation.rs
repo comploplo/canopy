@@ -202,6 +202,8 @@ mod tests {
             binding_confidence: 1.0,
             presuppositions: Vec::new(),
             polarity,
+            temporal_frame: None,
+            aspectual_viewpoint: None,
         }
     }
 

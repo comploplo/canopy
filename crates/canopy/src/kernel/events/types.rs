@@ -11,6 +11,7 @@
 //! - `SharedEventStructure`: Common event structure across all readings
 
 use crate::core::{DepRel, Distributivity, SemanticNumber, ThetaRole, Voice};
+use crate::kernel::discourse::{AspectualViewpoint, TemporalFrame};
 use crate::kernel::underspec::{
     Alternative, AmbiguitySummary, ChoiceId, ChoicePoint, ChoiceType, PackedSemantics, ReadingId,
     SharedStructure,
@@ -258,6 +259,14 @@ pub struct ComposedEvent {
     /// Event polarity: true = affirmative, false = negated.
     #[serde(default = "default_true")]
     pub polarity: bool,
+
+    /// Temporal frame (Reichenbachian S/R/E configuration).
+    #[serde(default)]
+    pub temporal_frame: Option<TemporalFrame>,
+
+    /// Aspectual viewpoint (perfective, progressive, perfect, etc.).
+    #[serde(default)]
+    pub aspectual_viewpoint: Option<AspectualViewpoint>,
 }
 
 fn default_true() -> bool {
@@ -928,6 +937,8 @@ impl SenseAlternative {
             binding_confidence: self.binding_confidence,
             presuppositions: Vec::new(),
             polarity: true,
+            temporal_frame: None,
+            aspectual_viewpoint: None,
         }
     }
 

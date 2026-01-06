@@ -17,6 +17,7 @@ use super::presupposition::{PresuppositionManager, TrackedPresupposition};
 use super::qud::{QudReport, QudStack, QudUpdate};
 use super::referent::{Gender, NumberFeature, ReferentId, ReferentRegistry};
 use super::relevance::{RelevanceReport, RelevanceScorer};
+use super::tam_builder::TamBuilder;
 use super::validation::{ValidationEngine, ValidationReport, ValidationStatus};
 use crate::core::ThetaRole;
 use crate::kernel::events::{ComposedEvent, ComposedEvents, LittleVType};
@@ -536,7 +537,34 @@ impl DiscourseContext {
             self.add_theta_role(event_id, *role, participant_id);
         }
 
-        // Add aspectual class as property
+        // Build TAM (Tense, Aspect, Modality) conditions from ComposedEvent
+        // This wires the temporal_frame and aspectual_viewpoint fields into the DRS
+        if event.temporal_frame.is_some() || event.aspectual_viewpoint.is_some() {
+            let tam_builder = TamBuilder::new();
+
+            // For aspectual operators, we need a scope DRS containing the event predication.
+            // This represents what the aspectual operator scopes over.
+            let scope_drs = if event.aspectual_viewpoint.is_some() {
+                let mut scope = Drs::new(self.next_drs_id());
+                scope.add_predicate(&event.predicate, event_id);
+                Some(scope)
+            } else {
+                None
+            };
+
+            let tam_conditions = tam_builder.build_tam_conditions(
+                event_id,
+                event.temporal_frame.as_ref(),
+                event.aspectual_viewpoint,
+                scope_drs,
+            );
+
+            for condition in tam_conditions {
+                self.drs.add_condition(condition);
+            }
+        }
+
+        // Add aspectual class as property (from little_v decomposition, separate from TAM viewpoint)
         let aspect_pred = match event.little_v_type {
             LittleVType::Cause => "causative",
             LittleVType::Become => "inchoative",
@@ -1098,6 +1126,8 @@ mod tests {
             binding_confidence: 1.0,
             presuppositions: Vec::new(),
             polarity: true,
+            temporal_frame: None,
+            aspectual_viewpoint: None,
         };
 
         ComposedEvents {
@@ -1125,6 +1155,8 @@ mod tests {
             binding_confidence: 1.0,
             presuppositions: Vec::new(),
             polarity: true,
+            temporal_frame: None,
+            aspectual_viewpoint: None,
         };
 
         ComposedEvents {
@@ -1152,6 +1184,8 @@ mod tests {
             binding_confidence: 1.0,
             presuppositions: Vec::new(),
             polarity: false,
+            temporal_frame: None,
+            aspectual_viewpoint: None,
         };
 
         ComposedEvents {
@@ -1179,6 +1213,8 @@ mod tests {
             binding_confidence: 1.0,
             presuppositions: Vec::new(),
             polarity: true,
+            temporal_frame: None,
+            aspectual_viewpoint: None,
         };
 
         ComposedEvents {
@@ -1187,5 +1223,218 @@ mod tests {
             confidence: 1.0,
             sources: Vec::new(),
         }
+    }
+
+    // TAM Integration Tests (Phase 1)
+
+    #[test]
+    fn test_process_event_with_temporal_frame() {
+        use crate::kernel::discourse::temporal::TemporalFrame;
+
+        let mut ctx = DiscourseContext::default();
+        let mut participants = HashMap::new();
+        participants.insert(ThetaRole::Agent, Participant::new(TokenId::new(0), "John"));
+
+        let event = ComposedEvent {
+            id: 0,
+            predicate: "run".to_string(),
+            little_v_type: LittleVType::Go,
+            participants,
+            aspect: AspectualClass::Activity,
+            voice: Voice::Active,
+            token_span: (TokenId::new(0), TokenId::new(1)),
+            source_sense: None,
+            decomposition_confidence: 1.0,
+            binding_confidence: 1.0,
+            presuppositions: Vec::new(),
+            polarity: true,
+            temporal_frame: Some(TemporalFrame::past()),
+            aspectual_viewpoint: None,
+        };
+
+        let events = ComposedEvents {
+            events: vec![event],
+            unbound_participants: Vec::new(),
+            confidence: 1.0,
+            sources: Vec::new(),
+        };
+
+        ctx.begin_sentence();
+        ctx.process_events(&events);
+        ctx.end_sentence();
+
+        // Check that a TemporalFrameAssignment condition was added
+        let has_temporal_frame = ctx
+            .drs()
+            .conditions
+            .iter()
+            .any(|c| matches!(c, DrsCondition::TemporalFrameAssignment { .. }));
+        assert!(
+            has_temporal_frame,
+            "DRS should have TemporalFrameAssignment condition"
+        );
+    }
+
+    #[test]
+    fn test_process_event_with_aspectual_viewpoint() {
+        use crate::kernel::discourse::temporal::{AspectualViewpoint, TemporalFrame};
+
+        let mut ctx = DiscourseContext::default();
+        let mut participants = HashMap::new();
+        participants.insert(ThetaRole::Agent, Participant::new(TokenId::new(0), "John"));
+
+        let event = ComposedEvent {
+            id: 0,
+            predicate: "run".to_string(),
+            little_v_type: LittleVType::Go,
+            participants,
+            aspect: AspectualClass::Activity,
+            voice: Voice::Active,
+            token_span: (TokenId::new(0), TokenId::new(1)),
+            source_sense: None,
+            decomposition_confidence: 1.0,
+            binding_confidence: 1.0,
+            presuppositions: Vec::new(),
+            polarity: true,
+            temporal_frame: Some(TemporalFrame::past_progressive()),
+            aspectual_viewpoint: Some(AspectualViewpoint::Progressive),
+        };
+
+        let events = ComposedEvents {
+            events: vec![event],
+            unbound_participants: Vec::new(),
+            confidence: 1.0,
+            sources: Vec::new(),
+        };
+
+        ctx.begin_sentence();
+        ctx.process_events(&events);
+        ctx.end_sentence();
+
+        // Check that both TemporalFrameAssignment and AspectualOp conditions were added
+        let has_temporal_frame = ctx
+            .drs()
+            .conditions
+            .iter()
+            .any(|c| matches!(c, DrsCondition::TemporalFrameAssignment { .. }));
+        let has_aspectual_op = ctx
+            .drs()
+            .conditions
+            .iter()
+            .any(|c| matches!(c, DrsCondition::AspectualOp { .. }));
+
+        assert!(
+            has_temporal_frame,
+            "DRS should have TemporalFrameAssignment"
+        );
+        assert!(
+            has_aspectual_op,
+            "DRS should have AspectualOp for Progressive"
+        );
+    }
+
+    #[test]
+    fn test_process_event_perfective_no_aspectual_op() {
+        use crate::kernel::discourse::temporal::{AspectualViewpoint, TemporalFrame};
+
+        let mut ctx = DiscourseContext::default();
+        let mut participants = HashMap::new();
+        participants.insert(ThetaRole::Agent, Participant::new(TokenId::new(0), "John"));
+
+        let event = ComposedEvent {
+            id: 0,
+            predicate: "run".to_string(),
+            little_v_type: LittleVType::Go,
+            participants,
+            aspect: AspectualClass::Achievement,
+            voice: Voice::Active,
+            token_span: (TokenId::new(0), TokenId::new(1)),
+            source_sense: None,
+            decomposition_confidence: 1.0,
+            binding_confidence: 1.0,
+            presuppositions: Vec::new(),
+            polarity: true,
+            temporal_frame: Some(TemporalFrame::past()),
+            aspectual_viewpoint: Some(AspectualViewpoint::Perfective),
+        };
+
+        let events = ComposedEvents {
+            events: vec![event],
+            unbound_participants: Vec::new(),
+            confidence: 1.0,
+            sources: Vec::new(),
+        };
+
+        ctx.begin_sentence();
+        ctx.process_events(&events);
+        ctx.end_sentence();
+
+        // Perfective should NOT create an AspectualOp (per tam_builder design)
+        let has_aspectual_op = ctx
+            .drs()
+            .conditions
+            .iter()
+            .any(|c| matches!(c, DrsCondition::AspectualOp { .. }));
+
+        assert!(
+            !has_aspectual_op,
+            "Perfective should not add AspectualOp condition"
+        );
+    }
+
+    #[test]
+    fn test_process_event_no_tam_when_none() {
+        let mut ctx = DiscourseContext::default();
+        let mut participants = HashMap::new();
+        participants.insert(ThetaRole::Agent, Participant::new(TokenId::new(0), "John"));
+
+        let event = ComposedEvent {
+            id: 0,
+            predicate: "run".to_string(),
+            little_v_type: LittleVType::Go,
+            participants,
+            aspect: AspectualClass::Activity,
+            voice: Voice::Active,
+            token_span: (TokenId::new(0), TokenId::new(1)),
+            source_sense: None,
+            decomposition_confidence: 1.0,
+            binding_confidence: 1.0,
+            presuppositions: Vec::new(),
+            polarity: true,
+            temporal_frame: None,
+            aspectual_viewpoint: None,
+        };
+
+        let events = ComposedEvents {
+            events: vec![event],
+            unbound_participants: Vec::new(),
+            confidence: 1.0,
+            sources: Vec::new(),
+        };
+
+        ctx.begin_sentence();
+        ctx.process_events(&events);
+        ctx.end_sentence();
+
+        // Without TAM fields, no TAM conditions should be added
+        let has_temporal_frame = ctx
+            .drs()
+            .conditions
+            .iter()
+            .any(|c| matches!(c, DrsCondition::TemporalFrameAssignment { .. }));
+        let has_aspectual_op = ctx
+            .drs()
+            .conditions
+            .iter()
+            .any(|c| matches!(c, DrsCondition::AspectualOp { .. }));
+
+        assert!(
+            !has_temporal_frame,
+            "No TemporalFrameAssignment when temporal_frame is None"
+        );
+        assert!(
+            !has_aspectual_op,
+            "No AspectualOp when aspectual_viewpoint is None"
+        );
     }
 }

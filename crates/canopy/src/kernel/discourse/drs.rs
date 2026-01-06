@@ -28,8 +28,10 @@
 //! ]
 //! ```
 
+use super::modal::{AccessibilityType, ClosestWorldSelection, CounterfactualModal, WorldId};
 use super::referent::{DiscourseReferent, ReferentId};
-use crate::core::ThetaRole;
+use super::temporal::{AspectualOperator, TemporalAnchorType, TemporalFrame, TimePoint};
+use crate::core::{ModalFlavor, ModalForce, ThetaRole};
 use crate::kernel::underspec::{
     Alternative, ChoiceId, ChoicePoint, ChoiceType, PackedSemantics, ScopeUnderspec,
 };
@@ -299,6 +301,79 @@ pub enum DrsCondition {
         event1: ReferentId,
         event2: ReferentId,
     },
+
+    // ========================================================================
+    // TAM (Tense, Aspect, Modality) Conditions
+    // ========================================================================
+    /// Temporal frame assignment (Reichenbachian S/R/E).
+    TemporalFrameAssignment {
+        /// The event being temporally located.
+        event: ReferentId,
+        /// The temporal frame (speech, reference, event times).
+        frame: TemporalFrame,
+    },
+
+    /// Aspectual operator (PROG, PERF, HAB, etc.).
+    AspectualOp {
+        /// The aspectual operator.
+        operator: AspectualOperator,
+        /// The event being modified.
+        event: ReferentId,
+        /// The scope of the operator.
+        scope: Box<Drs>,
+    },
+
+    /// Temporal anchor: locates event relative to a time point.
+    TemporalAnchor {
+        /// The event being anchored.
+        event: ReferentId,
+        /// How the event relates to the anchor.
+        anchor_type: TemporalAnchorType,
+        /// The reference time point.
+        reference: TimePoint,
+    },
+
+    /// Modal operator (necessity/possibility with flavor).
+    ModalOp {
+        /// Quantificational force (necessity = □, possibility = ◇).
+        force: ModalForce,
+        /// Modal flavor (epistemic, deontic, etc.).
+        flavor: ModalFlavor,
+        /// The scope of the modal.
+        scope: Box<Drs>,
+        /// Optional world variable for modal subordination.
+        world_var: Option<WorldId>,
+    },
+
+    /// World-relative condition: condition holds in specified world.
+    InWorld {
+        /// The world where the condition holds.
+        world: WorldId,
+        /// The condition that holds in that world.
+        condition: Box<DrsCondition>,
+    },
+
+    /// Accessibility relation between worlds.
+    Accessible {
+        /// Source world.
+        from_world: WorldId,
+        /// Target world.
+        to_world: WorldId,
+        /// Type of accessibility.
+        relation: AccessibilityType,
+    },
+
+    /// Counterfactual conditional.
+    Counterfactual {
+        /// The antecedent ("if φ had been the case").
+        antecedent: Box<Drs>,
+        /// The consequent ("ψ would have been the case").
+        consequent: Box<Drs>,
+        /// Modal force (would = necessity, might = possibility).
+        modal_force: CounterfactualModal,
+        /// Closest world selection strategy.
+        closest_worlds: ClosestWorldSelection,
+    },
 }
 
 impl std::fmt::Display for DrsCondition {
@@ -340,6 +415,40 @@ impl std::fmt::Display for DrsCondition {
                 event2,
             } => {
                 write!(f, "{relation:?}({event1}, {event2})")
+            }
+            // TAM conditions
+            DrsCondition::TemporalFrameAssignment { event, frame } => {
+                write!(f, "TFRAME({event}, {frame:?})")
+            }
+            DrsCondition::AspectualOp {
+                operator, event, ..
+            } => {
+                write!(f, "{operator}({event})")
+            }
+            DrsCondition::TemporalAnchor {
+                event, anchor_type, ..
+            } => {
+                write!(f, "ANCHOR({event}, {anchor_type:?})")
+            }
+            DrsCondition::ModalOp { force, flavor, .. } => {
+                let op = match force {
+                    ModalForce::Necessity => "□",
+                    ModalForce::Possibility => "◇",
+                };
+                write!(f, "{op}_{flavor:?}(...)")
+            }
+            DrsCondition::InWorld { world, .. } => {
+                write!(f, "IN({world}, ...)")
+            }
+            DrsCondition::Accessible {
+                from_world,
+                to_world,
+                relation,
+            } => {
+                write!(f, "ACC_{relation:?}({from_world}, {to_world})")
+            }
+            DrsCondition::Counterfactual { modal_force, .. } => {
+                write!(f, "CF_{modal_force}(...)")
             }
         }
     }

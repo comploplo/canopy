@@ -29,9 +29,14 @@
 //! | Psych | Experience(x, y) | "John fears spiders" |
 
 mod compose;
+mod tam;
 mod types;
 
 pub use compose::{EventComposer, EventComposerConfig};
+pub use tam::{
+    detect_aspect_markers_from_lemmas, infer_aspectual_viewpoint, infer_temporal_frame,
+    AspectMarkers, TamFeatures,
+};
 pub use types::{
     ComposedEvent, ComposedEvents, DependencyArc, LittleVType, PackedEvents, Participant,
     PresupposedContent, Presupposition, PresuppositionTrigger, SenseAlternative, SenseChoicePoint,

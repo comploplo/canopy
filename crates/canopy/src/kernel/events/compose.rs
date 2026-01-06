@@ -13,6 +13,9 @@
 //! - How to assemble events from pre-decomposed structures
 //! - How to bind participants from `RoleProvider` bindings
 
+use super::tam::{
+    detect_aspect_markers_from_lemmas, infer_aspectual_viewpoint, infer_temporal_frame,
+};
 use super::types::{
     ComposedEvent, ComposedEvents, PackedEvents, Participant, SenseAlternative, SenseChoicePoint,
     SentenceAnalysis, SharedEventStructure, UnbindingReason, UnboundParticipant,
@@ -331,6 +334,18 @@ impl EventComposer {
         // Collect sources
         let sources = vec![format!("{:?}", decomp.source)];
 
+        // Infer TAM features from morphology and context
+        let lemmas: Vec<&str> = analysis
+            .syntax
+            .tokens
+            .iter()
+            .map(|t| t.lemma.as_str())
+            .collect();
+        let aspect_markers = detect_aspect_markers_from_lemmas(&lemmas);
+        let morph = Some(&token.feats);
+        let temporal_frame = Some(infer_temporal_frame(morph, &aspect_markers));
+        let aspectual_viewpoint = Some(infer_aspectual_viewpoint(morph, &aspect_markers));
+
         let event = ComposedEvent {
             id: event_idx,
             predicate: lemma.clone(),
@@ -344,6 +359,8 @@ impl EventComposer {
             binding_confidence,
             presuppositions: vec![], // TODO: implement presupposition detection
             polarity: !analysis.metadata.is_negated,
+            temporal_frame,
+            aspectual_viewpoint,
         };
 
         Ok((event, unbound, sources))

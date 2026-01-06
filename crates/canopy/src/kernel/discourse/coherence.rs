@@ -7,7 +7,9 @@
 //! - Temporal reasoning (tense/aspect cues)
 //! - Polarity (negation patterns)
 
+use super::drs::TemporalRelationType;
 use super::referent::{ReferentId, ReferentRegistry};
+use super::temporal::TemporalFrame;
 use crate::kernel::events::ComposedEvents;
 use serde::{Deserialize, Serialize};
 
@@ -82,6 +84,60 @@ impl CoherenceRelation {
             Self::Parallel => &["similarly", "likewise", "also", "too"],
             Self::TopicShift => &["anyway", "incidentally", "by the way"],
             Self::Continuation => &["and", "also", "moreover", "furthermore"],
+        }
+    }
+
+    /// Return the default temporal constraint induced by this coherence relation.
+    ///
+    /// Based on SDRT principles:
+    /// - Narration: e1 < e2 (events in sequence)
+    /// - Background: e2 contains e1 (background provides setting)
+    /// - Explanation: e2 < e1 (cause precedes effect being explained)
+    /// - Result: e1 < e2 (cause precedes effect)
+    /// - Elaboration: e2 during e1 (detail is part of larger event)
+    /// - Parallel: e1 ≈ e2 (simultaneous or concurrent events)
+    #[must_use]
+    pub fn default_temporal_constraint(&self) -> Option<TemporalRelationType> {
+        match self {
+            // Temporal sequence, explanation, and result all push time forward
+            Self::Narration | Self::Explanation | Self::Result => {
+                Some(TemporalRelationType::Before)
+            }
+            // Background provides setting - contains the foreground event
+            Self::Background => Some(TemporalRelationType::Contains),
+            // Elaboration: the detail happens during the main event
+            Self::Elaboration => Some(TemporalRelationType::During),
+            // Parallel: events are simultaneous or overlapping
+            Self::Parallel => Some(TemporalRelationType::Simultaneous),
+            // Contrastive and topic relations don't impose temporal constraints
+            Self::Contrast | Self::Concession | Self::TopicShift | Self::Continuation => None,
+        }
+    }
+
+    /// Detect if this is a flashback context.
+    ///
+    /// A flashback occurs when:
+    /// - We're in a Narration context (sequential telling)
+    /// - The current sentence uses past perfect while previous was simple past
+    ///
+    /// This indicates a jump backward in narrative time.
+    #[must_use]
+    pub fn is_flashback_context(
+        &self,
+        prev_frame: Option<&TemporalFrame>,
+        curr_frame: Option<&TemporalFrame>,
+    ) -> bool {
+        // Only detect flashbacks in Narration context
+        if *self != Self::Narration {
+            return false;
+        }
+
+        match (prev_frame, curr_frame) {
+            (Some(prev), Some(curr)) => {
+                // Flashback: previous was simple past, current is past perfect
+                prev.is_simple_past() && curr.is_past_perfect()
+            }
+            _ => false,
         }
     }
 }
@@ -519,14 +575,87 @@ impl CoherenceClassifier {
         // Adjust confidence based on delta
         // More expected (higher delta) = higher confidence
         // Clamp delta to [-5, 5] then scale to [-0.5, 0.5] for confidence adjustment
-        let clamped = delta.clamp(-5.0, 5.0);
-        // SAFETY: clamped/10.0 is in [-0.5, 0.5], exactly representable in f32
-        // Clippy cannot verify value ranges, so allow is required
-        #[allow(clippy::cast_possible_truncation)]
-        let boost = (clamped / 10.0) as f32;
+        // Use integer bucketing to avoid f64->f32 truncation lint
+        let boost = match delta.clamp(-5.0, 5.0).round() {
+            x if x <= -5.0 => -0.5,
+            x if x <= -4.0 => -0.4,
+            x if x <= -3.0 => -0.3,
+            x if x <= -2.0 => -0.2,
+            x if x <= -1.0 => -0.1,
+            x if x <= 0.0 => 0.0,
+            x if x <= 1.0 => 0.1,
+            x if x <= 2.0 => 0.2,
+            x if x <= 3.0 => 0.3,
+            x if x <= 4.0 => 0.4,
+            _ => 0.5,
+        };
         classification.confidence = (classification.confidence + boost).clamp(0.0, 1.0);
 
         classification
+    }
+
+    /// Infer temporal constraints from coherence classification.
+    ///
+    /// Returns the temporal constraint between events in the two sentences,
+    /// based on the coherence relation and any flashback detection.
+    ///
+    /// # Arguments
+    /// * `classification` - The coherence classification result
+    /// * `prev_frame` - Temporal frame from previous sentence's main event
+    /// * `curr_frame` - Temporal frame from current sentence's main event
+    ///
+    /// # Returns
+    /// A tuple of (constraint, `is_flashback`) where constraint is the temporal
+    /// relation to enforce between the events.
+    #[must_use]
+    pub fn infer_temporal_constraints(
+        &self,
+        classification: &CoherenceClassification,
+        prev_frame: Option<&TemporalFrame>,
+        curr_frame: Option<&TemporalFrame>,
+    ) -> (Option<TemporalRelationType>, bool) {
+        let relation = classification.relation;
+
+        // Check for flashback (past perfect in narration context)
+        let is_flashback = relation.is_flashback_context(prev_frame, curr_frame);
+
+        if is_flashback {
+            // In a flashback, the event ordering is reversed from typical narration
+            // e2 (past perfect) happened before e1 (simple past)
+            return (Some(TemporalRelationType::After), true);
+        }
+
+        // Get default constraint from coherence relation
+        let constraint = relation.default_temporal_constraint();
+
+        (constraint, false)
+    }
+}
+
+/// Result of temporal constraint inference.
+#[derive(Debug, Clone)]
+pub struct TemporalConstraintResult {
+    /// The temporal constraint (if any).
+    pub constraint: Option<TemporalRelationType>,
+    /// Whether this represents a flashback.
+    pub is_flashback: bool,
+    /// The coherence relation that induced this constraint.
+    pub source_relation: CoherenceRelation,
+}
+
+impl TemporalConstraintResult {
+    /// Create a new result.
+    #[must_use]
+    pub fn new(
+        constraint: Option<TemporalRelationType>,
+        is_flashback: bool,
+        source_relation: CoherenceRelation,
+    ) -> Self {
+        Self {
+            constraint,
+            is_flashback,
+            source_relation,
+        }
     }
 }
 
@@ -825,5 +954,123 @@ mod tests {
         let tokens: Vec<String> = vec![];
 
         assert!(!classifier.has_negation(&tokens));
+    }
+
+    // Temporal integration tests
+
+    #[test]
+    fn test_default_temporal_constraint_narration() {
+        let constraint = CoherenceRelation::Narration.default_temporal_constraint();
+        assert_eq!(constraint, Some(TemporalRelationType::Before));
+    }
+
+    #[test]
+    fn test_default_temporal_constraint_background() {
+        let constraint = CoherenceRelation::Background.default_temporal_constraint();
+        assert_eq!(constraint, Some(TemporalRelationType::Contains));
+    }
+
+    #[test]
+    fn test_default_temporal_constraint_result() {
+        let constraint = CoherenceRelation::Result.default_temporal_constraint();
+        assert_eq!(constraint, Some(TemporalRelationType::Before));
+    }
+
+    #[test]
+    fn test_default_temporal_constraint_parallel() {
+        let constraint = CoherenceRelation::Parallel.default_temporal_constraint();
+        assert_eq!(constraint, Some(TemporalRelationType::Simultaneous));
+    }
+
+    #[test]
+    fn test_default_temporal_constraint_contrast_none() {
+        // Contrast doesn't impose temporal constraints
+        let constraint = CoherenceRelation::Contrast.default_temporal_constraint();
+        assert!(constraint.is_none());
+    }
+
+    #[test]
+    fn test_flashback_detection() {
+        let prev_frame = TemporalFrame::past();
+        let curr_frame = TemporalFrame::past_perfect();
+
+        // Flashback: simple past followed by past perfect in narration
+        let is_flashback =
+            CoherenceRelation::Narration.is_flashback_context(Some(&prev_frame), Some(&curr_frame));
+        assert!(is_flashback);
+
+        // Not a flashback if not narration
+        let is_flashback =
+            CoherenceRelation::Contrast.is_flashback_context(Some(&prev_frame), Some(&curr_frame));
+        assert!(!is_flashback);
+
+        // Not a flashback if frames are the same tense
+        let same_frame = TemporalFrame::past();
+        let is_flashback =
+            CoherenceRelation::Narration.is_flashback_context(Some(&prev_frame), Some(&same_frame));
+        assert!(!is_flashback);
+    }
+
+    #[test]
+    fn test_infer_temporal_constraints_narration() {
+        let classifier = CoherenceClassifier::new();
+        let classification = CoherenceClassification {
+            relation: CoherenceRelation::Narration,
+            confidence: 0.9,
+            primary_signal: CoherenceSignal::DiscourseMarker("then".to_string()),
+            supporting_signals: vec![],
+            surprisal_delta: None,
+        };
+
+        let prev_frame = TemporalFrame::past();
+        let curr_frame = TemporalFrame::past();
+
+        let (constraint, is_flashback) = classifier.infer_temporal_constraints(
+            &classification,
+            Some(&prev_frame),
+            Some(&curr_frame),
+        );
+
+        assert_eq!(constraint, Some(TemporalRelationType::Before));
+        assert!(!is_flashback);
+    }
+
+    #[test]
+    fn test_infer_temporal_constraints_flashback() {
+        let classifier = CoherenceClassifier::new();
+        let classification = CoherenceClassification {
+            relation: CoherenceRelation::Narration,
+            confidence: 0.9,
+            primary_signal: CoherenceSignal::TemporalCue,
+            supporting_signals: vec![],
+            surprisal_delta: None,
+        };
+
+        // Flashback scenario: simple past then past perfect
+        let prev_frame = TemporalFrame::past();
+        let curr_frame = TemporalFrame::past_perfect();
+
+        let (constraint, is_flashback) = classifier.infer_temporal_constraints(
+            &classification,
+            Some(&prev_frame),
+            Some(&curr_frame),
+        );
+
+        // Flashback reverses the constraint
+        assert_eq!(constraint, Some(TemporalRelationType::After));
+        assert!(is_flashback);
+    }
+
+    #[test]
+    fn test_temporal_constraint_result_struct() {
+        let result = TemporalConstraintResult::new(
+            Some(TemporalRelationType::Before),
+            false,
+            CoherenceRelation::Narration,
+        );
+
+        assert_eq!(result.constraint, Some(TemporalRelationType::Before));
+        assert!(!result.is_flashback);
+        assert_eq!(result.source_relation, CoherenceRelation::Narration);
     }
 }

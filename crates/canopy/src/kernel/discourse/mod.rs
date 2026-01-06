@@ -51,11 +51,14 @@ mod binding;
 mod coherence;
 mod context;
 mod drs;
+mod modal;
 mod moves;
 mod presupposition;
 mod qud;
 mod referent;
 mod relevance;
+mod tam_builder;
+mod temporal;
 mod validation;
 
 pub use binding::{
@@ -63,7 +66,7 @@ pub use binding::{
 };
 pub use coherence::{
     CoherenceClassification, CoherenceClassifier, CoherenceEdge, CoherenceGraph, CoherenceRelation,
-    CoherenceSignal, SentenceData, SentenceReferents,
+    CoherenceSignal, SentenceData, SentenceReferents, TemporalConstraintResult,
 };
 pub use context::{DiscourseConfig, DiscourseContext};
 pub use drs::{
@@ -85,3 +88,16 @@ pub use referent::{
 };
 pub use relevance::{RelevanceAlignment, RelevanceLevel, RelevanceReport};
 pub use validation::{ValidationEngine, ValidationReport, ValidationStatus};
+
+// TAM (Tense, Aspect, Modality)
+pub use modal::{
+    AccessibilityRelation, AccessibilityType, BackgroundKind, ClosestWorldSelection,
+    ConversationalBackground, Counterfactual, CounterfactualAntecedent, CounterfactualConsequent,
+    CounterfactualModal, ModalFrame, ScoredWorld, SimilarityMetric, WorldDescription, WorldId,
+    WorldSet,
+};
+pub use tam_builder::TamBuilder;
+pub use temporal::{
+    AspectualOperator, AspectualViewpoint, Boundedness, TemporalAnchorType, TemporalFrame,
+    TemporalOffset, TimeInterval, TimePoint,
+};

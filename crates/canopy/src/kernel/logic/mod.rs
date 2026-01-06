@@ -28,14 +28,22 @@
 
 mod answer;
 mod compiler;
+mod modal_reasoner;
 mod proof;
 mod query;
 mod reasoner;
 mod solver;
+mod temporal_reasoner;
 
 pub use answer::{Answer, AnswerBinding, QueryResult};
 pub use compiler::{compile, CompiledDrs, Fact, NegatedFormula};
+pub use modal_reasoner::{
+    CounterfactualEvaluation, CounterfactualModal, ModalEvaluation, ModalReasoner, World,
+};
 pub use proof::{ConditionRef, Explanation, ExplanationStep, StepKind};
 pub use query::{qud_to_query, Constraint, Proposition, Query, Term};
 pub use reasoner::{Conflict, ConsistencyResult, Entailment, EntailmentResult, Reasoner};
 pub use solver::ClosedWorldReasoner;
+pub use temporal_reasoner::{
+    AllenRelation, TemporalConsistencyResult, TemporalConstraint, TemporalReasoner,
+};
