@@ -231,6 +231,98 @@ for binding in &bindings {
 | Focus         | Medium | Focused elements preferred           |
 | First mention | Low    | First in sentence slightly preferred |
 
+## Logical Reasoning
+
+Canopy provides a logic layer for querying and reasoning over DRS structures.
+
+### Query Types
+
+```rust
+use canopy::kernel::logic::{Query, Proposition};
+use canopy::ThetaRole;
+
+// Yes/No question: "Did John leave?"
+let query = Query::yes_no("leave", "John", ThetaRole::Agent);
+
+// Wh-question: "Who left?"
+let query = Query::wh("leave", ThetaRole::Agent);
+
+// What-happened: "What did John do?"
+let query = Query::what_happened(Some("John".to_string()));
+
+// Existence: "Is there a book?"
+let query = Query::exists("book");
+```
+
+### Answering Queries
+
+```rust
+// Build DRS from document
+let doc = pipeline.analyze_document("John gave Mary a book.")?;
+if let Some(ref ctx) = doc.discourse_context {
+    // Answer a wh-question
+    let query = Query::wh("give", ThetaRole::Agent);
+    let result = ctx.query(&query);
+
+    for answer in &result.answers {
+        for (var, binding) in &answer.bindings {
+            println!("{} = {}", var, binding.text);  // ?agent = John
+        }
+    }
+}
+```
+
+### Consistency Checking
+
+```rust
+// Check if the discourse is internally consistent
+let result = ctx.is_consistent();
+if !result.consistent {
+    for conflict in &result.conflicts {
+        println!("Conflict: {}", conflict.description);
+    }
+}
+```
+
+### Entailment
+
+```rust
+// Check if a proposition is entailed
+let prop = Proposition::simple("give", ThetaRole::Agent, "John");
+let result = ctx.entails(&prop);
+
+match result.entailed {
+    Entailment::Yes => println!("Entailed"),
+    Entailment::No => println!("Contradicted"),
+    Entailment::Unknown => println!("Not enough information"),
+    Entailment::Ambiguous(readings) => println!("Depends on scope: {:?}", readings),
+}
+
+// Get explanation
+if let Some(explanation) = result.explanation {
+    println!("{}", explanation.format());
+}
+```
+
+### Explanations
+
+Query results include provenance tracking:
+
+```rust
+pub struct Explanation {
+    pub steps: Vec<ExplanationStep>,
+    pub summary: String,
+}
+
+pub enum StepKind {
+    Asserted { sentence: usize },      // Direct assertion
+    Inferred { from: Vec<ConditionRef> }, // Derived
+    Presupposed { status: PresuppositionStatus },
+    ModusPonens { premise, implication },
+    Contradiction { cond1, cond2 },
+}
+```
+
 ## DRS Construction
 
 Discourse Representation Structures capture semantic content:

@@ -73,6 +73,16 @@ Formal discourse semantics following linguistic theory:
 - **Presupposition Detection** — Trigger identification with accommodation tracking
 - **Validation** — Entity state tracking and contradiction detection
 
+### Logical Reasoning
+
+Executable logic layer for inference over DRS:
+
+- **Query Answering** — Yes/no, wh-questions, existence checks with bindings
+- **Entailment Checking** — Does the discourse entail a proposition?
+- **Consistency Checking** — Detect polarity conflicts and temporal cycles
+- **Explanations** — Sentence-level provenance for all answers
+- **Closed-World Reasoning** — Standard DRS assumption (absence = false)
+
 ### Underspecification
 
 Efficient ambiguity handling without exponential blowup:

@@ -12,6 +12,9 @@ canopy/
 │   ├── canopy/                 # KERNEL: Core types + semantic operations
 │   │   ├── core/               # ThetaRole, CanopyError, DepRel, UPos
 │   │   ├── kernel/             # EventComposer, DiscourseContext, DRS
+│   │   │   ├── discourse/      # DRS, QUD, anaphora, coherence
+│   │   │   ├── events/         # Event composition, LittleV
+│   │   │   └── logic/          # Reasoner, Query, Entailment, Explanations
 │   │   └── runtime/            # Provider traits, AnnotatedSyntax, IR
 │   │
 │   ├── canopy-resources/       # RESOURCES: Engines + pipeline
@@ -155,7 +158,8 @@ The `canopy` kernel contains:
 - Core types (ThetaRole, LittleV, CanopyError)
 - Provider trait definitions
 - Event composition logic
-- Discourse processing logic
+- Discourse processing logic (DRS, QUD, anaphora)
+- Logic layer (query answering, entailment, consistency)
 
 It has NO knowledge of VerbNet XML parsing, FrameNet loading, etc.
 

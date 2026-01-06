@@ -604,10 +604,104 @@ fn demo_moby_dick(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::E
     Ok(())
 }
 
-/// Section 11: Derivation Trace - Explainable Semantics
+/// Section 11: Logic Layer - Query Answering and Reasoning
+fn demo_logic_layer(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
+    use canopy::kernel::logic::{ClosedWorldReasoner, Proposition, Query, Reasoner};
+    use canopy::ThetaRole;
+
+    println!("\n┌─────────────────────────────────────────────────────────────────┐");
+    println!("│ 11. LOGIC LAYER (Query Answering & Reasoning)                   │");
+    println!("└─────────────────────────────────────────────────────────────────┘\n");
+
+    // Analyze a document to build DRS
+    let text = "John gave Mary a book. She read it carefully.";
+    println!("  Document: \"{text}\"\n");
+
+    let doc = pipeline.analyze_document(text)?;
+
+    if let Some(ref drs) = doc.drs {
+        let reasoner = ClosedWorldReasoner::new();
+
+        // 1. Consistency checking
+        println!("  Consistency Check:");
+        println!("  ──────────────────");
+        let consistency = reasoner.check_consistent(drs);
+        println!(
+            "    Consistent: {} (conflicts: {})\n",
+            consistency.consistent,
+            consistency.conflicts.len()
+        );
+
+        // 2. Yes/No query - existence check
+        println!("  Existence Queries:");
+        println!("  ──────────────────");
+        let exists_query = Query::exists("give");
+        let result = reasoner.answer(drs, &exists_query);
+        println!(
+            "    \"Is there a giving event?\" → {}",
+            if result.is_yes() { "Yes" } else { "No" }
+        );
+
+        let exists_query = Query::exists("run");
+        let result = reasoner.answer(drs, &exists_query);
+        println!(
+            "    \"Is there a running event?\" → {}\n",
+            if result.is_yes() { "Yes" } else { "No" }
+        );
+
+        // 3. Wh-question
+        println!("  Wh-Question (Who gave?):");
+        println!("  ─────────────────────────");
+        let wh_query = Query::wh("give", ThetaRole::Agent);
+        let result = reasoner.answer(drs, &wh_query);
+        println!("    Answers: {} found", result.answers.len());
+        for answer in &result.answers {
+            for (var, binding) in &answer.bindings {
+                println!("      {var} = \"{}\"", binding.text);
+            }
+        }
+        println!();
+
+        // 4. Entailment checking
+        println!("  Entailment Check:");
+        println!("  ──────────────────");
+        let prop = Proposition::simple("give", ThetaRole::Agent, "John");
+        let entailment = reasoner.entails(drs, &prop);
+        println!(
+            "    \"John is the agent of a giving\" → {:?}",
+            entailment.entailed
+        );
+        if let Some(ref explanation) = entailment.explanation {
+            println!("    Explanation: {}", explanation.summary);
+        }
+        println!();
+
+        // 5. What-happened query
+        println!("  What-Happened Query:");
+        println!("  ─────────────────────");
+        let what_query = Query::what_happened(Some("John".to_string()));
+        let result = reasoner.answer(drs, &what_query);
+        println!(
+            "    \"What did John do?\" → {} event(s)",
+            result.answers.len()
+        );
+        for answer in &result.answers {
+            if let Some(binding) = answer.bindings.get("?event") {
+                println!("      • {}", binding.text);
+            }
+        }
+    } else {
+        println!("  [DRS not available - discourse analysis may be disabled]");
+    }
+
+    println!();
+    Ok(())
+}
+
+/// Section 12: Derivation Trace - Explainable Semantics
 fn demo_derivation_trace(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
     println!("\n┌─────────────────────────────────────────────────────────────────┐");
-    println!("│ 11. DERIVATION TRACE (Explainable Semantics)                    │");
+    println!("│ 12. DERIVATION TRACE (Explainable Semantics)                    │");
     println!("└─────────────────────────────────────────────────────────────────┘\n");
 
     println!("  Single sentence with trace:");
@@ -644,6 +738,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     demo_surprisal();
     demo_disambiguators(&pipeline)?;
     demo_moby_dick(&pipeline)?;
+    demo_logic_layer(&pipeline)?;
     demo_derivation_trace(&pipeline)?;
 
     println!("\n╔══════════════════════════════════════════════════════════════════╗");
