@@ -8,6 +8,13 @@
 ## Quick Start
 
 ```bash
+# Clone with submodules
+git clone --recurse-submodules https://github.com/canopy-rs/canopy.git
+cd canopy
+
+# Or if already cloned, initialize submodules
+git submodule update --init --recursive
+
 # Build
 cargo build --release
 
@@ -35,7 +42,8 @@ data/
 ├── wordnet/          # WordNet 3.1 (117k synsets)
 ├── propbank/         # PropBank semantic roles
 ├── ud_english-ewt/   # Universal Dependencies treebank
-└── lexicon/          # Closed-class word lists
+├── lexicon/          # Closed-class word lists
+└── semlink/          # SemLink 2 mappings (git submodule)
 ```
 
 ## Basic Usage

@@ -205,6 +205,13 @@ Canopy requires linguistic datasets (not included). Each has its own license—c
 | PropBank       | `data/propbank/`            | [PropBank](https://propbank.github.io/)                          |
 | UD English-EWT | `data/ud_english-ewt/`      | [UniversalDependencies](https://universaldependencies.org/)      |
 | Gender names   | `data/name_gender_dataset/` | [UCI ML](https://archive.ics.uci.edu/dataset/591/gender+by+name) |
+| SemLink 2      | `data/semlink/`             | [GitHub](https://github.com/cu-clear/semlink) (git submodule)    |
+
+After cloning, initialize submodules:
+
+```bash
+git submodule update --init --recursive
+```
 
 ## Theoretical Foundations
 

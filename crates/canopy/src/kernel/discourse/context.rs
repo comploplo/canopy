@@ -21,6 +21,10 @@ use super::validation::{ValidationEngine, ValidationReport, ValidationStatus};
 use crate::core::ThetaRole;
 use crate::kernel::events::{ComposedEvent, ComposedEvents, LittleVType};
 use crate::kernel::incremental::SurprisalModel;
+use crate::kernel::logic::{
+    ClosedWorldReasoner, ConsistencyResult, EntailmentResult, Proposition, Query, QueryResult,
+    Reasoner,
+};
 use crate::runtime::AnnotatedSyntax;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
@@ -610,6 +614,81 @@ impl DiscourseContext {
             .cloned();
         let report = RelevanceScorer::score(self.current_sentence, question.as_ref(), events);
         self.relevance_history.push(report);
+    }
+
+    // =========================================================================
+    // Logic Layer: Query Answering and Reasoning
+    // =========================================================================
+
+    /// Check if the current discourse is internally consistent.
+    ///
+    /// Returns a `ConsistencyResult` indicating whether any contradictions
+    /// were detected in the DRS.
+    ///
+    /// # Example
+    ///
+    /// ```ignore
+    /// let result = context.is_consistent();
+    /// if !result.consistent {
+    ///     for conflict in &result.conflicts {
+    ///         println!("Conflict: {}", conflict.description);
+    ///     }
+    /// }
+    /// ```
+    #[must_use]
+    pub fn is_consistent(&self) -> ConsistencyResult {
+        let reasoner = ClosedWorldReasoner::new();
+        reasoner.check_consistent(&self.drs)
+    }
+
+    /// Check if a proposition is entailed by the discourse.
+    ///
+    /// Under the closed-world assumption, if something is not stated or
+    /// derivable, it is considered false.
+    ///
+    /// # Example
+    ///
+    /// ```ignore
+    /// let prop = Proposition::simple("leave", ThetaRole::Agent, "John");
+    /// let result = context.entails(&prop);
+    /// if result.is_yes() {
+    ///     println!("John left is entailed");
+    /// }
+    /// ```
+    #[must_use]
+    pub fn entails(&self, proposition: &Proposition) -> EntailmentResult {
+        let reasoner = ClosedWorldReasoner::new();
+        reasoner.entails(&self.drs, proposition)
+    }
+
+    /// Answer a query against the discourse.
+    ///
+    /// Supports yes/no questions, wh-questions, and existence checks.
+    ///
+    /// # Example
+    ///
+    /// ```ignore
+    /// // Who left?
+    /// let query = Query::wh("leave", ThetaRole::Agent);
+    /// let result = context.query(&query);
+    /// for value in result.all_values_for("?agent") {
+    ///     println!("Answer: {}", value);
+    /// }
+    /// ```
+    #[must_use]
+    pub fn query(&self, query: &Query) -> QueryResult {
+        let reasoner = ClosedWorldReasoner::new();
+        reasoner.answer(&self.drs, query)
+    }
+
+    /// Check if adding a condition would create a contradiction.
+    ///
+    /// Useful for checking whether a new assertion is consistent with
+    /// existing discourse before committing it.
+    #[must_use]
+    pub fn would_contradict(&self, condition: &DrsCondition) -> bool {
+        let reasoner = ClosedWorldReasoner::new();
+        reasoner.would_contradict(&self.drs, std::slice::from_ref(condition))
     }
 }
 

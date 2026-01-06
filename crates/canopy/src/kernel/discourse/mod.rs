@@ -68,7 +68,8 @@ pub use coherence::{
 pub use context::{DiscourseConfig, DiscourseContext};
 pub use drs::{
     Drs, DrsCondition, DrsId, Label, SubordinateDrs, SubordinationConstraint,
-    SubordinationConstraintType, SubordinationRelation, UdrsBuilder, UnderspecDrs,
+    SubordinationConstraintType, SubordinationRelation, TemporalRelationType, UdrsBuilder,
+    UnderspecDrs,
 };
 pub use moves::{DiscourseMove, MoveClassification, MoveClassifier, QuestionType};
 pub use presupposition::{

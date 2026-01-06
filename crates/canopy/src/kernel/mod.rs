@@ -29,5 +29,6 @@
 pub mod discourse;
 pub mod events;
 pub mod incremental;
+pub mod logic;
 pub mod trace;
 pub mod underspec;

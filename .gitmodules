@@ -1,0 +1,3 @@
+[submodule "data/semlink"]
+	path = data/semlink
+	url = https://github.com/cu-clear/semlink.git
