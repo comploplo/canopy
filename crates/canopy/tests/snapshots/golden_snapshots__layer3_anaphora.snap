@@ -1,5 +1,5 @@
 ---
-source: tests/golden_snapshots.rs
+source: crates/canopy/tests/golden_snapshots.rs
 expression: analysis
 ---
 {

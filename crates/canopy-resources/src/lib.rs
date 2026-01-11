@@ -87,7 +87,8 @@ pub use propbank::{PropBankAnalysis, PropBankConfig, PropBankEngine, SemanticRol
 
 // Provider re-exports
 pub use providers::{
-    DefaultProvider, LexiconDiscourseCueProvider, VerbNetRoleProvider, VerbNetSenseProvider,
+    ArgumentBinder, BinderConfig, DecomposerConfig, DefaultProvider, LexiconDiscourseCueProvider,
+    PredicateDecomposer,
 };
 
 // Tokenizer re-exports
@@ -98,5 +99,7 @@ pub use syntax::{ResourceBackedTagger, TreebankSyntaxProvider, WordPosIndex};
 
 // Pipeline re-exports
 pub use pipeline::{
-    CanopyPipeline, DocumentAnalysis, PipelineConfig, SemanticAnalysis, UnderspecifiedAnalysis,
+    BindingCandidate, CanopyPipeline, ConflictDetail, ConflictType, DocumentAnalysis,
+    PendingQuestion, PipelineConfig, PronounBindingInfo, QuantifierInfo, QudStatus,
+    ScopeAmbiguityInfo, SemanticAnalysis, SenseSelectionReason, UnderspecifiedAnalysis,
 };

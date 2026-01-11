@@ -1,121 +1,118 @@
 # Changelog
 
-All notable changes to canopy.rs will be documented in this file.
+All notable changes to Canopy will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to
-[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+> **Historical versions (M1-M6)**: See [archive/CHANGELOG_historical.md](archive/CHANGELOG_historical.md)
 
-> **Historical versions (M1-M4.5)**: See [archive/CHANGELOG_historical.md](archive/CHANGELOG_historical.md)
+______________________________________________________________________
 
 ## [Unreleased]
 
-### M6 Engine Infrastructure Overhaul - COMPLETE
+### LSP Diagnostic Enhancements
 
-#### Major Anti-Stub Architecture Reform
+Rich diagnostics surfacing kernel-derived semantic information:
 
-- **Eliminated ALL stub implementations**: VerbNet, FrameNet, and WordNet now require real data loading
-- **Fail-fast initialization**: Engines no longer create empty instances, must load semantic databases or fail
-- **Real data loading verified**: All engines now load actual linguistic resources (XML files, dictionaries)
-- **Honest performance metrics**: Eliminated misleading microsecond metrics from stub operations
+#### New Diagnostic Types
 
-#### Semantic Engine Improvements
+| Code                 | Severity | Description                                           |
+| -------------------- | -------- | ----------------------------------------------------- |
+| `pronoun-ambiguous`  | Info     | Pronoun has multiple candidate antecedents            |
+| `pronoun-unresolved` | Warning  | No accessible antecedent found                        |
+| `binding-violation`  | Hint     | Binding theory constraint violation (Condition A/B/C) |
+| `scope-ambiguous`    | Info     | Quantifier scope ambiguity detected                   |
+| `conflict-detail`    | Warning  | Enhanced conflict info with type and conditions       |
 
-- **VerbNet Engine**: Loads 329+ real XML files from VerbNet-GL dataset
-- **FrameNet Engine**: Loads real frame and lexical unit data from FrameNet v15
-- **WordNet Engine**: Loads real Princeton WordNet 3.1 dictionary files
-- **SemanticCoordinator**: All engines actively participating in analysis (not empty stubs)
+#### Enhanced Hover Content
 
-#### Production Readiness Metrics
+- **Pronoun binding**: Shows resolved antecedent, candidates with confidence, violations
+- **Sense derivation**: Why this sense was selected, runner-up, selection reason
+- **Logical form**: DRS conditions related to the predicate (for verbs)
 
-- **Initialization time**: 3.4 seconds (realistic vs 270ms stub time)
-- **Engine coverage**: 100% sentences analyzed with semantic features
-- **Active engines**: ["VerbNet", "FrameNet", "WordNet", "Treebank"] all operational
-- **Performance**: 18,269 sentences/second with real semantic analysis
+#### Code Actions
 
-#### Crate Restructuring
+Each diagnostic has corresponding quick-fix actions for exploration and disambiguation.
 
-- **Renamed**: `canopy-semantic-layer` -> `canopy-tokenizer` for clearer semantic focus
-- **Updated dependencies**: All workspace crates now reference correct tokenizer crate
-- **Import consistency**: Fixed all crate references across workspace
+### Semantic Tree Visualization
 
-### Coming in M7
+Pretty-printed tree output using `ptree` for semantic analysis results:
 
-- Neo-Davidsonian event structures from Layer 1 semantic analysis
-- Theta role assignment using VerbNet/FrameNet unified data
-- Event composition and aspectual classification
-- Multi-engine semantic fusion with confidence propagation
+```
+Sentence: "John gave Mary a book."
+├── Syntax
+│   ├── John [Propn] ─ Nsubj
+│   ├── gave [Verb] ─ Root
+│   └── ...
+├── Event 1: give (Cause)
+│   ├── Aspect: Accomplishment
+│   ├── Voice: Active
+│   └── Participants
+│       ├── Agent: "John" (95%)
+│       └── Theme: "book" (92%)
+└── Role Bindings
+    └── ...
+```
 
-______________________________________________________________________
+#### Tree Types
 
-## [0.5.1] - 2025-08-25 - M5.1 Lemmatization Integration Finalization
+- `build_sentence_tree()` — Full analysis with syntax, events, decompositions
+- `build_document_tree()` — Multi-sentence with coherence and discourse moves
+- `build_dependency_tree()` — Hierarchical dependency parse
+- `build_compact_event_tree()` — Minimal event view
+- `format_drs_box()` — Classic box notation for DRS
 
-### Final M5 Completion - All Integration Tests Enabled
+### Sense Disambiguation Improvements
 
-**M5 Lemmatization is now 100% COMPLETE** with all promised features fully implemented and tested.
+- **Lemma-based disambiguation**: Predicates disambiguated when lemma matches exactly one sense ID
+- Example: "try" with senses ["try-61.1", "attempt-61.1"] → selects "try-61.1" as unambiguous
 
-#### Completed Integration Work
+### MWE Integration & Improved Lemmatization
 
-- **Lemmatization Integration Tests**: Enabled all 10 comprehensive integration tests
-- **Confidence Scoring Integration**: Full `lemmatization_confidence` support in `Layer1SemanticResult`
-- **Cache-Based Lemmatization**: 59.4% cache hit rate using lemmatized forms as cache keys
-- **Statistics Tracking**: Complete query/cache analytics with proper concurrent access
-- **Configuration Support**: `enable_lemmatization` flag working correctly with graceful fallback
+#### Multi-Word Expression Support
 
-#### Performance Verification (Release Mode)
+- **Phrasal verb detection**: `PhrasalVerbDetector` identifies verb-particle constructions (give up, look up)
+- **MWE types**: Support for compound nouns, flat names, fixed expressions via `MweDetector`
+- **Gerund classification**: `GerundClassifier` distinguishes nominal, verbal, and adjectival gerunds
+- **AnnotatedSyntax extended**: New `phrasal_verbs` and `mwes` fields store detected MWEs
+- **Predicate decomposition**: Decomposer now uses phrasal lemmas ("give_up") for VerbNet lookup
 
-- **Cache Hit Rate**: 59.4% (exceeds documented 54.4% target)
-- **Lemmatization Accuracy**: 100% on all test cases
-- **Performance Impact**: Negative overhead (lemmatization improves performance via caching)
-- **Test Coverage**: 75.56% (exceeds 75% coverage gate requirement)
+#### Treebank-Based Lemmatization
 
-______________________________________________________________________
+- **WordLemmaIndex**: New index extracts form→lemma mappings from UD treebank
+- **Irregular verb support**: Correctly lemmatizes "gave"→"give", "went"→"go", etc.
+- **ResourceBackedTagger**: Uses treebank lemmas first, suffix heuristics as fallback
 
-## [0.5.0] - 2025-08-23 - M5 Lemmatization & Performance Optimization
+#### Engine Improvements
 
-### Major Achievements - Production-Ready Semantic Analysis
-
-- **M5 Complete**: Full lemmatization system with 54.4% cache hit improvement
-- **Performance Excellence**: Real corpus processing at 930 words/sec on full Moby Dick
-- **Lemmatization Accuracy**: 100% accuracy on test cases with confidence scoring
-- **Demo Quality**: Professional UX with runtime estimation and clean progress indicators
-- **Architecture Separation**: Clean Layer 1 (raw) vs Layer 2 (composed) semantic boundaries
-
-### Performance
-
-- **Single Word Analysis**: 85.4us per word (11,703 words/sec with lemmatization)
-- **Batch Processing**: Improved performance due to lemmatization caching
-- **Full Corpus**: 71,577 words in ~77 seconds (930 words/sec throughput)
-- **Cache Efficiency**: 54.4% hit rate with lemmatization vs baseline
-- **Memory Usage**: \<0.5MB (0.5% of budget) - highly efficient
-
-### Quality Assurance
-
-- **Lemmatization Testing**: 10 comprehensive integration tests
-- **Accuracy Validation**: 100% accuracy on representative test cases
-- **Performance Benchmarks**: Detailed metrics with confidence scoring
-- **Error Handling**: Graceful fallback strategies throughout pipeline
+- **LemmaQuery**: Unified query interface for semantic engines with calibrated confidence
+- **ArgumentBinder**: Restructured role binding with proper confidence scoring
+- **PredicateDecomposer**: Clean decomposition pipeline using phrasal lemmas
 
 ______________________________________________________________________
 
-## Production Performance Baseline
+## Current Status
 
-| Metric               | M5 Production Baseline      | M6 Achieved                |
-| -------------------- | --------------------------- | -------------------------- |
-| **Analysis Latency** | 85.4us (with lemmatization) | \<50us (event composition) |
-| **Throughput**       | 930 words/sec (full corpus) | 2,000+ words/sec           |
-| **Memory Usage**     | \<0.5MB cache               | \<1MB event structures     |
-| **Cache Hit Rate**   | 54.4% with lemmatization    | Maintained                 |
-| **Test Coverage**    | 80.26% (80% gate) ✅        | Maintain 80%+              |
+| Metric           | Value    |
+| ---------------- | -------- |
+| Test coverage    | 81%+     |
+| Rust lines       | ~60,000  |
+| Crates           | 4        |
+| Semantic engines | 5        |
+| Pipeline init    | ~750ms   |
+| Per-sentence     | 30-200μs |
+
+### Crates
+
+| Crate              | Lines   | Description                                                        |
+| ------------------ | ------- | ------------------------------------------------------------------ |
+| `canopy`           | ~24,000 | Core kernel: events, discourse, logic, underspec                   |
+| `canopy-resources` | ~28,000 | Engines (VerbNet, FrameNet, WordNet, PropBank, Lexicon) + pipeline |
+| `canopy-lsp`       | ~4,000  | Language Server Protocol implementation                            |
+| `canopy-cli`       | ~600    | Command-line interface                                             |
 
 ______________________________________________________________________
-
-## Contributing
-
-See [ROADMAP.md](ROADMAP.md) for development milestones and current status.
 
 ## Links
 
-- [Documentation](.)
-- [Roadmap](ROADMAP.md)
 - [Architecture](ARCHITECTURE.md)
+- [Roadmap](ROADMAP.md)
+- [Getting Started](GETTING_STARTED.md)

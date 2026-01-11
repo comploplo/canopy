@@ -77,6 +77,7 @@ pub fn parse_deprel(deprel: &str) -> DepRel {
         "fixed" => DepRel::Fixed,
         "flat" => DepRel::Flat,
         "compound" => DepRel::Compound,
+        "compound:prt" => DepRel::CompoundPrt,
         "list" => DepRel::List,
         "parataxis" => DepRel::Parataxis,
         "orphan" => DepRel::Orphan,

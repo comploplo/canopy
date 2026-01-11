@@ -94,7 +94,7 @@ pub struct SenseReading {
 /// Note: `LowerSurprisal` and `HybridScore` are reserved for future beam search
 /// and hybrid scoring features. Currently only `HigherConfidence` and `Unambiguous`
 /// are constructed in production code.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum SelectionReason {
     /// Winner had higher confidence score
     HigherConfidence {

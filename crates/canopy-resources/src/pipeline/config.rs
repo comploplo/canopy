@@ -13,6 +13,8 @@ pub struct PipelineConfig {
     pub decomposition_confidence_threshold: f32,
     /// Confidence threshold for role binding.
     pub role_binding_confidence_threshold: f32,
+    /// Maximum decompositions per predicate (None = unlimited).
+    pub max_decompositions_per_predicate: Option<usize>,
 }
 
 impl Default for PipelineConfig {
@@ -23,6 +25,7 @@ impl Default for PipelineConfig {
             max_sentences: None,
             decomposition_confidence_threshold: 0.5,
             role_binding_confidence_threshold: 0.5,
+            max_decompositions_per_predicate: Some(5),
         }
     }
 }
@@ -37,6 +40,7 @@ impl PipelineConfig {
             max_sentences: Some(10),
             decomposition_confidence_threshold: 0.3,
             role_binding_confidence_threshold: 0.3,
+            max_decompositions_per_predicate: Some(5),
         }
     }
 
@@ -57,6 +61,7 @@ mod tests {
         assert!(config.enable_discourse);
         assert!(config.use_treebank_patterns);
         assert!(config.max_sentences.is_none());
+        assert_eq!(config.max_decompositions_per_predicate, Some(5));
     }
 
     #[test]
@@ -64,5 +69,6 @@ mod tests {
         let config = PipelineConfig::minimal();
         assert!(!config.enable_discourse);
         assert_eq!(config.max_sentences, Some(10));
+        assert_eq!(config.max_decompositions_per_predicate, Some(5));
     }
 }

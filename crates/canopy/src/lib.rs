@@ -41,9 +41,9 @@ pub mod runtime;
 // Re-export runtime provider types (the dependency wall)
 pub use runtime::{
     AnnotatedSyntax, AnnotatedToken, CanopyProvider, DecompositionSource, DiscourseCueProvider,
-    DiscourseRelation, FrameId, NodeId, PredicateDecomposition, RoleBinding, RoleProvider,
-    RoleSource, SenseId, SenseInfo, SenseProvider, SenseSource, SyntaxProvider, SyntaxTree,
-    TokenId,
+    DiscourseRelation, FrameId, MweInfo, MweType, NodeId, PhrasalVerb, PredicateDecomposition,
+    RoleBinding, RoleProvider, RoleSource, SenseId, SenseInfo, SenseProvider, SenseSource,
+    SyntaxProvider, SyntaxTree, TokenId,
 };
 
 // Re-export core types for convenience

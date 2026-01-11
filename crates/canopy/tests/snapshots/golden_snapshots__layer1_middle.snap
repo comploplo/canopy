@@ -30,7 +30,7 @@ expression: analysis
       "has_verbnet": true,
       "has_framenet": true,
       "has_wordnet": true,
-      "confidence": 0.95
+      "confidence": 0.98
     }
   ],
   "layer2": null,

@@ -60,7 +60,7 @@ Canopy is a semantic linguistic analysis library implementing a 4-layer pipeline
 ```
 canopy/
 ├── crates/
-│   ├── canopy/                     # KERNEL: Core types + semantic operations
+│   ├── canopy/                     # KERNEL: Core types + semantic operations (~24k lines)
 │   │   ├── src/
 │   │   │   ├── core/               # Foundation types
 │   │   │   │   ├── error.rs        # CanopyError
@@ -110,7 +110,7 @@ canopy/
 │   │   │   │   │   ├── scope.rs        # Scope underspecification
 │   │   │   │   │   └── types.rs        # PackedSemantics, ChoicePoint
 │   │   │   │   │
-│   │   │   │   └── trace/          # Debugging traces
+│   │   │   │   └── trace/          # Debugging traces & sense selection
 │   │   │   │
 │   │   │   └── runtime/            # Provider traits & IR
 │   │   │       ├── ids.rs              # TokenId, SenseId, FrameId
@@ -121,7 +121,7 @@ canopy/
 │   │       ├── golden_snapshots.rs     # Regression tests
 │   │       └── tam_integration_tests.rs # TAM pipeline tests
 │   │
-│   ├── canopy-resources/           # RESOURCES: Engines + pipeline
+│   ├── canopy-resources/           # RESOURCES: Engines + pipeline (~28k lines)
 │   │   ├── src/
 │   │   │   ├── engine/             # Shared infrastructure
 │   │   │   │   ├── cacheable.rs        # LRU caching
@@ -131,18 +131,39 @@ canopy/
 │   │   │   ├── wordnet/            # WordNet engine (117k synsets)
 │   │   │   ├── propbank/           # PropBank engine
 │   │   │   ├── lexicon/            # Closed-class words
-│   │   │   ├── syntax/             # TreebankSyntaxProvider
+│   │   │   ├── syntax/             # TreebankSyntaxProvider, MWE detection
 │   │   │   ├── tokenizer/          # Tokenizers
 │   │   │   ├── providers/          # DefaultProvider implementations
 │   │   │   └── pipeline/           # CanopyPipeline orchestrator
+│   │   │       ├── orchestrator.rs     # Main pipeline
+│   │   │       ├── analysis.rs         # SemanticAnalysis, diagnostic types
+│   │   │       ├── trace_builder.rs    # Sense selection tracing
+│   │   │       └── tree.rs             # Pretty-printed semantic trees (ptree)
+│   │   │
+│   │   └── examples/
+│   │       └── demo.rs             # Comprehensive feature demo
 │   │
-│   └── canopy-cli/                 # CLI + demos
+│   ├── canopy-lsp/                 # LSP: Language Server Protocol (~4k lines)
+│   │   ├── src/
+│   │   │   ├── handlers/
+│   │   │   │   ├── diagnostics.rs      # Semantic diagnostics (10+ types)
+│   │   │   │   ├── hover.rs            # Rich hover with DRS, bindings, traces
+│   │   │   │   ├── code_actions.rs     # Quick-fixes for all diagnostics
+│   │   │   │   ├── semantic_tokens.rs  # Semantic highlighting
+│   │   │   │   ├── symbols.rs          # Document symbols
+│   │   │   │   └── inlay_hints.rs      # Inline semantic hints
+│   │   │   ├── backend.rs              # LSP backend implementation
+│   │   │   └── state.rs                # Document state management
+│   │
+│   └── canopy-cli/                 # CLI + demos (~600 lines)
 │
 └── data/                           # Linguistic resources (gitignored)
-    ├── verbnet3.4/
+    ├── verbnet/
     ├── framenet/
     ├── wordnet/
-    └── UD_English-EWT/
+    ├── propbank/
+    ├── lexicon/
+    └── ud_english-ewt/
 ```
 
 ## Dependency Graph

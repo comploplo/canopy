@@ -69,6 +69,7 @@ fn demo_analysis(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Er
     let examples = [
         ("Simple action", "John runs quickly."),
         ("Ditransitive", "Mary gave John a book."),
+        ("Phrasal verb", "look up fumarase deficiency for more info."),
         ("Passive voice", "The window was broken by the ball."),
         (
             "Complex event",
@@ -87,6 +88,14 @@ fn demo_analysis(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Er
             print!("{}:{:?} ", token.form, token.upos);
         }
         println!();
+
+        // Show phrasal verbs if detected
+        if !analysis.syntax.phrasal_verbs.is_empty() {
+            println!("    Phrasal verbs:");
+            for pv in &analysis.syntax.phrasal_verbs {
+                println!("      • \"{}\" (verb + particle)", pv.combined_lemma);
+            }
+        }
 
         if !analysis.decompositions.is_empty() {
             println!("    Predicates:");
@@ -721,10 +730,81 @@ fn demo_derivation_trace(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::e
     Ok(())
 }
 
-/// Section 13: TAM - Tense, Aspect, Modality and Temporal Reasoning
+/// Section 13: Semantic Tree Visualization
+fn demo_semantic_tree(pipeline: &CanopyPipeline) -> Result<(), Box<dyn std::error::Error>> {
+    use canopy_resources::pipeline::tree::{
+        build_compact_event_tree, build_dependency_tree, build_document_tree, build_sentence_tree,
+        format_drs_box, tree_to_string,
+    };
+
+    println!("\n┌─────────────────────────────────────────────────────────────────┐");
+    println!("│ 13. SEMANTIC TREE VISUALIZATION                                 │");
+    println!("└─────────────────────────────────────────────────────────────────┘\n");
+
+    // Single sentence tree
+    println!("  Sentence Tree:");
+    println!("  ───────────────\n");
+
+    let analysis = pipeline.analyze("John gave Mary a book.")?;
+    let tree = build_sentence_tree(&analysis);
+    let output = tree_to_string(&tree);
+    for line in output.lines() {
+        println!("    {line}");
+    }
+
+    // Dependency tree
+    println!("\n  Dependency Tree:");
+    println!("  ─────────────────\n");
+
+    let analysis = pipeline.analyze("The big dog chased the small cat.")?;
+    let tree = build_dependency_tree(&analysis);
+    let output = tree_to_string(&tree);
+    for line in output.lines() {
+        println!("    {line}");
+    }
+
+    // Compact event tree
+    println!("\n  Compact Event Tree:");
+    println!("  ────────────────────\n");
+
+    let analysis = pipeline.analyze("Mary gave John a gift.")?;
+    let tree = build_compact_event_tree(&analysis);
+    let output = tree_to_string(&tree);
+    for line in output.lines() {
+        println!("    {line}");
+    }
+
+    // Document tree
+    println!("\n  Document Tree:");
+    println!("  ────────────────\n");
+
+    let doc = pipeline.analyze_document("A man entered. He looked around. The door slammed.")?;
+    let tree = build_document_tree(&doc);
+    let output = tree_to_string(&tree);
+    for line in output.lines() {
+        println!("    {line}");
+    }
+
+    // DRS Box notation
+    println!("\n  DRS Box Notation:");
+    println!("  ───────────────────\n");
+
+    if let Some(ref drs) = doc.drs {
+        let box_output = format_drs_box(drs);
+        for line in box_output.lines() {
+            println!("    {line}");
+        }
+    } else {
+        println!("    (DRS not available)");
+    }
+
+    Ok(())
+}
+
+/// Section 14: TAM - Tense, Aspect, Modality and Temporal Reasoning
 fn demo_tam() {
     println!("\n┌─────────────────────────────────────────────────────────────────┐");
-    println!("│ 13. TAM - Tense, Aspect, Modality & Temporal Reasoning          │");
+    println!("│ 14. TAM - Tense, Aspect, Modality & Temporal Reasoning          │");
     println!("└─────────────────────────────────────────────────────────────────┘\n");
 
     demo_tam_temporal_frames();
@@ -891,6 +971,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     demo_moby_dick(&pipeline)?;
     demo_logic_layer(&pipeline)?;
     demo_derivation_trace(&pipeline)?;
+    demo_semantic_tree(&pipeline)?;
     demo_tam();
 
     println!("\n╔══════════════════════════════════════════════════════════════════╗");

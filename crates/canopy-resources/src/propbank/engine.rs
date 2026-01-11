@@ -8,8 +8,9 @@ use super::parser::{PropBankData, PropBankParser, PropBankStats};
 use super::types::{PropBankAnalysis, PropBankPredicate, SemanticRole};
 use crate::engine::{
     count_to_f32, micros_to_u64, BaseEngine, CacheKeyFormat, CacheStats, CachedEngine,
-    EngineConfigurable, EngineCore, EngineError, EngineResult, EngineStats, ParallelEngine,
-    PerformanceMetrics, SemanticEngine, SemanticResult, StatisticsProvider,
+    ConfidenceCalibration, EngineConfigurable, EngineCore, EngineError, EngineResult, EngineStats,
+    LemmaQuery, LemmaQueryable, ParallelEngine, PerformanceMetrics, ResourceSource, SemanticEngine,
+    SemanticEvidence, SemanticResult, StatisticsProvider,
 };
 use canopy::ThetaRole;
 use serde::{Deserialize, Serialize};
@@ -435,6 +436,48 @@ impl ParallelEngine for PropBankEngine {
 
     fn thread_count(&self) -> usize {
         1 // Currently single-threaded
+    }
+}
+
+/// `LemmaQueryable` implementation for lemma-based semantic queries.
+impl LemmaQueryable for PropBankEngine {
+    fn query_by_lemma(&self, query: &LemmaQuery) -> EngineResult<Vec<SemanticEvidence>> {
+        // PropBank is primarily for verbs
+        if !query.is_verb() {
+            return Ok(vec![]);
+        }
+
+        // Direct lemma lookup using O(1) index
+        let matching_predicates = self.get_framesets(&query.lemma);
+
+        if matching_predicates.is_empty() {
+            return Ok(vec![]);
+        }
+
+        let calibration = ConfidenceCalibration::propbank();
+
+        // Convert each predicate to SemanticEvidence
+        Ok(matching_predicates
+            .into_iter()
+            .map(|predicate| {
+                // Convert PropBank roles to ThetaRoles
+                let theta_roles: Vec<_> = predicate
+                    .arguments
+                    .iter()
+                    .filter_map(|arg| arg.role.to_theta_role())
+                    .collect();
+
+                let raw_confidence = Self::calculate_predicate_confidence(predicate);
+
+                SemanticEvidence::new(ResourceSource::PropBank, predicate.roleset.clone())
+                    .with_confidence(calibration.calibrate(raw_confidence))
+                    .with_roles(theta_roles)
+            })
+            .collect())
+    }
+
+    fn resource_source(&self) -> ResourceSource {
+        ResourceSource::PropBank
     }
 }
 

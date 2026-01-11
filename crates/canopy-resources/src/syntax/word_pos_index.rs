@@ -1,7 +1,8 @@
-//! Word→POS index extracted from UD treebank.
+//! Word→POS and Word→Lemma indices extracted from UD treebank.
 //!
 //! Provides fast O(1) lookup for the most likely POS tag of a word
-//! based on observed frequencies in the English Web Treebank (EWT).
+//! and correct lemmatization based on observed frequencies in the
+//! English Web Treebank (EWT).
 
 use super::shared::parse_upos;
 use crate::engine::ConlluParser;
@@ -9,6 +10,110 @@ use crate::paths::data_path;
 use canopy::{CanopyError, UPos};
 use std::collections::HashMap;
 use std::path::Path;
+
+/// Index mapping words to their lemmas.
+///
+/// Built from UD English-EWT treebank data. Handles irregular verbs
+/// (gave→give, went→go) and other irregular forms that suffix rules miss.
+#[derive(Debug, Clone)]
+pub struct WordLemmaIndex {
+    /// word (lowercase) → {lemma → frequency}
+    entries: HashMap<String, HashMap<String, u32>>,
+}
+
+impl WordLemmaIndex {
+    /// Create an empty index.
+    #[must_use]
+    pub fn new() -> Self {
+        Self {
+            entries: HashMap::new(),
+        }
+    }
+
+    /// Load word→lemma mappings from treebank files.
+    ///
+    /// # Errors
+    /// This function currently cannot fail but returns `Result` for API consistency.
+    pub fn from_treebank() -> Result<Self, CanopyError> {
+        let mut index = Self::new();
+
+        let ud_dir = data_path("data/ud_english-ewt/UD_English-EWT");
+        let ud_dir = if ud_dir.exists() {
+            ud_dir
+        } else {
+            let alt = data_path("data/ud_english-ewt");
+            if alt.exists() {
+                alt
+            } else {
+                tracing::warn!("UD treebank not found, WordLemmaIndex will be empty");
+                return Ok(index);
+            }
+        };
+
+        let parser = ConlluParser::new();
+
+        for split in &["train", "dev", "test"] {
+            let file_path = ud_dir.join(format!("en_ewt-ud-{split}.conllu"));
+            if file_path.exists() {
+                if let Ok(sentences) = parser.parse_file(&file_path) {
+                    for sentence in sentences {
+                        for token in &sentence.tokens {
+                            let word = token.form.to_lowercase();
+                            let lemma = token.lemma.to_lowercase();
+                            // Only store if lemma differs from word (saves memory)
+                            if word != lemma {
+                                *index
+                                    .entries
+                                    .entry(word)
+                                    .or_default()
+                                    .entry(lemma)
+                                    .or_insert(0) += 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        tracing::info!(
+            "WordLemmaIndex loaded {} words with non-trivial lemmas",
+            index.entries.len()
+        );
+        Ok(index)
+    }
+
+    /// Get the most common lemma for a word.
+    ///
+    /// Returns `None` if the word is not in the index (meaning the lemma
+    /// is likely the word itself, or it's an unknown word).
+    #[must_use]
+    pub fn get_lemma(&self, word: &str) -> Option<&str> {
+        let lower = word.to_lowercase();
+        self.entries.get(&lower).and_then(|dist| {
+            dist.iter()
+                .max_by_key(|(_, count)| *count)
+                .map(|(lemma, _)| lemma.as_str())
+        })
+    }
+
+    /// Get the number of words with non-trivial lemmas.
+    #[must_use]
+    pub fn len(&self) -> usize {
+        self.entries.len()
+    }
+
+    /// Check if the index is empty.
+    #[must_use]
+    pub fn is_empty(&self) -> bool {
+        self.entries.is_empty()
+    }
+}
+
+impl Default for WordLemmaIndex {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 /// Index mapping words to their POS tag distributions.
 ///
@@ -236,5 +341,71 @@ mod tests {
         if let Some(dist) = index.get_pos_distribution("run") {
             assert!(!dist.is_empty());
         }
+    }
+
+    // --- WordLemmaIndex tests ---
+
+    #[test]
+    fn test_empty_lemma_index() {
+        let index = WordLemmaIndex::new();
+        assert!(index.is_empty());
+        assert_eq!(index.get_lemma("gave"), None);
+    }
+
+    #[test]
+    fn test_lemma_index_from_treebank() {
+        if !treebank_available() {
+            eprintln!("Skipping: Treebank data not available");
+            return;
+        }
+
+        let index = WordLemmaIndex::from_treebank().unwrap();
+        assert!(!index.is_empty(), "Index should have entries");
+    }
+
+    #[test]
+    fn test_irregular_verb_lemmatization() {
+        if !treebank_available() {
+            eprintln!("Skipping: Treebank data not available");
+            return;
+        }
+
+        let index = WordLemmaIndex::from_treebank().unwrap();
+
+        // Test common irregular verbs
+        assert_eq!(index.get_lemma("gave"), Some("give"));
+        assert_eq!(index.get_lemma("went"), Some("go"));
+        assert_eq!(index.get_lemma("took"), Some("take"));
+        assert_eq!(index.get_lemma("saw"), Some("see"));
+        assert_eq!(index.get_lemma("made"), Some("make"));
+        assert_eq!(index.get_lemma("came"), Some("come"));
+        assert_eq!(index.get_lemma("knew"), Some("know"));
+        assert_eq!(index.get_lemma("broke"), Some("break"));
+    }
+
+    #[test]
+    fn test_lemma_regular_verbs() {
+        if !treebank_available() {
+            eprintln!("Skipping: Treebank data not available");
+            return;
+        }
+
+        let index = WordLemmaIndex::from_treebank().unwrap();
+
+        // Regular verbs should also be in the index
+        assert_eq!(index.get_lemma("walked"), Some("walk"));
+        assert_eq!(index.get_lemma("running"), Some("run"));
+    }
+
+    #[test]
+    fn test_lemma_case_insensitivity() {
+        if !treebank_available() {
+            eprintln!("Skipping: Treebank data not available");
+            return;
+        }
+
+        let index = WordLemmaIndex::from_treebank().unwrap();
+        assert_eq!(index.get_lemma("Gave"), index.get_lemma("gave"));
+        assert_eq!(index.get_lemma("WENT"), index.get_lemma("went"));
     }
 }

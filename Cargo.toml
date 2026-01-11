@@ -3,6 +3,7 @@ members = [
     "crates/canopy",                  # Kernel crate: core types, event composition, discourse
     "crates/canopy-resources",        # Heavy loaders: VerbNet, FrameNet, WordNet, etc.
     "crates/canopy-cli",              # Command-line interface
+    "crates/canopy-lsp",              # LSP server for IDE integration
 ]
 resolver = "2"
 
@@ -30,7 +31,7 @@ quick-xml = "0.37"
 bincode = "1.3"
 once_cell = "1.19"
 tempfile = "3.8"
-lru = "0.13"
+lru = "0.16"
 rayon = { version = "1.10" }
 
 # Testing and benchmarking

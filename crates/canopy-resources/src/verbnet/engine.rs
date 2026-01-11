@@ -11,9 +11,11 @@
 
 use super::types::{VerbClass, VerbNetAnalysis, VerbNetConfig, VerbNetStats};
 use crate::engine::{
-    count_to_f32, BaseEngine, CacheKeyFormat, CacheableData, CommonDataLoader, DataInfo,
-    DataLoader, EngineConfigurable, EngineCore, EngineResult, SemanticEngine, SemanticResult,
+    count_to_f32, BaseEngine, CacheKeyFormat, CacheableData, CommonDataLoader,
+    ConfidenceCalibration, DataInfo, DataLoader, EngineConfigurable, EngineCore, EngineResult,
+    LemmaQuery, LemmaQueryable, ResourceSource, SemanticEngine, SemanticEvidence, SemanticResult,
 };
+use canopy::core::ThetaRole;
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -198,79 +200,52 @@ impl VerbNetEngine {
         self.base_engine.analyze(&input, self)
     }
 
-    /// Find verb classes that contain the given verb
-    fn find_verb_classes(&self, verb: &str) -> Vec<VerbClass> {
-        let mut matching_classes = Vec::new();
+    /// Analyze a phrasal verb (verb + particle combination).
+    ///
+    /// Tries the combined form first (e.g., "give\_up"), then falls back
+    /// to the base verb if no phrasal entry exists.
+    ///
+    /// # Errors
+    /// Returns an error if analysis fails.
+    pub fn analyze_phrasal_verb(
+        &self,
+        verb: &str,
+        particle: &str,
+    ) -> EngineResult<SemanticResult<VerbNetAnalysis>> {
+        // Try combined form first (e.g., "give_up")
+        let combined = format!("{verb}_{particle}");
+        let result = self.analyze_verb(&combined)?;
 
-        // Direct lookup in verb index
-        if let Some(class_ids) = self.verb_index.get(verb) {
-            for class_id in class_ids {
-                if let Some(verb_class) = self.verb_classes.get(class_id) {
-                    matching_classes.push(verb_class.clone());
-                }
-            }
+        // If combined form found classes, return it
+        if !result.data.verb_classes.is_empty() {
+            debug!("Found phrasal verb entry: {}", combined);
+            return Ok(result);
         }
 
-        // If no direct matches, try lemmatization and partial matching
-        if matching_classes.is_empty() {
-            matching_classes = self.fuzzy_verb_search(verb);
-        }
-
-        matching_classes
+        // Fall back to base verb
+        debug!(
+            "No phrasal entry for '{}', falling back to '{}'",
+            combined, verb
+        );
+        self.analyze_verb(verb)
     }
 
-    /// Perform fuzzy search for verbs (basic lemmatization and partial matching)
-    fn fuzzy_verb_search(&self, verb: &str) -> Vec<VerbClass> {
-        let mut matching_classes = Vec::new();
-        let verb_lower = verb.to_lowercase();
+    /// Find verb classes that contain the given verb lemma.
+    ///
+    /// Uses direct lookup only - the lemma should be normalized by the
+    /// syntax provider before calling this method. No fuzzy matching.
+    fn find_verb_classes(&self, lemma: &str) -> Vec<VerbClass> {
+        // Direct lookup only - lemma already normalized by syntax provider
+        let lemma_lower = lemma.to_lowercase();
 
-        // Try basic lemmatization patterns
-        let mut patterns = vec![
-            verb_lower.clone(),
-            // Remove common suffixes
-            verb_lower.trim_end_matches("ing").to_string(),
-            verb_lower.trim_end_matches("ed").to_string(),
-            verb_lower.trim_end_matches('s').to_string(),
-            // Add common suffixes if not present
-            format!("{}e", verb_lower.trim_end_matches('e')),
-            format!("{}d", verb_lower),
-            format!("{}ing", verb_lower),
-        ];
-
-        // Handle special -ing cases
-        if verb_lower.ends_with("ing") {
-            let stem = verb_lower.trim_end_matches("ing");
-            // Check if the consonant was doubled (like "running" -> "run")
-            if stem.len() >= 2 {
-                let chars: Vec<char> = stem.chars().collect();
-                if chars.len() >= 2 && chars[chars.len() - 1] == chars[chars.len() - 2] {
-                    // Remove the doubled consonant
-                    let single_consonant_stem = &stem[0..stem.len() - 1];
-                    patterns.push(single_consonant_stem.to_string());
-                    patterns.push(format!("{single_consonant_stem}e"));
-                }
-            }
-            // Also try adding 'e' to the stem (like "giv" -> "give")
-            patterns.push(format!("{stem}e"));
+        if let Some(class_ids) = self.verb_index.get(&lemma_lower) {
+            class_ids
+                .iter()
+                .filter_map(|id| self.verb_classes.get(id).cloned())
+                .collect()
+        } else {
+            vec![] // No fuzzy fallback - precision first
         }
-
-        for pattern in patterns {
-            if let Some(class_ids) = self.verb_index.get(&pattern) {
-                for class_id in class_ids {
-                    if let Some(verb_class) = self.verb_classes.get(class_id) {
-                        // Avoid duplicates
-                        if !matching_classes
-                            .iter()
-                            .any(|c: &VerbClass| c.id == verb_class.id)
-                        {
-                            matching_classes.push(verb_class.clone());
-                        }
-                    }
-                }
-            }
-        }
-
-        matching_classes
     }
 
     /// Calculate confidence score based on matching classes
@@ -456,6 +431,43 @@ impl DataLoader for VerbNetEngine {
     fn data_info(&self) -> DataInfo {
         // Delegate to inherent method
         VerbNetEngine::data_info(self)
+    }
+}
+
+/// `LemmaQueryable` implementation for lemma-based semantic queries.
+///
+/// This is the primary interface for the new multi-engine pipeline.
+impl LemmaQueryable for VerbNetEngine {
+    fn query_by_lemma(&self, query: &LemmaQuery) -> EngineResult<Vec<SemanticEvidence>> {
+        // Only process verbs
+        if !query.is_verb() {
+            return Ok(vec![]);
+        }
+
+        let classes = self.find_verb_classes(&query.lemma);
+
+        // Convert each class to SemanticEvidence
+        let calibration = ConfidenceCalibration::verbnet();
+
+        Ok(classes
+            .into_iter()
+            .map(|c| {
+                let raw_confidence = Self::calculate_verb_confidence(std::slice::from_ref(&c));
+
+                SemanticEvidence::new(ResourceSource::VerbNet, c.id.clone())
+                    .with_confidence(calibration.calibrate(raw_confidence))
+                    .with_roles(
+                        c.themroles
+                            .iter()
+                            .filter_map(|r| ThetaRole::parse(&r.role_type))
+                            .collect(),
+                    )
+            })
+            .collect())
+    }
+
+    fn resource_source(&self) -> ResourceSource {
+        ResourceSource::VerbNet
     }
 }
 
@@ -754,17 +766,33 @@ mod tests {
     }
 
     #[test]
-    fn test_fuzzy_verb_search() {
+    fn test_lemma_query_interface() {
         let temp_dir = tempdir().unwrap();
         let xml_path = temp_dir.path().join("give-13.1.xml");
         fs::write(&xml_path, create_test_verbnet_xml()).unwrap();
 
         let engine = VerbNetEngine::new_with_test_data(temp_dir.path()).unwrap();
 
-        // Test basic lemmatization
-        let result = engine.analyze_verb("giving").unwrap();
-        assert!(result.confidence > 0.0);
-        assert_eq!(result.data.verb_classes.len(), 1);
+        // Test LemmaQueryable interface with correct lemma
+        let query = LemmaQuery::verb("give");
+        let evidence = engine.query_by_lemma(&query).unwrap();
+        assert_eq!(evidence.len(), 1);
+        assert_eq!(evidence[0].evidence_id, "give-13.1");
+        assert!(evidence[0].is_high_confidence());
+        assert!(!evidence[0].theta_roles.is_empty());
+
+        // Non-lemma forms should not match (no fuzzy search)
+        let query_inflected = LemmaQuery::verb("giving");
+        let evidence_inflected = engine.query_by_lemma(&query_inflected).unwrap();
+        assert!(
+            evidence_inflected.is_empty(),
+            "Inflected forms should not match"
+        );
+
+        // Non-verbs should return empty
+        let query_noun = LemmaQuery::noun("give");
+        let evidence_noun = engine.query_by_lemma(&query_noun).unwrap();
+        assert!(evidence_noun.is_empty());
     }
 
     #[test]

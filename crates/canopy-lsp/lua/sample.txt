@@ -1,0 +1,51 @@
+Canopy LSP Demo
+================
+
+Try these features:
+- Hover (K) over any word to see semantic analysis
+- Code Actions (<leader>ca) on diagnostics
+- Toggle inlay hints (<leader>ih)
+- Navigate diagnostics ([d and ]d)
+
+Simple Sentences
+----------------
+
+The cat runs.
+
+John walks quickly.
+
+Transitive Verbs (Agent + Patient)
+----------------------------------
+
+The dog chased the cat.
+
+Mary read the book carefully.
+
+The programmer fixed the bug.
+
+Ditransitive Verbs (Agent + Recipient + Theme)
+----------------------------------------------
+
+John gave Mary a book.
+
+The teacher sent the students an email.
+
+She told him the truth.
+
+Embedded Clauses
+----------------
+
+She believes that he left.
+
+John knows that Mary likes coffee.
+
+The scientist discovered that the theory was correct.
+
+Complex Sentences
+-----------------
+
+After the rain stopped, the children played outside.
+
+The book that John read was interesting.
+
+Mary, who loves linguistics, studies theta roles.

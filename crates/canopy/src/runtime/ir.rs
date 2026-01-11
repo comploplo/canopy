@@ -8,6 +8,53 @@ use super::ids::{NodeId, TokenId};
 use crate::core::{DepRel, MorphFeatures, UPos};
 use serde::{Deserialize, Serialize};
 
+/// Phrasal verb annotation (verb + particle construction).
+///
+/// Represents lexicalized verb-particle combinations like "give up", "turn off".
+/// Based on Construction Grammar (Goldberg 1995) - phrasal verbs are stored
+/// whole in the lexicon and should be queried as single units.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PhrasalVerb {
+    /// The main verb token ID.
+    pub verb_id: TokenId,
+    /// Particle token IDs (usually one, but can be multiple: "look forward to").
+    pub particle_ids: Vec<TokenId>,
+    /// Combined lemma for lexical lookup (e.g., `give_up`).
+    pub combined_lemma: String,
+    /// Byte span covering verb and all particles.
+    pub span: (usize, usize),
+}
+
+/// Multi-word expression type.
+///
+/// Based on Universal Dependencies annotation guidelines.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum MweType {
+    /// Compound noun: "ice cream", "health care" (UD: compound)
+    CompoundNoun,
+    /// Flat name: "New York", "John Smith" (UD: flat)
+    FlatName,
+    /// Fixed expression: "in spite of", "as well as" (UD: fixed)
+    FixedExpression,
+}
+
+/// Multi-word expression annotation.
+///
+/// Represents token sequences that function as single lexical units.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct MweInfo {
+    /// Type of multi-word expression.
+    pub mwe_type: MweType,
+    /// Head token of the MWE.
+    pub head_id: TokenId,
+    /// All token IDs in the MWE, in sentence order.
+    pub token_ids: Vec<TokenId>,
+    /// Combined lemma with underscores (e.g., `new_york`, `ice_cream`).
+    pub combined_lemma: String,
+    /// Byte span covering the entire MWE.
+    pub span: (usize, usize),
+}
+
 /// Annotated syntax tree - the input IR for semantic analysis.
 ///
 /// This is the contract between the `SyntaxProvider` and the kernel.
@@ -22,6 +69,14 @@ pub struct AnnotatedSyntax {
 
     /// Optional syntax tree structure (for phrase structure).
     pub tree: Option<SyntaxTree>,
+
+    /// Detected phrasal verbs (verb + particle constructions).
+    #[serde(default)]
+    pub phrasal_verbs: Vec<PhrasalVerb>,
+
+    /// Detected multi-word expressions (compounds, names, fixed expressions).
+    #[serde(default)]
+    pub mwes: Vec<MweInfo>,
 }
 
 impl AnnotatedSyntax {
@@ -32,6 +87,8 @@ impl AnnotatedSyntax {
             text,
             tokens,
             tree: None,
+            phrasal_verbs: Vec::new(),
+            mwes: Vec::new(),
         }
     }
 
@@ -42,7 +99,35 @@ impl AnnotatedSyntax {
             text,
             tokens,
             tree: Some(tree),
+            phrasal_verbs: Vec::new(),
+            mwes: Vec::new(),
         }
+    }
+
+    /// Get the predicate lemma for a verb token.
+    ///
+    /// Returns the phrasal lemma (e.g., `give_up`) if the verb has particles,
+    /// otherwise returns the regular token lemma.
+    #[must_use]
+    pub fn get_predicate_lemma(&self, verb_id: TokenId) -> Option<&str> {
+        // Check if this verb is part of a phrasal verb
+        if let Some(pv) = self.phrasal_verbs.iter().find(|pv| pv.verb_id == verb_id) {
+            return Some(&pv.combined_lemma);
+        }
+        // Fall back to regular token lemma
+        self.get_token(verb_id).map(|t| t.lemma.as_str())
+    }
+
+    /// Get the MWE containing a token, if any.
+    #[must_use]
+    pub fn get_mwe_for_token(&self, token_id: TokenId) -> Option<&MweInfo> {
+        self.mwes.iter().find(|m| m.token_ids.contains(&token_id))
+    }
+
+    /// Check if a token is part of a phrasal verb.
+    #[must_use]
+    pub fn is_phrasal_verb(&self, verb_id: TokenId) -> bool {
+        self.phrasal_verbs.iter().any(|pv| pv.verb_id == verb_id)
     }
 
     /// Get a token by ID.

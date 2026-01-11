@@ -6,7 +6,7 @@
 use super::shared::{
     guess_dependency, lemmatize_by_suffix, suffix_heuristics, SUBORDINATING_CONJUNCTIONS,
 };
-use super::word_pos_index::WordPosIndex;
+use super::word_pos_index::{WordLemmaIndex, WordPosIndex};
 use crate::engine::SharedEngines;
 use crate::lexicon::LexiconEngine;
 use crate::tokenizer::RawToken;
@@ -28,6 +28,8 @@ use std::sync::Arc;
 pub struct ResourceBackedTagger {
     /// Word→POS index from treebank statistics
     word_pos_index: WordPosIndex,
+    /// Word→lemma index from treebank (handles irregular verbs)
+    word_lemma_index: WordLemmaIndex,
     /// `VerbNet` engine for verb detection
     verbnet: Option<Arc<VerbNetEngine>>,
     /// `WordNet` engine for general POS lookup
@@ -46,6 +48,7 @@ impl ResourceBackedTagger {
     /// Returns an error if the word→POS index cannot be loaded from treebank.
     pub fn new() -> Result<Self, CanopyError> {
         let word_pos_index = WordPosIndex::from_treebank()?;
+        let word_lemma_index = WordLemmaIndex::from_treebank()?;
 
         // Create and load lexicon
         let mut lexicon = LexiconEngine::new();
@@ -59,14 +62,16 @@ impl ResourceBackedTagger {
         let wordnet = WordNetEngine::new().ok().map(Arc::new);
 
         tracing::info!(
-            "ResourceBackedTagger initialized: {} words in index, VerbNet={}, WordNet={}",
+            "ResourceBackedTagger initialized: {} words, {} lemmas, VerbNet={}, WordNet={}",
             word_pos_index.len(),
+            word_lemma_index.len(),
             verbnet.is_some(),
             wordnet.is_some()
         );
 
         Ok(Self {
             word_pos_index,
+            word_lemma_index,
             verbnet,
             wordnet,
             lexicon,
@@ -77,12 +82,14 @@ impl ResourceBackedTagger {
     #[must_use]
     pub fn with_deps(
         word_pos_index: WordPosIndex,
+        word_lemma_index: WordLemmaIndex,
         verbnet: Option<Arc<VerbNetEngine>>,
         wordnet: Option<Arc<WordNetEngine>>,
         lexicon: Arc<LexiconEngine>,
     ) -> Self {
         Self {
             word_pos_index,
+            word_lemma_index,
             verbnet,
             wordnet,
             lexicon,
@@ -98,14 +105,17 @@ impl ResourceBackedTagger {
     /// Returns an error if the word→POS index cannot be loaded from treebank.
     pub fn with_shared_engines(engines: &SharedEngines) -> Result<Self, CanopyError> {
         let word_pos_index = WordPosIndex::from_treebank()?;
+        let word_lemma_index = WordLemmaIndex::from_treebank()?;
 
         tracing::info!(
-            "ResourceBackedTagger initialized with shared engines: {} words in index",
-            word_pos_index.len()
+            "ResourceBackedTagger initialized with shared engines: {} words, {} lemmas",
+            word_pos_index.len(),
+            word_lemma_index.len()
         );
 
         Ok(Self {
             word_pos_index,
+            word_lemma_index,
             verbnet: engines.verbnet.clone(),
             wordnet: engines.wordnet.clone(),
             lexicon: engines.lexicon.clone(),
@@ -245,9 +255,19 @@ impl ResourceBackedTagger {
         None
     }
 
-    /// Simple lemmatization using shared suffix rules.
+    /// Lemmatization using treebank data with suffix fallback.
+    ///
+    /// Lookup order:
+    /// 1. Treebank lemmas (handles irregular verbs: gave→give, went→go)
+    /// 2. Keep auxiliaries/modals as-is
+    /// 3. Suffix-based heuristics (last resort)
     fn lemmatize(&self, form: &str) -> String {
         let lower = form.to_lowercase();
+
+        // Layer 1: Treebank lemmas (most reliable for irregular forms)
+        if let Some(lemma) = self.word_lemma_index.get_lemma(&lower) {
+            return lemma.to_string();
+        }
 
         // Keep auxiliaries/modals as-is
         if self.lexicon.is_auxiliary(&lower).unwrap_or(false)
@@ -256,7 +276,7 @@ impl ResourceBackedTagger {
             return lower;
         }
 
-        // Use shared suffix-based lemmatization
+        // Layer 2: Suffix-based heuristics (fallback for unknown words)
         lemmatize_by_suffix(form)
     }
 }
@@ -367,5 +387,50 @@ mod tests {
         assert_eq!(tagger.tag_pos("glorping", 1, 3), UPos::Verb);
         assert_eq!(tagger.tag_pos("glorped", 1, 3), UPos::Verb);
         assert_eq!(tagger.tag_pos("glorpily", 1, 3), UPos::Adv);
+    }
+
+    #[test]
+    fn test_irregular_verb_lemmatization() {
+        if !data_available() {
+            eprintln!("Skipping: Data not available");
+            return;
+        }
+
+        let tagger = ResourceBackedTagger::new().unwrap();
+
+        // Test irregular verbs are lemmatized correctly via treebank
+        assert_eq!(tagger.lemmatize("gave"), "give");
+        assert_eq!(tagger.lemmatize("went"), "go");
+        assert_eq!(tagger.lemmatize("took"), "take");
+        assert_eq!(tagger.lemmatize("saw"), "see");
+        assert_eq!(tagger.lemmatize("made"), "make");
+        assert_eq!(tagger.lemmatize("broke"), "break");
+
+        // Regular verbs still work
+        assert_eq!(tagger.lemmatize("walking"), "walk");
+        assert_eq!(tagger.lemmatize("jumped"), "jump");
+    }
+
+    #[test]
+    fn test_lemmatization_in_parse() {
+        if !data_available() {
+            eprintln!("Skipping: Data not available");
+            return;
+        }
+
+        let tagger = ResourceBackedTagger::new().unwrap();
+        let tokenizer = SimpleTokenizer::new();
+
+        let tokens = tokenizer.tokenize("He gave her the book.");
+        let syntax = tagger.parse("He gave her the book.", &tokens);
+
+        // Find "gave" token and verify its lemma is "give"
+        let gave_token = syntax.tokens.iter().find(|t| t.form == "gave");
+        assert!(gave_token.is_some(), "Should have 'gave' token");
+        assert_eq!(
+            gave_token.unwrap().lemma,
+            "give",
+            "'gave' should lemmatize to 'give'"
+        );
     }
 }

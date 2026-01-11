@@ -124,6 +124,10 @@ impl TraceBuilder {
     ///
     /// `all_decomps` should include all candidate decompositions before filtering.
     /// The winner is determined by highest confidence.
+    ///
+    /// A predicate is considered **unambiguous** if:
+    /// 1. Only one decomposition exists, OR
+    /// 2. Exactly one sense ID contains the predicate lemma (e.g., "try" matches "try-61.1" but not "attempt-61.1")
     pub fn record_sense_selection(
         &mut self,
         predicate_lemma: &str,
@@ -134,19 +138,40 @@ impl TraceBuilder {
             return;
         }
 
-        // Sort by confidence to find winner and runner-up
-        let mut sorted: Vec<_> = all_decomps.iter().collect();
-        sorted.sort_by(|a, b| {
-            b.confidence
-                .partial_cmp(&a.confidence)
-                .unwrap_or(std::cmp::Ordering::Equal)
-        });
+        // Check if exactly one sense contains the lemma - makes it unambiguous
+        let lemma_lower = predicate_lemma.to_lowercase();
+        let matching_senses: Vec<_> = all_decomps
+            .iter()
+            .filter(|d| {
+                let sense_lower = d.sense_id.to_string().to_lowercase();
+                sense_lower.contains(&lemma_lower)
+            })
+            .collect();
+
+        // If exactly one sense matches the lemma, prefer it as the winner
+        let (sorted, is_lemma_match) = if matching_senses.len() == 1 {
+            // Single lemma match - use it as winner, treat as unambiguous
+            let winner = matching_senses[0];
+            let others: Vec<_> = all_decomps.iter().filter(|d| d != &winner).collect();
+            let mut result = vec![winner];
+            result.extend(others);
+            (result, true)
+        } else {
+            // Multiple or no lemma matches - sort by confidence as usual
+            let mut sorted: Vec<_> = all_decomps.iter().collect();
+            sorted.sort_by(|a, b| {
+                b.confidence
+                    .partial_cmp(&a.confidence)
+                    .unwrap_or(std::cmp::Ordering::Equal)
+            });
+            (sorted, false)
+        };
 
         let winner = sorted[0];
         let runner_up = sorted.get(1).copied();
 
         // Determine selection reason
-        let selection_reason = if sorted.len() == 1 {
+        let selection_reason = if sorted.len() == 1 || is_lemma_match {
             SelectionReason::Unambiguous
         } else {
             let margin = winner.confidence - runner_up.map_or(0.0, |r| r.confidence);
@@ -164,8 +189,9 @@ impl TraceBuilder {
             selection_reason,
         });
 
-        // Update ambiguity tracking
-        if sorted.len() > 1 {
+        // Update ambiguity tracking - only count as ambiguous if multiple senses
+        // AND lemma doesn't disambiguate
+        if sorted.len() > 1 && !is_lemma_match {
             self.ambiguity_count += 1;
             self.total_readings *= sorted.len();
         }
@@ -338,6 +364,7 @@ fn format_deprel(deprel: &DepRel) -> String {
         DepRel::Case => "case".to_string(),
         DepRel::Nmod => "nmod".to_string(),
         DepRel::Compound => "compound".to_string(),
+        DepRel::CompoundPrt => "compound:prt".to_string(),
         DepRel::Mark => "mark".to_string(),
         DepRel::Aux => "aux".to_string(),
         DepRel::Cop => "cop".to_string(),
@@ -543,12 +570,13 @@ mod tests {
     }
 
     #[test]
-    fn test_sense_selection_trace() {
+    fn test_sense_selection_trace_ambiguous() {
         use canopy::kernel::events::LittleVType;
         use canopy::runtime::{DecompositionSource, SenseId};
 
         let mut builder = TraceBuilder::new("Test");
 
+        // Both senses contain "run" - should still be ambiguous
         let decomps = vec![
             PredicateDecomposition::new(SenseId::new("run-51.3.2"), LittleVType::Go, vec![])
                 .with_confidence(0.9)
@@ -564,7 +592,66 @@ mod tests {
         assert_eq!(trace.sense_traces.len(), 1);
         assert_eq!(trace.sense_traces[0].winner.sense_id, "run-51.3.2");
         assert!(trace.sense_traces[0].runner_up.is_some());
+        // Both senses contain "run", so it's still ambiguous
         assert_eq!(trace.metadata.ambiguity_count, 1);
         assert_eq!(trace.metadata.total_readings, 2);
+    }
+
+    #[test]
+    fn test_sense_selection_lemma_disambiguates() {
+        use canopy::kernel::events::LittleVType;
+        use canopy::runtime::{DecompositionSource, SenseId};
+
+        let mut builder = TraceBuilder::new("Test");
+
+        // Only one sense contains "try" - should be unambiguous
+        let decomps = vec![
+            PredicateDecomposition::new(SenseId::new("try-61.1"), LittleVType::Do, vec![])
+                .with_confidence(0.8)
+                .with_source(DecompositionSource::VerbNet),
+            PredicateDecomposition::new(SenseId::new("attempt-61.1"), LittleVType::Do, vec![])
+                .with_confidence(0.9)
+                .with_source(DecompositionSource::VerbNet),
+        ];
+
+        builder.record_sense_selection("try", 1, &decomps);
+
+        let trace = builder.build();
+        assert_eq!(trace.sense_traces.len(), 1);
+        // Winner should be "try-61.1" because it matches the lemma
+        assert_eq!(trace.sense_traces[0].winner.sense_id, "try-61.1");
+        // Should be unambiguous because lemma disambiguates
+        assert_eq!(
+            trace.sense_traces[0].selection_reason,
+            SelectionReason::Unambiguous
+        );
+        assert_eq!(trace.metadata.ambiguity_count, 0);
+        assert_eq!(trace.metadata.total_readings, 1);
+    }
+
+    #[test]
+    fn test_sense_selection_no_lemma_match() {
+        use canopy::kernel::events::LittleVType;
+        use canopy::runtime::{DecompositionSource, SenseId};
+
+        let mut builder = TraceBuilder::new("Test");
+
+        // Neither sense contains "speak" - fallback to confidence ordering
+        let decomps = vec![
+            PredicateDecomposition::new(SenseId::new("talk-37.5"), LittleVType::Do, vec![])
+                .with_confidence(0.7)
+                .with_source(DecompositionSource::VerbNet),
+            PredicateDecomposition::new(SenseId::new("say-37.7"), LittleVType::Do, vec![])
+                .with_confidence(0.9)
+                .with_source(DecompositionSource::VerbNet),
+        ];
+
+        builder.record_sense_selection("speak", 1, &decomps);
+
+        let trace = builder.build();
+        // Winner should be highest confidence since no lemma match
+        assert_eq!(trace.sense_traces[0].winner.sense_id, "say-37.7");
+        // Should be ambiguous (no lemma disambiguation)
+        assert_eq!(trace.metadata.ambiguity_count, 1);
     }
 }

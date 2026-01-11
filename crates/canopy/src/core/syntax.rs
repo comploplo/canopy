@@ -89,9 +89,10 @@ pub enum DepRel {
     Cc,   // coordinating conjunction
 
     // Other
-    Fixed, // fixed multiword expression
-    Flat,  // flat multiword expression
-    Compound,
+    Fixed,       // fixed multiword expression
+    Flat,        // flat multiword expression
+    Compound,    // compound (generic)
+    CompoundPrt, // compound:prt - verb particle
     List,
     Parataxis,
     Orphan,
@@ -125,6 +126,21 @@ impl DepRel {
     #[must_use]
     pub const fn is_core_argument(&self) -> bool {
         self.is_subject() || self.is_object() || matches!(self, DepRel::Ccomp | DepRel::Xcomp)
+    }
+
+    /// Check if this is a verb particle relation.
+    #[must_use]
+    pub const fn is_particle(&self) -> bool {
+        matches!(self, DepRel::CompoundPrt)
+    }
+
+    /// Check if this is a compound/MWE relation.
+    #[must_use]
+    pub const fn is_mwe(&self) -> bool {
+        matches!(
+            self,
+            DepRel::Compound | DepRel::CompoundPrt | DepRel::Flat | DepRel::Fixed
+        )
     }
 
     /// Parse from string representation.
@@ -163,6 +179,7 @@ impl DepRel {
             "fixed" => DepRel::Fixed,
             "flat" => DepRel::Flat,
             "compound" => DepRel::Compound,
+            "compound:prt" => DepRel::CompoundPrt,
             "list" => DepRel::List,
             "parataxis" => DepRel::Parataxis,
             "orphan" => DepRel::Orphan,
@@ -189,6 +206,8 @@ pub struct MorphFeatures {
     pub case: Option<Case>,
     pub gender: Option<Gender>,
     pub definiteness: Option<Definiteness>,
+    /// For gerunds: nominal, verbal, or adjectival usage.
+    pub gerund_usage: Option<GerundUsage>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -233,6 +252,20 @@ pub enum VerbForm {
     Infinitive,
     Participle,
     Gerund,
+}
+
+/// Usage type for gerunds (-ing forms).
+///
+/// Distinguishes how a gerund is functioning syntactically,
+/// which affects semantic interpretation.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum GerundUsage {
+    /// Nominal gerund: "Swimming is fun" (subject/object position)
+    Nominal,
+    /// Verbal/progressive: "He is swimming"
+    Verbal,
+    /// Adjectival/participial: "The boring lecture"
+    Adjectival,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -448,6 +481,7 @@ mod tests {
             case: Some(Case::Nominative),
             gender: Some(Gender::Masculine),
             definiteness: Some(Definiteness::Definite),
+            gerund_usage: None,
         };
 
         assert_eq!(features.person, Some(Person::First));

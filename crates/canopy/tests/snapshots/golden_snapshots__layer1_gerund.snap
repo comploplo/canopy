@@ -12,16 +12,16 @@ expression: analysis
       "has_verbnet": true,
       "has_framenet": true,
       "has_wordnet": true,
-      "confidence": 0.92
+      "confidence": 0.98
     },
     {
       "word": "is",
       "lemma": "be",
       "pos": null,
-      "has_verbnet": true,
-      "has_framenet": true,
-      "has_wordnet": true,
-      "confidence": 0.95
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
     },
     {
       "word": "good",
@@ -36,10 +36,10 @@ expression: analysis
       "word": "exercise",
       "lemma": "exercise",
       "pos": null,
-      "has_verbnet": true,
-      "has_framenet": true,
-      "has_wordnet": true,
-      "confidence": 0.95
+      "has_verbnet": false,
+      "has_framenet": false,
+      "has_wordnet": false,
+      "confidence": 0.0
     }
   ],
   "layer2": null,

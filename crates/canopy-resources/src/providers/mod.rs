@@ -1,7 +1,7 @@
 //! Provider trait implementations for canopy kernel.
 //!
 //! This module implements the provider traits from `canopy::runtime` using
-//! the heavy dataset engines (`VerbNet`, `FrameNet`, `PropBank`, etc.).
+//! multi-engine evidence aggregation from `VerbNet`, `FrameNet`, and `PropBank`.
 //!
 //! # Architecture
 //!
@@ -10,51 +10,55 @@
 //! ```text
 //! canopy::runtime        canopy-resources::providers
 //! ---------------        ---------------------------
-//! SenseProvider    <---- VerbNetSenseProvider
-//! RoleProvider     <---- VerbNetRoleProvider
+//! SenseProvider    <---- PredicateDecomposer (multi-engine)
+//! RoleProvider     <---- ArgumentBinder (multi-engine)
 //! DiscourseCue     <---- LexiconDiscourseCueProvider
 //! ```
 //!
 //! # Example
 //!
 //! ```rust,ignore
-//! use canopy_resources::providers::VerbNetSenseProvider;
+//! use canopy_resources::providers::PredicateDecomposer;
 //! use canopy::runtime::SenseProvider;
 //!
-//! let provider = VerbNetSenseProvider::new()?;
+//! let engines = SharedEngines::new()?;
+//! let provider = PredicateDecomposer::with_default_config(engines)?;
 //! let decompositions = provider.decompose_predicate(&syntax, pred_id)?;
 //! ```
 
+mod argument_binder;
 mod discourse_cue;
-mod role;
-mod sense;
+mod predicate_decomposer;
 
+pub use argument_binder::{ArgumentBinder, BinderConfig};
 pub use discourse_cue::LexiconDiscourseCueProvider;
-pub use role::VerbNetRoleProvider;
-pub use sense::VerbNetSenseProvider;
+pub use predicate_decomposer::{DecomposerConfig, PredicateDecomposer};
 
 // Combined provider that implements all traits
 pub use combined::DefaultProvider;
 
 mod combined {
-    use super::{LexiconDiscourseCueProvider, VerbNetRoleProvider, VerbNetSenseProvider};
+    use super::{
+        ArgumentBinder, BinderConfig, DecomposerConfig, LexiconDiscourseCueProvider,
+        PredicateDecomposer,
+    };
+    use crate::engine::SharedEngines;
     use canopy::runtime::{
         AnnotatedSyntax, DiscourseCueProvider, DiscourseRelation, FrameId, PredicateDecomposition,
         RoleBinding, RoleProvider, SenseId, SenseInfo, SenseProvider, SyntaxProvider, TokenId,
     };
     use canopy::CanopyError;
 
-    /// Default provider combining `VerbNet` and Lexicon engines.
+    /// Default provider combining multi-engine providers.
     ///
     /// This provider implements all four provider traits required by the kernel:
     /// - `SyntaxProvider` - Stub (requires external parser)
-    /// - `SenseProvider` - Uses `VerbNet` for predicate decomposition
-    /// - `RoleProvider` - Uses `VerbNet` for role binding
+    /// - `SenseProvider` - Uses multi-engine `PredicateDecomposer`
+    /// - `RoleProvider` - Uses multi-engine `ArgumentBinder`
     /// - `DiscourseCueProvider` - Uses Lexicon for discourse connectives
-    #[derive(Debug)]
     pub struct DefaultProvider {
-        sense: VerbNetSenseProvider,
-        role: VerbNetRoleProvider,
+        sense: PredicateDecomposer,
+        role: ArgumentBinder,
         discourse: LexiconDiscourseCueProvider,
     }
 
@@ -64,11 +68,23 @@ mod combined {
         /// # Errors
         /// Returns an error if any provider cannot be initialized.
         pub fn new() -> Result<Self, CanopyError> {
+            let engines = SharedEngines::new()?;
+
             Ok(Self {
-                sense: VerbNetSenseProvider::new()?,
-                role: VerbNetRoleProvider::new()?,
+                sense: PredicateDecomposer::new(engines.clone(), DecomposerConfig::default())?,
+                role: ArgumentBinder::new(engines, BinderConfig::default())?,
                 discourse: LexiconDiscourseCueProvider::new()?,
             })
+        }
+    }
+
+    impl std::fmt::Debug for DefaultProvider {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            f.debug_struct("DefaultProvider")
+                .field("sense", &"PredicateDecomposer")
+                .field("role", &"ArgumentBinder")
+                .field("discourse", &"LexiconDiscourseCueProvider")
+                .finish()
         }
     }
 

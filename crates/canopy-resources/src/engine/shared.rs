@@ -1,9 +1,11 @@
 //! Shared engine instances for pipeline components.
 //!
-//! Provides a way to share expensive engine instances (`VerbNet`, `WordNet`, Lexicon)
-//! across multiple pipeline components, avoiding duplicate initialization.
+//! Provides a way to share expensive engine instances across multiple
+//! pipeline components, avoiding duplicate initialization.
 
+use crate::framenet::FrameNetEngine;
 use crate::lexicon::LexiconEngine;
+use crate::propbank::PropBankEngine;
 use crate::verbnet::VerbNetEngine;
 use crate::wordnet::WordNetEngine;
 use canopy::CanopyError;
@@ -14,8 +16,8 @@ use std::sync::Arc;
 /// Engines are expensive to initialize (loading data files, building indexes).
 /// This struct allows sharing engine instances across multiple components:
 /// - `TreebankSyntaxProvider` (via `ResourceBackedTagger`)
-/// - `VerbNetSenseProvider`
-/// - `VerbNetRoleProvider`
+/// - `PredicateDecomposer`
+/// - `ArgumentBinder`
 ///
 /// # Example
 ///
@@ -32,6 +34,10 @@ pub struct SharedEngines {
     pub verbnet: Option<Arc<VerbNetEngine>>,
     /// `WordNet` engine (optional, may fail to load).
     pub wordnet: Option<Arc<WordNetEngine>>,
+    /// `FrameNet` engine (optional, may fail to load).
+    pub framenet: Option<Arc<FrameNetEngine>>,
+    /// `PropBank` engine (optional, may fail to load).
+    pub propbank: Option<Arc<PropBankEngine>>,
     /// Lexicon engine (always available).
     pub lexicon: Arc<LexiconEngine>,
 }
@@ -56,15 +62,25 @@ impl SharedEngines {
         // Try to load WordNet (optional)
         let wordnet = WordNetEngine::new().ok().map(Arc::new);
 
+        // Try to load FrameNet (optional)
+        let framenet = FrameNetEngine::new().ok().map(Arc::new);
+
+        // Try to load PropBank (optional)
+        let propbank = PropBankEngine::new().ok().map(Arc::new);
+
         tracing::info!(
-            "SharedEngines initialized: VerbNet={}, WordNet={}",
+            "SharedEngines initialized: VerbNet={}, WordNet={}, FrameNet={}, PropBank={}",
             verbnet.is_some(),
-            wordnet.is_some()
+            wordnet.is_some(),
+            framenet.is_some(),
+            propbank.is_some()
         );
 
         Ok(Self {
             verbnet,
             wordnet,
+            framenet,
+            propbank,
             lexicon,
         })
     }
@@ -74,13 +90,45 @@ impl SharedEngines {
     pub fn with_engines(
         verbnet: Option<Arc<VerbNetEngine>>,
         wordnet: Option<Arc<WordNetEngine>>,
+        framenet: Option<Arc<FrameNetEngine>>,
+        propbank: Option<Arc<PropBankEngine>>,
         lexicon: Arc<LexiconEngine>,
     ) -> Self {
         Self {
             verbnet,
             wordnet,
+            framenet,
+            propbank,
             lexicon,
         }
+    }
+
+    /// Check if all semantic engines are available.
+    #[must_use]
+    pub fn has_all_engines(&self) -> bool {
+        self.verbnet.is_some()
+            && self.wordnet.is_some()
+            && self.framenet.is_some()
+            && self.propbank.is_some()
+    }
+
+    /// Get count of loaded engines.
+    #[must_use]
+    pub fn loaded_engine_count(&self) -> usize {
+        let mut count = 1; // Lexicon is always loaded
+        if self.verbnet.is_some() {
+            count += 1;
+        }
+        if self.wordnet.is_some() {
+            count += 1;
+        }
+        if self.framenet.is_some() {
+            count += 1;
+        }
+        if self.propbank.is_some() {
+            count += 1;
+        }
+        count
     }
 }
 
@@ -89,6 +137,8 @@ impl std::fmt::Debug for SharedEngines {
         f.debug_struct("SharedEngines")
             .field("verbnet", &self.verbnet.is_some())
             .field("wordnet", &self.wordnet.is_some())
+            .field("framenet", &self.framenet.is_some())
+            .field("propbank", &self.propbank.is_some())
             .field("lexicon", &"<loaded>")
             .finish()
     }

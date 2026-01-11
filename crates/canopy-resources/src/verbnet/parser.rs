@@ -54,7 +54,10 @@ impl XmlResource for VerbClass {
                             class.frames = parse_frames(reader, &mut buf)?;
                         }
                         QName(b"SUBCLASSES") => {
-                            class.subclasses = parse_subclasses(reader, &mut buf)?;
+                            let result = parse_subclasses_recursive(reader, &mut buf)?;
+                            class.subclasses = result.ids;
+                            // Include members from all subclasses in the main class
+                            class.members.extend(result.all_members);
                         }
                         _ => {
                             // Skip unknown elements
@@ -545,21 +548,39 @@ fn parse_predicate_args<R: BufRead>(
     Ok(args)
 }
 
-/// Parse subclasses (simplified)
-fn parse_subclasses<R: BufRead>(
+/// Result of parsing subclasses: IDs and all members (including nested)
+struct SubclassParseResult {
+    ids: Vec<String>,
+    all_members: Vec<Member>,
+}
+
+/// Parse subclasses recursively, collecting all members from nested subclasses
+fn parse_subclasses_recursive<R: BufRead>(
     reader: &mut Reader<R>,
     buf: &mut Vec<u8>,
-) -> EngineResult<Vec<String>> {
-    let mut subclasses = Vec::new();
+) -> EngineResult<SubclassParseResult> {
+    let mut ids = Vec::new();
+    let mut all_members = Vec::new();
 
     loop {
         match reader.read_event_into(buf) {
             Ok(Event::Start(ref e)) => {
                 if e.name() == QName(b"VNSUBCLASS") {
                     if let Some(id) = get_attribute(e, "ID") {
-                        subclasses.push(id);
+                        trace!("Parsing subclass: {}", id);
+                        ids.push(id);
                     }
+                } else if e.name() == QName(b"MEMBERS") {
+                    // Parse members from this subclass level
+                    let members = parse_members(reader, buf)?;
+                    all_members.extend(members);
+                } else if e.name() == QName(b"SUBCLASSES") {
+                    // Recursively parse nested subclasses
+                    let nested = parse_subclasses_recursive(reader, buf)?;
+                    ids.extend(nested.ids);
+                    all_members.extend(nested.all_members);
                 }
+                // Skip THEMROLES and FRAMES in subclasses for now
             }
             Ok(Event::End(ref e)) if e.name() == QName(b"SUBCLASSES") => {
                 break;
@@ -575,7 +596,7 @@ fn parse_subclasses<R: BufRead>(
         buf.clear();
     }
 
-    Ok(subclasses)
+    Ok(SubclassParseResult { ids, all_members })
 }
 
 // Utility functions (get_attribute, extract_text_content imported from canopy_engine::xml_utils)

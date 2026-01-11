@@ -1,13 +1,137 @@
 //! Analysis result types for the pipeline.
 
 use canopy::kernel::discourse::{
-    CoherenceClassification, Drs, MoveClassification, RelevanceReport, TrackedPresupposition,
-    UnderspecDrs, ValidationReport,
+    AnaphorType, BindingConstraint, CoherenceClassification, Drs, MoveClassification,
+    RelevanceReport, TrackedPresupposition, UnderspecDrs, ValidationReport,
 };
 use canopy::kernel::events::{ComposedEvents, PackedEvents};
+use canopy::kernel::trace::SenseSelectionTrace;
 use canopy::kernel::underspec::AmbiguitySummary;
-use canopy::runtime::{AnnotatedSyntax, PredicateDecomposition, RoleBinding};
+use canopy::runtime::{AnnotatedSyntax, PredicateDecomposition, RoleBinding, TokenId};
 use serde::{Deserialize, Serialize};
+
+// =============================================================================
+// Diagnostic Info Types for LSP
+// =============================================================================
+
+/// Information about pronoun binding for diagnostics.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PronounBindingInfo {
+    /// Token ID of the pronoun/anaphor.
+    pub token_id: TokenId,
+    /// Surface form of the pronoun.
+    pub form: String,
+    /// Type of anaphoric expression.
+    pub anaphor_type: AnaphorType,
+    /// Candidate antecedents with confidence scores.
+    pub candidates: Vec<BindingCandidate>,
+    /// Any binding constraint violations.
+    pub violations: Vec<BindingConstraint>,
+    /// Whether this binding is ambiguous (multiple viable candidates).
+    pub is_ambiguous: bool,
+    /// Resolved antecedent (if one was selected).
+    pub resolved: Option<String>,
+}
+
+/// A candidate antecedent for pronoun binding.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BindingCandidate {
+    /// Surface text of the candidate.
+    pub text: String,
+    /// Confidence score (0.0-1.0).
+    pub confidence: f32,
+    /// Token ID of the candidate.
+    pub token_id: Option<TokenId>,
+    /// Sentence distance (0 = same sentence).
+    pub sentence_distance: usize,
+}
+
+/// Information about scope ambiguity for diagnostics.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ScopeAmbiguityInfo {
+    /// Token position range where the ambiguity occurs.
+    pub token_range: (usize, usize),
+    /// Number of possible scope orderings.
+    pub ordering_count: usize,
+    /// Description of the quantifiers involved.
+    pub quantifiers: Vec<QuantifierInfo>,
+    /// Brief description of the readings.
+    pub reading_descriptions: Vec<String>,
+}
+
+/// Information about a quantifier for scope diagnostics.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct QuantifierInfo {
+    /// Token position.
+    pub token_position: usize,
+    /// Quantifier text (e.g., "every", "a").
+    pub text: String,
+    /// Quantifier type.
+    pub quantifier_type: String,
+}
+
+/// Detailed information about a logical conflict/contradiction.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ConflictDetail {
+    /// Type of conflict.
+    pub conflict_type: ConflictType,
+    /// First conflicting condition (as text).
+    pub condition1: String,
+    /// Second conflicting condition (as text).
+    pub condition2: String,
+    /// Token position of first condition (if available).
+    pub token1_pos: Option<usize>,
+    /// Token position of second condition (if available).
+    pub token2_pos: Option<usize>,
+    /// Human-readable explanation.
+    pub explanation: String,
+}
+
+/// Types of logical conflicts.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ConflictType {
+    /// Direct polarity contradiction (P and NOT P).
+    Polarity,
+    /// Temporal inconsistency.
+    Temporal,
+    /// Modal inconsistency.
+    Modal,
+    /// Feature agreement failure.
+    FeatureAgreement,
+    /// Type mismatch.
+    TypeMismatch,
+    /// Cardinality violation.
+    Cardinality,
+}
+
+/// Status of Questions Under Discussion.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct QudStatus {
+    /// Number of unresolved questions.
+    pub unresolved_count: usize,
+    /// Currently active question (top of stack).
+    pub active_question: Option<String>,
+    /// Questions that were raised but not answered.
+    pub pending_questions: Vec<PendingQuestion>,
+}
+
+/// A pending (unresolved) question.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PendingQuestion {
+    /// Question text/description.
+    pub question: String,
+    /// Sentence where the question was raised.
+    pub raised_at: usize,
+    /// Whether it was explicitly asked or implicit.
+    pub is_explicit: bool,
+}
+
+// =============================================================================
+// Re-exports for LSP convenience
+// =============================================================================
+
+// Re-export for LSP convenience
+pub use canopy::kernel::trace::SelectionReason as SenseSelectionReason;
 
 /// Result of semantic analysis for a single sentence.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -32,6 +156,25 @@ pub struct SemanticAnalysis {
     pub coherence: Option<CoherenceClassification>,
     /// Presuppositions triggered by this sentence.
     pub presuppositions: Vec<TrackedPresupposition>,
+
+    // =========================================================================
+    // Enhanced diagnostic fields for LSP
+    // =========================================================================
+    /// Pronoun binding information for diagnostics.
+    #[serde(default)]
+    pub pronoun_bindings: Vec<PronounBindingInfo>,
+    /// Scope ambiguity information for diagnostics.
+    #[serde(default)]
+    pub scope_ambiguities: Vec<ScopeAmbiguityInfo>,
+    /// Detailed conflict information for contradiction diagnostics.
+    #[serde(default)]
+    pub conflict_details: Vec<ConflictDetail>,
+    /// Sense selection traces for hover/diagnostics.
+    #[serde(default)]
+    pub sense_traces: Vec<SenseSelectionTrace>,
+    /// Per-sentence DRS (logical form) if computed.
+    #[serde(default)]
+    pub sentence_drs: Option<Drs>,
 }
 
 impl SemanticAnalysis {
@@ -49,6 +192,12 @@ impl SemanticAnalysis {
             discourse_move: None,
             coherence: None,
             presuppositions: Vec::new(),
+            // New diagnostic fields
+            pronoun_bindings: Vec::new(),
+            scope_ambiguities: Vec::new(),
+            conflict_details: Vec::new(),
+            sense_traces: Vec::new(),
+            sentence_drs: None,
         }
     }
 
@@ -105,6 +254,41 @@ impl SemanticAnalysis {
     #[must_use]
     pub fn with_presuppositions(mut self, presuppositions: Vec<TrackedPresupposition>) -> Self {
         self.presuppositions = presuppositions;
+        self
+    }
+
+    /// Add pronoun binding information.
+    #[must_use]
+    pub fn with_pronoun_bindings(mut self, bindings: Vec<PronounBindingInfo>) -> Self {
+        self.pronoun_bindings = bindings;
+        self
+    }
+
+    /// Add scope ambiguity information.
+    #[must_use]
+    pub fn with_scope_ambiguities(mut self, ambiguities: Vec<ScopeAmbiguityInfo>) -> Self {
+        self.scope_ambiguities = ambiguities;
+        self
+    }
+
+    /// Add conflict details.
+    #[must_use]
+    pub fn with_conflict_details(mut self, details: Vec<ConflictDetail>) -> Self {
+        self.conflict_details = details;
+        self
+    }
+
+    /// Add sense selection traces.
+    #[must_use]
+    pub fn with_sense_traces(mut self, traces: Vec<SenseSelectionTrace>) -> Self {
+        self.sense_traces = traces;
+        self
+    }
+
+    /// Add sentence DRS.
+    #[must_use]
+    pub fn with_sentence_drs(mut self, drs: Drs) -> Self {
+        self.sentence_drs = Some(drs);
         self
     }
 

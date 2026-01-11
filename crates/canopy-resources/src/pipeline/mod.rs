@@ -7,8 +7,13 @@ mod analysis;
 mod config;
 mod orchestrator;
 mod trace_builder;
+pub mod tree;
 
-pub use analysis::{DocumentAnalysis, SemanticAnalysis, UnderspecifiedAnalysis};
+pub use analysis::{
+    BindingCandidate, ConflictDetail, ConflictType, DocumentAnalysis, PendingQuestion,
+    PronounBindingInfo, QuantifierInfo, QudStatus, ScopeAmbiguityInfo, SemanticAnalysis,
+    SenseSelectionReason, UnderspecifiedAnalysis,
+};
 pub use config::PipelineConfig;
 pub use orchestrator::CanopyPipeline;
 pub use trace_builder::TraceBuilder;

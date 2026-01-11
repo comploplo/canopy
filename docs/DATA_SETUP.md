@@ -28,15 +28,15 @@ After setup, your `data/` directory should look like:
 
 ```
 data/
-├── verbnet/
-│   └── vn-gl/           # VerbNet XML files (333 verb classes)
+├── verbnet/             # VerbNet XML files (333 verb classes)
 ├── wordnet/
 │   └── dict/            # WordNet database files
 ├── framenet/            # FrameNet XML (requires manual download)
 ├── propbank/            # PropBank frames
 ├── ud_english-ewt/
 │   └── UD_English-EWT/  # CoNLL-U treebank files
-├── canopy-lexicon/      # Built-in lexicon data
+├── lexicon/             # Closed-class word lists
+├── semlink/             # SemLink mappings (git submodule)
 └── test-corpus/         # Test data (Moby Dick)
 ```
 
@@ -112,8 +112,8 @@ Ensure the directory structure matches exactly what the code expects:
 
 ### Slow first analysis
 
-The first analysis takes ~900ms to load engines. Subsequent analyses are fast (~19ms/sentence).
+The first analysis takes ~750ms to load engines. Subsequent analyses are fast (30-200μs/sentence).
 
 ### Memory usage
 
-Loaded engines use ~50-100MB of RAM. This is expected for full semantic analysis.
+Loaded engines use ~350 MB of RAM. This is expected for full semantic analysis with multiple engines.

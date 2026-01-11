@@ -19,7 +19,7 @@ pub use event::{
     ModalForce, Path, PossessionType, Proposition, PsychType, SemanticNumber, State, Voice,
 };
 pub use syntax::{
-    Case, Definiteness, DepRel, Gender, Mood, MorphFeatures, MorphVoice, Number, Person, Tense,
-    UPos, VerbForm,
+    Case, Definiteness, DepRel, Gender, GerundUsage, Mood, MorphFeatures, MorphVoice, Number,
+    Person, Tense, UPos, VerbForm,
 };
 pub use theta::ThetaRole;

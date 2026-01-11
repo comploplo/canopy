@@ -1,0 +1,65 @@
+[package]
+name = "canopy-lsp"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "LSP server for Canopy semantic analysis"
+
+[[bin]]
+name = "canopy-lsp"
+path = "src/main.rs"
+
+[dependencies]
+# Core Canopy
+canopy = { path = "../canopy" }
+canopy-resources = { path = "../canopy-resources" }
+
+# LSP Infrastructure
+tower-lsp = "0.20"
+tokio = { workspace = true }
+async-trait = "0.1"
+
+# Concurrent data structures
+dashmap = "6.0"
+lru = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Logging
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+# Markdown parsing
+pulldown-cmark = "0.13"
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[package.metadata.cargo-machete]
+# These deps are used for future features or by handlers indirectly
+ignored = ["serde", "serde_json"]
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+# Relax pedantic lints for new crate - will improve incrementally
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+module_name_repetitions = "allow"
+too_many_lines = "allow"
+wildcard_imports = "allow"
+if_not_else = "allow"
+single_match_else = "allow"
+redundant_closure_for_method_calls = "allow"
+cast_precision_loss = "allow"
+cast_possible_truncation = "allow"
+cast_sign_loss = "allow"
+doc_markdown = "allow"
+must_use_candidate = "allow"
+match_same_arms = "allow"
+manual_let_else = "allow"

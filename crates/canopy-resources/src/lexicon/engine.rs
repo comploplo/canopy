@@ -421,6 +421,17 @@ impl LexiconEngine {
         self.is_word_class(word, WordClassType::Quantifiers)
     }
 
+    /// Check if a word is a verb particle (up, down, out, off, etc.)
+    ///
+    /// Particles are words that combine with verbs to form phrasal verbs
+    /// like "give up", "turn off", "look forward to".
+    ///
+    /// # Errors
+    /// Returns an error if word analysis fails.
+    pub fn is_particle(&self, word: &str) -> EngineResult<bool> {
+        self.is_word_class(word, WordClassType::Particles)
+    }
+
     /// Helper: check if a word belongs to a specific word class type
     fn is_word_class(&self, word: &str, class_type: WordClassType) -> EngineResult<bool> {
         let analysis = self.analyze_word(word)?;
@@ -1328,6 +1339,25 @@ mod tests {
         assert!(engine.is_quantifier("every").unwrap());
         assert!(engine.is_quantifier("many").unwrap());
         assert!(!engine.is_quantifier("run").unwrap());
+    }
+
+    #[test]
+    fn test_is_particle() {
+        let mut engine = LexiconEngine::new();
+        if engine.load_data().is_err() {
+            eprintln!("Skipping: Lexicon data not available");
+            return;
+        }
+
+        // Common verb particles
+        assert!(engine.is_particle("up").unwrap());
+        assert!(engine.is_particle("down").unwrap());
+        assert!(engine.is_particle("out").unwrap());
+        assert!(engine.is_particle("off").unwrap());
+        assert!(engine.is_particle("away").unwrap());
+        // Not particles
+        assert!(!engine.is_particle("run").unwrap());
+        assert!(!engine.is_particle("the").unwrap());
     }
 
     #[test]

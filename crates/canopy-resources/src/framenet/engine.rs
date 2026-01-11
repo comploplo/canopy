@@ -12,9 +12,11 @@
 use super::types::{Frame, FrameNetAnalysis, FrameNetConfig, FrameNetStats, LexicalUnit};
 use crate::engine::{
     count_to_f32, i32_count_to_f32, BaseEngine, CacheKeyFormat, CacheableData, CachedEngine,
-    DataInfo, DataLoader, EngineConfigurable, EngineCore, EngineError, EngineResult, EngineStats,
-    PerformanceMetrics, SemanticEngine, SemanticResult, StatisticsProvider, XmlParser,
+    ConfidenceCalibration, DataInfo, DataLoader, EngineConfigurable, EngineCore, EngineError,
+    EngineResult, EngineStats, LemmaQuery, LemmaQueryable, PerformanceMetrics, ResourceSource,
+    SemanticEngine, SemanticEvidence, SemanticResult, StatisticsProvider, XmlParser,
 };
+use canopy::core::{ThetaRole, UPos};
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -451,6 +453,28 @@ impl DataLoader for FrameNetEngine {
 }
 
 impl FrameNetEngine {
+    /// Check if a `FrameNet` lexical unit POS matches a query POS.
+    fn pos_matches(lu_pos: &str, query_pos: UPos) -> bool {
+        let lu_lower = lu_pos.to_lowercase();
+        match query_pos {
+            UPos::Verb => lu_lower.starts_with('v'),
+            UPos::Noun | UPos::Propn => lu_lower.starts_with('n'),
+            UPos::Adj => lu_lower.starts_with('a'),
+            _ => false,
+        }
+    }
+
+    /// Calculate confidence for a lexical unit based on its status.
+    fn calculate_lu_confidence(lu: &LexicalUnit) -> f32 {
+        if lu.status.contains("Finished") || lu.status.contains("FN1_Sent") {
+            0.9
+        } else if lu.status.contains("Created") {
+            0.7
+        } else {
+            0.6
+        }
+    }
+
     /// Load frames from directory (using parallel processing)
     fn load_frames<P: AsRef<Path>>(&mut self, path: P) -> EngineResult<()> {
         let parser = XmlParser::new();
@@ -682,6 +706,61 @@ impl StatisticsProvider for FrameNetEngine {
     }
 }
 
+/// `LemmaQueryable` implementation for lemma-based semantic queries.
+impl LemmaQueryable for FrameNetEngine {
+    fn query_by_lemma(&self, query: &LemmaQuery) -> EngineResult<Vec<SemanticEvidence>> {
+        // FrameNet supports verbs, nouns, and adjectives
+        if !query.is_verb() && !query.is_noun() && !query.is_adj() {
+            return Ok(vec![]);
+        }
+
+        // Find lexical units by lemma
+        let all_lus = self.find_lexical_units(&query.lemma);
+
+        // Filter by POS to match query
+        let matching_lus: Vec<_> = all_lus
+            .into_iter()
+            .filter(|lu| Self::pos_matches(&lu.pos, query.pos))
+            .collect();
+
+        if matching_lus.is_empty() {
+            return Ok(vec![]);
+        }
+
+        let calibration = ConfidenceCalibration::framenet();
+
+        // Convert each lexical unit to SemanticEvidence
+        Ok(matching_lus
+            .into_iter()
+            .map(|lu| {
+                // Get frame elements as theta roles
+                let theta_roles = self
+                    .get_frame(&lu.frame_id)
+                    .map(|frame| {
+                        frame
+                            .frame_elements
+                            .iter()
+                            .filter(|fe| matches!(fe.core_type, super::types::CoreType::Core))
+                            .filter_map(|fe| ThetaRole::parse(&fe.name))
+                            .collect::<Vec<_>>()
+                    })
+                    .unwrap_or_default();
+
+                // Calculate raw confidence based on LU quality
+                let raw_confidence = Self::calculate_lu_confidence(&lu);
+
+                SemanticEvidence::new(ResourceSource::FrameNet, lu.frame_name.clone())
+                    .with_confidence(calibration.calibrate(raw_confidence))
+                    .with_roles(theta_roles)
+            })
+            .collect())
+    }
+
+    fn resource_source(&self) -> ResourceSource {
+        ResourceSource::FrameNet
+    }
+}
+
 impl Default for FrameNetEngine {
     fn default() -> Self {
         Self::new().unwrap_or_else(|_| {
@@ -885,5 +964,59 @@ mod tests {
         };
         let confidence = engine.calculate_confidence(&input, &analysis);
         assert!(confidence > 0.9);
+    }
+
+    #[test]
+    fn test_pos_matches_verb() {
+        assert!(FrameNetEngine::pos_matches("V", UPos::Verb));
+        assert!(FrameNetEngine::pos_matches("v", UPos::Verb));
+        assert!(!FrameNetEngine::pos_matches("N", UPos::Verb));
+        assert!(!FrameNetEngine::pos_matches("A", UPos::Verb));
+    }
+
+    #[test]
+    fn test_pos_matches_noun() {
+        assert!(FrameNetEngine::pos_matches("N", UPos::Noun));
+        assert!(FrameNetEngine::pos_matches("n", UPos::Noun));
+        assert!(FrameNetEngine::pos_matches("N", UPos::Propn));
+        assert!(!FrameNetEngine::pos_matches("V", UPos::Noun));
+    }
+
+    #[test]
+    fn test_pos_matches_adjective() {
+        assert!(FrameNetEngine::pos_matches("A", UPos::Adj));
+        assert!(FrameNetEngine::pos_matches("a", UPos::Adj));
+        assert!(!FrameNetEngine::pos_matches("V", UPos::Adj));
+        assert!(!FrameNetEngine::pos_matches("N", UPos::Adj));
+    }
+
+    #[test]
+    fn test_calculate_lu_confidence() {
+        let finished_lu = LexicalUnit {
+            id: "1".to_string(),
+            name: "test.v".to_string(),
+            pos: "V".to_string(),
+            status: "Finished".to_string(),
+            frame_id: "1".to_string(),
+            frame_name: "Test".to_string(),
+            total_annotated: 10,
+            definition: "test".to_string(),
+            lexemes: vec![],
+            valences: vec![],
+            subcategorization: vec![],
+        };
+        assert!((FrameNetEngine::calculate_lu_confidence(&finished_lu) - 0.9).abs() < f32::EPSILON);
+
+        let created_lu = LexicalUnit {
+            status: "Created".to_string(),
+            ..finished_lu.clone()
+        };
+        assert!((FrameNetEngine::calculate_lu_confidence(&created_lu) - 0.7).abs() < f32::EPSILON);
+
+        let other_lu = LexicalUnit {
+            status: "Other".to_string(),
+            ..finished_lu
+        };
+        assert!((FrameNetEngine::calculate_lu_confidence(&other_lu) - 0.6).abs() < f32::EPSILON);
     }
 }

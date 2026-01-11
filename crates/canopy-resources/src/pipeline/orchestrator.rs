@@ -6,7 +6,7 @@ use super::analysis::{DocumentAnalysis, SemanticAnalysis, UnderspecifiedAnalysis
 use super::config::PipelineConfig;
 use super::trace_builder::TraceBuilder;
 use crate::engine::SharedEngines;
-use crate::providers::{VerbNetRoleProvider, VerbNetSenseProvider};
+use crate::providers::{ArgumentBinder, BinderConfig, DecomposerConfig, PredicateDecomposer};
 use crate::syntax::{TreebankConfig, TreebankSyntaxProvider};
 use crate::tokenizer::{SimpleTokenizer, Tokenizer};
 use canopy::kernel::discourse::{DiscourseConfig, DiscourseContext, UnderspecDrs};
@@ -29,9 +29,9 @@ pub struct CanopyPipeline {
     /// Syntax provider for parsing.
     syntax_provider: TreebankSyntaxProvider,
     /// Sense provider for predicate decomposition.
-    sense_provider: VerbNetSenseProvider,
+    sense_provider: PredicateDecomposer,
     /// Role provider for theta role assignment.
-    role_provider: VerbNetRoleProvider,
+    role_provider: ArgumentBinder,
     /// Event composer.
     event_composer: EventComposer,
     /// Pipeline configuration.
@@ -61,22 +61,13 @@ impl CanopyPipeline {
         let syntax_provider =
             TreebankSyntaxProvider::with_shared_engines(TreebankConfig::default(), &engines)?;
 
-        // Use shared VerbNet engine for sense and role providers
-        let sense_provider = if let Some(ref verbnet) = engines.verbnet {
-            VerbNetSenseProvider::with_engine(verbnet.clone())
-        } else {
-            VerbNetSenseProvider::new().map_err(|e| {
-                CanopyError::data_load(format!("Failed to create sense provider: {e}"))
-            })?
-        };
+        // Use multi-engine PredicateDecomposer for sense decomposition
+        let sense_provider = PredicateDecomposer::new(engines.clone(), DecomposerConfig::default())
+            .map_err(|e| CanopyError::data_load(format!("Failed to create sense provider: {e}")))?;
 
-        let role_provider = if let Some(ref verbnet) = engines.verbnet {
-            VerbNetRoleProvider::with_engine(verbnet.clone())
-        } else {
-            VerbNetRoleProvider::new().map_err(|e| {
-                CanopyError::data_load(format!("Failed to create role provider: {e}"))
-            })?
-        };
+        // Use multi-engine ArgumentBinder for role binding
+        let role_provider = ArgumentBinder::new(engines, BinderConfig::default())
+            .map_err(|e| CanopyError::data_load(format!("Failed to create role provider: {e}")))?;
 
         let event_composer = EventComposer::new(EventComposerConfig::default());
 
@@ -519,11 +510,21 @@ impl CanopyPipeline {
         for pred in syntax.predicates() {
             let decomps = self.sense_provider.decompose_predicate(syntax, pred.id)?;
 
-            // Filter by confidence threshold and tag with source predicate
-            for decomp in decomps {
-                if decomp.confidence >= self.config.decomposition_confidence_threshold {
-                    all_decomps.push(decomp.with_token_id(pred.id));
-                }
+            // Filter by confidence threshold
+            let filtered: Vec<_> = decomps
+                .into_iter()
+                .filter(|d| d.confidence >= self.config.decomposition_confidence_threshold)
+                .collect();
+
+            // Apply per-predicate limit
+            let limited: Vec<_> = match self.config.max_decompositions_per_predicate {
+                Some(max) => filtered.into_iter().take(max).collect(),
+                None => filtered,
+            };
+
+            // Tag with source predicate and add to results
+            for decomp in limited {
+                all_decomps.push(decomp.with_token_id(pred.id));
             }
         }
 

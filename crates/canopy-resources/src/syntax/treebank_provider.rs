@@ -6,13 +6,18 @@
 //! Pattern matching is always-on: verbs are automatically matched against
 //! VerbNet-derived dependency patterns for enhanced theta role hints.
 
+use super::gerund::GerundClassifier;
+use super::mwe::MweDetector;
 use super::pattern_matcher::{extract_patterns_from_syntax, PatternMatcher};
 use super::pattern_types::SemanticSignature;
+use super::phrasal_verb::PhrasalVerbDetector;
 use super::resource_tagger::ResourceBackedTagger;
 use super::shared::{parse_deprel, parse_upos};
 use crate::engine::{ConlluParser, ConlluSentence, SharedEngines};
 use crate::tokenizer::{SimpleTokenizer, Tokenizer};
-use canopy::runtime::{AnnotatedSyntax, AnnotatedToken, SyntaxProvider, TokenId};
+use canopy::runtime::{
+    AnnotatedSyntax, AnnotatedToken, MweInfo, MweType, PhrasalVerb, SyntaxProvider, TokenId,
+};
 use canopy::{CanopyError, MorphFeatures, UPos};
 use std::collections::HashMap;
 use std::sync::Mutex;
@@ -48,8 +53,6 @@ impl std::fmt::Debug for TreebankSyntaxProvider {
 pub struct TreebankConfig {
     /// Maximum number of patterns to index.
     pub max_patterns: usize,
-    /// Whether to use exact matching only.
-    pub exact_match_only: bool,
     /// Cache size for pattern matcher.
     pub pattern_cache_size: usize,
 }
@@ -58,7 +61,6 @@ impl Default for TreebankConfig {
     fn default() -> Self {
         Self {
             max_patterns: 20000,
-            exact_match_only: false,
             pattern_cache_size: 1000,
         }
     }
@@ -209,6 +211,56 @@ impl TreebankSyntaxProvider {
                 let _pattern = matcher.match_pattern(&signature);
                 // Pattern information is stored in the matcher cache;
                 // downstream semantic processing can query it via get_pattern()
+            }
+        }
+    }
+
+    /// Detect and annotate multi-word expressions in syntax.
+    ///
+    /// Populates `phrasal_verbs`, `mwes`, and `gerund_usage` fields based on
+    /// dependency relations (compound:prt, compound, flat, fixed).
+    #[allow(clippy::unused_self)] // Method pattern for future configuration
+    fn annotate_mwes(&self, syntax: &mut AnnotatedSyntax) {
+        // Detect phrasal verbs (verb + particle constructions)
+        let pv_detector = PhrasalVerbDetector::new();
+        for pred in syntax.predicates().map(|t| t.id).collect::<Vec<_>>() {
+            if pv_detector.has_particle(syntax, pred) {
+                let particles = pv_detector.find_particles(syntax, pred);
+                let lemma = pv_detector.phrasal_lemma(syntax, pred);
+                let span = pv_detector.phrasal_span(syntax, pred).unwrap_or((0, 0));
+
+                syntax.phrasal_verbs.push(PhrasalVerb {
+                    verb_id: pred,
+                    particle_ids: particles,
+                    combined_lemma: lemma,
+                    span,
+                });
+            }
+        }
+
+        // Detect MWEs (compounds, flat names, fixed expressions)
+        let mwe_detector = MweDetector::new();
+        for mwe in mwe_detector.find_mwes(syntax) {
+            let mwe_type = match mwe.mwe_type {
+                super::mwe::MweType::CompoundNoun => MweType::CompoundNoun,
+                super::mwe::MweType::FlatName => MweType::FlatName,
+                super::mwe::MweType::FixedExpression => MweType::FixedExpression,
+            };
+
+            syntax.mwes.push(MweInfo {
+                mwe_type,
+                head_id: mwe.head_token,
+                token_ids: mwe.tokens,
+                combined_lemma: mwe.combined_lemma,
+                span: mwe.span,
+            });
+        }
+
+        // Classify gerund usage
+        let classifier = GerundClassifier::new();
+        for (token_id, usage) in classifier.classify_all(syntax) {
+            if let Some(token) = syntax.tokens.get_mut(token_id.index()) {
+                token.feats.gerund_usage = Some(usage);
             }
         }
     }
@@ -419,8 +471,11 @@ impl SyntaxProvider for TreebankSyntaxProvider {
             self.tagger.parse(text, &tokens)
         };
 
-        // Always enhance with pattern matching for verbs
+        // Enhance with pattern matching for verbs
         self.enhance_with_patterns(&mut syntax);
+
+        // Detect and annotate multi-word expressions
+        self.annotate_mwes(&mut syntax);
 
         Ok(syntax)
     }
@@ -512,5 +567,76 @@ mod tests {
         assert_eq!(morph.number, Some(canopy::core::Number::Singular));
         assert_eq!(morph.person, Some(canopy::core::Person::Third));
         assert_eq!(morph.tense, Some(canopy::core::Tense::Present));
+    }
+
+    #[test]
+    fn test_phrasal_verb_annotation() {
+        // Test that annotate_mwes correctly detects phrasal verbs
+        // when compound:prt relation is present
+        use canopy::core::{DepRel, MorphFeatures};
+
+        let mut syntax = AnnotatedSyntax::new(
+            "He gave up.".to_string(),
+            vec![
+                AnnotatedToken {
+                    id: TokenId::new(0),
+                    form: "He".to_string(),
+                    lemma: "he".to_string(),
+                    upos: UPos::Pron,
+                    xpos: None,
+                    feats: MorphFeatures::default(),
+                    head: Some(TokenId::new(1)),
+                    deprel: DepRel::Nsubj,
+                    span: (0, 2),
+                },
+                AnnotatedToken {
+                    id: TokenId::new(1),
+                    form: "gave".to_string(),
+                    lemma: "give".to_string(),
+                    upos: UPos::Verb,
+                    xpos: None,
+                    feats: MorphFeatures::default(),
+                    head: None,
+                    deprel: DepRel::Root,
+                    span: (3, 7),
+                },
+                AnnotatedToken {
+                    id: TokenId::new(2),
+                    form: "up".to_string(),
+                    lemma: "up".to_string(),
+                    upos: UPos::Part,
+                    xpos: None,
+                    feats: MorphFeatures::default(),
+                    head: Some(TokenId::new(1)),
+                    deprel: DepRel::CompoundPrt, // Key: particle relation
+                    span: (8, 10),
+                },
+            ],
+        );
+
+        // Manually run annotate_mwes (simulating what parse() does)
+        let pv_detector = super::super::phrasal_verb::PhrasalVerbDetector::new();
+        for pred in syntax.predicates().map(|t| t.id).collect::<Vec<_>>() {
+            if pv_detector.has_particle(&syntax, pred) {
+                let particles = pv_detector.find_particles(&syntax, pred);
+                let lemma = pv_detector.phrasal_lemma(&syntax, pred);
+                let span = pv_detector.phrasal_span(&syntax, pred).unwrap_or((0, 0));
+
+                syntax.phrasal_verbs.push(PhrasalVerb {
+                    verb_id: pred,
+                    particle_ids: particles,
+                    combined_lemma: lemma,
+                    span,
+                });
+            }
+        }
+
+        // Verify phrasal verb was detected
+        assert_eq!(syntax.phrasal_verbs.len(), 1);
+        assert_eq!(syntax.phrasal_verbs[0].combined_lemma, "give_up");
+        assert_eq!(syntax.phrasal_verbs[0].verb_id, TokenId::new(1));
+
+        // Verify get_predicate_lemma returns phrasal form
+        assert_eq!(syntax.get_predicate_lemma(TokenId::new(1)), Some("give_up"));
     }
 }

@@ -13,7 +13,7 @@ pub mod ir;
 pub mod providers;
 
 pub use ids::{FrameId, NodeId, SenseId, TokenId};
-pub use ir::{AnnotatedSyntax, AnnotatedToken, SyntaxTree};
+pub use ir::{AnnotatedSyntax, AnnotatedToken, MweInfo, MweType, PhrasalVerb, SyntaxTree};
 pub use providers::{
     CanopyProvider, DecompositionSource, DiscourseCueProvider, DiscourseRelation,
     PredicateDecomposition, RoleBinding, RoleProvider, RoleSource, SenseInfo, SenseProvider,

@@ -10,7 +10,7 @@ expression: analysis
     "events": [
       {
         "predicate": "give",
-        "little_v": "Do",
+        "little_v": "Go",
         "roles": [
           "Agent",
           "Patient",

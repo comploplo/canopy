@@ -109,6 +109,24 @@ Efficient ambiguity handling without exponential blowup:
 - **Referential Ambiguity** — Ranked pronoun-antecedent candidates
 - **Multiple Disambiguators** — Surprisal, confidence, entropy-based selection
 
+### Language Server Protocol (LSP)
+
+IDE integration via `canopy-lsp` crate:
+
+- **Semantic Diagnostics** — Contradictions, ambiguity, binding violations, scope conflicts
+- **Rich Hover** — Theta roles, event structure, DRS logical form, sense derivation
+- **Code Actions** — Quick-fixes for disambiguation, explanation of constraints
+- **Semantic Tokens** — Syntax highlighting based on semantic analysis
+
+### Tree Visualization
+
+Pretty-printed semantic trees via `ptree`:
+
+- **Sentence Trees** — Syntax, events, decompositions, role bindings
+- **Dependency Trees** — Hierarchical parse structure
+- **Document Trees** — Multi-sentence with coherence relations
+- **DRS Box Notation** — Classic discourse representation boxes
+
 ### Surprisal Processing
 
 Information-theoretic analysis following psycholinguistics research:
@@ -136,12 +154,13 @@ The `canopy` crate defines abstract provider traits with no knowledge of data fo
 │                              CANOPY ARCHITECTURE                            │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│   ┌─────────────────────────────────────────────────────────────────────┐   │
-│   │                         canopy-cli                                  │   │
-│   │                   Command-line interface                            │   │
-│   └─────────────────────────────────────────────────────────────────────┘   │
-│                                    │                                        │
-│                                    ▼                                        │
+│   ┌──────────────────────────────┐  ┌────────────────────────────────────┐  │
+│   │          canopy-cli          │  │            canopy-lsp              │  │
+│   │    Command-line interface    │  │   Language Server Protocol (IDE)   │  │
+│   └──────────────────────────────┘  └────────────────────────────────────┘  │
+│                          │                           │                      │
+│                          └───────────┬───────────────┘                      │
+│                                      ▼                                      │
 │   ┌─────────────────────────────────────────────────────────────────────┐   │
 │   │                        canopy-resources                             │   │
 │   │                                                                     │   │
@@ -154,6 +173,10 @@ The `canopy` crate defines abstract provider traits with no knowledge of data fo
 │   │   │   Pattern Matcher   │  │       Engine Infrastructure        │   │   │
 │   │   │  UD treebank-aware  │  │  Binary cache · O(1) lookup · LRU  │   │   │
 │   │   └─────────────────────┘  └────────────────────────────────────┘   │   │
+│   │                                                                     │   │
+│   │   ┌─────────────────────┐                                           │   │
+│   │   │   Tree Visualizer   │  Pretty-printed semantic trees (ptree)   │   │
+│   │   └─────────────────────┘                                           │   │
 │   └─────────────────────────────────────────────────────────────────────┘   │
 │                                    │ implements traits                      │
 │                                    ▼                                        │
@@ -166,7 +189,10 @@ The `canopy` crate defines abstract provider traits with no knowledge of data fo
 │   │   │  Anaphora   │  │ Composition │  │ Beam search │  │ Semantics │  │   │
 │   │   └─────────────┘  └─────────────┘  └─────────────┘  └───────────┘  │   │
 │   │                                                                     │   │
-│   │   Core: ThetaRole · DepRel · UPos · CanopyError · Provider traits   │   │
+│   │   ┌─────────────┐  ┌─────────────────────────────────────────────┐  │   │
+│   │   │    Logic    │  │ Core: ThetaRole · DepRel · UPos · Traits    │  │   │
+│   │   │ Reasoning   │  │       Provider interfaces · CanopyError     │  │   │
+│   │   └─────────────┘  └─────────────────────────────────────────────┘  │   │
 │   └─────────────────────────────────────────────────────────────────────┘   │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -174,13 +200,14 @@ The `canopy` crate defines abstract provider traits with no knowledge of data fo
 
 ## Crates
 
-| Crate              | Description                        | Purpose                  |
-| ------------------ | ---------------------------------- | ------------------------ |
-| `canopy`           | Core types, traits, kernel modules | Abstract semantic layer  |
-| `canopy-resources` | 5 engines + pattern matcher        | Concrete implementations |
-| `canopy-cli`       | Command-line interface             | User interaction         |
+| Crate              | Lines   | Description                        |
+| ------------------ | ------- | ---------------------------------- |
+| `canopy`           | ~24,000 | Core types, traits, kernel modules |
+| `canopy-resources` | ~28,000 | 5 engines + pipeline + tree viz    |
+| `canopy-lsp`       | ~4,000  | Language Server Protocol           |
+| `canopy-cli`       | ~600    | Command-line interface             |
 
-**~45,000 lines of Rust** across 3 crates
+**~60,000 lines of Rust** across 4 crates
 
 ## Performance
 
