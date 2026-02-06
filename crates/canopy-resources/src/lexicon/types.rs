@@ -273,6 +273,14 @@ pub struct LexiconWord {
     pub frequency: Option<u32>,
     /// Semantic or pragmatic context
     pub context: Option<String>,
+    /// Grammatical person (for pronouns: "1", "2", "3")
+    pub person: Option<String>,
+    /// Grammatical number (for pronouns: "singular", "plural")
+    pub number: Option<String>,
+    /// Grammatical case (for pronouns: "nominative", "accusative", "genitive", "reflexive")
+    pub case: Option<String>,
+    /// Grammatical gender (for pronouns: "masculine", "feminine", "neuter")
+    pub gender: Option<String>,
 }
 
 impl LexiconWord {
@@ -286,6 +294,10 @@ impl LexiconWord {
             confidence: 1.0,
             frequency: None,
             context: None,
+            person: None,
+            number: None,
+            case: None,
+            gender: None,
         }
     }
 

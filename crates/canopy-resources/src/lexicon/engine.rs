@@ -275,6 +275,8 @@ pub struct LexiconEngine {
     lexicon_config: LexiconConfig,
     /// Is data loaded flag
     is_loaded: bool,
+    /// Data-driven pronoun features, built from XML at load time
+    pronoun_features: std::collections::HashMap<String, PronounFeatures>,
 }
 
 impl LexiconEngine {
@@ -295,6 +297,7 @@ impl LexiconEngine {
             database: Arc::new(LexiconDatabase::new()),
             lexicon_config,
             is_loaded: false,
+            pronoun_features: std::collections::HashMap::new(),
         }
     }
 
@@ -328,14 +331,74 @@ impl LexiconEngine {
 
         self.database = Arc::new(resource.database);
         self.is_loaded = true;
+        self.pronoun_features = Self::build_pronoun_features(&self.database);
 
         let stats = self.database.stats();
         info!(
-            "Lexicon database loaded with {} word classes, {} words, {} patterns",
-            stats.total_word_classes, stats.total_words, stats.total_patterns
+            "Lexicon database loaded with {} word classes, {} words, {} patterns ({} pronoun features)",
+            stats.total_word_classes, stats.total_words, stats.total_patterns,
+            self.pronoun_features.len()
         );
 
         Ok(())
+    }
+
+    /// Build pronoun features map from loaded XML data.
+    fn build_pronoun_features(
+        database: &LexiconDatabase,
+    ) -> std::collections::HashMap<String, PronounFeatures> {
+        let mut map = std::collections::HashMap::new();
+
+        for wc in &database.word_classes {
+            if wc.word_class_type != WordClassType::Pronouns {
+                continue;
+            }
+
+            for word in &wc.words {
+                let person = word.person.as_deref().and_then(|p| match p {
+                    "1" => Some(Person::First),
+                    "2" => Some(Person::Second),
+                    "3" => Some(Person::Third),
+                    _ => None,
+                });
+                let number = word.number.as_deref().and_then(|n| match n {
+                    "singular" => Some(PronounNumber::Singular),
+                    "plural" => Some(PronounNumber::Plural),
+                    _ => None,
+                });
+                let case = word.case.as_deref().and_then(|c| match c {
+                    "nominative" => Some(PronounCase::Nominative),
+                    "accusative" => Some(PronounCase::Accusative),
+                    "genitive" => Some(PronounCase::Genitive),
+                    "reflexive" => Some(PronounCase::Reflexive),
+                    _ => None,
+                });
+                let gender = word.gender.as_deref().map(|g| match g {
+                    "masculine" => PronounGender::Masculine,
+                    "feminine" => PronounGender::Feminine,
+                    "neuter" => PronounGender::Neuter,
+                    _ => PronounGender::Unknown,
+                });
+
+                let features = PronounFeatures {
+                    person,
+                    number,
+                    gender,
+                    case,
+                };
+
+                // Only insert if we have at least one feature
+                if features.person.is_some()
+                    || features.number.is_some()
+                    || features.gender.is_some()
+                    || features.case.is_some()
+                {
+                    map.insert(word.word.to_lowercase(), features);
+                }
+            }
+        }
+
+        map
     }
 
     /// Check if a word is a stop word
@@ -453,7 +516,13 @@ impl LexiconEngine {
         if !self.is_pronoun(word)? {
             return Ok(None);
         }
-        Ok(Some(lookup_pronoun_features(&word.to_lowercase())))
+        let lower = word.to_lowercase();
+        // Use data-driven features from XML, fall back to hardcoded for unloaded state
+        if let Some(features) = self.pronoun_features.get(&lower) {
+            Ok(Some(features.clone()))
+        } else {
+            Ok(Some(lookup_pronoun_features(&lower)))
+        }
     }
 
     /// Get the discourse relation for a word if it's a discourse marker

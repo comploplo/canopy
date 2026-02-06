@@ -508,14 +508,6 @@ impl StatisticsProvider for WordNetEngine {
     }
 }
 
-impl Default for WordNetEngine {
-    fn default() -> Self {
-        Self::new().unwrap_or_else(|_| {
-            panic!("WordNet engine requires real data - cannot create default instance without WordNet files")
-        })
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

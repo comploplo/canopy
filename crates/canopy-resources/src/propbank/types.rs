@@ -74,13 +74,18 @@ impl SemanticRole {
         }
     }
 
-    /// Get canonical theta role mapping for compatibility with other engines
+    /// Get canonical theta role mapping for compatibility with other engines.
+    ///
+    /// Note: ARG2 (`IndirectObject`) is verb-specific and cannot be mapped without
+    /// the argument description from the roleset. Use `PropBankArgument::to_theta_role()`
+    /// for description-aware mapping.
     #[must_use]
     pub fn to_theta_role(&self) -> Option<ThetaRole> {
         match self {
             Self::Agent => Some(ThetaRole::Agent),
             Self::Patient => Some(ThetaRole::Patient),
-            Self::IndirectObject => Some(ThetaRole::Recipient),
+            // IndirectObject (ARG2) is verb-specific — falls through to _ => None.
+            // Use PropBankArgument::to_theta_role() for description-aware mapping.
             Self::StartingPoint => Some(ThetaRole::Source),
             Self::EndingPoint => Some(ThetaRole::Goal),
             Self::Modifier(ArgumentModifier::Location) => Some(ThetaRole::Location),
@@ -235,6 +240,48 @@ impl PropBankArgument {
                 | SemanticRole::EndingPoint
                 | SemanticRole::Additional
         )
+    }
+
+    /// Get theta role using both the semantic role and the argument description.
+    ///
+    /// For ARG2 (`IndirectObject`), the theta role depends on the verb's roleset.
+    /// This method infers the role from the description field (e.g., "instrument",
+    /// "recipient", "beneficiary", "attribute").
+    #[must_use]
+    pub fn to_theta_role(&self) -> Option<ThetaRole> {
+        if let SemanticRole::IndirectObject = &self.role {
+            return Some(Self::infer_arg2_theta_role(&self.description));
+        }
+        self.role.to_theta_role()
+    }
+
+    /// Infer theta role for ARG2 from the roleset description.
+    fn infer_arg2_theta_role(description: &str) -> ThetaRole {
+        let desc = description.to_lowercase();
+        if desc.contains("recipient") || desc.contains("receiver") || desc.contains("beneficiary") {
+            ThetaRole::Recipient
+        } else if desc.contains("instrument") || desc.contains("tool") || desc.contains("means") {
+            ThetaRole::Instrument
+        } else if desc.contains("location") || desc.contains("place") || desc.contains("where") {
+            ThetaRole::Location
+        } else if desc.contains("goal") || desc.contains("destination") || desc.contains("end") {
+            ThetaRole::Goal
+        } else if desc.contains("source") || desc.contains("origin") || desc.contains("start") {
+            ThetaRole::Source
+        } else if desc.contains("manner") || desc.contains("way") || desc.contains("how") {
+            ThetaRole::Manner
+        } else if desc.contains("cause") || desc.contains("reason") {
+            ThetaRole::Cause
+        } else if desc.contains("experiencer") {
+            ThetaRole::Experiencer
+        } else if desc.contains("theme") || desc.contains("topic") || desc.contains("content") {
+            ThetaRole::Theme
+        } else if desc.contains("patient") || desc.contains("affected") {
+            ThetaRole::Patient
+        } else {
+            // Default fallback: attribute, extent, amount, and unrecognized descriptions
+            ThetaRole::Theme
+        }
     }
 
     /// Check if this is a modifier argument (ARGM-*)
@@ -393,7 +440,7 @@ impl PropBankAnalysis {
         let theta_roles = predicate
             .arguments
             .iter()
-            .filter_map(|arg| arg.role.to_theta_role())
+            .filter_map(PropBankArgument::to_theta_role)
             .collect();
 
         Self {
@@ -564,10 +611,8 @@ mod tests {
             SemanticRole::Patient.to_theta_role(),
             Some(ThetaRole::Patient)
         );
-        assert_eq!(
-            SemanticRole::IndirectObject.to_theta_role(),
-            Some(ThetaRole::Recipient)
-        );
+        // ARG2 is verb-specific; SemanticRole::to_theta_role() returns None
+        assert_eq!(SemanticRole::IndirectObject.to_theta_role(), None);
         assert_eq!(
             SemanticRole::StartingPoint.to_theta_role(),
             Some(ThetaRole::Source)
@@ -600,6 +645,27 @@ mod tests {
             SemanticRole::Modifier(ArgumentModifier::Negation).to_theta_role(),
             None
         );
+    }
+
+    #[test]
+    fn test_propbank_argument_to_theta_role_uses_description() {
+        // ARG2 with "recipient" description -> Recipient
+        let arg = PropBankArgument::new(SemanticRole::IndirectObject, "recipient".to_string(), 0.9);
+        assert_eq!(arg.to_theta_role(), Some(ThetaRole::Recipient));
+
+        // ARG2 with "instrument" description -> Instrument
+        let arg =
+            PropBankArgument::new(SemanticRole::IndirectObject, "instrument".to_string(), 0.9);
+        assert_eq!(arg.to_theta_role(), Some(ThetaRole::Instrument));
+
+        // ARG2 with "beneficiary" description -> Recipient
+        let arg =
+            PropBankArgument::new(SemanticRole::IndirectObject, "beneficiary".to_string(), 0.9);
+        assert_eq!(arg.to_theta_role(), Some(ThetaRole::Recipient));
+
+        // ARG0 still works as before (Agent)
+        let arg = PropBankArgument::new(SemanticRole::Agent, "agent".to_string(), 0.9);
+        assert_eq!(arg.to_theta_role(), Some(ThetaRole::Agent));
     }
 
     // === ArgumentModifier Tests ===

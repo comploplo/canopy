@@ -9,6 +9,7 @@ use lru::LruCache;
 use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
 use std::num::NonZeroUsize;
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Mutex;
 use std::time::Instant;
 
@@ -24,8 +25,9 @@ impl SentenceHash {
     }
 }
 
-/// Cached analysis result.
+/// Cached analysis result with the original text for collision verification.
 struct CachedAnalysis {
+    text: String,
     analysis: SemanticAnalysis,
     #[allow(dead_code)]
     computed_at: Instant,
@@ -36,9 +38,9 @@ pub struct AnalysisCache {
     /// Per-sentence analysis cache.
     cache: Mutex<LruCache<SentenceHash, CachedAnalysis>>,
     /// Cache hit counter.
-    hits: Mutex<u64>,
+    hits: AtomicU64,
     /// Cache miss counter.
-    misses: Mutex<u64>,
+    misses: AtomicU64,
 }
 
 impl Default for AnalysisCache {
@@ -55,8 +57,8 @@ impl AnalysisCache {
             cache: Mutex::new(LruCache::new(
                 NonZeroUsize::new(capacity).unwrap_or(NonZeroUsize::new(1).unwrap()),
             )),
-            hits: Mutex::new(0),
-            misses: Mutex::new(0),
+            hits: AtomicU64::new(0),
+            misses: AtomicU64::new(0),
         }
     }
 
@@ -69,24 +71,25 @@ impl AnalysisCache {
         let hash = SentenceHash::from_text(sentence);
 
         // Check cache first
-        {
-            let mut cache = self.cache.lock().unwrap();
+        if let Ok(mut cache) = self.cache.lock() {
             if let Some(cached) = cache.get(&hash) {
-                *self.hits.lock().unwrap() += 1;
-                return Ok(cached.analysis.clone());
+                if cached.text == sentence {
+                    self.hits.fetch_add(1, Ordering::Relaxed);
+                    return Ok(cached.analysis.clone());
+                }
             }
         }
 
         // Cache miss - compute analysis
-        *self.misses.lock().unwrap() += 1;
+        self.misses.fetch_add(1, Ordering::Relaxed);
         let analysis = pipeline.analyze(sentence)?;
 
         // Store in cache
-        {
-            let mut cache = self.cache.lock().unwrap();
+        if let Ok(mut cache) = self.cache.lock() {
             cache.put(
                 hash,
                 CachedAnalysis {
+                    text: sentence.to_owned(),
                     analysis: analysis.clone(),
                     computed_at: Instant::now(),
                 },
@@ -99,18 +102,20 @@ impl AnalysisCache {
     /// Get cache statistics.
     #[must_use]
     pub fn stats(&self) -> CacheStats {
-        let hits = *self.hits.lock().unwrap();
-        let misses = *self.misses.lock().unwrap();
-        let size = self.cache.lock().unwrap().len();
+        let hits = self.hits.load(Ordering::Relaxed);
+        let misses = self.misses.load(Ordering::Relaxed);
+        let size = self.cache.lock().map(|c| c.len()).unwrap_or(0);
 
         CacheStats { hits, misses, size }
     }
 
     /// Clear the cache.
     pub fn clear(&self) {
-        self.cache.lock().unwrap().clear();
-        *self.hits.lock().unwrap() = 0;
-        *self.misses.lock().unwrap() = 0;
+        if let Ok(mut cache) = self.cache.lock() {
+            cache.clear();
+        }
+        self.hits.store(0, Ordering::Relaxed);
+        self.misses.store(0, Ordering::Relaxed);
     }
 }
 
@@ -232,8 +237,8 @@ mod tests {
     fn test_cache_clear() {
         let cache = AnalysisCache::new(100);
         // Manually increment counters for testing
-        *cache.hits.lock().unwrap() = 50;
-        *cache.misses.lock().unwrap() = 25;
+        cache.hits.store(50, Ordering::Relaxed);
+        cache.misses.store(25, Ordering::Relaxed);
 
         let stats_before = cache.stats();
         assert_eq!(stats_before.hits, 50);

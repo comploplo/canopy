@@ -18,11 +18,11 @@ if ! command -v cargo-llvm-cov &> /dev/null; then
 fi
 
 # Run coverage on core packages
-echo "🔍 Analyzing core packages: canopy-core, canopy-engine..."
+echo "🔍 Analyzing core packages: canopy, canopy-resources..."
 
 if cargo llvm-cov \
-    --package canopy-core \
-    --package canopy-engine \
+    --package canopy \
+    --package canopy-resources \
     --fail-under-lines "${COVERAGE_THRESHOLD}" 2>&1; then
 
     echo ""

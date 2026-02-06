@@ -259,16 +259,27 @@ impl PropBankEngine {
         }
     }
 
-    /// Get theta roles for compatibility with other engines
+    /// Get theta roles for compatibility with other engines.
+    ///
+    /// Uses argument descriptions to correctly map verb-specific ARG2 roles.
     ///
     /// # Errors
     /// Returns an error if the predicate is not found in the database.
     pub fn get_theta_roles(&self, lemma: &str, sense: &str) -> EngineResult<Vec<ThetaRole>> {
-        let roles = self.get_semantic_roles(lemma, sense)?;
-        Ok(roles
-            .iter()
-            .filter_map(super::types::SemanticRole::to_theta_role)
-            .collect())
+        let roleset = format!("{lemma}.{sense}");
+
+        if let Some(predicate) = self.data.predicates.get(&roleset) {
+            Ok(predicate
+                .arguments
+                .iter()
+                .filter_map(super::types::PropBankArgument::to_theta_role)
+                .collect())
+        } else {
+            Err(EngineError::analysis(
+                format!("Predicate not found: {roleset}"),
+                "semantic role lookup",
+            ))
+        }
     }
 
     /// Calculate confidence for a predicate based on available information
@@ -464,7 +475,7 @@ impl LemmaQueryable for PropBankEngine {
                 let theta_roles: Vec<_> = predicate
                     .arguments
                     .iter()
-                    .filter_map(|arg| arg.role.to_theta_role())
+                    .filter_map(super::types::PropBankArgument::to_theta_role)
                     .collect();
 
                 let raw_confidence = Self::calculate_predicate_confidence(predicate);
@@ -558,7 +569,7 @@ impl PropBankEngine {
             theta_roles: predicate
                 .arguments
                 .iter()
-                .filter_map(|arg| arg.role.to_theta_role())
+                .filter_map(super::types::PropBankArgument::to_theta_role)
                 .collect(),
         })
     }

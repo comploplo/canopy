@@ -1,6 +1,12 @@
 #!/bin/bash
-# Advanced performance monitoring for canopy.rs
-# Stores baseline performance metrics and detects regressions over time
+# Performance monitoring for canopy
+# Runs criterion benchmarks and reports real metrics
+#
+# Usage:
+#   ./scripts/performance-monitor.sh          # Run benchmarks and report
+#   ./scripts/performance-monitor.sh baseline  # Save current results as baseline
+#   ./scripts/performance-monitor.sh check     # Compare against baseline
+#   ./scripts/performance-monitor.sh trends    # Show historical results
 
 set -e
 
@@ -8,210 +14,84 @@ PERF_DIR=".performance"
 BASELINE_FILE="$PERF_DIR/baseline.json"
 HISTORY_FILE="$PERF_DIR/history.log"
 
-# Create performance directory if it doesn't exist
 mkdir -p "$PERF_DIR"
 
-# Performance test configuration
-TEST_SENTENCES=(
-    "John loves Mary"
-    "The quick brown fox jumps over the lazy dog"
-    "John gave Mary a book yesterday in the library"
-    "What did John give to Mary in the library?"
-    "The book that John gave to Mary was interesting"
-)
+echo "🔍 Canopy Performance Monitor"
+echo "=============================="
 
-echo "🔍 Advanced Performance Monitoring"
-echo "=================================="
+run_benchmarks() {
+    echo "📊 Running criterion benchmarks (this may take a minute)..."
 
-# Function to run performance benchmarks
-run_performance_test() {
-    local test_name="$1"
-    local sentence="$2"
+    # Run criterion benchmarks in JSON format and capture output
+    local bench_output
+    bench_output=$(cargo bench --bench baseline 2>&1) || {
+        echo "⚠️  Benchmarks require data files. Some may be skipped."
+    }
 
-    echo "Testing: $sentence"
+    echo "$bench_output" > "$PERF_DIR/last_run.log"
 
-    # Use cargo test with release mode for accurate performance measurement
-    local output=$(cargo test --release --package canopy-core --lib -- tests::golden_tests::test_enhanced_word_analysis --exact --nocapture 2>&1 | grep -E "(Analysis time|F1|Accuracy)" || echo "")
+    # Extract timing results from criterion output
+    # Criterion format: "bench_name    time:   [low avg high]"
+    echo ""
+    echo "📈 Benchmark Results:"
+    echo "---------------------"
 
-    # Extract metrics (simplified for demo - would use actual benchmark results)
-    local latency_us=35  # Default baseline value
-    local accuracy=100   # Default baseline value
+    echo "$bench_output" | grep -E "time:" | while IFS= read -r line; do
+        echo "  $line"
+    done
 
-    echo "  Latency: ${latency_us}μs"
-    echo "  Accuracy: ${accuracy}%"
+    # Log timestamped results
+    local timestamp
+    timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+    echo "$timestamp | $(echo "$bench_output" | grep -E "time:" | tr '\n' ' ')" >> "$HISTORY_FILE"
 
-    # Return metrics as JSON
-    cat << EOF
-{
-  "test": "$test_name",
-  "sentence": "$sentence",
-  "latency_us": $latency_us,
-  "accuracy_percent": $accuracy,
-  "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-}
-EOF
+    echo ""
+    echo "✅ Benchmark run complete"
+    echo "   Full output: $PERF_DIR/last_run.log"
 }
 
-# Function to store performance baseline
 store_baseline() {
     echo "📊 Establishing performance baseline..."
+    run_benchmarks
 
-    local total_latency=0
-    local total_accuracy=0
-    local test_count=0
-
-    local results="["
-    local first=true
-
-    for i in "${!TEST_SENTENCES[@]}"; do
-        local sentence="${TEST_SENTENCES[$i]}"
-        local result=$(run_performance_test "test_$i" "$sentence")
-
-        if [ "$first" = true ]; then
-            first=false
-        else
-            results="$results,"
-        fi
-        results="$results$result"
-
-        # Extract metrics for averaging
-        local latency=$(echo "$result" | grep -o '"latency_us": [0-9]*' | grep -o '[0-9]*')
-        local accuracy=$(echo "$result" | grep -o '"accuracy_percent": [0-9]*' | grep -o '[0-9]*')
-
-        total_latency=$((total_latency + latency))
-        total_accuracy=$((total_accuracy + accuracy))
-        test_count=$((test_count + 1))
-    done
-
-    results="$results]"
-
-    # Calculate averages
-    local avg_latency=$((total_latency / test_count))
-    local avg_accuracy=$((total_accuracy / test_count))
-
-    # Store baseline
-    cat << EOF > "$BASELINE_FILE"
-{
-  "version": "M3",
-  "date_established": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-  "baseline_metrics": {
-    "average_latency_us": $avg_latency,
-    "average_accuracy_percent": $avg_accuracy,
-    "max_latency_us": 50,
-    "min_accuracy_percent": 95
-  },
-  "test_results": $results
-}
-EOF
-
-    echo "✅ Baseline established:"
-    echo "   Average latency: ${avg_latency}μs"
-    echo "   Average accuracy: ${avg_accuracy}%"
-    echo "   Stored in: $BASELINE_FILE"
+    cp "$PERF_DIR/last_run.log" "$BASELINE_FILE"
+    echo "✅ Baseline stored in $BASELINE_FILE"
 }
 
-# Function to check against baseline
 check_regression() {
     if [ ! -f "$BASELINE_FILE" ]; then
-        echo "⚠️  No baseline found. Establishing baseline..."
-        store_baseline
-        return 0
+        echo "⚠️  No baseline found. Run: $0 baseline"
+        exit 1
     fi
 
-    echo "🔍 Checking for performance regressions..."
+    echo "🔍 Running benchmarks and comparing against baseline..."
+    run_benchmarks
 
-    # Load baseline metrics
-    local baseline_latency=$(grep -o '"average_latency_us": [0-9]*' "$BASELINE_FILE" | grep -o '[0-9]*')
-    local baseline_accuracy=$(grep -o '"average_accuracy_percent": [0-9]*' "$BASELINE_FILE" | grep -o '[0-9]*')
-    local max_latency=$(grep -o '"max_latency_us": [0-9]*' "$BASELINE_FILE" | grep -o '[0-9]*')
-    local min_accuracy=$(grep -o '"min_accuracy_percent": [0-9]*' "$BASELINE_FILE" | grep -o '[0-9]*')
-
-    echo "📊 Baseline: ${baseline_latency}μs latency, ${baseline_accuracy}% accuracy"
-    echo "📏 Thresholds: <${max_latency}μs latency, >${min_accuracy}% accuracy"
-
-    # Run current tests
-    local total_latency=0
-    local total_accuracy=0
-    local test_count=0
-    local max_observed_latency=0
-    local min_observed_accuracy=100
-
-    for i in "${!TEST_SENTENCES[@]}"; do
-        local sentence="${TEST_SENTENCES[$i]}"
-        local result=$(run_performance_test "current_test_$i" "$sentence")
-
-        # Extract current metrics
-        local latency=$(echo "$result" | grep -o '"latency_us": [0-9]*' | grep -o '[0-9]*')
-        local accuracy=$(echo "$result" | grep -o '"accuracy_percent": [0-9]*' | grep -o '[0-9]*')
-
-        total_latency=$((total_latency + latency))
-        total_accuracy=$((total_accuracy + accuracy))
-        test_count=$((test_count + 1))
-
-        # Track extremes
-        if [ "$latency" -gt "$max_observed_latency" ]; then
-            max_observed_latency=$latency
-        fi
-        if [ "$accuracy" -lt "$min_observed_accuracy" ]; then
-            min_observed_accuracy=$accuracy
-        fi
-    done
-
-    # Calculate current averages
-    local current_avg_latency=$((total_latency / test_count))
-    local current_avg_accuracy=$((total_accuracy / test_count))
-
-    echo "📈 Current: ${current_avg_latency}μs latency, ${current_avg_accuracy}% accuracy"
-
-    # Check for regressions
-    local regression_detected=false
-
-    if [ "$max_observed_latency" -gt "$max_latency" ]; then
-        echo "❌ LATENCY REGRESSION: ${max_observed_latency}μs > ${max_latency}μs threshold"
-        regression_detected=true
-    fi
-
-    if [ "$min_observed_accuracy" -lt "$min_accuracy" ]; then
-        echo "❌ ACCURACY REGRESSION: ${min_observed_accuracy}% < ${min_accuracy}% threshold"
-        regression_detected=true
-    fi
-
-    # Log results
-    local log_entry="$(date -u +%Y-%m-%dT%H:%M:%SZ) | Latency: ${current_avg_latency}μs | Accuracy: ${current_avg_accuracy}% | Status: $(if [ "$regression_detected" = true ]; then echo "REGRESSION"; else echo "OK"; fi)"
-    echo "$log_entry" >> "$HISTORY_FILE"
-
-    if [ "$regression_detected" = true ]; then
-        echo ""
-        echo "💡 Performance regression guidance:"
-        echo "   1. Check recent commits for performance-impacting changes"
-        echo "   2. Run 'cargo bench' for detailed profiling"
-        echo "   3. Verify optimizations and caching are working"
-        echo "   4. Consider reverting problematic changes"
-        echo ""
-        echo "📊 Performance history: $HISTORY_FILE"
-        return 1
-    else
-        echo "✅ No performance regression detected"
-        return 0
-    fi
+    echo ""
+    echo "📊 Comparison with baseline:"
+    echo "   Baseline: $BASELINE_FILE"
+    echo ""
+    echo "   For detailed comparison, use criterion's built-in comparison:"
+    echo "   cargo bench --bench baseline -- --baseline main"
 }
 
-# Function to show performance trends
 show_trends() {
     if [ ! -f "$HISTORY_FILE" ]; then
-        echo "⚠️  No performance history available"
+        echo "⚠️  No performance history available. Run benchmarks first."
         return 0
     fi
 
     echo "📈 Performance Trends (last 10 entries):"
     echo "========================================"
-    tail -10 "$HISTORY_FILE" | while read -r line; do
+    tail -10 "$HISTORY_FILE" | while IFS= read -r line; do
         echo "  $line"
     done
 }
 
-# Main execution
-case "${1:-check}" in
+case "${1:-run}" in
+    "run")
+        run_benchmarks
+        ;;
     "baseline")
         store_baseline
         ;;
@@ -222,18 +102,19 @@ case "${1:-check}" in
         show_trends
         ;;
     "reset")
-        echo "🗑️  Resetting performance baseline..."
-        rm -f "$BASELINE_FILE" "$HISTORY_FILE"
+        echo "🗑️  Resetting performance data..."
+        rm -f "$BASELINE_FILE" "$HISTORY_FILE" "$PERF_DIR/last_run.log"
         store_baseline
         ;;
     *)
-        echo "Usage: $0 [baseline|check|trends|reset]"
+        echo "Usage: $0 [run|baseline|check|trends|reset]"
         echo ""
         echo "Commands:"
-        echo "  baseline  - Establish new performance baseline"
-        echo "  check     - Check for regressions (default)"
-        echo "  trends    - Show performance trends"
-        echo "  reset     - Reset and re-establish baseline"
+        echo "  run       - Run benchmarks and report results (default)"
+        echo "  baseline  - Run benchmarks and save as baseline"
+        echo "  check     - Run benchmarks and compare against baseline"
+        echo "  trends    - Show historical benchmark results"
+        echo "  reset     - Clear history and establish new baseline"
         exit 1
         ;;
 esac

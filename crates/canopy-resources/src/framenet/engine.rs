@@ -761,14 +761,6 @@ impl LemmaQueryable for FrameNetEngine {
     }
 }
 
-impl Default for FrameNetEngine {
-    fn default() -> Self {
-        Self::new().unwrap_or_else(|_| {
-            panic!("FrameNet engine requires real data - cannot create default instance without FrameNet files")
-        })
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -39,6 +39,13 @@ fn parse_lexicon_attrs(
 }
 
 /// Parse word element attributes and text
+/// Extract a string attribute value from an XML attribute.
+fn attr_string(value: &[u8], name: &str) -> EngineResult<String> {
+    std::str::from_utf8(value)
+        .map_err(|e| EngineError::data_load(format!("Invalid UTF-8 in {name}: {e}")))
+        .map(String::from)
+}
+
 fn parse_word_element<R: BufRead>(
     e: &quick_xml::events::BytesStart,
     reader: &mut Reader<R>,
@@ -48,49 +55,33 @@ fn parse_word_element<R: BufRead>(
     let mut confidence = 1.0f32;
     let mut frequency = None;
     let mut context = None;
+    let mut person = None;
+    let mut number = None;
+    let mut case = None;
+    let mut gender = None;
 
     for attr in e.attributes() {
         let attr = attr
             .map_err(|e| EngineError::data_load(format!("Failed to parse word attribute: {e}")))?;
         match attr.key.as_ref() {
-            b"pos" => {
-                pos = Some(
-                    std::str::from_utf8(&attr.value)
-                        .map_err(|e| EngineError::data_load(format!("Invalid UTF-8 in pos: {e}")))?
-                        .to_string(),
-                );
-            }
+            b"pos" => pos = Some(attr_string(&attr.value, "pos")?),
             b"confidence" => {
-                confidence = std::str::from_utf8(&attr.value)
-                    .map_err(|e| {
-                        EngineError::data_load(format!("Invalid UTF-8 in confidence: {e}"))
-                    })?
+                confidence = attr_string(&attr.value, "confidence")?
                     .parse()
-                    .map_err(|e| {
-                        EngineError::data_load(format!("Invalid confidence number: {e}"))
-                    })?;
+                    .map_err(|e| EngineError::data_load(format!("Invalid confidence: {e}")))?;
             }
             b"frequency" => {
                 frequency = Some(
-                    std::str::from_utf8(&attr.value)
-                        .map_err(|e| {
-                            EngineError::data_load(format!("Invalid UTF-8 in frequency: {e}"))
-                        })?
+                    attr_string(&attr.value, "frequency")?
                         .parse()
-                        .map_err(|e| {
-                            EngineError::data_load(format!("Invalid frequency number: {e}"))
-                        })?,
+                        .map_err(|e| EngineError::data_load(format!("Invalid frequency: {e}")))?,
                 );
             }
-            b"context" => {
-                context = Some(
-                    std::str::from_utf8(&attr.value)
-                        .map_err(|e| {
-                            EngineError::data_load(format!("Invalid UTF-8 in context: {e}"))
-                        })?
-                        .to_string(),
-                );
-            }
+            b"context" => context = Some(attr_string(&attr.value, "context")?),
+            b"person" => person = Some(attr_string(&attr.value, "person")?),
+            b"number" => number = Some(attr_string(&attr.value, "number")?),
+            b"case" => case = Some(attr_string(&attr.value, "case")?),
+            b"gender" => gender = Some(attr_string(&attr.value, "gender")?),
             _ => {}
         }
     }
@@ -102,6 +93,10 @@ fn parse_word_element<R: BufRead>(
         confidence,
         frequency,
         context,
+        person,
+        number,
+        case,
+        gender,
     })
 }
 
